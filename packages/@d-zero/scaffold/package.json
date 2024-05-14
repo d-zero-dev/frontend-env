@@ -1,0 +1,51 @@
+{
+	"name": "@d-zero/scaffold",
+	"version": "5.0.0-alpha.0",
+	"description": "Frontend scaffold files of D-ZERO Co., Ltd.",
+	"repository": "https://github.com/d-zero-dev/frontend-env.git",
+	"author": "D-ZERO Co., Ltd.",
+	"license": "MIT",
+	"private": false,
+	"type": "module",
+	"main": "package.json",
+	"scripts": {
+		"dev": "cross-env NODE_ENV=serve build",
+		"d": "yarn dev",
+		"release": "cross-env NODE_ENV=production build",
+		"lint": "run-s lint:*",
+		"lint:html": "markuplint \"./__assets/**/*.{pug,html}\"",
+		"lint:html:pug": "pug-lint ./__assets/htdocs/**/*.pug -r console; pug-lint ./__assets/_libs/**/*.pug -r console;",
+		"lint:css": " stylelint \"./__assets/**/*.scss\"",
+		"lint:js": " eslint \"./__assets/**/*.{js,mjs,cjs,jsx,ts,tsx}\"",
+		"lint:format": "prettier --write \"./__assets/**/*.{js,jsx,ts,tsx,scss,pug,html}\"",
+		"lint:spell": "cspell --no-progress --show-suggestions \"**\"",
+		"up": "yarn upgrade-interactive --latest"
+	},
+	"browserslist": [
+		"last 1 chrome version",
+		"last 1 firefox version",
+		"last 1 edge version",
+		"last 1 and_chr version",
+		"last 2 safari version",
+		"last 2 ios_saf version"
+	],
+	"devDependencies": {
+		"@d-zero/builder": "5.0.0-alpha.0",
+		"@d-zero/linters": "5.0.0-alpha.25",
+		"@d-zero/postcss-config": "5.0.0-alpha.0",
+		"@d-zero/tsconfig": "0.2.0",
+		"@types/node": "20.12.12",
+		"cross-env": "7.0.3",
+		"npm-run-all2": "6.1.2",
+		"sass": "1.77.1",
+		"typescript": "5.4.5"
+	},
+	"dependencies": {
+		"ress": "5.0.2",
+		"tslib": "2.6.2"
+	},
+	"volta": {
+		"node": "22.1.0",
+		"yarn": "1.22.22"
+	}
+}

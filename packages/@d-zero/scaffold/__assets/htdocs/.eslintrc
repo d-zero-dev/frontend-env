@@ -1,0 +1,10 @@
+{
+	"extends": ["../../.eslintrc.cjs"],
+	"env": {
+		"node": false,
+		"browser": true,
+		"jquery": true,
+		"es6": true,
+		"commonjs": true
+	}
+}

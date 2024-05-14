@@ -1,0 +1,20 @@
+header.c-header
+	.c-header__body
+		.c-header__title
+			.c-header__site-name
+				if isHome
+					h1
+						a(href="__URL__"): span サイトタイトル
+				else
+					div
+						a(href="__URL__"): span サイトタイトル
+			p.c-header__description
+				//- spell-checker:disable-next-line
+				| Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+		.c-header__info
+			ul.c-header__links
+				li: a(href="__URL__"): span 会社概要
+				li: a(href="__URL__"): span 新着情報
+				li: a(href="__URL__"): span サイトマップ
+			.c-header__tel
+				a(href="tel:0000000000"): span 00-0000-0000

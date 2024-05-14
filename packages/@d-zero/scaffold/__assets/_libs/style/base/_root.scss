@@ -1,0 +1,30 @@
+@use 'sass:math';
+@use '../theme' as *;
+
+:root {
+	// 配色
+	--base-font-color: #{$darkest-color};
+	--base-font-size: #{$base-font-size * 1px};
+	--base-line-height: #{$base-line-height};
+	--border-color: #{$darkest-color};
+
+	// コンテンツ幅
+	--content-width: #{math.div($breakpoint-sm, $base-font-size) * 1rem};
+	--wide-layout-width: #{math.div($breakpoint-md, $base-font-size) * 1rem};
+
+	// フォントファミリー
+	--font-family-body: #{$font-family-body};
+	--font-family-heading: #{$font-family-heading};
+
+	// 見出し調和数列スケーリング
+	// @see https://standard.shiftbrain.com/blog/music-math-typography
+	--font-size-h1: calc(1em * 8 / 2);
+	--font-size-h2: calc(1em * 8 / 3);
+	--font-size-h3: calc(1em * 8 / 4);
+	--font-size-h4: calc(1em * 8 / 5);
+	--font-size-h5: calc(1em * 8 / 6);
+	--font-size-h6: calc(1em * 8 / 7);
+
+	// 定義
+	font-size: var(--base-font-size);
+}

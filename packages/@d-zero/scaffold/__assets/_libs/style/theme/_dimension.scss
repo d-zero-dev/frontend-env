@@ -1,0 +1,53 @@
+// # タイポグラフィ
+// @see https://techblog.yahoo.co.jp/entry/2023052430423559/
+$base-font-size: 17;
+$base-line-height: 1.8;
+
+// # 寸法
+//
+$breakpoint-xs: 576;
+$breakpoint-sm: 768;
+$breakpoint-md: 992;
+$breakpoint-lg: 1200;
+
+// xsのみ
+@custom-media --xs (max-width: #{$breakpoint-xs * 1px});
+
+// smのみ
+@custom-media --sm (min-width: #{$breakpoint-xs * 1px}) and (max-width: #{$breakpoint-sm * 1px - 1px});
+
+// mdのみ
+@custom-media --md (min-width: #{$breakpoint-sm * 1px}) and (max-width: #{$breakpoint-md * 1px - 1px});
+
+// lgのみ
+@custom-media --lg (min-width: #{$breakpoint-md * 1px}) and (max-width: #{$breakpoint-lg * 1px - 1px});
+
+// xlのみ
+@custom-media --xl (min-width: #{$breakpoint-lg * 1px});
+
+// xs以下 = xsのみ
+@custom-media --xs-lte (max-width: #{$breakpoint-xs * 1px - 1px});
+
+// sm以下
+@custom-media --sm-lte (max-width: #{$breakpoint-sm * 1px - 1px});
+
+// md以下
+@custom-media --md-lte (max-width: #{$breakpoint-md * 1px - 1px});
+
+// lg以下
+@custom-media --lg-lte (max-width: #{$breakpoint-lg * 1px - 1px});
+
+// xs超え
+@custom-media --xs-gt (min-width: #{$breakpoint-xs * 1px});
+
+// sm超え
+@custom-media --sm-gt (min-width: #{$breakpoint-sm * 1px});
+
+// md超え
+@custom-media --md-gt (min-width: #{$breakpoint-md * 1px});
+
+// lg超え
+@custom-media --lg-gt (min-width: #{$breakpoint-lg * 1px});
+
+// high resolution
+@custom-media --hr (min-resolution: 2dppx);

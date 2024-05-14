@@ -1,0 +1,27 @@
+articles:
+  - title: リンゴ
+    # spell-checker:disable-next-line
+    desc: リンゴ（林檎、学名：Malus pumila）は、バラ科リンゴ属の落葉高木樹。またはその果実のこと。植物学上はセイヨウリンゴと呼ぶ。春、白または薄紅の花が咲く。
+    time: 2019-01-01
+    url: https://ja.wikipedia.org/wiki/%E3%83%AA%E3%83%B3%E3%82%B4
+    img: //upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/250px-Red_Apple.jpg
+    cat:
+      - id: fruit
+        name: 果物
+    tag:
+      - 甘い
+      - 赤
+  - title: みかん
+    # spell-checker:disable-next-line
+    desc: ウンシュウミカン（温州蜜柑、学名：Citrus unshiu）は、ミカン科の常緑低木またはその果実のこと。様々な栽培品種があり、食用として利用される。
+    time: 2019-02-01
+    url: https://ja.wikipedia.org/wiki/%E3%82%A6%E3%83%B3%E3%82%B7%E3%83%A5%E3%82%A6%E3%83%9F%E3%82%AB%E3%83%B3
+    # spell-checker:disable-next-line
+    img: //upload.wikimedia.org/wikipedia/commons/thumb/3/31/Citrus_unshiu_20101127_c.jpg/250px-Citrus_unshiu_20101127_c.jpg
+    cat:
+      - id: fruit
+        name: 果物
+    tag:
+      - 甘い
+      - 酸っぱい
+      - オレンジ

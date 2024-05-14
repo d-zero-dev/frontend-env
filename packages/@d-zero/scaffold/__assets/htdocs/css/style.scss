@@ -1,0 +1,32 @@
+@import 'ress' layer(reset);
+
+@layer base {
+	@import '@/style/base/_root.scss';
+}
+
+@layer general {
+	@import '@/style/general/_all.scss';
+	@import '@/style/general/_body.scss';
+	@import '@/style/general/_button.scss';
+	@import '@/style/general/_img.scss';
+}
+
+@layer components {
+	@import '@/component/_c-page-home.scss';
+	@import '@/component/_c-page-sub.scss';
+	@import '@/component/_c-header.scss';
+	@import '@/component/_c-footer.scss';
+	@import '@/component/_c-nav-global.scss';
+	@import '@/component/_c-nav-sitemap.scss';
+	@import '@/component/_c-nav-breadcrumb.scss';
+	@import '@/component/_c-title-page.scss';
+	@import '@/component/_c-pagination.scss';
+	@import '@/component/_c-card-list.scss';
+	@import '@/component/_c-card.scss';
+	@import '@/component/_c-media-list.scss';
+	@import '@/component/_c-media.scss';
+	@import '@/component/_c-content-index.scss';
+	@import '@/component/_c-content-main.scss';
+}
+
+@layer reset, base, general, components;

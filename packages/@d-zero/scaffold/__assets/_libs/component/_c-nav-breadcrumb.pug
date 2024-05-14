@@ -1,0 +1,42 @@
+.c-nav-breadcrumb
+	ol(itemscope itemtype="https://schema.org/BreadcrumbList")
+		li.c-nav-breadcrumb__item(
+			itemscope
+			itemprop="itemListElement"
+			itemtype="https://schema.org/ListItem"
+			data-breadcrumb="home")
+			a(
+				href="/"
+				itemscope
+				itemprop="item"
+				itemtype="https://schema.org/WebPage"
+				itemid="/")
+				span(itemprop="name") Home
+			meta(itemprop="position" content="1")
+			span.c-nav-breadcrumb__separetor
+		li.c-nav-breadcrumb__item(
+			itemscope
+			itemprop="itemListElement"
+			itemtype="https://schema.org/ListItem")
+			a(
+				href="/first/"
+				itemscope
+				itemprop="item"
+				itemtype="https://schema.org/WebPage"
+				itemid="/first/")
+				span(itemprop="name") Parent
+			meta(itemprop="position" content="2")
+			span.c-nav-breadcrumb__separetor
+		li.c-nav-breadcrumb__item(
+			itemscope
+			itemprop="itemListElement"
+			itemtype="https://schema.org/ListItem"
+			data-breadcrumb="current")
+			a(
+				href="/first/about"
+				itemscope
+				itemprop="item"
+				itemtype="https://schema.org/WebPage"
+				itemid="/first/about")
+				span(itemprop="name") Current
+			meta(itemprop="position" content="3")

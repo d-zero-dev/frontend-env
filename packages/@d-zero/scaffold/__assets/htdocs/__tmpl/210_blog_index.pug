@@ -1,0 +1,40 @@
+html(lang="ja")
+	head
+		include ../../_libs/mixin/meta.pug
+		+meta('__ページタイトル__ | __サイトタイトル__')
+	body.c-page-sub
+		.c-page-sub__base
+			.c-page-sub__header
+				include ../../_libs/component/_c-header.pug
+			.c-page-sub__nav-global
+				include ../../_libs/component/_c-nav-global.pug
+
+			.c-page-sub__main
+				main
+					article.c-page-sub__content
+						.c-page-sub__title-page
+							include ../../_libs/component/_c-title-page.pug
+						.c-page-sub__nav-breadcrumb
+							include ../../_libs/component/_c-nav-breadcrumb.pug
+						.c-page-sub__content-index
+							.c-content-index
+								.c-content-index__categories
+									// ⚠️ CMS要件:
+									// - ページがカテゴリーインデックスの場合は aria-current="page" を付加する
+									// - カテゴリーインデックスではなく、カテゴリーに属するページでは aria-current="page" は付加しない
+									ul
+										li: a(href="__PATH_TO__"): span ALL
+										li: a(href="__PATH_TO__" aria-current="page"): span カテゴリー1
+										li: a(href="__PATH_TO__"): span カテゴリー2
+										li: a(href="__PATH_TO__"): span カテゴリー3
+								.c-content-index__body
+									.c-card-list
+										each article in data.articles
+											include ../../_libs/component/_c-card.pug
+						.c-page-sub__pagination
+							include ../../_libs/component/_c-pagination.pug
+
+			.c-page-sub__nav-sitemap
+				include ../../_libs/component/_c-nav-sitemap.pug
+			.c-page-sub__footer
+				include ../../_libs/component/_c-footer.pug

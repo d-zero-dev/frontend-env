@@ -1,0 +1,100 @@
+@use '../style/theme' as *;
+
+.c-pagination {
+	display: flex;
+	justify-content: center;
+	margin-block-start: 1rem;
+	overflow: hidden;
+	clear: both;
+	text-align: center;
+
+	@media (--xs) {
+		justify-content: space-between;
+	}
+
+	a {
+		color: currentcolor;
+		text-decoration: none;
+		background: none;
+	}
+
+	&__prev,
+	&__next {
+		a {
+			position: relative;
+			display: flex;
+			align-items: center;
+			padding-inline: 1em;
+			border: 1px solid var(--border-color);
+
+			&[data-disabled='true'] {
+				pointer-events: none;
+				opacity: 0.3;
+			}
+		}
+	}
+
+	&__prev {
+		order: 1;
+
+		::before {
+			content: '<';
+		}
+	}
+
+	&__next {
+		order: 3;
+
+		::after {
+			content: '＞';
+		}
+	}
+
+	&__numbers {
+		display: flex;
+		order: 2;
+		padding: 0;
+		margin-block: 0;
+		margin-inline: 2em;
+		font-weight: bold;
+		list-style: none;
+
+		@media (--xs) {
+			display: none;
+		}
+	}
+
+	&__number {
+		display: block;
+		margin-block: 0;
+		margin-inline: 0.5em;
+		list-style: none;
+
+		&:hover {
+			padding-block-end: 2px;
+			border-block-end: 2px solid var(--border-color);
+		}
+
+		// 🐲 baserCMSの仕様上 マルチクラスでしかカレントを定義できない
+		/* stylelint-disable selector-class-pattern */
+		&--current {
+			border-block-end: 2px solid var(--border-color);
+
+			&:hover {
+				padding-block-end: 0;
+			}
+		}
+		/* stylelint-enable selector-class-pattern */
+
+		a {
+			display: block;
+			padding-block: 0;
+			padding-inline: 0.3em;
+			text-align: center;
+
+			&::after {
+				display: none;
+			}
+		}
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"import": ["@d-zero/cspell-config"],
+	"words": [
+		//
+		"nodir",
+		"postcssrc"
+	]
+}

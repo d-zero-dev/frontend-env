@@ -1,0 +1,42 @@
+{
+	"editor.renderWhitespace": "all",
+	"editor.wordSeparators": "`~!@#%^&*()=+[{]}\\|;:'\",.<>/?",
+	"editor.renderControlCharacters": true,
+	"files.trimTrailingWhitespace": true,
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"git.ignoreLimitWarning": true,
+	"html.format.enable": true,
+	"css.validate": false,
+	"scss.validate": false,
+	"stylelint.validate": ["css", "scss"],
+
+	"files.associations": {
+		".stylelintrc": "json",
+		".markuplintrc": "json",
+		".pug-lintrc": "json"
+	},
+
+	// Plugin settings
+	"puglint.enable": true,
+
+	// Auto format
+	"editor.formatOnSave": true,
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[markdown]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit",
+		"source.fixAll.stylelint": "explicit"
+	},
+
+	// GitHub Copilot
+	"github.copilot.enable": {
+		"*": false
+	}
+}

@@ -1,0 +1,45 @@
+@use '../style/theme' as *;
+
+.c-page-home {
+	inline-size: 100%;
+	block-size: 100%;
+
+	&__base {
+		display: grid;
+		grid-template:
+			'header' auto
+			'nav-global' auto
+			'main' 1fr
+			'nav-sitemap' auto
+			'footer' auto
+			/ 1fr;
+		inline-size: 100%;
+		block-size: 100%;
+	}
+
+	&__header {
+		grid-area: header;
+	}
+
+	&__nav-global {
+		grid-area: nav-global;
+	}
+
+	&__main {
+		grid-area: main;
+
+		> * {
+			inline-size: var(--content-width);
+			padding-inline: 1rem;
+			margin-inline: auto;
+		}
+	}
+
+	&__nav-sitemap {
+		grid-area: nav-sitemap;
+	}
+
+	&__footer {
+		grid-area: footer;
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"extends": ["../../.markuplintrc"],
+	"nodeRules": [
+		{
+			"selector": "link, script",
+			"rules": {
+				"invalid-attr": {
+					"options": {
+						"allowAttrs": {
+							"⚠️": {
+								"type": "Any"
+							}
+						}
+					}
+				}
+			}
+		}
+	]
+}

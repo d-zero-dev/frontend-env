@@ -1,0 +1,32 @@
+{
+	"name": "@d-zero/builder",
+	"version": "5.0.0-alpha.0",
+	"description": "Builder of D-ZERO Frontend",
+	"repository": "https://github.com/d-zero-dev/frontend-env.git",
+	"author": "D-ZERO Co., Ltd.",
+	"license": "MIT",
+	"private": false,
+	"type": "module",
+	"bin": {
+		"build": "./cli.mjs"
+	},
+	"exports": {
+		"./11ty": {
+			"require": "./eleventy.config.cjs"
+		}
+	},
+	"dependencies": {
+		"@11ty/eleventy": "2.0.1",
+		"@11ty/eleventy-plugin-vite": "4.0.0",
+		"@rollup/plugin-commonjs": "25.0.7",
+		"async-cleanup": "1.0.0",
+		"cli-color": "2.0.4",
+		"dayjs": "1.11.11",
+		"html-minifier-terser": "7.2.0",
+		"js-yaml": "4.1.0",
+		"jsdom": "24.0.0",
+		"minimist": "1.2.8",
+		"prettier": "3.2.5",
+		"vite": "5.2.11"
+	}
+}

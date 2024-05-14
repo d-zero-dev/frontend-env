@@ -1,0 +1,3 @@
+{
+	"extends": "@d-zero/commitlint-config"
+}

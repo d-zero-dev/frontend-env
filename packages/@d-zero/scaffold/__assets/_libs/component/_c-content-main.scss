@@ -1,0 +1,270 @@
+@use '../style/theme' as *;
+
+/* stylelint-disable selector-class-pattern, selector-nested-pattern -- content-main特殊ルール */
+//
+// メインコンテンツ（content-mainコンポーネント）の内容はCMSなどで管理されるHTMLを含んだり、
+// ページ独自のスタイルを扱うことが多いので例外的に専用のルールを設ける。
+//
+// メインコンテンツのエレメントは基本的に自由である。
+// ただし、クラス名は`c-`で開始してはいけない。もちろん 【`c-` + `コンポーネント名` + `__` + `エレメント名`】 という規則でクラス名をつけない。
+// さらにそのルールに従って、メインコンテンツの中にコンポーネントを内包してはいけない。
+.c-content-main {
+	:where(*) {
+		text-underline-offset: 3px;
+	}
+
+	:where(h2, h3, h4, h5, h6, p) {
+		margin-block-end: max(0.75em, 1rem);
+	}
+
+	:where(ul, ol, table, blockquote) {
+		margin-block-end: 2em;
+	}
+
+	:where(h2) {
+		font-size: var(--font-size-h2);
+	}
+
+	:where(h3) {
+		font-size: var(--font-size-h3);
+	}
+
+	:where(h4) {
+		font-size: var(--font-size-h4);
+	}
+
+	:where(h5) {
+		font-size: var(--font-size-h5);
+	}
+
+	:where(h6) {
+		font-size: var(--font-size-h6);
+	}
+
+	:where(ul, ol) {
+		list-style-position: inside;
+	}
+
+	:where(blockquote) {
+		padding-inline: 1em;
+		border-inline-start: 3px solid var(--border-color);
+	}
+
+	:where(table) {
+		inline-size: 100%;
+		border-collapse: collapse;
+	}
+
+	:where(th, td) {
+		padding: 1em;
+		border: 1px solid var(--border-color);
+	}
+
+	.cc-form-description {
+		//
+	}
+
+	.cc-form {
+		margin: 0 auto;
+	}
+
+	.cc-form-field-list {
+		//
+	}
+
+	.cc-form-fieldset {
+		display: block;
+		padding: 1em 2em;
+
+		fieldset {
+			padding: 0;
+			margin: 0;
+			border: none;
+		}
+
+		legend {
+			padding: 0;
+			margin: 0;
+		}
+
+		&-heading {
+			display: flex;
+			align-items: center;
+			font-size: calc(18 / 16 * 1em);
+			font-weight: bold;
+
+			label {
+				display: block;
+				cursor: pointer;
+			}
+
+			.required,
+			.optional {
+				display: block;
+				margin: 0 0 0 0.5em;
+				font-size: calc(12 / 18 * 1em);
+				line-height: 1;
+				border-radius: 0.2em;
+			}
+		}
+
+		&-attention {
+			margin: 0.5em 0;
+			font-size: calc(12 / 18 * 1em);
+			font-weight: normal;
+		}
+
+		&-body {
+			//
+		}
+	}
+
+	.mail-field {
+		padding: 0 0 1em;
+		margin: 0 0 0 1em;
+
+		&:last-child {
+			border-block-end: 1px solid var(--border-color);
+		}
+
+		&[data-type='text'],
+		&[data-type='select'] {
+			display: grid;
+			grid-template:
+				'before-attachment input after-attachment' auto
+				'description description description' auto
+				'error-message error-message error-message' auto
+				/ auto 1fr auto;
+			grid-gap: 0;
+
+			> * {
+				place-self: center flex-start;
+			}
+
+			.mail-before-attachment {
+				grid-area: before-attachment;
+				margin: 0 1em 0 0;
+
+				&:empty {
+					margin: 0;
+				}
+			}
+
+			.mail-input {
+				grid-area: input;
+			}
+
+			.mail-after-attachment {
+				grid-area: after-attachment;
+				margin: 0 0 0 1em;
+
+				&:empty {
+					margin: 0;
+				}
+			}
+
+			.mail-description {
+				grid-area: description;
+				font-size: calc(12 / 16 * 1em);
+			}
+
+			.error-message {
+				grid-area: error-message;
+				font-size: calc(12 / 16 * 1em);
+			}
+		}
+
+		.mail-before-attachment {
+			font-weight: bold;
+		}
+
+		.mail-input {
+			display: block;
+			grid-area: input;
+			inline-size: 100%;
+
+			input:not([type='radio'], [type='checkbox']),
+			textarea {
+				inline-size: 100%;
+				padding-inline: 0.5em;
+				font-family: inherit;
+				font-size: inherit;
+				border: 1px solid var(--border-color);
+				border-radius: 0.2em;
+
+				&[size] {
+					inline-size: auto;
+				}
+
+				&[type='file'] {
+					padding-block: 0;
+					padding-inline: 0 1em;
+
+					&::-webkit-file-upload-button {
+						appearance: none;
+						border: none;
+					}
+				}
+			}
+
+			input:not([type='radio'], [type='checkbox']) {
+				&:not([size]) {
+					inline-size: 100%;
+				}
+			}
+
+			textarea {
+				&:not([cols]) {
+					inline-size: 100%;
+				}
+			}
+
+			select {
+				padding: 0.5em calc(0.5em + 24px + 2px) 0.5em 0.5em;
+				appearance: none;
+				background-image: url('@/img/bg-arrow.svg');
+				background-repeat: no-repeat;
+				background-position: right calc(0.2em + 2px) top calc(100% / 2 + 2px);
+				border: 1px solid var(--border-color);
+				border-radius: 0.2em;
+			}
+		}
+
+		.checkbox {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+
+			input {
+				display: block;
+				padding: 0;
+				margin: 0;
+				line-height: 1;
+			}
+
+			label {
+				cursor: pointer;
+			}
+		}
+
+		.mail-group-radio {
+			> span {
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+
+				input {
+					display: block;
+					padding: 0;
+					margin: 0 0.5em 0 0;
+					line-height: 1;
+				}
+
+				label {
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}
+/* stylelint-enable selector-class-pattern, selector-nested-pattern */

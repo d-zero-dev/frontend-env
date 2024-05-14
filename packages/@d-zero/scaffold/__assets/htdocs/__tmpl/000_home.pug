@@ -1,0 +1,20 @@
+html(lang="ja")
+	head
+		include ../../_libs/mixin/meta.pug
+		+meta('__サイトタイトル__')
+	body.c-page-home
+		.c-page-home__base
+			.c-page-home__header
+				- const isHome = true;
+				include ../../_libs/component/_c-header.pug
+			.c-page-home__nav-global
+				include ../../_libs/component/_c-nav-global.pug
+
+			.c-page-home__main
+				main
+					h2 メイン
+
+			.c-page-home__nav-sitemap
+				include ../../_libs/component/_c-nav-sitemap.pug
+			.c-page-home__footer
+				include ../../_libs/component/_c-footer.pug

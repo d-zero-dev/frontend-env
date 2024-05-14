@@ -1,0 +1,47 @@
+@use '../style/theme' as *;
+
+.c-nav-breadcrumb {
+	@media (--md-lte) {
+		display: none;
+	}
+
+	ol {
+		display: flex;
+		justify-content: flex-start;
+		padding: 0;
+		margin: 0;
+
+		> li {
+			list-style: none;
+
+			&:last-child a {
+				::after {
+					display: none;
+				}
+			}
+		}
+	}
+
+	a {
+		display: inline-block;
+		color: inherit;
+		text-decoration: underline;
+
+		::after {
+			display: inline-block;
+			content: ' > ';
+		}
+	}
+
+	&__item {
+		display: inline-block;
+		padding: 0;
+		margin: 0;
+	}
+
+	&__item[data-breadcrumb='current'] {
+		a {
+			text-decoration: none;
+		}
+	}
+}

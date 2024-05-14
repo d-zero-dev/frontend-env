@@ -1,0 +1,7 @@
+@use '../style/theme' as *;
+
+.c-card-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(calc(200 / 17 * 1em), 1fr));
+	gap: 0.5em;
+}

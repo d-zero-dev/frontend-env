@@ -1,0 +1,45 @@
+{
+	"name": "@d-zero/fontend-env",
+	"version": "5.0.0-alpha.0",
+	"description": "D-ZERO Frontend Developer's Environment",
+	"repository": "https://github.com/d-zero-dev/frontend-env.git",
+	"author": "D-ZERO Co., Ltd.",
+	"license": "MIT",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"lint": "run-s lint:eslint lint:prettier lint:textlint lint:cspell",
+		"lint:cspell": "cspell --no-progress --show-suggestions \"**\"",
+		"lint:eslint": "eslint --fix \"./*.{js,cjs,mjs}\"",
+		"lint:prettier": "prettier --write \"./**/*.{js,jsx,ts,tsx,scss,pug,html}\"",
+		"lint:textlint": "textlint --fix \"./**/*.md\"",
+		"release": "lerna publish --exact --conventional-commits --conventional-graduate",
+		"release:next": "lerna publish --dist-tag next --exact --force-publish --conventional-commits --conventional-prerelease --preid alpha",
+		"prepare": "husky",
+		"commit": "cz",
+		"co": "cz",
+		"up": "yarn upgrade-interactive --latest"
+	},
+	"workspaces": [
+		"packages/@d-zero/*"
+	],
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-customizable"
+		},
+		"cz-customizable": {
+			"config": "./node_modules/@d-zero/cz-config"
+		}
+	},
+	"devDependencies": {
+		"@d-zero/commitlint-config": "5.0.0-alpha.25",
+		"@d-zero/linters": "5.0.0-alpha.25",
+		"husky": "9.0.11",
+		"lerna": "8.1.3",
+		"npm-run-all2": "6.1.2"
+	},
+	"volta": {
+		"node": "22.1.0",
+		"yarn": "1.22.22"
+	}
+}

@@ -1,0 +1,15 @@
+@use '../theme' as *;
+
+/* stylelint-disable selector-max-universal -- this is universal selector rules */
+* {
+	&,
+	&::before,
+	&::after {
+		box-sizing: border-box;
+	}
+
+	&::selection {
+		background-color: initial;
+	}
+}
+/* stylelint-enable selector-max-universal */

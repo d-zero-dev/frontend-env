@@ -1,0 +1,12 @@
+.DS_Store
+
+node_modules
+npm-error.log
+package-lock.json
+yarn-error.log
+
+# ignore file types
+*.zip
+*.psd
+*.ai
+*.sql

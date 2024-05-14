@@ -1,0 +1,11 @@
+{
+	"extends": ["@d-zero/tsconfig"],
+	"compilerOptions": {
+		"noEmit": true, // Instead to use Vite,
+		"paths": {
+			"@/*": ["./__assets/_libs/*"]
+		}
+	},
+	"exclude": ["htdocs", "node_modules"],
+	"include": ["**/*.ts"]
+}

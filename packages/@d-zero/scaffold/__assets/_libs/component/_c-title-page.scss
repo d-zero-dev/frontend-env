@@ -1,0 +1,11 @@
+@use '../style/theme' as *;
+
+.c-title-page {
+	h1 {
+		margin: 0;
+		font-size: var(--font-size-h1);
+		text-align: start;
+		border: 1px solid transparent;
+		border-radius: 5px;
+	}
+}

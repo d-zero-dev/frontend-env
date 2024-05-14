@@ -1,0 +1,23 @@
+.c-media
+	a(href=article.url)
+		.c-media__img
+			img(src=article.img alt height="300" decoding="async" width="400")
+		.c-media__header
+			.c-media__meta
+				if article.cat
+					.c-media__category(data-category=article.cat.id)
+						span= article.cat.name
+				if article.time
+					.c-media__time(data-datetime=filters.date(article.time, "YYYY-MM-DD"))
+						span= filters.date(article.time, "YYYY.MM.DD")
+				if article.tag
+					.c-media__tags
+						ul
+							each tag in article.tag
+								li.c-media__tag-item(data-tag=tag)
+									span= tag
+			.c-media__title
+				span= article.title
+		.c-media__body
+			.c-media__description
+				p= article.desc

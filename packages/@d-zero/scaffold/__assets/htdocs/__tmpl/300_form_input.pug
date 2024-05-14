@@ -1,0 +1,569 @@
+html(lang="ja")
+	head
+		include ../../_libs/mixin/meta.pug
+		+meta('__ページタイトル__ | __サイトタイトル__')
+	body.c-page-sub
+		.c-page-sub__base
+			.c-page-sub__header
+				include ../../_libs/component/_c-header.pug
+			.c-page-sub__nav-global
+				include ../../_libs/component/_c-nav-global.pug
+
+			.c-page-sub__main
+				main
+					.c-page-sub__content
+						.c-page-sub__title-page
+							include ../../_libs/component/_c-title-page.pug
+						.c-page-sub__nav-breadcrumb
+							include ../../_libs/component/_c-nav-breadcrumb.pug
+						.c-page-sub__content-main
+							.c-content-main
+								// CMS要件: メールフォーム概要
+								.cc-form-description
+									p こちらのフォームよりご応募ください。<br>記入いただいた内容を検討の上、弊社人事担当者よりメールにてご返信いたします。
+								// CMS要件: メールフォーム概要ここまで
+
+								form#MailMessageIndexForm.cc-form(
+									action="__PATH_TO__"
+									enctype="multipart/form-data"
+									method="post"
+									accept-charset="utf-8"
+									novalidate)
+									input(type="hidden" name="_method" value="POST")
+									input#Token__TOKEN__(type="hidden" name="data[_Token][key]" value="__TOKEN__")
+									input#MailMessageMode(type="hidden" name="data[MailMessage][mode]")
+									.cc-form-field-list
+										// CMS要件: グループ化している場合は fieldset/legend の構造
+										#GroupMailMessageField1.cc-form-fieldset
+											fieldset
+												legend.cc-form-fieldset-heading
+													span フィールドグループ名
+													span.required 必須
+												.cc-form-fieldset-attention
+													.mail-attention 注意書き
+												.cc-form-fieldset-body
+													// CMS要件: 入力タイプによって data-type 属性を変更
+													#FieldMailMessageField1.mail-field(data-type="text")
+														// CMS要件: グループ化している場合は 前見出し は labelとする
+														label.mail-before-attachment(for="MailMessageField1") 前見出し
+														span.mail-input
+															input#MailMessageField1(
+																type="text"
+																name="data[MailMessage][field1]"
+																maxlength="255"
+																required)
+														span.mail-after-attachment 後見出し
+														.mail-description 説明文
+														.error-message エラーメッセージ
+													#FieldMailMessageField2.mail-field(data-type="text")
+														span.mail-before-attachment
+														span.mail-input
+															input#MailMessageField2(
+																type="text"
+																name="data[MailMessage][field2]"
+																maxlength="255"
+																required)
+														// CMS要件: グループ化している場合は 前見出しが空であれば 後見出しを labelとする
+														label.mail-after-attachment(for="MailMessageField2") 後見出し
+														.mail-description 説明文
+														.error-message エラーメッセージ
+										// CMS要件: グループ化していない場合は div/label の構造
+										#GroupMailMessageField3.cc-form-fieldset
+											div
+												.cc-form-fieldset-heading
+													label(for="MailMessageField3") 単体フィールド名
+													span.required 必須
+												.cc-form-fieldset-attention
+													.mail-attention 注意書き
+												.cc-form-fieldset-body
+													#FieldMailMessageField3.mail-field(data-type="text")
+														// CMS要件: グループ化していない場合は 前見出しも後見出しも label にはならない
+														span.mail-before-attachment 前見出し
+														span.mail-input
+															input#MailMessageField3(
+																type="text"
+																name="data[MailMessage][field3]"
+																maxlength="255"
+																required)
+														span.mail-after-attachment 後見出し
+														.mail-description 説明文
+														.error-message エラーメッセージ
+										#GroupMailMessageName.cc-form-fieldset
+											fieldset
+												legend.cc-form-fieldset-heading
+													span 氏名
+													span.required 必須
+												.cc-form-fieldset-body
+													#FieldMailMessageLastName.mail-field(data-type="text")
+														label.mail-before-attachment(for="MailMessageLastName") 姓
+														span.mail-input
+															input#MailMessageLastName(
+																type="text"
+																name="data[MailMessage][LastName]"
+																required)
+														span.mail-after-attachment
+														.mail-description
+													#FieldMailMessageFirstName.mail-field(data-type="text")
+														label.mail-before-attachment(for="MailMessageFirstName") 名
+														span.mail-input
+															input#MailMessageFirstName(
+																type="text"
+																name="data[MailMessage][FirstName]"
+																required)
+														span.mail-after-attachment
+														.mail-description
+										#GroupMessageNameKana1.cc-form-fieldset
+											fieldset
+												legend.cc-form-fieldset-heading
+													span フリガナ
+													span.optional 任意
+												.cc-form-fieldset-attention
+													.mail-attention カタカナで入力してください
+												.cc-form-fieldset-body
+													#FieldMailMessageLastNameKana.mail-field(data-type="text")
+														label.mail-before-attachment(for="MailMessageLastNameKana") セイ
+														span.mail-input
+															input#MailMessageLastNameKana(
+																type="text"
+																name="data[MailMessage][LastNameKana]"
+																required)
+														span.mail-after-attachment
+														.mail-description
+													#FieldMailMessageFirstNameKana.mail-field(data-type="text")
+														label.mail-before-attachment(for="MailMessageFirstNameKana") メイ
+														span.mail-input
+															input#MailMessageFirstNameKana(
+																type="text"
+																name="data[MailMessage][FirstNameKana]"
+																required)
+														span.mail-after-attachment
+														.mail-description
+										#GroupMessageZip.cc-form-fieldset
+											fieldset
+												legend.cc-form-fieldset-heading
+													span 住所
+													span.optional 任意
+												.cc-form-fieldset-body
+													#FieldMessageZip.mail-field(data-type="text")
+														label.mail-before-attachment(for="MailMessageZip") 〒
+														span.mail-input
+															input#MailMessageZip(
+																name="data[MailMessage][zip]"
+																size="10"
+																maxlength="8"
+																type="text")
+														span.mail-after-attachment
+														.mail-description ハイフンを除く半角数字で入力してください
+													#FieldMessageAddress1.mail-field(data-type="select")
+														label.mail-before-attachment(for="MailMessageAddress1") 都道府県
+														span.mail-input
+															select#MailMessageAddress1(name="data[MailMessage][address_1]")
+																option(value) 選択してください
+																option(value="北海道") 北海道
+																option(value="青森県") 青森県
+																option(value="岩手県") 岩手県
+																option(value="宮城県") 宮城県
+																option(value="秋田県") 秋田県
+																option(value="山形県") 山形県
+																option(value="福島県") 福島県
+																option(value="茨城県") 茨城県
+																option(value="栃木県") 栃木県
+																option(value="群馬県") 群馬県
+																option(value="埼玉県") 埼玉県
+																option(value="千葉県") 千葉県
+																option(value="東京都") 東京都
+																option(value="神奈川県") 神奈川県
+																option(value="新潟県") 新潟県
+																option(value="富山県") 富山県
+																option(value="石川県") 石川県
+																option(value="福井県") 福井県
+																option(value="山梨県") 山梨県
+																option(value="長野県") 長野県
+																option(value="岐阜県") 岐阜県
+																option(value="静岡県") 静岡県
+																option(value="愛知県") 愛知県
+																option(value="三重県") 三重県
+																option(value="滋賀県") 滋賀県
+																option(value="京都府") 京都府
+																option(value="大阪府") 大阪府
+																option(value="兵庫県") 兵庫県
+																option(value="奈良県") 奈良県
+																option(value="和歌山県") 和歌山県
+																option(value="鳥取県") 鳥取県
+																option(value="島根県") 島根県
+																option(value="岡山県") 岡山県
+																option(value="広島県") 広島県
+																option(value="山口県") 山口県
+																option(value="徳島県") 徳島県
+																option(value="香川県") 香川県
+																option(value="愛媛県") 愛媛県
+																option(value="高知県") 高知県
+																option(value="福岡県") 福岡県
+																option(value="佐賀県") 佐賀県
+																option(value="長崎県") 長崎県
+																option(value="熊本県") 熊本県
+																option(value="大分県") 大分県
+																option(value="宮崎県") 宮崎県
+																option(value="鹿児島県") 鹿児島県
+																option(value="沖縄県") 沖縄県
+														span.mail-after-attachment
+														.mail-description
+													#FieldMessageAddress2.mail-field(data-type="text")
+														label.mail-before-attachment(for="MailMessageAddress2") 市区町村
+														span.mail-input
+															input#MailMessageAddress2(
+																name="data[MailMessage][address_2]"
+																size="30"
+																maxlength="200"
+																type="text")
+														span.mail-after-attachment
+														.mail-description
+													#FieldMessageAddress3.mail-field(data-type="text")
+														label.mail-before-attachment(for="MailMessageAddress3") 番地
+														span.mail-input
+															input#MailMessageAddress3(
+																name="data[MailMessage][address_3]"
+																size="30"
+																maxlength="200"
+																type="text")
+														span.mail-after-attachment
+														.mail-description
+										// CMS要件: グループ化していない場合でも チェックボックスでは fieldset/legend の構造
+										#GroupMessageCategory.cc-form-fieldset
+											fieldset
+												legend.cc-form-fieldset-heading
+													span チェックボックス単体
+													span.required 必須
+												.cc-form-fieldset-body
+													#FieldMessageCategory.mail-field(data-type="checkbox")
+														span.mail-before-attachment チェックボックス前見出し
+														input#MailMessageCategory(
+															type="hidden"
+															name="data[MailMessage][category]"
+															value)
+														.checkbox
+															input#MailMessageCategoryItem1(
+																type="checkbox"
+																name="data[MailMessage][category][]"
+																value="Item1")
+															| &nbsp;
+															label(for="MailMessageCategoryItem1") 項目1
+														.checkbox
+															input#MailMessageCategoryItem2(
+																type="checkbox"
+																name="data[MailMessage][category][]"
+																value="Item2")
+															| &nbsp;
+															label(for="MailMessageCategoryItem2") 項目2
+														.checkbox
+															input#MailMessageCategoryItem3(
+																type="checkbox"
+																name="data[MailMessage][category][]"
+																value="Item3")
+															| &nbsp;
+															label(for="MailMessageCategoryItem3") 項目3
+														span.mail-after-attachment チェックボックス後見出し
+														.mail-description
+										#GroupMessageContents.cc-form-fieldset
+											fieldset
+												legend.cc-form-fieldset-heading
+													span チェックボックス
+													span.required 必須
+												.cc-form-fieldset-attention
+													.mail-attention 注意書き
+												.cc-form-fieldset-body
+													#FieldMessageContents.mail-field(data-type="checkbox")
+														span.mail-before-attachment 前見出し
+														input#MailMessageField4(
+															type="hidden"
+															name="data[MailMessage][contents]"
+															value)
+														.checkbox
+															input#MailMessageField41(
+																type="checkbox"
+																name="data[MailMessage][contents][]"
+																value="1")
+															| &nbsp;
+															label(for="MailMessageField41") 生麦生米生卵
+														.checkbox
+															input#MailMessageField42(
+																type="checkbox"
+																name="data[MailMessage][contents][]"
+																value="2")
+															| &nbsp;
+															label(for="MailMessageField42") 赤パジャマ黄パジャマ茶パジャマ
+														.checkbox
+															input#MailMessageField43(
+																type="checkbox"
+																name="data[MailMessage][contents][]"
+																value="3")
+															| &nbsp;
+															label(for="MailMessageField43") 青巻紙赤巻紙黄巻紙
+														.checkbox
+															input#MailMessageField44(
+																type="checkbox"
+																name="data[MailMessage][contents][]"
+																value="4")
+															| &nbsp;
+															label(for="MailMessageField44") 隣の客はよく柿食う客だ
+														.checkbox
+															input#MailMessageField45(
+																type="checkbox"
+																name="data[MailMessage][contents][]"
+																value="5")
+															| &nbsp;
+															label(for="MailMessageField45") かえるぴょこぴょこ3ぴょこぴょこ あわせてぴょこぴょこ6ぴょこぴょこ
+														.checkbox
+															input#MailMessageField46(
+																type="checkbox"
+																name="data[MailMessage][contents][]"
+																value="6")
+															| &nbsp;
+															label(for="MailMessageField46") 東京特許許可局許可局長
+														.checkbox
+															input#MailMessageField47(
+																type="checkbox"
+																name="data[MailMessage][contents][]"
+																value="7")
+															| &nbsp;
+															label(for="MailMessageField47") その他
+														span.mail-after-attachment
+													#FieldMessageContentsOther.mail-field(data-type="text")
+														label.mail-before-attachment(for="MailMessageContentsOther") その他
+														span.mail-input
+															input#MailMessageContentsOther(
+																name="data[MailMessage][contents_other]"
+																size="30"
+																maxlength="255"
+																type="text")
+														span.mail-after-attachment 後見出し
+														.mail-description その他を選択された場合は内容をご入力ください。
+										#GroupMessageTel.cc-form-fieldset
+											div
+												.cc-form-fieldset-heading
+													label(for="MailMessageTel") 電話番号
+												.cc-form-fieldset-attention
+													.mail-attention 注意書き
+												.cc-form-fieldset-body
+													#FieldMessageTel.mail-field(data-type="text")
+														span.mail-before-attachment 前見出し
+														span.mail-input
+															input#MailMessageTel(
+																name="data[MailMessage][tel]"
+																size="15"
+																maxlength="13"
+																type="text")
+														span.mail-after-attachment 後見出し
+										#GroupMessageEmail1.cc-form-fieldset
+											div
+												.cc-form-fieldset-heading
+													label(for="MailMessageEmail1") メールアドレス
+													span.required 必須
+												.cc-form-fieldset-attention
+													.mail-attention 注意書き
+												.cc-form-fieldset-body
+													#FieldMessageEmail1.mail-field(data-type="text")
+														span.mail-before-attachment 前見出し
+														span.mail-input
+															input#MailMessageEmail1(
+																name="data[MailMessage][email_1]"
+																maxlength="255"
+																type="text")
+														span.mail-after-attachment 後見出し
+										#GroupMessageBirth.cc-form-fieldset
+											div
+												.cc-form-fieldset-heading
+													label(for="MailMessageBirth") 生まれ年
+													span.required 必須
+												.cc-form-fieldset-attention
+													.mail-attention 注意書き
+												.cc-form-fieldset-body
+													#FieldMessageBirth.mail-field(data-type="select")
+														span.mail-before-attachment 前見出し
+														span.mail-input
+															select#MailMessageBirth(name="data[MailMessage][birth]")
+																option(value) 選択してください
+																option(value="1") 1923年
+																option(value="2") 1924年
+																option(value="3") 1925年
+																option(value="4") 1926年
+																option(value="5") 1927年
+																option(value="6") 1928年
+																option(value="7") 1929年
+																option(value="8") 1930年
+																option(value="9") 1931年
+																option(value="10") 1932年
+																option(value="11") 1933年
+																option(value="12") 1934年
+																option(value="13") 1935年
+																option(value="14") 1936年
+																option(value="15") 1937年
+																option(value="16") 1938年
+																option(value="17") 1939年
+																option(value="18") 1940年
+																option(value="19") 1941年
+																option(value="20") 1942年
+																option(value="21") 1943年
+																option(value="22") 1944年
+																option(value="23") 1945年
+																option(value="24") 1946年
+																option(value="25") 1947年
+																option(value="26") 1948年
+																option(value="27") 1949年
+																option(value="28") 1950年
+																option(value="29") 1951年
+																option(value="30") 1952年
+																option(value="31") 1953年
+																option(value="32") 1954年
+																option(value="33") 1955年
+																option(value="34") 1956年
+																option(value="35") 1957年
+																option(value="36") 1958年
+																option(value="37") 1959年
+																option(value="38") 1960年
+																option(value="39") 1961年
+																option(value="40") 1962年
+																option(value="41") 1963年
+																option(value="42") 1964年
+																option(value="43") 1965年
+																option(value="44") 1966年
+																option(value="45") 1967年
+																option(value="46") 1968年
+																option(value="47") 1969年
+																option(value="48") 1970年
+																option(value="49") 1971年
+																option(value="50") 1972年
+																option(value="51") 1973年
+																option(value="52") 1974年
+																option(value="53") 1975年
+																option(value="54") 1976年
+																option(value="55") 1977年
+																option(value="56") 1978年
+																option(value="57") 1979年
+																option(value="58") 1980年
+																option(value="59") 1981年
+																option(value="60") 1982年
+																option(value="61") 1983年
+																option(value="62") 1984年
+																option(value="63") 1985年
+																option(value="64") 1986年
+																option(value="65") 1987年
+																option(value="66") 1988年
+																option(value="67") 1989年
+																option(value="68") 1990年
+																option(value="69") 1991年
+																option(value="70") 1992年
+																option(value="71") 1993年
+																option(value="72") 1994年
+																option(value="73") 1995年
+																option(value="74") 1996年
+																option(value="75") 1997年
+																option(value="76") 1998年
+																option(value="77") 1999年
+																option(value="78") 2000年
+																option(value="79") 2001年
+																option(value="80") 2002年
+																option(value="81") 2003年
+																option(value="82") 2004年
+																option(value="83") 2005年
+																option(value="84") 2006年
+																option(value="85") 2007年
+																option(value="86") 2008年
+																option(value="87") 2009年
+																option(value="88") 2010年
+																option(value="89") 2011年
+																option(value="90") 2012年
+																option(value="91") 2013年
+																option(value="92") 2014年
+																option(value="93") 2015年
+																option(value="94") 2016年
+																option(value="95") 2017年
+														span.mail-after-attachment 後見出し
+										#GroupMessageSex.cc-form-fieldset
+											fieldset
+												legend.cc-form-fieldset-heading
+													span 性別
+													span.optional 任意
+												.cc-form-fieldset-attention
+													.mail-attention 注意書き
+												.cc-form-fieldset-body
+													#FieldMessageSex.mail-field(data-type="radio")
+														span.mail-before-attachment 前見出し
+														input#MailMessageSex_(type="hidden" name="data[MailMessage][sex]" value)
+														.mail-group-radio
+															span
+																input#MailMessageSex1(
+																	type="radio"
+																	name="data[MailMessage][sex]"
+																	value="1")
+																label(for="MailMessageSex1") 男性
+															span
+																input#MailMessageSex2(
+																	type="radio"
+																	name="data[MailMessage][sex]"
+																	value="2")
+																label(for="MailMessageSex2") 女性
+														span.mail-after-attachment 後見出し
+										#GroupMessageMessage.cc-form-fieldset
+											div
+												.cc-form-fieldset-heading
+													label(for="MailMessageMessage") テキストエリア
+													span.optional 任意
+												.cc-form-fieldset-attention
+													.mail-attention 注意書き
+												.cc-form-fieldset-body
+													#FieldMessageMessage.mail-field(data-type="textarea")
+														span.mail-before-attachment 前見出し
+														// CMS要件: サイズ指定がないときは cols属性を出力しない
+														span.mail-input
+															textarea#MailMessageMessage(name="data[MailMessage][message]" rows="10")
+														span.mail-after-attachment 後見出し
+										#GroupMessageMessage2.cc-form-fieldset
+											div
+												.cc-form-fieldset-heading
+													label(for="MailMessageMessage2") テキストエリア
+													span.optional 任意
+												.cc-form-fieldset-attention
+													.mail-attention 注意書き
+												.cc-form-fieldset-body
+													#FieldMessageMessage2.mail-field(data-type="textarea")
+														span.mail-before-attachment 前見出し
+														span.mail-input
+															textarea#MailMessageMessage2(
+																name="data[MailMessage][message2]"
+																rows="10"
+																cols="20")
+														span.mail-after-attachment 後見出し
+										#GroupMessageFile.cc-form-fieldset
+											div
+												.cc-form-fieldset-heading
+													label(for="MailMessageFile") ファイル添付
+													span.optional 任意
+												.cc-form-fieldset-attention
+													.mail-attention 注意書き
+												.cc-form-fieldset-body
+													#FieldMessageFile.mail-field(data-type="file")
+														span.mail-before-attachment 前見出し
+														span.mail-input
+															input#MailMessageFile(name="data[MailMessage][File]" type="file")
+														span.mail-after-attachment 後見出し
+									.cc-form-agreement
+										p
+											| 送信前に
+											a(href="__PATH_TO__") 個人情報保護方針
+											| をご確認ください。
+									.cc-form-submit
+										button#BtnMessageConfirm(type="submit"): span 送信内容を確認
+									input#TokenFields__TOKEN(
+										type="hidden"
+										name="data[_Token][fields]"
+										value="__TOKEN__")
+									input#TokenUnlocked__TOKEN(
+										type="hidden"
+										name="data[_Token][unlocked]"
+										value="__TOKEN__")
+
+			.c-page-sub__nav-sitemap
+				include ../../_libs/component/_c-nav-sitemap.pug
+			.c-page-sub__footer
+				include ../../_libs/component/_c-footer.pug

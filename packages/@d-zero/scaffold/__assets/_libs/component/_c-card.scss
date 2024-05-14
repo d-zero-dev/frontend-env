@@ -1,0 +1,106 @@
+@use '../style/theme' as *;
+
+.c-card {
+	position: relative;
+	block-size: 100%;
+	overflow: hidden;
+	border: 1px solid var(--border-color);
+	outline: 2px solid transparent;
+	transition: outline 300ms;
+
+	&:has(a:hover) {
+		border: 1px solid var(--border-color);
+		outline: 2px solid var(--border-color);
+	}
+
+	> a {
+		block-size: 100%;
+		color: currentcolor;
+		text-decoration: none;
+	}
+
+	&__img {
+		inline-size: 100%;
+
+		img {
+			inset-block-start: 0;
+			inset-inline-start: 0;
+			display: block;
+			inline-size: 100%;
+			aspect-ratio: 4 / 3;
+			object-fit: cover;
+			object-position: center top;
+		}
+	}
+
+	&__header {
+		flex: 0 1 auto;
+		padding-inline: 1em;
+	}
+
+	&__body {
+		flex: 0 1 100%;
+		padding-block: 0.5em 2em;
+		padding-inline: 1em;
+	}
+
+	&__title {
+		padding: 0;
+		margin-block: 0;
+		margin-inline: auto;
+	}
+
+	// ブログのみ
+	&__meta {
+		//
+	}
+
+	// ブログのみ
+	&__time {
+		display: none;
+	}
+
+	// ブログのみ
+	&__category {
+		//
+	}
+
+	// ブログのみ
+	&__tags {
+		ul {
+			padding: 0;
+			margin-block: 0;
+			margin-inline: auto;
+			list-style: none;
+		}
+	}
+
+	// ブログのみ
+	&__tag-item {
+		display: inline-block;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+
+		span {
+			display: block;
+			padding-block: 0.2em;
+			padding-inline: 1em;
+		}
+	}
+
+	// ブログのみ
+	&__author {
+		display: none;
+	}
+
+	&__description {
+		padding: 0;
+		margin: 0;
+
+		p {
+			padding: 0;
+			margin: 0;
+		}
+	}
+}

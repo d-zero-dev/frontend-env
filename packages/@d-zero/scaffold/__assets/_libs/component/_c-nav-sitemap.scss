@@ -1,0 +1,140 @@
+@use '../style/theme' as *;
+
+.c-nav-sitemap {
+	padding-block: 2em;
+	padding-inline: 0;
+
+	@media (--xs-lte) {
+		padding: 0;
+	}
+
+	%list {
+		margin: 0;
+	}
+
+	%item {
+		display: block;
+		padding: 0;
+		margin: 0;
+	}
+
+	a {
+		display: block;
+		padding-inline-start: 2em;
+		color: inherit;
+		text-decoration: none;
+
+		@media (--xs-lte) {
+			padding-block: 1em;
+			padding-inline: 2em;
+		}
+	}
+
+	&__body {
+		max-inline-size: var(--wide-layout-width);
+		margin-block: 0;
+		margin-inline: auto;
+		overflow: hidden;
+
+		@media (--md-lte) {
+			max-inline-size: 100%;
+		}
+	}
+
+	ul[data-sitemap-level='1'] {
+		@extend %list;
+		column-count: 4;
+		padding: 0;
+
+		@media (--xs) {
+			column-count: 1;
+		}
+
+		@media (--sm) {
+			column-count: 2;
+		}
+
+		@media (--md) {
+			column-count: 3;
+		}
+	}
+
+	li[data-sitemap-level='1'] {
+		@extend %item;
+		display: inline-block; // 💉 for columns item technic
+		inline-size: 100%; // 💉 for columns item technic
+		margin-block: 0 1em;
+		margin-inline: 0;
+		break-inside: avoid-column;
+
+		a {
+			@media (--xs-lte) {
+				margin: 0;
+				border-block-end: 2px solid var(--border-color);
+
+				::before {
+					display: none;
+					margin: 0;
+				}
+			}
+		}
+	}
+
+	ul[data-sitemap-level='2'] {
+		@extend %list;
+		padding-inline-start: 1em;
+
+		@media (--xs-lte) {
+			padding: 0;
+		}
+	}
+
+	li[data-sitemap-level='2'] {
+		@extend %item;
+		margin-block: 0 0.5em;
+		margin-inline: 0;
+
+		@media (--xs-lte) {
+			margin: 0;
+		}
+
+		a {
+			@media (--xs-lte) {
+				padding-block: 1em;
+				padding-inline: 2em;
+				border-block-end: 1px solid var(--border-color);
+			}
+
+			&::before {
+				@media (--xs-lte) {
+					display: none;
+					margin: 0;
+				}
+			}
+		}
+	}
+
+	ul[data-sitemap-level='3'] {
+		@extend %list;
+		padding-inline-start: 1em;
+
+		@media (--xs-lte) {
+			padding: 0;
+		}
+	}
+
+	li[data-sitemap-level='3'] {
+		@extend %item;
+
+		a {
+			&::before {
+				border: 1px solid var(--border-color);
+
+				@media (--xs-lte) {
+					display: none;
+					margin: 0;
+				}
+			}
+		}
+	}
+}
