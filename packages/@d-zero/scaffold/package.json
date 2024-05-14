@@ -6,6 +6,9 @@
 	"author": "D-ZERO Co., Ltd.",
 	"license": "MIT",
 	"private": false,
+	"publishConfig": {
+		"access": "public"
+	},
 	"type": "module",
 	"main": "package.json",
 	"scripts": {
