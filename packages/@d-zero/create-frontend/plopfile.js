@@ -1,5 +1,4 @@
 import { spawn } from 'node:child_process';
-import fs from 'node:fs';
 import path from 'node:path';
 
 import { globSync } from 'glob';
@@ -7,6 +6,7 @@ import ignore from 'ignore';
 import meow from 'meow';
 
 import { t } from './locale.js';
+import { readFileSafe } from './read-file-safe.js';
 
 const cli = meow(
 	`
@@ -51,10 +51,8 @@ export default function (plop) {
 		path.dirname(import.meta.resolve('@d-zero/scaffold').replace('file:', '')),
 	);
 
-	const ignoreFiles = fs
-		.readFileSync(path.resolve(scaffoldDir, '.gitignore'), 'utf8')
-		.split('\n')
-		.filter(Boolean);
+	const gitignore = readFileSafe(path.resolve(scaffoldDir, '.gitignore'));
+	const ignoreFiles = gitignore?.split('\n').filter(Boolean) ?? [];
 
 	const ig = ignore()
 		// Ignore files in .gitignore
