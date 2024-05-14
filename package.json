@@ -13,6 +13,7 @@
 		"lint:prettier": "prettier --write \"./**/*.{js,jsx,ts,tsx,scss,pug,html}\"",
 		"lint:textlint": "textlint --fix \"./**/*.md\"",
 		"release": "lerna publish --exact --conventional-commits --conventional-graduate",
+		"release:alpha:latest": "lerna publish --exact --force-publish --conventional-commits --conventional-prerelease --preid alpha",
 		"release:next": "lerna publish --dist-tag next --exact --force-publish --conventional-commits --conventional-prerelease --preid alpha",
 		"prepare": "husky",
 		"commit": "cz",
