@@ -11,6 +11,16 @@
 	},
 	"type": "module",
 	"main": "package.json",
+	"files": [
+		"*",
+		"**/*",
+		".gitignore",
+		"!htdocs",
+		"!node_modules",
+		"!.11ty-vite",
+		"!.serve",
+		"!.DS_Store"
+	],
 	"scripts": {
 		"dev": "cross-env NODE_ENV=serve build",
 		"d": "yarn dev",
