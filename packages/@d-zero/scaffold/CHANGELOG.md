@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.5](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.4...v5.0.0-alpha.5) (2024-05-14)
+
+### Bug Fixes
+
+- **scaffold:** fix published files ([f35ae2b](https://github.com/d-zero-dev/frontend-env/commit/f35ae2b9c46f14efda206acf518d10bd3b4a582f))
+
 # [5.0.0-alpha.4](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.2...v5.0.0-alpha.4) (2024-05-14)
 
 **Note:** Version bump only for package @d-zero/scaffold
