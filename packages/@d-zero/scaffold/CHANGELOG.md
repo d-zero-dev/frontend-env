@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.2](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.1...v5.0.0-alpha.2) (2024-05-14)
+
+### Bug Fixes
+
+- **scaffold:** fix to include `.gitignore` in package ([e432294](https://github.com/d-zero-dev/frontend-env/commit/e43229418c0cd7c97100bc421fb277dd53883284))
+
 # 5.0.0-alpha.1 (2024-05-14)
 
 ### Features

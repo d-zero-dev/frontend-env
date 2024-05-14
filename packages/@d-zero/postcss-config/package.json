@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/postcss-config",
-	"version": "5.0.0-alpha.1",
+	"version": "5.0.0-alpha.2",
 	"description": "Configurations of PostCSS",
 	"repository": "https://github.com/d-zero-dev/frontend-env.git",
 	"author": "D-ZERO Co., Ltd.",

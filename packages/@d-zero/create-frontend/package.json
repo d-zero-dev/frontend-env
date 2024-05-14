@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/create-frontend",
-	"version": "5.0.0-alpha.1",
+	"version": "5.0.0-alpha.2",
 	"description": "Create a new frontend project from a scaffolding template",
 	"repository": "https://github.com/d-zero-dev/frontend-env.git",
 	"author": "D-ZERO Co., Ltd.",
@@ -14,7 +14,7 @@
 		"create-dzero-frontend": "./index.js"
 	},
 	"dependencies": {
-		"@d-zero/scaffold": "5.0.0-alpha.1",
+		"@d-zero/scaffold": "5.0.0-alpha.2",
 		"glob": "10.3.15",
 		"i18n-js": "4.4.3",
 		"ignore": "5.3.1",
