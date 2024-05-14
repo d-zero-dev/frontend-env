@@ -14,7 +14,7 @@
 		"create-dzero-frontend": "./index.js"
 	},
 	"dependencies": {
-		"@d-zero/scaffold": "5.0.0-alpha.2",
+		"@d-zero/scaffold": "5.0.0-alpha.5",
 		"glob": "10.3.15",
 		"i18n-js": "4.4.3",
 		"ignore": "5.3.1",
