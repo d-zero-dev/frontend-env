@@ -1,0 +1,27 @@
+.DS_Store
+node_modules
+npm-error.log
+yarn-error.log
+.env
+
+# Huge File
+*.zip
+*.psd
+*.pdf
+*.ai
+*.mp3
+*.mp4
+*.mov
+
+# Privacy
+*.sql
+
+# Temporary
+.11ty-vite
+.serve
+
+# Document Root
+htdocs
+!__assets/htdocs
+
+!.gitignore
