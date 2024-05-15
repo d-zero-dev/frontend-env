@@ -11,7 +11,7 @@ import { build } from './fn/build.mjs';
  */
 const isServe = process.env.NODE_ENV === 'serve';
 
-cleanUp();
+cleanUp(true);
 
 const elev = new Eleventy(
 	undefined, // inputDir is set from the Eleventy config file
@@ -49,8 +49,10 @@ process.on('exit', cleanUp);
  * Before starting the build process.
  * Also, After aborting the process.
  */
-function cleanUp() {
-	process.stdout.write('🧹 Clean up');
+function cleanUp(silent = false) {
+	if (!silent) {
+		process.stdout.write('🧹 Clean up\n');
+	}
 	rmSync('.serve', { recursive: true, force: true });
 	rmSync('.11ty-vite', { recursive: true, force: true });
 }
