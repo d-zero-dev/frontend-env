@@ -42,9 +42,6 @@ jobs:
         if: steps.cache-depends.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile --check-files
 
-      - name: Build
-        run: yarn build
-
       - name: Lint
         run: yarn lint
 
