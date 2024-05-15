@@ -75,16 +75,31 @@ export default function (plop) {
 		const dest = answers['__d-zero_scaffold_dest__'] ?? cli.flags.dir ?? '.';
 		const doInstall =
 			answers['__d-zero_scaffold_yarn_install__'] ?? cli.flags.install ?? true;
+
+		const { promise, resolve, reject } = Promise.withResolvers();
+
 		if (doInstall) {
 			const child = spawn('yarn', ['install'], {
 				cwd: path.resolve(process.cwd(), dest),
 				stdio: 'inherit',
 			});
 
+			child.on('exit', (code) => {
+				if (code === 0) {
+					resolve(': success');
+				} else {
+					reject(new Error('Failed to install dependencies'));
+				}
+			});
+
 			process.on('SIGINT', () => {
 				child.kill('SIGINT');
 			});
+		} else {
+			resolve(': skipped');
 		}
+
+		return promise;
 	});
 
 	plop.setGenerator('basic', {
