@@ -798,6 +798,14 @@
   dependencies:
     pug-lint "2.7.0"
 
+"@d-zero/shared@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@d-zero/shared/-/shared-0.3.0.tgz#631093b44ed65d1c4526570e7fc85ccb87feac93"
+  integrity sha512-r3E2oS0Qbom7E3yPor6zdDd7TtTwTjtK+lAyB1GHKAhrsd9OHjPlUvMC5EkfnSk6xet4al7abRFlPaR8hdtsVA==
+  dependencies:
+    "@holiday-jp/holiday_jp" "2.4.0"
+    dayjs "1.11.11"
+
 "@d-zero/stylelint-config@5.0.0-alpha.26":
   version "5.0.0-alpha.26"
   resolved "https://registry.yarnpkg.com/@d-zero/stylelint-config/-/stylelint-config-5.0.0-alpha.26.tgz#5c4bf54ebc9597da2b2355ebf2ec382f0b42ca76"
@@ -1115,6 +1123,11 @@
   version "8.57.0"
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.0.tgz#a5417ae8427873f1dd08b70b3574b453e67b5f7f"
   integrity sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==
+
+"@holiday-jp/holiday_jp@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@holiday-jp/holiday_jp/-/holiday_jp-2.4.0.tgz#dd98c48ceec8764c5d1af0e9deb5506d579e700b"
+  integrity sha512-YcLZJMTwadSoxR8sduIGWpX9sAhjoVR8hc2PnJZPxTOlT73ZXPlTu1TPQ0JZqM7+7MPGILZRuPimBDiC/aAhgw==
 
 "@humanwhocodes/config-array@^0.11.14":
   version "0.11.14"

@@ -1,3 +1,5 @@
+import { pathComparator } from '@d-zero/shared/sort/path';
+
 /**
  * @typedef {Object} EleventyResultFile
  * @property {string} inputPath
@@ -11,22 +13,23 @@
  * @returns {EleventyResultFile[]}
  */
 export function getHtmlFiles(results) {
-	return results.flatMap((result) =>
-		result
-			.map((file) => {
-				if ('outputPath' in file && file.outputPath.endsWith('.html')) {
-					return file;
-				}
-			})
-			.filter(Boolean)
-			.toSorted(
-				/**
-				 *
-				 * @param {EleventyResultFile} a
-				 * @param {EleventyResultFile} b
-				 * @returns
-				 */
-				(a, b) => a.inputPath - b.inputPath,
-			),
-	);
+	return results
+		.flatMap((result) =>
+			result
+				.map((file) => {
+					if ('outputPath' in file && file.outputPath.endsWith('.html')) {
+						return file;
+					}
+				})
+				.filter(Boolean),
+		)
+		.toSorted(
+			/**
+			 *
+			 * @param {EleventyResultFile} a
+			 * @param {EleventyResultFile} b
+			 * @returns
+			 */
+			(a, b) => pathComparator(a.inputPath, b.inputPath),
+		);
 }
