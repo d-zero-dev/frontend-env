@@ -32,5 +32,8 @@
 		"minimist": "1.2.8",
 		"prettier": "3.2.5",
 		"vite": "5.2.11"
+	},
+	"devDependencies": {
+		"strip-ansi": "7.1.0"
 	}
 }
