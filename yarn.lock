@@ -692,17 +692,17 @@
     "@commitlint/config-conventional" "19.2.2"
     "@d-zero/cz-config" "5.0.0-alpha.27"
 
-"@d-zero/cspell-config@5.0.0-alpha.26":
-  version "5.0.0-alpha.26"
-  resolved "https://registry.yarnpkg.com/@d-zero/cspell-config/-/cspell-config-5.0.0-alpha.26.tgz#3cbac3ccf34dec045507d8bd97ab67bacbeeb1e1"
-  integrity sha512-Fvj/Vn//B/EVBz0Y+KrEVJ0TZ7K04kUV1VW/5trAeWaSAPb41BDs9Z9gKsSY3qB/W2xauHZxClp4SGZZ6/u4YQ==
+"@d-zero/cspell-config@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@d-zero/cspell-config/-/cspell-config-5.0.0-alpha.27.tgz#40a7a93302839d0096c94008348b5de4c3480ea8"
+  integrity sha512-/FZ5BGjsGLanGWyipyPo4J96gbVUWXInQYAl3t06dyox/uqVtX2ayXp4g4h5HiF8VvH7I5CSbIwRblwyAo5oHA==
   dependencies:
     cspell "8.8.1"
 
-"@d-zero/csstree-scss-syntax@5.0.0-alpha.26":
-  version "5.0.0-alpha.26"
-  resolved "https://registry.yarnpkg.com/@d-zero/csstree-scss-syntax/-/csstree-scss-syntax-5.0.0-alpha.26.tgz#9fc9dac6d709ee43ac0ffc6bb63bb5821190e1c6"
-  integrity sha512-gI9b+7AGbwbd4g6+B4ueiKrnHap5jo/zsj7hsRHLjzrlbIvdSMuMzYUCX2AxE2l6UtxK3c33yGar90nlP4Azjw==
+"@d-zero/csstree-scss-syntax@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@d-zero/csstree-scss-syntax/-/csstree-scss-syntax-5.0.0-alpha.27.tgz#482aa19a6fa7c247880e91a4ca25ccafa4131d3a"
+  integrity sha512-rcV1eha3D2XsetBqPbEV3EADxacazlbmGc4K8KghzBU1bdeFv2h7YIQp/sMovImHGsIJDd9fSvcfTC2FDOyhbQ==
   dependencies:
     css-tree "2.3.1"
 
@@ -714,62 +714,62 @@
     commitizen "4.3.0"
     cz-customizable "7.0.0"
 
-"@d-zero/eslint-config@5.0.0-alpha.26":
-  version "5.0.0-alpha.26"
-  resolved "https://registry.yarnpkg.com/@d-zero/eslint-config/-/eslint-config-5.0.0-alpha.26.tgz#35ed740e998d5de5d3f495b433f0c0f0cab61b98"
-  integrity sha512-61p97Y39RzrxYUdXel1QzsbAY9g4KpJtayd0Nfox2uRMks4bWSR0kFWG53Rc/Klr5AKCYwU+W9M5x0Ldo6fVvQ==
+"@d-zero/eslint-config@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@d-zero/eslint-config/-/eslint-config-5.0.0-alpha.27.tgz#ae955b18245bec4be9af60e9d45e7c3cfeeaa2fc"
+  integrity sha512-BtVEhdrVk46rKBi3oV9zouRuyp5XMy6mn7tb1zKNzd2b+qW5UidmM1KMAYB932FRa4NzakbIj48m53FjkXyRGg==
   dependencies:
     "@typescript-eslint/eslint-plugin" "7.8.0"
     "@typescript-eslint/parser" "7.8.0"
     eslint "8.57.0"
     eslint-plugin-eslint-comments "3.2.0"
     eslint-plugin-import "2.29.1"
-    eslint-plugin-jsdoc "48.2.4"
+    eslint-plugin-jsdoc "48.2.5"
     eslint-plugin-regexp "2.5.0"
     eslint-plugin-sort-class-members "1.20.0"
     eslint-plugin-unicorn "51.0.1"
 
-"@d-zero/lint-staged-config@5.0.0-alpha.26":
-  version "5.0.0-alpha.26"
-  resolved "https://registry.yarnpkg.com/@d-zero/lint-staged-config/-/lint-staged-config-5.0.0-alpha.26.tgz#de1b8884173692574c76f9f01c46dbe0e919ef9d"
-  integrity sha512-Xssc7MuzfYN3FaQj9kVCk6LU7PfbgeRT64VGM3dbecQ0HS0qElk6RT9yfvCDsQbaQkEqEy+mNj7BUQgDgjR+0Q==
+"@d-zero/lint-staged-config@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@d-zero/lint-staged-config/-/lint-staged-config-5.0.0-alpha.27.tgz#1151e3b5d30b7cd0a562f2b7544d1aeeac36f0ac"
+  integrity sha512-hkd0TPbUbMGMYAyCFRJWY4PhT98PZgw9PE3VzZsGAaFc6gCelhb9ViyAfIeF2ClS+Z49fHy8hOfWHUSGTPC7Hg==
   dependencies:
     lint-staged "15.2.2"
 
-"@d-zero/linters@5.0.0-alpha.26":
-  version "5.0.0-alpha.26"
-  resolved "https://registry.yarnpkg.com/@d-zero/linters/-/linters-5.0.0-alpha.26.tgz#650d3c67801ba9d294ea3936022eff2c6cf1f249"
-  integrity sha512-XUWeBCuzhXVLzOYRCRercZcT/0w2HixfMg5jHGg970I6gGISdMY4MweP5KmdtzAbY6HWA3cuac1v+4H1Hr3AeA==
+"@d-zero/linters@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@d-zero/linters/-/linters-5.0.0-alpha.27.tgz#28f27d24beb414eba644e1afff6d3e26354123dd"
+  integrity sha512-AtQi4JxHCyd6f28tIWYFWfLh14RVwuv30arhdAoTGF2TIRtuPn3wydwiyYAWBGmK5GQPp6vl7RDceEh+1yOF0Q==
   dependencies:
-    "@d-zero/cspell-config" "5.0.0-alpha.26"
-    "@d-zero/eslint-config" "5.0.0-alpha.26"
-    "@d-zero/lint-staged-config" "5.0.0-alpha.26"
-    "@d-zero/markuplint-config" "5.0.0-alpha.26"
-    "@d-zero/prettier-config" "5.0.0-alpha.26"
-    "@d-zero/pug-lint-config" "5.0.0-alpha.26"
-    "@d-zero/stylelint-config" "5.0.0-alpha.26"
-    "@d-zero/textlint-config" "5.0.0-alpha.26"
+    "@d-zero/cspell-config" "5.0.0-alpha.27"
+    "@d-zero/eslint-config" "5.0.0-alpha.27"
+    "@d-zero/lint-staged-config" "5.0.0-alpha.27"
+    "@d-zero/markuplint-config" "5.0.0-alpha.27"
+    "@d-zero/prettier-config" "5.0.0-alpha.27"
+    "@d-zero/pug-lint-config" "5.0.0-alpha.27"
+    "@d-zero/stylelint-config" "5.0.0-alpha.27"
+    "@d-zero/textlint-config" "5.0.0-alpha.27"
 
-"@d-zero/markuplint-config@5.0.0-alpha.26":
-  version "5.0.0-alpha.26"
-  resolved "https://registry.yarnpkg.com/@d-zero/markuplint-config/-/markuplint-config-5.0.0-alpha.26.tgz#2894f46ea672ecb01dff0e68299b4d16d37c6918"
-  integrity sha512-C7Uy5DliBvRIrkoDc3RZA3qZoZf3s6xBRMR6vQxYvN/re7GQz+abuV+j4rPql/BP4HO0m5ODO5XsHDLSWwThSQ==
+"@d-zero/markuplint-config@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@d-zero/markuplint-config/-/markuplint-config-5.0.0-alpha.27.tgz#9966150b54076daae63a5112d4ca5e064764b56b"
+  integrity sha512-gV9DXL79mXUMP5QgsNmSfqNZ3cpWdD1/7hdBfeGxEvP3wG2XDgFTvDxdqMWiPzVcvi6o9HMZhCeGyDzNyir/Hg==
   dependencies:
     "@markuplint/pug-parser" "4.6.2"
     markuplint "4.8.1"
 
-"@d-zero/prettier-config@5.0.0-alpha.26":
-  version "5.0.0-alpha.26"
-  resolved "https://registry.yarnpkg.com/@d-zero/prettier-config/-/prettier-config-5.0.0-alpha.26.tgz#db65cf731746f72810362a3fbeab20657afb5698"
-  integrity sha512-q2W3mYLFKu/1KnQ+td5awk3rb0FsfIORbrvA83C8IdLlH/BnGDPf96aBgkfyCBxquonw7qv51NYoGkLYddNTKg==
+"@d-zero/prettier-config@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@d-zero/prettier-config/-/prettier-config-5.0.0-alpha.27.tgz#b49b8de7429002c86155f50957782165f20c0d88"
+  integrity sha512-WS7qCz7ltjTHKwN8iDKpCnyPzHl2Y8TxAnl7xW/w9/NC1g+z+m7glQ4iUTrDERt77C4kvcFAnuTt7CfhKTIRjw==
   dependencies:
     "@prettier/plugin-pug" "3.0.0"
     prettier "3.2.5"
 
-"@d-zero/pug-lint-config@5.0.0-alpha.26":
-  version "5.0.0-alpha.26"
-  resolved "https://registry.yarnpkg.com/@d-zero/pug-lint-config/-/pug-lint-config-5.0.0-alpha.26.tgz#88da294ac4b570982c3ec56f1e8aa260fe5e7430"
-  integrity sha512-uuMV/enlEZTwj9PnO7nzy/l7HJRwtPGpTzp2NwtmLjNN2/92QB6kzWXyhfPLgeMwyjiPrzv+4Nn/egpJ0AYA6Q==
+"@d-zero/pug-lint-config@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@d-zero/pug-lint-config/-/pug-lint-config-5.0.0-alpha.27.tgz#5fb987a4ea6a4d103b72acc1ce3267a9c6c6ffba"
+  integrity sha512-THw8evZQMoLVbCy+q9/rHncXhvZxoOSlK0gchtTqhQm0vWJk8/lfJrgPjWixOM1VFceegNNqz8ixctVtbttuEQ==
   dependencies:
     pug-lint "2.7.0"
 
@@ -781,12 +781,12 @@
     "@holiday-jp/holiday_jp" "2.4.0"
     dayjs "1.11.11"
 
-"@d-zero/stylelint-config@5.0.0-alpha.26":
-  version "5.0.0-alpha.26"
-  resolved "https://registry.yarnpkg.com/@d-zero/stylelint-config/-/stylelint-config-5.0.0-alpha.26.tgz#5c4bf54ebc9597da2b2355ebf2ec382f0b42ca76"
-  integrity sha512-XlxOXG6BFwD2FeSwaSZqbqld/ATi+c3njbc0oKZsvcgKse1qou008ZNsavGz1nBaZTSf7a3z6lfjeg3Y47bsbw==
+"@d-zero/stylelint-config@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@d-zero/stylelint-config/-/stylelint-config-5.0.0-alpha.27.tgz#b36836faf133127975a08ca9f72d0731a385af22"
+  integrity sha512-YU7/ggrorlzBi4I9/WpZGPJgZyNvzaKcaQEhPP7l4OZTldwbQfF2VZ6yIRtso55/qy+qkMu+YIoad08T798V1g==
   dependencies:
-    "@d-zero/stylelint-rules" "5.0.0-alpha.26"
+    "@d-zero/stylelint-rules" "5.0.0-alpha.27"
     postcss-scss "4.0.9"
     stylelint "16.5.0"
     stylelint-config-recess-order "5.0.1"
@@ -795,20 +795,20 @@
     stylelint-scss "6.3.0"
     stylelint-use-logical "2.1.2"
 
-"@d-zero/stylelint-rules@5.0.0-alpha.26":
-  version "5.0.0-alpha.26"
-  resolved "https://registry.yarnpkg.com/@d-zero/stylelint-rules/-/stylelint-rules-5.0.0-alpha.26.tgz#1ed387647d0ed0f991b9aed96be4484d7473692d"
-  integrity sha512-Sa9qg/j7nqmKjeI3SGLTxcNyRH8OEDTDm9cFfQVorUAdPp46LWxnZoDMRBEHKm73g7FernnYaAobAj28Hz2S1g==
+"@d-zero/stylelint-rules@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@d-zero/stylelint-rules/-/stylelint-rules-5.0.0-alpha.27.tgz#5ae48047c53a04d3b4f7b6d9dc181b1e20cd2cde"
+  integrity sha512-benwzfp0mm7oFZ1SVdylYBZDf7d8VVgXi1xdt2jCBixhVD4mUFQAXfyCLMKgD3PF1Av05RnPZMjt3b1SNstT/A==
   dependencies:
-    "@d-zero/csstree-scss-syntax" "5.0.0-alpha.26"
+    "@d-zero/csstree-scss-syntax" "5.0.0-alpha.27"
     css-tree "2.3.1"
     postcss-value-parser "4.2.0"
     stylelint "16.5.0"
 
-"@d-zero/textlint-config@5.0.0-alpha.26":
-  version "5.0.0-alpha.26"
-  resolved "https://registry.yarnpkg.com/@d-zero/textlint-config/-/textlint-config-5.0.0-alpha.26.tgz#ace5e074290463b7e4da3c0449858ea9be373f24"
-  integrity sha512-qhK3OdE8QgmLayepSc7rUC3nN9ZVxKhF3jPTTCEK5sroJ7AFPWQ9k8G47yFBLLMP2ZzVdXoRjEVh/Cj0ril8IQ==
+"@d-zero/textlint-config@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@d-zero/textlint-config/-/textlint-config-5.0.0-alpha.27.tgz#f087c151dff858e9e64a6f7277b0381c0427425c"
+  integrity sha512-Kgt/xLcvbdVQ3kjZ+YBbKsKeFgDI5uVUeThRbFJALvEisfTTDXyhLP1Mnq5LC8k3Pr3qfdzPrYFe+yZH+Ox1DA==
   dependencies:
     textlint "14.0.4"
     textlint-plugin-html "1.0.0"
@@ -4831,10 +4831,10 @@ eslint-plugin-import@2.29.1:
     semver "^6.3.1"
     tsconfig-paths "^3.15.0"
 
-eslint-plugin-jsdoc@48.2.4:
-  version "48.2.4"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-48.2.4.tgz#0b6972faa9e5de89a08f1b0bcdc30e70a9cad736"
-  integrity sha512-3ebvVgCJFy06gpmuS2ynz13uh9iFSzZ1C1dDkgcSAqVVg82zlORKMk2fvjq708pAO6bwfs5YLttknFEbaoDiGw==
+eslint-plugin-jsdoc@48.2.5:
+  version "48.2.5"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-48.2.5.tgz#66ec712632852faa15065a094342786858f13c49"
+  integrity sha512-ZeTfKV474W1N9niWfawpwsXGu+ZoMXu4417eBROX31d7ZuOk8zyG66SO77DpJ2+A9Wa2scw/jRqBPnnQo7VbcQ==
   dependencies:
     "@es-joy/jsdoccomment" "~0.43.0"
     are-docs-informative "^0.0.2"
@@ -4843,7 +4843,7 @@ eslint-plugin-jsdoc@48.2.4:
     escape-string-regexp "^4.0.0"
     esquery "^1.5.0"
     is-builtin-module "^3.2.1"
-    semver "^7.6.0"
+    semver "^7.6.1"
     spdx-expression-parse "^4.0.0"
 
 eslint-plugin-regexp@2.5.0:
