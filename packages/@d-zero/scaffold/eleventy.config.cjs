@@ -7,6 +7,10 @@ module.exports = function (eleventyConfig) {
 		'@': path.resolve(__dirname, '__assets', '_libs'),
 	});
 
+	eleventyConfig.setPugOptions({
+		basedir: path.resolve(__dirname, '__assets', '_libs'),
+	});
+
 	if (process.env.NODE_ENV === 'production') {
 		eleventyConfig.addGlobalData('prettier', true);
 		// eleventyConfig.addGlobalData('minifier', { minifyJS: false });
