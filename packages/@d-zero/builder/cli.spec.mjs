@@ -29,7 +29,7 @@ describe('CLI', () => {
 				// Windows path separator
 				.replaceAll(path.sep, '/')
 				// Remove time
-				.replaceAll(/\d+(?:\.\d{1,3})?\s*(?:ms|seconds)/g, '{time}')
+				.replaceAll(/\d+(?:\.\d{1,3})?\s*(?:ms|seconds|s)/g, '{time}')
 				// Remove version
 				.replaceAll(/v\d+\.\d+\.\d+(?:[a-z]+(?:\.[\da-z]+)?)?/gi, '{version}')
 				// Remove size
