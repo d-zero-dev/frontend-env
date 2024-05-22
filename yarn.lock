@@ -773,13 +773,15 @@
   dependencies:
     pug-lint "2.7.0"
 
-"@d-zero/shared@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@d-zero/shared/-/shared-0.3.0.tgz#631093b44ed65d1c4526570e7fc85ccb87feac93"
-  integrity sha512-r3E2oS0Qbom7E3yPor6zdDd7TtTwTjtK+lAyB1GHKAhrsd9OHjPlUvMC5EkfnSk6xet4al7abRFlPaR8hdtsVA==
+"@d-zero/shared@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@d-zero/shared/-/shared-0.4.0.tgz#e5a3fd8e41a2ce32f82b621af638a113a41d8b09"
+  integrity sha512-5ejBMnVjpObKsh0SE0IiQIJ2Ar6B/VHUXFATCaYKqpoOM/51F2K8KTF1Rsq4TXOYlKY/zf/sooaa5ihPOLAgOw==
   dependencies:
     "@holiday-jp/holiday_jp" "2.4.0"
+    await-event-emitter "2.0.2"
     dayjs "1.11.11"
+    escape-string-regexp "5.0.0"
 
 "@d-zero/stylelint-config@5.0.0-alpha.30":
   version "5.0.0-alpha.30"
@@ -2936,6 +2938,13 @@ available-typed-arrays@^1.0.7:
   integrity sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==
   dependencies:
     possible-typed-array-names "^1.0.0"
+
+await-event-emitter@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/await-event-emitter/-/await-event-emitter-2.0.2.tgz#bafa7d53d2e2f33a6015eb1fa6e19384a1b269b4"
+  integrity sha512-3+cjm1wr2MQz0bFM1f5F0pR9XUitF5/kaKUfeGXJWFKC57FgDY61BoQp/xzjjkxXCz8tw1S2fCpeHtxpTID9tA==
+  dependencies:
+    is-promise "^4.0.0"
 
 axios@^1.6.0:
   version "1.7.0"
@@ -6651,6 +6660,11 @@ is-promise@^2.0.0, is-promise@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/is-promise/-/is-promise-2.2.2.tgz#39ab959ccbf9a774cf079f7b40c7a26f763135f1"
   integrity sha512-+lP4/6lKUBfQjZ2pdxThZvLUAafmZb8OAxFb8XXtiQmS35INgr85hdOGoEs124ez1FCnZJt6jau/T+alh58QFQ==
+
+is-promise@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/is-promise/-/is-promise-4.0.0.tgz#42ff9f84206c1991d26debf520dd5c01042dd2f3"
+  integrity sha512-hvpoI6korhJMnej285dSg6nu1+e6uxs7zG3BYAm5byqDsgJNWwxzM6z6iZiAgQR4TJ30JmBTOwqZUw3WlyH3AQ==
 
 is-reference@1.2.1:
   version "1.2.1"
