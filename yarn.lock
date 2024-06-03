@@ -824,10 +824,10 @@
     textlint-rule-preset-japanese "10.0.3"
     textlint-rule-preset-jtf-style "2.3.14"
 
-"@d-zero/tsconfig@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@d-zero/tsconfig/-/tsconfig-0.2.0.tgz#21335ea18c7cb28e0a08c08478e42f99545fbe59"
-  integrity sha512-bf4+7GdZcMOMn+1qaxLmWGMEIaJe+Qg2OsgmeZsCKdEoQEaJ/aI73l6ObKB1wZ9fDAKv0DGIeDmz29B8AIUcuw==
+"@d-zero/tsconfig@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@d-zero/tsconfig/-/tsconfig-0.3.0.tgz#edc05e888837e53a64f6b77fdc94d89f44eb768d"
+  integrity sha512-8rYjjkYFURNw3xpSScwqCqdK4io+QnYVTNemxsnqtgqy9ce1VF8At5gpWNgzO5wMYbb+tV6ykqfxeFKjjgqqxQ==
   dependencies:
     "@tsconfig/node-lts" "20.1.3"
     "@tsconfig/recommended" "1.0.6"
