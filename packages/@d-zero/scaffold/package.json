@@ -45,7 +45,7 @@
 	},
 	"dependencies": {
 		"ress": "5.0.2",
-		"tslib": "2.6.2"
+		"tslib": "2.6.3"
 	},
 	"volta": {
 		"node": "22.2.0",
