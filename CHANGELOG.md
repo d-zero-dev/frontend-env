@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.9](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.8...v5.0.0-alpha.9) (2024-06-10)
+
+### Bug Fixes
+
+- **builder:** inline-scriptが削除できない問題を修正 ([1eef9ba](https://github.com/d-zero-dev/frontend-env/commit/1eef9ba083aed28ebf19a5d237b413765f8e7fc8))
+- **builder:** pugがコピーされない実験用コードが残っていたため削除 ([0dee05c](https://github.com/d-zero-dev/frontend-env/commit/0dee05ca3881e66c3640ccbb6dd3d2dcbf36ca70))
+
+### Features
+
+- **builder:** `empty`ファイルをコピーしないように変更 ([218c0c1](https://github.com/d-zero-dev/frontend-env/commit/218c0c160dfe0de6952d58a960fb37292a17ad9a))
+- **builder:** `publicDir`を`eleventyConfig.addGlobalData`に設定できるように追加 ([26e2740](https://github.com/d-zero-dev/frontend-env/commit/26e2740c8df32cc60cb4e407fe4cfc20919a7e5a))
+- **builder:** 静的ファイルフォルダを`[@static](https://github.com/static)`として定義 ([c9668c2](https://github.com/d-zero-dev/frontend-env/commit/c9668c2f6b5de991e3fec5fbf684c27b264a52ed))
+- **scaffold:** `[@static](https://github.com/static)`フォルダを空フォルダとして予め準備 ([7fe485b](https://github.com/d-zero-dev/frontend-env/commit/7fe485b2ef4d5a13e23e494c1d2c5422ef3fdc3b))
+
 # [5.0.0-alpha.8](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.7...v5.0.0-alpha.8) (2024-05-23)
 
 ### Bug Fixes
