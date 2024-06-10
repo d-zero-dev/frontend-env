@@ -1,3 +1,5 @@
+const path = require('node:path');
+
 const EleventyVitePlugin = require('@11ty/eleventy-plugin-vite');
 const dayjs = require('dayjs');
 const yaml = require('js-yaml');
@@ -41,6 +43,9 @@ module.exports = function (eleventyConfig) {
 
 	eleventyConfig.addPassthroughCopy('__assets/htdocs', {
 		dot: false,
+		filter: (filePath) => {
+			return path.basename(filePath) !== 'empty';
+		},
 	});
 
 	const publicDir = eleventyConfig.globalData.publicDir ?? '@static';
