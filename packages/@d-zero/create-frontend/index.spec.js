@@ -65,6 +65,8 @@ describe('CLI', () => {
 			`✔  ++ ${dir}/__assets/htdocs/__tmpl/100_sub.pug`,
 			`✔  ++ ${dir}/__assets/htdocs/__tmpl/000_home.pug`,
 			`✔  ++ ${dir}/__assets/htdocs/__tmpl/.markuplintrc`,
+			`✔  ++ ${dir}/__assets/htdocs/@static/empty`,
+			`✔  ++ ${dir}/__assets/htdocs/@static/img/empty`,
 			`✔  ++ ${dir}/__assets/_libs/.markuplintrc`,
 			`✔  ++ ${dir}/__assets/_libs/style/theme/_index.scss`,
 			`✔  ++ ${dir}/__assets/_libs/style/theme/_font.scss`,
