@@ -47,7 +47,13 @@ export async function build(elev) {
 		]);
 	}
 
-	await fs.unlink(path.resolve(outDir, INLINE_SCRIPT_FILE_DELETE_ID));
+	const files = await fs.readdir(outDir);
+
+	for (const file of files) {
+		if (file.startsWith(INLINE_SCRIPT_FILE_DELETE_ID)) {
+			await fs.unlink(path.resolve(outDir, file));
+		}
+	}
 
 	log(outputLogTable);
 }

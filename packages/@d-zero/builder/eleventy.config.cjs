@@ -79,12 +79,7 @@ module.exports = function (eleventyConfig) {
 						chunkFileNames: () => {
 							return 'js/[name].js';
 						},
-						entryFileNames: (chunkInfo) => {
-							if (chunkInfo.moduleIds.some((id) => id.includes('html-proxy'))) {
-								return INLINE_SCRIPT_FILE_DELETE_ID;
-							}
-							return 'js/__[name].js';
-						},
+						entryFileNames: () => INLINE_SCRIPT_FILE_DELETE_ID,
 					},
 				},
 			},
