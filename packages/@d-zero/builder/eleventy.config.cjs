@@ -43,11 +43,13 @@ module.exports = function (eleventyConfig) {
 		dot: false,
 	});
 
+	const publicDir = eleventyConfig.globalData.publicDir ?? '@static';
+
 	eleventyConfig.addPlugin(EleventyVitePlugin, {
 		tempFolderName: '.11ty-vite',
 		viteOptions: {
 			root: '__assets/htdocs',
-			publicDir: '@static',
+			publicDir,
 			clearScreen: false,
 			server: {
 				mode: 'development',

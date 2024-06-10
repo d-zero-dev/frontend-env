@@ -3,6 +3,8 @@ const path = require('node:path');
 const eleventy = require('@d-zero/builder/11ty');
 
 module.exports = function (eleventyConfig) {
+	// eleventyConfig.addGlobalData('publicDir', '@static');
+
 	eleventyConfig.addGlobalData('alias', {
 		'@': path.resolve(__dirname, '__assets', '_libs'),
 	});
