@@ -67,9 +67,7 @@ module.exports = function (eleventyConfig) {
 							}
 							return `img/${name}`;
 						},
-						chunkFileNames: () => {
-							return 'js/[name].js';
-						},
+						chunkFileNames: () => 'js/[name].js',
 						entryFileNames: () => INLINE_SCRIPT_FILE_DELETE_ID,
 					},
 				},
