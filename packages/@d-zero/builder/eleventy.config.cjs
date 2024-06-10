@@ -1,5 +1,3 @@
-const path = require('node:path');
-
 const EleventyVitePlugin = require('@11ty/eleventy-plugin-vite');
 const dayjs = require('dayjs');
 const yaml = require('js-yaml');
@@ -41,15 +39,8 @@ module.exports = function (eleventyConfig) {
 
 	eleventyConfig.addDataExtension('yml', (contents) => yaml.load(contents));
 
-	// eleventyConfig.addWatchTarget('__assets/_libs');
-
-	const ignoreCopyExt = new Set(['.pug']);
 	eleventyConfig.addPassthroughCopy('__assets/htdocs', {
 		dot: false,
-		filter: (filePath) => {
-			const ext = path.extname(filePath);
-			return !ignoreCopyExt.has(ext);
-		},
 	});
 
 	eleventyConfig.addPlugin(EleventyVitePlugin, {
