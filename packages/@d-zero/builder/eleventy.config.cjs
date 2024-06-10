@@ -47,7 +47,7 @@ module.exports = function (eleventyConfig) {
 		tempFolderName: '.11ty-vite',
 		viteOptions: {
 			root: '__assets/htdocs',
-			publicDir: 'public',
+			publicDir: '@static',
 			clearScreen: false,
 			server: {
 				mode: 'development',
