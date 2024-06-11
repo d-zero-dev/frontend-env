@@ -7,9 +7,5 @@
 	&::after {
 		box-sizing: border-box;
 	}
-
-	&::selection {
-		background-color: initial;
-	}
 }
 /* stylelint-enable selector-max-universal */
