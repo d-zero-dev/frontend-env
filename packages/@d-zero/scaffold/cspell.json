@@ -1,3 +1,4 @@
 {
-	"import": ["@d-zero/cspell-config"]
+	"import": ["@d-zero/cspell-config"],
+	"ignorePaths": ["./htdocs", "**/@static/**/*"]
 }

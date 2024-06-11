@@ -46,6 +46,7 @@ describe('CLI', () => {
 			`✔  ++ ${dir}/.stylelintrc`,
 			`✔  ++ ${dir}/.pug-lintrc`,
 			`✔  ++ ${dir}/.prettierrc.mjs`,
+			`✔  ++ ${dir}/.prettierignore`,
 			`✔  ++ ${dir}/.postcssrc.js`,
 			`✔  ++ ${dir}/.npmignore`,
 			`✔  ++ ${dir}/.markuplintrc`,
