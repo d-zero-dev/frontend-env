@@ -30,7 +30,7 @@
 		"js-yaml": "4.1.0",
 		"jsdom": "24.1.0",
 		"minimist": "1.2.8",
-		"prettier": "3.3.1",
+		"prettier": "3.3.2",
 		"vite": "5.2.13"
 	},
 	"devDependencies": {
