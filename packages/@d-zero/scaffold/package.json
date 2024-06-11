@@ -20,7 +20,7 @@
 		"lint:html:pug": "pug-lint ./__assets/htdocs/**/*.pug -r console; pug-lint ./__assets/_libs/**/*.pug -r console;",
 		"lint:css": " stylelint \"./__assets/**/*.scss\"",
 		"lint:js": " eslint \"./__assets/**/*.{js,mjs,cjs,jsx,ts,tsx}\"",
-		"lint:format": "prettier --write \"./__assets/**/*.{js,jsx,ts,tsx,scss,pug,html}\"",
+		"lint:format": "prettier --write \"{*,./__assets/**/*}.{js,jsx,ts,tsx,scss,pug,html,json,yaml,*rc}\"",
 		"lint:spell": "cspell --no-progress --show-suggestions \"**\"",
 		"up": "yarn upgrade-interactive --latest"
 	},
