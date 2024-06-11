@@ -4302,6 +4302,11 @@ deprecation@^2.0.0:
   resolved "https://registry.yarnpkg.com/deprecation/-/deprecation-2.3.1.tgz#6368cbdb40abf3373b525ac87e4a260c3a700919"
   integrity sha512-xmHIy4F3scKVwMsQ4WnVaS8bHOx0DmVwRywosKhaILI0ywMDWPtBSku2HNxRvF7jtwDRsoEwYQSfbxj8b7RlJQ==
 
+destyle.css@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/destyle.css/-/destyle.css-4.0.1.tgz#e155a8ba274ea50e432f8773c3e4fd814ba45553"
+  integrity sha512-G9iyW0JfRkgdxhbWQeuLdO1KZ40nzKssHtArbSFvaU/w44G0cZ5v3u4bHY829INSu480J/fxae+lTm225mN3Vw==
+
 detect-file@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/detect-file/-/detect-file-1.0.0.tgz#f0d66d03672a825cb1b73bdb3fe62310c8e552b7"
@@ -10074,11 +10079,6 @@ resolve@^1.1.7, resolve@^1.10.0, resolve@^1.15.1, resolve@^1.20.0, resolve@^1.22
     is-core-module "^2.13.0"
     path-parse "^1.0.7"
     supports-preserve-symlinks-flag "^1.0.0"
-
-ress@5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/ress/-/ress-5.0.2.tgz#bfe37c76cd8ca344ab69214bdeb677790a6d8730"
-  integrity sha512-oHBtOWo/Uc8SzQMbQNIKTcgi8wKmAs7IlNlRywmXudbOtF+c27FlOIq7tnwLDVcTywe6JXYo1pDXHO6kABwNYA==
 
 restore-cursor@^2.0.0:
   version "2.0.0"

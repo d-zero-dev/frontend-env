@@ -44,7 +44,7 @@
 		"typescript": "5.4.5"
 	},
 	"dependencies": {
-		"ress": "5.0.2",
+		"destyle.css": "4.0.1",
 		"tslib": "2.6.3"
 	},
 	"volta": {

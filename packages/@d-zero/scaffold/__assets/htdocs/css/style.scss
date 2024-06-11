@@ -1,4 +1,4 @@
-@import 'ress' layer(reset);
+@import 'destyle.css' layer(reset);
 
 @layer base {
 	@import '@/style/base/_root.scss';
