@@ -34,6 +34,8 @@ describe('CLI', () => {
 				.replaceAll(/v\d+\.\d+\.\d+(?:[a-z]+(?:\.[\da-z]+)?)?/gi, '{version}')
 				// Remove size
 				.replaceAll(/\s*\d+\.\d{2}\s*(?:kB|MB|GB)/g, ' {size}')
+				// Remove random number
+				.replaceAll(/::inline-script::\d{1,2}/g, '::inline-script::{number}')
 				.split('\n'),
 		).toStrictEqual([
 			'vite {version} building for production...',
@@ -54,7 +56,7 @@ describe('CLI', () => {
 			'../htdocs/__tmpl/300_form_input/index.html {size} │ gzip: {size}',
 			'../htdocs/css/style.css {size} │ gzip: {size}',
 			'../htdocs/js/script.js {size} │ gzip: {size}',
-			'../htdocs/::inline-script::10 {size} │ gzip: {size}',
+			'../htdocs/::inline-script::{number} {size} │ gzip: {size}',
 			'✓ built in {time}',
 			'[11ty] Copied 14 files / Wrote 10 files in {time} ({time} each, {version})',
 			'Convert:',
