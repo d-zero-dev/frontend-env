@@ -1,6 +1,6 @@
 {
 	"lerna": "8.1.2",
-	"version": "5.0.0-alpha.9",
+	"version": "5.0.0-alpha.10",
 	"npmClient": "yarn",
 	"packages": ["packages/@d-zero/*"],
 	"command": {

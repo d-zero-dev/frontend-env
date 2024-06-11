@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.10](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.9...v5.0.0-alpha.10) (2024-06-11)
+
+### Bug Fixes
+
+- **scaffold:** 生成ファイルや静的ファイルがリント対象となっていたため除外設定を追加 ([0938636](https://github.com/d-zero-dev/frontend-env/commit/0938636ec260337914eaa4d0ab98aead709164fc))
+
 # [5.0.0-alpha.9](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.8...v5.0.0-alpha.9) (2024-06-10)
 
 **Note:** Version bump only for package @d-zero/create-frontend
