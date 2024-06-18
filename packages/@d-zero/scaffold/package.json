@@ -37,7 +37,7 @@
 		"@d-zero/linters": "5.0.0-alpha.35",
 		"@d-zero/postcss-config": "5.0.0-alpha.10",
 		"@d-zero/tsconfig": "0.3.0",
-		"@types/node": "20.14.4",
+		"@types/node": "20.14.5",
 		"cross-env": "7.0.3",
 		"npm-run-all2": "6.2.0",
 		"sass": "1.77.6",
