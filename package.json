@@ -33,7 +33,7 @@
 		}
 	},
 	"devDependencies": {
-		"@d-zero/commitlint-config": "5.0.0-alpha.35",
+		"@d-zero/commitlint-config": "5.0.0-alpha.36",
 		"@d-zero/linters": "5.0.0-alpha.35",
 		"husky": "9.0.11",
 		"lerna": "8.1.3",
