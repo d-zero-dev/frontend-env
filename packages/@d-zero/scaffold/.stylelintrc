@@ -1,3 +1,12 @@
 {
-	"extends": ["@d-zero/stylelint-config"]
+	"extends": ["@d-zero/stylelint-config"],
+	"overrides": [
+		{
+			"files": ["_c-content-main.scss"],
+			"rules": {
+				"selector-class-pattern": null,
+				"selector-nested-pattern": "^(?!\\.c-).*"
+			}
+		}
+	]
 }

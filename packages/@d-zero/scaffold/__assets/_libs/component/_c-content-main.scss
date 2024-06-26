@@ -1,7 +1,7 @@
 @use '../style/theme' as *;
 
-/* stylelint-disable selector-class-pattern, selector-nested-pattern -- content-main特殊ルール */
-//
+// 🃏 このファイルのStylelintルールはoverridesによって特別に変更されています
+
 // メインコンテンツ（content-mainコンポーネント）の内容はCMSなどで管理されるHTMLを含んだり、
 // ページ独自のスタイルを扱うことが多いので例外的に専用のルールを設ける。
 //
@@ -267,4 +267,3 @@
 		}
 	}
 }
-/* stylelint-enable selector-class-pattern, selector-nested-pattern */
