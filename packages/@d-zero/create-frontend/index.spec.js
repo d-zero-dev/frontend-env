@@ -113,6 +113,7 @@ describe('CLI', () => {
 			`✔  ++ ${dir}/__assets/_libs/component/_c-card-list.scss`,
 			`✔  ++ ${dir}/.vscode/settings.json`,
 			`✔  ++ ${dir}/.vscode/extensions.json`,
+			`✔  ++ ${dir}/.husky/pre-commit`,
 			'✔  Install dependencies : skipped',
 		]);
 	});
