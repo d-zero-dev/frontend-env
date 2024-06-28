@@ -22,6 +22,7 @@
 		"lint:js": " eslint \"./__assets/**/*.{js,mjs,cjs,jsx,ts,tsx}\"",
 		"lint:format": "prettier --write \"{*,./__assets/**/*}.{js,jsx,ts,tsx,scss,pug,html,json,yaml,*rc}\"",
 		"lint:spell": "cspell --no-progress --show-suggestions \"**\"",
+		"prepare": "husky install",
 		"up": "yarn upgrade-interactive --latest"
 	},
 	"browserslist": [
@@ -39,6 +40,7 @@
 		"@d-zero/tsconfig": "0.3.0",
 		"@types/node": "20.14.9",
 		"cross-env": "7.0.3",
+		"husky": "9.0.11",
 		"npm-run-all2": "6.2.0",
 		"sass": "1.77.6",
 		"typescript": "5.5.2"
