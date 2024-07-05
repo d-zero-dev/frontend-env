@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.12](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.11...v5.0.0-alpha.12) (2024-07-05)
+
+### Bug Fixes
+
+- **scaffold:** fix ignore path within lint-staged ([c62c532](https://github.com/d-zero-dev/frontend-env/commit/c62c5327bd7f142960950fbe4300905301d34a6f))
+
 # [5.0.0-alpha.11](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.10...v5.0.0-alpha.11) (2024-07-05)
 
 ### Bug Fixes
