@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.11](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.10...v5.0.0-alpha.11) (2024-07-05)
+
+### Bug Fixes
+
+- **repo:** fix deprecated husky command on prepare script ([d72833b](https://github.com/d-zero-dev/frontend-env/commit/d72833bcc90cdf3abb649a5e865551fadccf72ee))
+- **scaffold:** fix to ignore `htdocs` on lint staged process ([8292cc9](https://github.com/d-zero-dev/frontend-env/commit/8292cc90098076ad613c33162610e8536bd89ff7))
+
+### Features
+
+- **scaffold:** 301_form_confirmテンプレートに「入力画面に戻る」ボタンを追加 ([7aa3614](https://github.com/d-zero-dev/frontend-env/commit/7aa3614ffd8f1e7cebe64c97428c0d830f9abb70))
+- **scaffold:** add `@d-zero/component` stylelint rule ([7c42f10](https://github.com/d-zero-dev/frontend-env/commit/7c42f10fc01edf42082844c5334447025cc81bda))
+- **scaffold:** huskyの追加 ([7f485dc](https://github.com/d-zero-dev/frontend-env/commit/7f485dcb28cfaf5ff78eec9e93bcd0a56ff52b95))
+
 # [5.0.0-alpha.10](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.9...v5.0.0-alpha.10) (2024-06-11)
 
 ### Bug Fixes
