@@ -33,8 +33,8 @@
 		}
 	},
 	"devDependencies": {
-		"@d-zero/commitlint-config": "5.0.0-alpha.37",
-		"@d-zero/linters": "5.0.0-alpha.37",
+		"@d-zero/commitlint-config": "5.0.0-alpha.39",
+		"@d-zero/linters": "5.0.0-alpha.39",
 		"husky": "9.0.11",
 		"lerna": "8.1.5",
 		"npm-run-all2": "6.2.2",
