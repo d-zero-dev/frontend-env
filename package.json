@@ -36,7 +36,7 @@
 		"@d-zero/commitlint-config": "5.0.0-alpha.39",
 		"@d-zero/linters": "5.0.0-alpha.39",
 		"husky": "9.0.11",
-		"lerna": "8.1.5",
+		"lerna": "8.1.6",
 		"npm-run-all2": "6.2.2",
 		"vitest": "1.6.0"
 	},
