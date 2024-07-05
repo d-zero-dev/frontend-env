@@ -22,7 +22,7 @@
 		"lint:js": " eslint \"./__assets/**/*.{js,mjs,cjs,jsx,ts,tsx}\"",
 		"lint:format": "prettier --write \"{*,./__assets/**/*}.{js,jsx,ts,tsx,scss,pug,html,json,yaml,*rc}\"",
 		"lint:spell": "cspell --no-progress --show-suggestions \"**\"",
-		"prepare": "husky install",
+		"prepare": "husky",
 		"up": "yarn upgrade-interactive --latest"
 	},
 	"browserslist": [
