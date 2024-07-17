@@ -717,14 +717,14 @@
   resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-3.1.1.tgz#63085d2995ca0f0e55aa8b8a07d69bfd48b844fe"
   integrity sha512-a7cxGcJ2wIlMFLlh8z2ONm+715QkPHiyJcxwQlKOz/03GPw1COpfhcmC9wm4xlZfp//jWHNNMwzjtqHXVWU9KA==
 
-"@d-zero/commitlint-config@5.0.0-alpha.39":
-  version "5.0.0-alpha.39"
-  resolved "https://registry.yarnpkg.com/@d-zero/commitlint-config/-/commitlint-config-5.0.0-alpha.39.tgz#dfe5d8e7eba5f610f0ec75e49d1fc2d331869428"
-  integrity sha512-0JJtFbgsj9/dYmFEWMRF6wGo7xoYrVGzcT3//r3y4wvhsug3/eSaqI78UthSyos1XyWV/jFXQ1YX87vIU0JUIA==
+"@d-zero/commitlint-config@5.0.0-alpha.40":
+  version "5.0.0-alpha.40"
+  resolved "https://registry.yarnpkg.com/@d-zero/commitlint-config/-/commitlint-config-5.0.0-alpha.40.tgz#ebf45642921fe57ba17cb89c162e5b3a389980de"
+  integrity sha512-6v45RKngw3oEJzUtOy4vZm5OuPGCq30AFprCqXKxGP13GPWinVk7qbXmY1pe0ILELeJNdeTIbJ7WoWyByFCTRw==
   dependencies:
     "@commitlint/cli" "19.3.0"
     "@commitlint/config-conventional" "19.2.2"
-    "@d-zero/cz-config" "5.0.0-alpha.39"
+    "@d-zero/cz-config" "5.0.0-alpha.40"
 
 "@d-zero/cspell-config@5.0.0-alpha.39":
   version "5.0.0-alpha.39"
@@ -740,13 +740,13 @@
   dependencies:
     css-tree "2.3.1"
 
-"@d-zero/cz-config@5.0.0-alpha.39":
-  version "5.0.0-alpha.39"
-  resolved "https://registry.yarnpkg.com/@d-zero/cz-config/-/cz-config-5.0.0-alpha.39.tgz#cb95689c0f658c2a65559d76c73c7786f244abf0"
-  integrity sha512-Q0aLEXcYxHHeF40DYWr/KaCS4Jh5Sg8Z6wQkczqn56Ehuprc08JpGMfgBsViOgJrbsOd7elRIwXXFItnTB/f4Q==
+"@d-zero/cz-config@5.0.0-alpha.40":
+  version "5.0.0-alpha.40"
+  resolved "https://registry.yarnpkg.com/@d-zero/cz-config/-/cz-config-5.0.0-alpha.40.tgz#857c740d288fbaa27e26066f4252a547f53703f4"
+  integrity sha512-4I3uafGMKFsfpUdSY9x3stjaPA//qG2nwnWczj2djbHDi3MvfjQtHc45qWPke/BN58paAG/6P8It9ITrPVXyKQ==
   dependencies:
     commitizen "4.3.0"
-    cz-customizable "7.0.0"
+    cz-customizable "7.1.0"
 
 "@d-zero/eslint-config@5.0.0-alpha.39":
   version "5.0.0-alpha.39"
@@ -4133,10 +4133,10 @@ cz-conventional-changelog@3.3.0:
   optionalDependencies:
     "@commitlint/load" ">6.1.1"
 
-cz-customizable@7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/cz-customizable/-/cz-customizable-7.0.0.tgz#2a291010bae48936cb2d917447bf83b67fa497df"
-  integrity sha512-pQKkGSm+8SY9VY/yeJqDOla1MjrGaG7WG4EYLLEV4VNctGO7WdzdGtWEr2ydKSkrpmTs7f8fmBksg/FaTrUAyw==
+cz-customizable@7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/cz-customizable/-/cz-customizable-7.1.0.tgz#294a1592dc5caac2045c9a5617888215e484bdfc"
+  integrity sha512-wC0nz7AqYe5fN/xlGaj3Fk8mLjanJlhP+g5qwbagGgNBmOAKo/isc+XNSaR340CC+aSbgO0/vIWM8yJBhBX4Bg==
   dependencies:
     editor "1.0.0"
     find-config "^1.0.0"
