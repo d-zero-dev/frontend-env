@@ -1,8 +1,11 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
+import { glob } from 'glob';
+
 import Const from '../const.cjs';
 
+import { buildCss } from './build-css.mjs';
 import { convert } from './convert.mjs';
 import { getHtmlFiles } from './get-html-files.mjs';
 import { log } from './log.mjs';
@@ -18,6 +21,17 @@ export async function build(elev) {
 
 	const options = elev.config?.globalData ?? {};
 	const outDir = elev.config.dir.output;
+
+	const cssFiles = await glob(path.resolve(elev.config.dir.input, 'css', '**', '*.scss'));
+	for (const file of cssFiles) {
+		const name = path.basename(file, path.extname(file));
+		const out = await buildCss(
+			file,
+			path.resolve(elev.config.dir.output, 'css', `${name}.css`),
+			options,
+		);
+	}
+
 	const htmlFiles = getHtmlFiles(results);
 
 	/**
