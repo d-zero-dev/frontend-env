@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.13](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.12...v5.0.0-alpha.13) (2024-07-22)
+
+
+### Features
+
+* **builder:** add to support to build multiple CSS ([94dcb2c](https://github.com/d-zero-dev/frontend-env/commit/94dcb2c3aff6e06ad093b2bf07a57c3a2fc7599a))
+
+
+
+
+
 # [5.0.0-alpha.12](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.11...v5.0.0-alpha.12) (2024-07-05)
 
 **Note:** Version bump only for package @d-zero/builder
