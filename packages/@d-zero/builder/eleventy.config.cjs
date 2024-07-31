@@ -12,6 +12,9 @@ const { INLINE_SCRIPT_FILE_DELETE_ID } = require('./const.cjs');
  */
 module.exports = function (eleventyConfig) {
 	const isServe = process.env.NODE_ENV === 'serve';
+	const outputCssDir = eleventyConfig.globalData.outputCssDir ?? 'css';
+	const outputJsDir = eleventyConfig.globalData.outputJsDir ?? 'js';
+	const outputImgDir = eleventyConfig.globalData.outputImgDir ?? 'img';
 
 	global.filters = eleventyConfig.javascriptFunctions;
 
@@ -70,11 +73,11 @@ module.exports = function (eleventyConfig) {
 					output: {
 						assetFileNames: ({ name }) => {
 							if (name.endsWith('.css')) {
-								return `css/${name}`;
+								return `${outputCssDir}/${name}`;
 							}
-							return `img/${name}`;
+							return `${outputImgDir}/${name}`;
 						},
-						chunkFileNames: () => 'js/[name].js',
+						chunkFileNames: () => `${outputJsDir}/[name].js`,
 						entryFileNames: () => INLINE_SCRIPT_FILE_DELETE_ID,
 					},
 				},
@@ -94,6 +97,9 @@ module.exports = function (eleventyConfig) {
 			output: isServe ? '.serve' : 'htdocs',
 			layouts: '../_libs/component',
 			data: '../_libs/data',
+			outputCss: outputCssDir,
+			outputJs: outputJsDir,
+			outputImg: outputImgDir,
 		},
 	};
 };

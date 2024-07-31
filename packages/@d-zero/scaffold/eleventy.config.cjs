@@ -4,6 +4,9 @@ const eleventy = require('@d-zero/builder/11ty');
 
 module.exports = function (eleventyConfig) {
 	// eleventyConfig.addGlobalData('publicDir', '@static');
+	// eleventyConfig.addGlobalData('outputCssDir', 'css');
+	// eleventyConfig.addGlobalData('outputJsDir', 'js');
+	// eleventyConfig.addGlobalData('outputImgDir', 'img');
 
 	eleventyConfig.addGlobalData('alias', {
 		'@': path.resolve(__dirname, '__assets', '_libs'),

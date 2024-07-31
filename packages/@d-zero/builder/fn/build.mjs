@@ -22,12 +22,14 @@ export async function build(elev) {
 	const options = elev.config?.globalData ?? {};
 	const outDir = elev.config.dir.output;
 
-	const cssFiles = await glob(path.resolve(elev.config.dir.input, 'css', '**', '*.scss'));
+	const cssFiles = await glob(
+		path.resolve(elev.config.dir.input, elev.config.dir.outputCss, '**', '*.scss'),
+	);
 	for (const file of cssFiles) {
 		const name = path.basename(file, path.extname(file));
 		const out = await buildCss(
 			file,
-			path.resolve(elev.config.dir.output, 'css', `${name}.css`),
+			path.resolve(elev.config.dir.output, elev.config.dir.outputCss, `${name}.css`),
 			options,
 		);
 	}
