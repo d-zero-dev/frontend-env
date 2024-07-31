@@ -43,6 +43,7 @@ describe('CLI', () => {
 			`✔  ++ ${dir}/README.md`,
 			`✔  ++ ${dir}/CHANGELOG.md`,
 			`✔  ++ ${dir}/.textlintrc.js`,
+			`✔  ++ ${dir}/.textlintignore`,
 			`✔  ++ ${dir}/.stylelintrc`,
 			`✔  ++ ${dir}/.pug-lintrc`,
 			`✔  ++ ${dir}/.prettierrc.mjs`,
