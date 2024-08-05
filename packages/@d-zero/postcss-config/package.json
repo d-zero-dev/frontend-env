@@ -18,7 +18,7 @@
 		"postcss-calc": "10.0.0",
 		"postcss-clip-path-polyfill": "1.1.0",
 		"postcss-color-function": "4.1.0",
-		"postcss-custom-media": "10.0.8",
+		"postcss-custom-media": "11.0.0",
 		"postcss-math": "0.0.10",
 		"postcss-scss": "4.0.9"
 	}
