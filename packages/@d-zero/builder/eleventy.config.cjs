@@ -2,6 +2,7 @@ const path = require('node:path');
 
 const EleventyVitePlugin = require('@11ty/eleventy-plugin-vite');
 const dayjs = require('dayjs');
+const htmlmin = require('html-minifier-terser');
 const yaml = require('js-yaml');
 
 const { INLINE_SCRIPT_FILE_DELETE_ID } = require('./const.cjs');
@@ -33,6 +34,14 @@ module.exports = function (eleventyConfig) {
 		minifyCSS: true,
 		minifyJS: true,
 		...eleventyConfig.globalData.minifier,
+	});
+
+	eleventyConfig.addTransform('htmlmin', function (content) {
+		if ((this.page.outputPath || '').endsWith('.html')) {
+			return htmlmin.minify(content, eleventyConfig.globalData.minifier);
+		}
+
+		return content;
 	});
 
 	eleventyConfig.setPugOptions({
