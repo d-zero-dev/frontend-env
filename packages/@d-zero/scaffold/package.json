@@ -47,7 +47,7 @@
 	},
 	"dependencies": {
 		"destyle.css": "4.0.1",
-		"tslib": "2.6.3"
+		"tslib": "2.7.0"
 	},
 	"volta": {
 		"node": "22.7.0",
