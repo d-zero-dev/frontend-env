@@ -37,7 +37,7 @@
 		"@d-zero/builder": "5.0.0-alpha.14",
 		"@d-zero/linters": "5.0.0-alpha.41",
 		"@d-zero/postcss-config": "5.0.0-alpha.14",
-		"@d-zero/tsconfig": "0.3.1",
+		"@d-zero/tsconfig": "0.3.2",
 		"@types/node": "20.16.3",
 		"cross-env": "7.0.3",
 		"husky": "9.1.5",
