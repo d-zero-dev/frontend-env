@@ -37,7 +37,7 @@
 		"@d-zero/linters": "5.0.0-alpha.42",
 		"husky": "9.1.6",
 		"lerna": "8.1.8",
-		"npm-run-all2": "6.2.2",
+		"npm-run-all2": "6.2.3",
 		"vitest": "2.1.1"
 	},
 	"volta": {
