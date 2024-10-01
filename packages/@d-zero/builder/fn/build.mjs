@@ -66,7 +66,7 @@ export async function build(elev) {
 		outputLogTable.push([
 			//
 			path.relative(outDir, outputPath),
-			path.relative(outDir, htmlFile.outputPath),
+			path.relative(inputDir, htmlFile.inputPath),
 			...Object.values(options),
 		]);
 	}
