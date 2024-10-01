@@ -9,7 +9,8 @@ import { replaceExt } from './replace-ext.mjs';
 /**
  * @typedef {Object} HtmlFile
  * @property {string} inputPath
- * @property {string} outputPath
+ * @property {string} inputRoot
+ * @property {string} outputRoot
  * @property {string} url
  * @property {string} content
  */
@@ -20,21 +21,39 @@ import { replaceExt } from './replace-ext.mjs';
  * @property {boolean} prettier
  * @property {"\n" | "\r\n"} lineBreak
  * @property {string} charset
+ * @property {"file" | "directory" | "preserve"} pathFormat
  */
 
 /**
  * @param {HtmlFile} htmlFile
  * @param {Options} options
  */
-export async function convert(htmlFile, options) {
+export async function convert(htmlFile, options = {}) {
+	const inputRoot = htmlFile.inputRoot ?? process.cwd();
+	const outputRoot = htmlFile.outputRoot ?? inputRoot ?? process.cwd();
+	const pathFormat = options.pathFormat ?? 'preserve';
+
 	const inputName = path.basename(htmlFile.inputPath, path.extname(htmlFile.inputPath));
-	const outDir = path.dirname(htmlFile.outputPath);
+	const inputDir = path.relative(inputRoot, path.dirname(htmlFile.inputPath));
+	const outDir = path.join(outputRoot, inputDir);
+	const isRoot = outDir === outputRoot;
 
-	let newOutputPath = htmlFile.outputPath;
+	let newOutputPath = path.join(outDir, inputName + '.html');
 
-	if (inputName !== 'index') {
-		const outExt = path.extname(htmlFile.outputPath);
-		newOutputPath = outDir + outExt;
+	switch (pathFormat) {
+		case 'file': {
+			if (inputName === 'index' && !isRoot) {
+				newOutputPath = outDir + '.html';
+				break;
+			}
+			break;
+		}
+		case 'directory': {
+			if (inputName !== 'index') {
+				newOutputPath = path.join(outDir, inputName, 'index.html');
+			}
+			break;
+		}
 	}
 
 	let content = htmlFile.content;

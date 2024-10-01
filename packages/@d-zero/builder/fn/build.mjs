@@ -20,6 +20,7 @@ export async function build(elev) {
 	const results = await elev.write();
 
 	const options = elev.config?.globalData ?? {};
+	const inputDir = elev.config.dir.input;
 	const outDir = elev.config.dir.output;
 
 	const cssFiles = await glob(
@@ -42,7 +43,14 @@ export async function build(elev) {
 	const outputLogTable = [['From', 'To', ...Object.keys(options)]];
 
 	for (const htmlFile of htmlFiles) {
-		const { outputPath, content } = await convert(htmlFile, options);
+		const { outputPath, content } = await convert(
+			{
+				...htmlFile,
+				inputRoot: inputDir,
+				outputRoot: outDir,
+			},
+			options,
+		);
 
 		await fs.writeFile(outputPath, content, 'utf8');
 
