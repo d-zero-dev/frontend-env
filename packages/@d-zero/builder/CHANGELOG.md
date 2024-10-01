@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.15](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.14...v5.0.0-alpha.15) (2024-10-01)
+
+### Bug Fixes
+
+- **builder:** apply `pathFormat` option ([89b2bc7](https://github.com/d-zero-dev/frontend-env/commit/89b2bc7cfe5cd76f88769d5ae46a213ee5a30e27))
+- **builder:** fix to output from paths ([ccfa0f5](https://github.com/d-zero-dev/frontend-env/commit/ccfa0f5f7a3cc9be89d53ad9d00627295a162adc))
+
+### Features
+
+- **builder:** html-minifier-terserで設定したhtmlの変換をローカルサーバーでも確認できるようにする ([2c129aa](https://github.com/d-zero-dev/frontend-env/commit/2c129aa67fb4a62990b74b767e500569275179b1))
+
 # [5.0.0-alpha.14](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.13...v5.0.0-alpha.14) (2024-07-31)
 
 ### Features
