@@ -35,22 +35,22 @@ export async function convert(htmlFile, options = {}) {
 
 	const inputName = path.basename(htmlFile.inputPath, path.extname(htmlFile.inputPath));
 	const inputDir = path.relative(inputRoot, path.dirname(htmlFile.inputPath));
-	const outDir = path.join(outputRoot, inputDir);
-	const isRoot = outDir === outputRoot;
+	const outputDir = path.join(outputRoot, inputDir);
+	const isRoot = outputDir === outputRoot;
 
-	let newOutputPath = path.join(outDir, inputName + '.html');
+	let newOutputPath = path.join(outputDir, inputName + '.html');
 
 	switch (pathFormat) {
 		case 'file': {
 			if (inputName === 'index' && !isRoot) {
-				newOutputPath = outDir + '.html';
+				newOutputPath = outputDir + '.html';
 				break;
 			}
 			break;
 		}
 		case 'directory': {
 			if (inputName !== 'index') {
-				newOutputPath = path.join(outDir, inputName, 'index.html');
+				newOutputPath = path.join(outputDir, inputName, 'index.html');
 			}
 			break;
 		}
