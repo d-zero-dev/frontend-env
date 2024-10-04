@@ -797,14 +797,14 @@
   dependencies:
     pug-lint "2.7.0"
 
-"@d-zero/shared@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@d-zero/shared/-/shared-0.4.0.tgz#e5a3fd8e41a2ce32f82b621af638a113a41d8b09"
-  integrity sha512-5ejBMnVjpObKsh0SE0IiQIJ2Ar6B/VHUXFATCaYKqpoOM/51F2K8KTF1Rsq4TXOYlKY/zf/sooaa5ihPOLAgOw==
+"@d-zero/shared@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@d-zero/shared/-/shared-0.5.0.tgz#c1507ae424232ea5e87451a704f1d1ab25fd984b"
+  integrity sha512-Vkkvr6q3xgm2Y+fqDgvp/QpZNMIFykc2XS6yZdkHDzOnYBROI794Wzl5p7rNP9sWmSm6J6SF1hYF1uGmcog4Ww==
   dependencies:
     "@holiday-jp/holiday_jp" "2.4.0"
     await-event-emitter "2.0.2"
-    dayjs "1.11.11"
+    dayjs "1.11.13"
     escape-string-regexp "5.0.0"
 
 "@d-zero/stylelint-config@5.0.0-alpha.43":
@@ -4243,11 +4243,6 @@ dateformat@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
   integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
-
-dayjs@1.11.11:
-  version "1.11.11"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.11.tgz#dfe0e9d54c5f8b68ccf8ca5f72ac603e7e5ed59e"
-  integrity sha512-okzr3f11N6WuqYtZSvm+F776mB41wRZMhKP+hc34YdW+KmtYYK9iqvHSwo2k9FEH3fhGXvOPV6yz2IcSrfRUDg==
 
 dayjs@1.11.13, dayjs@^1.10.0:
   version "1.11.13"
