@@ -4,7 +4,6 @@ import { changeCharset } from './charset.mjs';
 import { lineBreak } from './line-break.mjs';
 import { minifier } from './minifier.mjs';
 import { prettier } from './prettier.mjs';
-import { replaceExt } from './replace-ext.mjs';
 
 /**
  * @typedef {Object} HtmlFile
@@ -57,8 +56,6 @@ export async function convert(htmlFile, options = {}) {
 	}
 
 	let content = htmlFile.content;
-
-	content = replaceExt(content);
 
 	if (options.prettier) {
 		content = await prettier(content);

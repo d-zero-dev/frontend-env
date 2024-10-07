@@ -1,13 +1,9 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import Const from '../const.cjs';
-
 import { convert } from './convert.mjs';
 import { getHtmlFiles } from './get-html-files.mjs';
 import { log } from './log.mjs';
-
-const { INLINE_SCRIPT_FILE_DELETE_ID } = Const;
 
 /**
  *
@@ -54,14 +50,6 @@ export async function build(elev) {
 			path.relative(inputDir, htmlFile.inputPath),
 			...Object.values(options),
 		]);
-	}
-
-	const files = await fs.readdir(outDir);
-
-	for (const file of files) {
-		if (file.startsWith(INLINE_SCRIPT_FILE_DELETE_ID)) {
-			await fs.unlink(path.resolve(outDir, file));
-		}
 	}
 
 	log(outputLogTable);

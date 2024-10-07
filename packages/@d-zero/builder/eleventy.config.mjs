@@ -1,14 +1,13 @@
 import path from 'node:path';
 
 import pugPlugin from '@11ty/eleventy-plugin-pug';
-import EleventyVitePlugin from '@11ty/eleventy-plugin-vite';
 import dayjs from 'dayjs';
 import htmlmin from 'html-minifier-terser';
 import { load as yamlLoad } from 'js-yaml';
 
-import { INLINE_SCRIPT_FILE_DELETE_ID } from './const.cjs';
 import { banner } from './defines.mjs';
 import { scssPlugin } from './eleventy-plugins/scss.mjs';
+import { tsPlugin } from './eleventy-plugins/ts.mjs';
 
 const tempFolderName = path.resolve(process.cwd(), '.11ty');
 
@@ -68,51 +67,12 @@ export default function (eleventyConfig) {
 		alias: eleventyConfig.globalData?.alias ?? {},
 	});
 
+	eleventyConfig.addPlugin(tsPlugin, {
+		tmpDir: tempFolderName,
+		banner: banner(),
+	});
+
 	eleventyConfig.addDataExtension('yml', (contents) => yamlLoad(contents));
-
-	eleventyConfig.addPassthroughCopy('__assets/htdocs', {
-		dot: false,
-		filter: (filePath) => {
-			return path.basename(filePath) !== 'empty';
-		},
-	});
-
-	const publicDir = eleventyConfig.globalData.publicDir ?? '@static';
-
-	eleventyConfig.addPlugin(EleventyVitePlugin, {
-		tempFolderName: '.11ty-vite',
-		viteOptions: {
-			root: '__assets/htdocs',
-			publicDir,
-			clearScreen: false,
-			server: {
-				mode: 'development',
-				middlewareMode: true,
-			},
-			build: {
-				target: 'modules',
-				polyfillModulePreload: false,
-				mode: 'production',
-				sourcemap: false,
-				cssCodeSplit: false,
-				rollupOptions: {
-					output: {
-						assetFileNames: ({ name }) => {
-							if (name.endsWith('.css')) {
-								return `${outputCssDir}/${name}`;
-							}
-							return `${outputImgDir}/${name}`;
-						},
-						chunkFileNames: () => `${outputJsDir}/[name].js`,
-						entryFileNames: () => INLINE_SCRIPT_FILE_DELETE_ID,
-					},
-				},
-			},
-			resolve: {
-				alias: eleventyConfig.globalData.alias,
-			},
-		},
-	});
 
 	return {
 		passthroughFileCopy: true,
