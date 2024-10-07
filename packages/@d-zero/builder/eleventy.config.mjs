@@ -1,5 +1,6 @@
 import path from 'node:path';
 
+import pugPlugin from '@11ty/eleventy-plugin-pug';
 import EleventyVitePlugin from '@11ty/eleventy-plugin-vite';
 import dayjs from 'dayjs';
 import htmlmin from 'html-minifier-terser';
@@ -17,7 +18,13 @@ export default function (eleventyConfig) {
 	const outputJsDir = eleventyConfig.globalData.outputJsDir ?? 'js';
 	const outputImgDir = eleventyConfig.globalData.outputImgDir ?? 'img';
 
-	global.filters = eleventyConfig.javascriptFunctions;
+	const charset = isServe ? 'utf8' : (eleventyConfig.globalData.charset ?? 'utf8');
+
+	const input = '__assets/htdocs';
+	const output = isServe ? '.serve' : 'htdocs';
+	const absInput = path.resolve(input);
+	const alias = eleventyConfig.globalData?.alias?.['@'] ?? absInput;
+	const relAlias = path.relative(absInput, alias);
 
 	eleventyConfig.addFilter('date', (date, format) => {
 		return dayjs(date).format(format);
@@ -44,11 +51,10 @@ export default function (eleventyConfig) {
 		return content;
 	});
 
-	eleventyConfig.setPugOptions({
+	eleventyConfig.addPlugin(pugPlugin, {
 		pretty: true,
 		doctype: 'html',
-		filters: global.filters,
-		...eleventyConfig.getMergingConfigObject().pugOptions,
+		filters: eleventyConfig.javascript.filters,
 	});
 
 	eleventyConfig.addDataExtension('yml', (contents) => yamlLoad(contents));
@@ -98,17 +104,16 @@ export default function (eleventyConfig) {
 	});
 
 	return {
-		templateFormats: ['pug', 'html'],
-		htmlTemplateEngine: 'pug',
 		passthroughFileCopy: true,
 		dir: {
-			input: '__assets/htdocs',
-			output: isServe ? '.serve' : 'htdocs',
+			input,
+			output,
 			layouts: '../_libs/component',
 			data: '../_libs/data',
 			outputCss: outputCssDir,
 			outputJs: outputJsDir,
 			outputImg: outputImgDir,
+			includes: relAlias,
 		},
 	};
 }
