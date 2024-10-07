@@ -1,19 +1,19 @@
-const path = require('node:path');
+import path from 'node:path';
 
-const eleventy = require('@d-zero/builder/11ty');
+import eleventy from '@d-zero/builder/11ty';
 
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
 	// eleventyConfig.addGlobalData('publicDir', '@static');
 	// eleventyConfig.addGlobalData('outputCssDir', 'css');
 	// eleventyConfig.addGlobalData('outputJsDir', 'js');
 	// eleventyConfig.addGlobalData('outputImgDir', 'img');
 
 	eleventyConfig.addGlobalData('alias', {
-		'@': path.resolve(__dirname, '__assets', '_libs'),
+		'@': path.resolve(import.meta.dirname, '__assets', '_libs'),
 	});
 
 	eleventyConfig.setPugOptions({
-		basedir: path.resolve(__dirname, '__assets', '_libs'),
+		basedir: path.resolve(import.meta.dirname, '__assets', '_libs'),
 	});
 
 	if (process.env.NODE_ENV === 'production') {
@@ -25,4 +25,4 @@ module.exports = function (eleventyConfig) {
 	}
 
 	return eleventy(eleventyConfig);
-};
+}
