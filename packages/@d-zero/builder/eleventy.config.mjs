@@ -7,6 +7,10 @@ import htmlmin from 'html-minifier-terser';
 import { load as yamlLoad } from 'js-yaml';
 
 import { INLINE_SCRIPT_FILE_DELETE_ID } from './const.cjs';
+import { banner } from './defines.mjs';
+import { scssPlugin } from './eleventy-plugins/scss.mjs';
+
+const tempFolderName = path.resolve(process.cwd(), '.11ty');
 
 /**
  * @param {import("@11ty/eleventy").UserConfig} eleventyConfig
@@ -55,6 +59,13 @@ export default function (eleventyConfig) {
 		pretty: true,
 		doctype: 'html',
 		filters: eleventyConfig.javascript.filters,
+	});
+
+	eleventyConfig.addPlugin(scssPlugin, {
+		tmpDir: tempFolderName,
+		banner: banner(),
+		minify: eleventyConfig.globalData?.minifier?.minifyCSS ?? true,
+		alias: eleventyConfig.globalData?.alias ?? {},
 	});
 
 	eleventyConfig.addDataExtension('yml', (contents) => yamlLoad(contents));

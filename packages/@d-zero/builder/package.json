@@ -27,7 +27,6 @@
 		"async-cleanup": "1.0.0",
 		"cli-color": "2.0.4",
 		"dayjs": "1.11.13",
-		"glob": "11.0.0",
 		"html-minifier-terser": "7.2.0",
 		"js-yaml": "4.1.0",
 		"jsdom": "25.0.1",
