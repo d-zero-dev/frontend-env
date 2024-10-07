@@ -1,17 +1,17 @@
-const path = require('node:path');
+import path from 'node:path';
 
-const EleventyVitePlugin = require('@11ty/eleventy-plugin-vite');
-const dayjs = require('dayjs');
-const htmlmin = require('html-minifier-terser');
-const yaml = require('js-yaml');
+import EleventyVitePlugin from '@11ty/eleventy-plugin-vite';
+import dayjs from 'dayjs';
+import htmlmin from 'html-minifier-terser';
+import { load as yamlLoad } from 'js-yaml';
 
-const { INLINE_SCRIPT_FILE_DELETE_ID } = require('./const.cjs');
+import { INLINE_SCRIPT_FILE_DELETE_ID } from './const.cjs';
 
 /**
  * @param {import("@11ty/eleventy").UserConfig} eleventyConfig
  * @returns
  */
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
 	const isServe = process.env.NODE_ENV === 'serve';
 	const outputCssDir = eleventyConfig.globalData.outputCssDir ?? 'css';
 	const outputJsDir = eleventyConfig.globalData.outputJsDir ?? 'js';
@@ -51,7 +51,7 @@ module.exports = function (eleventyConfig) {
 		...eleventyConfig.getMergingConfigObject().pugOptions,
 	});
 
-	eleventyConfig.addDataExtension('yml', (contents) => yaml.load(contents));
+	eleventyConfig.addDataExtension('yml', (contents) => yamlLoad(contents));
 
 	eleventyConfig.addPassthroughCopy('__assets/htdocs', {
 		dot: false,
@@ -111,4 +111,4 @@ module.exports = function (eleventyConfig) {
 			outputImg: outputImgDir,
 		},
 	};
-};
+}

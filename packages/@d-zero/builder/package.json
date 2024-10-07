@@ -15,7 +15,7 @@
 	},
 	"exports": {
 		"./11ty": {
-			"require": "./eleventy.config.cjs"
+			"import": "./eleventy.config.mjs"
 		}
 	},
 	"dependencies": {
