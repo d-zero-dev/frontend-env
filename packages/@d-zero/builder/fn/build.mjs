@@ -24,7 +24,7 @@ export async function build(elev) {
 	const outputLogTable = [['From', 'To', ...Object.keys(options)]];
 
 	for (const htmlFile of htmlFiles) {
-		const { outputPath, content } = await pathTransfer(
+		const outputPath = pathTransfer(
 			{
 				...htmlFile,
 				inputRoot: inputDir,
@@ -33,7 +33,7 @@ export async function build(elev) {
 			options,
 		);
 
-		await fs.writeFile(outputPath, content, 'utf8');
+		await fs.copyFile(htmlFile.outputPath, outputPath);
 
 		if (outputPath !== htmlFile.outputPath) {
 			await fs.unlink(htmlFile.outputPath);

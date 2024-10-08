@@ -2,10 +2,10 @@ import path from 'node:path';
 
 import pugPlugin from '@11ty/eleventy-plugin-pug';
 import dayjs from 'dayjs';
-import htmlmin from 'html-minifier-terser';
 import { load as yamlLoad } from 'js-yaml';
 
 import { banner } from './defines.mjs';
+import { htmlPlugin } from './eleventy-plugins/html.mjs';
 import { scssPlugin } from './eleventy-plugins/scss.mjs';
 import { tsPlugin } from './eleventy-plugins/ts.mjs';
 
@@ -33,6 +33,9 @@ export default function (eleventyConfig) {
 		return dayjs(date).format(format);
 	});
 
+	/**
+	 * @see https://github.com/terser/html-minifier-terser?tab=readme-ov-file#options-quick-reference
+	 */
 	eleventyConfig.addGlobalData('minifier', {
 		collapseWhitespace: false,
 		collapseBooleanAttributes: true,
@@ -46,18 +49,17 @@ export default function (eleventyConfig) {
 		...eleventyConfig.globalData.minifier,
 	});
 
-	eleventyConfig.addTransform('htmlmin', function (content) {
-		if ((this.page.outputPath || '').endsWith('.html')) {
-			return htmlmin.minify(content, eleventyConfig.globalData.minifier);
-		}
-
-		return content;
-	});
-
 	eleventyConfig.addPlugin(pugPlugin, {
 		pretty: true,
 		doctype: 'html',
 		filters: eleventyConfig.javascript.filters,
+	});
+
+	eleventyConfig.addPlugin(htmlPlugin, {
+		minifier: eleventyConfig.globalData.minifier,
+		prettier: eleventyConfig.globalData.prettier ?? true,
+		lineBreak: eleventyConfig.globalData.lineBreak,
+		charset,
 	});
 
 	eleventyConfig.addPlugin(scssPlugin, {

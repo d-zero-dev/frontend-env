@@ -10,27 +10,25 @@ describe('pathTransfer', () => {
 	 * @param {"file" | "directory" | "preserve"} format
 	 * @returns {Promise<string[]>}
 	 */
-	async function _(paths, format) {
-		return await Promise.all(
-			paths.map(async (path, index) => {
-				const htmlFile = await pathTransfer(
-					{
-						inputPath: path,
-						inputRoot: 'path/to',
-						content: HTML_CONTENT,
-					},
-					{
-						pathFormat: format,
-					},
-				);
-				return htmlFile.outputPath;
-			}),
-		);
+	function _(paths, format) {
+		return paths.map((path, index) => {
+			const outputPath = pathTransfer(
+				{
+					inputPath: path,
+					inputRoot: 'path/to',
+					content: HTML_CONTENT,
+				},
+				{
+					pathFormat: format,
+				},
+			);
+			return outputPath;
+		});
 	}
 
-	test('default (preserve)', async () => {
+	test('default (preserve)', () => {
 		expect(
-			await _([
+			_([
 				//
 				'path/to/index.pug',
 				'path/to/foo.pug',
@@ -44,9 +42,9 @@ describe('pathTransfer', () => {
 		]);
 	});
 
-	test('file', async () => {
+	test('file', () => {
 		expect(
-			await _(
+			_(
 				[
 					//
 					'path/to/index.pug',
@@ -63,9 +61,9 @@ describe('pathTransfer', () => {
 		]);
 	});
 
-	test('directory', async () => {
+	test('directory', () => {
 		expect(
-			await _(
+			_(
 				[
 					//
 					'path/to/index.pug',
