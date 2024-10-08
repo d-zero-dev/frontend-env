@@ -11,12 +11,6 @@ html(lang="ja")
 			.list-group-item a {
 				display: block;
 			}
-		script(type="module").
-			document.querySelectorAll("a").forEach((a) => {
-				if (a.hostname === "localhost") {
-					a.pathname = a.pathname.replace(/\.html$/, "/");
-				}
-			});
 	body
 		.c-content-main
 			main.container
