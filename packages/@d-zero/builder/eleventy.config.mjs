@@ -7,8 +7,8 @@ import { load as yamlLoad } from 'js-yaml';
 import { banner } from './defines.mjs';
 import { htmlPlugin } from './eleventy-plugins/html.mjs';
 import { reportPlugin } from './eleventy-plugins/report.mjs';
+import { scriptPlugin } from './eleventy-plugins/script.mjs';
 import { scssPlugin } from './eleventy-plugins/scss.mjs';
-import { tsPlugin } from './eleventy-plugins/ts.mjs';
 import { pathTransformRouter } from './path-transform-router.mjs';
 
 const tempFolderName = path.resolve(process.cwd(), '.11ty');
@@ -73,7 +73,7 @@ export default function (eleventyConfig) {
 		alias: eleventyConfig.globalData?.alias ?? {},
 	});
 
-	eleventyConfig.addPlugin(tsPlugin, {
+	eleventyConfig.addPlugin(scriptPlugin, {
 		tmpDir: tempFolderName,
 		banner: banner(),
 	});

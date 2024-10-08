@@ -10,10 +10,13 @@ import esbuild from 'esbuild';
  * @param {string} pluginConfig.banner
  * @returns
  */
-export function tsPlugin(eleventyConfig, pluginConfig) {
+export function scriptPlugin(eleventyConfig, pluginConfig) {
+	eleventyConfig.addTemplateFormats('js');
+	eleventyConfig.addTemplateFormats('cjs');
+	eleventyConfig.addTemplateFormats('mjs');
 	eleventyConfig.addTemplateFormats('ts');
 
-	eleventyConfig.addExtension('ts', {
+	const settings = {
 		outputFileExtension: 'js',
 		compile(_, inputPath) {
 			return async () => {
@@ -35,7 +38,12 @@ export function tsPlugin(eleventyConfig, pluginConfig) {
 				return content;
 			};
 		},
-	});
+	};
+
+	eleventyConfig.addExtension('js', settings);
+	eleventyConfig.addExtension('cjs', settings);
+	eleventyConfig.addExtension('mjs', settings);
+	eleventyConfig.addExtension('ts', settings);
 
 	eleventyConfig.on('eleventy.after', async () => {
 		await fs.rm(pluginConfig.tmpDir, {
