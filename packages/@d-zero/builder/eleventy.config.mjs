@@ -9,6 +9,7 @@ import { htmlPlugin } from './eleventy-plugins/html.mjs';
 import { reportPlugin } from './eleventy-plugins/report.mjs';
 import { scssPlugin } from './eleventy-plugins/scss.mjs';
 import { tsPlugin } from './eleventy-plugins/ts.mjs';
+import { pathTransformRouter } from './path-transform-router.mjs';
 
 const tempFolderName = path.resolve(process.cwd(), '.11ty');
 
@@ -86,6 +87,9 @@ export default function (eleventyConfig) {
 			port: 8080,
 			showAllHosts: false,
 			encoding: 'utf8',
+			onRequest: {
+				'/*': pathTransformRouter({ output }),
+			},
 		},
 		true,
 	);
