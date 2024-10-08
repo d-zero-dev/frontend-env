@@ -1,8 +1,8 @@
 import { describe, test, expect } from 'vitest';
 
-import { convert } from './convert.mjs';
+import { pathTransfer } from './path-transfer.mjs';
 
-describe('convert', () => {
+describe('pathTransfer', () => {
 	const HTML_CONTENT = '<html><head></head><body></body></html>';
 
 	/**
@@ -13,7 +13,7 @@ describe('convert', () => {
 	async function _(paths, format) {
 		return await Promise.all(
 			paths.map(async (path, index) => {
-				const htmlFile = await convert(
+				const htmlFile = await pathTransfer(
 					{
 						inputPath: path,
 						inputRoot: 'path/to',

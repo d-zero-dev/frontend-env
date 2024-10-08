@@ -27,7 +27,7 @@ import { prettier } from './prettier.mjs';
  * @param {HtmlFile} htmlFile
  * @param {Options} options
  */
-export async function convert(htmlFile, options = {}) {
+export async function pathTransfer(htmlFile, options = {}) {
 	const inputRoot = htmlFile.inputRoot ?? process.cwd();
 	const outputRoot = htmlFile.outputRoot ?? inputRoot ?? process.cwd();
 	const pathFormat = options.pathFormat ?? 'preserve';

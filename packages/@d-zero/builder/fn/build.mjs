@@ -1,9 +1,9 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { convert } from './convert.mjs';
 import { getHtmlFiles } from './get-html-files.mjs';
 import { log } from './log.mjs';
+import { pathTransfer } from './path-transfer.mjs';
 
 /**
  *
@@ -24,7 +24,7 @@ export async function build(elev) {
 	const outputLogTable = [['From', 'To', ...Object.keys(options)]];
 
 	for (const htmlFile of htmlFiles) {
-		const { outputPath, content } = await convert(
+		const { outputPath, content } = await pathTransfer(
 			{
 				...htmlFile,
 				inputRoot: inputDir,
