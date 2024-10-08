@@ -27,6 +27,8 @@
 		"cli-color": "2.0.4",
 		"dayjs": "1.11.13",
 		"esbuild": "0.24.0",
+		"filesize": "10.1.6",
+		"gzip-size": "7.0.0",
 		"html-minifier-terser": "7.2.0",
 		"js-yaml": "4.1.0",
 		"minimist": "1.2.8",

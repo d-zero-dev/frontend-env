@@ -6,6 +6,7 @@ import { load as yamlLoad } from 'js-yaml';
 
 import { banner } from './defines.mjs';
 import { htmlPlugin } from './eleventy-plugins/html.mjs';
+import { reportPlugin } from './eleventy-plugins/report.mjs';
 import { scssPlugin } from './eleventy-plugins/scss.mjs';
 import { tsPlugin } from './eleventy-plugins/ts.mjs';
 
@@ -75,6 +76,8 @@ export default function (eleventyConfig) {
 		tmpDir: tempFolderName,
 		banner: banner(),
 	});
+
+	eleventyConfig.addPlugin(reportPlugin);
 
 	return {
 		passthroughFileCopy: true,
