@@ -17,7 +17,7 @@ const tempFolderName = path.resolve(process.cwd(), '.11ty');
  * @returns
  */
 export default function (eleventyConfig) {
-	const isServe = process.env.NODE_ENV === 'serve';
+	const isServe = process.env.ELEVENTY_RUN_MODE === 'serve';
 	const outputCssDir = eleventyConfig.globalData.outputCssDir ?? 'css';
 	const outputJsDir = eleventyConfig.globalData.outputJsDir ?? 'js';
 	const outputImgDir = eleventyConfig.globalData.outputImgDir ?? 'img';
@@ -25,7 +25,7 @@ export default function (eleventyConfig) {
 	const charset = isServe ? 'utf8' : (eleventyConfig.globalData.charset ?? 'utf8');
 
 	const input = '__assets/htdocs';
-	const output = isServe ? '.serve' : 'htdocs';
+	const output = 'htdocs';
 	const absInput = path.resolve(input);
 	const alias = eleventyConfig.globalData?.alias?.['@'] ?? absInput;
 	const relAlias = path.relative(absInput, alias);
@@ -78,6 +78,17 @@ export default function (eleventyConfig) {
 	});
 
 	eleventyConfig.addPlugin(reportPlugin);
+
+	eleventyConfig.setServerOptions(
+		{
+			liveReload: true,
+			domDiff: true,
+			port: 8080,
+			showAllHosts: false,
+			encoding: 'utf8',
+		},
+		true,
+	);
 
 	return {
 		passthroughFileCopy: true,
