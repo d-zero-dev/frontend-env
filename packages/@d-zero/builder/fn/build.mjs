@@ -33,9 +33,8 @@ export async function build(elev) {
 			options,
 		);
 
-		await fs.copyFile(htmlFile.outputPath, outputPath);
-
-		if (outputPath !== htmlFile.outputPath) {
+		if (path.resolve(htmlFile.outputPath) !== path.resolve(outputPath)) {
+			await fs.copyFile(htmlFile.outputPath, outputPath);
 			await fs.unlink(htmlFile.outputPath);
 			const outDir = path.dirname(htmlFile.outputPath);
 			const dirFiles = await fs.readdir(outDir);
