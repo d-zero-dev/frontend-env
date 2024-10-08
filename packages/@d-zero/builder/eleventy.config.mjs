@@ -8,7 +8,7 @@ import { banner } from './defines.mjs';
 import { htmlPlugin } from './eleventy-plugins/html.mjs';
 import { reportPlugin } from './eleventy-plugins/report.mjs';
 import { scriptPlugin } from './eleventy-plugins/script.mjs';
-import { scssPlugin } from './eleventy-plugins/scss.mjs';
+import { stylePlugin } from './eleventy-plugins/style.mjs';
 import { pathTransformRouter } from './path-transform-router.mjs';
 
 const tempFolderName = path.resolve(process.cwd(), '.11ty');
@@ -66,7 +66,7 @@ export default function (eleventyConfig) {
 		charset,
 	});
 
-	eleventyConfig.addPlugin(scssPlugin, {
+	eleventyConfig.addPlugin(stylePlugin, {
 		tmpDir: tempFolderName,
 		banner: banner(),
 		minify: eleventyConfig.globalData?.minifier?.minifyCSS ?? true,

@@ -14,7 +14,7 @@ const INLINE_SCRIPT_FILE_DELETE_ID = '::inline-script::';
  * @param {Record<string, string>} pluginConfig.alias
  * @returns
  */
-export function scssPlugin(eleventyConfig, pluginConfig) {
+export function stylePlugin(eleventyConfig, pluginConfig) {
 	eleventyConfig.addTemplateFormats('scss');
 
 	eleventyConfig.addExtension('scss', {
