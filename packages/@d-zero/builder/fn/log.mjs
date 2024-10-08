@@ -1,48 +1,61 @@
+import path from 'node:path';
+
 import c from 'cli-color';
 
 /**
  * @param {string[][]} outputLogTable
  */
-export function log(outputLogTable) {
-	process.stdout.write(`${c.bold.blue('Convert')}:\n`);
+export function log(outputLogTable, pathFormat = 'preserve') {
+	process.stdout.write(
+		`${c.bold.blue('File Transfer')} ${c.bgBlue(` ${pathFormat} `)}:\n`,
+	);
 	process.stdout.write(
 		c.columns(
 			outputLogTable.map((row, i) => {
-				if (i === 0) {
-					return row.map((cell) => c.bold(cell));
-				}
+				const [origin, from, to] = row;
+				const fromDir = path.dirname(from);
+				const toDir = path.dirname(to);
+				const fromName = path.basename(from, path.extname(from));
+				const toName = path.basename(to, path.extname(to));
+				const toNameWithExt = path.basename(to);
+				const name =
+					fromName === toName ? c.black(toNameWithExt) : c.greenBright(toNameWithExt);
 
-				const [to, from, ...options] = row;
+				const formDirArray = fromDir.split(path.sep);
+				const toDirArray = toDir.split(path.sep);
 
-				const optionsLog = options.map((value) => {
-					if (typeof value === 'boolean') {
-						return enable(value);
-					}
-					if (value === '\n') {
-						return 'LF';
-					}
-					if (value === '\r\n') {
-						return 'CRLF';
-					}
-					if (typeof value === 'string') {
-						return string(value);
-					}
-					return enable(value);
-				});
+				const dir = toDirArray
+					.map((dir, i) => {
+						if (dir === '.') {
+							return '';
+						}
+						const from = formDirArray[i];
+						if (from === dir) {
+							return c.black(dir + path.sep);
+						}
+						return c.white(dir + path.sep);
+					})
+					.join('');
 
-				if (from === to) {
-					return [c.black(from), c.white(to), ...optionsLog];
-				}
-				return [c.black(from), c.greenBright(to), ...optionsLog];
+				const rel = path.relative(fromDir, toDir);
+				const commonDir = rel
+					? path.relative(path.resolve(), path.resolve(to, rel))
+					: path.dirname(to);
+				const fromPath = path.relative(commonDir, from);
+				const fromDelete = fromName === toName ? c.black(fromPath) : c.red(fromPath);
+				const fromDeleteBase =
+					commonDir === '.' || commonDir === '' ? '' : commonDir + '/';
+
+				return [
+					//
+					c.black(origin),
+					c.black(fromDeleteBase) + fromDelete,
+					dir + name,
+				];
 			}),
+			{
+				sep: c.black(' -> '),
+			},
 		),
 	);
-}
-
-function enable(value) {
-	return value ? c.blueBright('enabled') : c.black('disabled');
-}
-
-function string(value) {
-	return c.yellowBright(`"${value}"`);
 }

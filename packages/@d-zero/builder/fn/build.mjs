@@ -21,7 +21,7 @@ export async function build(elev) {
 	/**
 	 * @type {string[][]}
 	 */
-	const outputLogTable = [['From', 'To', ...Object.keys(options)]];
+	const outputLogTable = [];
 
 	for (const htmlFile of htmlFiles) {
 		const outputPath = pathTransfer(
@@ -45,12 +45,11 @@ export async function build(elev) {
 		}
 
 		outputLogTable.push([
-			//
-			path.relative(outDir, outputPath),
 			path.relative(inputDir, htmlFile.inputPath),
-			...Object.values(options),
+			path.relative(outDir, htmlFile.outputPath),
+			path.relative(outDir, outputPath),
 		]);
 	}
 
-	log(outputLogTable);
+	log(outputLogTable, options.pathFormat);
 }
