@@ -49,6 +49,8 @@ export default function (eleventyConfig) {
 		...eleventyConfig.globalData.minifier,
 	});
 
+	eleventyConfig.addDataExtension('yml', (contents) => yamlLoad(contents));
+
 	eleventyConfig.addPlugin(pugPlugin, {
 		pretty: true,
 		doctype: 'html',
@@ -73,8 +75,6 @@ export default function (eleventyConfig) {
 		tmpDir: tempFolderName,
 		banner: banner(),
 	});
-
-	eleventyConfig.addDataExtension('yml', (contents) => yamlLoad(contents));
 
 	return {
 		passthroughFileCopy: true,
