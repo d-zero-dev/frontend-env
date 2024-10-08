@@ -4,7 +4,7 @@ import { minify } from 'html-minifier-terser';
  * @param {import("@11ty/eleventy").UserConfig} eleventyConfig
  * @param {Object} pluginConfig
  * @param {import("html-minifier-terser").Options} pluginConfig.minifier
- * @param {boolean} pluginConfig.prettier
+ * @param {import("prettier").Options} pluginConfig.prettier
  * @param {"\n" | "\r\n"} pluginConfig.lineBreak
  * @param {string} pluginConfig.charset
  * @returns
@@ -28,6 +28,7 @@ export function htmlPlugin(eleventyConfig, pluginConfig) {
 				printWidth: 100_000,
 				tabWidth: 2,
 				useTabs: false,
+				...pluginConfig.prettier,
 			});
 		}
 
