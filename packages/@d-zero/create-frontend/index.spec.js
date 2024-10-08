@@ -38,7 +38,7 @@ describe('CLI', () => {
 			`✔  ++ ${dir}/tsconfig.json`,
 			`✔  ++ ${dir}/package.json`,
 			`✔  ++ ${dir}/lint-staged.config.mjs`,
-			`✔  ++ ${dir}/eleventy.config.cjs`,
+			`✔  ++ ${dir}/eleventy.config.mjs`,
 			`✔  ++ ${dir}/cspell.json`,
 			`✔  ++ ${dir}/README.md`,
 			`✔  ++ ${dir}/CHANGELOG.md`,
