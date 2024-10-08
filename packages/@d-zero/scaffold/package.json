@@ -12,7 +12,7 @@
 	"type": "module",
 	"main": "package.json",
 	"scripts": {
-		"dev": "cross-env NODE_ENV=serve build",
+		"dev": "eleventy --serve --watch",
 		"d": "yarn dev",
 		"release": "cross-env NODE_ENV=production build",
 		"lint": "run-s lint:*",
