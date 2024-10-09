@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.16](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.15...v5.0.0-alpha.16) (2024-10-09)
+
+### Features
+
+- **postcss:** replace `postcss-color-function` with `postcss-color-mod-function` ([0dc805e](https://github.com/d-zero-dev/frontend-env/commit/0dc805e45b93c07ee2232a6898dcb30048708816))
+
+### BREAKING CHANGES
+
+- **postcss:** use `color-mod()` instead of `color()`
+
 # [5.0.0-alpha.15](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.14...v5.0.0-alpha.15) (2024-10-01)
 
 **Note:** Version bump only for package @d-zero/postcss-config

@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/scaffold",
-	"version": "5.0.0-alpha.15",
+	"version": "5.0.0-alpha.16",
 	"description": "Frontend scaffold files of D-ZERO Co., Ltd.",
 	"repository": "https://github.com/d-zero-dev/frontend-env.git",
 	"author": "D-ZERO Co., Ltd.",
@@ -34,9 +34,9 @@
 		"last 2 ios_saf version"
 	],
 	"devDependencies": {
-		"@d-zero/builder": "5.0.0-alpha.15",
+		"@d-zero/builder": "5.0.0-alpha.16",
 		"@d-zero/linters": "5.0.0-alpha.45",
-		"@d-zero/postcss-config": "5.0.0-alpha.15",
+		"@d-zero/postcss-config": "5.0.0-alpha.16",
 		"@d-zero/tsconfig": "0.3.2",
 		"@types/node": "22.7.5",
 		"cross-env": "7.0.3",

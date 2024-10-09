@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.16](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.15...v5.0.0-alpha.16) (2024-10-09)
+
+### Bug Fixes
+
+- **scaffold:** add `--fix` option to lint commands ([78208e3](https://github.com/d-zero-dev/frontend-env/commit/78208e3bb482391c5e3fea2eb44c2447fb8f1a0f))
+
 # [5.0.0-alpha.15](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.14...v5.0.0-alpha.15) (2024-10-01)
 
 **Note:** Version bump only for package @d-zero/scaffold

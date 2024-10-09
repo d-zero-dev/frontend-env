@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/builder",
-	"version": "5.0.0-alpha.15",
+	"version": "5.0.0-alpha.16",
 	"description": "Builder of D-ZERO Frontend",
 	"repository": "https://github.com/d-zero-dev/frontend-env.git",
 	"author": "D-ZERO Co., Ltd.",
@@ -19,8 +19,8 @@
 		}
 	},
 	"dependencies": {
-		"@11ty/eleventy-plugin-pug": "1.0.0",
 		"@11ty/eleventy": "3.0.0",
+		"@11ty/eleventy-plugin-pug": "1.0.0",
 		"@d-zero/shared": "0.5.0",
 		"@rollup/plugin-commonjs": "28.0.0",
 		"async-cleanup": "1.0.0",

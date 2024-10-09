@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.16](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.15...v5.0.0-alpha.16) (2024-10-09)
+
+### Bug Fixes
+
+- **builder:** fix detection of doctype ([4ea90de](https://github.com/d-zero-dev/frontend-env/commit/4ea90de41238bf65b29afa740847614cb4813e0b))
+- **builder:** fix to prevent deletion of index.html ([deaf2dc](https://github.com/d-zero-dev/frontend-env/commit/deaf2dc6e58841dc4ba45d0c16dea5325446650e))
+- **builder:** support non-TS scripts ([d463dad](https://github.com/d-zero-dev/frontend-env/commit/d463dad065b5e90b1d9ffb70d01abd7ef961e429))
+- **scaffold:** add `--fix` option to lint commands ([78208e3](https://github.com/d-zero-dev/frontend-env/commit/78208e3bb482391c5e3fea2eb44c2447fb8f1a0f))
+
+### Features
+
+- **builder:** add `pathTransformRouter` feature ([24f538c](https://github.com/d-zero-dev/frontend-env/commit/24f538c39e3751c36dc4c81607dd2f2e8f33f9ba))
+- **builder:** support ESM configuration ([65cde74](https://github.com/d-zero-dev/frontend-env/commit/65cde74acc00e7595606da3f28e02aafb4f66dfc))
+- **builder:** support Prettier options ([b5dc432](https://github.com/d-zero-dev/frontend-env/commit/b5dc4323b936324d51878750e1c1e33d25462829))
+- **builder:** update 11ty v3.0.0 ([6da098a](https://github.com/d-zero-dev/frontend-env/commit/6da098a389c90db71a3b289287cf1cc5d0b2a513))
+- **postcss:** replace `postcss-color-function` with `postcss-color-mod-function` ([0dc805e](https://github.com/d-zero-dev/frontend-env/commit/0dc805e45b93c07ee2232a6898dcb30048708816))
+
+### BREAKING CHANGES
+
+- **postcss:** use `color-mod()` instead of `color()`
+- **builder:** support ESM configuration only
+- **builder:** update 11ty
+
 # [5.0.0-alpha.15](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.14...v5.0.0-alpha.15) (2024-10-01)
 
 ### Bug Fixes
