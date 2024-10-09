@@ -3,7 +3,7 @@ export default {
 		'postcss-custom-media': true,
 		'postcss-math': true,
 		'postcss-calc': true,
-		'postcss-color-function': true,
+		'postcss-color-mod-function': true,
 		'postcss-clip-path-polyfill': true,
 		autoprefixer: true,
 		'postcss-base64': {
