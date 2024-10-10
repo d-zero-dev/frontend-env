@@ -11,6 +11,7 @@ import { reportPlugin } from './eleventy-plugins/report.mjs';
 import { scriptPlugin } from './eleventy-plugins/script.mjs';
 import { stylePlugin } from './eleventy-plugins/style.mjs';
 import { pathTransformRouter } from './path-transform-router.mjs';
+import { ssi } from './ssi.mjs';
 
 const tempFolderName = path.resolve(process.cwd(), '.11ty');
 
@@ -99,6 +100,14 @@ export default function (eleventyConfig) {
 
 					if (eleventyConfig.globalData.autoDecode) {
 						html = decode(content.body);
+					}
+
+					if (eleventyConfig.globalData.ssi) {
+						html = await ssi(html ?? content.body.toString('utf8'), {
+							url,
+							output,
+							ssi: eleventyConfig.globalData.ssi,
+						});
 					}
 
 					return html ?? content;
