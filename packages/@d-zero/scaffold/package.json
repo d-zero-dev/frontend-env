@@ -12,6 +12,7 @@
 	"type": "module",
 	"main": "package.json",
 	"scripts": {
+		"build": "npx @d-zero/builder",
 		"dev": "eleventy --serve --watch",
 		"d": "yarn dev",
 		"release": "cross-env NODE_ENV=production build",
