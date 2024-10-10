@@ -4,6 +4,7 @@ import pugPlugin from '@11ty/eleventy-plugin-pug';
 import dayjs from 'dayjs';
 import { load as yamlLoad } from 'js-yaml';
 
+import { decode } from './decode.mjs';
 import { banner } from './defines.mjs';
 import { htmlPlugin } from './eleventy-plugins/html.mjs';
 import { reportPlugin } from './eleventy-plugins/report.mjs';
@@ -88,7 +89,20 @@ export default function (eleventyConfig) {
 			showAllHosts: false,
 			encoding: 'utf8',
 			onRequest: {
-				'/*': pathTransformRouter({ output }),
+				'/*': async ({ url }) => {
+					const content = await pathTransformRouter({ output })({ url });
+					if (!content) {
+						return;
+					}
+
+					let html;
+
+					if (eleventyConfig.globalData.autoDecode) {
+						html = decode(content.body);
+					}
+
+					return html ?? content;
+				},
 			},
 		},
 		true,
