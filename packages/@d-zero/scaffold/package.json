@@ -20,6 +20,7 @@
 		"lint:pug": "pug-lint ./__assets/htdocs/**/*.pug -r console; pug-lint ./__assets/_libs/**/*.pug -r console;",
 		"lint:css": "stylelint \"./__assets/**/*.scss\" --fix",
 		"lint:js": "eslint \"./__assets/**/*.{js,mjs,cjs,jsx,ts,tsx}\" --fix",
+		"lint:ts": "tsc --noEmit",
 		"lint:format": "prettier --write \"{*,./__assets/**/*}.{js,jsx,ts,tsx,scss,pug,html,json,yaml,*rc}\"",
 		"lint:spell": "cspell --no-progress --show-suggestions \"**\"",
 		"test": "vitest run",
