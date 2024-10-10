@@ -22,6 +22,7 @@
 		"lint:js": "eslint \"./__assets/**/*.{js,mjs,cjs,jsx,ts,tsx}\" --fix",
 		"lint:format": "prettier --write \"{*,./__assets/**/*}.{js,jsx,ts,tsx,scss,pug,html,json,yaml,*rc}\"",
 		"lint:spell": "cspell --no-progress --show-suggestions \"**\"",
+		"test": "vitest run",
 		"prepare": "husky",
 		"up": "yarn upgrade-interactive --latest"
 	},
@@ -43,7 +44,8 @@
 		"husky": "9.1.6",
 		"npm-run-all2": "6.2.3",
 		"sass": "1.79.4",
-		"typescript": "5.6.3"
+		"typescript": "5.6.3",
+		"vitest": "2.1.2"
 	},
 	"dependencies": {
 		"destyle.css": "4.0.1",
