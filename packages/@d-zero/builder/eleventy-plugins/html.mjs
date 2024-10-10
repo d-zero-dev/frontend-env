@@ -1,4 +1,5 @@
 import { minify } from 'html-minifier-terser';
+import iconv from 'iconv-lite';
 
 /**
  * @param {import("@11ty/eleventy").UserConfig} eleventyConfig
@@ -43,9 +44,6 @@ export function htmlPlugin(eleventyConfig, pluginConfig) {
 		const charset = pluginConfig.charset.toLowerCase().trim();
 		/* cspell:disable-next-line */
 		if (/^s(?:hift)?[_-]?jis$/.test(charset)) {
-			// eslint-disable-next-line import/no-extraneous-dependencies, unicorn/no-await-expression-member
-			const iconv = (await import('iconv-lite')).default;
-
 			content = content
 				// Change charset
 				.replaceAll(/<meta\s+charset="utf-8"\s*\/?>/gi, `<meta charset="SHIFT-JIS">`)
