@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/builder",
-	"version": "5.0.0-alpha.16",
+	"version": "5.0.0-alpha.17",
 	"description": "Builder of D-ZERO Frontend",
 	"repository": "https://github.com/d-zero-dev/frontend-env.git",
 	"author": "D-ZERO Co., Ltd.",

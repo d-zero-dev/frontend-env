@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.17](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.16...v5.0.0-alpha.17) (2024-10-10)
+
+### Features
+
+- **builder:** add `autoDecode` option ([501f6a2](https://github.com/d-zero-dev/frontend-env/commit/501f6a272259381fdb3958733f117bb4ce3808c9))
+- **builder:** add `ssi` option ([c52bfc5](https://github.com/d-zero-dev/frontend-env/commit/c52bfc5d6529d584db3afe1eadec1c9d00001e8d))
+
 # [5.0.0-alpha.16](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.15...v5.0.0-alpha.16) (2024-10-09)
 
 ### Bug Fixes
