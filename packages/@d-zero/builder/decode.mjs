@@ -4,7 +4,7 @@ import { reShiftJIS } from './fn/charset.mjs';
 
 const reCharsetShiftJIS = new RegExp(
 	'charset\\s*=\\s*("|\')\\s*' + reShiftJIS.source + '\\s*\\1',
-	'gi',
+	'i',
 );
 
 /**
