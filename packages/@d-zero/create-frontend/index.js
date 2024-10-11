@@ -4,11 +4,9 @@ import { fileURLToPath } from 'node:url';
 
 import { Plop, run } from 'plop';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 Plop.prepare(
 	{
-		configPath: path.join(__dirname, 'plopfile.js'),
+		configPath: path.join(import.meta.dirname, 'plopfile.js'),
 	},
 	(env) =>
 		Plop.execute(
