@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.21](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.20...v5.0.0-alpha.21) (2024-10-11)
+
+### Bug Fixes
+
+- **builder:** fix passing charset to the attribute ([6e2fd17](https://github.com/d-zero-dev/frontend-env/commit/6e2fd179a237c0b29c424654b0922ba46dc9525f))
+- **builder:** fix regex pointer to reset ([6aba522](https://github.com/d-zero-dev/frontend-env/commit/6aba522fb84c64d872955d199e4e499f033201ab))
+- **builder:** fix to return original file content according to the path ([397b4af](https://github.com/d-zero-dev/frontend-env/commit/397b4af981fa187146e83a6d9c92f990cf7fb2b4))
+
+### Features
+
+- **builder:** enable live reload on path transfer ([e3392ee](https://github.com/d-zero-dev/frontend-env/commit/e3392eecd2df506924576c7f217954a2358ca1c0))
+
 # [5.0.0-alpha.20](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.19...v5.0.0-alpha.20) (2024-10-11)
 
 ### Bug Fixes

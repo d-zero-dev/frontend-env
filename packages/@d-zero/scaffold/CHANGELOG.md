@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.21](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.20...v5.0.0-alpha.21) (2024-10-11)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
 # [5.0.0-alpha.20](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.19...v5.0.0-alpha.20) (2024-10-11)
 
 **Note:** Version bump only for package @d-zero/scaffold
