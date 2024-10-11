@@ -23,6 +23,7 @@
 		"lint:ts": "tsc --noEmit",
 		"lint:format": "prettier --write \"{*,./__assets/**/*}.{js,jsx,ts,tsx,scss,pug,html,json,yaml,*rc}\"",
 		"lint:spell": "cspell --no-progress --show-suggestions \"**\"",
+		"lint:text": "textlint \"./__assets/**/*.{pug,html}\"",
 		"test": "vitest run",
 		"prepare": "husky",
 		"up": "yarn upgrade-interactive --latest"
