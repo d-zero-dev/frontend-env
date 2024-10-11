@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.19](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.18...v5.0.0-alpha.19) (2024-10-11)
+
+### Features
+
+- **scaffold:** add `lint:text` command ([59ff16e](https://github.com/d-zero-dev/frontend-env/commit/59ff16eb99ccccec667ada4d030041d1c5e98c20))
+- **scaffold:** add Textlint PRH setting ([635a9d2](https://github.com/d-zero-dev/frontend-env/commit/635a9d2adaca43d6dbbd6eb4865f2a7ecd115205))
+
 # [5.0.0-alpha.18](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.17...v5.0.0-alpha.18) (2024-10-11)
 
 ### Bug Fixes
