@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.20](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.19...v5.0.0-alpha.20) (2024-10-11)
+
+### Bug Fixes
+
+- **builder:** fix to refer `pathFormat` option ([d4a3473](https://github.com/d-zero-dev/frontend-env/commit/d4a3473f1034bf81cd0e22ef039c1287779c28bc))
+
 # [5.0.0-alpha.19](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.18...v5.0.0-alpha.19) (2024-10-11)
 
 ### Bug Fixes
