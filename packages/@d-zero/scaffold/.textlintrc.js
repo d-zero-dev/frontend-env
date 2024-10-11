@@ -1,3 +1,11 @@
+const config = require('@d-zero/textlint-config');
+
 module.exports = {
-	...require('@d-zero/textlint-config'),
+	...config,
+	rules: {
+		...config.rules,
+		prh: {
+			rulePaths: ['./prh.yaml'],
+		},
+	},
 };
