@@ -18,7 +18,7 @@ afterAll(cleanUp);
 describe('CLI', () => {
 	test('build (no params)', async () => {
 		const { stdout } = await execa('build', [], {
-			cwd: path.resolve(process.cwd(), 'packages', '@d-zero', 'scaffold'),
+			cwd: scaffoldDir,
 			failed: true,
 			env: {
 				NODE_NO_WARNINGS: '1',
