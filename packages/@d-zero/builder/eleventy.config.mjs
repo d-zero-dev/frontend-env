@@ -129,7 +129,7 @@ export default function (eleventyConfig, options) {
 						});
 					}
 
-					return html ?? content;
+					return html;
 				},
 			},
 		},
