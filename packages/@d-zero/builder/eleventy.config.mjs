@@ -10,6 +10,7 @@ import { htmlPlugin } from './eleventy-plugins/html.mjs';
 import { reportPlugin } from './eleventy-plugins/report.mjs';
 import { scriptPlugin } from './eleventy-plugins/script.mjs';
 import { stylePlugin } from './eleventy-plugins/style.mjs';
+import { insertReloadClient } from './insert-reload-client.mjs';
 import { pathTransformRouter } from './path-transform-router.mjs';
 import { ssi } from './ssi.mjs';
 
@@ -114,6 +115,10 @@ export default function (eleventyConfig, options) {
 					const content = await pathTransformRouter({ output })({ url });
 					if (!content) {
 						return;
+					}
+
+					if (content.body instanceof Buffer) {
+						content.body = insertReloadClient(content.body);
 					}
 
 					/**
