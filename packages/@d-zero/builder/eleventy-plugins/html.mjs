@@ -1,6 +1,8 @@
 import { minify } from 'html-minifier-terser';
 import iconv from 'iconv-lite';
 
+import { isShiftJIS } from '../fn/charset.mjs';
+
 /**
  * @param {import("@11ty/eleventy").UserConfig} eleventyConfig
  * @param {Object} pluginConfig
@@ -41,9 +43,7 @@ export function htmlPlugin(eleventyConfig, pluginConfig) {
 			content = content.replaceAll(/\r?\n/g, pluginConfig.lineBreak);
 		}
 
-		const charset = pluginConfig.charset.toLowerCase().trim();
-		/* cspell:disable-next-line */
-		if (/^s(?:hift)?[_-]?jis$/.test(charset)) {
+		if (isShiftJIS(pluginConfig.charset.toLowerCase().trim())) {
 			content = content
 				// Change charset
 				.replaceAll(/<meta\s+charset="utf-8"\s*\/?>/gi, `<meta charset="SHIFT-JIS">`)
