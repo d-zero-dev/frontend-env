@@ -49,6 +49,12 @@ export default function (eleventyConfig, options) {
 	const alias = options?.alias?.['@'] ?? absInput;
 	const relAlias = path.relative(absInput, alias);
 
+	/**
+	 * Use `pathFormat` in build process
+	 * @see file://./fn/build.mjs
+	 */
+	eleventyConfig.addGlobalData('pathFormat', options.pathFormat);
+
 	eleventyConfig.addFilter('date', (date, format) => {
 		return dayjs(date).format(format);
 	});

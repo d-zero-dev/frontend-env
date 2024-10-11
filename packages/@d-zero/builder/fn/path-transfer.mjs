@@ -8,21 +8,14 @@ import path from 'node:path';
  */
 
 /**
- * @typedef {Object} Options
- * @property {PathFormat} pathFormat
- */
-
-/**
  * @typedef {"file" | "directory" | "preserve"} PathFormat
  */
 
 /**
  * @param {HtmlFile} htmlFile
- * @param {Options} options
+ * @param {PathFormat} pathFormat
  */
-export function pathTransfer(htmlFile, options = {}) {
-	const pathFormat = options.pathFormat ?? 'preserve';
-
+export function pathTransfer(htmlFile, pathFormat) {
 	const inputRoot = htmlFile.inputRoot ?? process.cwd();
 	const outputRoot = htmlFile.outputRoot ?? inputRoot ?? process.cwd();
 

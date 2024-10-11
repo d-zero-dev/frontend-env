@@ -12,7 +12,7 @@ import { pathTransfer } from './path-transfer.mjs';
 export async function build(elev) {
 	const results = await elev.write();
 
-	const options = elev.config?.globalData ?? {};
+	const pathFormat = elev.config?.globalData?.pathFormat ?? 'preserve';
 	const inputDir = elev.config.dir.input;
 	const outDir = elev.config.dir.output;
 
@@ -30,7 +30,7 @@ export async function build(elev) {
 				inputRoot: inputDir,
 				outputRoot: outDir,
 			},
-			options,
+			pathFormat,
 		);
 
 		if (path.resolve(htmlFile.outputPath) !== path.resolve(outputPath)) {
@@ -50,5 +50,5 @@ export async function build(elev) {
 		]);
 	}
 
-	log(outputLogTable, options.pathFormat);
+	log(outputLogTable, pathFormat);
 }
