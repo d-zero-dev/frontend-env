@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.18](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.17...v5.0.0-alpha.18) (2024-10-11)
+
+### Bug Fixes
+
+- **builder:** fix path transforming on request ([efe5644](https://github.com/d-zero-dev/frontend-env/commit/efe5644a79e3ce514fbcfe11b65b8e1ab16c7d6c))
+
+### Features
+
+- **builder:** rename package command name ([b7c5db3](https://github.com/d-zero-dev/frontend-env/commit/b7c5db318287a0db1f7c2a75f4887e6c80951e5e))
+
+### BREAKING CHANGES
+
+- **builder:** rename `build` command to `dzbuild` command
+
 # [5.0.0-alpha.17](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.16...v5.0.0-alpha.17) (2024-10-10)
 
 ### Features

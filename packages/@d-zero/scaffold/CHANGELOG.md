@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.18](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.17...v5.0.0-alpha.18) (2024-10-11)
+
+### Bug Fixes
+
+- **scaffold:** fix `build` command ([1a12364](https://github.com/d-zero-dev/frontend-env/commit/1a12364aa593ae9074e8496730982ee47759ccea))
+
+### Features
+
+- **scaffold:** add `test` command ([6df437e](https://github.com/d-zero-dev/frontend-env/commit/6df437eed5ac86947db3fea0e90557da7644fa8c))
+- **scaffold:** add TS compile checker as `lint:ts` command ([a330265](https://github.com/d-zero-dev/frontend-env/commit/a330265447568acf8aef6eb1bc454b4de6061ffb))
+- **scaffold:** remove `release` command ([7e1c8df](https://github.com/d-zero-dev/frontend-env/commit/7e1c8dfecf6c7705d432e48f0c3a5100adad4f6e))
+
+### BREAKING CHANGES
+
+- **scaffold:** remove `release` command
+
 # [5.0.0-alpha.17](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.16...v5.0.0-alpha.17) (2024-10-10)
 
 **Note:** Version bump only for package @d-zero/scaffold
