@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.22](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.21...v5.0.0-alpha.22) (2024-10-11)
+
+### Bug Fixes
+
+- **builder:** disable donDiff when using `options.ssi` ([2b1afde](https://github.com/d-zero-dev/frontend-env/commit/2b1afde08c675e3054b1f836100e09038353342e))
+
 # [5.0.0-alpha.21](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.20...v5.0.0-alpha.21) (2024-10-11)
 
 ### Bug Fixes
