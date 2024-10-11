@@ -3,6 +3,9 @@
 	"words": [
 		//
 		"nodir",
-		"postcssrc"
+		"postcssrc",
+
+		//
+		"dzbuild"
 	]
 }
