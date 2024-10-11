@@ -106,7 +106,7 @@ export default function (eleventyConfig, options) {
 	eleventyConfig.setServerOptions(
 		{
 			liveReload: true,
-			domDiff: true,
+			domDiff: options.ssi ? false : true,
 			port: 8080,
 			showAllHosts: false,
 			encoding: 'utf8',
