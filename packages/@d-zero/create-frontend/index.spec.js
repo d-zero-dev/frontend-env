@@ -36,6 +36,7 @@ describe('CLI', () => {
 		);
 		expect(stdout.replaceAll(path.sep, '/').split('\n')).toStrictEqual([
 			`✔  ++ ${dir}/tsconfig.json`,
+			`✔  ++ ${dir}/prh.yaml`,
 			`✔  ++ ${dir}/package.json`,
 			`✔  ++ ${dir}/lint-staged.config.mjs`,
 			`✔  ++ ${dir}/eleventy.config.mjs`,
@@ -47,7 +48,6 @@ describe('CLI', () => {
 			`✔  ++ ${dir}/.stylelintrc`,
 			`✔  ++ ${dir}/.pug-lintrc`,
 			`✔  ++ ${dir}/.prettierrc.mjs`,
-			`✔  ++ ${dir}/.prettierignore`,
 			`✔  ++ ${dir}/.postcssrc.js`,
 			`✔  ++ ${dir}/.npmignore`,
 			`✔  ++ ${dir}/.markuplintrc`,
@@ -67,8 +67,6 @@ describe('CLI', () => {
 			`✔  ++ ${dir}/__assets/htdocs/__tmpl/100_sub.pug`,
 			`✔  ++ ${dir}/__assets/htdocs/__tmpl/000_home.pug`,
 			`✔  ++ ${dir}/__assets/htdocs/__tmpl/.markuplintrc`,
-			`✔  ++ ${dir}/__assets/htdocs/@static/empty`,
-			`✔  ++ ${dir}/__assets/htdocs/@static/img/empty`,
 			`✔  ++ ${dir}/__assets/_libs/.markuplintrc`,
 			`✔  ++ ${dir}/__assets/_libs/style/theme/_index.scss`,
 			`✔  ++ ${dir}/__assets/_libs/style/theme/_font.scss`,
