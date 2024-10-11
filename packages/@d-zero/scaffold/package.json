@@ -15,7 +15,6 @@
 		"build": "npx @d-zero/builder",
 		"dev": "eleventy --serve --watch",
 		"d": "yarn dev",
-		"release": "cross-env NODE_ENV=production build",
 		"lint": "run-s lint:*",
 		"lint:html": "markuplint \"./__assets/**/*.{pug,html}\"",
 		"lint:pug": "pug-lint ./__assets/htdocs/**/*.pug -r console; pug-lint ./__assets/_libs/**/*.pug -r console;",
