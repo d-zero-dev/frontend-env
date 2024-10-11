@@ -9,7 +9,11 @@ import path from 'node:path';
 
 /**
  * @typedef {Object} Options
- * @property {"file" | "directory" | "preserve"} pathFormat
+ * @property {PathFormat} pathFormat
+ */
+
+/**
+ * @typedef {"file" | "directory" | "preserve"} PathFormat
  */
 
 /**

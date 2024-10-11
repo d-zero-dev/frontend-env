@@ -16,21 +16,37 @@ import { ssi } from './ssi.mjs';
 const tempFolderName = path.resolve(process.cwd(), '.11ty');
 
 /**
+ * @typedef {Object} DZBuilderConfig
+ * @property {Record<string, string>} [alias] Alias for the path to the directory containing the components.
+ * @property {string} [outputCssDir='css'] Output directory for CSS files.
+ * @property {string} [outputJsDir='js'] Output directory for JavaScript files.
+ * @property {string} [outputImgDir='img'] Output directory for image files.
+ * @property {boolean | import("prettier").Config} [prettier=true] Prettier options.
+ * @property {Record<string, boolean>} [minifier] Minifier options.
+ * @property {"\n" | "\r\n"} [lineBreak] Line break.
+ * @property {string} [charset='utf8'] Character encoding.
+ * @property {import("./fn/path-transfer.mjs").PathFormat} [pathFormat] Path format.
+ * @property {boolean} [autoDecode] Automatically decode the content on the dev server.
+ * @property {Record<string, import("./ssi.mjs").SSIOptions>} [ssi] Server Side Include options on the dev server.
+ */
+
+/**
  * @param {import("@11ty/eleventy").UserConfig} eleventyConfig
+ * @param {DZBuilderConfig} options
  * @returns
  */
-export default function (eleventyConfig) {
+export default function (eleventyConfig, options) {
 	const isServe = process.env.ELEVENTY_RUN_MODE === 'serve';
-	const outputCssDir = eleventyConfig.globalData.outputCssDir ?? 'css';
-	const outputJsDir = eleventyConfig.globalData.outputJsDir ?? 'js';
-	const outputImgDir = eleventyConfig.globalData.outputImgDir ?? 'img';
+	const outputCssDir = options.outputCssDir ?? 'css';
+	const outputJsDir = options.outputJsDir ?? 'js';
+	const outputImgDir = options.outputImgDir ?? 'img';
 
-	const charset = isServe ? 'utf8' : (eleventyConfig.globalData.charset ?? 'utf8');
+	const charset = isServe ? 'utf8' : (options.charset ?? 'utf8');
 
 	const input = '__assets/htdocs';
 	const output = 'htdocs';
 	const absInput = path.resolve(input);
-	const alias = eleventyConfig.globalData?.alias?.['@'] ?? absInput;
+	const alias = options?.alias?.['@'] ?? absInput;
 	const relAlias = path.relative(absInput, alias);
 
 	eleventyConfig.addFilter('date', (date, format) => {
@@ -50,7 +66,7 @@ export default function (eleventyConfig) {
 		useShortDoctype: false,
 		minifyCSS: true,
 		minifyJS: true,
-		...eleventyConfig.globalData.minifier,
+		...options.minifier,
 	});
 
 	eleventyConfig.addDataExtension('yml', (contents) => yamlLoad(contents));
@@ -62,17 +78,17 @@ export default function (eleventyConfig) {
 	});
 
 	eleventyConfig.addPlugin(htmlPlugin, {
-		minifier: eleventyConfig.globalData.minifier,
-		prettier: eleventyConfig.globalData.prettier ?? true,
-		lineBreak: eleventyConfig.globalData.lineBreak,
+		minifier: options.minifier,
+		prettier: options.prettier ?? true,
+		lineBreak: options.lineBreak,
 		charset,
 	});
 
 	eleventyConfig.addPlugin(stylePlugin, {
 		tmpDir: tempFolderName,
 		banner: banner(),
-		minify: eleventyConfig.globalData?.minifier?.minifyCSS ?? true,
-		alias: eleventyConfig.globalData?.alias ?? {},
+		minify: options?.minifier?.minifyCSS ?? true,
+		alias: options?.alias ?? {},
 	});
 
 	eleventyConfig.addPlugin(scriptPlugin, {
@@ -98,15 +114,15 @@ export default function (eleventyConfig) {
 
 					let html;
 
-					if (eleventyConfig.globalData.autoDecode) {
+					if (options.autoDecode) {
 						html = decode(content.body);
 					}
 
-					if (eleventyConfig.globalData.ssi) {
+					if (options.ssi) {
 						html = await ssi(html ?? content.body.toString('utf8'), {
 							url,
 							output,
-							ssi: eleventyConfig.globalData.ssi,
+							ssi: options.ssi,
 						});
 					}
 
