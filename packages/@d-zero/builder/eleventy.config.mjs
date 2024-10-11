@@ -116,14 +116,13 @@ export default function (eleventyConfig, options) {
 						return;
 					}
 
-					let html;
-
-					if (options.autoDecode) {
-						html = decode(content.body);
-					}
+					/**
+					 * This is guaranteed to be UTF-8 encoded.
+					 */
+					let html = decode(content.body, options.autoDecode);
 
 					if (options.ssi) {
-						html = await ssi(html ?? content.body.toString('utf8'), {
+						html = await ssi(html, {
 							url,
 							output,
 							ssi: options.ssi,
