@@ -10,17 +10,15 @@ describe('pathTransfer', () => {
 	 * @param {"file" | "directory" | "preserve"} format
 	 * @returns {Promise<string[]>}
 	 */
-	function _(paths, format) {
-		return paths.map((path, index) => {
+	function _(paths, pathFormat = 'preserve') {
+		return paths.map((path) => {
 			const outputPath = pathTransfer(
 				{
 					inputPath: path,
 					inputRoot: 'path/to',
 					content: HTML_CONTENT,
 				},
-				{
-					pathFormat: format,
-				},
+				pathFormat,
 			);
 			return outputPath;
 		});
