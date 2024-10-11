@@ -53,22 +53,6 @@ export default function (eleventyConfig, options) {
 		return dayjs(date).format(format);
 	});
 
-	/**
-	 * @see https://github.com/terser/html-minifier-terser?tab=readme-ov-file#options-quick-reference
-	 */
-	eleventyConfig.addGlobalData('minifier', {
-		collapseWhitespace: false,
-		collapseBooleanAttributes: true,
-		removeComments: false,
-		removeRedundantAttributes: true,
-		removeScriptTypeAttributes: true,
-		removeStyleLinkTypeAttributes: true,
-		useShortDoctype: false,
-		minifyCSS: true,
-		minifyJS: true,
-		...options.minifier,
-	});
-
 	eleventyConfig.addDataExtension('yml', (contents) => yamlLoad(contents));
 
 	eleventyConfig.addPlugin(pugPlugin, {
@@ -78,7 +62,21 @@ export default function (eleventyConfig, options) {
 	});
 
 	eleventyConfig.addPlugin(htmlPlugin, {
-		minifier: options.minifier,
+		/**
+		 * @see https://github.com/terser/html-minifier-terser?tab=readme-ov-file#options-quick-reference
+		 */
+		minifier: {
+			collapseWhitespace: false,
+			collapseBooleanAttributes: true,
+			removeComments: false,
+			removeRedundantAttributes: true,
+			removeScriptTypeAttributes: true,
+			removeStyleLinkTypeAttributes: true,
+			useShortDoctype: false,
+			minifyCSS: true,
+			minifyJS: true,
+			...options.minifier,
+		},
 		prettier: options.prettier ?? true,
 		lineBreak: options.lineBreak,
 		charset,
