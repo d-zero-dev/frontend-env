@@ -16,30 +16,27 @@ export function pathTransformRouter(options) {
 
 		const origin = path.join(options.output, url.pathname);
 
-		const content = await fs.readFile(origin).catch(() => null);
-		if (content) {
-			return {
-				body: content,
-			};
-		}
-
 		if (url.pathname.endsWith('/')) {
+			// 👍️ Honesty
+			// /path/to/name/ => Find: /path/to/name/index.html
 			{
 				const filePath = path.join(origin, 'index.html');
 				const content = await fs.readFile(filePath).catch(() => null);
 				if (content) {
-					_(`${url.pathname}`, filePath);
+					_(`${url.pathname}:(1)`, filePath);
 					return {
 						body: content,
 					};
 				}
 			}
 
+			// 🤔 Failback
+			// /path/to/name/ => Find: /path/to/name.html
 			{
 				const filePath = origin + '.html';
 				const content = await fs.readFile(filePath).catch(() => null);
 				if (content) {
-					_(`${url.pathname}`, filePath);
+					_(`${url.pathname}:(2)`, filePath);
 					return {
 						body: content,
 					};
@@ -47,6 +44,8 @@ export function pathTransformRouter(options) {
 			}
 		}
 
+		// 🤖 Access to 11ty's Cool URLs
+		// /path/to/name.html => Find: /path/to/name/index.html
 		if (url.pathname.endsWith('.html')) {
 			const dir = path.dirname(origin);
 			const name = path.basename(origin, '.html');
