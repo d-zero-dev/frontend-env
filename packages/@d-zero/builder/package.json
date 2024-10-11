@@ -11,7 +11,7 @@
 	},
 	"type": "module",
 	"bin": {
-		"build": "./cli.mjs"
+		"dzbuild": "./cli.mjs"
 	},
 	"exports": {
 		"./11ty": {
