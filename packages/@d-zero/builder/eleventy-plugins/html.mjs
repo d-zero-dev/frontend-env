@@ -43,10 +43,11 @@ export function htmlPlugin(eleventyConfig, pluginConfig) {
 			content = content.replaceAll(/\r?\n/g, pluginConfig.lineBreak);
 		}
 
-		if (isShiftJIS(pluginConfig.charset.toLowerCase().trim())) {
+		const charset = pluginConfig.charset.toLowerCase().trim();
+		if (isShiftJIS(charset)) {
 			content = content
 				// Change charset
-				.replaceAll(/<meta\s+charset="utf-8"\s*\/?>/gi, `<meta charset="SHIFT-JIS">`)
+				.replaceAll(/<meta\s+charset="utf-?8"\s*\/?>/gi, `<meta charset="${charset}">`)
 				// Change entities
 				.replaceAll('©', '&copy;')
 				.replaceAll('⚠️', 'WARNING')
