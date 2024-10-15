@@ -5,17 +5,17 @@ html(lang="ja")
 	body.c-page-sub
 		.c-page-sub__base
 			.c-page-sub__header
-				include /component/_c-header.pug
+				include /component/c-header.pug
 			.c-page-sub__nav-global
-				include /component/_c-nav-global.pug
+				include /component/c-nav-global.pug
 
 			.c-page-sub__main
 				main
 					article.c-page-sub__content
 						.c-page-sub__title-page
-							include /component/_c-title-page.pug
+							include /component/c-title-page.pug
 						.c-page-sub__nav-breadcrumb
-							include /component/_c-nav-breadcrumb.pug
+							include /component/c-nav-breadcrumb.pug
 						.c-page-sub__content-index
 							.c-content-index
 								.c-content-index__categories
@@ -30,11 +30,11 @@ html(lang="ja")
 								.c-content-index__body
 									.c-media-list
 										each article in data.articles
-											include /component/_c-media.pug
+											include /component/c-media.pug
 						.c-page-sub__pagination
-							include /component/_c-pagination.pug
+							include /component/c-pagination.pug
 
 			.c-page-sub__nav-sitemap
-				include /component/_c-nav-sitemap.pug
+				include /component/c-nav-sitemap.pug
 			.c-page-sub__footer
-				include /component/_c-footer.pug
+				include /component/c-footer.pug

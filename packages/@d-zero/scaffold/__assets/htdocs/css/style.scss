@@ -1,32 +1,32 @@
 @import 'destyle.css' layer(reset);
 
 @layer base {
-	@import '@/style/base/_root.scss';
+	@import '@/style/base/root.scss';
 }
 
 @layer general {
-	@import '@/style/general/_all.scss';
-	@import '@/style/general/_body.scss';
-	@import '@/style/general/_button.scss';
-	@import '@/style/general/_img.scss';
+	@import '@/style/general/all.scss';
+	@import '@/style/general/body.scss';
+	@import '@/style/general/button.scss';
+	@import '@/style/general/img.scss';
 }
 
 @layer components {
-	@import '@/component/_c-page-home.scss';
-	@import '@/component/_c-page-sub.scss';
-	@import '@/component/_c-header.scss';
-	@import '@/component/_c-footer.scss';
-	@import '@/component/_c-nav-global.scss';
-	@import '@/component/_c-nav-sitemap.scss';
-	@import '@/component/_c-nav-breadcrumb.scss';
-	@import '@/component/_c-title-page.scss';
-	@import '@/component/_c-pagination.scss';
-	@import '@/component/_c-card-list.scss';
-	@import '@/component/_c-card.scss';
-	@import '@/component/_c-media-list.scss';
-	@import '@/component/_c-media.scss';
-	@import '@/component/_c-content-index.scss';
-	@import '@/component/_c-content-main.scss';
+	@import '@/component/c-page-home.scss';
+	@import '@/component/c-page-sub.scss';
+	@import '@/component/c-header.scss';
+	@import '@/component/c-footer.scss';
+	@import '@/component/c-nav-global.scss';
+	@import '@/component/c-nav-sitemap.scss';
+	@import '@/component/c-nav-breadcrumb.scss';
+	@import '@/component/c-title-page.scss';
+	@import '@/component/c-pagination.scss';
+	@import '@/component/c-card-list.scss';
+	@import '@/component/c-card.scss';
+	@import '@/component/c-media-list.scss';
+	@import '@/component/c-media.scss';
+	@import '@/component/c-content-index.scss';
+	@import '@/component/c-content-main.scss';
 }
 
 @layer reset, base, general, components;

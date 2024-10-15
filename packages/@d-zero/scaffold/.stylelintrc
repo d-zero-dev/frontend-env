@@ -2,7 +2,7 @@
 	"extends": ["@d-zero/stylelint-config"],
 	"overrides": [
 		{
-			"files": ["_c-*.scss"],
+			"files": ["c-*.scss"],
 			"rules": {
 				"@d-zero/component": {
 					"allowMultipleSelectors": true
@@ -10,7 +10,7 @@
 			}
 		},
 		{
-			"files": ["_c-content-main.scss"],
+			"files": ["c-content-main.scss"],
 			"rules": {
 				"selector-class-pattern": null,
 				"selector-nested-pattern": "^(?!\\.c-).*"
