@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.23](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.22...v5.0.0-alpha.23) (2024-10-15)
+
+**Note:** Version bump only for package @d-zero/fontend-env
+
 # [5.0.0-alpha.22](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.21...v5.0.0-alpha.22) (2024-10-11)
 
 ### Bug Fixes
