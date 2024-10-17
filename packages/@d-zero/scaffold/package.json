@@ -41,7 +41,7 @@
 		"@d-zero/linters": "5.0.0-alpha.46",
 		"@d-zero/postcss-config": "5.0.0-alpha.23",
 		"@d-zero/tsconfig": "0.3.2",
-		"@types/node": "22.7.5",
+		"@types/node": "22.7.6",
 		"cross-env": "7.0.3",
 		"husky": "9.1.6",
 		"npm-run-all2": "6.2.3",
@@ -54,7 +54,7 @@
 		"tslib": "2.8.0"
 	},
 	"volta": {
-		"node": "22.9.0",
+		"node": "22.10.0",
 		"yarn": "1.22.22"
 	}
 }
