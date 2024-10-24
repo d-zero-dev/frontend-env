@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.24](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.23...v5.0.0-alpha.24) (2024-10-24)
+
+### Bug Fixes
+
+- **builder:** fix the condition regarding the presence or absence of `doctype` ([4dea2e9](https://github.com/d-zero-dev/frontend-env/commit/4dea2e9296d01a5c018cfbfae554f47d2ea60ce8))
+
+### Features
+
+- **scaffold:** コンポーネントファイル名を`_c-*`から`c-*`に変更 ([ae6d450](https://github.com/d-zero-dev/frontend-env/commit/ae6d4507f37f7f674c8f70026910bf260fc53334))
+
+### BREAKING CHANGES
+
+- **scaffold:** コンポーネントファイル名を`_c-*`から`c-*`に変更
+
 # [5.0.0-alpha.23](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.22...v5.0.0-alpha.23) (2024-10-15)
 
 **Note:** Version bump only for package @d-zero/fontend-env
