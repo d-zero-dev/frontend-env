@@ -18,7 +18,12 @@ export function htmlPlugin(eleventyConfig, pluginConfig) {
 			return content;
 		}
 
-		if (!/^<!doctype html/i.test(content.trim())) {
+		if (
+			// Start with `<html` (For partial HTML)
+			/^<html(?:\s|>)/i.test(content.trim()) &&
+			// Not start with `<!doctype html`
+			!/^<!doctype html/i.test(content.trim())
+		) {
 			// eleventy-pug-plugin does not support `doctype` option
 			content = '<!DOCTYPE html>\n' + content;
 		}
