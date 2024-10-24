@@ -17,7 +17,7 @@
 		"postcss-base64": "0.7.1",
 		"postcss-calc": "10.0.2",
 		"postcss-clip-path-polyfill": "1.1.0",
-		"postcss-color-mod-function": "3.0.3",
+		"postcss-color-mod-function": "4.1.1",
 		"postcss-custom-media": "11.0.4",
 		"postcss-math": "0.0.10",
 		"postcss-scss": "4.0.9"
