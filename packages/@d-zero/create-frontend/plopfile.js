@@ -167,20 +167,23 @@ export default function (plop) {
 							path: path.resolve(dest, originFile),
 							templateFile: path.resolve(scaffoldDir, originFile),
 							transform(content) {
-								if (originFile === 'package.json') {
-									const nameCandidate = path.basename(path.resolve(dest));
-									const pkg = JSON.parse(content);
-									pkg._createdBy = `${pkg.name}@${pkg.version}`;
-									pkg.name = nameCandidate;
-									pkg.private = true;
-									delete pkg.version;
-									delete pkg.description;
-									delete pkg.repository;
-									delete pkg.author;
-									delete pkg.license;
-									delete pkg.publishConfig;
-									delete pkg.files;
-									content = JSON.stringify(pkg, null, '\t');
+								switch (originFile) {
+									case 'package.json': {
+										const nameCandidate = path.basename(path.resolve(dest));
+										const pkg = JSON.parse(content);
+										pkg._createdBy = `${pkg.name}@${pkg.version}`;
+										pkg.name = nameCandidate;
+										pkg.private = true;
+										delete pkg.version;
+										delete pkg.description;
+										delete pkg.repository;
+										delete pkg.author;
+										delete pkg.license;
+										delete pkg.publishConfig;
+										delete pkg.files;
+										content = JSON.stringify(pkg, null, '\t');
+										break;
+									}
 								}
 								return content;
 							},
