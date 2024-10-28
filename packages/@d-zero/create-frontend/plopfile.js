@@ -148,8 +148,9 @@ export default function (plop) {
 			},
 		],
 		actions: function (answers) {
+			const config = answerToConfig(answers);
+
 			if (cli.flags.debug) {
-				const config = answerToConfig(answers);
 				// eslint-disable-next-line no-console
 				console.log(config);
 			}
@@ -161,15 +162,14 @@ export default function (plop) {
 					 * @type {import('plop').AddActionConfig}
 					 */
 					(originFile) => {
-						const dest = answers['__d-zero_scaffold_dest__'] ?? cli.flags.dir;
 						return {
 							type: 'add',
-							path: path.resolve(dest, originFile),
+							path: path.resolve(config.dest, originFile),
 							templateFile: path.resolve(scaffoldDir, originFile),
 							transform(content) {
 								switch (originFile) {
 									case 'package.json': {
-										const nameCandidate = path.basename(path.resolve(dest));
+										const nameCandidate = path.basename(path.resolve(config.dest));
 										const pkg = JSON.parse(content);
 										pkg._createdBy = `${pkg.name}@${pkg.version}`;
 										pkg.name = nameCandidate;
