@@ -1,5 +1,6 @@
 import { spawn } from 'node:child_process';
 import path from 'node:path';
+import { argv } from 'node:process';
 
 import { globSync } from 'glob';
 import ignore from 'ignore';
@@ -23,6 +24,9 @@ const cli = meow(
 	Examples
 	  $ yarn create @d-zero/frontend
 	  $ yarn create @d-zero/frontend --type cms --dir ./my-cms --install
+
+	Note
+	  Running the command without any options will start in interactive mode, allowing you to configure the project step-by-step.
 `,
 	{
 		importMeta: import.meta,
@@ -30,10 +34,12 @@ const cli = meow(
 			type: {
 				type: 'string',
 				shortFlag: 't',
+				default: 'burger',
 			},
 			dir: {
 				type: 'string',
 				shortFlag: 'd',
+				default: '.',
 			},
 			install: {
 				type: 'boolean',
@@ -57,6 +63,8 @@ export default function (plop) {
 
 	const gitignore = readFileSafe(path.resolve(scaffoldDir, '.gitignore'));
 	const ignoreFiles = gitignore?.split('\n').filter(Boolean) ?? [];
+	const hasArgs = argv.length > 2;
+	const interactive = !hasArgs;
 
 	const ig = ignore()
 		// Ignore files in .gitignore
@@ -120,23 +128,23 @@ export default function (plop) {
 						value: 'burger',
 					},
 				],
-				default: cli.flags.type ?? 'burger',
+				default: cli.flags.type,
 				filter: (val) => val.toLowerCase(),
-				when: !cli.flags.type,
+				when: interactive,
 			},
 			{
 				type: 'input',
 				name: '__d-zero_scaffold_dest__',
 				message: t`Destination path`,
-				default: '.',
-				when: !cli.flags.type,
+				default: cli.flags.dir,
+				when: interactive,
 			},
 			{
 				type: 'confirm',
 				name: '__d-zero_scaffold_yarn_install__',
 				message: t`Install dependencies with yarn?`,
-				default: true,
-				when: !cli.flags.type,
+				default: cli.flags.install,
+				when: interactive,
 			},
 		],
 		actions: function (answers) {
@@ -153,7 +161,7 @@ export default function (plop) {
 					 * @type {import('plop').AddActionConfig}
 					 */
 					(originFile) => {
-						const dest = answers['__d-zero_scaffold_dest__'] ?? cli.flags.dir ?? '.';
+						const dest = answers['__d-zero_scaffold_dest__'] ?? cli.flags.dir;
 						return {
 							type: 'add',
 							path: path.resolve(dest, originFile),
