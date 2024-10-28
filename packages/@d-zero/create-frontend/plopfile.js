@@ -39,6 +39,10 @@ const cli = meow(
 				type: 'boolean',
 				default: true,
 			},
+			debug: {
+				type: 'boolean',
+				default: false,
+			},
 		},
 	},
 );
@@ -72,9 +76,7 @@ export default function (plop) {
 	);
 
 	plop.setActionType('Install dependencies', (answers) => {
-		const dest = answers['__d-zero_scaffold_dest__'] ?? cli.flags.dir ?? '.';
-		const doInstall =
-			answers['__d-zero_scaffold_yarn_install__'] ?? cli.flags.install ?? true;
+		const { dest, doInstall } = answerToConfig(answers);
 
 		const { promise, resolve, reject } = Promise.withResolvers();
 
@@ -138,6 +140,12 @@ export default function (plop) {
 			},
 		],
 		actions: function (answers) {
+			if (cli.flags.debug) {
+				const config = answerToConfig(answers);
+				// eslint-disable-next-line no-console
+				console.log(config);
+			}
+
 			return [
 				...scaffoldFiles.map(
 					/**
@@ -177,4 +185,12 @@ export default function (plop) {
 			];
 		},
 	});
+}
+
+function answerToConfig(answers) {
+	const type = answers['__d-zero_project_type__'] ?? cli.flags.type;
+	const dest = answers['__d-zero_scaffold_dest__'] ?? cli.flags.dir;
+	const doInstall = answers['__d-zero_scaffold_yarn_install__'] ?? cli.flags.install;
+
+	return { type, dest, doInstall };
 }
