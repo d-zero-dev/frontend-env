@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.25](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.24...v5.0.0-alpha.25) (2024-10-29)
+
+### Features
+
+- **create-frontend:** add `--debug` option ([835529e](https://github.com/d-zero-dev/frontend-env/commit/835529e798d634ed75dbb5ec8d7e3e75f58b0fae))
+- **create-frontend:** add interactive mode ([e0cf69d](https://github.com/d-zero-dev/frontend-env/commit/e0cf69daca825b26fd490ea0ea6bc10a3f258c58))
+- **create-frontend:** add settings for `type=burger` ([b755336](https://github.com/d-zero-dev/frontend-env/commit/b755336b704086adcc67af8111a49a0bcb5b82cd))
+- **create-frontend:** add settings for `type=static` ([7298f7e](https://github.com/d-zero-dev/frontend-env/commit/7298f7edbda2cfdf267cd9145686be7cb125587f))
+- **scaffold:** add `.bge-content` styles with `bge-style.css` ([081f7ee](https://github.com/d-zero-dev/frontend-env/commit/081f7ee9e03b659ec9b964f0bcb17dee2b3be9ec))
+- **scaffold:** add `checkJs=false` to tsconfig ([1fb9ed1](https://github.com/d-zero-dev/frontend-env/commit/1fb9ed1d1d34004748f3fd7c1caeebcc6ade597d))
+
 # [5.0.0-alpha.24](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.23...v5.0.0-alpha.24) (2024-10-24)
 
 ### Bug Fixes

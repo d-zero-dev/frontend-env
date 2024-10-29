@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.25](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.24...v5.0.0-alpha.25) (2024-10-29)
+
+### Features
+
+- **scaffold:** add `.bge-content` styles with `bge-style.css` ([081f7ee](https://github.com/d-zero-dev/frontend-env/commit/081f7ee9e03b659ec9b964f0bcb17dee2b3be9ec))
+- **scaffold:** add `checkJs=false` to tsconfig ([1fb9ed1](https://github.com/d-zero-dev/frontend-env/commit/1fb9ed1d1d34004748f3fd7c1caeebcc6ade597d))
+
 # [5.0.0-alpha.24](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.23...v5.0.0-alpha.24) (2024-10-24)
 
 ### Features
