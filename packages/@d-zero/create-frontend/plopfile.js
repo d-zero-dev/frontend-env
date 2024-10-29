@@ -1,4 +1,5 @@
 import { spawn } from 'node:child_process';
+import fs from 'node:fs';
 import path from 'node:path';
 import { argv } from 'node:process';
 
@@ -77,6 +78,10 @@ export default function (plop) {
 		.add(
 			// BurgerEditor
 			cli.flags.type === 'burger' ? [] : ['**/bge-*'],
+		)
+		.add(
+			// static
+			cli.flags.type === 'static' ? ['**/__tmpl/**/*'] : [],
 		);
 
 	const scaffoldFiles = ig.filter(
@@ -124,8 +129,10 @@ export default function (plop) {
 				name: '__d-zero_project_type__',
 				message: t`What's the type of project?`,
 				choices: [
-					//
-					'Static',
+					{
+						name: 'Static',
+						value: 'static',
+					},
 					'CMS (WordPress etc.)',
 					{
 						name: 'CMS (baserCMS with BurgerEditor)',
@@ -171,9 +178,10 @@ export default function (plop) {
 							path: path.resolve(config.dest, originFile),
 							templateFile: path.resolve(scaffoldDir, originFile),
 							transform(content) {
+								const nameCandidate = path.basename(path.resolve(config.dest));
+
 								switch (originFile) {
 									case 'package.json': {
-										const nameCandidate = path.basename(path.resolve(config.dest));
 										const pkg = JSON.parse(content);
 										pkg._createdBy = `${pkg.name}@${pkg.version}`;
 										pkg.name = nameCandidate;
@@ -193,6 +201,14 @@ export default function (plop) {
 											content = content.replace("blocks.html'", "bge-blocks.html'");
 										}
 										break;
+									}
+									case '__assets/htdocs/index.pug': {
+										if (config.type === 'static') {
+											content = fs.readFileSync(
+												path.resolve(scaffoldDir, '__assets/htdocs/__tmpl/000_home.pug'),
+												'utf8',
+											);
+										}
 									}
 								}
 								return content;
