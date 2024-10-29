@@ -73,7 +73,11 @@ export default function (plop) {
 		.add([
 			// Test directories
 			'**/*.test/**/*',
-		]);
+		])
+		.add(
+			// BurgerEditor
+			cli.flags.type === 'burger' ? [] : ['**/bge-*'],
+		);
 
 	const scaffoldFiles = ig.filter(
 		globSync('**/*', {
@@ -182,6 +186,12 @@ export default function (plop) {
 										delete pkg.publishConfig;
 										delete pkg.files;
 										content = JSON.stringify(pkg, null, '\t');
+										break;
+									}
+									case '__assets/_libs/data/blocks.cjs': {
+										if (config.type === 'burger') {
+											content = content.replace("blocks.html'", "bge-blocks.html'");
+										}
 										break;
 									}
 								}
