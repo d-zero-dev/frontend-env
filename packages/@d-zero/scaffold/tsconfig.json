@@ -1,6 +1,7 @@
 {
 	"extends": ["@d-zero/tsconfig"],
 	"compilerOptions": {
+		"checkJs": false,
 		"noEmit": true, // Instead to use Vite,
 		"paths": {
 			"@/*": ["./__assets/_libs/*"]
