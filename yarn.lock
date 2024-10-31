@@ -766,14 +766,14 @@
   resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-4.0.0.tgz#7dfccb9df5499e627e7bfdbb4021a06813a45dba"
   integrity sha512-189nelqtPd8++phaHNwYovKZI0FOzH1vQEE3QhHHkNIGrg5fSs9CbYP3RvfEH5geztnIA9Jwq91wyOIwAW5JIQ==
 
-"@d-zero/commitlint-config@5.0.0-alpha.49":
-  version "5.0.0-alpha.49"
-  resolved "https://registry.yarnpkg.com/@d-zero/commitlint-config/-/commitlint-config-5.0.0-alpha.49.tgz#9e7f942aaedd746c7b1ad74534d521ccb86965e8"
-  integrity sha512-eYrrzCV6hIfPd36b9OBy4azeu/RJarlhCLs+fBZCI7PE5/nFKZ+ry0gcmGNUfXdCr2I0pG6EA2CQ3xCTjWCyzg==
+"@d-zero/commitlint-config@5.0.0-alpha.50":
+  version "5.0.0-alpha.50"
+  resolved "https://registry.yarnpkg.com/@d-zero/commitlint-config/-/commitlint-config-5.0.0-alpha.50.tgz#8c57372908a02eae81b123d1317e6b9dde49af6a"
+  integrity sha512-5VCY1sGBBlpp4DBDWhGTnyVTE4qVzA8XDNqwCqjpba4yEuEsRoDj9Kb4DIu65XCz7JTxyDf0qzi7oI36EaC8Jg==
   dependencies:
     "@commitlint/cli" "19.5.0"
     "@commitlint/config-conventional" "19.5.0"
-    "@d-zero/cz-config" "5.0.0-alpha.49"
+    "@d-zero/cz-config" "5.0.0-alpha.50"
 
 "@d-zero/cspell-config@5.0.0-alpha.49":
   version "5.0.0-alpha.49"
@@ -789,10 +789,10 @@
   dependencies:
     css-tree "3.0.0"
 
-"@d-zero/cz-config@5.0.0-alpha.49":
-  version "5.0.0-alpha.49"
-  resolved "https://registry.yarnpkg.com/@d-zero/cz-config/-/cz-config-5.0.0-alpha.49.tgz#494e96b652a21b1080d5b9b79cbee509e8e32fad"
-  integrity sha512-0WxumvQINAn1rDF/pw5TDz+VrPxOJqgOT8204Jd1BvqsGeJF1f95URSFFSjP3wHJ2SuPO27QfJTvzYdci+y2nQ==
+"@d-zero/cz-config@5.0.0-alpha.50":
+  version "5.0.0-alpha.50"
+  resolved "https://registry.yarnpkg.com/@d-zero/cz-config/-/cz-config-5.0.0-alpha.50.tgz#77b1827748907a3ce6a14866ab6d567d6d6f3f2e"
+  integrity sha512-ghjn5475A0JFjR6sy+WkgTMS5ZGN9wsS4jbLwT6iJaGMZR9/oeUHWHAH2NxRDmffgUdF/6pNOXxOLNyu8ZgweQ==
   dependencies:
     commitizen "4.3.1"
     cz-customizable "7.2.1"
