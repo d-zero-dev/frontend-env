@@ -22,6 +22,7 @@ const tempFolderName = path.resolve(process.cwd(), '.11ty');
  * @property {string} [outputCssDir='css'] Output directory for CSS files.
  * @property {string} [outputJsDir='js'] Output directory for JavaScript files.
  * @property {string} [outputImgDir='img'] Output directory for image files.
+ * @property {import("./fn/image-sizes.mjs").ImageSizesOptions} [imageSizes]  options.
  * @property {boolean | import("prettier").Config} [prettier=true] Prettier options.
  * @property {Record<string, boolean>} [minifier] Minifier options.
  * @property {"\n" | "\r\n"} [lineBreak] Line break.
@@ -86,6 +87,7 @@ export default function (eleventyConfig, options) {
 		},
 		prettier: options.prettier ?? true,
 		lineBreak: options.lineBreak,
+		imageSizes: options.imageSizes ?? {}, // Enabled by default
 		charset,
 	});
 

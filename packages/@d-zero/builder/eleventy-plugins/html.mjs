@@ -1,12 +1,17 @@
+import path from 'node:path';
+
 import { minify } from 'html-minifier-terser';
 import iconv from 'iconv-lite';
 
 import { isShiftJIS } from '../fn/charset.mjs';
+import { domSerialize } from '../fn/dom-serialize.mjs';
+import { imageSizes } from '../fn/image-sizes.mjs';
 
 /**
  * @param {import("@11ty/eleventy").UserConfig} eleventyConfig
  * @param {Object} pluginConfig
  * @param {import("html-minifier-terser").Options} pluginConfig.minifier
+ * @param {import("../fn/image-sizes.mjs").ImageSizesOptions} pluginConfig.imageSizes
  * @param {import("prettier").Options} pluginConfig.prettier
  * @param {"\n" | "\r\n"} pluginConfig.lineBreak
  * @param {string} pluginConfig.charset
@@ -17,6 +22,16 @@ export function htmlPlugin(eleventyConfig, pluginConfig) {
 		if (!(this.page.outputPath ?? '').endsWith('.html')) {
 			return content;
 		}
+
+		content = await domSerialize(content, async (documentElement) => {
+			// Hooks
+			if (pluginConfig.imageSizes) {
+				await imageSizes(documentElement, {
+					rootDir: path.resolve(eleventyConfig.dir.output),
+					...pluginConfig.imageSizes,
+				});
+			}
+		});
 
 		if (
 			// Start with `<html` (For partial HTML)
