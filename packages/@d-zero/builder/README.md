@@ -45,6 +45,7 @@ export default function (eleventyConfig) {
 		outputCssDir: 'css',
 		outputJsDir: 'js',
 		outputImgDir: 'img',
+		imageSizes: { selector: '*' },
 		prettier: false,
 		minifier: { minifyJS: false },
 		lineBreak: '\r\n',
@@ -98,7 +99,17 @@ flowchart LR
 				#lineBreak(["改行コード変換<br>(lineBreak)"])
 				#charset(["文字コード変換<br>(charset)"])
 
-				#prettier --> #minifier --> #lineBreak --> #charset
+
+				subgraph #domSerialize["domSerialize"]
+					direction TB
+
+					#jsdom(["JSDOM.serialize()"])
+					#imageSizes(["画像<br>width/height<br>属性自動付与<br>(imageSizes)"])
+
+					#jsdom --> #imageSizes
+				end
+
+				#domSerialize --> #prettier --> #minifier --> #lineBreak --> #charset
 			end
 
 			subgraph #transpileCSS["addExtension"]
@@ -137,6 +148,7 @@ flowchart LR
 | `outputCssDir` | CSSの出力ディレクトリを設定します。                  |
 | `outputJsDir`  | JSの出力ディレクトリを設定します。                   |
 | `outputImgDir` | 画像の出力ディレクトリを設定します。                 |
+| `imageSizes`   | 画像のwidth/height属性を自動付与します。             |
 | `prettier`     | Prettierを有効にします。                             |
 | `minifier`     | Minifierを有効にします。                             |
 | `lineBreak`    | 改行コードを設定します。                             |
