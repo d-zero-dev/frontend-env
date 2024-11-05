@@ -39,5 +39,6 @@ yarn create @d-zero/frontend
 
 | コマンド    | 内容                                      |
 | ----------- | ----------------------------------------- |
+| `yarn tsc`  | TypeScriptのコンパイルを実行します        |
 | `yarn lint` | リント（各種リントを実行します）          |
 | `yarn co`   | Gitコミットを*Commitizen*経由で実行します |
