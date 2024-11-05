@@ -1,3 +1,6 @@
+import type { EleventyPlugin } from '../eleventy.types.js';
+import type { EleventyGlobalData } from '../types.js';
+
 import path from 'node:path';
 
 import { pathComparator } from '@d-zero/shared/sort/path';
@@ -5,20 +8,18 @@ import c from 'cli-color';
 import { filesize } from 'filesize';
 import { gzipSize } from 'gzip-size';
 
-/**
- * @param {import("@11ty/eleventy").UserConfig} eleventyConfig
- * @returns
- */
-export function reportPlugin(eleventyConfig) {
-	eleventyConfig.on('eleventy.after', async ({ dir, results }) => {
+export const reportPlugin: EleventyPlugin<void, EleventyGlobalData> = (
+	eleventyConfig,
+) => {
+	eleventyConfig.on('eleventy.after', async ({ directories, results }) => {
 		const fileList = results.toSorted((a, b) =>
 			pathComparator(a.outputPath, b.outputPath),
 		);
 
 		const table = await Promise.all(
 			fileList.map(async (file) => {
-				const baseDir = path.relative(process.cwd(), dir.output);
-				const filePathFromBase = path.relative(dir.output, file.outputPath);
+				const baseDir = path.relative(process.cwd(), directories.output);
+				const filePathFromBase = path.relative(directories.output, file.outputPath);
 				const highlight = file.outputPath.endsWith('.html')
 					? c.green
 					: file.outputPath.endsWith('.css')
@@ -46,4 +47,4 @@ export function reportPlugin(eleventyConfig) {
 			}),
 		);
 	});
-}
+};

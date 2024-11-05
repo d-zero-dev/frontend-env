@@ -1,12 +1,9 @@
 import { JSDOM } from 'jsdom';
 
-/**
- *
- * @param {string} html
- * @param {(element: HTMLElement) => Promise<void> | void} hook
- * @returns {Promise<string>}
- */
-export async function domSerialize(html, hook) {
+export async function domSerialize(
+	html: string,
+	hook: (element: HTMLElement) => Promise<void> | void,
+) {
 	const dom = getDOM(html);
 
 	await hook(dom.element);
@@ -18,7 +15,12 @@ export async function domSerialize(html, hook) {
 	return dom.element.outerHTML;
 }
 
-function getDOM(html) {
+function getDOM(html: string): {
+	element: HTMLElement;
+	document: Document;
+	dom: JSDOM | null;
+	isFragment: boolean;
+} {
 	const isFragment = !/^<html(?:\s|>)|^<!doctype\s/i.test(html.trim());
 
 	if (isFragment) {
@@ -26,7 +28,11 @@ function getDOM(html) {
 		const document = fragment.ownerDocument;
 		const tmpContainer = document.createElement('div');
 		tmpContainer.append(fragment);
-		const element = tmpContainer.firstChild;
+		const element = [...tmpContainer.children].find((el) => el instanceof HTMLElement);
+
+		if (!element) {
+			throw new Error('No HTMLElement in the fragment.');
+		}
 
 		return {
 			element,

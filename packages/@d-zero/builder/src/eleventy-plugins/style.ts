@@ -1,3 +1,7 @@
+import type { EleventyPlugin } from '../eleventy.types.js';
+import type { EleventyGlobalData } from '../types.js';
+import type { Options as HMTOptions } from 'html-minifier-terser';
+
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -5,16 +9,17 @@ import { build } from 'vite';
 
 const INLINE_SCRIPT_FILE_DELETE_ID = '::inline-script::';
 
-/**
- * @param {import("@11ty/eleventy").UserConfig} eleventyConfig
- * @param {Object} pluginConfig
- * @param {string} pluginConfig.tmpDir
- * @param {string} pluginConfig.banner
- * @param {boolean} pluginConfig.minify
- * @param {Record<string, string>} pluginConfig.alias
- * @returns
- */
-export function stylePlugin(eleventyConfig, pluginConfig) {
+type StylePluginConfig = {
+	tmpDir: string;
+	banner: string;
+	minify?: HMTOptions['minifyCSS'];
+	alias: Record<string, string>;
+};
+
+export const stylePlugin: EleventyPlugin<StylePluginConfig, EleventyGlobalData> = (
+	eleventyConfig,
+	pluginConfig,
+) => {
 	eleventyConfig.addTemplateFormats('scss');
 
 	eleventyConfig.addExtension('scss', {
@@ -31,7 +36,7 @@ export function stylePlugin(eleventyConfig, pluginConfig) {
 
 				await fs.mkdir(outDir, { recursive: true });
 
-				const cssMinify = pluginConfig.minify ?? true;
+				const cssMinify = !!pluginConfig.minify;
 
 				await fs.writeFile(entryJS, `import '${absInputPath}';`, 'utf8');
 
@@ -42,7 +47,6 @@ export function stylePlugin(eleventyConfig, pluginConfig) {
 						cssMinify,
 						target: 'modules',
 						polyfillModulePreload: false,
-						mode: 'production',
 						sourcemap: false,
 						cssCodeSplit: false,
 						outDir,
@@ -50,10 +54,11 @@ export function stylePlugin(eleventyConfig, pluginConfig) {
 							input: entryJS,
 							output: {
 								assetFileNames: ({ name }) => {
-									if (name.endsWith('.css')) {
+									if (name?.endsWith('.css')) {
 										name = path.basename(tmpPath);
 										return `${name}`;
 									}
+									return '[name]-[hash][extname]';
 								},
 								chunkFileNames: () => INLINE_SCRIPT_FILE_DELETE_ID,
 								entryFileNames: () => INLINE_SCRIPT_FILE_DELETE_ID,
@@ -78,4 +83,4 @@ export function stylePlugin(eleventyConfig, pluginConfig) {
 			force: true,
 		});
 	});
-}
+};

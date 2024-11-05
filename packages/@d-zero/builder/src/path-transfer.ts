@@ -1,21 +1,8 @@
+import type { HtmlFile, PathFormat } from './types.js';
+
 import path from 'node:path';
 
-/**
- * @typedef {Object} HtmlFile
- * @property {string} inputPath
- * @property {string} inputRoot
- * @property {string} outputRoot
- */
-
-/**
- * @typedef {"file" | "directory" | "preserve"} PathFormat
- */
-
-/**
- * @param {HtmlFile} htmlFile
- * @param {PathFormat} pathFormat
- */
-export function pathTransfer(htmlFile, pathFormat) {
+export function pathTransfer(htmlFile: HtmlFile, pathFormat: PathFormat) {
 	const inputRoot = htmlFile.inputRoot ?? process.cwd();
 	const outputRoot = htmlFile.outputRoot ?? inputRoot ?? process.cwd();
 

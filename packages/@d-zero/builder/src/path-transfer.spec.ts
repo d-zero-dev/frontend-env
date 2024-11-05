@@ -1,16 +1,13 @@
+import type { PathFormat } from './types.js';
+
 import { describe, test, expect } from 'vitest';
 
-import { pathTransfer } from './path-transfer.mjs';
+import { pathTransfer } from './path-transfer.js';
 
 describe('pathTransfer', () => {
 	const HTML_CONTENT = '<html><head></head><body></body></html>';
 
-	/**
-	 * @param {string[]} paths
-	 * @param {"file" | "directory" | "preserve"} format
-	 * @returns {Promise<string[]>}
-	 */
-	function _(paths, pathFormat = 'preserve') {
+	function _(paths: string[], pathFormat: PathFormat = 'preserve'): string[] {
 		return paths.map((path) => {
 			const outputPath = pathTransfer(
 				{

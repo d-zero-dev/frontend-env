@@ -1,3 +1,5 @@
+import type { ImageSizesOptions, ImageSize as Size } from './types.js';
+
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { promisify } from 'node:util';
@@ -5,40 +7,19 @@ import { promisify } from 'node:util';
 import { Cache } from '@d-zero/shared/cache';
 import ImageSize from 'image-size';
 
-/**
- * @typedef {Object} Size
- * @property {number} width
- * @property {number} height
- */
+// @ts-ignore
+const sizeOf: (filePath: string) => Promise<Size> = promisify(ImageSize);
 
-/**
- * @typedef {Object} ImageSizesOptions
- * @property {string} rootDir
- * @property {string} selector
- * @property {string[]} ext
- */
-
-const sizeOf = promisify(ImageSize);
-
-/**
- *
- * @param {HTMLElement} documentElement
- * @param {ImageSizesOptions} options
- * @returns
- */
 export async function imageSizes(
-	documentElement,
+	documentElement: HTMLElement,
 	{
 		rootDir,
 		selector,
 		// https://github.com/image-size/image-size?tab=readme-ov-file#supported-formats
 		ext = ['png', 'jpg', 'jpeg', 'webp', 'avif', 'svg'],
-	},
+	}: ImageSizesOptions,
 ) {
-	/**
-	 * @type {Cache<Size>}
-	 */
-	const cache = new Cache('@d-zero/builder/image-sizes');
+	const cache = new Cache<Size>('@d-zero/builder/image-sizes');
 
 	const images = [...documentElement.querySelectorAll('img, picture > source')];
 
@@ -59,7 +40,7 @@ export async function imageSizes(
 			continue;
 		}
 
-		const filePath = path.join(rootDir, ...src.split('/'));
+		const filePath = path.join(rootDir ?? '', ...src.split('/'));
 		const stats = await fs.stat(filePath).catch(() => null);
 
 		if (!stats) {
@@ -74,8 +55,8 @@ export async function imageSizes(
 
 		if (cached) {
 			// Update the DOM
-			img.setAttribute('width', cached.width);
-			img.setAttribute('height', cached.height);
+			img.setAttribute('width', `${cached.width}`);
+			img.setAttribute('height', `${cached.height}`);
 			continue;
 		}
 
@@ -85,8 +66,8 @@ export async function imageSizes(
 			continue;
 		}
 
-		img.setAttribute('width', imageSize.width);
-		img.setAttribute('height', imageSize.height);
+		img.setAttribute('width', `${imageSize.width}`);
+		img.setAttribute('height', `${imageSize.height}`);
 
 		await cache.store(cacheKey, imageSize);
 	}

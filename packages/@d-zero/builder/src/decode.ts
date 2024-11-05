@@ -1,18 +1,13 @@
 import iconv from 'iconv-lite';
 
-import { reShiftJIS } from './fn/charset.mjs';
+import { reShiftJIS } from './charset.js';
 
 const reCharsetShiftJIS = new RegExp(
 	'charset\\s*=\\s*("|\')\\s*' + reShiftJIS.source + '\\s*\\1',
 	'i',
 );
 
-/**
- *
- * @param {Buffer} body
- * @param {boolean} decoding
- */
-export function decode(body, decoding) {
+export function decode(body: Buffer, decoding: boolean) {
 	let html = body.toString('utf8');
 
 	if (decoding && reCharsetShiftJIS.test(html)) {

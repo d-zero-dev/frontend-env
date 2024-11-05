@@ -1,17 +1,19 @@
+import type { OutputTableRow, PathFormat } from './types.js';
+
 import path from 'node:path';
 
 import c from 'cli-color';
 
-/**
- * @param {string[][]} outputLogTable
- */
-export function log(outputLogTable, pathFormat = 'preserve') {
+export function log(
+	outputLogTable: OutputTableRow[],
+	pathFormat: PathFormat = 'preserve',
+) {
 	process.stdout.write(
 		`${c.bold.blue('File Transfer')} ${c.bgBlue(` ${pathFormat} `)}:\n`,
 	);
 	process.stdout.write(
 		c.columns(
-			outputLogTable.map((row, i) => {
+			outputLogTable.map((row) => {
 				const [origin, from, to] = row;
 				const fromDir = path.dirname(from);
 				const toDir = path.dirname(to);

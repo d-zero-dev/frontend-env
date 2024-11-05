@@ -3,12 +3,15 @@ import path from 'node:path';
 
 import c from 'cli-color';
 
-/**
- * @param {Object} options
- * @param {string} options.output
- * @returns
- */
-export function pathTransformRouter(options) {
+type PathTransformRouterOptions = {
+	output: string;
+};
+
+type PathTransformRouter = (args: { url: URL }) => Promise<{ body: Buffer } | void>;
+
+export function pathTransformRouter(
+	options: PathTransformRouterOptions,
+): PathTransformRouter {
 	return async ({ url }) => {
 		if (!url.pathname.endsWith('/') && !url.pathname.endsWith('.html')) {
 			return;
@@ -76,7 +79,7 @@ export function pathTransformRouter(options) {
 	};
 }
 
-function _(url, found) {
+function _(url: string, found: string) {
 	process.stdout.write(
 		[c.black('[11ty]'), c.green(url), c.blue(`Found: ${found}`), '\n'].join(' '),
 	);

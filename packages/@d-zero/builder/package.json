@@ -11,11 +11,11 @@
 	},
 	"type": "module",
 	"bin": {
-		"dzbuild": "./cli.mjs"
+		"dzbuild": "./dist/cli.js"
 	},
 	"exports": {
 		"./11ty": {
-			"import": "./eleventy.config.mjs"
+			"import": "./dist/eleventy.config.js"
 		}
 	},
 	"scripts": {

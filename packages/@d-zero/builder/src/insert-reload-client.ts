@@ -3,14 +3,9 @@ const insert = `<script type="module" src="/.11ty/reload-client.js"></script></h
 const searchBuf = Buffer.from(search);
 const insertBuf = Buffer.from(insert);
 
-/**
- *
- * @param {Buffer} content
- */
-export function insertReloadClient(content) {
+export function insertReloadClient(content: Buffer): Buffer {
 	const index = content.indexOf(searchBuf);
 	if (index !== -1) {
-		// content.set(insertBuf, index);
 		const head = content.subarray(0, index);
 		const tail = content.subarray(index + searchBuf.length);
 		return Buffer.concat([head, insertBuf, tail]);

@@ -1,27 +1,23 @@
+import type { Eleventy } from './eleventy.types.js';
+import type { EleventyGlobalData, OutputTableRow } from './types.js';
+
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { getHtmlFiles } from './get-html-files.mjs';
-import { log } from './log.mjs';
-import { pathTransfer } from './path-transfer.mjs';
+import { getHtmlFiles } from './get-html-files.js';
+import { log } from './log.js';
+import { pathTransfer } from './path-transfer.js';
 
-/**
- *
- * @param {import('@11ty/eleventy')} elev
- */
-export async function build(elev) {
+export async function build(elev: Eleventy<EleventyGlobalData>) {
 	const results = await elev.write();
 
-	const pathFormat = elev.config?.globalData?.pathFormat ?? 'preserve';
+	const pathFormat = elev.config.globalData?.pathFormat ?? 'preserve';
 	const inputDir = elev.config.dir.input;
 	const outDir = elev.config.dir.output;
 
 	const htmlFiles = getHtmlFiles(results);
 
-	/**
-	 * @type {string[][]}
-	 */
-	const outputLogTable = [];
+	const outputLogTable: OutputTableRow[] = [];
 
 	for (const htmlFile of htmlFiles) {
 		const outputPath = pathTransfer(

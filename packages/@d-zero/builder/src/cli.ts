@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
+// @ts-ignore
 import Eleventy from '@11ty/eleventy';
 
-import { build } from './fn/build.mjs';
+import { build } from './build.js';
 
 const elev = new Eleventy(
 	undefined, // inputDir is set from the Eleventy config file

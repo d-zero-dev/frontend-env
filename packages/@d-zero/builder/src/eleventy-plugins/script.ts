@@ -1,22 +1,26 @@
+import type { EleventyExtensionCompiler, EleventyPlugin } from '../eleventy.types.js';
+import type { EleventyGlobalData } from '../types.js';
+
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
 import esbuild from 'esbuild';
 
-/**
- * @param {import("@11ty/eleventy").UserConfig} eleventyConfig
- * @param {Object} pluginConfig
- * @param {string} pluginConfig.tmpDir
- * @param {string} pluginConfig.banner
- * @returns
- */
-export function scriptPlugin(eleventyConfig, pluginConfig) {
+type ScriptPluginConfig = {
+	tmpDir: string;
+	banner: string;
+};
+
+export const scriptPlugin: EleventyPlugin<ScriptPluginConfig, EleventyGlobalData> = (
+	eleventyConfig,
+	pluginConfig,
+) => {
 	eleventyConfig.addTemplateFormats('js');
 	eleventyConfig.addTemplateFormats('cjs');
 	eleventyConfig.addTemplateFormats('mjs');
 	eleventyConfig.addTemplateFormats('ts');
 
-	const settings = {
+	const settings: EleventyExtensionCompiler = {
 		outputFileExtension: 'js',
 		compile(_, inputPath) {
 			return async () => {
@@ -27,7 +31,7 @@ export function scriptPlugin(eleventyConfig, pluginConfig) {
 					bundle: true,
 					alias: eleventyConfig.globalData.alias,
 					outfile: tmpPath,
-					minify: eleventyConfig.globalData?.minifyJS ?? true,
+					minify: !!eleventyConfig.globalData.minifier?.minifyJS,
 					charset: 'utf8',
 					banner: {
 						js: pluginConfig.banner,
@@ -51,4 +55,4 @@ export function scriptPlugin(eleventyConfig, pluginConfig) {
 			force: true,
 		});
 	});
-}
+};
