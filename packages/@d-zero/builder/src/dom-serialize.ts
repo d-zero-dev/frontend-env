@@ -8,27 +8,24 @@ export async function domSerialize(
 
 	await hook(dom.element);
 
-	if (dom.isFragment) {
-		return dom.element.outerHTML;
-	}
-
 	return dom.element.outerHTML;
 }
 
 function getDOM(html: string): {
 	element: HTMLElement;
 	document: Document;
-	dom: JSDOM | null;
 	isFragment: boolean;
 } {
 	const isFragment = !/^<html(?:\s|>)|^<!doctype\s/i.test(html.trim());
 
 	if (isFragment) {
-		const fragment = JSDOM.fragment(html);
-		const document = fragment.ownerDocument;
+		const window = new JSDOM('').window;
+		const document = window.document;
 		const tmpContainer = document.createElement('div');
-		tmpContainer.append(fragment);
-		const element = [...tmpContainer.children].find((el) => el instanceof HTMLElement);
+		tmpContainer.insertAdjacentHTML('beforeend', html);
+		const element = [...tmpContainer.children].find(
+			(el) => el instanceof window.HTMLElement,
+		);
 
 		if (!element) {
 			throw new Error('No HTMLElement in the fragment.');
@@ -37,7 +34,6 @@ function getDOM(html: string): {
 		return {
 			element,
 			document,
-			dom: null,
 			isFragment: true,
 		};
 	}
@@ -47,7 +43,6 @@ function getDOM(html: string): {
 	return {
 		element: dom.window.document.documentElement,
 		document: dom.window.document,
-		dom,
 		isFragment: false,
 	};
 }
