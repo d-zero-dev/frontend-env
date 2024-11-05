@@ -26,7 +26,7 @@ export function pathTransformRouter(
 				const filePath = path.join(origin, 'index.html');
 				const content = await fs.readFile(filePath).catch(() => null);
 				if (content) {
-					_(`${url.pathname}`, filePath);
+					_(url.pathname, filePath, 'Honesty');
 					return {
 						body: content,
 					};
@@ -39,7 +39,7 @@ export function pathTransformRouter(
 				const filePath = origin + '.html';
 				const content = await fs.readFile(filePath).catch(() => null);
 				if (content) {
-					_(`${url.pathname}`, filePath);
+					_(url.pathname, filePath, 'Failback');
 					return {
 						body: content,
 					};
@@ -56,7 +56,7 @@ export function pathTransformRouter(
 				const filePath = path.join(dir, name, 'index.html');
 				const content = await fs.readFile(filePath).catch(() => null);
 				if (content) {
-					_(`${url.pathname}`, filePath);
+					_(url.pathname, filePath, "11ty's Cool URL");
 					return {
 						body: content,
 					};
@@ -67,7 +67,7 @@ export function pathTransformRouter(
 			{
 				const content = await fs.readFile(origin).catch(() => null);
 				if (content) {
-					_(`${url.pathname}`, origin);
+					_(url.pathname, origin, 'Original path');
 					return {
 						body: content,
 					};
@@ -79,8 +79,14 @@ export function pathTransformRouter(
 	};
 }
 
-function _(url: string, found: string) {
+function _(url: string, found: string, type: string) {
 	process.stdout.write(
-		[c.black('[11ty]'), c.green(url), c.blue(`Found: ${found}`), '\n'].join(' '),
+		[
+			c.black('[11ty]'),
+			c.green(url),
+			c.blue(`Found: ${found}`),
+			c.bgMagenta(` ${type} `),
+			'\n',
+		].join(' '),
 	);
 }
