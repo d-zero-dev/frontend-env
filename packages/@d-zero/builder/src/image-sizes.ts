@@ -32,8 +32,9 @@ export async function imageSizes(
 
 		if (
 			!src ||
-			src.startsWith('data:') ||
-			src.startsWith('http') ||
+			src.startsWith('data://') ||
+			src.startsWith('http://') ||
+			src.startsWith('https://') ||
 			src.startsWith('//') ||
 			!ext.some((e) => src.endsWith(`.${e}`))
 		) {
