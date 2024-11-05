@@ -35,10 +35,12 @@
 	"devDependencies": {
 		"@d-zero/commitlint-config": "5.0.0-alpha.50",
 		"@d-zero/linters": "5.0.0-alpha.50",
+		"@d-zero/tsconfig": "0.4.0",
 		"husky": "9.1.6",
 		"lerna": "8.1.9",
 		"npm-run-all2": "7.0.1",
-		"vitest": "2.1.4"
+		"vitest": "2.1.4",
+		"typescript": "5.6.3"
 	},
 	"volta": {
 		"node": "22.11.0",

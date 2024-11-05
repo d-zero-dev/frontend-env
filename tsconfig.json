@@ -1,0 +1,4 @@
+{
+	"extends": ["@d-zero/tsconfig"],
+	"exclude": ["node_modules", "**/*.js", "**/*.mjs", "**/*.cjs", "**/*.d.ts"]
+}
