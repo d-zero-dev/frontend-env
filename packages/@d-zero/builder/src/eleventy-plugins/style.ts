@@ -36,7 +36,7 @@ export const stylePlugin: EleventyPlugin<StylePluginConfig, EleventyGlobalData> 
 
 				await fs.mkdir(outDir, { recursive: true });
 
-				const cssMinify = !!pluginConfig.minify;
+				const cssMinify = !!(pluginConfig.minify ?? true);
 
 				await fs.writeFile(entryJS, `import '${absInputPath}';`, 'utf8');
 

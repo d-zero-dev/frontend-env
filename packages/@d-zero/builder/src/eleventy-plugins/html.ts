@@ -14,7 +14,7 @@ import { imageSizes } from '../image-sizes.js';
 
 type HtmlPluginOptions = {
 	minifier?: HMTOptions;
-	imageSizes?: ImageSizesOptions;
+	imageSizes?: ImageSizesOptions | boolean;
 	prettier?: PrettierOptions | boolean;
 	lineBreak?: '\n' | '\r\n';
 	charset: string;
@@ -31,11 +31,13 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 
 		content = await domSerialize(content, async (documentElement) => {
 			// Hooks
-			if (pluginConfig?.imageSizes) {
+			if (pluginConfig?.imageSizes ?? true) {
+				const options =
+					typeof pluginConfig.imageSizes === 'object' ? pluginConfig.imageSizes : {};
 				const rootDir = path.resolve(eleventyConfig.dir.output);
 				await imageSizes(documentElement, {
 					rootDir,
-					...pluginConfig.imageSizes,
+					...options,
 				});
 			}
 		});

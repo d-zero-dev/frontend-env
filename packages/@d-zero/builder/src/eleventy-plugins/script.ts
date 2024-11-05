@@ -31,7 +31,7 @@ export const scriptPlugin: EleventyPlugin<ScriptPluginConfig, EleventyGlobalData
 					bundle: true,
 					alias: eleventyConfig.globalData.alias,
 					outfile: tmpPath,
-					minify: !!eleventyConfig.globalData.minifier?.minifyJS,
+					minify: !!(eleventyConfig.globalData.minifier?.minifyJS ?? true),
 					charset: 'utf8',
 					banner: {
 						js: pluginConfig.banner,
