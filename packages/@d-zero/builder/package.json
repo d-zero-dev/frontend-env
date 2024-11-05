@@ -18,6 +18,10 @@
 			"import": "./eleventy.config.mjs"
 		}
 	},
+	"scripts": {
+		"tsc": "tsc --project tsconfig.build.json",
+		"dev": "tsc --watch --project tsconfig.build.json"
+	},
 	"dependencies": {
 		"@11ty/eleventy": "3.0.0",
 		"@11ty/eleventy-plugin-pug": "1.0.0",
@@ -37,7 +41,12 @@
 		"vite": "5.4.10"
 	},
 	"devDependencies": {
+		"@types/cli-color": "2.0.6",
+		"@types/html-minifier-terser": "^7.0.2",
+		"@types/js-yaml": "4.0.9",
+		"@types/jsdom": "21.1.7",
 		"execa": "9.5.1",
+		"prettier": "3.3.3",
 		"strip-ansi": "7.1.0"
 	}
 }

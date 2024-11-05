@@ -2457,6 +2457,11 @@
   dependencies:
     "@types/babel-types" "*"
 
+"@types/cli-color@2.0.6":
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/@types/cli-color/-/cli-color-2.0.6.tgz#becc4b0c8509bbc938e7c3b2b7a0a8dd64691d08"
+  integrity sha512-uLK0/0dOYdkX8hNsezpYh1gc8eerbhf9bOKZ3e24sP67703mw9S14/yW6mSTatiaKO9v+mU/a1EVy4rOXXeZTA==
+
 "@types/conventional-commits-parser@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@types/conventional-commits-parser/-/conventional-commits-parser-5.0.0.tgz#8c9d23e0b415b24b91626d07017303755d542dc8"
@@ -2501,6 +2506,11 @@
   dependencies:
     "@types/unist" "^2"
 
+"@types/html-minifier-terser@^7.0.2":
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/@types/html-minifier-terser/-/html-minifier-terser-7.0.2.tgz#2290fa13e6e49b6cc0ab0afa2d6cf6a66feedb48"
+  integrity sha512-mm2HqV22l8lFQh4r2oSsOEVea+m0qqxEmwpc9kC1p/XzmjLWrReR9D/GRs8Pex2NX/imyEH9c5IU/7tMBQCHOA==
+
 "@types/inquirer@^9.0.3":
   version "9.0.7"
   resolved "https://registry.yarnpkg.com/@types/inquirer/-/inquirer-9.0.7.tgz#61bb8d0e42f038b9a1738b08fba7fa98ad9b4b24"
@@ -2508,6 +2518,20 @@
   dependencies:
     "@types/through" "*"
     rxjs "^7.2.0"
+
+"@types/js-yaml@4.0.9":
+  version "4.0.9"
+  resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-4.0.9.tgz#cd82382c4f902fed9691a2ed79ec68c5898af4c2"
+  integrity sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==
+
+"@types/jsdom@21.1.7":
+  version "21.1.7"
+  resolved "https://registry.yarnpkg.com/@types/jsdom/-/jsdom-21.1.7.tgz#9edcb09e0b07ce876e7833922d3274149c898cfa"
+  integrity sha512-yOriVnggzrnQ3a9OKOCxaVuSug3w3/SbOj5i7VwXWZEyUNl3bLF9V3MfxGbZKuwqJOQyRfqXyROBB1CoZLFWzA==
+  dependencies:
+    "@types/node" "*"
+    "@types/tough-cookie" "*"
+    parse5 "^7.0.0"
 
 "@types/json5@^0.0.29":
   version "0.0.29"
@@ -2579,6 +2603,11 @@
   integrity sha512-HsJ+z3QuETzP3cswwtzt2vEIiHBk/dCcHGhbmG5X3ecnwFD/lPrMpliGXxSCg03L9AhrdwA4Oz/qfspkDW+xGQ==
   dependencies:
     "@types/node" "*"
+
+"@types/tough-cookie@*":
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/@types/tough-cookie/-/tough-cookie-4.0.5.tgz#cb6e2a691b70cb177c6e3ae9c1d2e8b2ea8cd304"
+  integrity sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==
 
 "@types/unist@^2", "@types/unist@^2.0.0", "@types/unist@^2.0.2":
   version "2.0.11"
@@ -9275,7 +9304,7 @@ parse-url@^8.1.0:
   dependencies:
     parse-path "^7.0.0"
 
-parse5@7.2.1, parse5@^7.1.2:
+parse5@7.2.1, parse5@^7.0.0, parse5@^7.1.2:
   version "7.2.1"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-7.2.1.tgz#8928f55915e6125f430cc44309765bf17556a33a"
   integrity sha512-BuBYQYlv1ckiPdQi/ohiivi9Sagc9JG+Ozs0r7b/0iK3sKmrb0b9FdWdBbOdx6hBCM/F9Ir82ofnBhtZOjCRPQ==

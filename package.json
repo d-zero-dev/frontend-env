@@ -7,6 +7,8 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
+		"tsc": "lerna run tsc",
+		"dev": "lerna run dev",
 		"test": "vitest run --test-timeout 60000",
 		"lint": "run-s lint:eslint lint:prettier lint:textlint lint:cspell",
 		"lint:cspell": "cspell --no-progress --show-suggestions \"**\"",
