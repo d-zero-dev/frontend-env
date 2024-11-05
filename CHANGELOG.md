@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.28](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.27...v5.0.0-alpha.28) (2024-11-05)
+
+### Bug Fixes
+
+- **builder:** fix condition of external URL ([a104747](https://github.com/d-zero-dev/frontend-env/commit/a1047470ad8b1b905b829115e03a52580331cf48))
+- **builder:** fix default boolean of options ([7e1360f](https://github.com/d-zero-dev/frontend-env/commit/7e1360f1d6d27d20254095dacd1d6293dd461d12))
+- **builder:** fix DOM serialization ([234f955](https://github.com/d-zero-dev/frontend-env/commit/234f9558f6b7a30b550a37bb858ef61835b46c2b))
+- **builder:** support 11ty generated path on dev server ([b61cb2d](https://github.com/d-zero-dev/frontend-env/commit/b61cb2d6b7ea186e24c72573b246439321845ed2))
+- **repo:** fix textlint command ([192818d](https://github.com/d-zero-dev/frontend-env/commit/192818d130908a0f1577398d9a0afef4284fba67))
+
 # [5.0.0-alpha.27](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.26...v5.0.0-alpha.27) (2024-10-31)
 
 ### Features
