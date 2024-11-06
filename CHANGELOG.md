@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.31](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.30...v5.0.0-alpha.31) (2024-11-06)
+
+### Bug Fixes
+
+- **builder:** remove `console.log` ([df89cd2](https://github.com/d-zero-dev/frontend-env/commit/df89cd27fb6f7b11a7b1c7898e686afe5935ec7d))
+
 # [5.0.0-alpha.30](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.29...v5.0.0-alpha.30) (2024-11-06)
 
 ### Features
