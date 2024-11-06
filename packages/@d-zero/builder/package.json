@@ -22,6 +22,10 @@
 		"tsc": "tsc --project tsconfig.build.json",
 		"dev": "tsc --watch --project tsconfig.build.json"
 	},
+	"files": [
+		"dist",
+		"bin"
+	],
 	"dependencies": {
 		"@11ty/eleventy": "3.0.0",
 		"@11ty/eleventy-plugin-pug": "1.0.0",
