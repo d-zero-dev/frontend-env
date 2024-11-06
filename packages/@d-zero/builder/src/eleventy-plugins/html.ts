@@ -1,5 +1,5 @@
 import type { EleventyPlugin } from '../eleventy.types.js';
-import type { EleventyGlobalData, ImageSizesOptions } from '../types.js';
+import type { Charset, EleventyGlobalData, ImageSizesOptions } from '../types.js';
 import type { Options as HMTOptions } from 'html-minifier-terser';
 import type { Options as PrettierOptions } from 'prettier';
 
@@ -17,7 +17,7 @@ type HtmlPluginOptions = {
 	imageSizes?: ImageSizesOptions | boolean;
 	prettier?: PrettierOptions | boolean;
 	lineBreak?: '\n' | '\r\n';
-	charset: string;
+	charset: Charset;
 };
 
 export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> = (

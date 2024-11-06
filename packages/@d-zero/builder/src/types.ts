@@ -15,11 +15,23 @@ export type DZBuilderConfig = {
 	prettier?: boolean | PrettierOptions;
 	minifier?: HMTOptions;
 	lineBreak?: '\n' | '\r\n';
-	charset?: string;
+	charset?: Charset;
 	pathFormat?: PathFormat;
 	autoDecode?: boolean;
 	ssi?: Record<string, SSIOption>;
 };
+
+export type CharsetList =
+	| 'utf-8' // eslint-disable-line unicorn/text-encoding-identifier-case
+	| 'utf8'
+	| 'cp932'
+	| 'shift_jis'
+	| 'shift-jis'
+	| 's-jis'
+	| 's_jis'
+	| 'sjis';
+
+export type Charset = CharsetList | Uppercase<CharsetList>;
 
 export type PathFormat = 'file' | 'directory' | 'preserve';
 
@@ -31,7 +43,7 @@ export type HtmlFile = {
 };
 
 export type SSIOption = {
-	encoding: 'CP932' | 'utf8';
+	encoding: Charset;
 };
 
 export type ImageSize = {
