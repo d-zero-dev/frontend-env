@@ -125,8 +125,6 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			return iconv.encode(content, 'CP932');
 		}
 
-		console.log({ outputPath, charset, content });
-
 		return content;
 	});
 };
