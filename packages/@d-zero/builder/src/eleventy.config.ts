@@ -3,14 +3,13 @@ import type { DZBuilderConfig, EleventyGlobalData } from './types.js';
 
 import path from 'node:path';
 
-// @ts-ignore
-import pugPlugin from '@11ty/eleventy-plugin-pug';
 import dayjs from 'dayjs';
 import { load as yamlLoad } from 'js-yaml';
 
 import { decode } from './decode.js';
 import { banner } from './defines.js';
 import { htmlPlugin } from './eleventy-plugins/html.js';
+import { pugPlugin } from './eleventy-plugins/pug.js';
 import { reportPlugin } from './eleventy-plugins/report.js';
 import { scriptPlugin } from './eleventy-plugins/script.js';
 import { stylePlugin } from './eleventy-plugins/style.js';
@@ -49,8 +48,6 @@ export default function (
 
 	eleventyConfig.addPlugin(pugPlugin, {
 		pretty: true,
-		doctype: 'html',
-		filters: eleventyConfig.javascript.filters,
 	});
 
 	eleventyConfig.addPlugin(htmlPlugin, {

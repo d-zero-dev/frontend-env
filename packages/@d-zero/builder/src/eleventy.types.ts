@@ -41,7 +41,46 @@ export type EleventyTransformContext = {
 
 export type EleventyExtensionCompiler = {
 	outputFileExtension?: string;
-	compile: (content: string, inputPath: string) => () => Promise<string>;
+	compile: (
+		content: string,
+		inputPath: string,
+	) => (context: EleventyExtensionCompilerContext) => Promise<string> | string;
+};
+
+export type EleventyExtensionCompilerContext = {
+	eleventy: {
+		version: string;
+		generator: string;
+		env: {
+			source: string;
+			runMode: string;
+			config: string;
+			root: string;
+		};
+		directories: {
+			input: string;
+			inputFile?: string;
+			inputGlob?: string;
+			data: string;
+			includes: string;
+			layouts: string;
+			output: string;
+		};
+	};
+	pkg: Record<string, unknown>;
+	page: {
+		inputPath: string;
+		fileSlug: string;
+		filePathStem: string;
+		outputFileExtension: string;
+		templateSyntax: string;
+		date: Date;
+		rawInput: string;
+		url: string;
+		outputPath: string;
+	};
+	collections: Record<string, unknown>;
+	filters: Record<string, Function>; // eslint-disable-line @typescript-eslint/no-unsafe-function-type
 };
 
 export type EleventyPlugin<
