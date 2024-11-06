@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.30](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.29...v5.0.0-alpha.30) (2024-11-06)
+
+### Features
+
+- **builder:** add `charset.overrides` option ([9afeaaf](https://github.com/d-zero-dev/frontend-env/commit/9afeaaf1591a4f01e11ea82b3344ad118c4d5a4d))
+- **builder:** expose declaration type files ([f17e294](https://github.com/d-zero-dev/frontend-env/commit/f17e294223a8adca501dc48155f34dfb76f83176))
+- **builder:** improve `charset` type ([741d080](https://github.com/d-zero-dev/frontend-env/commit/741d080da6af3d018ae6a277fe7cf770339ef948))
+- **builder:** use custom Pug extension instead of `@11ty/eleventy-plugin-pug` ([df94f82](https://github.com/d-zero-dev/frontend-env/commit/df94f822e551adf770f1d6011db92bdf47794cf4))
+
 # [5.0.0-alpha.29](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.28...v5.0.0-alpha.29) (2024-11-06)
 
 ### Bug Fixes
