@@ -1,5 +1,10 @@
 import type { EleventyPlugin } from '../eleventy.types.js';
-import type { Charset, EleventyGlobalData, ImageSizesOptions } from '../types.js';
+import type {
+	Charset,
+	CharsetOptions,
+	EleventyGlobalData,
+	ImageSizesOptions,
+} from '../types.js';
 import type { Options as HMTOptions } from 'html-minifier-terser';
 import type { Options as PrettierOptions } from 'prettier';
 
@@ -7,17 +12,20 @@ import path from 'node:path';
 
 import { minify } from 'html-minifier-terser';
 import iconv from 'iconv-lite';
+import { minimatch } from 'minimatch';
 
 import { isShiftJIS } from '../charset.js';
 import { domSerialize } from '../dom-serialize.js';
 import { imageSizes } from '../image-sizes.js';
+import { pathTransfer } from '../path-transfer.js';
 
 type HtmlPluginOptions = {
 	minifier?: HMTOptions;
 	imageSizes?: ImageSizesOptions | boolean;
 	prettier?: PrettierOptions | boolean;
 	lineBreak?: '\n' | '\r\n';
-	charset: Charset;
+	charset?: Charset | CharsetOptions;
+	isServe?: boolean;
 };
 
 export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> = (
@@ -25,9 +33,22 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 	pluginConfig,
 ) => {
 	eleventyConfig.addTransform('html', async function (content) {
-		if (!(this.page.outputPath ?? '').endsWith('.html')) {
+		if (!this.page.inputPath || !(this.page.outputPath ?? '').endsWith('.html')) {
 			return content;
 		}
+
+		const transferred = pathTransfer(
+			{
+				inputPath: this.page.inputPath,
+			},
+			eleventyConfig.globalData.pathFormat ?? 'preserve',
+		);
+
+		const outputPath =
+			'/' +
+			path
+				.relative(path.join(process.cwd(), eleventyConfig.dir.input), transferred)
+				.replaceAll(path.sep, '/');
 
 		content = await domSerialize(content, async (documentElement) => {
 			// Hooks
@@ -74,7 +95,24 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			content = content.replaceAll(/\r?\n/g, pluginConfig.lineBreak);
 		}
 
-		const charset = pluginConfig?.charset.toLowerCase().trim();
+		if (pluginConfig.isServe) {
+			return content;
+		}
+
+		let charset =
+			typeof pluginConfig.charset === 'string'
+				? pluginConfig.charset
+				: (pluginConfig.charset?.encoding ?? 'utf8');
+
+		if (typeof pluginConfig.charset === 'object') {
+			const overrides = pluginConfig.charset.overrides ?? [];
+			for (const override of overrides) {
+				if (override.paths.some((pattern) => minimatch(outputPath, pattern))) {
+					charset = override.encoding;
+				}
+			}
+		}
+
 		if (charset && isShiftJIS(charset)) {
 			content = content
 				// Change charset
@@ -86,6 +124,8 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 
 			return iconv.encode(content, 'CP932');
 		}
+
+		console.log({ outputPath, charset, content });
 
 		return content;
 	});

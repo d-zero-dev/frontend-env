@@ -28,8 +28,6 @@ export default function (
 	const outputJsDir = options.outputJsDir ?? 'js';
 	const outputImgDir = options.outputImgDir ?? 'img';
 
-	const charset = isServe ? 'utf8' : (options.charset ?? 'utf8');
-
 	const input = '__assets/htdocs';
 	const output = 'htdocs';
 	const absInput = path.resolve(input);
@@ -69,7 +67,8 @@ export default function (
 		prettier: options.prettier,
 		lineBreak: options.lineBreak,
 		imageSizes: options.imageSizes,
-		charset,
+		charset: options.charset,
+		isServe,
 	});
 
 	eleventyConfig.addPlugin(stylePlugin, {

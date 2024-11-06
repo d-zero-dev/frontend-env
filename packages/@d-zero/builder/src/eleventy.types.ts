@@ -34,9 +34,11 @@ export type EleventyConfig<G extends Record<string, unknown> | void = void> = {
 };
 
 export type EleventyTransformContext = {
-	page: {
-		outputPath?: string;
-	};
+	inputPath: string;
+	outputPath: string;
+	url: string;
+	page: EleventyPage;
+	baseHref?: string;
 };
 
 export type EleventyExtensionCompiler = {
@@ -68,19 +70,21 @@ export type EleventyExtensionCompilerContext = {
 		};
 	};
 	pkg: Record<string, unknown>;
-	page: {
-		inputPath: string;
-		fileSlug: string;
-		filePathStem: string;
-		outputFileExtension: string;
-		templateSyntax: string;
-		date: Date;
-		rawInput: string;
-		url: string;
-		outputPath: string;
-	};
+	page: EleventyPage;
 	collections: Record<string, unknown>;
 	filters: Record<string, Function>; // eslint-disable-line @typescript-eslint/no-unsafe-function-type
+};
+
+export type EleventyPage = {
+	inputPath: string;
+	fileSlug: string;
+	filePathStem: string;
+	outputFileExtension: string;
+	templateSyntax: string;
+	date: Date;
+	rawInput: string;
+	url: string;
+	outputPath: string;
 };
 
 export type EleventyPlugin<

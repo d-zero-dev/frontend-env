@@ -15,7 +15,7 @@ export type DZBuilderConfig = {
 	prettier?: boolean | PrettierOptions;
 	minifier?: HMTOptions;
 	lineBreak?: '\n' | '\r\n';
-	charset?: Charset;
+	charset?: Charset | CharsetOptions;
 	pathFormat?: PathFormat;
 	autoDecode?: boolean;
 	ssi?: Record<string, SSIOption>;
@@ -32,6 +32,16 @@ export type CharsetList =
 	| 'sjis';
 
 export type Charset = CharsetList | Uppercase<CharsetList>;
+
+export type CharsetOptions = {
+	encoding: Charset;
+	overrides?: CharsetOverride[];
+};
+
+export type CharsetOverride = {
+	paths: string[];
+	encoding: Charset;
+};
 
 export type PathFormat = 'file' | 'directory' | 'preserve';
 
