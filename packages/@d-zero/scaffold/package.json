@@ -41,7 +41,7 @@
 		"@d-zero/linters": "5.0.0-alpha.50",
 		"@d-zero/postcss-config": "5.0.0-alpha.31",
 		"@d-zero/tsconfig": "0.4.0",
-		"@types/node": "22.9.1",
+		"@types/node": "22.9.2",
 		"cross-env": "7.0.3",
 		"husky": "9.1.7",
 		"npm-run-all2": "7.0.1",
