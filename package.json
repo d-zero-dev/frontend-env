@@ -41,7 +41,7 @@
 		"husky": "9.1.7",
 		"lerna": "8.1.9",
 		"npm-run-all2": "7.0.1",
-		"vitest": "2.1.7",
+		"vitest": "2.1.8",
 		"typescript": "5.7.2"
 	},
 	"volta": {
