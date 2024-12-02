@@ -47,7 +47,7 @@
 		"npm-run-all2": "7.0.1",
 		"sass": "1.81.0",
 		"typescript": "5.7.2",
-		"vitest": "2.1.6"
+		"vitest": "2.1.7"
 	},
 	"dependencies": {
 		"destyle.css": "4.0.1",
