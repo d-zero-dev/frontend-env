@@ -42,7 +42,7 @@
 		"minimatch": "10.0.1",
 		"prettier": "3.4.1",
 		"pug": "3.0.3",
-		"vite": "5.4.11"
+		"vite": "6.0.2"
 	},
 	"devDependencies": {
 		"@types/cli-color": "2.0.6",
