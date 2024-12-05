@@ -1,5 +1,5 @@
 {
-	"extends": ["../../.markuplintrc"],
+	"extends": ["../../markuplint.config.js"],
 	"nodeRules": [
 		{
 			"selector": "link, script",

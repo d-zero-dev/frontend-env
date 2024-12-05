@@ -1,4 +1,8 @@
 {
 	"import": ["@d-zero/cspell-config"],
-	"ignorePaths": ["./htdocs"]
+	"ignorePaths": ["./htdocs"],
+	"words": [
+		// Libraries
+		"splide"
+	]
 }
