@@ -53,6 +53,11 @@ export default function (eleventyConfig) {
 		// charset: 'shift_jis',
 
 		/**
+		 * Convert character entities
+		 */
+		// characterEntities: true
+
+		/**
 		 * Path format
 		 */
 		// pathFormat: 'directory',
