@@ -10,6 +10,7 @@ import type { Options as PrettierOptions } from 'prettier';
 
 import path from 'node:path';
 
+import { characterEntities } from 'character-entities';
 import { minify } from 'html-minifier-terser';
 import iconv from 'iconv-lite';
 import { minimatch } from 'minimatch';
@@ -25,6 +26,7 @@ type HtmlPluginOptions = {
 	prettier?: PrettierOptions | boolean;
 	lineBreak?: '\n' | '\r\n';
 	charset?: Charset | CharsetOptions;
+	characterEntities?: boolean;
 	isServe?: boolean;
 };
 
@@ -63,6 +65,23 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			}
 		});
 
+		if (pluginConfig?.characterEntities ?? false) {
+			for (const [entity, char] of Object.entries(characterEntities)) {
+				let _entity = entity;
+				const codePoint = char.codePointAt(0);
+				if (codePoint != null && codePoint < 127) {
+					continue;
+				}
+				if (
+					/^[A-Z]+$/i.test(entity) &&
+					characterEntities[entity.toLowerCase()] === char
+				) {
+					_entity = entity.toLowerCase();
+				}
+				content = content.replaceAll(char, `&${_entity};`);
+			}
+		}
+
 		if (
 			// Start with `<html` (For partial HTML)
 			/^<html(?:\s|>)/i.test(content.trim()) &&
@@ -74,7 +93,6 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 		}
 
 		if (pluginConfig?.prettier) {
-			// eslint-disable-next-line import/no-extraneous-dependencies
 			const prettier = await import('prettier');
 			const options =
 				typeof pluginConfig.prettier === 'object' ? pluginConfig.prettier : {};

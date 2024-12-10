@@ -73,6 +73,7 @@ export default function (
 		lineBreak: options.lineBreak,
 		imageSizes: options.imageSizes,
 		charset: options.charset,
+		characterEntities: options.characterEntities,
 		isServe,
 	});
 

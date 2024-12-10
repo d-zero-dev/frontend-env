@@ -30,6 +30,7 @@
 		"@11ty/eleventy": "3.0.0",
 		"@d-zero/shared": "0.6.0",
 		"cli-color": "2.0.4",
+		"character-entities": "2.0.2",
 		"dayjs": "1.11.13",
 		"esbuild": "0.24.0",
 		"filesize": "10.1.6",

@@ -16,6 +16,7 @@ export type DZBuilderConfig = {
 	minifier?: HMTOptions;
 	lineBreak?: '\n' | '\r\n';
 	charset?: Charset | CharsetOptions;
+	characterEntities?: boolean;
 	pathFormat?: PathFormat;
 	autoDecode?: boolean;
 	ssi?: Record<string, SSIOption>;
