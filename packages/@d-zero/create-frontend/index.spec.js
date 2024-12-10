@@ -5,6 +5,10 @@ import path from 'node:path';
 import { execa } from 'execa';
 import { describe, test, expect, beforeEach } from 'vitest';
 
+/**
+ *
+ * @param task
+ */
 function getName(task) {
 	return encodeURIComponent(`${task.suite.name}_${task.name}`.toLowerCase());
 }
@@ -14,6 +18,11 @@ beforeEach((ctx) => {
 });
 
 describe('CLI', () => {
+	/**
+	 *
+	 * @param dir
+	 * @param type
+	 */
 	async function cliTest(dir, type) {
 		const { stdout } = await execa(
 			'npx',

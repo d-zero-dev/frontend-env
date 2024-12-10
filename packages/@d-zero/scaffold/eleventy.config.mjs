@@ -2,6 +2,10 @@ import path from 'node:path';
 
 import eleventy from '@d-zero/builder/11ty';
 
+/**
+ *
+ * @param eleventyConfig
+ */
 export default function (eleventyConfig) {
 	return eleventy(eleventyConfig, {
 		/**
@@ -28,14 +32,12 @@ export default function (eleventyConfig) {
 
 		/**
 		 * Prettier options.
-		 *
 		 * @see https://prettier.io/docs/en/options
 		 */
 		// prettier: false,
 
 		/**
 		 * Minifier options.
-		 *
 		 * @see https://github.com/terser/html-minifier-terser?tab=readme-ov-file#options-quick-reference
 		 */
 		// minifier: { minifyJS: false },

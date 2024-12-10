@@ -224,6 +224,10 @@ export default function (plop) {
 	});
 }
 
+/**
+ *
+ * @param answers
+ */
 function answerToConfig(answers) {
 	const type = answers['__d-zero_project_type__'] ?? cli.flags.type;
 	const dest = answers['__d-zero_scaffold_dest__'] ?? cli.flags.dir;
