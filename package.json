@@ -12,7 +12,7 @@
 		"test": "vitest run --test-timeout 60000",
 		"lint": "run-s lint:eslint lint:prettier lint:textlint lint:cspell",
 		"lint:cspell": "cspell --no-progress --show-suggestions \"**\"",
-		"lint:eslint": "eslint --fix \"./*.{js,cjs,mjs}\"",
+		"lint:eslint": "eslint --fix \"./{*,**/*}.{js,cjs,mjs}\"",
 		"lint:prettier": "prettier --write \"./**/*.{js,jsx,ts,tsx,scss,pug,html}\"",
 		"lint:textlint": "textlint --fix \"./**/*.md\" && textlint \"./**/*.md\"",
 		"release": "lerna publish --exact --conventional-commits --conventional-graduate",
