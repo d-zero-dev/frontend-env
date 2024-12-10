@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.32](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.31...v5.0.0-alpha.32) (2024-12-10)
+
+### Features
+
+- **scaffold:** update eslint config to flat ([c423fab](https://github.com/d-zero-dev/frontend-env/commit/c423fabe7f0cbd1240ef533cb6e657aef94f6e7a))
+- **scaffold:** クラス名をMarkuplintに追加しやすいようにコンフィグファイルを改善 ([33dc4c8](https://github.com/d-zero-dev/frontend-env/commit/33dc4c89a4c02bc0a34779d7eda1ca14528de4eb))
+
 # [5.0.0-alpha.31](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.30...v5.0.0-alpha.31) (2024-11-06)
 
 **Note:** Version bump only for package @d-zero/scaffold
