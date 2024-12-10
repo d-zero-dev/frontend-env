@@ -50,6 +50,7 @@ export default function (eleventyConfig) {
 		minifier: { minifyJS: false },
 		lineBreak: '\r\n',
 		charset: 'shift_jis',
+		characterEntities: true,
 		pathFormat: 'directory',
 		autoDecode: true,
 		ssi: { '**/*': { encoding: 'shift_jis' } },
@@ -94,11 +95,11 @@ flowchart LR
 			subgraph #transformHTML["addTransform"]
 				direction TB
 
+                #characterEntities(["文字参照変換<br>(characterEntities)"])
 				#prettier(["整形<br>(prettier)"])
 				#minifier(["最適化<br>(minifier)"])
 				#lineBreak(["改行コード変換<br>(lineBreak)"])
 				#charset(["文字コード変換<br>(charset)"])
-
 
 				subgraph #domSerialize["domSerialize"]
 					direction TB
@@ -109,7 +110,7 @@ flowchart LR
 					#jsdom --> #imageSizes
 				end
 
-				#domSerialize --> #prettier --> #minifier --> #lineBreak --> #charset
+				#domSerialize --> #characterEntities --> #prettier --> #minifier --> #lineBreak --> #charset
 			end
 
 			subgraph #transpileCSS["addExtension"]
@@ -142,20 +143,21 @@ flowchart LR
 
 `addGlobalData`メソッドを利用することで、ビルド処理に必要な設定を上書きします。
 
-| オプションID   | 説明                                                 |
-| -------------- | ---------------------------------------------------- |
-| `alias`        | パスのエイリアスを設定します。                       |
-| `outputCssDir` | CSSの出力ディレクトリを設定します。                  |
-| `outputJsDir`  | JSの出力ディレクトリを設定します。                   |
-| `outputImgDir` | 画像の出力ディレクトリを設定します。                 |
-| `imageSizes`   | 画像のwidth/height属性を自動付与します。             |
-| `prettier`     | Prettierを有効にします。                             |
-| `minifier`     | Minifierを有効にします。                             |
-| `lineBreak`    | 改行コードを設定します。                             |
-| `charset`      | 文字コードを設定します。                             |
-| `pathFormat`   | パスのフォーマットを設定します。                     |
-| `autoDecode`   | 開発用ローカルサーバーの自動デコードを有効にします。 |
-| `ssi`          | 開発用ローカルサーバーのSSIの設定を行います。        |
+| オプションID        | 説明                                                 |
+| ------------------- | ---------------------------------------------------- |
+| `alias`             | パスのエイリアスを設定します。                       |
+| `outputCssDir`      | CSSの出力ディレクトリを設定します。                  |
+| `outputJsDir`       | JSの出力ディレクトリを設定します。                   |
+| `outputImgDir`      | 画像の出力ディレクトリを設定します。                 |
+| `imageSizes`        | 画像のwidth/height属性を自動付与します。             |
+| `prettier`          | Prettierを有効にします。                             |
+| `minifier`          | Minifierを有効にします。                             |
+| `lineBreak`         | 改行コードを設定します。                             |
+| `charset`           | 文字コードを設定します。                             |
+| `characterEntities` | 文字参照を変換します。                               |
+| `pathFormat`        | パスのフォーマットを設定します。                     |
+| `autoDecode`        | 開発用ローカルサーバーの自動デコードを有効にします。 |
+| `ssi`               | 開発用ローカルサーバーのSSIの設定を行います。        |
 
 詳細は[コーディングガイドライン](https://guidelines.d-zero.co.jp/html.html#builder)を確認してください。
 
