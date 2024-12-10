@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/builder",
-	"version": "5.0.0-alpha.32",
+	"version": "5.0.0-alpha.33",
 	"description": "Builder of D-ZERO Frontend",
 	"repository": "https://github.com/d-zero-dev/frontend-env.git",
 	"author": "D-ZERO Co., Ltd.",
@@ -29,8 +29,8 @@
 	"dependencies": {
 		"@11ty/eleventy": "3.0.0",
 		"@d-zero/shared": "0.6.0",
-		"cli-color": "2.0.4",
 		"character-entities": "2.0.2",
+		"cli-color": "2.0.4",
 		"dayjs": "1.11.13",
 		"esbuild": "0.24.0",
 		"filesize": "10.1.6",

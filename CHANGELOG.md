@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.33](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.32...v5.0.0-alpha.33) (2024-12-10)
+
+### Features
+
+- **builder:** add `characterEntities` option ([4db7534](https://github.com/d-zero-dev/frontend-env/commit/4db7534e439c13bcfad6577973667ee4cec6d653))
+
 # [5.0.0-alpha.32](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.31...v5.0.0-alpha.32) (2024-12-10)
 
 ### Features
