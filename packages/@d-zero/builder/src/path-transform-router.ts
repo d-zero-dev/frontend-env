@@ -9,6 +9,10 @@ type PathTransformRouterOptions = {
 
 type PathTransformRouter = (args: { url: URL }) => Promise<{ body: Buffer } | void>;
 
+/**
+ *
+ * @param options
+ */
 export function pathTransformRouter(
 	options: PathTransformRouterOptions,
 ): PathTransformRouter {
@@ -97,6 +101,12 @@ export function pathTransformRouter(
 	};
 }
 
+/**
+ *
+ * @param url
+ * @param found
+ * @param type
+ */
 function _(url: string, found: string, type: string) {
 	process.stdout.write(
 		[

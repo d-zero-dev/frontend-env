@@ -1,5 +1,9 @@
 import dayjs from 'dayjs';
 
+/**
+ *
+ * @param devMode
+ */
 export function banner(devMode = false) {
 	if (devMode) {
 		return `/*

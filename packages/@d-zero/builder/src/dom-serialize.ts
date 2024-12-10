@@ -1,5 +1,10 @@
 import { JSDOM } from 'jsdom';
 
+/**
+ *
+ * @param html
+ * @param hook
+ */
 export async function domSerialize(
 	html: string,
 	hook: (element: HTMLElement) => Promise<void> | void,
@@ -11,6 +16,10 @@ export async function domSerialize(
 	return dom.element.outerHTML;
 }
 
+/**
+ *
+ * @param html
+ */
 function getDOM(html: string): {
 	element: HTMLElement;
 	document: Document;

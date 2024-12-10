@@ -7,6 +7,11 @@ import { pathTransfer } from './path-transfer.js';
 describe('pathTransfer', () => {
 	const HTML_CONTENT = '<html><head></head><body></body></html>';
 
+	/**
+	 *
+	 * @param paths
+	 * @param pathFormat
+	 */
 	function _(paths: string[], pathFormat: PathFormat = 'preserve'): string[] {
 		return paths.map((path) => {
 			const outputPath = pathTransfer(

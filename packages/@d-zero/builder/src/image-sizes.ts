@@ -10,6 +10,14 @@ import ImageSize from 'image-size';
 // @ts-ignore
 const sizeOf: (filePath: string) => Promise<Size> = promisify(ImageSize);
 
+/**
+ *
+ * @param documentElement
+ * @param options
+ * @param options.rootDir
+ * @param options.selector
+ * @param options.ext
+ */
 export async function imageSizes(
 	documentElement: HTMLElement,
 	{

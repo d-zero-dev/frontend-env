@@ -19,6 +19,11 @@ import { ssi } from './ssi.js';
 
 const tempFolderName = path.resolve(process.cwd(), '.11ty');
 
+/**
+ *
+ * @param eleventyConfig
+ * @param options
+ */
 export default function (
 	eleventyConfig: EleventyConfig<EleventyGlobalData>,
 	options: DZBuilderConfig,

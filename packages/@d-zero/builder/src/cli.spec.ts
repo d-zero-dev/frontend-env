@@ -8,6 +8,9 @@ import { describe, test, expect, beforeAll, afterAll } from 'vitest';
 const scaffoldDir = path.resolve(process.cwd(), 'packages', '@d-zero', 'scaffold');
 const publishDir = path.resolve(scaffoldDir, 'htdocs');
 
+/**
+ *
+ */
 function cleanUp() {
 	fs.rmSync(publishDir, { recursive: true, force: true });
 }

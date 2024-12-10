@@ -3,6 +3,9 @@ import Eleventy from '@11ty/eleventy';
 
 import { build } from './build.js';
 
+/**
+ *
+ */
 export async function cli() {
 	const elev = new Eleventy(
 		undefined, // inputDir is set from the Eleventy config file

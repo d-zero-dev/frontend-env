@@ -4,6 +4,11 @@ import path from 'node:path';
 
 import c from 'cli-color';
 
+/**
+ *
+ * @param outputLogTable
+ * @param pathFormat
+ */
 export function log(
 	outputLogTable: OutputTableRow[],
 	pathFormat: PathFormat = 'preserve',

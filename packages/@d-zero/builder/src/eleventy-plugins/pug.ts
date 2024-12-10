@@ -8,7 +8,6 @@ type PugPluginOptions = PugOptions & { [key: string]: unknown };
 
 /**
  * Ref: https://github.com/11ty/eleventy-plugin-template-languages/blob/main/pug/extension.js
- *
  * @param eleventyConfig
  * @param pluginConfig
  */

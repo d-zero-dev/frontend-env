@@ -8,6 +8,10 @@ import { getHtmlFiles } from './get-html-files.js';
 import { log } from './log.js';
 import { pathTransfer } from './path-transfer.js';
 
+/**
+ *
+ * @param elev
+ */
 export async function build(elev: Eleventy<EleventyGlobalData>) {
 	const results = await elev.write();
 

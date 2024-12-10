@@ -7,6 +7,11 @@ const reCharsetShiftJIS = new RegExp(
 	'i',
 );
 
+/**
+ *
+ * @param body
+ * @param decoding
+ */
 export function decode(body: Buffer, decoding: boolean) {
 	let html = body.toString('utf8');
 

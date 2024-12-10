@@ -2,6 +2,11 @@ import type { HtmlFile, PathFormat } from './types.js';
 
 import path from 'node:path';
 
+/**
+ *
+ * @param htmlFile
+ * @param pathFormat
+ */
 export function pathTransfer(htmlFile: HtmlFile, pathFormat: PathFormat) {
 	const inputRoot = htmlFile.inputRoot ?? process.cwd();
 	const outputRoot = htmlFile.outputRoot ?? inputRoot ?? process.cwd();

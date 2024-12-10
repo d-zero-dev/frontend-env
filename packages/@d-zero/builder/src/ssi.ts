@@ -21,6 +21,11 @@ type SSIFuncOptions = {
 	ssi: Record<string, SSIOption>;
 };
 
+/**
+ *
+ * @param html
+ * @param options
+ */
 export async function ssi(
 	html: string,
 	options: SSIFuncOptions,
@@ -34,7 +39,6 @@ export async function ssi(
 
 	const cache = new Map<string, string>();
 
-	// eslint-disable-next-line no-constant-condition
 	while (true) {
 		const matches = reSSITag.exec(html);
 		if (!matches) {
