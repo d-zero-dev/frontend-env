@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.34](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.33...v5.0.0-alpha.34) (2024-12-16)
+
+### Features
+
+- **builder:** add `banner` option ([1f56212](https://github.com/d-zero-dev/frontend-env/commit/1f5621292e39f7ca4d124913209c16330758478a))
+- **builder:** add `createBanner` API ([513a45c](https://github.com/d-zero-dev/frontend-env/commit/513a45c7d099ac4791eec7e3786c5657fe37a4b9))
+
 # [5.0.0-alpha.33](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.32...v5.0.0-alpha.33) (2024-12-10)
 
 ### Features
