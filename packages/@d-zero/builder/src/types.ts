@@ -12,6 +12,7 @@ export type DZBuilderConfig = {
 	outputCssDir?: string;
 	outputJsDir?: string;
 	outputImgDir?: string;
+	banner?: CreateBanner | string;
 	imageSizes?: ImageSizesOptions;
 	prettier?: boolean | PrettierOptions;
 	minifier?: HMTOptions;

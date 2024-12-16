@@ -39,7 +39,10 @@ export default function (
 	const alias = options?.alias?.['@'] ?? absInput;
 	const relAlias = path.relative(absInput, alias);
 
-	const banner = createBanner(defaultBanner());
+	const banner =
+		typeof options.banner === 'string'
+			? options.banner
+			: createBanner(options.banner?.() ?? defaultBanner());
 
 	eleventyConfig.addGlobalData('alias', options.alias);
 	eleventyConfig.addGlobalData('pathFormat', options.pathFormat);
