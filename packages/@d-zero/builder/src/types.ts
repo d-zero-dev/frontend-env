@@ -1,3 +1,4 @@
+import type { Dayjs } from 'dayjs';
 import type { Options as HMTOptions } from 'html-minifier-terser';
 import type { Options as PrettierOptions } from 'prettier';
 
@@ -69,3 +70,9 @@ export type ImageSizesOptions = {
 };
 
 export type OutputTableRow = [origin: string, from: string, to: string];
+
+export type BannerOptions = {
+	devMode?: boolean;
+};
+
+export type CreateBanner = (options?: BannerOptions) => (now: Dayjs) => string;

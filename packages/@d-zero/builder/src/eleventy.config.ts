@@ -6,8 +6,8 @@ import path from 'node:path';
 import dayjs from 'dayjs';
 import { load as yamlLoad } from 'js-yaml';
 
+import { createBanner, defaultBanner } from './banner.js';
 import { decode } from './decode.js';
-import { banner } from './defines.js';
 import { htmlPlugin } from './eleventy-plugins/html.js';
 import { pugPlugin } from './eleventy-plugins/pug.js';
 import { reportPlugin } from './eleventy-plugins/report.js';
@@ -38,6 +38,8 @@ export default function (
 	const absInput = path.resolve(input);
 	const alias = options?.alias?.['@'] ?? absInput;
 	const relAlias = path.relative(absInput, alias);
+
+	const banner = createBanner(defaultBanner());
 
 	eleventyConfig.addGlobalData('alias', options.alias);
 	eleventyConfig.addGlobalData('pathFormat', options.pathFormat);
@@ -79,14 +81,14 @@ export default function (
 
 	eleventyConfig.addPlugin(stylePlugin, {
 		tmpDir: tempFolderName,
-		banner: banner(),
+		banner,
 		minify: options?.minifier?.minifyCSS ?? true,
 		alias: options?.alias ?? {},
 	});
 
 	eleventyConfig.addPlugin(scriptPlugin, {
 		tmpDir: tempFolderName,
-		banner: banner(),
+		banner,
 	});
 
 	eleventyConfig.addPlugin(reportPlugin);
