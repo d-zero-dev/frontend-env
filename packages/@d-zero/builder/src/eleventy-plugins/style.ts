@@ -1,10 +1,12 @@
 import type { EleventyPlugin } from '../eleventy.types.js';
 import type { EleventyGlobalData } from '../types.js';
 import type { Options as HMTOptions } from 'html-minifier-terser';
+import type { Options as PrettierOptions } from 'prettier';
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
+import stripComments from 'strip-css-comments';
 import { build } from 'vite';
 
 const INLINE_SCRIPT_FILE_DELETE_ID = '::inline-script::';
@@ -14,6 +16,7 @@ type StylePluginConfig = {
 	banner: string;
 	minify?: HMTOptions['minifyCSS'];
 	alias: Record<string, string>;
+	prettier?: PrettierOptions | boolean;
 };
 
 export const stylePlugin: EleventyPlugin<StylePluginConfig, EleventyGlobalData> = (
@@ -70,7 +73,17 @@ export const stylePlugin: EleventyPlugin<StylePluginConfig, EleventyGlobalData> 
 					},
 				});
 
-				const content = await fs.readFile(tmpPath, 'utf8');
+				let content = await fs.readFile(tmpPath, 'utf8');
+
+				if (!cssMinify) {
+					content = stripComments(content);
+					const prettier = await import('prettier');
+					content = await prettier.format(content, {
+						parser: 'css',
+						tabWidth: 2,
+						useTabs: false,
+					});
+				}
 
 				return `${pluginConfig.banner}\n${content}`;
 			};
