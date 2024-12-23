@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.35](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.34...v5.0.0-alpha.35) (2024-12-23)
+
+### Bug Fixes
+
+- **builder:** fix to strip CSS comments on no-minify ([c7a1f05](https://github.com/d-zero-dev/frontend-env/commit/c7a1f055202f4bfe04b86c5972dc3e75c0c67005))
+
 # [5.0.0-alpha.34](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.33...v5.0.0-alpha.34) (2024-12-16)
 
 ### Features
