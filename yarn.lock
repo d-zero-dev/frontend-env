@@ -777,14 +777,14 @@
     pug "3.0.3"
     vite "6.0.3"
 
-"@d-zero/commitlint-config@5.0.0-alpha.54":
-  version "5.0.0-alpha.54"
-  resolved "https://registry.yarnpkg.com/@d-zero/commitlint-config/-/commitlint-config-5.0.0-alpha.54.tgz#5ca3ab9e390b576e8c5930352aa63f193ab761b3"
-  integrity sha512-S90fhxODinvv0ld20fGo6plBBM4GLAHbmmXPwEw8z9yWFhX8FgzY/JqpVT8Xt3t4p2WvWyWv/13TWvXZ7u1bSg==
+"@d-zero/commitlint-config@5.0.0-alpha.55":
+  version "5.0.0-alpha.55"
+  resolved "https://registry.yarnpkg.com/@d-zero/commitlint-config/-/commitlint-config-5.0.0-alpha.55.tgz#37b0fe524ca29c4947a75a11c0b5945dfa8b20fb"
+  integrity sha512-uPEI5GwiZ6eRiGu5GdexrjE/y+6140R5+AAYU8TstVkG9jMBIp+JHEQDyk1YieOI3DjIBsN1HMvMeJie7dT3lw==
   dependencies:
     "@commitlint/cli" "19.6.1"
     "@commitlint/config-conventional" "19.6.0"
-    "@d-zero/cz-config" "5.0.0-alpha.54"
+    "@d-zero/cz-config" "5.0.0-alpha.55"
 
 "@d-zero/cspell-config@5.0.0-alpha.54":
   version "5.0.0-alpha.54"
@@ -800,13 +800,13 @@
   dependencies:
     css-tree "3.1.0"
 
-"@d-zero/cz-config@5.0.0-alpha.54":
-  version "5.0.0-alpha.54"
-  resolved "https://registry.yarnpkg.com/@d-zero/cz-config/-/cz-config-5.0.0-alpha.54.tgz#1225a2a84fccdf9ca4e834bf5676da889497e97d"
-  integrity sha512-RLuSvx4u19I3BbkcEoa1lGxErbh5mhz9WQAU7Fswz3WtVXTlD7r5z4sYPnM3pnhEVzbvbnW8zxwRhU9R9nO7dA==
+"@d-zero/cz-config@5.0.0-alpha.55":
+  version "5.0.0-alpha.55"
+  resolved "https://registry.yarnpkg.com/@d-zero/cz-config/-/cz-config-5.0.0-alpha.55.tgz#24c46de27b3f55089267e74897523034c9fdd2ff"
+  integrity sha512-NyKtKQv4xfrxoNr1s5OVbVPSbyXP38NvYI5FmiVUh7q56I+MlXZnxFMuLhDY05STgJtkvazooxHRgxnn6dBb4A==
   dependencies:
     commitizen "4.3.1"
-    cz-customizable "7.3.0"
+    cz-customizable "7.4.0"
 
 "@d-zero/eslint-config@5.0.0-alpha.54":
   version "5.0.0-alpha.54"
@@ -4490,10 +4490,10 @@ cz-conventional-changelog@3.3.0:
   optionalDependencies:
     "@commitlint/load" ">6.1.1"
 
-cz-customizable@7.3.0:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/cz-customizable/-/cz-customizable-7.3.0.tgz#6bbf200af4a596838b0c93988eb2ff3c679296ec"
-  integrity sha512-ExNKEk8SG91ydXO2wph3VptVXZPRM8092WZlzD4hUI1WpFlGAQvTi8x+9rlpTuZzr8XPff9xEIJlx2hAFyEfqg==
+cz-customizable@7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/cz-customizable/-/cz-customizable-7.4.0.tgz#37a30d4b4ca97e123120992f0ed0037fe90cd45e"
+  integrity sha512-0HFu2d7/j9E9BPZv6+jhsojS8F16r+UHNAVVw1u5Xvog/mYNnrkHocRXZTnmVioAFvNux4zd+vt5LCdZnfhOhg==
   dependencies:
     editor "1.0.0"
     find-config "^1.0.0"
