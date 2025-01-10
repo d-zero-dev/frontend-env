@@ -15,7 +15,7 @@
 	},
 	"dependencies": {
 		"@d-zero/scaffold": "5.0.0-alpha.36",
-		"glob": "11.0.0",
+		"glob": "11.0.1",
 		"i18n-js": "4.5.1",
 		"ignore": "7.0.0",
 		"meow": "13.2.0",
