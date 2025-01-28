@@ -77,7 +77,7 @@ export default function (plop) {
 		])
 		.add(
 			// BurgerEditor
-			cli.flags.type === 'burger' ? [] : ['**/bge-*'],
+			cli.flags.type === 'burger' ? [] : ['**/bge-*', '**/bge_*'],
 		)
 		.add(
 			// static
