@@ -32,18 +32,19 @@ html(lang="ja")
 									input#MailMessageMode(type="hidden" name="data[MailMessage][mode]")
 									.cc-form-field-list
 										.cc-form-fieldset
-											.cc-form-fieldset-heading
-												span フィールドグループ名
-												span.required 必須
-											.cc-form-fieldset-body
-												.mail-field(data-type="text")
-													span.mail-before-attachment 前見出し
-													span.mail-input __入力内容__
-													span.mail-after-attachment 後見出し
-												.mail-field(data-type="text")
-													span.mail-before-attachment
-													span.mail-input __入力内容__
-													span.mail-after-attachment 後見出し
+											div
+												.cc-form-fieldset-heading
+													span フィールドグループ名
+													span.required 必須
+												.cc-form-fieldset-body
+													.mail-field(data-type="text")
+														span.mail-before-attachment 前見出し
+														span.mail-input __入力内容__
+														span.mail-after-attachment 後見出し
+													.mail-field(data-type="text")
+														span.mail-before-attachment
+														span.mail-input __入力内容__
+														span.mail-after-attachment 後見出し
 										.cc-form-fieldset
 											div
 												.cc-form-fieldset-heading
