@@ -48,7 +48,7 @@ describe('CLI', () => {
 			'htdocs/__tmpl/300_form_input/index.html {size} | gzip: {size}',
 			'htdocs/__tmpl/301_form_confirm/index.html {size} | gzip: {size}',
 			'htdocs/__tmpl/302_form_complete/index.html {size} | gzip: {size}',
-			'htdocs/css/bge-style.css {size} | gzip: {size}',
+			'htdocs/css/bge_style.css {size} | gzip: {size}',
 			'htdocs/css/style.css {size} | gzip: {size}',
 			'htdocs/js/script.js {size} | gzip: {size}',
 			'htdocs/sub-folder.test/index.html {size} | gzip: {size}',
