@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.37](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.36...v5.0.0-alpha.37) (2025-02-03)
+
+### Bug Fixes
+
+- **scaffold:** .bge-contentsクラス名のsが抜けていたので修正 ([c9b4757](https://github.com/d-zero-dev/frontend-env/commit/c9b4757e16aa35178883fed8e8e0fb5a34b24c90))
+- **scaffold:** 301_form_confirmテンプレートの最初の.cc-form-fieldset直下にdiv要素追加 ([32aba92](https://github.com/d-zero-dev/frontend-env/commit/32aba92639dacae38579c5a5e3b0966de57a97d0))
+- **scaffold:** bge-style.scssのファイル名を変更 ([071dc15](https://github.com/d-zero-dev/frontend-env/commit/071dc15ae0647455bb25f707c6edf537c89e2058))
+- **scaffold:** bge-style.scssのファイル名変更に伴う周辺処理の更新 ([bcca3a1](https://github.com/d-zero-dev/frontend-env/commit/bcca3a18d560694da914b207c01b9309c184ef39))
+
+### Features
+
+- **scaffold:** componentsレイヤーの廃止 ([024eda3](https://github.com/d-zero-dev/frontend-env/commit/024eda3e417396b0f33637f6803f346c822503dd))
+- **scaffold:** componentsレイヤーの廃止 ([1339a56](https://github.com/d-zero-dev/frontend-env/commit/1339a565655d8ed6e168dc6eb790a2d21b543718))
+
+### BREAKING CHANGES
+
+- **scaffold:** componentsレイヤーの廃止
+- **scaffold:** componentsレイヤーの廃止
+
 # [5.0.0-alpha.36](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.35...v5.0.0-alpha.36) (2025-01-06)
 
 ### Bug Fixes

@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/scaffold",
-	"version": "5.0.0-alpha.36",
+	"version": "5.0.0-alpha.37",
 	"description": "Frontend scaffold files of D-ZERO Co., Ltd.",
 	"repository": "https://github.com/d-zero-dev/frontend-env.git",
 	"author": "D-ZERO Co., Ltd.",
@@ -39,7 +39,7 @@
 	"devDependencies": {
 		"@d-zero/builder": "5.0.0-alpha.34",
 		"@d-zero/linters": "5.0.0-alpha.55",
-		"@d-zero/postcss-config": "5.0.0-alpha.36",
+		"@d-zero/postcss-config": "5.0.0-alpha.37",
 		"@d-zero/tsconfig": "0.4.1",
 		"@types/node": "22.13.0",
 		"cross-env": "7.0.3",
