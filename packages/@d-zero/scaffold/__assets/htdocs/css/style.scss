@@ -11,22 +11,20 @@
 	@import '@/style/general/img.scss';
 }
 
-@layer components {
-	@import '@/component/c-page-home.scss';
-	@import '@/component/c-page-sub.scss';
-	@import '@/component/c-header.scss';
-	@import '@/component/c-footer.scss';
-	@import '@/component/c-nav-global.scss';
-	@import '@/component/c-nav-sitemap.scss';
-	@import '@/component/c-nav-breadcrumb.scss';
-	@import '@/component/c-title-page.scss';
-	@import '@/component/c-pagination.scss';
-	@import '@/component/c-card-list.scss';
-	@import '@/component/c-card.scss';
-	@import '@/component/c-media-list.scss';
-	@import '@/component/c-media.scss';
-	@import '@/component/c-content-index.scss';
-	@import '@/component/c-content-main.scss';
-}
+@import '@/component/c-page-home.scss';
+@import '@/component/c-page-sub.scss';
+@import '@/component/c-header.scss';
+@import '@/component/c-footer.scss';
+@import '@/component/c-nav-global.scss';
+@import '@/component/c-nav-sitemap.scss';
+@import '@/component/c-nav-breadcrumb.scss';
+@import '@/component/c-title-page.scss';
+@import '@/component/c-pagination.scss';
+@import '@/component/c-card-list.scss';
+@import '@/component/c-card.scss';
+@import '@/component/c-media-list.scss';
+@import '@/component/c-media.scss';
+@import '@/component/c-content-index.scss';
+@import '@/component/c-content-main.scss';
 
-@layer reset, base, general, components;
+@layer reset, base, general;
