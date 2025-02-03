@@ -11,8 +11,6 @@
 	@import '@/style/general/img.scss';
 }
 
-@layer components {
-	@import '@/component/bge-content.scss';
-}
+@import '@/component/bge-content.scss';
 
-@layer reset, base, general, components;
+@layer reset, base, general;
