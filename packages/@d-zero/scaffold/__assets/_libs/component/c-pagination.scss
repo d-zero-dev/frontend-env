@@ -1,11 +1,11 @@
 @use '../style/theme' as *;
 
 .c-pagination {
+	clear: both;
 	display: flex;
 	justify-content: center;
 	margin-block-start: 1rem;
 	overflow: hidden;
-	clear: both;
 	text-align: center;
 
 	@media (--xs) {
