@@ -37,8 +37,8 @@
 		"last 2 ios_saf version"
 	],
 	"devDependencies": {
-		"@d-zero/builder": "5.0.0-alpha.34",
-		"@d-zero/linters": "5.0.0-alpha.55",
+		"@d-zero/builder": "5.0.0-alpha.37",
+		"@d-zero/linters": "5.0.0-alpha.56",
 		"@d-zero/postcss-config": "5.0.0-alpha.37",
 		"@d-zero/tsconfig": "0.4.1",
 		"@types/node": "22.13.1",
