@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.39](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.38...v5.0.0-alpha.39) (2025-02-12)
+
+**Note:** Version bump only for package @d-zero/builder
+
 # [5.0.0-alpha.38](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.37...v5.0.0-alpha.38) (2025-02-05)
 
 **Note:** Version bump only for package @d-zero/builder
