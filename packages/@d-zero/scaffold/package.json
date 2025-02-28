@@ -46,7 +46,7 @@
 		"husky": "9.1.7",
 		"npm-run-all2": "7.0.2",
 		"sass": "1.85.1",
-		"typescript": "5.7.3",
+		"typescript": "5.8.2",
 		"vitest": "3.0.7"
 	},
 	"dependencies": {
