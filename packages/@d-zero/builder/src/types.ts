@@ -9,9 +9,6 @@ export type EleventyGlobalData = Pick<
 
 export type DZBuilderConfig = {
 	alias?: Record<string, string>;
-	outputCssDir?: string;
-	outputJsDir?: string;
-	outputImgDir?: string;
 	banner?: CreateBanner | string;
 	imageSizes?: ImageSizesOptions;
 	prettier?: boolean | PrettierOptions;

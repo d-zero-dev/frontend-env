@@ -29,9 +29,6 @@ export default function (
 	options: DZBuilderConfig,
 ) {
 	const isServe = process.env.ELEVENTY_RUN_MODE === 'serve';
-	const outputCssDir = options.outputCssDir ?? 'css';
-	const outputJsDir = options.outputJsDir ?? 'js';
-	const outputImgDir = options.outputImgDir ?? 'img';
 
 	const input = '__assets/htdocs';
 	const output = 'htdocs';
@@ -141,9 +138,6 @@ export default function (
 			output,
 			layouts: '../_libs/component',
 			data: '../_libs/data',
-			outputCss: outputCssDir,
-			outputJs: outputJsDir,
-			outputImg: outputImgDir,
 			includes: relAlias,
 		},
 	};

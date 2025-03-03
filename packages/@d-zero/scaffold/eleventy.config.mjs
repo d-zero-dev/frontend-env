@@ -16,21 +16,6 @@ export default function (eleventyConfig) {
 		},
 
 		/**
-		 * Output directory for CSS files.
-		 */
-		// outputCssDir: 'css',
-
-		/**
-		 * Output directory for JavaScript files
-		 */
-		// outputJsDir: 'js',
-
-		/**
-		 * Output directory for image files
-		 */
-		// outputImgDir: 'img',
-
-		/**
 		 * Prettier options.
 		 * @see https://prettier.io/docs/en/options
 		 */
