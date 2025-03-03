@@ -4,6 +4,9 @@ const extended = extendsConfig({
 	// classNaming: ['/^splide(?:__[a-z]+)?$/'],
 });
 
+/**
+ * @type {import('@markuplint/ml-config').Config}
+ */
 export default {
 	...extended,
 	nodeRules: [
@@ -24,4 +27,10 @@ export default {
 			},
 		},
 	],
+	// overrides: {
+	// 	...extended.overrides,
+	// 	'**/*.pug': {
+	// 		...
+	// 	},
+	// },
 };
