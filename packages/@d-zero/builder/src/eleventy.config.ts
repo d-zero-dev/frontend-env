@@ -30,8 +30,9 @@ export default function (
 ) {
 	const isServe = process.env.ELEVENTY_RUN_MODE === 'serve';
 
+	const outDir = options.outDir ?? 'htdocs';
+
 	const input = '__assets/htdocs';
-	const output = 'htdocs';
 	const absInput = path.resolve(input);
 	const alias = options?.alias?.['@'] ?? absInput;
 	const relAlias = path.relative(absInput, alias);
@@ -102,7 +103,11 @@ export default function (
 			encoding: 'utf8',
 			onRequest: {
 				'/*': async ({ url }) => {
-					const content = await pathTransformRouter({ output })({ url });
+					const content = await pathTransformRouter({
+						output: outDir,
+					})({
+						url,
+					});
 					if (!content) {
 						return;
 					}
@@ -119,7 +124,7 @@ export default function (
 					if (options.ssi) {
 						return await ssi(html, {
 							url,
-							output,
+							output: outDir,
 							ssi: options.ssi,
 						});
 					}
@@ -135,7 +140,7 @@ export default function (
 		passthroughFileCopy: true,
 		dir: {
 			input,
-			output,
+			output: outDir,
 			layouts: '../_libs/component',
 			data: '../_libs/data',
 			includes: relAlias,

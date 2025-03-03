@@ -16,6 +16,11 @@ export default function (eleventyConfig) {
 		},
 
 		/**
+		 * The directory where the source files are located.
+		 */
+		// outDir: 'htdocs',
+
+		/**
 		 * Prettier options.
 		 * @see https://prettier.io/docs/en/options
 		 */
