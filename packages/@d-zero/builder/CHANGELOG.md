@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.40](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.39...v5.0.0-alpha.40) (2025-03-03)
+
+### Features
+
+- **builder:** add option `outDir` ([a3d0843](https://github.com/d-zero-dev/frontend-env/commit/a3d0843afd50db2305661a65a863c0c9fa2223fd))
+
 # [5.0.0-alpha.39](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.38...v5.0.0-alpha.39) (2025-02-12)
 
 **Note:** Version bump only for package @d-zero/builder
