@@ -894,10 +894,10 @@
   dependencies:
     pug-lint "2.7.0"
 
-"@d-zero/shared@0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@d-zero/shared/-/shared-0.6.0.tgz#4461ba6ebd9ba4c6fee69629542e36ab6d2131bd"
-  integrity sha512-/tKW9AppY5DGcYr9CuN65Q3gzlr6Lt9w6HstSnRoBjdbF6at5jZj5vv2o/JZuilKX8+fh7151aog0FzD6hs2QA==
+"@d-zero/shared@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@d-zero/shared/-/shared-0.7.0.tgz#173c413b1961a57a9b52ce3a5be629dc2b083361"
+  integrity sha512-/iJmA5jGvWNw0fSqFq47Rltv1vemgFPCQtKfXoBGApfsXuDloHlyECNgE8+5GTdOHCFwtJc9lbfDKr1D1sua3w==
   dependencies:
     "@holiday-jp/holiday_jp" "2.4.0"
     await-event-emitter "2.0.2"
