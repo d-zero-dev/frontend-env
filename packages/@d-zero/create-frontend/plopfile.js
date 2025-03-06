@@ -74,6 +74,8 @@ export default function (plop) {
 		.add([
 			// Test directories
 			'**/*.test/**/*',
+			// Test Files
+			'*.test.*',
 		])
 		.add(
 			// BurgerEditor
