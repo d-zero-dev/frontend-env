@@ -17,7 +17,7 @@ yarn-error.log
 *.sql
 
 # Temporary
-.11ty-vite
+.11ty
 .serve
 
 # Document Root
