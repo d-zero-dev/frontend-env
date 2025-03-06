@@ -1,7 +1,8 @@
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 
 import { execa } from 'execa';
+import ignore from 'ignore';
 import stripAnsi from 'strip-ansi';
 import { describe, test, expect, beforeAll, afterAll } from 'vitest';
 
@@ -9,10 +10,50 @@ const scaffoldDir = path.resolve(process.cwd(), 'packages', '@d-zero', 'scaffold
 const publishDir = path.resolve(scaffoldDir, 'htdocs');
 
 /**
- *
+ * Cleans up files in publishDir based on .gitignore in scaffoldDir.
+ * If .gitignore does not exist (or is empty), all files will be deleted.
  */
-function cleanUp() {
-	fs.rmSync(publishDir, { recursive: true, force: true });
+async function cleanUp() {
+	// Read .gitignore from the root of scaffoldDir
+	const gitignorePath = path.join(scaffoldDir, '.gitignore');
+	let ig: { ignores: (path: string) => boolean };
+	try {
+		const gitignoreContent = await fs.readFile(gitignorePath, 'utf8');
+		ig = ignore().add(gitignoreContent);
+	} catch {
+		// If .gitignore does not exist, then treat it as if it is empty (delete all files)
+		ig = { ignores: () => true };
+	}
+
+	/**
+	 * Recursively cleans files and directories within the given directory.
+	 * @param dir - The target directory path.
+	 */
+	async function cleanDir(dir: string) {
+		const entries = await fs.readdir(dir, { withFileTypes: true });
+		await Promise.all(
+			entries.map(async (entry) => {
+				const fullPath = path.join(dir, entry.name);
+				// Evaluate relative path from scaffoldDir
+				const relativePath = path.relative(scaffoldDir, fullPath);
+
+				if (ig.ignores(relativePath)) {
+					// Delete only if the file or directory is ignored by .gitignore
+					if (entry.isDirectory()) {
+						await fs.rm(fullPath, { recursive: true, force: true });
+					} else {
+						await fs.unlink(fullPath);
+					}
+				} else if (entry.isDirectory()) {
+					// Recursively check subdirectories
+					await cleanDir(fullPath);
+				}
+			}),
+		);
+	}
+
+	// Ignore errors during cleanup
+	await cleanDir(publishDir).catch(() => null);
 }
 
 beforeAll(cleanUp);
