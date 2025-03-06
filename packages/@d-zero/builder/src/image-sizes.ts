@@ -1,14 +1,22 @@
-import type { ImageSizesOptions, ImageSize as Size } from './types.js';
+import type { ImageSizesOptions, ImageSize } from './types.js';
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { promisify } from 'node:util';
 
 import { Cache } from '@d-zero/shared/cache';
-import ImageSize from 'image-size';
+import { imageSize } from 'image-size';
 
-// @ts-ignore
-const sizeOf: (filePath: string) => Promise<Size> = promisify(ImageSize);
+/**
+ * Asynchronously retrieves the dimensions of an image file.
+ * @param filePath - The path to the image file to measure
+ * @returns A Promise that resolves to an ImageSize object containing the dimensions of the image
+ * @throws Will throw an error if the file cannot be read or if the image format is not supported
+ */
+async function sizeOf(filePath: string): Promise<ImageSize> {
+	const buffer = await fs.readFile(filePath);
+	const res = imageSize(buffer);
+	return res;
+}
 
 /**
  *
@@ -27,7 +35,7 @@ export async function imageSizes(
 		ext = ['png', 'jpg', 'jpeg', 'webp', 'avif', 'svg'],
 	}: ImageSizesOptions,
 ) {
-	const cache = new Cache<Size>('@d-zero/builder/image-sizes');
+	const cache = new Cache<ImageSize>('@d-zero/builder/image-sizes');
 
 	const images = [...documentElement.querySelectorAll('img, picture > source')];
 
