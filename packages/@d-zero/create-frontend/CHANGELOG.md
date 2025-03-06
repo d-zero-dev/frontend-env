@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.42](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.41...v5.0.0-alpha.42) (2025-03-06)
+
+### Features
+
+- **create-frontend:** add pattern for test files in plop configuration ([97e1f1e](https://github.com/d-zero-dev/frontend-env/commit/97e1f1e36f43cc98cadf18c71d304290fac74bce))
+
 # [5.0.0-alpha.41](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.40...v5.0.0-alpha.41) (2025-03-03)
 
 **Note:** Version bump only for package @d-zero/create-frontend

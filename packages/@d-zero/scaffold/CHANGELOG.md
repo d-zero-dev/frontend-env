@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.42](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.41...v5.0.0-alpha.42) (2025-03-06)
+
+### Bug Fixes
+
+- **scaffold:** update .gitignore to reflect correct temporary directory ([aa17c0c](https://github.com/d-zero-dev/frontend-env/commit/aa17c0caee9c01792b9ef15de78ce50919ce5b78))
+
 # [5.0.0-alpha.41](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.40...v5.0.0-alpha.41) (2025-03-03)
 
 **Note:** Version bump only for package @d-zero/scaffold

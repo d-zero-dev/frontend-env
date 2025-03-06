@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.42](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.41...v5.0.0-alpha.42) (2025-03-06)
+
+### Bug Fixes
+
+- **builder:** update image-size v2 retrieval to use async function and improve type handling ([7d65c2e](https://github.com/d-zero-dev/frontend-env/commit/7d65c2e79b22f23611544742c2b67080a12b02be))
+
 # [5.0.0-alpha.41](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.40...v5.0.0-alpha.41) (2025-03-03)
 
 **Note:** Version bump only for package @d-zero/builder
