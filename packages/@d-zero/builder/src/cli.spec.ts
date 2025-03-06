@@ -29,13 +29,13 @@ describe('CLI', () => {
 		});
 		expect(
 			stripAnsi(stdout)
-				// Windows path separator
+				// Replace Windows path separator with '/'
 				.replaceAll(path.sep, '/')
-				// Remove time
+				// Remove time numbers
 				.replaceAll(/\d+(?:\.\d{1,3})?\s*(?:ms|seconds|s)/g, '{time}')
-				// Remove version
+				// Remove version numbers
 				.replaceAll(/v\d+\.\d+\.\d+(?:[a-z]+(?:\.[\da-z]+)?)?/gi, '{version}')
-				// Remove size
+				// Remove file sizes
 				.replaceAll(/\s*\d+\.\d+\s*(?:kB|MB|GB)/g, ' {size}')
 				.split('\n'),
 		).toStrictEqual([
