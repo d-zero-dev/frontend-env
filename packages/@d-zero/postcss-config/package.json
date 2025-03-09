@@ -12,7 +12,7 @@
 	"type": "module",
 	"main": "./.postcssrc.js",
 	"dependencies": {
-		"autoprefixer": "10.4.20",
+		"autoprefixer": "10.4.21",
 		"postcss": "8.5.3",
 		"postcss-base64": "0.7.1",
 		"postcss-calc": "10.1.1",
