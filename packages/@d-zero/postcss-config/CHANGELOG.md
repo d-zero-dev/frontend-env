@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.43](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.42...v5.0.0-alpha.43) (2025-03-12)
+
+**Note:** Version bump only for package @d-zero/postcss-config
+
 # [5.0.0-alpha.42](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.41...v5.0.0-alpha.42) (2025-03-06)
 
 **Note:** Version bump only for package @d-zero/postcss-config
