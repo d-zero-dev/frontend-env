@@ -189,25 +189,25 @@
     "@babel/helper-string-parser" "^7.25.9"
     "@babel/helper-validator-identifier" "^7.25.9"
 
-"@commitlint/cli@19.7.1":
-  version "19.7.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-19.7.1.tgz#aca351ae6200af58b49de58181319015e7429601"
-  integrity sha512-iObGjR1tE/PfDtDTEfd+tnRkB3/HJzpQqRTyofS2MPPkDn1mp3DBC8SoPDayokfAy+xKhF8+bwRCJO25Nea0YQ==
+"@commitlint/cli@19.8.0":
+  version "19.8.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-19.8.0.tgz#e66e5a5268437e42b7c6f2a447e94ea83b8a3272"
+  integrity sha512-t/fCrLVu+Ru01h0DtlgHZXbHV2Y8gKocTR5elDOqIRUzQd0/6hpt2VIWOj9b3NDo7y4/gfxeR2zRtXq/qO6iUg==
   dependencies:
-    "@commitlint/format" "^19.5.0"
-    "@commitlint/lint" "^19.7.1"
-    "@commitlint/load" "^19.6.1"
-    "@commitlint/read" "^19.5.0"
-    "@commitlint/types" "^19.5.0"
+    "@commitlint/format" "^19.8.0"
+    "@commitlint/lint" "^19.8.0"
+    "@commitlint/load" "^19.8.0"
+    "@commitlint/read" "^19.8.0"
+    "@commitlint/types" "^19.8.0"
     tinyexec "^0.3.0"
     yargs "^17.0.0"
 
-"@commitlint/config-conventional@19.7.1":
-  version "19.7.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-19.7.1.tgz#9119a02ec8e0f4ac88f035e37dc333e7f69ace1c"
-  integrity sha512-fsEIF8zgiI/FIWSnykdQNj/0JE4av08MudLTyYHm4FlLWemKoQvPNUYU2M/3tktWcCEyq7aOkDDgtjrmgWFbvg==
+"@commitlint/config-conventional@19.8.0":
+  version "19.8.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-19.8.0.tgz#4a1470a0156f5d1f560426c05cfc3a6a796c2b9c"
+  integrity sha512-9I2kKJwcAPwMoAj38hwqFXG0CzS2Kj+SAByPUQ0SlHTfb7VUhYVmo7G2w2tBrqmOf7PFd6MpZ/a1GQJo8na8kw==
   dependencies:
-    "@commitlint/types" "^19.5.0"
+    "@commitlint/types" "^19.8.0"
     conventional-changelog-conventionalcommits "^7.0.2"
 
 "@commitlint/config-validator@^19.8.0":
@@ -235,7 +235,7 @@
   resolved "https://registry.yarnpkg.com/@commitlint/execute-rule/-/execute-rule-19.8.0.tgz#ebcac26dc75d481e223b0c37d59e5bdd7a164d4a"
   integrity sha512-fuLeI+EZ9x2v/+TXKAjplBJWI9CNrHnyi5nvUQGQt4WRkww/d95oVRsc9ajpt4xFrFmqMZkd/xBQHZDvALIY7A==
 
-"@commitlint/format@^19.5.0":
+"@commitlint/format@^19.8.0":
   version "19.8.0"
   resolved "https://registry.yarnpkg.com/@commitlint/format/-/format-19.8.0.tgz#b06084fb3b807f2142c19c94572127d4a3af5da1"
   integrity sha512-EOpA8IERpQstxwp/WGnDArA7S+wlZDeTeKi98WMOvaDLKbjptuHWdOYYr790iO7kTCif/z971PKPI2PkWMfOxg==
@@ -251,7 +251,7 @@
     "@commitlint/types" "^19.8.0"
     semver "^7.6.0"
 
-"@commitlint/lint@^19.7.1":
+"@commitlint/lint@^19.8.0":
   version "19.8.0"
   resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-19.8.0.tgz#c2bf85de6d2e86e13c972cf19a2d425e62e9b057"
   integrity sha512-+/NZKyWKSf39FeNpqhfMebmaLa1P90i1Nrb1SrA7oSU5GNN/lksA4z6+ZTnsft01YfhRZSYMbgGsARXvkr/VLQ==
@@ -261,7 +261,7 @@
     "@commitlint/rules" "^19.8.0"
     "@commitlint/types" "^19.8.0"
 
-"@commitlint/load@>6.1.1", "@commitlint/load@^19.6.1":
+"@commitlint/load@>6.1.1", "@commitlint/load@^19.8.0":
   version "19.8.0"
   resolved "https://registry.yarnpkg.com/@commitlint/load/-/load-19.8.0.tgz#7c7078fbdc9c4e3a14fa5a8684c3cb854353551e"
   integrity sha512-4rvmm3ff81Sfb+mcWT5WKlyOa+Hd33WSbirTVUer0wjS1Hv/Hzr07Uv1ULIV9DkimZKNyOwXn593c+h8lsDQPQ==
@@ -291,7 +291,7 @@
     conventional-changelog-angular "^7.0.0"
     conventional-commits-parser "^5.0.0"
 
-"@commitlint/read@^19.5.0":
+"@commitlint/read@^19.8.0":
   version "19.8.0"
   resolved "https://registry.yarnpkg.com/@commitlint/read/-/read-19.8.0.tgz#d16bea846619100e23c4d56bcf191c397da7542f"
   integrity sha512-6ywxOGYajcxK1y1MfzrOnwsXO6nnErna88gRWEl3qqOOP8MDu/DTeRkGLXBFIZuRZ7mm5yyxU5BmeUvMpNte5w==
@@ -336,7 +336,7 @@
   dependencies:
     find-up "^7.0.0"
 
-"@commitlint/types@^19.5.0", "@commitlint/types@^19.8.0":
+"@commitlint/types@^19.8.0":
   version "19.8.0"
   resolved "https://registry.yarnpkg.com/@commitlint/types/-/types-19.8.0.tgz#5a77c7a723a714995a51917edd0ecfcf29495d3c"
   integrity sha512-LRjP623jPyf3Poyfb0ohMj8I3ORyBDOwXAgxxVPbSD0unJuW2mJWeiRfaQinjtccMqC5Wy1HOMfa4btKjbNxbg==
@@ -802,14 +802,14 @@
   resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-5.0.0.tgz#037817b574262134cabd68fc4ec1a454f168407b"
   integrity sha512-PCqQV3c4CoVm3kdPhyeZ07VmBRdH2EpMFA/pd9OASpOEC3aXNGoqPDAZ80D0cLpMBxnmk0+yNhGsEx31hq7Gtw==
 
-"@d-zero/commitlint-config@5.0.0-alpha.60":
-  version "5.0.0-alpha.60"
-  resolved "https://registry.yarnpkg.com/@d-zero/commitlint-config/-/commitlint-config-5.0.0-alpha.60.tgz#ec3e392ea74d2ad3ab1f16de7f6259b0ceefb4ce"
-  integrity sha512-/CVKGG3BexDJPPp4kbEtK+E/ZU9TyWnSA77H3bxEtwKnWTFQzNaUHLz1OGedAa0CjUL/dLI0Ur3ZQDv0BIyutg==
+"@d-zero/commitlint-config@5.0.0-alpha.61":
+  version "5.0.0-alpha.61"
+  resolved "https://registry.yarnpkg.com/@d-zero/commitlint-config/-/commitlint-config-5.0.0-alpha.61.tgz#2672758fe5af9f1849a014c9bafe967acf7ce360"
+  integrity sha512-SkOb8mle85rMG4omxQtHnF2F9FeCcEfTyY7w7YanCtwx95BJNTcl8ZH4gNmiVD4vH1oooCZuQHk5ApXGNGpoPw==
   dependencies:
-    "@commitlint/cli" "19.7.1"
-    "@commitlint/config-conventional" "19.7.1"
-    "@d-zero/cz-config" "5.0.0-alpha.60"
+    "@commitlint/cli" "19.8.0"
+    "@commitlint/config-conventional" "19.8.0"
+    "@d-zero/cz-config" "5.0.0-alpha.61"
 
 "@d-zero/cspell-config@5.0.0-alpha.60":
   version "5.0.0-alpha.60"
@@ -825,10 +825,10 @@
   dependencies:
     css-tree "3.1.0"
 
-"@d-zero/cz-config@5.0.0-alpha.60":
-  version "5.0.0-alpha.60"
-  resolved "https://registry.yarnpkg.com/@d-zero/cz-config/-/cz-config-5.0.0-alpha.60.tgz#36867cbdd4bd33139f7209dd635c12d943c4885c"
-  integrity sha512-IwAAHY0GHOsf8XaZbSVRPyw+qdenyqVy3m+QKKIYKi1NAKRSH5DZyPvXfclgIH3qFH9TeXd2ncnXc7vICdso5w==
+"@d-zero/cz-config@5.0.0-alpha.61":
+  version "5.0.0-alpha.61"
+  resolved "https://registry.yarnpkg.com/@d-zero/cz-config/-/cz-config-5.0.0-alpha.61.tgz#134b3a31a90a153d5b95ebfa62cdd7c5738729f8"
+  integrity sha512-pca9RozG/7wGuFTX7/6ndU2jCzGuK8vA6LdKSjh0KYMBNDuUxaFPG7VafHVj3DOhA5g3Kg4SRorAydhlYKy1Iw==
   dependencies:
     commitizen "4.3.1"
     cz-customizable "7.4.0"
