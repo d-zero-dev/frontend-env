@@ -1,0 +1,163 @@
+# コーディングに関するAIエージェントの規定
+
+## プロンプトに対する振る舞い
+
+### コード生成
+
+コード生成に関する指令を受けたときは、以下の手順で基本的に対応する。
+
+<!-- ユーザー向け情報: @d-zero/mcp-serverをCLINEに設定している前提 -->
+
+- コーディングガイドラインをMCPサーバ経由で読み、一旦内容を記憶する
+- FigmaのURLを受け取り、MCPサーバ経由でFigmaのFileデータを取得する
+- FigmaのFileデータを解析し、指令に対応するコンポーネントの準備をする
+- 必要なコンポーネントファイルを作成する
+  - マークアップの形式はPugが良いかHTMLが良いかは最初は尋ねる
+  - 要素の順番はスクリーンリーダーやフォーカスの順番に依存し重要であるため、Figmaレイヤーの順番にはこだわらず、情報設計的な在り方を最優先に視覚的な配置を加味して順番を決定する
+  - マークアップは暗黙のロールに気をつけて、然るべきHTML要素を採用すること
+    - 選択肢がいくつもある場合はユーザーに尋ねること
+  - CSSを変更した際にStylelintの警告が発生するが、保存と同時に自動修正がかかる場合があるので、保存実行後は内容を再読み込みしてから必要な警告は再把握すること
+
+## 実装方針
+
+コード生成にあたってコーディングガイドラインにない細かい実装方針を記す。
+
+### 全般
+
+- Linterの警告は数回トライして直せない場合は、無効化するかどうかユーザーに尋ねる
+- cSpellの警告は単純なスペルミスは修正し、固有名詞と思われるものであれば`cspell.json`に単語を追加する
+  - 省略可能単語はコーディングガイドラインに準ずる
+
+### HTML
+
+- ページ遷移しない（リンクでない）インタラクションにa要素を使わない
+- WAI-ARIAを用いる必要があるときは適宜ユーザーに確認する
+  - WAI-ARIAを必要とする基準はARIA Authoring Practice Guideのコンポーネント
+  - APG以外に必要とする例外
+    - aria-currentはパンくず、フォームのプロセスなどに用いる
+- data属性はJSでインタラクティブな状態変化をつけるときのみに用いて静的なスタイルを適用しない
+- 改行でbr要素使わず、span要素とdisplay:block/inline-blockを活用する
+  - 詩・ポエムは除く
+
+### CSS
+
+- ウィンドウ幅がどの幅でも横スクロールを発生させない
+- data属性はJSでインタラクティブな状態変化をつけるときのみに用いて静的なスタイルを適用しない
+- 色を使用する場合は、:rootにカスタムプロパティを定義して使用する
+  - 参照する際に `var(--primary-color, #000)` のようなフォールバック用の第2引数は用いない
+
+### JavaScript
+
+- TypeScriptで書く
+- if/elseifよりもswitch/caseやハッシュマップを用いる
+- なるべく早期returnを用いてネストを深くしない
+- 関数はひとつのファイルに切り出す
+- 純粋関数はテストコードを書くかどうかユーザーに尋ねる
+- テストはvitestを用いる
+- テストファイルは `*.spec.ts` という命名にする
+- 一般的なデザインパターンに当てはまらないならclassは用いずに関数ベースの実装をする
+- JSDocsは日本語で書く
+- `<script type="module">`を用いてモジュール化しているので`DOMContentLoaded`イベントは**不要**
+- document.querySelectorなどで要素の型をジェネリクスで受け取る場合、`HTMLElement`型を用いてよい
+  - HTMLやCSSクラスと照らし合わせて、セレクタの対象要素の種類が明らかな場合は`HTMLInputElement`型などを用いてよい
+- `any`型に関して
+  - `any`型を定義する場合は`unknown`型に置き換える
+  - モジュールの型定義がない場合は、暗黙の`any`型として実装するが、プロパティやメソッドを利用する際に明示的に型を指定する
+- 型エラーに関して
+  - 定義されていないプロパティやメソッドを利用する際には、型エラーが発生するが、その場合はユーザーに確認を取り以下のいずれかの対応を取る
+    - `@ts-ignore`を利用してエラーを無視する
+    - `in`演算子を利用してプロパティの存在を確認する
+    - 型を新たに定義してエラーを回避する
+- ESLintの警告はWarningレベルでも修正する
+
+### コンポーネント
+
+#### ランドマーク
+
+- ランドマークはページコンポーネント（`c-page-*`）に実装し、UIコンポーネントには使用しない
+- ここでいうランドマークはLandmark Roleを持つ要素のことで以下の要素を指す
+  - `<header>`
+  - `<footer>`
+  - `<nav>`
+  - `<main>`
+  - `<aside>`
+
+#### インタラクティブコンポーネント
+
+- インタラクティブな呼び出し元ボタンはbutton要素を用いる
+- アクションはcommand属性を用いる
+  - command属性に規定されているアクションはそのまま活用する
+    - `command="toggle-popover"`はポップオーバーUIの開閉を行う
+    - `command="show-popover"`はポップオーバーUIの展開を行う
+    - `command="hide-popover"`はポップオーバーUIの収納を行う
+    - `command="show-modal"`はモーダルUIの展開を行う
+    - `command="close"`はモーダルUIの収納を行う
+  - 上記以外はカスタムコマンドを用意する
+    - カスタムコマンドは`command="--command-name"`のように記述して、実装はJavaScriptに記述する
+  - 規定アクション中に内部的な処理を施す場合はCommandEventを利用してJavaScriptに記述する
+    - 状況によっては`beforetoggle`や`toggle`、`close`などのイベントが適切なので適宜利用する
+
+### カスタムコマンドの実装例
+
+```html
+<button command="--custom-command" commandfor="target01">カスタムコマンド</button>
+
+<div id="target01">カスタムコマンドの対象</div>
+```
+
+```typescript
+for (button of document.querySelectorAll<HTMLButtonElement>('[command]')) {
+	const targetId = button.getAttribute('commandfor') ?? null;
+	if (!targetId) {
+		continue;
+	}
+	const target = document.getElementById(targetId);
+	target?.addEventListener('command', (e) => {
+		switch (e.command) {
+			case '--custom-command': {
+				const invoker: HTMLButtonElement = e.source; // 呼び出し元ボタンの特定
+				// カスタムコマンドの処理
+				console.log(`Hello, Custom Command: ${e.command}`);
+				break;
+			}
+		}
+	});
+}
+```
+
+### 規定アクションのイベントフックの実装例
+
+```html
+<button type="button" command="show-modal" commandfor="dialog01">メニュー</button>
+
+<dialog id="dialog01" aria-labelledby="dialog01-title">
+	<h2 id="dialog01-title">メニュー</h2>
+	<p>メニューの内容</p>
+</dialog>
+```
+
+```typescript
+for (button of document.querySelectorAll<HTMLButtonElement>('[command]')) {
+	const targetId = button.getAttribute('commandfor') ?? null;
+	if (!targetId) {
+		continue;
+	}
+	const target = document.getElementById(targetId);
+	target?.addEventListener('command', (e) => {
+		switch (e.command) {
+			case 'show-modal': {
+				const invoker: HTMLButtonElement = e.source; // 呼び出し元ボタンの特定
+				// フック処理
+				console.log(`Invoked: ${e.command}`);
+				break;
+			}
+		}
+	});
+
+	// もしくは<dialog>要素であればbeforetoggleやtoggleイベントなどを利用できる
+	target?.addEventListener('beforetoggle', (e) => {
+		// フック処理
+		console.log(`Fired: beforetoggle`);
+	});
+}
+```
