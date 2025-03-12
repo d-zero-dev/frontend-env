@@ -4643,6 +4643,11 @@ dev-ip@^1.0.1:
   resolved "https://registry.yarnpkg.com/dev-ip/-/dev-ip-1.0.1.tgz#a76a3ed1855be7a012bb8ac16cb80f3c00dc28f0"
   integrity sha512-LmVkry/oDShEgSZPNgqCIp2/TlqtExeGmymru3uCELnfyjY11IzpAproLYs+1X88fXO6DBoYP3ul2Xo2yz2j6A==
 
+dialog-toggle-events-polyfill@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/dialog-toggle-events-polyfill/-/dialog-toggle-events-polyfill-1.1.2.tgz#3044d082c39eda751c1b4754fb22edbedbb6a151"
+  integrity sha512-0XLpm2dfUg2NH0YRp2DkP3XkJqlM7k0Jx5sH+O/llAazxYirbdI+lqW7dgtzUnAFmQL0deo0yoeNln7gPEclRw==
+
 diff-sequences@^29.6.3:
   version "29.6.3"
   resolved "https://registry.yarnpkg.com/diff-sequences/-/diff-sequences-29.6.3.tgz#4deaf894d11407c51efc8418012f9e70b84ea921"
@@ -6760,6 +6765,11 @@ invert-kv@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-3.0.1.tgz#a93c7a3d4386a1dc8325b97da9bb1620c0282523"
   integrity sha512-CYdFeFexxhv/Bcny+Q0BfOV+ltRlJcd4BBZBYFX/O0u4npJrgZtIcjokegtiSMAvlMTJ+Koq0GBCc//3bueQxw==
+
+invokers-polyfill@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/invokers-polyfill/-/invokers-polyfill-0.5.2.tgz#4be98f7fecd0e2fbc8f0633c6c7cc0e7c1c9cc08"
+  integrity sha512-s4lbErodTZDOt4o54a6ljdHgxwnvEchgJxqI7Epx0H9ylCr+vbGVid7WeHkfU5k7CMgG5rzRIMuI+PclqhdXuA==
 
 ip-address@^9.0.5:
   version "9.0.5"

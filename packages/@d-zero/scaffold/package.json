@@ -51,6 +51,8 @@
 	},
 	"dependencies": {
 		"destyle.css": "4.0.1",
+		"dialog-toggle-events-polyfill": "1.1.2",
+		"invokers-polyfill": "0.5.2",
 		"tslib": "2.8.1"
 	},
 	"volta": {
