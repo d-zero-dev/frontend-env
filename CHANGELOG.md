@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.44](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.43...v5.0.0-alpha.44) (2025-03-12)
+
+### Features
+
+- **scaffold:** add dialog and invokers polyfills ([eee8c7b](https://github.com/d-zero-dev/frontend-env/commit/eee8c7bf8fecbe6eb10b5e4a5ddee0dce7421988))
+
 # [5.0.0-alpha.43](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.42...v5.0.0-alpha.43) (2025-03-12)
 
 ### Features
