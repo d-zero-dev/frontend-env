@@ -6,6 +6,7 @@
 		"dbaeumer.vscode-eslint",
 		"yusukehirao.vscode-markuplint",
 		"mrmlnc.vscode-puglint",
-		"streetsidesoftware.code-spell-checker"
+		"streetsidesoftware.code-spell-checker",
+		"saoudrizwan.claude-dev"
 	]
 }
