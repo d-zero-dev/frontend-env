@@ -4643,7 +4643,7 @@ dev-ip@^1.0.1:
   resolved "https://registry.yarnpkg.com/dev-ip/-/dev-ip-1.0.1.tgz#a76a3ed1855be7a012bb8ac16cb80f3c00dc28f0"
   integrity sha512-LmVkry/oDShEgSZPNgqCIp2/TlqtExeGmymru3uCELnfyjY11IzpAproLYs+1X88fXO6DBoYP3ul2Xo2yz2j6A==
 
-dialog-toggle-events-polyfill@^1.1.2:
+dialog-toggle-events-polyfill@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/dialog-toggle-events-polyfill/-/dialog-toggle-events-polyfill-1.1.2.tgz#3044d082c39eda751c1b4754fb22edbedbb6a151"
   integrity sha512-0XLpm2dfUg2NH0YRp2DkP3XkJqlM7k0Jx5sH+O/llAazxYirbdI+lqW7dgtzUnAFmQL0deo0yoeNln7gPEclRw==
@@ -6576,10 +6576,10 @@ ignore@^5.0.4, ignore@^5.0.5, ignore@^5.2.0, ignore@^5.2.4, ignore@^5.3.1:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.3.2.tgz#3cd40e729f3643fd87cb04e50bf0eb722bc596f5"
   integrity sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==
 
-image-size@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/image-size/-/image-size-2.0.0.tgz#5b03dd619e73a6e7e55c323f9934a0a5d4461e8b"
-  integrity sha512-HP07n1SpdIXGUL4VotUIOQz66MQOq8g7VN+Yj02YTVowqZScQ5i/JYU0+lkNr2pwt5j4hOpk94/UBV1ZCbS2fA==
+image-size@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/image-size/-/image-size-2.0.1.tgz#80f06046b8facf8d63d78e1d350873fea375f0eb"
+  integrity sha512-NI6NK/2zchlZopsQrcVIS7jxA0/rtIy74B+/rx5s7rKQyFebmQjZVhzxXgRZJROk+WhhOq+S6sUaODxp0L5hfg==
 
 immutable@^5.0.2:
   version "5.0.3"
@@ -6766,7 +6766,7 @@ invert-kv@^3.0.0:
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-3.0.1.tgz#a93c7a3d4386a1dc8325b97da9bb1620c0282523"
   integrity sha512-CYdFeFexxhv/Bcny+Q0BfOV+ltRlJcd4BBZBYFX/O0u4npJrgZtIcjokegtiSMAvlMTJ+Koq0GBCc//3bueQxw==
 
-invokers-polyfill@^0.5.2:
+invokers-polyfill@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/invokers-polyfill/-/invokers-polyfill-0.5.2.tgz#4be98f7fecd0e2fbc8f0633c6c7cc0e7c1c9cc08"
   integrity sha512-s4lbErodTZDOt4o54a6ljdHgxwnvEchgJxqI7Epx0H9ylCr+vbGVid7WeHkfU5k7CMgG5rzRIMuI+PclqhdXuA==
