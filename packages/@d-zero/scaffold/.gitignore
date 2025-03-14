@@ -19,6 +19,7 @@ yarn-error.log
 # Temporary
 .11ty
 .serve
+.cache
 
 # Document Root
 htdocs/*
