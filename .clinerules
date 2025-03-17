@@ -1,0 +1,37 @@
+# AI Agent Rules
+
+## Test Rules
+
+### Execution Requirements
+
+- You must use vitest as the testing framework
+
+### Test Code Requirements
+
+- You must write all tests in TypeScript
+- You must name test files with the pattern `*.spec.ts`
+- You must use `test` function, not `it`
+- You must use `expect` for all assertions
+- You must include both success and failure test cases
+- You must not write conditional logic or exception handling in test code
+- You must use `toThrow` for testing exceptions
+
+## Git Rules
+
+- You must write in English
+- You must use the imperative mood
+- You must use conventional commits
+  - You must use the following types:
+    - `feat`
+    - `fix`
+    - `ui`
+    - `style`
+    - `docs`
+    - `refactor`
+    - `test`
+    - `chore`
+  - You must use the following scopes:
+    - Each package name
+    - `repo`
+    - `deps`
+    - `github`
