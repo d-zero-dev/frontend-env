@@ -44,7 +44,7 @@
 		"prettier": "3.5.3",
 		"pug": "3.0.3",
 		"strip-css-comments": "5.0.0",
-		"vite": "6.2.2"
+		"vite": "6.2.3"
 	},
 	"devDependencies": {
 		"@types/cli-color": "2.0.6",
