@@ -1,5 +1,13 @@
 {
 	"extends": ["@d-zero/stylelint-config"],
+	"rules": {
+		"selector-type-no-unknown": [
+			true,
+			{
+				"ignoreTypes": ["/^c-.+$/"]
+			}
+		]
+	},
 	"overrides": [
 		{
 			"files": ["c-*.scss"],

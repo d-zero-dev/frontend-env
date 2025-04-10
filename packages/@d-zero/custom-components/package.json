@@ -1,0 +1,40 @@
+{
+	"name": "@d-zero/custom-components",
+	"version": "4.0.0-alpha.4",
+	"description": "D-ZERO custom components",
+	"author": "D-ZERO",
+	"license": "MIT",
+	"repository": {
+		"url": "https://github.com/d-zero-dev/frontend-env.git"
+	},
+	"private": false,
+	"publishConfig": {
+		"access": "public"
+	},
+	"type": "module",
+	"exports": {
+		"./hamburger-menu": {
+			"import": "./dist/hamburger-menu.js",
+			"types": "./dist/hamburger-menu.d.ts"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsc --project tsconfig.build.json",
+		"dev": "storybook dev -p 6006",
+		"storybook": "storybook build"
+	},
+	"devDependencies": {
+		"@chromatic-com/storybook": "3.2.6",
+		"@storybook/addon-essentials": "8.6.12",
+		"@storybook/blocks": "8.6.12",
+		"@storybook/experimental-addon-test": "8.6.12",
+		"@storybook/test": "8.6.12",
+		"@storybook/web-components": "8.6.12",
+		"@storybook/web-components-vite": "8.6.12",
+		"lit": "3.2.1",
+		"storybook": "8.6.12"
+	}
+}

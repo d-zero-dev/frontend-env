@@ -1,0 +1,95 @@
+import { Meta, Story, Canvas, Markdown } from '@storybook/blocks';
+import * as HamburgerMenuStories from './hamburger-menu.stories';
+
+<Meta of={HamburgerMenuStories} />
+
+# HamburgerMenu
+
+ハンバーガーメニューアイコンを表示し、クリックすると指定されたダイアログを開くWeb Componentです。
+アイコンのスタイル（線の色、太さ、間隔、角丸など）や、外枠のスタイルをCSSカスタムプロパティでカスタマイズできます。
+
+## プレビュー
+
+<Canvas>
+	<Story of={HamburgerMenuStories.Default} />
+</Canvas>
+
+## 使い方
+
+```html
+<x-hamburger-menu>
+	<dialog>
+		<h1>メニュー</h1>
+		<ul>
+			<li><a href="#">項目1</a></li>
+			<li><a href="#">項目2</a></li>
+		</ul>
+		<button command="close">閉じる</button>
+	</dialog>
+</x-hamburger-menu>
+```
+
+`<x-hamburger-menu>` 要素の中に `<dialog>` 要素を配置します。
+
+`<button command="close">`を`<dialog>`内のどこに配置しても閉じるボタンとして機能します。
+
+## カスタム要素の登録
+
+このコンポーネントを使用するには、最初に`defineHamburgerMenu`関数を呼び出してカスタム要素を登録する必要があります。
+
+```js
+import { defineHamburgerMenu } from '@d-zero/custom-components/hamburger-menu';
+
+// プレフィックスを指定してカスタム要素を登録
+defineHamburgerMenu('x'); // 'x-hamburger-menu'を登録
+```
+
+この関数は以下の特徴があります：
+
+- 引数としてプレフィックスを取り、`{prefix}-hamburger-menu`形式のカスタム要素を登録します
+- 既に同じ名前のカスタム要素が登録されている場合は再登録しません
+- 関数の戻り値は登録されたタグ名（例：`x-hamburger-menu`）です
+
+## 属性
+
+### `line-count`
+
+線の数を指定します。
+
+```html
+<x-hamburger-menu line-count="3"></x-hamburger-menu>
+```
+
+#### IDL属性 `lineCount`
+
+線の数を取得、または設定します。
+
+```js
+const hamburgerMenu = document.querySelector('x-hamburger-menu');
+
+// 線の数を取得
+console.log(hamburgerMenu.lineCount);
+
+// 線の数を設定
+hamburgerMenu.lineCount = 3;
+```
+
+## プロパティ (CSSカスタムプロパティ)
+
+コンポーネントの見た目は以下のCSSカスタムプロパティで調整できます:
+
+<Markdown>
+	{`
+| プロパティ名      | デフォルト値 | 説明                         |
+| ----------------- | ------------ | ---------------------------- |
+| \`--line-width\`    | \`3em\`          | 線の幅                       |
+| \`--line-height\`   | \`2px\`          | 線の高さ                     |
+| \`--line-color\`    | \`currentColor\` | ハンバーガーメニューの線の色 |
+| \`--border-radius\` | \`0\`            | 外枠の角丸                   |
+| \`--border-width\`  | \`1px\`          | 外枠の線の太さ               |
+| \`--border-style\`  | \`solid\`        | 外枠の線の種類               |
+| \`--border-color\`  | \`currentColor\` | 外枠の線の色                 |
+| \`--padding-block\` | \`25cqi\`        | ハンバーガーメニューの上下のパディング |
+| \`--padding-inline\` | \`20cqi\`        | ハンバーガーメニューの左右のパディング |
+`}
+</Markdown>
