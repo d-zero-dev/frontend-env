@@ -79,9 +79,6 @@ export class HamburgerMenu extends HTMLElement {
 				display: block;
 				inline-size: 5em;
 				block-size: 5em;
-				border-radius: var(--border-radius);
-				border: var(--border-width) var(--border-style) var(--border-color);
-				overflow: hidden;
 			}
 			button {
 				display: block;
@@ -92,6 +89,9 @@ export class HamburgerMenu extends HTMLElement {
 				padding: 0;
 				margin: 0;
 				cursor: pointer;
+				border-radius: var(--border-radius);
+				border: var(--border-width) var(--border-style, solid) var(--border-color);
+				overflow: hidden;
 				appearance: none;
 				-webkit-appearance: none;
 				-moz-appearance: none;
