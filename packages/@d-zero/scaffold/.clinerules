@@ -8,98 +8,84 @@
 
 <!-- ユーザー向け情報: @d-zero/mcp-serverをClineに設定している前提 -->
 
-### 共通
+#### 共通
 
 1. **最重要**: MCPサーバからのリクエストに問題があったときは作業を中断し、ユーザーに問題を報告する
-
    - 例: 「Figmaデータの取得に失敗しました。MCPサーバの設定を確認してください。」
-
 2. コーディングガイドラインをMCPサーバ経由で読み、一旦内容を記憶する
-
    - 例: `use_mcp_tool`を使用してガイドラインを取得し、実装方針を確認する
-
 3. 各タスクの手順どおりに進める
-
-### コンポーネント生成
-
-1. 共通の手順を実行する
-
-2. FigmaのURLを受け取り、MCPサーバ経由でFigmaのFileデータを取得する
-
+4. 共通の手順を実行する
+5. FigmaのURLを受け取り、MCPサーバ経由でFigmaのFileデータを取得する
    - 例: `use_mcp_tool`を使用してFigmaデータを取得する
-
-3. **重要**: FigmaのFileデータから全体のnodeIdを画像取得APIに渡し全体の画像を取得する
-
+6. **重要**: FigmaのFileデータから全体のnodeIdを画像取得APIに渡し全体の画像を取得する
    - 全体画像は物理ファイルとして.cacheディレクトリに保存する
    - 例: `use_mcp_tool`でnodeIdを特定し、画像を取得して`.cache/コンポーネント名.png`として保存
    - **この手順は必須**: 全体画像を確認せずに実装を進めないこと
-
-4. **必須**: FigmaのFileデータと全体の画像を解析し、指令に対応するコンポーネントの準備をする
-
+7. **必須**: FigmaのFileデータと全体の画像を解析し、指令に対応するコンポーネントの準備をする
    - 例: `.cache/コンポーネント名.png`を解析し全体デザインを確認し、構造やスタイルを分析
    - 全体像を把握してから個別要素の実装に進むこと
    - `boundVariables`を持つノードは`:root`に設定した情報（コメントのVariableID）を元に適切にCSSカスタムプロパティを`var(--primary-color)`のように設定する
-
-5. ユーザーにVariablesの詳細情報を要求し、受け取ったら`:root`に設定する
-
+8. ユーザーにVariablesの詳細情報を要求し、受け取ったら`:root`に設定する
    - **必須**: 要求は必ず行う
    - ユーザーが拒否したらこの工程はスキップする
-   - 例: `--primary-color[VariableCollectionId:5:13/VariableID:5:14]={"r":0.9529411792755127,"g":0.572549045085907,"b":0,"a":1}`を受け取ると`--primary-color: rgba(243, 156, 18, 1);`として設定し、コメントでVariableIDの情報を残す
+   - 例: `--primary-color[VariableCollectionId:5:13/VariableID:5:14]={"r":0.9529411792755127,"g":0.572549045085907,"b":0,"a":1}`を受け取ると`--primary-color: rgba(243, 156, 18, 1);`として設定し、コメントでVariableIDの情報を残す（コメントはコードの行に続ける）
    - **重要**: `:root`に指定し、コンポーネントのスコープ内には設定しない
-
-6. 必要なコンポーネントファイルを作成する
-
-   - マークアップの形式はPugが良いかHTMLが良いかは最初は尋ねる、もしくは推測して既存のコンポーネントがあれば、上書きしていいか尋ねる
+   - **重要**: `:root`セレクタの他の定義を上書きしてはいけない
+9. 必要なコンポーネントファイルを作成する
+   - マークアップの形式はPugで新規作成、もしくは推測して既存のコンポーネントがあれば、上書きしていいか尋ねる
    - 要素の順番はスクリーンリーダーやフォーカスの順番に依存し重要であるため、Figmaレイヤーの順番にはこだわらず、情報設計的な在り方を最優先に視覚的な配置を加味して順番を決定する
    - マークアップは暗黙のロールに気をつけて、然るべきHTML要素を採用すること
      - 選択肢がいくつもある場合はユーザーに尋ねること
+     - `@d-zero/custom-components`のコンポーネントが適している場合はそれを優先する
+     - `@d-zero/custom-components`のプレフィックスは`c-`をつけること
    - Stylelintの警告について
-     - **次の警告は無視する**
-       - プロパティの順番に関する警告
-       - 論理プロパティに関する警告
-       - カラーフォーマットに関する警告
-     - それ以外の警告はコーディングガイドラインを元に修正する
-   - Figmaから取得できるCSSに関連するプロパティは**全て完全に再現する**
+     - 警告があった場合、一度保存をし、`npx stylelint --fix`を実行して修正する
+   - **`@media`をつかってはいけない**
+     - **MUST NOT USE** `@media`
+10. 画像やアイコンに関して
+    - 画像として書き出しが適切なFigmaのレイヤーはnodeIdを画像取得APIに渡して画像を取得する
+      - ラスタライズの画像レイヤー・塗レイヤーがなければSVGとして、それ以外はPNGとして取得する
+      - 画像はガイドラインの命名規則に従って保存し、HTMLやCSSのパスを適切に設定する
+        - ガイドライン通り、`/img/`の直下に保存し、サブディレクトリはつくらない
+      - SVGファイルも`<img>`要素で読み込む
+        - インラインSVGにはしない（`<svg>`要素を直接HTMLに記述しない）
+      - **重要**: SVGの中にベクターではない画像が含まれる場合は、SVGにせずPNGに変換して保存する
+    - **重要**: SVGが適切だとしてもFigmaのレイヤー構造から生成してはならない。必ずMCPサーバ経由で取得したSVGを使用すること
+11. 報告
+    - コンポーネントがどのページに影響するかを報告して終了
+      - どのページかどうかは`__assets/htdocs/`ディレクトリ内から`@include`もしくはクラス名を検索して特定する
+12. ふりかえり
+    - ふりかえりを行いタスクが手順通りに進んだかを確認する
+    - `git status`を実行して、変更があったファイルとその内容を確認する
+    - してはいけないことを行っていないかを確認する
 
-7. 画像やアイコンに関して
+##### 以下のタスクは実行しない
 
-   - 画像として書き出しが必要なFigmaのレイヤーはnodeIdを画像取得APIに渡して画像を取得する
-     - 画像はガイドラインの命名規則に従って保存し、HTMLやCSSのパスを適切に設定する
-       - ガイドライン通り、`/img/`の直下に保存し、サブディレクトリはつくらない
-     - SVGが適切な場合はFigmaのFileデータのノードからSVGファイルを生成する
-       - ガイドライン通り、`/img/`の直下に保存し、サブディレクトリはつくらない
-       - SVGファイルは`<img>`要素で読み込む
-       - インラインSVGにはしない（`<svg>`要素を直接HTMLに記述しない）
-       - **重要**: SVGの中にVectorではない画像が含まれる場合は、SVGにせずPNGに変換して保存する
-
-8. ブラウザチェック
-
-   - **不要** (現状は精度が低いため)
-   - ユーザーにチェックを促す
-
-9. 報告
-
-   - コンポーネントがどのページに影響するかを報告して終了
-     - どのページかどうかは`__assets/htdocs/`ディレクトリ内から`@include`もしくはクラス名を検索して特定する
+- サンプルページ
+  - **MUST NOT CREATE**
+  - **作らない**
+- ブラウザチェック
+  - **MUST NOT CHECK**
+  - **してはいけない**
+  - ユーザーにチェックを促す
+- ビルド
+  - **MUST NOT RUN COMMAND**
+  - **してはいけない**
+  - ユーザーに実行を促す
 
 ## 修正指示
 
 1. 共通の手順を実行する
-
 2. 修正指示の確認をする
-
    - 曖昧な指示がある場合はユーザーに確認する
    - 例: 「ボタンのスタイルを修正してください」→「どのボタンですか？」と確認する
-
 3. 修正場所の特定
-
    - `<root>/htdocs`ディレクトリ内のファイルを直接編集しない
      - `<root>/__assets`ディレクトリ内に編集用のファイルがあるのでそちらを編集する
      - 検索対象としても不適切
      - 例外: `<root>/htdocs/img/`配下の画像ファイルは直接編集してもよい
-
 4. ブラウザチェック
-
    - **不要** (現状は精度が低いため)
    - ユーザーにチェックを促す
 
@@ -127,6 +113,7 @@
 - data属性はJSでインタラクティブな状態変化をつけるときのみに用いて静的なスタイルを適用しない
 - 改行でbr要素使わず、span要素とdisplay:block/inline-blockを活用する
   - 詩・ポエムは除く
+- `<c-hamburger-menu>`の中身がFigmaにない場合はダミーでダイアログの内容を入れる
 
 ### CSS/SCSS
 
@@ -167,92 +154,38 @@
 
 ### コンポーネント
 
-#### ランドマーク
+#### カスタム要素/ウェブコンポーネント
 
-- ランドマークはページコンポーネント（`c-page-*`）に実装し、UIコンポーネントには使用しない
-- ここでいうランドマークはLandmark Roleを持つ要素のことで以下の要素を指す
-  - `<header>`
-  - `<footer>`
-  - `<nav>`
-  - `<main>`
-  - `<aside>`
+`@d-zero/custom-components`のコンポーネントが適している場合は利用する
 
-#### インタラクティブコンポーネント
+必要なコンポーネントを`htdocs/js/script.ts`に定義する。プレフィックスは基本的に`c-`を用いる。
 
-- インタラクティブな呼び出し元ボタンはbutton要素を用いる
-- アクションはcommand属性を用いる
-  - command属性に規定されているアクションはそのまま活用する
-    - `command="toggle-popover"`はポップオーバーUIの開閉を行う
-    - `command="show-popover"`はポップオーバーUIの展開を行う
-    - `command="hide-popover"`はポップオーバーUIの収納を行う
-    - `command="show-modal"`はモーダルUIの展開を行う
-    - `command="close"`はモーダルUIの収納を行う
-  - 上記以外はカスタムコマンドを用意する
-    - カスタムコマンドは`command="--command-name"`のように記述して、実装はJavaScriptに記述する
-  - 規定アクション中に内部的な処理を施す場合はCommandEventを利用してJavaScriptに記述する
-    - 状況によっては`beforetoggle`や`toggle`、`close`などのイベントが適切なので適宜利用する
+```ts
+import { defineHamburgerMenu } from '@d-zero/custom-components/hamburger-menu';
 
-### カスタムコマンドの実装例
+const CUSTOM_COMPONENTS_PREFIX = 'c';
 
-```html
-<button command="--custom-command" commandfor="target01">カスタムコマンド</button>
-
-<div id="target01">カスタムコマンドの対象</div>
+defineHamburgerMenu(CUSTOM_COMPONENTS_PREFIX);
 ```
 
-```typescript
-for (button of document.querySelectorAll<HTMLButtonElement>('[command]')) {
-	const targetId = button.getAttribute('commandfor') ?? null;
-	if (!targetId) {
-		continue;
-	}
-	const target = document.getElementById(targetId);
-	target?.addEventListener('command', (e) => {
-		switch (e.command) {
-			case '--custom-command': {
-				const invoker: HTMLButtonElement = e.source; // 呼び出し元ボタンの特定
-				// カスタムコマンドの処理
-				console.log(`Hello, Custom Command: ${e.command}`);
-				break;
-			}
+カスタム要素は指定したプレフィックスを用いて定義する。それぞれ属性とカスタムプロパティの仕様に従って実装する（仕様はCursor Docsかコンテキストウィンドウ内のガイドライン参照）。
+
+```html
+<c-hamburger-menu line-count="3">
+	<!-- slot -->
+</c-hamburger-menu>
+```
+
+```scss
+.c-some-component {
+	&__hamburger-menu {
+		c-hamburger-menu {
+			block-size: 2rem;
+			inline-size: 2rem;
+			--line-color: var(--primary-color);
 		}
-	});
+	}
 }
 ```
 
-### 規定アクションのイベントフックの実装例
-
-```html
-<button type="button" command="show-modal" commandfor="dialog01">メニュー</button>
-
-<dialog id="dialog01" aria-labelledby="dialog01-title">
-	<h2 id="dialog01-title">メニュー</h2>
-	<p>メニューの内容</p>
-</dialog>
-```
-
-```typescript
-for (button of document.querySelectorAll<HTMLButtonElement>('[command]')) {
-	const targetId = button.getAttribute('commandfor') ?? null;
-	if (!targetId) {
-		continue;
-	}
-	const target = document.getElementById(targetId);
-	target?.addEventListener('command', (e) => {
-		switch (e.command) {
-			case 'show-modal': {
-				const invoker: HTMLButtonElement = e.source; // 呼び出し元ボタンの特定
-				// フック処理
-				console.log(`Invoked: ${e.command}`);
-				break;
-			}
-		}
-	});
-
-	// もしくは<dialog>要素であればbeforetoggleやtoggleイベントなどを利用できる
-	target?.addEventListener('beforetoggle', (e) => {
-		// フック処理
-		console.log(`Fired: beforetoggle`);
-	});
-}
-```
+⚠️ `@d-zero/custom-components`のコンポーネントは、インタラクションは実装済みなので**追加で実装を行ってはいけない**。
