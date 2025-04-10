@@ -50,6 +50,7 @@
 		"vitest": "3.0.9"
 	},
 	"dependencies": {
+		"@d-zero/custom-components": "4.0.0-alpha.4",
 		"destyle.css": "4.0.1",
 		"dialog-toggle-events-polyfill": "1.1.2",
 		"invokers-polyfill": "0.5.2",
