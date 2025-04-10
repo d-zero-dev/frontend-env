@@ -29,9 +29,9 @@ import * as HamburgerMenuStories from './hamburger-menu.stories';
 </x-hamburger-menu>
 ```
 
-`<x-hamburger-menu>` 要素の中に `<dialog>` 要素を配置します。
+`<x-hamburger-menu>`要素の中に`<dialog>`要素を配置します。
 
-`<button command="close">`を`<dialog>`内のどこに配置しても閉じるボタンとして機能します。
+`<dialog>`要素の中に`<button command="close">`を配置すると自動的に閉じるボタンとして機能します。
 
 ## カスタム要素の登録
 
@@ -54,10 +54,10 @@ defineHamburgerMenu('x'); // 'x-hamburger-menu'を登録
 
 ### `line-count`
 
-線の数を指定します。
+線の数を指定します。デフォルトは`3`です。
 
 ```html
-<x-hamburger-menu line-count="3"></x-hamburger-menu>
+<x-hamburger-menu line-count="2"></x-hamburger-menu>
 ```
 
 #### IDL属性 `lineCount`
@@ -93,3 +93,15 @@ hamburgerMenu.lineCount = 3;
 | \`--padding-inline\` | \`20cqi\`        | ハンバーガーメニューの左右のパディング |
 `}
 </Markdown>
+
+## 構造ルール
+
+### 子・子孫要素
+
+要素の直下には`<dialog>`要素をひとつ配置します。それ以外の要素は配置しないでください。
+
+`<dialog>`内には`<button command="close">`を配置すると自動的に閉じるボタンとして機能します。
+
+### 親・先祖要素
+
+Shadow DOMに`<button>`要素をもつため、インタラクティブ要素として扱ってください。したがって、親または子孫要素として`<button>`要素や`<a>`要素で**囲うことはできません**。
