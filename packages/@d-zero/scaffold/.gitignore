@@ -3,6 +3,7 @@ node_modules
 npm-error.log
 yarn-error.log
 .env
+.husky/_/*
 
 # Huge File
 *.zip
