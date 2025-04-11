@@ -40,10 +40,10 @@
 		"@d-zero/linters": "5.0.0-alpha.62",
 		"@d-zero/tsconfig": "0.4.1",
 		"husky": "9.1.7",
-		"lerna": "8.2.1",
+		"lerna": "8.2.2",
 		"npm-run-all2": "7.0.2",
-		"typescript": "5.8.2",
-		"vitest": "3.0.9"
+		"typescript": "5.8.3",
+		"vitest": "3.1.1"
 	},
 	"volta": {
 		"node": "22.14.0",
