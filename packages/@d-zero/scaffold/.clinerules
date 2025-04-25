@@ -4,4 +4,14 @@
 
 ### コード生成
 
-1. コード生成に関する指令を受たら`use_mcp_tool:frontend_env:get_component_creation_instruction`を実行し、サーバが返す指示を一言一句漏らさず確認してそのとおりに従え。
+#### Figmaからコンポーネント生成
+
+Figmaからコード生成に関する指令を受たら`use_mcp_tool:frontend_env:get_task_step(./ai-tasks/create-component.md)`を実行し、サーバが返す指示を一言一句漏らさず確認してそのとおりに従え。
+
+#### BurgerEditorコンテンツ生成
+
+特定のウェブページをBurgerEditorコンテンツ化するように指令を受たら`use_mcp_tool:frontend_env:get_task_step(./ai-tasks/page-to-burger.md)`を実行し、サーバが返す指示を一言一句漏らさず確認してそのとおりに従え。
+
+#### ページ生成
+
+何かしらのページを作成するように指令を受たらファイルを`read_file`する前に`use_mcp_tool:frontend_env:get_task_step(./ai-tasks/create-page.md)`を実行し、サーバが返す指示を一言一句漏らさず確認してそのとおりに従え。
