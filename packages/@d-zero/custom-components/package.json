@@ -13,6 +13,10 @@
 	},
 	"type": "module",
 	"exports": {
+		"./breadcrumbs": {
+			"import": "./dist/breadcrumbs.js",
+			"types": "./dist/breadcrumbs.d.ts"
+		},
 		"./hamburger-menu": {
 			"import": "./dist/hamburger-menu.js",
 			"types": "./dist/hamburger-menu.d.ts"

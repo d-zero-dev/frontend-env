@@ -1,0 +1,263 @@
+import { Meta, Story, Canvas, Markdown } from '@storybook/blocks';
+import * as BreadcrumbsStories from './breadcrumbs.stories';
+
+<Meta of={BreadcrumbsStories} />
+
+# Breadcrumbs
+
+パンくずリストを表示するWeb Componentです。
+区切り文字やスタイル（色、間隔、フォントサイズなど）をCSSカスタムプロパティや**CSS Shadow Parts**でカスタマイズできます。
+Schema.orgのマイクロデータにも対応しているため、SEO対策にも有効です。
+
+## プレビュー
+
+<Canvas>
+	<Story of={BreadcrumbsStories.Default} />
+</Canvas>
+
+## 使い方
+
+```html
+<x-breadcrumbs>
+	<a href="/">ホーム</a>
+	<a href="/category">カテゴリA</a>
+	<a href="/category/subcategory/items">アイテム一覧</a>
+	<a href="/category/subcategory/items/current" aria-current="page">現在のアイテム</a>
+</x-breadcrumbs>
+```
+
+`<x-breadcrumbs>`要素の直下には`<a>`要素のみを配置します。
+
+- **すべての項目は`<a>`要素である必要があります。**
+- 各`<a>`要素は**必須の`href`属性**を持つ必要があります。
+- 最後の`<a>`要素は自動的に現在のページとして扱われ、`aria-current="page"`属性が付与されます（既に指定されている場合を除く）。
+- **テキストノードは使用できません。** もしテキストノードが含まれている場合、エラーが発生します。
+
+内部的に適切なHTML構造（`<ol>`と`<li>`）が自動的に生成されます。
+
+## カスタム要素の登録
+
+このコンポーネントを使用するには、最初に`defineBreadcrumbs`関数を呼び出してカスタム要素を登録する必要があります。
+
+```js
+import { defineBreadcrumbs } from '@d-zero/custom-components/breadcrumbs';
+
+// プレフィックスを指定してカスタム要素を登録
+defineBreadcrumbs('x'); // 'x-breadcrumbs'を登録
+```
+
+この関数は以下の特徴があります：
+
+- 引数としてプレフィックスを取り、`{prefix}-breadcrumbs`形式のカスタム要素を登録します
+- 既に同じ名前のカスタム要素が登録されている場合は再登録しません
+- 関数の戻り値は登録されたタグ名（例：`x-breadcrumbs`）です
+
+## SEO対応
+
+このコンポーネントは[Schema.org](https://schema.org/)のBreadcrumbListマイクロデータ形式に対応しています。
+これにより、検索エンジンはパンくずリストを正確に認識し、検索結果に表示することができます。
+
+内部的に以下のマイクロデータが自動的に付与されます：
+
+- `itemscope`, `itemtype="https://schema.org/BreadcrumbList"` - リスト全体
+- `itemprop="itemListElement"`, `itemtype="https://schema.org/ListItem"` - 各リスト項目
+- `itemprop="item"`, `itemtype="https://schema.org/WebPage"` - 各リンク
+- `itemprop="name"` - リンクテキスト
+- `itemprop="position"` - 順序位置
+
+## 属性
+
+### `separator`
+
+区切り文字を指定します。
+
+- **指定しない場合:** デフォルトの区切り文字 `/` が使用されます。
+- **空文字列 (`separator=""`) を指定した場合:** 区切り文字は表示されません。
+
+```html
+<!-- デフォルト (/) -->
+<x-breadcrumbs>...</x-breadcrumbs>
+
+<!-- 区切り文字を > に変更 -->
+<x-breadcrumbs separator=">">...</x-breadcrumbs>
+
+<!-- 区切り文字なし -->
+<x-breadcrumbs separator="">...</x-breadcrumbs>
+```
+
+#### IDL属性 `separator`
+
+区切り文字を取得、または設定します。
+
+- 有効な値（空文字列を含む任意の文字列）を設定すると、属性にも反映されます。
+- `null` または空白のみの文字列を設定しようとした場合、**デフォルト値(`/`)にリセットされ、対応する属性は削除されます**（属性が存在しない場合の挙動になります）。
+
+```js
+const breadcrumbs = document.querySelector('x-breadcrumbs');
+
+// 属性が未指定ならデフォルト値を取得
+console.log(breadcrumbs.separator); // 例: '/'
+
+// 属性を設定
+breadcrumbs.setAttribute('separator', '>');
+console.log(breadcrumbs.separator); // ' > '
+
+// プロパティから空文字列を設定 (区切り文字なし)
+breadcrumbs.separator = '';
+console.log(breadcrumbs.getAttribute('separator')); // ''
+console.log(breadcrumbs.separator); // ''
+
+// プロパティから不正な値を設定（デフォルト値'/'に戻り、属性は削除）
+breadcrumbs.separator = null;
+console.log(breadcrumbs.hasAttribute('separator')); // false
+console.log(breadcrumbs.separator); // '/'が表示される
+```
+
+## プロパティ (CSSカスタムプロパティ)
+
+コンポーネントの見た目は以下のCSSカスタムプロパティで調整できます:
+
+<Markdown>
+	{`
+| プロパティ名            | デフォルト値    | 説明                         |
+| ----------------------- | --------------- | ---------------------------- |
+| \`--separator-color\`     | \`currentColor\` | 区切り文字の色               |
+| \`--separator-spacing\`   | \`0.5em\`        | 区切り文字の間隔             |
+| \`--color\`               | \`currentColor\` | リスト全体のデフォルト文字色 |
+| \`--current-color\`       | \`currentColor\` | 現在位置を示すアイテムの色   |
+| \`--font\`                | \`inherit\`      | 全体のフォントスタイル（ショートハンド） |
+| \`--current-font\`        | \`inherit\`      | 現在位置アイテムのフォントスタイル（ショートハンド） |
+`}
+</Markdown>
+
+**ショートハンドプロパティについて:**
+
+- `--font` を設定すると、リスト全体のフォントスタイル（太字、斜体、サイズ、ファミリーなど）を一括で指定できます。
+- `--current-font` を設定すると、現在のページ（最後の項目）のフォントスタイルを個別に指定できます。
+- これらのショートハンドプロパティが設定されている場合、対応する個別のプロパティ（`--color`, `--current-color`）よりも優先されることがあります（CSSの仕様に従います）。例えば、`--font` で `color` が指定されている場合、`--color` の指定は無視される可能性があります。
+
+## CSS Shadow Parts (`::part`)
+
+より詳細なスタイリングのために、内部の特定要素が**パート**として公開されています。
+これらは`::part()`疑似要素セレクターを使用して外部からスタイリングできます。
+
+現在公開されているパートは以下の通りです：
+
+- `separator`: 各リンク間の区切り文字（`<span>`要素）
+
+**例:** 区切り文字を太字にし、背景色を追加する
+
+```css
+/* x-breadcrumbs要素のseparatorパートをターゲット */
+x-breadcrumbs::part(separator) {
+	font-weight: bold;
+	color: navy;
+	background-color: lightblue;
+	padding: 1px 4px;
+	border-radius: 3px;
+}
+```
+
+CSSカスタムプロパティでは難しい、より複雑なスタイル（背景、角丸、ボーダーなど）を区切り文字に適用したい場合に便利です。
+
+**Storybookでのテスト:**
+StorybookのControlsパネルにある「separator Part CSS」テキストエリアを使用すると、リアルタイムで`::part(separator)`へのスタイルを適用してプレビューできます。
+
+## バリエーション
+
+### カスタム区切り文字
+
+区切り文字や間隔をカスタマイズした例です。
+
+<Canvas>
+	<Story of={BreadcrumbsStories.CustomSeparator} />
+</Canvas>
+
+### 長いパス
+
+多くの階層を持つパンくずリストの例です。
+
+<Canvas>
+	<Story of={BreadcrumbsStories.LongPath} />
+</Canvas>
+
+### カスタムフォント
+
+フォントショートハンドプロパティを使用した例です。
+
+<Canvas>
+	<Story of={BreadcrumbsStories.CustomFonts} />
+</Canvas>
+
+### パートスタイリング
+
+CSS Shadow Parts (`::part(separator)`) を使用して区切り文字を詳細にスタイリングした例です。
+StorybookのControlsパネルで「separator Part CSS」を編集して、様々なスタイルを試すことができます。
+
+<Canvas>
+	<Story of={BreadcrumbsStories.PartStyling} />
+</Canvas>
+
+## 構造ルール
+
+### 子・子孫要素
+
+要素の直下には`<a>`要素のみを配置します。各`<a>`要素はリンクとなり、`href`属性が必須です。
+テキストノードを含めることはできず、エラーの原因となります。
+最後の`<a>`要素は自動的に現在のページとして扱われ、`aria-current="page"`が内部で設定されます。
+
+### 内部構造
+
+コンポーネントは内部的に、以下のHTML構造（Shadow DOM内）を生成します：
+
+```html
+<ol itemscope itemtype="https://schema.org/BreadcrumbList">
+	<li itemscope itemprop="itemListElement" itemtype="https://schema.org/ListItem">
+		<a
+			href="/"
+			itemscope
+			itemprop="item"
+			itemtype="https://schema.org/WebPage"
+			itemid="/">
+			<span itemprop="name">ホーム</span>
+		</a>
+		<meta itemprop="position" content="1" />
+		<span aria-hidden="true" part="separator">/</span>
+		<!-- part属性が追加 -->
+	</li>
+	<li itemscope itemprop="itemListElement" itemtype="https://schema.org/ListItem">
+		<a
+			href="/category"
+			itemscope
+			itemprop="item"
+			itemtype="https://schema.org/WebPage"
+			itemid="/category">
+			<span itemprop="name">カテゴリ</span>
+		</a>
+		<meta itemprop="position" content="2" />
+		<span aria-hidden="true" part="separator">/</span>
+		<!-- part属性が追加 -->
+	</li>
+	<li itemscope itemprop="itemListElement" itemtype="https://schema.org/ListItem">
+		<a
+			href="/category/page"
+			itemscope
+			itemprop="item"
+			itemtype="https://schema.org/WebPage"
+			itemid="/category/page"
+			aria-current="page">
+			<span itemprop="name">現在のページ</span>
+		</a>
+		<meta itemprop="position" content="3" />
+		<!-- 最後の要素なので区切り文字なし -->
+	</li>
+</ol>
+```
+
+### アクセシビリティ
+
+コンポーネントは適切な意味論的構造（Semantic Structure）を持ち、以下のアクセシビリティ機能を提供します：
+
+- `<ol>`と`<li>`で適切なリスト構造を形成
+- 最後の要素には`aria-current="page"`が自動的に付与され、現在のページとして認識される
+- 区切り文字は`aria-hidden="true"`によりスクリーンリーダーから無視される
