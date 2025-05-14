@@ -42,7 +42,7 @@ jobs:
         run: yarn --frozen-lockfile --check-files
 
       - name: Compile
-        run: yarn tsc
+        run: yarn build
 
       - name: Lint
         run: yarn lint
