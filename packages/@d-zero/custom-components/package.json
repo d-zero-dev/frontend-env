@@ -38,7 +38,7 @@
 		"@storybook/test": "8.6.12",
 		"@storybook/web-components": "8.6.12",
 		"@storybook/web-components-vite": "8.6.12",
-		"lit": "3.2.1",
+		"lit": "3.3.0",
 		"storybook": "8.6.12"
 	}
 }
