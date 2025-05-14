@@ -17,7 +17,7 @@
 		"@d-zero/scaffold": "5.0.0-alpha.45",
 		"glob": "11.0.2",
 		"i18n-js": "4.5.1",
-		"ignore": "7.0.3",
+		"ignore": "7.0.4",
 		"meow": "13.2.0",
 		"plop": "4.0.1"
 	},
