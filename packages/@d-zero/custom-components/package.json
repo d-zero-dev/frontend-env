@@ -32,13 +32,13 @@
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "3.2.6",
-		"@storybook/addon-essentials": "8.6.13",
-		"@storybook/blocks": "8.6.13",
-		"@storybook/experimental-addon-test": "8.6.13",
-		"@storybook/test": "8.6.13",
-		"@storybook/web-components": "8.6.13",
-		"@storybook/web-components-vite": "8.6.13",
+		"@storybook/addon-essentials": "8.6.14",
+		"@storybook/blocks": "8.6.14",
+		"@storybook/experimental-addon-test": "8.6.14",
+		"@storybook/test": "8.6.14",
+		"@storybook/web-components": "8.6.14",
+		"@storybook/web-components-vite": "8.6.14",
 		"lit": "3.3.0",
-		"storybook": "8.6.13"
+		"storybook": "8.6.14"
 	}
 }
