@@ -41,6 +41,8 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			return content;
 		}
 
+		const isServe = pluginConfig.isServe ?? false;
+
 		const transferred = pathTransfer(
 			{
 				inputPath: this.page.inputPath,
@@ -55,7 +57,7 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 				.replaceAll(path.sep, '/');
 
 		if (pluginConfig?.hooks?.beforeSerialize) {
-			content = await pluginConfig.hooks.beforeSerialize(content);
+			content = await pluginConfig.hooks.beforeSerialize(content, isServe);
 		}
 
 		content = await domSerialize(content, async (documentElement, window) => {
@@ -71,7 +73,7 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			}
 
 			if (pluginConfig?.hooks?.afterSerialize) {
-				await pluginConfig.hooks.afterSerialize(window);
+				await pluginConfig.hooks.afterSerialize(window, isServe);
 			}
 		});
 
@@ -123,7 +125,7 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			content = content.replaceAll(/\r?\n/g, pluginConfig.lineBreak);
 		}
 
-		if (pluginConfig.isServe) {
+		if (isServe) {
 			return content;
 		}
 
@@ -158,11 +160,15 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 		const relativePathFromBase = path.relative(dirPath, eleventyConfig.dir.output) || '.';
 
 		if (pluginConfig?.hooks?.replace) {
-			content = await pluginConfig.hooks.replace(content, {
-				filePath,
-				dirPath,
-				relativePathFromBase,
-			});
+			content = await pluginConfig.hooks.replace(
+				content,
+				{
+					filePath,
+					dirPath,
+					relativePathFromBase,
+				},
+				isServe,
+			);
 		}
 
 		return content;

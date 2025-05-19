@@ -71,9 +71,9 @@ export type ImageSizesOptions = {
 };
 
 export type HtmlHooks = {
-	beforeSerialize?: (content: string) => Promise<string> | string;
-	afterSerialize?: (window: Window) => Promise<void> | void;
-	replace?: (content: string, paths: Paths) => Promise<string> | string;
+	beforeSerialize?: (content: string, isServe: boolean) => Promise<string> | string;
+	afterSerialize?: (window: Window, isServe: boolean) => Promise<void> | void;
+	replace?: (content: string, paths: Paths, isServe: boolean) => Promise<string> | string;
 };
 
 export type Paths = {
