@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.46](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.45...v5.0.0-alpha.46) (2025-05-19)
+
+### Features
+
+- **custom-components:** add Breadcrumbs component ([18ca2a5](https://github.com/d-zero-dev/frontend-env/commit/18ca2a558309403f31fe6a7c129f23cc78c503e6))
+
 # [5.0.0-alpha.45](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.44...v5.0.0-alpha.45) (2025-04-11)
 
 ### Bug Fixes

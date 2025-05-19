@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.46](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.45...v5.0.0-alpha.46) (2025-05-19)
+
+### Bug Fixes
+
+- **builder:** rename tsc script to build ([cd535c3](https://github.com/d-zero-dev/frontend-env/commit/cd535c375c3a7a47e66e5e85994a8a606dbf008d))
+- **github:** update CI compile step to use yarn build ([229b911](https://github.com/d-zero-dev/frontend-env/commit/229b9112d4b7a521c3ad3ec981c9e624cdd10233))
+- **repo:** exclude dist and storybook-static directories from linting ([2e19fa0](https://github.com/d-zero-dev/frontend-env/commit/2e19fa0cdb5daab89c566b52d9cede517b053c5f))
+
+### Features
+
+- **builder:** add HTML extension customization feature ([42b8fde](https://github.com/d-zero-dev/frontend-env/commit/42b8fdef30de00d4d8fb070fa1cef9a24d8f1fd9))
+- **builder:** add HTML hooks functionality for custom processing ([6698f58](https://github.com/d-zero-dev/frontend-env/commit/6698f58832b678197aa60a2b6eab5cf8c5f1afed))
+- **builder:** add isServe flag to HTML hooks ([9126ae1](https://github.com/d-zero-dev/frontend-env/commit/9126ae1c59fe5885b3f83a495d9eb3f2f3880152))
+- **builder:** expose window object in dom-serialize hook ([b3750b7](https://github.com/d-zero-dev/frontend-env/commit/b3750b77c74d2f8e055fdfed6f85c02a87590731))
+- **custom-components:** add Breadcrumbs component ([18ca2a5](https://github.com/d-zero-dev/frontend-env/commit/18ca2a558309403f31fe6a7c129f23cc78c503e6))
+- **scaffold:** add ai tasks and enhance rules ([db109a8](https://github.com/d-zero-dev/frontend-env/commit/db109a8d268dee572431d1865d870a5bb30c7193))
+
 # [5.0.0-alpha.45](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.44...v5.0.0-alpha.45) (2025-04-11)
 
 ### Bug Fixes

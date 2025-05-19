@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.46](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.45...v5.0.0-alpha.46) (2025-05-19)
+
+### Bug Fixes
+
+- **builder:** rename tsc script to build ([cd535c3](https://github.com/d-zero-dev/frontend-env/commit/cd535c375c3a7a47e66e5e85994a8a606dbf008d))
+
+### Features
+
+- **builder:** add HTML extension customization feature ([42b8fde](https://github.com/d-zero-dev/frontend-env/commit/42b8fdef30de00d4d8fb070fa1cef9a24d8f1fd9))
+- **builder:** add HTML hooks functionality for custom processing ([6698f58](https://github.com/d-zero-dev/frontend-env/commit/6698f58832b678197aa60a2b6eab5cf8c5f1afed))
+- **builder:** add isServe flag to HTML hooks ([9126ae1](https://github.com/d-zero-dev/frontend-env/commit/9126ae1c59fe5885b3f83a495d9eb3f2f3880152))
+- **builder:** expose window object in dom-serialize hook ([b3750b7](https://github.com/d-zero-dev/frontend-env/commit/b3750b77c74d2f8e055fdfed6f85c02a87590731))
+
 # [5.0.0-alpha.45](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.44...v5.0.0-alpha.45) (2025-04-11)
 
 **Note:** Version bump only for package @d-zero/builder

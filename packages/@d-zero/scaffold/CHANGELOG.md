@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.46](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.45...v5.0.0-alpha.46) (2025-05-19)
+
+### Features
+
+- **scaffold:** add ai tasks and enhance rules ([db109a8](https://github.com/d-zero-dev/frontend-env/commit/db109a8d268dee572431d1865d870a5bb30c7193))
+
 # [5.0.0-alpha.45](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.44...v5.0.0-alpha.45) (2025-04-11)
 
 ### Features

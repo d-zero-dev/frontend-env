@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/scaffold",
-	"version": "5.0.0-alpha.45",
+	"version": "5.0.0-alpha.46",
 	"description": "Frontend scaffold files of D-ZERO Co., Ltd.",
 	"repository": "https://github.com/d-zero-dev/frontend-env.git",
 	"author": "D-ZERO Co., Ltd.",
@@ -37,9 +37,9 @@
 		"last 2 ios_saf version"
 	],
 	"devDependencies": {
-		"@d-zero/builder": "5.0.0-alpha.45",
+		"@d-zero/builder": "5.0.0-alpha.46",
 		"@d-zero/linters": "5.0.0-alpha.63",
-		"@d-zero/postcss-config": "5.0.0-alpha.45",
+		"@d-zero/postcss-config": "5.0.0-alpha.46",
 		"@d-zero/tsconfig": "0.4.1",
 		"@types/node": "22.15.19",
 		"cross-env": "7.0.3",
@@ -50,7 +50,7 @@
 		"vitest": "3.1.3"
 	},
 	"dependencies": {
-		"@d-zero/custom-components": "5.0.0-alpha.45",
+		"@d-zero/custom-components": "5.0.0-alpha.46",
 		"destyle.css": "4.0.1",
 		"dialog-toggle-events-polyfill": "1.1.4",
 		"invokers-polyfill": "0.5.4",
