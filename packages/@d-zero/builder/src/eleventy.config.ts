@@ -78,6 +78,7 @@ export default function (
 		charset: options.charset,
 		characterEntities: options.characterEntities,
 		isServe,
+		hooks: options.htmlHooks,
 	});
 
 	eleventyConfig.addPlugin(stylePlugin, {

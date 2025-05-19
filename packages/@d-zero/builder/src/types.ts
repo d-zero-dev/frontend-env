@@ -20,6 +20,7 @@ export type DZBuilderConfig = {
 	pathFormat?: PathFormat;
 	autoDecode?: boolean;
 	ssi?: Record<string, SSIOption>;
+	htmlHooks?: HtmlHooks;
 };
 
 export type CharsetList =
@@ -66,6 +67,18 @@ export type ImageSizesOptions = {
 	rootDir?: string;
 	selector?: string;
 	ext?: string[];
+};
+
+export type HtmlHooks = {
+	beforeSerialize?: (content: string) => Promise<string> | string;
+	afterSerialize?: (window: Window) => Promise<void> | void;
+	replace?: (content: string, paths: Paths) => Promise<string> | string;
+};
+
+export type Paths = {
+	filePath: string;
+	dirPath: string;
+	relativePathFromBase: string;
 };
 
 export type OutputTableRow = [origin: string, from: string, to: string];

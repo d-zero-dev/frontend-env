@@ -3,6 +3,7 @@ import type {
 	Charset,
 	CharsetOptions,
 	EleventyGlobalData,
+	HtmlHooks,
 	ImageSizesOptions,
 } from '../types.js';
 import type { Options as HMTOptions } from 'html-minifier-terser';
@@ -28,6 +29,7 @@ type HtmlPluginOptions = {
 	charset?: Charset | CharsetOptions;
 	characterEntities?: boolean;
 	isServe?: boolean;
+	hooks?: HtmlHooks;
 };
 
 export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> = (
@@ -52,7 +54,11 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 				.relative(path.join(process.cwd(), eleventyConfig.dir.input), transferred)
 				.replaceAll(path.sep, '/');
 
-		content = await domSerialize(content, async (documentElement) => {
+		if (pluginConfig?.hooks?.beforeSerialize) {
+			content = await pluginConfig.hooks.beforeSerialize(content);
+		}
+
+		content = await domSerialize(content, async (documentElement, window) => {
 			// Hooks
 			if (pluginConfig?.imageSizes ?? true) {
 				const options =
@@ -62,6 +68,10 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 					rootDir,
 					...options,
 				});
+			}
+
+			if (pluginConfig?.hooks?.afterSerialize) {
+				await pluginConfig.hooks.afterSerialize(window);
 			}
 		});
 
@@ -141,6 +151,18 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 				.replaceAll('〜', '&#12316;');
 
 			return iconv.encode(content, 'CP932');
+		}
+
+		const filePath = this.page.outputPath;
+		const dirPath = path.dirname(filePath);
+		const relativePathFromBase = path.relative(dirPath, eleventyConfig.dir.output) || '.';
+
+		if (pluginConfig?.hooks?.replace) {
+			content = await pluginConfig.hooks.replace(content, {
+				filePath,
+				dirPath,
+				relativePathFromBase,
+			});
 		}
 
 		return content;
