@@ -59,6 +59,9 @@ export default function (eleventyConfig) {
 			afterSerialize: (window) => {},
 			replace: (content, paths) => content,
 		},
+		extensions: {
+			html: 'html', // html以外の拡張子（例：'php'）も指定可能
+		},
 	});
 }
 ```
@@ -167,6 +170,7 @@ flowchart LR
 | `autoDecode`        | 開発用ローカルサーバーの自動デコードを有効にします。 |
 | `ssi`               | 開発用ローカルサーバーのSSIの設定を行います。        |
 | `htmlHooks`         | HTML処理のカスタマイズ用フックを設定します。         |
+| `extensions`        | ファイル拡張子をカスタマイズします。                 |
 
 詳細は[コーディングガイドライン](https://guidelines.d-zero.co.jp/html.html#builder)を確認してください。
 
@@ -200,6 +204,20 @@ htmlHooks: {
 ```
 
 その他、`eleventyConfig`インスタンスのプロパティやメソッドを用いてEleventyの設定を追加することで、ビルド処理をカスタマイズすることができます。
+
+#### extensions
+
+出力されるファイルの拡張子をカスタマイズします。
+
+```js
+extensions: {
+  html: 'php', // HTMLファイルをPHP拡張子で出力
+}
+```
+
+現在サポートされている拡張子タイプ：
+
+- `html`: HTMLファイルの拡張子（デフォルト: 'html'）
 
 ViteやRollupに関する設定、その他ディレクトリ構成の変更などは`@d-zero/builder/11ty`で行うのは現状難しいため、Eleventyの設定ファイルで一から設定することになります。または、[Issue](https://github.com/d-zero-dev/frontend-env/issues)もしくは[プルリクエスト](https://github.com/d-zero-dev/frontend-env/pulls)変更可能なオプションをリクエストしてください。
 
