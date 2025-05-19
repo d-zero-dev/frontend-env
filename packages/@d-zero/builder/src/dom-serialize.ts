@@ -7,12 +7,10 @@ import { JSDOM } from 'jsdom';
  */
 export async function domSerialize(
 	html: string,
-	hook: (element: HTMLElement) => Promise<void> | void,
+	hook: (element: HTMLElement, window: Window) => Promise<void> | void,
 ) {
 	const dom = getDOM(html);
-
-	await hook(dom.element);
-
+	await hook(dom.element, dom.window);
 	return dom.element.outerHTML;
 }
 
@@ -23,6 +21,7 @@ export async function domSerialize(
 function getDOM(html: string): {
 	element: HTMLElement;
 	document: Document;
+	window: Window;
 	isFragment: boolean;
 } {
 	const isFragment = !/^<html(?:\s|>)|^<!doctype\s/i.test(html.trim());
@@ -43,6 +42,7 @@ function getDOM(html: string): {
 		return {
 			element,
 			document,
+			window: window as unknown as Window,
 			isFragment: true,
 		};
 	}
@@ -52,6 +52,7 @@ function getDOM(html: string): {
 	return {
 		element: dom.window.document.documentElement,
 		document: dom.window.document,
+		window: dom.window as unknown as Window,
 		isFragment: false,
 	};
 }
