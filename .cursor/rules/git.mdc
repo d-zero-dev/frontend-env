@@ -3,10 +3,11 @@ description: Git manipulation rules
 globs: *,**/*
 alwaysApply: true
 ---
+
 # Commit creation
 
 - When asked to "commit":
-  1. Check staged files using `git diff --staged` and create a commit message using *only* the staged files.
+  1. Check staged files using `git diff --staged` and create a commit message using _only_ the staged files.
      - Once the message is ready, directly propose the commit command to the user.
   2. If no files are staged, check the differences using `git status`, then stage files sequentially based on the following commit granularity before committing:
      - Separate commits by package.
