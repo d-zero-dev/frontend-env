@@ -54,6 +54,11 @@ export default function (eleventyConfig) {
 		pathFormat: 'directory',
 		autoDecode: true,
 		ssi: { '**/*': { encoding: 'shift_jis' } },
+		htmlHooks: {
+			beforeSerialize: (content) => content,
+			afterSerialize: (window) => {},
+			replace: (content, paths) => content,
+		},
 	});
 }
 ```
@@ -95,11 +100,14 @@ flowchart LR
 			subgraph #transformHTML["addTransform"]
 				direction TB
 
-                #characterEntities(["文字参照変換<br>(characterEntities)"])
+				#beforeSerialize(["DOM処理前フック<br>(htmlHooks.beforeSerialize)"])
+				#characterEntities(["文字参照変換<br>(characterEntities)"])
 				#prettier(["整形<br>(prettier)"])
 				#minifier(["最適化<br>(minifier)"])
 				#lineBreak(["改行コード変換<br>(lineBreak)"])
 				#charset(["文字コード変換<br>(charset)"])
+				#afterSerialize(["DOM処理後フック<br>(htmlHooks.afterSerialize)"])
+				#replaceHook(["最終出力前フック<br>(htmlHooks.replace)"])
 
 				subgraph #domSerialize["domSerialize"]
 					direction TB
@@ -110,7 +118,7 @@ flowchart LR
 					#jsdom --> #imageSizes
 				end
 
-				#domSerialize --> #characterEntities --> #prettier --> #minifier --> #lineBreak --> #charset
+				#beforeSerialize --> #domSerialize --> #afterSerialize --> #characterEntities --> #prettier --> #minifier --> #lineBreak --> #charset --> #replaceHook
 			end
 
 			subgraph #transpileCSS["addExtension"]
@@ -158,8 +166,38 @@ flowchart LR
 | `pathFormat`        | パスのフォーマットを設定します。                     |
 | `autoDecode`        | 開発用ローカルサーバーの自動デコードを有効にします。 |
 | `ssi`               | 開発用ローカルサーバーのSSIの設定を行います。        |
+| `htmlHooks`         | HTML処理のカスタマイズ用フックを設定します。         |
 
 詳細は[コーディングガイドライン](https://guidelines.d-zero.co.jp/html.html#builder)を確認してください。
+
+#### htmlHooks
+
+HTML処理の各段階でカスタム処理を挿入するためのフックを提供します。
+
+| フックID          | 説明                                                     |
+| ----------------- | -------------------------------------------------------- |
+| `beforeSerialize` | DOM処理前のHTML文字列に対して処理を行います。            |
+| `afterSerialize`  | DOM処理後のWindowオブジェクトに対して処理を行います。    |
+| `replace`         | 最終出力前にHTML文字列とパス情報を使って処理を行います。 |
+
+```js
+htmlHooks: {
+  // DOM処理前のHTMLを処理
+  beforeSerialize: (content) => {
+    return content.replace(/特定の文字列/g, '置換後の文字列');
+  },
+  // DOM処理後にWindowオブジェクトを操作
+  afterSerialize: (window) => {
+    const elements = window.document.querySelectorAll('.target');
+    elements.forEach(el => el.classList.add('modified'));
+  },
+  // 最終出力前に処理（パス情報も利用可能）
+  replace: (content, paths) => {
+    const { filePath, dirPath, relativePathFromBase } = paths;
+    return content.replace(/{{relativePath}}/g, relativePathFromBase);
+  }
+}
+```
 
 その他、`eleventyConfig`インスタンスのプロパティやメソッドを用いてEleventyの設定を追加することで、ビルド処理をカスタマイズすることができます。
 
