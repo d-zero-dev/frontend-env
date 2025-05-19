@@ -4,7 +4,7 @@ import type { Options as PrettierOptions } from 'prettier';
 
 export type EleventyGlobalData = Pick<
 	DZBuilderConfig,
-	'alias' | 'pathFormat' | 'minifier'
+	'alias' | 'pathFormat' | 'minifier' | 'extensions'
 >;
 
 export type DZBuilderConfig = {
@@ -21,6 +21,7 @@ export type DZBuilderConfig = {
 	autoDecode?: boolean;
 	ssi?: Record<string, SSIOption>;
 	htmlHooks?: HtmlHooks;
+	extensions?: Record<Extensions, string>;
 };
 
 export type CharsetList =
@@ -80,6 +81,8 @@ export type Paths = {
 	dirPath: string;
 	relativePathFromBase: string;
 };
+
+export type Extensions = 'html' /* | 'css' | 'js' */;
 
 export type OutputTableRow = [origin: string, from: string, to: string];
 

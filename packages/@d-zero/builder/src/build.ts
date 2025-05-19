@@ -18,13 +18,14 @@ export async function build(elev: Eleventy<EleventyGlobalData>) {
 	const pathFormat = elev.config.globalData?.pathFormat ?? 'preserve';
 	const inputDir = elev.config.dir.input;
 	const outDir = elev.config.dir.output;
+	const htmlExtension = elev.config.globalData?.extensions?.html ?? 'html';
 
 	const htmlFiles = getHtmlFiles(results);
 
 	const outputLogTable: OutputTableRow[] = [];
 
 	for (const htmlFile of htmlFiles) {
-		const outputPath = pathTransfer(
+		let outputPath = pathTransfer(
 			{
 				...htmlFile,
 				inputRoot: inputDir,
@@ -41,6 +42,13 @@ export async function build(elev: Eleventy<EleventyGlobalData>) {
 			if (dirFiles.length === 0) {
 				await fs.rmdir(outDir);
 			}
+		}
+
+		if (htmlExtension !== 'html') {
+			const oldPath = outputPath;
+			const newPath = outputPath.replace('.html', `.${htmlExtension}`);
+			await fs.rename(oldPath, newPath);
+			outputPath = newPath;
 		}
 
 		outputLogTable.push([

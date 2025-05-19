@@ -45,6 +45,7 @@ export default function (
 	eleventyConfig.addGlobalData('alias', options.alias);
 	eleventyConfig.addGlobalData('pathFormat', options.pathFormat);
 	eleventyConfig.addGlobalData('minifier', options.minifier);
+	eleventyConfig.addGlobalData('extensions', options.extensions);
 
 	eleventyConfig.addFilter('date', (date, format) => {
 		return dayjs(date).format(format);
