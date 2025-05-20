@@ -1,0 +1,6 @@
+# @see https://www.npmjs.com/package/@d-zero/print
+
+https://www.d-zero.co.jp
+https://www.digital.go.jp
+https://www.google.co.jp
+https://www.apple.com/jp/

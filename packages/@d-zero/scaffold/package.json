@@ -25,6 +25,7 @@
 		"lint:spell": "cspell --no-progress --show-suggestions \"**\"",
 		"lint:text": "textlint \"./__assets/**/*.{pug,html}\"",
 		"test": "vitest run",
+		"print": "npx @d-zero/print -f __info/print.txt --type note",
 		"prepare": "husky",
 		"up": "yarn upgrade-interactive --latest"
 	},

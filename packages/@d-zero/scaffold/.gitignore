@@ -22,6 +22,9 @@ yarn-error.log
 .serve
 .cache
 
+# Tools
+.print
+
 # Document Root
 htdocs/*
 !__assets/htdocs
