@@ -12,6 +12,9 @@
 	"type": "module",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
+	"bin": {
+		"check-frontend-env": "./dist/index.js"
+	},
 	"exports": {
 		".": {
 			"import": "./dist/index.js",

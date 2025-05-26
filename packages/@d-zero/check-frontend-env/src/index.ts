@@ -1,1 +1,3 @@
-// eslint-disable-next-line unicorn/no-empty-file
+#!/usr/bin/env node
+import os from 'node:os';
+console.log(os.homedir());
