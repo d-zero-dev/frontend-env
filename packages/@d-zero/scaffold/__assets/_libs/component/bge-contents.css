@@ -1,6 +1,6 @@
 @use './c-content-main.scss' as *;
 
-// stylelint-disable-next-line selector-class-pattern
+/* stylelint-disable-next-line selector-class-pattern */
 .bge-contents {
 	@extend .c-content-main;
 }

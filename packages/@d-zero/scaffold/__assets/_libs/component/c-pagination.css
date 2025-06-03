@@ -73,7 +73,7 @@
 			border-block-end: 2px solid var(--border-color);
 		}
 
-		// 🐲 baserCMSの仕様上 マルチクラスでしかカレントを定義できない
+		/* 🐲 baserCMSの仕様上 マルチクラスでしかカレントを定義できない */
 		/* stylelint-disable selector-class-pattern */
 		&--current {
 			border-block-end: 2px solid var(--border-color);

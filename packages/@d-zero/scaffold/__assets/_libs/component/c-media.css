@@ -57,22 +57,22 @@
 		margin-inline: auto;
 	}
 
-	// ブログのみ
+	/* ブログのみ */
 	&__meta {
-		//
+		/* empty */
 	}
 
-	// ブログのみ
+	/* ブログのみ */
 	&__time {
 		display: none;
 	}
 
-	// ブログのみ
+	/* ブログのみ */
 	&__category {
-		//
+		/* empty */
 	}
 
-	// ブログのみ
+	/* ブログのみ */
 	&__tags {
 		ul {
 			padding: 0;
@@ -82,7 +82,7 @@
 		}
 	}
 
-	// ブログのみ
+	/* ブログのみ */
 	&__tag-item {
 		display: inline-block;
 		padding: 0;
@@ -96,7 +96,7 @@
 		}
 	}
 
-	// ブログのみ
+	/* ブログのみ */
 	&__author {
 		display: none;
 	}

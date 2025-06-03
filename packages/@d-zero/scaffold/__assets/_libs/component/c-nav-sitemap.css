@@ -59,8 +59,8 @@
 
 	li[data-sitemap-level='1'] {
 		@extend %item;
-		display: inline-block; // 💉 for columns item technic
-		inline-size: 100%; // 💉 for columns item technic
+		display: inline-block; /* 💉 for columns item technic */
+		inline-size: 100%; /* 💉 for columns item technic */
 		margin-block: 0 1em;
 		margin-inline: 0;
 		break-inside: avoid-column;
