@@ -1,0 +1,30 @@
+@import 'destyle.css' layer(reset);
+
+@layer base {
+	@import '@/style/base/root.css';
+}
+
+@layer general {
+	@import '@/style/general/all.css';
+	@import '@/style/general/body.css';
+	@import '@/style/general/button.css';
+	@import '@/style/general/img.css';
+}
+
+@import '@/component/c-page-home.css';
+@import '@/component/c-page-sub.css';
+@import '@/component/c-header.css';
+@import '@/component/c-footer.css';
+@import '@/component/c-nav-global.css';
+@import '@/component/c-nav-sitemap.css';
+@import '@/component/c-nav-breadcrumb.css';
+@import '@/component/c-title-page.css';
+@import '@/component/c-pagination.css';
+@import '@/component/c-card-list.css';
+@import '@/component/c-card.css';
+@import '@/component/c-media-list.css';
+@import '@/component/c-media.css';
+@import '@/component/c-content-index.css';
+@import '@/component/c-content-main.css';
+
+@layer reset, base, general;
