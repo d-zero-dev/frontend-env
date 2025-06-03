@@ -23,9 +23,9 @@ export const stylePlugin: EleventyPlugin<StylePluginConfig, EleventyGlobalData> 
 	eleventyConfig,
 	pluginConfig,
 ) => {
-	eleventyConfig.addTemplateFormats('scss');
+	eleventyConfig.addTemplateFormats('css');
 
-	eleventyConfig.addExtension('scss', {
+	eleventyConfig.addExtension('css', {
 		outputFileExtension: 'css',
 		compile(_, inputPath) {
 			return async () => {

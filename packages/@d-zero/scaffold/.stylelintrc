@@ -10,7 +10,7 @@
 	},
 	"overrides": [
 		{
-			"files": ["c-*.scss"],
+			"files": ["c-*.css"],
 			"rules": {
 				"@d-zero/component": {
 					"allowMultipleSelectors": true
@@ -18,7 +18,7 @@
 			}
 		},
 		{
-			"files": ["c-content-main.scss"],
+			"files": ["c-content-main.css"],
 			"rules": {
 				"selector-class-pattern": null,
 				"selector-nested-pattern": "^(?!\\.c-).*"
