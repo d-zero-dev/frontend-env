@@ -27,7 +27,7 @@
 		"bin"
 	],
 	"dependencies": {
-		"@11ty/eleventy": "3.1.0",
+		"@11ty/eleventy": "3.1.1",
 		"@d-zero/shared": "0.8.0",
 		"character-entities": "2.0.2",
 		"cli-color": "2.0.4",
