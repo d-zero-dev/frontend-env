@@ -8,31 +8,23 @@ import path from 'node:path';
  * @param pathFormat
  */
 export function pathTransfer(htmlFile: HtmlFile, pathFormat: PathFormat) {
-	const inputRoot = htmlFile.inputRoot ?? process.cwd();
-	const outputRoot = htmlFile.outputRoot ?? inputRoot ?? process.cwd();
+        const inputRoot = htmlFile.inputRoot ?? process.cwd();
+        const outputRoot = htmlFile.outputRoot ?? inputRoot;
 
-	const inputName = path.basename(htmlFile.inputPath, path.extname(htmlFile.inputPath));
-	const inputDir = path.relative(inputRoot, path.dirname(htmlFile.inputPath));
-	const outputDir = path.join(outputRoot, inputDir);
-	const isRoot = outputDir === outputRoot;
+        const inputName = path.basename(htmlFile.inputPath, path.extname(htmlFile.inputPath));
+        const inputDir = path.relative(inputRoot, path.dirname(htmlFile.inputPath));
+        const outputDir = path.join(outputRoot, inputDir);
+        const isRoot = outputDir === outputRoot;
 
-	let newOutputPath = path.join(outputDir, inputName + '.html');
+        const defaultOutput = path.join(outputDir, inputName + '.html');
 
-	switch (pathFormat) {
-		case 'file': {
-			if (inputName === 'index' && !isRoot) {
-				newOutputPath = outputDir + '.html';
-				break;
-			}
-			break;
-		}
-		case 'directory': {
-			if (inputName !== 'index') {
-				newOutputPath = path.join(outputDir, inputName, 'index.html');
-			}
-			break;
-		}
-	}
+        if (pathFormat === 'file') {
+                return inputName === 'index' && !isRoot ? outputDir + '.html' : defaultOutput;
+        }
 
-	return newOutputPath;
+        if (pathFormat === 'directory' && inputName !== 'index') {
+                return path.join(outputDir, inputName, 'index.html');
+        }
+
+        return defaultOutput;
 }

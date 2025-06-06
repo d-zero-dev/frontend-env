@@ -7,16 +7,12 @@ import { pathComparator } from '@d-zero/shared/sort/path';
  * @param results
  */
 export function getHtmlFiles(results: EleventyResult[][]) {
-	return results
-		.flatMap((result) =>
-			result
-				.map((file) => {
-					if ('outputPath' in file && file.outputPath.endsWith('.html')) {
-						return file;
-					}
-					return null;
-				})
-				.filter<EleventyResult>((file): file is EleventyResult => file !== null),
-		)
-		.toSorted((a, b) => pathComparator(a.inputPath, b.inputPath));
+        return results
+                .flatMap((result) =>
+                        result.filter(
+                                (file): file is EleventyResult =>
+                                        'outputPath' in file && file.outputPath.endsWith('.html'),
+                        ),
+                )
+                .toSorted((a, b) => pathComparator(a.inputPath, b.inputPath));
 }
