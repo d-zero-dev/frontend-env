@@ -19,7 +19,7 @@ export function pathTransfer(htmlFile: HtmlFile, pathFormat: PathFormat) {
         const defaultOutput = path.join(outputDir, inputName + '.html');
 
         if (pathFormat === 'file') {
-                return inputName === 'index' && !isRoot ? outputDir + '.html' : defaultOutput;
+                return inputName === 'index' && !isRoot ? path.join(outputDir, 'index.html') : defaultOutput;
         }
 
         if (pathFormat === 'directory' && inputName !== 'index') {
