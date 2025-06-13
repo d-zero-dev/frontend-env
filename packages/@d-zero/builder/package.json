@@ -40,7 +40,7 @@
 		"image-size": "2.0.2",
 		"js-yaml": "4.1.0",
 		"jsdom": "26.1.0",
-		"minimatch": "10.0.2",
+		"minimatch": "10.0.3",
 		"prettier": "3.5.3",
 		"pug": "3.0.3",
 		"strip-css-comments": "5.0.0",
