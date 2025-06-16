@@ -21,93 +21,93 @@
 		color: currentcolor;
 		text-decoration: none;
 	}
+}
 
-	&__img {
-		grid-area: img;
+.c-media__img {
+	grid-area: img;
 
-		img {
-			inset-block-start: 0;
-			inset-inline-start: 0;
-			display: block;
-			inline-size: 100%;
-			block-size: 100%;
-			aspect-ratio: 4 / 3;
-			object-fit: cover;
-			object-position: center top;
-		}
+	img {
+		inset-block-start: 0;
+		inset-inline-start: 0;
+		display: block;
+		inline-size: 100%;
+		block-size: 100%;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+		object-position: center top;
 	}
+}
 
-	&__header {
-		flex: 0 1 auto;
-		grid-area: header;
-		padding-block: 0;
-		padding-inline: 1.5em;
-	}
+.c-media__header {
+	flex: 0 1 auto;
+	grid-area: header;
+	padding-block: 0;
+	padding-inline: 1.5em;
+}
 
-	&__body {
-		flex: 0 1 100%;
-		grid-area: body;
-		padding-block: 0.5em 2em;
-		padding-inline: 1.5em;
-	}
+.c-media__body {
+	flex: 0 1 100%;
+	grid-area: body;
+	padding-block: 0.5em 2em;
+	padding-inline: 1.5em;
+}
 
-	&__title {
+.c-media__title {
+	padding: 0;
+	margin-block: 0;
+	margin-inline: auto;
+}
+
+/* ブログのみ */
+.c-media__meta {
+	/* empty */
+}
+
+/* ブログのみ */
+.c-media__time {
+	display: none;
+}
+
+/* ブログのみ */
+.c-media__category {
+	/* empty */
+}
+
+/* ブログのみ */
+.c-media__tags {
+	ul {
 		padding: 0;
 		margin-block: 0;
 		margin-inline: auto;
-	}
-
-	/* ブログのみ */
-	&__meta {
-		/* empty */
-	}
-
-	/* ブログのみ */
-	&__time {
-		display: none;
-	}
-
-	/* ブログのみ */
-	&__category {
-		/* empty */
-	}
-
-	/* ブログのみ */
-	&__tags {
-		ul {
-			padding: 0;
-			margin-block: 0;
-			margin-inline: auto;
-			list-style: none;
-		}
-	}
-
-	/* ブログのみ */
-	&__tag-item {
-		display: inline-block;
-		padding: 0;
-		margin: 0;
 		list-style: none;
-
-		span {
-			display: block;
-			padding-block: 0.2em;
-			padding-inline: 1em;
-		}
 	}
+}
 
-	/* ブログのみ */
-	&__author {
-		display: none;
+/* ブログのみ */
+.c-media__tag-item {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+
+	span {
+		display: block;
+		padding-block: 0.2em;
+		padding-inline: 1em;
 	}
+}
 
-	&__description {
+/* ブログのみ */
+.c-media__author {
+	display: none;
+}
+
+.c-media__description {
+	padding: 0;
+	margin: 0;
+
+	p {
 		padding: 0;
 		margin: 0;
-
-		p {
-			padding: 0;
-			margin: 0;
-		}
 	}
 }

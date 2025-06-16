@@ -16,89 +16,89 @@
 		color: currentcolor;
 		text-decoration: none;
 	}
+}
 
-	&__img {
+.c-card__img {
+	inline-size: 100%;
+
+	img {
+		inset-block-start: 0;
+		inset-inline-start: 0;
+		display: block;
 		inline-size: 100%;
-
-		img {
-			inset-block-start: 0;
-			inset-inline-start: 0;
-			display: block;
-			inline-size: 100%;
-			aspect-ratio: 4 / 3;
-			object-fit: cover;
-			object-position: center top;
-		}
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+		object-position: center top;
 	}
+}
 
-	&__header {
-		flex: 0 1 auto;
-		padding-inline: 1em;
-	}
+.c-card__header {
+	flex: 0 1 auto;
+	padding-inline: 1em;
+}
 
-	&__body {
-		flex: 0 1 100%;
-		padding-block: 0.5em 2em;
-		padding-inline: 1em;
-	}
+.c-card__body {
+	flex: 0 1 100%;
+	padding-block: 0.5em 2em;
+	padding-inline: 1em;
+}
 
-	&__title {
+.c-card__title {
+	padding: 0;
+	margin-block: 0;
+	margin-inline: auto;
+}
+
+/* ブログのみ */
+.c-card__meta {
+	/* empty */
+}
+
+/* ブログのみ */
+.c-card__time {
+	display: none;
+}
+
+/* ブログのみ */
+.c-card__category {
+	/* empty */
+}
+
+/* ブログのみ */
+.c-card__tags {
+	ul {
 		padding: 0;
 		margin-block: 0;
 		margin-inline: auto;
-	}
-
-	/* ブログのみ */
-	&__meta {
-		/* empty */
-	}
-
-	/* ブログのみ */
-	&__time {
-		display: none;
-	}
-
-	/* ブログのみ */
-	&__category {
-		/* empty */
-	}
-
-	/* ブログのみ */
-	&__tags {
-		ul {
-			padding: 0;
-			margin-block: 0;
-			margin-inline: auto;
-			list-style: none;
-		}
-	}
-
-	/* ブログのみ */
-	&__tag-item {
-		display: inline-block;
-		padding: 0;
-		margin: 0;
 		list-style: none;
-
-		span {
-			display: block;
-			padding-block: 0.2em;
-			padding-inline: 1em;
-		}
 	}
+}
 
-	/* ブログのみ */
-	&__author {
-		display: none;
+/* ブログのみ */
+.c-card__tag-item {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+
+	span {
+		display: block;
+		padding-block: 0.2em;
+		padding-inline: 1em;
 	}
+}
 
-	&__description {
+/* ブログのみ */
+.c-card__author {
+	display: none;
+}
+
+.c-card__description {
+	padding: 0;
+	margin: 0;
+
+	p {
 		padding: 0;
 		margin: 0;
-
-		p {
-			padding: 0;
-			margin: 0;
-		}
 	}
 }
