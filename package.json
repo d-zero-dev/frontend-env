@@ -36,7 +36,7 @@
 		}
 	},
 	"devDependencies": {
-		"@d-zero/commitlint-config": "5.0.0-alpha.63",
+		"@d-zero/commitlint-config": "5.0.0-alpha.65",
 		"@d-zero/linters": "5.0.0-alpha.63",
 		"@d-zero/tsconfig": "0.4.1",
 		"husky": "9.1.7",
