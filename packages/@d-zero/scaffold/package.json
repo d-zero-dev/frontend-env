@@ -54,7 +54,7 @@
 		"@d-zero/custom-components": "5.0.0-alpha.46",
 		"destyle.css": "4.0.1",
 		"dialog-toggle-events-polyfill": "1.1.4",
-		"invokers-polyfill": "0.5.4",
+		"invokers-polyfill": "0.5.5",
 		"tslib": "2.8.1"
 	},
 	"volta": {

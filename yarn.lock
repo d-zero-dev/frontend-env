@@ -7284,10 +7284,10 @@ invert-kv@^3.0.0:
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-3.0.1.tgz#a93c7a3d4386a1dc8325b97da9bb1620c0282523"
   integrity sha512-CYdFeFexxhv/Bcny+Q0BfOV+ltRlJcd4BBZBYFX/O0u4npJrgZtIcjokegtiSMAvlMTJ+Koq0GBCc//3bueQxw==
 
-invokers-polyfill@0.5.4:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/invokers-polyfill/-/invokers-polyfill-0.5.4.tgz#45a8a2c7021fb23bd759b20a43987e1127f8c5c5"
-  integrity sha512-D++eT6W1ec4nfa4R/Io+yubtyqUgz7lhN/CXHfQR7lyPnWkGYULydxMQiScyacVe3qy9bxBhNHQiyZGkHup8Lw==
+invokers-polyfill@0.5.5:
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/invokers-polyfill/-/invokers-polyfill-0.5.5.tgz#439238f0afe16c5452b93242e7a2bfc6c721cba4"
+  integrity sha512-78dqWtGBnpHGfCOXOVycJC4Ry2faxIlUWt/Qil7nosaEHg1vcmamwFEdN/1g/ldPp5XaRrRuRLTya7SQF36AwQ==
 
 ip-address@^9.0.5:
   version "9.0.5"
