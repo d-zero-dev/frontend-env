@@ -913,15 +913,16 @@
   dependencies:
     pug-lint "2.7.0"
 
-"@d-zero/shared@0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@d-zero/shared/-/shared-0.8.0.tgz#2c24144be3df5e4e7cf1f9adaa8459ea19d16ebf"
-  integrity sha512-JZ296y1KxKH+ESKXeLoBiTJID9Wsi1MdrbcH6x++3vhZ1DEQK2C0htP/FEZAsG63WwyzfIhvFBlycqIYiQwXdQ==
+"@d-zero/shared@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@d-zero/shared/-/shared-0.9.0.tgz#3e48585520c9dfc68e401481988db8199a1bcc84"
+  integrity sha512-CeRsH14sQLwBYVNf0FT2hu4eaudmiHDsY6988JzhNa1oLlUR6xucZqfKfX1rrR7V7s/W1UAo2qy8mJFztbOOSQ==
   dependencies:
-    "@holiday-jp/holiday_jp" "2.4.0"
+    "@holiday-jp/holiday_jp" "2.5.1"
     await-event-emitter "2.0.2"
     dayjs "1.11.13"
     escape-string-regexp "5.0.0"
+    front-matter "4.0.2"
 
 "@d-zero/stylelint-config@5.0.0-alpha.63":
   version "5.0.0-alpha.63"
@@ -1320,10 +1321,10 @@
     "@eslint/core" "^0.13.0"
     levn "^0.4.1"
 
-"@holiday-jp/holiday_jp@2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@holiday-jp/holiday_jp/-/holiday_jp-2.4.0.tgz#dd98c48ceec8764c5d1af0e9deb5506d579e700b"
-  integrity sha512-YcLZJMTwadSoxR8sduIGWpX9sAhjoVR8hc2PnJZPxTOlT73ZXPlTu1TPQ0JZqM7+7MPGILZRuPimBDiC/aAhgw==
+"@holiday-jp/holiday_jp@2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@holiday-jp/holiday_jp/-/holiday_jp-2.5.1.tgz#ac9f64372304fedd742bbd3d7d70a41bc76848a2"
+  integrity sha512-KuXfzsp0xlP830WDZRbsHj99wJzamx4fS55usUJFz+oHZmZ4gJfVdyiyv/rIWK+O7RgfHSi5j5Ajy0ZK/Vlnyg==
 
 "@humanfs/core@^0.19.1":
   version "0.19.1"
@@ -6325,7 +6326,7 @@ fresh@^2.0.0:
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-2.0.0.tgz#8dd7df6a1b3a1b3a5cf186c05a5dd267622635a4"
   integrity sha512-Rx/WycZ60HOaqLKAi6cHRKKI7zxWbJ31MhntmtwMoaTeF7XFH9hhBp8vITaMidfljRQ6eYWCKkaTK+ykVJHP2A==
 
-front-matter@^4.0.2:
+front-matter@4.0.2, front-matter@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/front-matter/-/front-matter-4.0.2.tgz#b14e54dc745cfd7293484f3210d15ea4edd7f4d5"
   integrity sha512-I8ZuJ/qG92NWX8i5x1Y8qyj3vizhXS31OxjKDu3LKP+7/qBgfIKValiZIEwoVoJKUHlhWtYrktkxV1XsX+pPlg==
