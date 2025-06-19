@@ -2,7 +2,7 @@ import autoprefixer from 'autoprefixer';
 import postcssBase64 from 'postcss-base64';
 import postcssCalc from 'postcss-calc';
 import postcssClipPathPolyfill from 'postcss-clip-path-polyfill';
-import postcssColorModFunction from 'postcss-color-mod-function'; // eslint-disable-line import/default
+import postcssColorModFunction from 'postcss-color-mod-function'; // eslint-disable-line import-x/default
 import postcssCustomMedia from 'postcss-custom-media';
 import postcssExtendRule from 'postcss-extend-rule';
 import postcssMath from 'postcss-math';

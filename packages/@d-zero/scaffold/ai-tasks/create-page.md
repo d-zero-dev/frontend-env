@@ -54,7 +54,7 @@ components:
 html(lang="ja")
 	head
 		include /mixin/meta.pug
-		+meta('__サイトタイトル__')
+		+meta("__サイトタイトル__")
 	body.c-page-home
 		.c-page-home__base
 			.c-page-home__header
@@ -75,7 +75,7 @@ html(lang="ja")
 html(lang="ja")
 	head
 		include /mixin/meta.pug
-		+meta('__サイトタイトル__')
+		+meta("__サイトタイトル__")
 	body.c-page-sub
 		.c-page-sub__base
 			.c-page-sub__header

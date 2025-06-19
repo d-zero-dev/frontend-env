@@ -39,7 +39,7 @@
 	],
 	"devDependencies": {
 		"@d-zero/builder": "5.0.0-alpha.46",
-		"@d-zero/linters": "5.0.0-alpha.63",
+		"@d-zero/linters": "5.0.0-alpha.65",
 		"@d-zero/postcss-config": "5.0.0-alpha.46",
 		"@d-zero/tsconfig": "0.4.1",
 		"@types/node": "22.15.32",
