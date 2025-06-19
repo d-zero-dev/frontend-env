@@ -4,8 +4,6 @@ npm-error.log
 yarn-error.log
 .env
 .husky/_/*
-.yarn/install-state.gz
-.yarn/build-state.yml
 
 # Huge File
 *.zip

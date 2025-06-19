@@ -26,11 +26,6 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Enable Corepack and setup Yarn v4
-        run: |
-          corepack enable
-          yarn --version
-
       - name: Cache dependencies
         id: cache-depends
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
@@ -44,7 +39,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-depends.outputs.cache-hit != 'true'
-        run: yarn --immutable
+        run: yarn --frozen-lockfile --check-files
 
       - name: Compile
         run: yarn build

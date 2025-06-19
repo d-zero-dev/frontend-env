@@ -5,6 +5,7 @@
 	"repository": "https://github.com/d-zero-dev/frontend-env.git",
 	"author": "D-ZERO Co., Ltd.",
 	"license": "MIT",
+	"private": false,
 	"publishConfig": {
 		"access": "public"
 	},
