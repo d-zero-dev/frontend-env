@@ -61,7 +61,7 @@ afterAll(cleanUp);
 
 describe('CLI', () => {
 	test('dzbuild (no params)', async () => {
-		const { stdout } = await execa('dzbuild', [], {
+		const { stdout } = await execa('npx', ['dzbuild'], {
 			cwd: scaffoldDir,
 			failed: true,
 			env: {
