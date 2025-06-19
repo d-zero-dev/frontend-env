@@ -1,4 +1,4 @@
-@import 'destyle.css' layer(reset);
+@import 'kiso.css' layer(reset);
 @import '@/style/base/root.css' layer(base);
 @import '@/style/general/all.css' layer(general);
 @import '@/style/general/body.css' layer(general);

@@ -3,6 +3,7 @@
 	"ignorePaths": ["./htdocs"],
 	"words": [
 		// Libraries
-		"splide"
+		"splide",
+		"kiso"
 	]
 }
