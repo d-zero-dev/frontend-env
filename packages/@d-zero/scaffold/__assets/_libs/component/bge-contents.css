@@ -1,6 +1,7 @@
-@use './c-content-main.scss' as *;
+@import './c-content-main.css';
 
 /* stylelint-disable-next-line selector-class-pattern */
 .bge-contents {
-	@extend .c-content-main;
+	/* stylelint-disable-next-line at-rule-no-unknown */
+	@bge-legacy-copy .c-content-main;
 }
