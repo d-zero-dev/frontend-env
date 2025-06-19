@@ -5,7 +5,6 @@
 	"repository": "https://github.com/d-zero-dev/frontend-env.git",
 	"author": "D-ZERO Co., Ltd.",
 	"license": "MIT",
-	"private": false,
 	"publishConfig": {
 		"access": "public"
 	},
@@ -13,17 +12,17 @@
 	"main": "package.json",
 	"scripts": {
 		"build": "npx @d-zero/builder",
-		"dev": "eleventy --serve --watch",
+		"dev": "npx eleventy --serve --watch",
 		"d": "yarn dev",
-		"lint": "run-s lint:*",
-		"lint:html": "markuplint \"./__assets/**/*.{pug,html}\"",
-		"lint:pug": "pug-lint ./__assets/htdocs/**/*.pug -r console; pug-lint ./__assets/_libs/**/*.pug -r console;",
-		"lint:css": "stylelint \"./__assets/**/*.css\" --fix",
-		"lint:js": "eslint \"./__assets/**/*.{js,mjs,cjs,jsx,ts,tsx}\" --fix",
+		"lint": "run-s \"lint:*\"",
+		"lint:html": "npx markuplint \"./__assets/**/*.{pug,html}\"",
+		"lint:pug": "npx pug-lint ./__assets/htdocs/**/*.pug -r console; npx pug-lint ./__assets/_libs/**/*.pug -r console;",
+		"lint:css": "npx stylelint \"./__assets/**/*.css\" --fix",
+		"lint:js": "npx eslint \"./__assets/**/*.{js,mjs,cjs,jsx,ts,tsx}\" --fix",
 		"lint:ts": "tsc --noEmit",
-		"lint:format": "prettier --write \"{*,./__assets/**/*}.{js,jsx,ts,tsx,css,pug,html,json,yaml,*rc}\"",
-		"lint:spell": "cspell --no-progress --show-suggestions \"**\"",
-		"lint:text": "textlint \"./__assets/**/*.{pug,html}\"",
+		"lint:format": "npx prettier --write \"{*,./__assets/**/*}.{js,jsx,ts,tsx,css,pug,html,json,yaml,*rc}\"",
+		"lint:spell": "npx cspell --no-progress --show-suggestions \"**\"",
+		"lint:text": "npx textlint \"./__assets/**/*.{pug,html}\"",
 		"test": "vitest run",
 		"print": "npx @d-zero/print -f __info/print.txt --type note",
 		"prepare": "husky",
@@ -56,8 +55,9 @@
 		"kiso.css": "1.1.6",
 		"tslib": "2.8.1"
 	},
+	"packageManager": "yarn@4.9.2",
 	"volta": {
 		"node": "22.16.0",
-		"yarn": "1.22.22"
+		"yarn": "4.9.2"
 	}
 }

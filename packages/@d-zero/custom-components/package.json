@@ -7,7 +7,6 @@
 	"repository": {
 		"url": "https://github.com/d-zero-dev/frontend-env.git"
 	},
-	"private": false,
 	"publishConfig": {
 		"access": "public"
 	},

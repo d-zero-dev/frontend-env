@@ -11,17 +11,17 @@
 		"dev": "lerna run dev",
 		"test": "vitest run --test-timeout 60000",
 		"lint": "run-s lint:eslint lint:prettier lint:textlint lint:cspell",
-		"lint:cspell": "cspell --no-progress --show-suggestions \"**\"",
-		"lint:eslint": "eslint --fix \"./{*,**/*}.{js,cjs,mjs}\"",
-		"lint:prettier": "prettier --write \"{*,./**/*}.{md,mdc,mdx,js,jsx,ts,tsx,css,pug,html}\" \"**/.clinerules\" \"!**/{dist,storybook-static}/**/*\"",
-		"lint:textlint": "textlint --fix \"{*,./**/*}.{md,mdc}\" && textlint \"{*,./**/*}.{md,mdc}\"",
+		"lint:cspell": "npx cspell --no-progress --show-suggestions \"**\"",
+		"lint:eslint": "npx eslint --fix \"./{*,**/*}.{js,cjs,mjs}\"",
+		"lint:prettier": "npx prettier --write \"{*,./**/*}.{md,mdc,mdx,js,jsx,ts,tsx,css,pug,html}\" \"**/.clinerules\" \"!**/{dist,storybook-static}/**/*\"",
+		"lint:textlint": "npx textlint --fix \"{*,./**/*}.{md,mdc}\" && npx textlint \"{*,./**/*}.{md,mdc}\"",
 		"storybook": "lerna run storybook --scope=@d-zero/custom-components",
 		"release": "lerna publish --exact --conventional-commits --conventional-graduate",
 		"release:alpha:latest": "lerna publish --exact --force-publish --conventional-commits --conventional-prerelease --preid alpha",
 		"release:next": "lerna publish --dist-tag next --exact --force-publish --conventional-commits --conventional-prerelease --preid alpha",
 		"prepare": "husky",
-		"commit": "cz",
-		"co": "cz",
+		"commit": "npx cz",
+		"co": "npx cz",
 		"up": "yarn upgrade-interactive --latest"
 	},
 	"workspaces": [
@@ -45,8 +45,9 @@
 		"typescript": "5.8.3",
 		"vitest": "3.2.4"
 	},
+	"packageManager": "yarn@4.9.2",
 	"volta": {
 		"node": "22.16.0",
-		"yarn": "1.22.22"
+		"yarn": "4.9.2"
 	}
 }
