@@ -19,6 +19,7 @@
 		"postcss-clip-path-polyfill": "1.1.0",
 		"postcss-color-mod-function": "4.1.1",
 		"postcss-custom-media": "11.0.6",
+		"postcss-extend-rule": "4.0.0",
 		"postcss-math": "0.0.10",
 		"postcss-scss": "4.0.9"
 	}
