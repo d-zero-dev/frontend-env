@@ -1,0 +1,9 @@
+@import 'destyle.css' layer(reset);
+@import '@/style/base/root.css' layer(base);
+@import '@/style/general/all.css' layer(general);
+@import '@/style/general/body.css' layer(general);
+@import '@/style/general/button.css' layer(general);
+@import '@/style/general/img.css' layer(general);
+@import '@/component/bge-contents.css';
+
+@layer reset, base, general;

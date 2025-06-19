@@ -1,0 +1,113 @@
+.c-media {
+	position: relative;
+	block-size: 100%;
+	overflow: hidden;
+	outline: 2px solid transparent;
+	border: 1px solid var(--border-color);
+	transition: outline 300ms;
+
+	&:has(a:hover) {
+		outline: 2px solid var(--border-color);
+		border: 1px solid var(--border-color);
+	}
+
+	> a {
+		display: grid;
+		grid-template:
+			'img header' auto
+			'img body' auto
+			/ calc(1 / 3 * 100%) calc(2 / 3 * 100%);
+		block-size: 100%;
+		color: currentcolor;
+		text-decoration: none;
+	}
+}
+
+.c-media__img {
+	grid-area: img;
+
+	img {
+		inset-block-start: 0;
+		inset-inline-start: 0;
+		display: block;
+		inline-size: 100%;
+		block-size: 100%;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+		object-position: center top;
+	}
+}
+
+.c-media__header {
+	flex: 0 1 auto;
+	grid-area: header;
+	padding-block: 0;
+	padding-inline: 1.5em;
+}
+
+.c-media__body {
+	flex: 0 1 100%;
+	grid-area: body;
+	padding-block: 0.5em 2em;
+	padding-inline: 1.5em;
+}
+
+.c-media__title {
+	padding: 0;
+	margin-block: 0;
+	margin-inline: auto;
+}
+
+/* ブログのみ */
+.c-media__meta {
+	display: none;
+}
+
+/* ブログのみ */
+.c-media__time {
+	display: none;
+}
+
+/* ブログのみ */
+.c-media__category {
+	display: none;
+}
+
+/* ブログのみ */
+.c-media__tags {
+	ul {
+		padding: 0;
+		margin-block: 0;
+		margin-inline: auto;
+		list-style: none;
+	}
+}
+
+/* ブログのみ */
+.c-media__tag-item {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+
+	span {
+		display: block;
+		padding-block: 0.2em;
+		padding-inline: 1em;
+	}
+}
+
+/* ブログのみ */
+.c-media__author {
+	display: none;
+}
+
+.c-media__description {
+	padding: 0;
+	margin: 0;
+
+	p {
+		padding: 0;
+		margin: 0;
+	}
+}

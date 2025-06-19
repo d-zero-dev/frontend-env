@@ -7,8 +7,7 @@
 	"git.ignoreLimitWarning": true,
 	"html.format.enable": true,
 	"css.validate": false,
-	"scss.validate": false,
-	"stylelint.validate": ["css", "scss"],
+	"stylelint.validate": ["css"],
 	"files.associations": {
 		"*.mdc": "markdown",
 		".clinerules": "markdown",
