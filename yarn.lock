@@ -5119,11 +5119,6 @@ dequal@^2.0.2, dequal@^2.0.3:
   resolved "https://registry.yarnpkg.com/dequal/-/dequal-2.0.3.tgz#2644214f1997d39ed0ee0ece72335490a7ac67be"
   integrity sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==
 
-destyle.css@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/destyle.css/-/destyle.css-4.0.1.tgz#e155a8ba274ea50e432f8773c3e4fd814ba45553"
-  integrity sha512-G9iyW0JfRkgdxhbWQeuLdO1KZ40nzKssHtArbSFvaU/w44G0cZ5v3u4bHY829INSu480J/fxae+lTm225mN3Vw==
-
 detect-file@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/detect-file/-/detect-file-1.0.0.tgz#f0d66d03672a825cb1b73bdb3fe62310c8e552b7"
@@ -7861,6 +7856,11 @@ kind-of@^6.0.0, kind-of@^6.0.2, kind-of@^6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
+
+kiso.css@1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/kiso.css/-/kiso.css-1.1.6.tgz#a7dd0303dd9dbf604a48c73b0f41cbc453b54ed6"
+  integrity sha512-YUWQar9/Y00P1GgmpngNcXEJmLGKZW8QIHcthsoS5X53us53sW4Uu208WWWZq0JlpPRdTcJ/8MRUWO7lr8kk+Q==
 
 kleur@^3.0.3:
   version "3.0.3"
