@@ -60,7 +60,7 @@
 
 /* ブログのみ */
 .c-media__meta {
-	/* empty */
+	display: none;
 }
 
 /* ブログのみ */
@@ -70,7 +70,7 @@
 
 /* ブログのみ */
 .c-media__category {
-	/* empty */
+	display: none;
 }
 
 /* ブログのみ */

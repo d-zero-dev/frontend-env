@@ -1,5 +1,5 @@
 .c-footer {
-	padding-block-end: 2em;
+	padding-block-end: 2rem;
 }
 
 .c-footer__body {
@@ -12,7 +12,7 @@
 		display: flex;
 		justify-content: center;
 		padding: 0;
-		margin-block: 0 1em;
+		margin-block: 0 1rem;
 		margin-inline: 0;
 
 		@media (--sm-lte) {
@@ -24,12 +24,12 @@
 		display: block;
 		padding: 0;
 		margin-block: 0;
-		margin-inline: 1em;
+		margin-inline: 1rem;
 	}
 
 	a {
 		display: block;
-		padding: 1em;
+		padding: 1rem;
 		color: inherit;
 		text-decoration: none;
 	}

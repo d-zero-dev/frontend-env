@@ -12,11 +12,11 @@
 	}
 
 	:where(h2, h3, h4, h5, h6, p) {
-		margin-block-end: max(0.75em, 1rem);
+		margin-block-end: max(0.75rem, 1rem);
 	}
 
 	:where(ul, ol, table, blockquote) {
-		margin-block-end: 2em;
+		margin-block-end: 2rem;
 	}
 
 	:where(h2) {
@@ -44,7 +44,7 @@
 	}
 
 	:where(blockquote) {
-		padding-inline: 1em;
+		padding-inline: 1rem;
 		border-inline-start: 3px solid var(--border-color);
 	}
 
@@ -54,12 +54,12 @@
 	}
 
 	:where(th, td) {
-		padding: 1em;
+		padding: 1rem;
 		border: 1px solid var(--border-color);
 	}
 
 	.cc-form-description {
-		/* empty */
+		font-size: calc(14 / 16 * 1rem);
 	}
 
 	.cc-form {
@@ -67,12 +67,13 @@
 	}
 
 	.cc-form-field-list {
-		/* empty */
+		display: flex;
+		flex-direction: column;
 	}
 
 	.cc-form-fieldset {
 		display: block;
-		padding: 1em 2em;
+		padding: 1rem 2rem;
 
 		fieldset {
 			padding: 0;
@@ -84,42 +85,42 @@
 			padding: 0;
 			margin: 0;
 		}
+	}
 
-		&-heading {
-			display: flex;
-			align-items: center;
-			font-size: calc(18 / 16 * 1em);
-			font-weight: bold;
+	.cc-form-fieldset-heading {
+		display: flex;
+		align-items: center;
+		font-size: calc(18 / 16 * 1rem);
+		font-weight: bold;
 
-			label {
-				display: block;
-				cursor: pointer;
-			}
-
-			.required,
-			.optional {
-				display: block;
-				margin: 0 0 0 0.5em;
-				font-size: calc(12 / 18 * 1em);
-				line-height: 1;
-				border-radius: 0.2em;
-			}
+		label {
+			display: block;
+			cursor: pointer;
 		}
 
-		&-attention {
-			margin: 0.5em 0;
-			font-size: calc(12 / 18 * 1em);
-			font-weight: normal;
-		}
-
-		&-body {
-			/* empty */
+		.required,
+		.optional {
+			display: block;
+			margin: 0 0 0 0.5rem;
+			font-size: calc(12 / 18 * 1rem);
+			line-height: 1;
+			border-radius: 0.2rem;
 		}
 	}
 
+	.cc-form-fieldset-attention {
+		margin: 0.5rem 0;
+		font-size: calc(12 / 18 * 1rem);
+		font-weight: normal;
+	}
+
+	.cc-form-fieldset-body {
+		margin-block-start: 1rem;
+	}
+
 	.mail-field {
-		padding: 0 0 1em;
-		margin: 0 0 0 1em;
+		padding: 0 0 1rem;
+		margin: 0 0 0 1rem;
 
 		&:last-child {
 			border-block-end: 1px solid var(--border-color);
@@ -141,7 +142,7 @@
 
 			.mail-before-attachment {
 				grid-area: before-attachment;
-				margin: 0 1em 0 0;
+				margin: 0 1rem 0 0;
 
 				&:empty {
 					margin: 0;
@@ -154,7 +155,7 @@
 
 			.mail-after-attachment {
 				grid-area: after-attachment;
-				margin: 0 0 0 1em;
+				margin: 0 0 0 1rem;
 
 				&:empty {
 					margin: 0;
@@ -163,12 +164,12 @@
 
 			.mail-description {
 				grid-area: description;
-				font-size: calc(12 / 16 * 1em);
+				font-size: calc(12 / 16 * 1rem);
 			}
 
 			.error-message {
 				grid-area: error-message;
-				font-size: calc(12 / 16 * 1em);
+				font-size: calc(12 / 16 * 1rem);
 			}
 		}
 
@@ -184,11 +185,11 @@
 			input:not([type='radio'], [type='checkbox']),
 			textarea {
 				inline-size: 100%;
-				padding-inline: 0.5em;
+				padding-inline: 0.5rem;
 				font-family: inherit;
 				font-size: inherit;
 				border: 1px solid var(--border-color);
-				border-radius: 0.2em;
+				border-radius: 0.2rem;
 
 				&[size] {
 					inline-size: auto;
@@ -196,7 +197,7 @@
 
 				&[type='file'] {
 					padding-block: 0;
-					padding-inline: 0 1em;
+					padding-inline: 0 1rem;
 
 					&::-webkit-file-upload-button {
 						appearance: none;
@@ -218,13 +219,13 @@
 			}
 
 			select {
-				padding: 0.5em calc(0.5em + 24px + 2px) 0.5em 0.5em;
+				padding: 0.5rem calc(0.5rem + 24px + 2px) 0.5rem 0.5rem;
 				appearance: none;
-				background-image: url('@/img/bg-arrow.svg');
+				background-image: url('/img/bg-arrow.svg');
 				background-repeat: no-repeat;
-				background-position: right calc(0.2em + 2px) top calc(100% / 2 + 2px);
+				background-position: right calc(0.2rem + 2px) top calc(100% / 2 + 2px);
 				border: 1px solid var(--border-color);
-				border-radius: 0.2em;
+				border-radius: 0.2rem;
 			}
 		}
 
@@ -254,7 +255,7 @@
 				input {
 					display: block;
 					padding: 0;
-					margin: 0 0.5em 0 0;
+					margin: 0 0.5rem 0 0;
 					line-height: 1;
 				}
 

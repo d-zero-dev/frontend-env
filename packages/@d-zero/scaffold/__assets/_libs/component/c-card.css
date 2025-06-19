@@ -34,13 +34,13 @@
 
 .c-card__header {
 	flex: 0 1 auto;
-	padding-inline: 1em;
+	padding-inline: 1rem;
 }
 
 .c-card__body {
 	flex: 0 1 100%;
-	padding-block: 0.5em 2em;
-	padding-inline: 1em;
+	padding-block: 0.5rem 2rem;
+	padding-inline: 1rem;
 }
 
 .c-card__title {
@@ -83,8 +83,8 @@
 
 	span {
 		display: block;
-		padding-block: 0.2em;
-		padding-inline: 1em;
+		padding-block: 0.2rem;
+		padding-inline: 1rem;
 	}
 }
 
