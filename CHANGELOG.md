@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.46...v5.0.0-beta.0) (2025-06-20)
+
+### Bug Fixes
+
+- resolve Yarn v4 compatibility issues in tests ([c83d417](https://github.com/d-zero-dev/frontend-env/commit/c83d4172356b816133eb0e2bb30da30f5cf42083))
+- **scaffold:** remove independent yarn.lock for workspace consistency ([3099cf7](https://github.com/d-zero-dev/frontend-env/commit/3099cf71c16b2828a092c2e32ba15f0479a1ad66))
+- **scaffold:** replace SCSS comments with CSS comments in component styles ([ff1345f](https://github.com/d-zero-dev/frontend-env/commit/ff1345fb0fd219c00ca956e4dc7f00705d03c95f))
+
+### Features
+
+- **builder:** add CSS compiler with minification support ([e260d0a](https://github.com/d-zero-dev/frontend-env/commit/e260d0a958bcde62bdebcb81fe93d54ff1e6e562))
+- **postcss:** add postcss-extend-rule plugin and migrate to ES imports ([b0fe263](https://github.com/d-zero-dev/frontend-env/commit/b0fe263007898beeae347e1501ca0cdbbb8f8639))
+- **repo:** add release:beta:latest script ([5c904d0](https://github.com/d-zero-dev/frontend-env/commit/5c904d06cdcca6a84e5eff7ae91cf3277cbc0ae8))
+- **scaffold:** add `print` command ([355a71a](https://github.com/d-zero-dev/frontend-env/commit/355a71a89a7c404d5483e05ca6a38dedb464f5d4))
+- **scaffold:** リセットCSSにdestyle.cssからkiso.cssを採用 ([c2ed37d](https://github.com/d-zero-dev/frontend-env/commit/c2ed37dc628c8d97278117a9ff8bc831e2544698))
+
+### Reverts
+
+- Revert "chore(repo): migrate to Yarn v4" ([d9d6623](https://github.com/d-zero-dev/frontend-env/commit/d9d66235d04bc0b7c423a9d2a0678bfedd6022b3))
+
+### BREAKING CHANGES
+
+- **scaffold:** destyle.cssを廃止
+
 # [5.0.0-alpha.46](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.45...v5.0.0-alpha.46) (2025-05-19)
 
 ### Bug Fixes

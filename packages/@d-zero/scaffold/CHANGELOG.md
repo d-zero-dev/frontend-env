@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.46...v5.0.0-beta.0) (2025-06-20)
+
+### Bug Fixes
+
+- **scaffold:** remove independent yarn.lock for workspace consistency ([3099cf7](https://github.com/d-zero-dev/frontend-env/commit/3099cf71c16b2828a092c2e32ba15f0479a1ad66))
+- **scaffold:** replace SCSS comments with CSS comments in component styles ([ff1345f](https://github.com/d-zero-dev/frontend-env/commit/ff1345fb0fd219c00ca956e4dc7f00705d03c95f))
+
+### Features
+
+- **scaffold:** add `print` command ([355a71a](https://github.com/d-zero-dev/frontend-env/commit/355a71a89a7c404d5483e05ca6a38dedb464f5d4))
+- **scaffold:** リセットCSSにdestyle.cssからkiso.cssを採用 ([c2ed37d](https://github.com/d-zero-dev/frontend-env/commit/c2ed37dc628c8d97278117a9ff8bc831e2544698))
+
+### Reverts
+
+- Revert "chore(repo): migrate to Yarn v4" ([d9d6623](https://github.com/d-zero-dev/frontend-env/commit/d9d66235d04bc0b7c423a9d2a0678bfedd6022b3))
+
+### BREAKING CHANGES
+
+- **scaffold:** destyle.cssを廃止
+
 # [5.0.0-alpha.46](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.45...v5.0.0-alpha.46) (2025-05-19)
 
 ### Features

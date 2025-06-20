@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.46...v5.0.0-beta.0) (2025-06-20)
+
+### Reverts
+
+- Revert "chore(repo): migrate to Yarn v4" ([d9d6623](https://github.com/d-zero-dev/frontend-env/commit/d9d66235d04bc0b7c423a9d2a0678bfedd6022b3))
+
 # [5.0.0-alpha.46](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.45...v5.0.0-alpha.46) (2025-05-19)
 
 ### Features
