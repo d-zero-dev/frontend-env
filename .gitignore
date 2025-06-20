@@ -14,3 +14,6 @@ yarn-error.log
 *.sql
 
 *storybook.log
+
+# claude
+.claude/
