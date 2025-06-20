@@ -26,6 +26,11 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - name: Enable Corepack and setup Yarn v4
+        run: |
+          corepack enable
+          yarn --version
+
       - name: Cache dependencies
         id: cache-depends
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
@@ -37,9 +42,13 @@ jobs:
         if: runner.os == 'Windows' && steps.cache-depends.outputs.cache-hit != 'true'
         run: echo "network-timeout 600000" > .yarnrc
 
-      - name: Install dependencies
-        if: steps.cache-depends.outputs.cache-hit != 'true'
-        run: yarn --frozen-lockfile --check-files
+      - name: Install dependencies for Renovate/Dependabot
+        if: github.actor == 'renovate[bot]' || github.actor == 'dependabot[bot]'
+        run: yarn install --refresh-lockfile
+
+      - name: Install dependencies for normal PRs
+        if: github.actor != 'renovate[bot]' && github.actor != 'dependabot[bot]'
+        run: yarn install --immutable
 
       - name: Compile
         run: yarn build

@@ -4,6 +4,8 @@ node_modules
 npm-error.log
 package-lock.json
 yarn-error.log
+.yarn/install-state.gz
+.yarn/build-state.yml
 
 # ignore file types
 *.zip
