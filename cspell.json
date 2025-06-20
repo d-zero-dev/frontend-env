@@ -6,6 +6,9 @@
 		"postcssrc",
 
 		//
-		"dzbuild"
+		"dzbuild",
+
+		//
+		"kiso"
 	]
 }
