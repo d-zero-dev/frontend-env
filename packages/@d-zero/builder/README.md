@@ -26,7 +26,7 @@ npx @d-zero/builder
 
 - [Eleventy](https://www.11ty.dev/): HTMLトランスパイルおよび全体のビルド処理
 - [esbuild](https://esbuild.github.io/): JavaScriptトランスパイル
-- [Vite](https://vitejs.dev/): CSSトランスパイル
+- [PostCSS](https://postcss.org/): CSSトランスパイル
 
 ## 設定
 
@@ -74,7 +74,7 @@ export default function (eleventyConfig) {
 flowchart LR
 	#inHTML["*.html"]
 	#inPug["*.pug"]
-	#inSCSS["*.scss"]
+	#inCSS["*.css"]
 	#inJS["*.{js,cjs,mjs}"]
 	#inTS["*.ts"]
 	#outHTML["*.html"]
@@ -83,7 +83,7 @@ flowchart LR
 
 	#inHTML --> #dzBuilder
 	#inPug --> #dzBuilder
-	#inSCSS --> #dzBuilder
+	#inCSS --> #dzBuilder
 	#inJS --> #dzBuilder
 	#inTS --> #dzBuilder
 	#dzBuilder --> #outHTML
@@ -96,7 +96,7 @@ flowchart LR
 		subgraph #eleventy["11ty"]
 			#html["*.html"]
 			#pug["*.pug"]
-			#scss["*.scss"]
+			#css["*.css"]
 			#js["*.{js,cjs,mjs}"]
 			#ts["*.ts"]
 
@@ -127,7 +127,7 @@ flowchart LR
 			subgraph #transpileCSS["addExtension"]
 				direction TB
 
-				#vite(["トランスパイル<br>(SASS on Vite)"])
+				#postcss(["トランスパイル<br>(PostCSS)"])
 			end
 
 			subgraph #transpileJS["addExtension"]
@@ -138,7 +138,7 @@ flowchart LR
 
 			#html --> #transformHTML
 			#pug --> #eleventy-plugin-pug(["Pugプラグイン<br>(eleventy-plugin-pug)"]) --> #transformHTML
-			#scss --> #transpileCSS
+			#css --> #transpileCSS
 			#js --> #transpileJS
 			#ts --> #transpileJS
 		end
@@ -222,11 +222,11 @@ extensions: {
 
 - `html`: HTMLファイルの拡張子（デフォルト: 'html'）
 
-ViteやRollupに関する設定、その他ディレクトリ構成の変更などは`@d-zero/builder/11ty`で行うのは現状難しいため、Eleventyの設定ファイルで一から設定することになります。または、[Issue](https://github.com/d-zero-dev/frontend-env/issues)もしくは[プルリクエスト](https://github.com/d-zero-dev/frontend-env/pulls)変更可能なオプションをリクエストしてください。
+esbuildやRollupに関する設定、その他ディレクトリ構成の変更などは`@d-zero/builder/11ty`で行うのは現状難しいため、Eleventyの設定ファイルで一から設定することになります。または、[Issue](https://github.com/d-zero-dev/frontend-env/issues)もしくは[プルリクエスト](https://github.com/d-zero-dev/frontend-env/pulls)変更可能なオプションをリクエストしてください。
 
 ## ロードマップ
 
-静的サイトもしくはCMSのテンプレートを素早く構築するため、利用技術についてこだわりがあるわけではありません。そのため、利用技術の変更や追加を行うことがあります。現状、Eleventy/esbuild/Viteを利用している理由はちょうどよかっただけです。
+静的サイトもしくはCMSのテンプレートを素早く構築するため、利用技術についてこだわりがあるわけではありません。そのため、利用技術の変更や追加を行うことがあります。現状、Eleventy/esbuildを利用している理由はちょうどよかっただけです。
 
 ### 技術採用のポイント
 
