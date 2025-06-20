@@ -30,7 +30,7 @@
 		"storybook": "storybook build"
 	},
 	"devDependencies": {
-		"@chromatic-com/storybook": "3.2.6",
+		"@chromatic-com/storybook": "3.2.7",
 		"@storybook/addon-essentials": "8.6.14",
 		"@storybook/blocks": "8.6.14",
 		"@storybook/experimental-addon-test": "8.6.14",
