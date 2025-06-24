@@ -26,7 +26,7 @@
 		"bin"
 	],
 	"dependencies": {
-		"@11ty/eleventy": "3.1.1",
+		"@11ty/eleventy": "3.1.2",
 		"@d-zero/shared": "0.9.0",
 		"@types/postcss-import": "14.0.3",
 		"@types/postcss-load-config": "3.0.1",
