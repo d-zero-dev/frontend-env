@@ -3,7 +3,7 @@ import path from 'node:path';
 import cssnano from 'cssnano';
 import postcss from 'postcss';
 import postcssImport from 'postcss-import';
-// eslint-disable-next-line import/default
+// eslint-disable-next-line import-x/default
 import postcssLoadConfig from 'postcss-load-config';
 
 type CompileCssOptions = {
