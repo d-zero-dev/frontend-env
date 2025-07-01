@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.1](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.0...v5.0.0-beta.1) (2025-07-01)
+
+### Bug Fixes
+
+- **builder:** resolve npm packages starting with @ symbol ([d2f0817](https://github.com/d-zero-dev/frontend-env/commit/d2f0817e7c3295e2790ecfceb383c989947aba5b))
+- **builder:** update eslint rule from import to import-x ([2a71dbf](https://github.com/d-zero-dev/frontend-env/commit/2a71dbfb2b1343641db0857c12ac49b56d0fb84f))
+
+### Features
+
+- **scaffold:** add CSS layer structure and burger-editor integration ([89b4fa6](https://github.com/d-zero-dev/frontend-env/commit/89b4fa63209e43a130d592f729962b1a4a2876ca))
+
 # [5.0.0-beta.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.46...v5.0.0-beta.0) (2025-06-20)
 
 ### Bug Fixes
