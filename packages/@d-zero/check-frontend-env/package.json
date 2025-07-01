@@ -23,11 +23,17 @@
 	},
 	"scripts": {
 		"build": "tsc --project tsconfig.build.json",
-		"dev": "tsc --watch --project tsconfig.build.json"
+		"dev": "tsc --watch --project tsconfig.build.json",
+		"test": "vitest",
+		"test:run": "vitest run"
 	},
 	"files": [
 		"dist"
 	],
 	"dependencies": {},
-	"devDependencies": {}
+	"devDependencies": {
+		"@types/node": "^20.11.24",
+		"typescript": "^5.3.3",
+		"vitest": "^1.3.1"
+	}
 }
