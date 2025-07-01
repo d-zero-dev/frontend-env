@@ -34,7 +34,8 @@ export async function compileCss(
 				(id: string, basedir: string) => {
 					// Check if the import starts with an alias
 					for (const [alias, aliasPath] of Object.entries(options.alias)) {
-						if (id.startsWith(alias)) {
+						// Arias must be followed by a slash
+						if (id.startsWith(alias + '/')) {
 							const resolvedPath = id.replace(alias, aliasPath);
 							return [path.resolve(basedir, resolvedPath)];
 						}
