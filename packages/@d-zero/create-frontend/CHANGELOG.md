@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.2](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.1...v5.0.0-beta.2) (2025-07-11)
+
+### Features
+
+- **scaffold:** introduce @burger-editor/local for local development ([1524937](https://github.com/d-zero-dev/frontend-env/commit/15249370d68aeeb9c5b20d7c29dd4c8dfc0d000e))
+
 # [5.0.0-beta.1](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.0...v5.0.0-beta.1) (2025-07-01)
 
 **Note:** Version bump only for package @d-zero/create-frontend
