@@ -21,7 +21,7 @@
 		"plop": "4.0.1"
 	},
 	"devDependencies": {
-		"@types/glob": "8.1.0",
+		"@types/glob": "9.0.0",
 		"execa": "9.6.0"
 	}
 }
