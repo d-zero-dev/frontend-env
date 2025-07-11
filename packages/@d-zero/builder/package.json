@@ -47,7 +47,9 @@
 		"postcss-import": "16.1.1",
 		"postcss-load-config": "6.0.1",
 		"prettier": "3.5.3",
-		"pug": "3.0.3"
+		"pug": "3.0.3",
+		"strip-css-comments": "5.0.0",
+		"vite": "7.0.4"
 	},
 	"devDependencies": {
 		"@types/cli-color": "2.0.6",
@@ -58,6 +60,7 @@
 		"execa": "9.6.0",
 		"ignore": "7.0.5",
 		"prettier": "3.5.3",
+		"sass": "1.89.2",
 		"strip-ansi": "7.1.0"
 	}
 }

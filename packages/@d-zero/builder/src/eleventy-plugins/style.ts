@@ -3,15 +3,18 @@ import type { EleventyGlobalData } from '../types.js';
 import type { Options as HMTOptions } from 'html-minifier-terser';
 import type { Options as PrettierOptions } from 'prettier';
 
+import fs from 'node:fs/promises';
 import path from 'node:path';
 
 import { compileCss } from '../compiler/css.js';
+import { compileSass } from '../compiler/sass.js';
 
 type StylePluginConfig = {
 	banner: string;
 	minify?: HMTOptions['minifyCSS'];
 	alias: Record<string, string>;
 	prettier?: PrettierOptions | boolean;
+	tmpDir: string;
 };
 
 export const stylePlugin: EleventyPlugin<StylePluginConfig, EleventyGlobalData> = (
@@ -37,6 +40,36 @@ export const stylePlugin: EleventyPlugin<StylePluginConfig, EleventyGlobalData> 
 				return `${pluginConfig.banner}\n${content}`;
 			};
 		},
+	});
+
+	eleventyConfig.addTemplateFormats('scss');
+	eleventyConfig.addExtension('scss', {
+		outputFileExtension: 'css',
+		compile(_, inputPath) {
+			return async () => {
+				const absInputPath = path.resolve(inputPath);
+				const cssMinify = !!(pluginConfig.minify ?? true);
+
+				let content = await compileSass(absInputPath, {
+					minify: cssMinify,
+					alias: pluginConfig.alias,
+					tmpDir: pluginConfig.tmpDir,
+				});
+
+				if (!cssMinify) {
+					content = await prettifyCss(content);
+				}
+
+				return `${pluginConfig.banner}\n${content}`;
+			};
+		},
+	});
+
+	eleventyConfig.on('eleventy.after', async () => {
+		await fs.rm(pluginConfig.tmpDir, {
+			recursive: true,
+			force: true,
+		});
 	});
 };
 
