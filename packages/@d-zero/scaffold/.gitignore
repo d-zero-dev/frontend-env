@@ -33,3 +33,8 @@ htdocs/*
 !htdocs/img
 htdocs/img/*
 !htdocs/img/*.test.*
+!htdocs/files
+htdocs/files/*
+!htdocs/files/images
+htdocs/files/images/*
+!htdocs/files/images/sample.png

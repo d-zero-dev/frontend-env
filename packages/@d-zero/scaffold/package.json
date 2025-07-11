@@ -24,6 +24,7 @@
 		"lint:spell": "npx cspell --no-progress --show-suggestions \"**\"",
 		"lint:text": "npx textlint \"./__assets/**/*.{pug,html}\"",
 		"test": "vitest run",
+		"bge": "npx @burger-editor/local",
 		"print": "npx @d-zero/print -f __info/print.txt --type note",
 		"prepare": "husky",
 		"up": "yarn upgrade-interactive --latest"
@@ -37,6 +38,7 @@
 		"last 2 ios_saf version"
 	],
 	"devDependencies": {
+		"@burger-editor/local": "4.0.0-alpha.9",
 		"@d-zero/builder": "5.0.0-beta.1",
 		"@d-zero/linters": "5.0.0-alpha.65",
 		"@d-zero/postcss-config": "5.0.0-beta.1",
@@ -49,7 +51,7 @@
 		"vitest": "3.2.4"
 	},
 	"dependencies": {
-		"@burger-editor/css": "2.29.1",
+		"@burger-editor/css": "4.0.0-alpha.9",
 		"@d-zero/custom-components": "5.0.0-beta.1",
 		"dialog-toggle-events-polyfill": "1.1.4",
 		"invokers-polyfill": "0.5.5",

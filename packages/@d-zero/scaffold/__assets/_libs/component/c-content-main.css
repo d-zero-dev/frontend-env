@@ -7,12 +7,8 @@
  * ただし、クラス名は`c-`で開始してはいけない。もちろん 【`c-` + `コンポーネント名` + `__` + `エレメント名`】 という規則でクラス名をつけない。
  * さらにそのルールに従って、メインコンテンツの中にコンポーネントを内包してはいけない。 */
 .c-content-main {
-	:where(*) {
-		text-underline-offset: 3px;
-	}
-
 	:where(h2, h3, h4, h5, h6, p) {
-		margin-block-end: max(0.75rem, 1rem);
+		margin-block-end: 1rem;
 	}
 
 	:where(ul, ol, table, blockquote) {
@@ -56,6 +52,117 @@
 	:where(th, td) {
 		padding: 1rem;
 		border: 1px solid var(--border-color);
+	}
+
+	[data-bgi] {
+		:where(&, & > div) {
+			:where(& > :first-child) {
+				margin-block-start: 0;
+			}
+
+			:where(& > :last-child) {
+				margin-block-end: 0;
+			}
+		}
+	}
+
+	[data-bgi='button'],
+	[data-bgi='download-file'] {
+		a {
+			display: flex;
+			justify-content: center;
+			min-inline-size: 10em;
+			max-inline-size: 20em;
+			padding-block: 0.5em;
+			padding-inline: 1em;
+			color: inherit;
+			text-decoration: none;
+			border: 1px solid currentcolor;
+			border-radius: calc(infinity * 1px);
+		}
+	}
+
+	[data-bgi='table'],
+	[data-bgi='wysiwyg'] {
+		table {
+			inline-size: 100%;
+			border-spacing: 0;
+			border-collapse: collapse;
+
+			th,
+			td {
+				padding: 1.5em;
+				border: 1px solid currentcolor;
+			}
+		}
+	}
+
+	[data-bgi='hr'] {
+		--border-color: currentcolor;
+		--border-width: 3px;
+
+		[data-bgi-hr-kind='dashed'] {
+			--border-kind: dashed;
+		}
+
+		[data-bgi-hr-kind='bold'] {
+			--border-width: 5px;
+		}
+
+		[data-bgi-hr-kind='narrow'] {
+			--border-width: 1px;
+		}
+
+		[data-bgi-hr-kind='short'] {
+			--inline-size: 50%;
+		}
+	}
+
+	@container bge-container (width < 768px) {
+		[data-bge-container='grid:1'],
+		[data-bge-container^='grid:1:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 1;
+			}
+		}
+
+		[data-bge-container='grid:2'],
+		[data-bge-container^='grid:2:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 2;
+			}
+		}
+
+		[data-bge-container='grid:3'],
+		[data-bge-container^='grid:3:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 2;
+
+				/* 最後の要素を2列分にする */
+				> :nth-child(2n + 1):last-child {
+					grid-column: span 2;
+				}
+			}
+		}
+
+		[data-bge-container='grid:4'],
+		[data-bge-container^='grid:4:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 2;
+			}
+		}
+
+		[data-bge-container='grid:5'],
+		[data-bge-container^='grid:5:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 2;
+
+				/* 最後の要素を2列分にする */
+				> :nth-child(2n + 1):last-child {
+					grid-column: span 2;
+				}
+			}
+		}
 	}
 
 	.cc-form-description {
