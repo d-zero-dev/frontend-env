@@ -19,7 +19,6 @@ export const stylePlugin: EleventyPlugin<StylePluginConfig, EleventyGlobalData> 
 	pluginConfig,
 ) => {
 	eleventyConfig.addTemplateFormats('css');
-
 	eleventyConfig.addExtension('css', {
 		outputFileExtension: 'css',
 		compile(css, inputPath) {
@@ -28,18 +27,11 @@ export const stylePlugin: EleventyPlugin<StylePluginConfig, EleventyGlobalData> 
 				const cssMinify = !!(pluginConfig.minify ?? true);
 
 				let content = await compileCss(css, absInputPath, {
-					banner: pluginConfig.banner,
-					minify: cssMinify,
 					alias: pluginConfig.alias,
 				});
 
 				if (!cssMinify) {
-					const prettier = await import('prettier');
-					content = await prettier.format(content, {
-						parser: 'css',
-						tabWidth: 2,
-						useTabs: false,
-					});
+					content = await prettifyCss(content);
 				}
 
 				return `${pluginConfig.banner}\n${content}`;
@@ -47,3 +39,16 @@ export const stylePlugin: EleventyPlugin<StylePluginConfig, EleventyGlobalData> 
 		},
 	});
 };
+
+/**
+ *
+ * @param content
+ */
+async function prettifyCss(content: string) {
+	const prettier = await import('prettier');
+	return await prettier.format(content, {
+		parser: 'css',
+		tabWidth: 2,
+		useTabs: false,
+	});
+}

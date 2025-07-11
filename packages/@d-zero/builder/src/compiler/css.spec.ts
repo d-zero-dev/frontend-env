@@ -17,8 +17,6 @@ describe('compileCss', () => {
 			`;
 
 			const result = await compileCss(css, 'test.css', {
-				banner: '',
-				minify: true,
 				alias: {},
 			});
 
@@ -40,8 +38,6 @@ describe('compileCss', () => {
 			`;
 
 			const result = await compileCss(css, 'test.css', {
-				banner: '',
-				minify: true,
 				alias: {},
 			});
 
@@ -67,8 +63,6 @@ describe('compileCss', () => {
 			`;
 
 			const result = await compileCss(css, 'test.css', {
-				banner: '',
-				minify: true,
 				alias: {},
 			});
 
@@ -82,8 +76,6 @@ describe('compileCss', () => {
 			const css = '';
 
 			const result = await compileCss(css, 'test.css', {
-				banner: '',
-				minify: true,
 				alias: {},
 			});
 
@@ -97,8 +89,6 @@ describe('compileCss', () => {
 			`;
 
 			const result = await compileCss(css, 'test.css', {
-				banner: '',
-				minify: true,
 				alias: {},
 			});
 
@@ -113,8 +103,6 @@ describe('compileCss', () => {
 			`;
 
 			const result = await compileCss(css, 'test.css', {
-				banner: '',
-				minify: true,
 				alias: {},
 			});
 
@@ -129,8 +117,6 @@ describe('compileCss', () => {
 			const css = '.test { color: ; }'; // Missing value
 
 			const result = await compileCss(css, 'test.css', {
-				banner: '',
-				minify: true,
 				alias: {},
 			});
 
@@ -142,8 +128,6 @@ describe('compileCss', () => {
 
 			await expect(
 				compileCss(css, 'test.css', {
-					banner: '',
-					minify: true,
 					alias: {},
 				}),
 			).rejects.toThrow('Unclosed block');
@@ -159,8 +143,6 @@ describe('compileCss', () => {
 			`;
 
 			const result = await compileCss(css, 'test.css', {
-				banner: '',
-				minify: true,
 				alias: {
 					'@components': '/some/path',
 					'@utils': '/another/path',
@@ -195,8 +177,6 @@ describe('compileCss - File import functionality', () => {
 		const css = '@import "@components/button.css";';
 
 		const result = await compileCss(css, path.join(cssDir, 'main.css'), {
-			banner: '',
-			minify: true,
 			alias: {
 				'@components': path.join(cssDir, 'components'),
 			},
@@ -211,8 +191,6 @@ describe('compileCss - File import functionality', () => {
 
 		await expect(
 			compileCss(css, path.join(cssDir, 'main.css'), {
-				banner: '',
-				minify: true,
 				alias: {},
 			}),
 		).rejects.toThrow();

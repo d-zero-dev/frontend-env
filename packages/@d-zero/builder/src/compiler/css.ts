@@ -7,8 +7,6 @@ import postcssImport from 'postcss-import';
 import postcssLoadConfig from 'postcss-load-config';
 
 type CompileCssOptions = {
-	banner: string;
-	minify: boolean;
 	alias: Record<string, string>;
 };
 
