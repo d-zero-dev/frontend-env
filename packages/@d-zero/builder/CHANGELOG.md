@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.3](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.2...v5.0.0-beta.3) (2025-07-11)
+
+### Features
+
+- **builder:** restore SASS compilation functionality as hidden feature ([f4deb58](https://github.com/d-zero-dev/frontend-env/commit/f4deb58094fb87ef8ab130c4574e497e0addac39))
+
 # [5.0.0-beta.2](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.1...v5.0.0-beta.2) (2025-07-11)
 
 **Note:** Version bump only for package @d-zero/builder

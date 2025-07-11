@@ -1202,7 +1202,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/builder@npm:5.0.0-beta.2, @d-zero/builder@workspace:packages/@d-zero/builder":
+"@d-zero/builder@npm:5.0.0-beta.3, @d-zero/builder@workspace:packages/@d-zero/builder":
   version: 0.0.0-use.local
   resolution: "@d-zero/builder@workspace:packages/@d-zero/builder"
   dependencies:
@@ -1259,7 +1259,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@d-zero/create-frontend@workspace:packages/@d-zero/create-frontend"
   dependencies:
-    "@d-zero/scaffold": "npm:5.0.0-beta.2"
+    "@d-zero/scaffold": "npm:5.0.0-beta.3"
     "@types/glob": "npm:9.0.0"
     execa: "npm:9.6.0"
     glob: "npm:11.0.3"
@@ -1290,7 +1290,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/custom-components@npm:5.0.0-beta.2, @d-zero/custom-components@workspace:packages/@d-zero/custom-components":
+"@d-zero/custom-components@npm:5.0.0-beta.3, @d-zero/custom-components@workspace:packages/@d-zero/custom-components":
   version: 0.0.0-use.local
   resolution: "@d-zero/custom-components@workspace:packages/@d-zero/custom-components"
   dependencies:
@@ -1385,7 +1385,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/postcss-config@npm:5.0.0-beta.2, @d-zero/postcss-config@workspace:packages/@d-zero/postcss-config":
+"@d-zero/postcss-config@npm:5.0.0-beta.3, @d-zero/postcss-config@workspace:packages/@d-zero/postcss-config":
   version: 0.0.0-use.local
   resolution: "@d-zero/postcss-config@workspace:packages/@d-zero/postcss-config"
   dependencies:
@@ -1421,16 +1421,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/scaffold@npm:5.0.0-beta.2, @d-zero/scaffold@workspace:packages/@d-zero/scaffold":
+"@d-zero/scaffold@npm:5.0.0-beta.3, @d-zero/scaffold@workspace:packages/@d-zero/scaffold":
   version: 0.0.0-use.local
   resolution: "@d-zero/scaffold@workspace:packages/@d-zero/scaffold"
   dependencies:
     "@burger-editor/css": "npm:4.0.0-alpha.9"
     "@burger-editor/local": "npm:4.0.0-alpha.9"
-    "@d-zero/builder": "npm:5.0.0-beta.2"
-    "@d-zero/custom-components": "npm:5.0.0-beta.2"
+    "@d-zero/builder": "npm:5.0.0-beta.3"
+    "@d-zero/custom-components": "npm:5.0.0-beta.3"
     "@d-zero/linters": "npm:5.0.0-alpha.65"
-    "@d-zero/postcss-config": "npm:5.0.0-beta.2"
+    "@d-zero/postcss-config": "npm:5.0.0-beta.3"
     "@d-zero/tsconfig": "npm:0.5.0"
     "@types/node": "npm:22.16.3"
     cross-env: "npm:7.0.3"
@@ -18493,62 +18493,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:7.0.4":
-  version: 7.0.4
-  resolution: "vite@npm:7.0.4"
-  dependencies:
-    esbuild: "npm:^0.25.0"
-    fdir: "npm:^6.4.6"
-    fsevents: "npm:~2.3.3"
-    picomatch: "npm:^4.0.2"
-    postcss: "npm:^8.5.6"
-    rollup: "npm:^4.40.0"
-    tinyglobby: "npm:^0.2.14"
-  peerDependencies:
-    "@types/node": ^20.19.0 || >=22.12.0
-    jiti: ">=1.21.0"
-    less: ^4.0.0
-    lightningcss: ^1.21.0
-    sass: ^1.70.0
-    sass-embedded: ^1.70.0
-    stylus: ">=0.54.8"
-    sugarss: ^5.0.0
-    terser: ^5.16.0
-    tsx: ^4.8.1
-    yaml: ^2.4.2
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  peerDependenciesMeta:
-    "@types/node":
-      optional: true
-    jiti:
-      optional: true
-    less:
-      optional: true
-    lightningcss:
-      optional: true
-    sass:
-      optional: true
-    sass-embedded:
-      optional: true
-    stylus:
-      optional: true
-    sugarss:
-      optional: true
-    terser:
-      optional: true
-    tsx:
-      optional: true
-    yaml:
-      optional: true
-  bin:
-    vite: bin/vite.js
-  checksum: 10c0/2eb3572d60e8e6f0e291905e30989a52042350439c03002603d27a396652bf0484e13d5e8b15e0d7bd9988a8dc03ee712d45eb83e9dcf8aab4e8ecb28b0419b6
-  languageName: node
-  linkType: hard
-
-"vite@npm:^5.0.0 || ^6.0.0 || ^7.0.0-0":
+"vite@npm:7.0.4, vite@npm:^5.0.0 || ^6.0.0 || ^7.0.0-0":
   version: 7.0.4
   resolution: "vite@npm:7.0.4"
   dependencies:
