@@ -1437,7 +1437,7 @@ __metadata:
     dialog-toggle-events-polyfill: "npm:1.1.4"
     husky: "npm:9.1.7"
     invokers-polyfill: "npm:0.5.5"
-    kiso.css: "npm:1.2.1"
+    kiso.css: "npm:1.2.2"
     npm-run-all2: "npm:8.0.4"
     tslib: "npm:2.8.1"
     typescript: "npm:5.8.3"
@@ -11229,10 +11229,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kiso.css@npm:1.2.1":
-  version: 1.2.1
-  resolution: "kiso.css@npm:1.2.1"
-  checksum: 10c0/6ed34fcd5355936104ee45b0d17464c5cb3c130cf2261623e1a2fb47749ceda3e26e1ab799b15a1f043d8604958699a9465da135a63e4d9d7f9351a24eda9342
+"kiso.css@npm:1.2.2":
+  version: 1.2.2
+  resolution: "kiso.css@npm:1.2.2"
+  checksum: 10c0/bfa96c74b3af8efa4401768321d8dae83c9594e795544d8dec20f761d75a804e927ebc7d4554bb9b9dbd2d2d55e6838390924111f9c6853e4160d414372ec045
   languageName: node
   linkType: hard
 
