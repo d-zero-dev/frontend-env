@@ -32,7 +32,7 @@
 		"@types/postcss-load-config": "3.0.1",
 		"character-entities": "2.0.2",
 		"cli-color": "2.0.4",
-		"cssnano": "7.0.7",
+		"cssnano": "7.1.0",
 		"dayjs": "1.11.13",
 		"esbuild": "0.25.6",
 		"filesize": "11.0.1",
