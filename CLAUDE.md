@@ -39,14 +39,12 @@ When adding rules to CLAUDE.md:
 5. **After completing any implementation, run appropriate checks from root** based on file types:
 
    **Build + Lint required for:**
-
    - TypeScript/JavaScript code changes (.ts, .js, .tsx, .jsx)
    - CSS/SCSS changes affecting build output
    - Package.json dependency changes
    - Configuration files affecting compilation (tsconfig.json, etc.)
 
    **Lint only required for:**
-
    - Markdown files (.md)
    - Documentation changes
    - Text-only configuration files
