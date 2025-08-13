@@ -143,7 +143,7 @@ export default function (
 		dir: {
 			input,
 			output: outDir,
-			layouts: '../_libs/component',
+			layouts: '../_libs/layouts',
 			data: '../_libs/data',
 			includes: relAlias,
 		},
