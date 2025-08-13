@@ -108,11 +108,13 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			const prettier = await import('prettier');
 			const options =
 				typeof pluginConfig.prettier === 'object' ? pluginConfig.prettier : {};
+			const config = await prettier.resolveConfig(this.page.inputPath);
 			content = await prettier.format(content, {
 				parser: 'html',
 				printWidth: 100_000,
 				tabWidth: 2,
 				useTabs: false,
+				...config,
 				...options,
 			});
 		}
