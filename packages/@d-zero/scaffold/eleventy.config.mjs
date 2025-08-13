@@ -22,9 +22,15 @@ export default function (eleventyConfig) {
 
 		/**
 		 * Prettier options.
+		 *
+		 * If `true`, use the prettier config in the project root.
+		 *
+		 * If `false`, disable prettier.
+		 *
+		 * If `object`, use the options. Merge with the prettier config in the project root.
 		 * @see https://prettier.io/docs/en/options
 		 */
-		// prettier: false,
+		prettier: true,
 
 		/**
 		 * Minifier options.
