@@ -87,6 +87,7 @@
 }
 
 /* 🐲 baserCMSの仕様上 マルチクラスでしかカレントを定義できない */
+
 /* stylelint-disable selector-class-pattern */
 .c-pagination__number--current {
 	border-block-end: 2px solid var(--border-color);
@@ -95,4 +96,5 @@
 		padding-block-end: 0;
 	}
 }
+
 /* stylelint-enable selector-class-pattern */

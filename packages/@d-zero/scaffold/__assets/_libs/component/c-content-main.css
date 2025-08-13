@@ -170,7 +170,8 @@
 	}
 
 	.cc-form {
-		margin: 0 auto;
+		margin-block: 0;
+		margin-inline: auto;
 	}
 
 	.cc-form-field-list {
@@ -180,7 +181,8 @@
 
 	.cc-form-fieldset {
 		display: block;
-		padding: 1rem 2rem;
+		padding-block: 1rem;
+		padding-inline: 2rem;
 
 		fieldset {
 			padding: 0;
@@ -208,7 +210,8 @@
 		.required,
 		.optional {
 			display: block;
-			margin: 0 0 0 0.5rem;
+			margin-block: 0;
+			margin-inline: 0 0.5rem;
 			font-size: calc(12 / 18 * 1rem);
 			line-height: 1;
 			border-radius: 0.2rem;
@@ -216,7 +219,8 @@
 	}
 
 	.cc-form-fieldset-attention {
-		margin: 0.5rem 0;
+		margin-block: 0.5rem;
+		margin-inline: 0;
 		font-size: calc(12 / 18 * 1rem);
 		font-weight: normal;
 	}
@@ -226,8 +230,10 @@
 	}
 
 	.mail-field {
-		padding: 0 0 1rem;
-		margin: 0 0 0 1rem;
+		padding-block: 0 1rem;
+		padding-inline: 0;
+		margin-block: 0;
+		margin-inline: 0 1rem;
 
 		&:last-child {
 			border-block-end: 1px solid var(--border-color);
@@ -241,7 +247,7 @@
 				'description description description' auto
 				'error-message error-message error-message' auto
 				/ auto 1fr auto;
-			grid-gap: 0;
+			gap: 0;
 
 			> * {
 				place-self: center flex-start;
@@ -249,7 +255,8 @@
 
 			.mail-before-attachment {
 				grid-area: before-attachment;
-				margin: 0 1rem 0 0;
+				margin-block: 0;
+				margin-inline: 0 1rem;
 
 				&:empty {
 					margin: 0;
@@ -262,7 +269,8 @@
 
 			.mail-after-attachment {
 				grid-area: after-attachment;
-				margin: 0 0 0 1rem;
+				margin-block: 0;
+				margin-inline: 1rem 0;
 
 				&:empty {
 					margin: 0;
@@ -326,7 +334,8 @@
 			}
 
 			select {
-				padding: 0.5rem calc(0.5rem + 24px + 2px) 0.5rem 0.5rem;
+				padding-block: 0.5rem;
+				padding-inline: 0.5rem calc(0.5rem + 24px + 2px);
 				appearance: none;
 				background-image: url('/img/bg-arrow.svg');
 				background-repeat: no-repeat;
@@ -362,7 +371,8 @@
 				input {
 					display: block;
 					padding: 0;
-					margin: 0 0.5rem 0 0;
+					margin-block: 0;
+					margin-inline: 0 0.5rem;
 					line-height: 1;
 				}
 
