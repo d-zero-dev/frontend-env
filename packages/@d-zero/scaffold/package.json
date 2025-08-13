@@ -11,7 +11,8 @@
 	"type": "module",
 	"main": "package.json",
 	"scripts": {
-		"build": "npx @d-zero/builder",
+		"build": "yarn lint && npx @d-zero/builder",
+		"build:only": "npx @d-zero/builder",
 		"dev": "npx eleventy --serve --watch",
 		"d": "yarn dev",
 		"lint": "run-s \"lint:*\"",
