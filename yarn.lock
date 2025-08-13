@@ -1338,7 +1338,7 @@ __metadata:
     cross-env: "npm:10.0.0"
     dialog-toggle-events-polyfill: "npm:1.1.4"
     husky: "npm:9.1.7"
-    invokers-polyfill: "npm:0.5.5"
+    invokers-polyfill: "npm:0.5.6"
     kiso.css: "npm:1.2.2"
     npm-run-all2: "npm:8.0.4"
     tslib: "npm:2.8.1"
@@ -9997,10 +9997,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"invokers-polyfill@npm:0.5.5":
-  version: 0.5.5
-  resolution: "invokers-polyfill@npm:0.5.5"
-  checksum: 10c0/fe643e9819a78099a7e2fbfc88a5dea107fb9a0027945719ef694e411124a7adfec32d1280ea1ffae05e855f668d36890194fada2fa1d6a7f3e00549459a45f2
+"invokers-polyfill@npm:0.5.6":
+  version: 0.5.6
+  resolution: "invokers-polyfill@npm:0.5.6"
+  checksum: 10c0/5efa508cc6fb59f4348290796395f8fc521fe95ddc22c41b412d758ef2faaa755b0206df9de26a5e2d2495074da3dc822317062b3c98b4e0da4a86adf698beb8
   languageName: node
   linkType: hard
 
