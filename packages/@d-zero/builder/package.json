@@ -34,7 +34,7 @@
 		"cli-color": "2.0.4",
 		"cssnano": "7.1.0",
 		"dayjs": "1.11.13",
-		"esbuild": "0.25.8",
+		"esbuild": "0.25.9",
 		"filesize": "11.0.2",
 		"gzip-size": "7.0.0",
 		"html-minifier-terser": "7.2.0",
