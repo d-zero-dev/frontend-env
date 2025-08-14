@@ -229,30 +229,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@burger-editor/css@npm:4.0.0-alpha.13":
-  version: 4.0.0-alpha.13
-  resolution: "@burger-editor/css@npm:4.0.0-alpha.13"
-  checksum: 10c0/605ec6808af05d3aa211496f59fc7884c9f9d2e7dd93d7f664613ded6d12491569dedab97560ecff75bad3cddaebc232ada1913b53dde8d25722b3e0f8c66ac9
+"@burger-editor/css@npm:4.0.0-alpha.14":
+  version: 4.0.0-alpha.14
+  resolution: "@burger-editor/css@npm:4.0.0-alpha.14"
+  checksum: 10c0/efcd1d2b7df0257df17ced67c4df2aabc870bebc3c099aaeed5175af13814559373ee71dc9ed2f7a081a42fabdca382ff0dd29648f88d16f62dc1eae62c73f82
   languageName: node
   linkType: hard
 
-"@burger-editor/local@npm:4.0.0-alpha.13":
-  version: 4.0.0-alpha.13
-  resolution: "@burger-editor/local@npm:4.0.0-alpha.13"
+"@burger-editor/local@npm:4.0.0-alpha.14":
+  version: 4.0.0-alpha.14
+  resolution: "@burger-editor/local@npm:4.0.0-alpha.14"
   dependencies:
     "@hono/node-server": "npm:1.18.2"
-    "@hono/zod-validator": "npm:0.7.0"
+    "@hono/zod-validator": "npm:0.7.2"
     ansi-colors: "npm:4.1.3"
     cosmiconfig: "npm:9.0.0"
     debug: "npm:4.4.1"
+    gray-matter: "npm:^4.0.3"
     hono: "npm:4.9.1"
     jsdom: "npm:26.1.0"
     open: "npm:10.2.0"
     prettier: "npm:3.6.2"
-    zod: "npm:3.24.4"
+    zod: "npm:4.0.17"
   bin:
     bge: ./server/index.js
-  checksum: 10c0/a21ae29a8104f56c35391500d47948204ff745c959915c63be960e9050293f7cbaf2454e9198b27c84a54bb43af9374fdfae67525155b93caa323aed278ec3b6
+  checksum: 10c0/aa9c3c89ee1f2a60cc828f6d11d823f9973e3c8563b7c9efbe05c1b9abfde512b6deeb6b7b69aa88fabb5552fc6504d1dc0e23e23d973871c015ba92962c40e3
   languageName: node
   linkType: hard
 
@@ -1327,8 +1328,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@d-zero/scaffold@workspace:packages/@d-zero/scaffold"
   dependencies:
-    "@burger-editor/css": "npm:4.0.0-alpha.13"
-    "@burger-editor/local": "npm:4.0.0-alpha.13"
+    "@burger-editor/css": "npm:4.0.0-alpha.14"
+    "@burger-editor/local": "npm:4.0.0-alpha.14"
     "@d-zero/builder": "npm:5.0.0-beta.3"
     "@d-zero/custom-components": "npm:5.0.0-beta.3"
     "@d-zero/linters": "npm:5.0.0-alpha.70"
@@ -1934,13 +1935,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hono/zod-validator@npm:0.7.0":
-  version: 0.7.0
-  resolution: "@hono/zod-validator@npm:0.7.0"
+"@hono/zod-validator@npm:0.7.2":
+  version: 0.7.2
+  resolution: "@hono/zod-validator@npm:0.7.2"
   peerDependencies:
     hono: ">=3.9.0"
-    zod: ^3.25.0
-  checksum: 10c0/8e362358348ef84a889ada450bba0a0c5b6109dacf74189153622f947e1fb66e161ef8772f169efe49d737e837d490c33efbbe094e5bb3e7a55dccd62848acd6
+    zod: ^3.25.0 || ^4.0.0
+  checksum: 10c0/39471e33bb96163496d88919f86efee1f1ff9ee2bf9f2a2e12e2dd2d8f090c56c57abc38e58a707018e2e4da0e5a06d4a631a57d10a524fa8e70d3bbaa75ca45
   languageName: node
   linkType: hard
 
@@ -18944,10 +18945,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:3.24.4":
-  version: 3.24.4
-  resolution: "zod@npm:3.24.4"
-  checksum: 10c0/ab3112f017562180a41a0f83d870b333677f7d6b77f106696c56894567051b91154714a088149d8387a4f50806a2520efcb666f108cd384a35c236a191186d91
+"zod@npm:4.0.17":
+  version: 4.0.17
+  resolution: "zod@npm:4.0.17"
+  checksum: 10c0/c56ef4cc02f8f52be8724c5a8b338266202d68477c7606bee9b7299818b75c9adc27f16f4b6704a372f3e7578bd016f389de19bfec766564b7c39d0d327c540a
   languageName: node
   linkType: hard
 
