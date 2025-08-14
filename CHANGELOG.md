@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.4](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.3...v5.0.0-beta.4) (2025-08-14)
+
+### Bug Fixes
+
+- **scaffold:** update burger-editor config and sample file format ([e45030d](https://github.com/d-zero-dev/frontend-env/commit/e45030d19b8adbc63ad4aef4d8abb42dcf84aff1))
+- **scaffold:** update CSS to use logical properties and fix formatting ([d2339db](https://github.com/d-zero-dev/frontend-env/commit/d2339db25cd4f227a1476af4b533b69d39c0ccb3))
+
+### Features
+
+- **builder:** change layouts directory to \_libs/layouts ([6e9b5f0](https://github.com/d-zero-dev/frontend-env/commit/6e9b5f016b4594cae0195c2f1aa67c6d222f0aa7))
+- **builder:** resolve prettier config automatically for HTML formatting ([b071f9d](https://github.com/d-zero-dev/frontend-env/commit/b071f9dc93cd0b9859bdad70929aa09dea281a39))
+- **scaffold:** add 11ty layout files ([fafeb55](https://github.com/d-zero-dev/frontend-env/commit/fafeb557c47d372a3037c94d5d093873ad47b84a))
+- **scaffold:** add sample page for static file production ([f2cacbd](https://github.com/d-zero-dev/frontend-env/commit/f2cacbdf90c237aa7dc80e7bae2a8b80c8732088))
+- **scaffold:** enable prettier by default in eleventy config ([ba539bd](https://github.com/d-zero-dev/frontend-env/commit/ba539bd0228fc86a0e126bd48cd04df41da91f3d))
+- **scaffold:** integrate lint check into build process ([9c99c22](https://github.com/d-zero-dev/frontend-env/commit/9c99c22eeb986ed07a774e82467c82e1403da1fe))
+- **scaffold:** update burger-editor dependencies to 4.0.0-alpha.14 ([3bec3a5](https://github.com/d-zero-dev/frontend-env/commit/3bec3a594af622aff826cd3c9ef29704ad95306b))
+
 # [5.0.0-beta.3](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.2...v5.0.0-beta.3) (2025-07-11)
 
 ### Features

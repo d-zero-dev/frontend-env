@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.4](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.3...v5.0.0-beta.4) (2025-08-14)
+
+### Features
+
+- **builder:** change layouts directory to \_libs/layouts ([6e9b5f0](https://github.com/d-zero-dev/frontend-env/commit/6e9b5f016b4594cae0195c2f1aa67c6d222f0aa7))
+- **builder:** resolve prettier config automatically for HTML formatting ([b071f9d](https://github.com/d-zero-dev/frontend-env/commit/b071f9dc93cd0b9859bdad70929aa09dea281a39))
+
 # [5.0.0-beta.3](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.2...v5.0.0-beta.3) (2025-07-11)
 
 ### Features
