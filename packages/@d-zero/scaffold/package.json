@@ -40,7 +40,7 @@
 	"devDependencies": {
 		"@burger-editor/local": "4.0.0-alpha.13",
 		"@d-zero/builder": "5.0.0-beta.3",
-		"@d-zero/linters": "5.0.0-alpha.69",
+		"@d-zero/linters": "5.0.0-alpha.70",
 		"@d-zero/postcss-config": "5.0.0-beta.3",
 		"@d-zero/tsconfig": "0.5.0",
 		"@types/node": "22.17.1",
