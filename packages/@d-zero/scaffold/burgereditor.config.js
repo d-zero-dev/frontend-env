@@ -8,7 +8,8 @@ config();
  * @type {import('@burger-editor/local').LocalServerConfig}
  */
 export default {
-	documentRoot: path.join(import.meta.dirname, 'htdocs'),
+	documentRoot: path.join(import.meta.dirname, '__assets', 'htdocs'),
+	assetsRoot: path.join(import.meta.dirname, 'htdocs'),
 	lang: 'ja',
 	stylesheets: ['/css/style.css'],
 	classList: ['c-content-main'],
