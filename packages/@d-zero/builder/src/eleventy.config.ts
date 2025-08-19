@@ -1,4 +1,4 @@
-import type { EleventyConfig } from './eleventy.types.js';
+import type { EleventyConfig, EleventyPage } from './eleventy.types.js';
 import type { DZBuilderConfig, EleventyGlobalData } from './types.js';
 
 import path from 'node:path';
@@ -95,6 +95,11 @@ export default function (
 	});
 
 	eleventyConfig.addPlugin(reportPlugin);
+
+	eleventyConfig.addGlobalData('permalink', () => {
+		return (data: { page: EleventyPage }) =>
+			`${data.page.filePathStem}.${data.page.outputFileExtension}`;
+	});
 
 	eleventyConfig.setServerOptions(
 		{
