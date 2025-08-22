@@ -236,24 +236,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@burger-editor/local@npm:4.0.0-alpha.14":
-  version: 4.0.0-alpha.14
-  resolution: "@burger-editor/local@npm:4.0.0-alpha.14"
+"@burger-editor/local@npm:4.0.0-alpha.16":
+  version: 4.0.0-alpha.16
+  resolution: "@burger-editor/local@npm:4.0.0-alpha.16"
   dependencies:
-    "@hono/node-server": "npm:1.18.2"
+    "@hono/node-server": "npm:1.19.0"
     "@hono/zod-validator": "npm:0.7.2"
     ansi-colors: "npm:4.1.3"
     cosmiconfig: "npm:9.0.0"
     debug: "npm:4.4.1"
     gray-matter: "npm:^4.0.3"
-    hono: "npm:4.9.1"
+    hono: "npm:4.9.2"
     jsdom: "npm:26.1.0"
     open: "npm:10.2.0"
     prettier: "npm:3.6.2"
     zod: "npm:4.0.17"
   bin:
     bge: ./server/index.js
-  checksum: 10c0/aa9c3c89ee1f2a60cc828f6d11d823f9973e3c8563b7c9efbe05c1b9abfde512b6deeb6b7b69aa88fabb5552fc6504d1dc0e23e23d973871c015ba92962c40e3
+  checksum: 10c0/d08a754a502199c79134ed6b1f82ea3286d3030a1a35d21fd129e84960e835582f5482689b653a34d065aef41f71bbaf4aeec96ce1ed81cf7e19d66d7ecb4ebf
   languageName: node
   linkType: hard
 
@@ -1329,7 +1329,7 @@ __metadata:
   resolution: "@d-zero/scaffold@workspace:packages/@d-zero/scaffold"
   dependencies:
     "@burger-editor/css": "npm:4.0.0-alpha.16"
-    "@burger-editor/local": "npm:4.0.0-alpha.14"
+    "@burger-editor/local": "npm:4.0.0-alpha.16"
     "@d-zero/builder": "npm:5.0.0-beta.4"
     "@d-zero/custom-components": "npm:5.0.0-beta.4"
     "@d-zero/linters": "npm:5.0.0-alpha.70"
@@ -1745,12 +1745,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hono/node-server@npm:1.18.2":
-  version: 1.18.2
-  resolution: "@hono/node-server@npm:1.18.2"
+"@hono/node-server@npm:1.19.0":
+  version: 1.19.0
+  resolution: "@hono/node-server@npm:1.19.0"
   peerDependencies:
     hono: ^4
-  checksum: 10c0/9dee029f9642df95f6d98cf2e4fbf89396dbf0cbef310fe621a4ffbf0867a4d3bff221bed5997e52aa0e84c9344c0b8b0e58f2f3bc0effe2a539a8f206062a3b
+  checksum: 10c0/33d7d6a1d139e449e57900533117a356efc04d26ca3cb1412e0c51c761e1eaf475bcf0b9646e46cfe589712d37c3b540223ac458577e090913bf348eebc1e01e
   languageName: node
   linkType: hard
 
@@ -9471,10 +9471,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:4.9.1":
-  version: 4.9.1
-  resolution: "hono@npm:4.9.1"
-  checksum: 10c0/8446d6e0f43adfa95cd74d0312d6763c6b0557f90815a2b6c3084c0b8f57068a270f8f5e06afb463f0dff937531278a3229b6d242caa2a5436686af7d20fc577
+"hono@npm:4.9.2":
+  version: 4.9.2
+  resolution: "hono@npm:4.9.2"
+  checksum: 10c0/0f1a25ea729e90ce9ace8f8dc4e05a180a1a41e3fdd68e5564a4348c260b784b7dccfc4e4c9e004eb0f42acbd9360bda0856639088ba11639c6851929c1d77f7
   languageName: node
   linkType: hard
 
