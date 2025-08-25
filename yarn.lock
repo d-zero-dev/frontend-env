@@ -236,9 +236,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@burger-editor/local@npm:4.0.0-alpha.16":
-  version: 4.0.0-alpha.16
-  resolution: "@burger-editor/local@npm:4.0.0-alpha.16"
+"@burger-editor/local@npm:4.0.0-alpha.17":
+  version: 4.0.0-alpha.17
+  resolution: "@burger-editor/local@npm:4.0.0-alpha.17"
   dependencies:
     "@hono/node-server": "npm:1.19.0"
     "@hono/zod-validator": "npm:0.7.2"
@@ -246,14 +246,14 @@ __metadata:
     cosmiconfig: "npm:9.0.0"
     debug: "npm:4.4.1"
     gray-matter: "npm:^4.0.3"
-    hono: "npm:4.9.2"
+    hono: "npm:4.9.4"
     jsdom: "npm:26.1.0"
     open: "npm:10.2.0"
     prettier: "npm:3.6.2"
     zod: "npm:4.0.17"
   bin:
     bge: ./server/index.js
-  checksum: 10c0/d08a754a502199c79134ed6b1f82ea3286d3030a1a35d21fd129e84960e835582f5482689b653a34d065aef41f71bbaf4aeec96ce1ed81cf7e19d66d7ecb4ebf
+  checksum: 10c0/4481058413e8c2cbd16fb763be5e40dfd97eb9cd37ef0d1965ae1c32d66e8dc8b8ac1c4f0e36f9883208ef07c43c5f8fa9263fce6a4f099893838579a37dde09
   languageName: node
   linkType: hard
 
@@ -1329,7 +1329,7 @@ __metadata:
   resolution: "@d-zero/scaffold@workspace:packages/@d-zero/scaffold"
   dependencies:
     "@burger-editor/css": "npm:4.0.0-alpha.17"
-    "@burger-editor/local": "npm:4.0.0-alpha.16"
+    "@burger-editor/local": "npm:4.0.0-alpha.17"
     "@d-zero/builder": "npm:5.0.0-beta.4"
     "@d-zero/custom-components": "npm:5.0.0-beta.4"
     "@d-zero/linters": "npm:5.0.0-alpha.70"
@@ -9494,10 +9494,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:4.9.2":
-  version: 4.9.2
-  resolution: "hono@npm:4.9.2"
-  checksum: 10c0/0f1a25ea729e90ce9ace8f8dc4e05a180a1a41e3fdd68e5564a4348c260b784b7dccfc4e4c9e004eb0f42acbd9360bda0856639088ba11639c6851929c1d77f7
+"hono@npm:4.9.4":
+  version: 4.9.4
+  resolution: "hono@npm:4.9.4"
+  checksum: 10c0/2ecea6846d6fb2f9135e1287af849c5fbafac0394b2e38b1d00d4afe00b791c20e39b6a6d8dcd6c444b97aafcf7043509f53d00960da636ce395fe91e089ede5
   languageName: node
   linkType: hard
 
