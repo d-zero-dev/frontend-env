@@ -46,9 +46,9 @@
 		"typescript": "5.9.2",
 		"vitest": "3.2.4"
 	},
-	"packageManager": "yarn@4.9.3",
+	"packageManager": "yarn@4.9.4",
 	"volta": {
 		"node": "24.6.0",
-		"yarn": "4.9.3"
+		"yarn": "4.9.4"
 	}
 }
