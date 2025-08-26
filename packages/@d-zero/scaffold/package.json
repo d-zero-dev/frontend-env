@@ -44,7 +44,7 @@
 		"@d-zero/linters": "5.0.0-alpha.71",
 		"@d-zero/postcss-config": "5.0.0-beta.4",
 		"@d-zero/tsconfig": "0.5.0",
-		"@types/node": "22.17.2",
+		"@types/node": "22.18.0",
 		"cross-env": "10.0.0",
 		"dotenv": "17.2.1",
 		"husky": "9.1.7",
