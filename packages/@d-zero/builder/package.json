@@ -61,6 +61,6 @@
 		"ignore": "7.0.5",
 		"prettier": "3.6.2",
 		"sass": "1.92.1",
-		"strip-ansi": "7.1.0"
+		"strip-ansi": "7.1.2"
 	}
 }
