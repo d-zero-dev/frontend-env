@@ -80,6 +80,8 @@ describe('CLI', () => {
 				.replaceAll(/\s*\d+\.\d+\s*(?:kB|MB|GB)/g, ' {size}')
 				.split('\n'),
 		).toStrictEqual([
+			'htdocs/index.html {size} | gzip: {size}',
+			'htdocs/__tmpl/index.html {size} | gzip: {size}',
 			'htdocs/__tmpl/000_home.html {size} | gzip: {size}',
 			'htdocs/__tmpl/100_sub.html {size} | gzip: {size}',
 			'htdocs/__tmpl/200_blog_index.html {size} | gzip: {size}',
