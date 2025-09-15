@@ -41,7 +41,7 @@
 		"@d-zero/linters": "5.0.0-alpha.71",
 		"@d-zero/tsconfig": "0.5.0",
 		"husky": "9.1.7",
-		"lerna": "8.2.3",
+		"lerna": "8.2.4",
 		"npm-run-all2": "8.0.4",
 		"typescript": "5.9.2",
 		"vitest": "3.2.4"
