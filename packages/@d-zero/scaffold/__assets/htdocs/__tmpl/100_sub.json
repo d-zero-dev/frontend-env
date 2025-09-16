@@ -1,3 +1,4 @@
 {
-	"layout": "sub.pug"
+	"layout": "sub.pug",
+	"title": "下層固定ページ・ブログ詳細ページ"
 }

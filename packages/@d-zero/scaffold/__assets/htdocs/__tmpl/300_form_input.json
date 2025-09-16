@@ -1,3 +1,4 @@
 {
-	"layout": "sub.pug"
+	"layout": "sub.pug",
+	"title": "メールフォーム入力ページ"
 }
