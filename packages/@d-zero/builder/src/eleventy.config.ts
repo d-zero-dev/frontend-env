@@ -1,4 +1,4 @@
-import type { EleventyConfig, EleventyPage } from './eleventy.types.js';
+import type { EleventyConfig } from './eleventy.types.js';
 import type { DZBuilderConfig, EleventyGlobalData } from './types.js';
 
 import path from 'node:path';
@@ -36,6 +36,7 @@ export default function (
 	const absInput = path.resolve(input);
 	const alias = options?.alias?.['@'] ?? absInput;
 	const relAlias = path.relative(absInput, alias);
+	const pathFormat = options.pathFormat ?? 'preserve';
 
 	const banner =
 		typeof options.banner === 'string'
@@ -43,7 +44,7 @@ export default function (
 			: createBanner(options.banner?.() ?? defaultBanner());
 
 	eleventyConfig.addGlobalData('alias', options.alias);
-	eleventyConfig.addGlobalData('pathFormat', options.pathFormat);
+	eleventyConfig.addGlobalData('pathFormat', pathFormat);
 	eleventyConfig.addGlobalData('minifier', options.minifier);
 	eleventyConfig.addGlobalData('extensions', options.extensions);
 
@@ -96,10 +97,11 @@ export default function (
 
 	eleventyConfig.addPlugin(reportPlugin);
 
-	eleventyConfig.addGlobalData('permalink', () => {
-		return (data: { page: EleventyPage }) =>
-			`${data.page.filePathStem}.${data.page.outputFileExtension}`;
-	});
+	if (pathFormat === 'preserve') {
+		eleventyConfig.addGlobalData('permalink', () => {
+			return (data) => `${data.page.filePathStem}.${data.page.outputFileExtension}`;
+		});
+	}
 
 	eleventyConfig.setServerOptions(
 		{
