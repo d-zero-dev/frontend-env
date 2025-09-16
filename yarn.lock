@@ -1382,6 +1382,7 @@ __metadata:
     dotenv: "npm:17.2.2"
     husky: "npm:9.1.7"
     invokers-polyfill: "npm:0.5.7"
+    jsdom: "npm:27.0.0"
     kiso.css: "npm:1.2.2"
     npm-run-all2: "npm:8.0.4"
     tslib: "npm:2.8.1"
