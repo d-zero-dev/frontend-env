@@ -1,10 +1,11 @@
+import type { EleventyPage } from './eleventy.types.js';
 import type { Dayjs } from 'dayjs';
 import type { Options as HMTOptions } from 'html-minifier-terser';
 import type { Options as PrettierOptions } from 'prettier';
 
 export type EleventyGlobalData = Pick<
 	DZBuilderConfig,
-	'alias' | 'pathFormat' | 'minifier' | 'extensions'
+	'alias' | 'pathFormat' | 'minifier' | 'extensions' | 'permalink'
 >;
 
 export type DZBuilderConfig = {
@@ -22,6 +23,7 @@ export type DZBuilderConfig = {
 	ssi?: Record<string, SSIOption>;
 	htmlHooks?: HtmlHooks;
 	extensions?: Record<Extensions, string>;
+	permalink?: () => (data: { page: EleventyPage }) => string;
 };
 
 export type CharsetList =

@@ -43,12 +43,12 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 
 		const isServe = pluginConfig.isServe ?? false;
 
-		const transferred = pathTransfer(
-			{
-				inputPath: this.page.inputPath,
-			},
-			eleventyConfig.globalData.pathFormat ?? 'preserve',
-		);
+		const pathFormat = eleventyConfig.globalData.pathFormat ?? 'preserve';
+
+		const transferred =
+			pathFormat === 'preserve'
+				? this.page.inputPath
+				: pathTransfer({ inputPath: this.page.inputPath }, pathFormat);
 
 		const outputPath =
 			'/' +
