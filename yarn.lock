@@ -1340,7 +1340,7 @@ __metadata:
     dialog-toggle-events-polyfill: "npm:1.1.4"
     dotenv: "npm:17.2.2"
     husky: "npm:9.1.7"
-    invokers-polyfill: "npm:0.5.6"
+    invokers-polyfill: "npm:0.5.7"
     kiso.css: "npm:1.2.2"
     npm-run-all2: "npm:8.0.4"
     tslib: "npm:2.8.1"
@@ -9913,10 +9913,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"invokers-polyfill@npm:0.5.6":
-  version: 0.5.6
-  resolution: "invokers-polyfill@npm:0.5.6"
-  checksum: 10c0/5efa508cc6fb59f4348290796395f8fc521fe95ddc22c41b412d758ef2faaa755b0206df9de26a5e2d2495074da3dc822317062b3c98b4e0da4a86adf698beb8
+"invokers-polyfill@npm:0.5.7":
+  version: 0.5.7
+  resolution: "invokers-polyfill@npm:0.5.7"
+  checksum: 10c0/5ea658e853e76a1943a33857f132436c6c9f948d4920134f5c1f5f168682f7721b5cbd26167c94b4956bb33cca754125939154abdbc2eb02d448f5dd7d7262f9
   languageName: node
   linkType: hard
 
