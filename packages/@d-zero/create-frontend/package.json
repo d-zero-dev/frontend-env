@@ -17,7 +17,7 @@
 		"glob": "11.0.3",
 		"i18n-js": "4.5.1",
 		"ignore": "7.0.5",
-		"meow": "13.2.0",
+		"meow": "14.0.0",
 		"plop": "4.0.2"
 	},
 	"devDependencies": {
