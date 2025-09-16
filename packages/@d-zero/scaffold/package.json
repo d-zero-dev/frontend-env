@@ -10,6 +10,10 @@
 	},
 	"type": "module",
 	"main": "package.json",
+	"production": {
+		"host": "https://example.com",
+		"siteName": "__サイト名__"
+	},
 	"scripts": {
 		"build": "yarn lint && npx @d-zero/builder",
 		"build:only": "npx @d-zero/builder",
