@@ -5,7 +5,7 @@ import { JSDOM } from 'jsdom';
 /**
  *
  */
-export default async function () {
+export default function () {
 	return (page, collections) => {
 		const breadcrumbs = collections.all
 			.filter((item) => isAncestor(page, item.filePathStem))
