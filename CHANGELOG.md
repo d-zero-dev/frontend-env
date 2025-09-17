@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.5](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.4...v5.0.0-beta.5) (2025-09-17)
+
+### Bug Fixes
+
+- **scaffold:** add dotenv ([f9e09fb](https://github.com/d-zero-dev/frontend-env/commit/f9e09fbc1e32f99dd0529b5fba40cc8c205471cb))
+- **scaffold:** add missing dotenv dependency ([79abde5](https://github.com/d-zero-dev/frontend-env/commit/79abde5199f9f5bca2cd7d8a5b4e96f53e14a2f8))
+- **scaffold:** remove unnecessary async keyword from breadcrumbs function ([2e1e11f](https://github.com/d-zero-dev/frontend-env/commit/2e1e11f29face454705de7b359ab1bc598c549cf))
+- **scaffold:** use rel="icon" for favicon ([af6c9e8](https://github.com/d-zero-dev/frontend-env/commit/af6c9e83c2bd2b454bf54745de0b8275063450d5))
+
+### Features
+
+- **builder:** change default permalink ([0c17797](https://github.com/d-zero-dev/frontend-env/commit/0c17797dc4a16cbba684e99cf976db7699f99dc8))
+- **scaffold:** add dynamic breadcrumb generation ([4816002](https://github.com/d-zero-dev/frontend-env/commit/4816002823cb0698cac60858db26bffe081ab8e0))
+- **scaffold:** add dynamic title generation using breadcrumbs ([39fd107](https://github.com/d-zero-dev/frontend-env/commit/39fd1076cd7d722bb97942751bc6f65826f93c1a))
+- **scaffold:** update c-title-page component ([77d8bbe](https://github.com/d-zero-dev/frontend-env/commit/77d8bbe534392b1ae2bd82ea0e0da02287f32ff0))
+- **scaffold:** update layout and template files ([6f95978](https://github.com/d-zero-dev/frontend-env/commit/6f9597865bf66e9d8f336a4e5e9db0462953116b))
+- **scaffold:** update meta mixin, sample page and package config ([f97f141](https://github.com/d-zero-dev/frontend-env/commit/f97f1416ddd2053cdfab38823fe66adfdf3ef5f9))
+- **scaffold:** update template data with Japanese titles ([7c60679](https://github.com/d-zero-dev/frontend-env/commit/7c606797db4a94b527de69b3ec79980fed275f61))
+
 # [5.0.0-beta.4](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.3...v5.0.0-beta.4) (2025-08-14)
 
 ### Bug Fixes

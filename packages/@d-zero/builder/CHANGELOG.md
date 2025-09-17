@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.5](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.4...v5.0.0-beta.5) (2025-09-17)
+
+### Features
+
+- **builder:** change default permalink ([0c17797](https://github.com/d-zero-dev/frontend-env/commit/0c17797dc4a16cbba684e99cf976db7699f99dc8))
+
 # [5.0.0-beta.4](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.3...v5.0.0-beta.4) (2025-08-14)
 
 ### Features
