@@ -12,7 +12,7 @@ export default function () {
 			.map((item) => ({
 				title: getTitle(item),
 				href: item.page.url,
-				depth: item.page.url.split('/').length,
+				depth: item.page.url.split('/').filter(Boolean).length,
 			}))
 			.sort((a, b) => a.depth - b.depth);
 		return breadcrumbs;
