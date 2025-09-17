@@ -33,12 +33,23 @@ function isAncestor(page, filePathStem) {
 	return (included && isIndex) || isSelf;
 }
 
+const titleCache = new Map();
+
 /**
  *
  * @param item
  */
 function getTitle(item) {
-	return item.data.title?.trim() || getTitleFromDOM(item) || item.page.fileSlug?.trim();
+	const filePathStem = item.filePathStem;
+	if (titleCache.has(filePathStem)) {
+		return titleCache.get(filePathStem);
+	}
+	const title =
+		item.data.title?.trim() ||
+		getTitleFromDOM(getContent(item)) ||
+		item.page.fileSlug?.trim();
+	titleCache.set(filePathStem, title);
+	return title;
 }
 
 /**
@@ -46,13 +57,21 @@ function getTitle(item) {
  * @param item
  */
 function getTitleFromDOM(item) {
-	let content;
+	const content = getContent(item);
+	const dom = new JSDOM(content);
+	const title = dom.window.document.title.trim();
+	return title;
+}
+
+/**
+ *
+ * @param item
+ */
+function getContent(item) {
 	try {
 		// UsingCircularTemplateContentReferenceError may potentially occur
-		content = item.templateContent;
+		return item.templateContent;
 	} catch {
 		return null;
 	}
-	const dom = new JSDOM(content);
-	return dom.window.document.title.trim();
 }
