@@ -261,6 +261,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@burger-editor/blocks@npm:4.0.0-alpha.25":
+  version: 4.0.0-alpha.25
+  resolution: "@burger-editor/blocks@npm:4.0.0-alpha.25"
+  dependencies:
+    "@burger-editor/core": "npm:4.0.0-alpha.25"
+    "@burger-editor/utils": "npm:4.0.0-alpha.25"
+  checksum: 10c0/eb7dc689fc0e8c7effe22637624909c341dd9def4675c59a849158d602e4ac1f135a72a8f1deb893cf09f9c01c345173da64f50ea2abbbf85a349e635c0649f7
+  languageName: node
+  linkType: hard
+
+"@burger-editor/core@npm:4.0.0-alpha.25":
+  version: 4.0.0-alpha.25
+  resolution: "@burger-editor/core@npm:4.0.0-alpha.25"
+  dependencies:
+    "@burger-editor/frozen-patty": "npm:4.0.0-alpha.25"
+    "@burger-editor/utils": "npm:4.0.0-alpha.25"
+    jaco: "npm:5.0.0"
+    semver: "npm:7.7.2"
+  checksum: 10c0/8572eb66433ceb1eb0ebb2b5518c4c5a1974c754564f26051746b7a34fbe338805d14d3c91c77a3f022883f583f91ff94571282605818ab63c02f430f86e2279
+  languageName: node
+  linkType: hard
+
 "@burger-editor/css@npm:4.0.0-alpha.25":
   version: 4.0.0-alpha.25
   resolution: "@burger-editor/css@npm:4.0.0-alpha.25"
@@ -268,24 +290,45 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@burger-editor/local@npm:4.0.0-alpha.20":
-  version: 4.0.0-alpha.20
-  resolution: "@burger-editor/local@npm:4.0.0-alpha.20"
+"@burger-editor/frozen-patty@npm:4.0.0-alpha.25":
+  version: 4.0.0-alpha.25
+  resolution: "@burger-editor/frozen-patty@npm:4.0.0-alpha.25"
   dependencies:
-    "@hono/node-server": "npm:1.19.2"
+    "@burger-editor/utils": "npm:4.0.0-alpha.25"
+  checksum: 10c0/808eefafcfbabc1cb2b28a73dba45d6829323e508c964f153baee73b23482ae79f5138feb329ffbf2309327af3fa02dba65106ce23fd49aa058f52a4218668c9
+  languageName: node
+  linkType: hard
+
+"@burger-editor/local@npm:4.0.0-alpha.25":
+  version: 4.0.0-alpha.25
+  resolution: "@burger-editor/local@npm:4.0.0-alpha.25"
+  dependencies:
+    "@burger-editor/blocks": "npm:4.0.0-alpha.25"
+    "@hono/node-server": "npm:1.19.3"
     "@hono/zod-validator": "npm:0.7.2"
     ansi-colors: "npm:4.1.3"
     cosmiconfig: "npm:9.0.0"
-    debug: "npm:4.4.1"
+    debug: "npm:4.4.3"
     gray-matter: "npm:^4.0.3"
-    hono: "npm:4.9.6"
+    hono: "npm:4.9.8"
     jsdom: "npm:26.1.0"
     open: "npm:10.2.0"
     prettier: "npm:3.6.2"
     zod: "npm:4.0.17"
   bin:
     bge: ./server/index.js
-  checksum: 10c0/fba1c9fd87b48bf103d2bbaa5b7f134db44f046646196cab3ac962146978aa80b8e5edcf546796010c5fa5553a45930fa23adc6b0c61bfcb7dfc93e0afebb167
+  checksum: 10c0/e0fafcd18733fc55204579e89d5948b0b37e16f96ea704bf8f10a767d574cc7dc61ee3c62c4e9b03b598252f3b0c182e628e8a9ce3bab25969eac6a37b5cc22d
+  languageName: node
+  linkType: hard
+
+"@burger-editor/utils@npm:4.0.0-alpha.25":
+  version: 4.0.0-alpha.25
+  resolution: "@burger-editor/utils@npm:4.0.0-alpha.25"
+  dependencies:
+    dayjs: "npm:1.11.18"
+    marked: "npm:16.3.0"
+    turndown: "npm:7.2.1"
+  checksum: 10c0/a81a8eeb1c3184b3887a4f1a926eb285e6a0e441d6683259fe26a32083a44e3039f6b31eda72b244dde77af40263f668ddbacfb772a33374a8617ac6d4986f2d
   languageName: node
   linkType: hard
 
@@ -1370,7 +1413,7 @@ __metadata:
   resolution: "@d-zero/scaffold@workspace:packages/@d-zero/scaffold"
   dependencies:
     "@burger-editor/css": "npm:4.0.0-alpha.25"
-    "@burger-editor/local": "npm:4.0.0-alpha.20"
+    "@burger-editor/local": "npm:4.0.0-alpha.25"
     "@d-zero/builder": "npm:5.0.0-beta.5"
     "@d-zero/custom-components": "npm:5.0.0-beta.5"
     "@d-zero/linters": "npm:5.0.0-alpha.71"
@@ -1969,12 +2012,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hono/node-server@npm:1.19.2":
-  version: 1.19.2
-  resolution: "@hono/node-server@npm:1.19.2"
+"@hono/node-server@npm:1.19.3":
+  version: 1.19.3
+  resolution: "@hono/node-server@npm:1.19.3"
   peerDependencies:
     hono: ^4
-  checksum: 10c0/36a191740ca65780ef5b9da21e5ea7ac34e77c64ecbd4449b03eb0b4430bf9e27d9f51266b9898e53e266e4d7505caa735d1a3ef543585ceeefb10684e253aa5
+  checksum: 10c0/72a6f52feb9d9e5112b70077c6fc84184f484f2d6818622c480edcacd6d888e1a14d45dc1ab5112324bfcbd7c42ff647e71fecba6d372dc511a820c858085ad9
   languageName: node
   linkType: hard
 
@@ -2522,6 +2565,13 @@ __metadata:
     "@types/react": ">=16"
     react: ">=16"
   checksum: 10c0/34ca98bc2a0f969894ea144dc5c8a5294690505458cd24965cd9be854d779c193ad9192bf9143c4c18438fafd1902e100d99067e045c69319288562d497558c6
+  languageName: node
+  linkType: hard
+
+"@mixmark-io/domino@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@mixmark-io/domino@npm:2.2.0"
+  checksum: 10c0/aa468a15f9217d425220fe6a4b3f9416cbe8e566ee14efc191c6d5cc04fe39338b16a90bbac190f28d44e69465db5f2cf95f479c621ce38060ca6b2a3d346e9d
   languageName: node
   linkType: hard
 
@@ -7182,7 +7232,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:^4.0.0, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.5, debug@npm:^4.4.0, debug@npm:^4.4.1":
+"debug@npm:4, debug@npm:4.4.3, debug@npm:^4.0.0, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.5, debug@npm:^4.4.0, debug@npm:^4.4.1":
   version: 4.4.3
   resolution: "debug@npm:4.4.3"
   dependencies:
@@ -9798,10 +9848,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:4.9.6":
-  version: 4.9.6
-  resolution: "hono@npm:4.9.6"
-  checksum: 10c0/182a144eb3b9e05bd9e43d15af15c93f60d3d747fef6c6904b9993e9db8129ea7fadf6190331d6f76b1bf6dd2b2c3b13efea105236f541ef411397e30475422d
+"hono@npm:4.9.8":
+  version: 4.9.8
+  resolution: "hono@npm:4.9.8"
+  checksum: 10c0/18d007abf1c6b88dd833b0732942bff47913c0f332eeab2bf680b8c647b7025bb64db91a8f22a786138629c02b09fd9819256140a19091eeed7c66a16f19244b
   languageName: node
   linkType: hard
 
@@ -10852,6 +10902,13 @@ __metadata:
   dependencies:
     "@isaacs/cliui": "npm:^8.0.2"
   checksum: 10c0/84ec4f8e21d6514db24737d9caf65361511f75e5e424980eebca4199f400874f45e562ac20fa8aeb1dd20ca2f3f81f0788b6e9c3e64d216a5794fd6f30e0e042
+  languageName: node
+  linkType: hard
+
+"jaco@npm:5.0.0":
+  version: 5.0.0
+  resolution: "jaco@npm:5.0.0"
+  checksum: 10c0/1edaf5d3803a670f1333efb3751825c60a1ec23408b3decc0a88dd1712133f61890924bb3baead0321e4083157037cf3a3ef7a1cf51b7cc0e0a753d4caa29663
   languageName: node
   linkType: hard
 
@@ -11987,6 +12044,15 @@ __metadata:
   dependencies:
     repeat-string: "npm:^1.0.0"
   checksum: 10c0/f257e0781ea50eb946919df84bdee4ba61f983971b277a369ca7276f89740fd0e2749b9b187163a42df4c48682b71962d4007215ce3523480028f06c11ddc2e6
+  languageName: node
+  linkType: hard
+
+"marked@npm:16.3.0":
+  version: 16.3.0
+  resolution: "marked@npm:16.3.0"
+  bin:
+    marked: bin/marked.js
+  checksum: 10c0/5a3d7da93d7692014c8764c31dc741fa6ee16d8573788a3b28d041c440e79177c46d786ad7c1fc2b3f5e301d6db32e22da45efd4c00ddbc31caf87bd8e9a673b
   languageName: node
   linkType: hard
 
@@ -16022,7 +16088,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.0.0, semver@npm:^7.1.1, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8, semver@npm:^7.5.3, semver@npm:^7.6.0, semver@npm:^7.6.2, semver@npm:^7.7.2":
+"semver@npm:7.7.2, semver@npm:^7.0.0, semver@npm:^7.1.1, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8, semver@npm:^7.5.3, semver@npm:^7.6.0, semver@npm:^7.6.2, semver@npm:^7.7.2":
   version: 7.7.2
   resolution: "semver@npm:7.7.2"
   bin:
@@ -17729,6 +17795,15 @@ __metadata:
     debug: "npm:^4.3.4"
     make-fetch-happen: "npm:^13.0.1"
   checksum: 10c0/7c17b097571f001730d7be0aeaec6bec46ed2f25bf73990b1133c383d511a1ce65f831e5d6d78770940a85b67664576ff0e4c98e5421bab6d33ff36e4be500c8
+  languageName: node
+  linkType: hard
+
+"turndown@npm:7.2.1":
+  version: 7.2.1
+  resolution: "turndown@npm:7.2.1"
+  dependencies:
+    "@mixmark-io/domino": "npm:^2.2.0"
+  checksum: 10c0/a2ed7b05624ad20d243fab424a256f029340782ea0c023229813b732a29af8857e313761b5a9e3d224aede1712bd47a382c3d0923712592b8756c698945eccb1
   languageName: node
   linkType: hard
 
