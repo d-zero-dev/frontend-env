@@ -35,7 +35,7 @@
 		"cssnano": "7.1.1",
 		"dayjs": "1.11.18",
 		"esbuild": "0.25.9",
-		"filesize": "11.0.10",
+		"filesize": "11.0.13",
 		"gzip-size": "7.0.0",
 		"html-minifier-terser": "7.2.0",
 		"iconv-lite": "0.7.0",

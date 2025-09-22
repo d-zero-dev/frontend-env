@@ -1208,7 +1208,7 @@ __metadata:
     dayjs: "npm:1.11.18"
     esbuild: "npm:0.25.9"
     execa: "npm:9.6.0"
-    filesize: "npm:11.0.10"
+    filesize: "npm:11.0.13"
     gzip-size: "npm:7.0.0"
     html-minifier-terser: "npm:7.2.0"
     iconv-lite: "npm:0.7.0"
@@ -8842,10 +8842,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"filesize@npm:11.0.10":
-  version: 11.0.10
-  resolution: "filesize@npm:11.0.10"
-  checksum: 10c0/34ebc21d4559492a696f1eaa2c895020bb09b79be3a5ded7b86d496ab9a55c08789b9c8762c9fab6ae92efc354e6222af5c7533da256040aebfeaa53b5b706fd
+"filesize@npm:11.0.13":
+  version: 11.0.13
+  resolution: "filesize@npm:11.0.13"
+  checksum: 10c0/5950272a2981a71cfbfda2ad278a7f59b101d3383e466c57cf8eaf5d359cb2b96f0549aa8d6ad116619337f0a1ccbceca7710e35d03d49cb757fc25b44a6d64a
   languageName: node
   linkType: hard
 
