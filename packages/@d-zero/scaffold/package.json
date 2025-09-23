@@ -65,9 +65,9 @@
 		"kiso.css": "1.2.2",
 		"tslib": "2.8.1"
 	},
-	"packageManager": "yarn@4.10.2",
+	"packageManager": "yarn@4.10.3",
 	"volta": {
 		"node": "24.8.0",
-		"yarn": "4.10.2"
+		"yarn": "4.10.3"
 	}
 }
