@@ -157,11 +157,12 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			return iconv.encode(content, 'CP932');
 		}
 
-		const filePath = this.page.outputPath;
-		const dirPath = path.dirname(filePath);
-		const relativePathFromBase = path.relative(dirPath, eleventyConfig.dir.output) || '.';
-
 		if (pluginConfig?.hooks?.replace) {
+			const filePath = this.page.outputPath;
+			const dirPath = path.dirname(filePath);
+			const relativePathFromBase =
+				path.relative(dirPath, eleventyConfig.dir.output) || '.';
+
 			content = await pluginConfig.hooks.replace(
 				content,
 				{
