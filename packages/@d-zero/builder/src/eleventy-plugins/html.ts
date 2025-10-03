@@ -60,22 +60,27 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			content = await pluginConfig.hooks.beforeSerialize(content, isServe);
 		}
 
-		content = await domSerialize(content, async (documentElement, window) => {
-			// Hooks
-			if (pluginConfig?.imageSizes ?? true) {
-				const options =
-					typeof pluginConfig.imageSizes === 'object' ? pluginConfig.imageSizes : {};
-				const rootDir = path.resolve(eleventyConfig.dir.output);
-				await imageSizes(documentElement, {
-					rootDir,
-					...options,
-				});
-			}
+		const ImageSizesOptions = pluginConfig?.imageSizes ?? true;
+		const afterSerialize = pluginConfig?.hooks?.afterSerialize ?? false;
 
-			if (pluginConfig?.hooks?.afterSerialize) {
-				await pluginConfig.hooks.afterSerialize(window, isServe);
-			}
-		});
+		if (ImageSizesOptions || afterSerialize) {
+			content = await domSerialize(content, async (documentElement, window) => {
+				// Hooks
+				if (ImageSizesOptions) {
+					const options =
+						typeof pluginConfig.imageSizes === 'object' ? pluginConfig.imageSizes : {};
+					const rootDir = path.resolve(eleventyConfig.dir.output);
+					await imageSizes(documentElement, {
+						rootDir,
+						...options,
+					});
+				}
+
+				if (afterSerialize) {
+					await afterSerialize(window, isServe);
+				}
+			});
+		}
 
 		if (pluginConfig?.characterEntities ?? false) {
 			for (const [entity, char] of Object.entries(characterEntities)) {
