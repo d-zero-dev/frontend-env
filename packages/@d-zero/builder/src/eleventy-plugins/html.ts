@@ -41,8 +41,6 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			return content;
 		}
 
-		const isServe = pluginConfig.isServe ?? false;
-
 		const pathFormat = eleventyConfig.globalData.pathFormat ?? 'preserve';
 
 		const transferred =
@@ -56,12 +54,20 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 				.relative(path.join(process.cwd(), eleventyConfig.dir.input), transferred)
 				.replaceAll(path.sep, '/');
 
+		const ImageSizesOptions = pluginConfig?.imageSizes ?? true;
+		const afterSerialize = pluginConfig?.hooks?.afterSerialize ?? false;
+		const characterEntitiesOptions = pluginConfig?.characterEntities ?? false;
+
+		const prettierOptions = pluginConfig?.prettier ?? false;
+		const minifierOptions = pluginConfig?.minifier ?? false;
+		const lineBreakOptions = pluginConfig?.lineBreak ?? '\n';
+
+		const isServe = pluginConfig.isServe ?? false;
+
+		const replaceHook = pluginConfig?.hooks?.replace ?? false;
 		if (pluginConfig?.hooks?.beforeSerialize) {
 			content = await pluginConfig.hooks.beforeSerialize(content, isServe);
 		}
-
-		const ImageSizesOptions = pluginConfig?.imageSizes ?? true;
-		const afterSerialize = pluginConfig?.hooks?.afterSerialize ?? false;
 
 		if (ImageSizesOptions || afterSerialize) {
 			content = await domSerialize(content, async (documentElement, window) => {
@@ -82,7 +88,7 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			});
 		}
 
-		if (pluginConfig?.characterEntities ?? false) {
+		if (characterEntitiesOptions) {
 			for (const [entity, char] of Object.entries(characterEntities)) {
 				let _entity = entity;
 				const codePoint = char.codePointAt(0);
@@ -109,10 +115,9 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			content = '<!DOCTYPE html>\n' + content;
 		}
 
-		if (pluginConfig?.prettier) {
+		if (prettierOptions) {
 			const prettier = await import('prettier');
-			const options =
-				typeof pluginConfig.prettier === 'object' ? pluginConfig.prettier : {};
+			const options = typeof prettierOptions === 'object' ? prettierOptions : {};
 			const config = await prettier.resolveConfig(this.page.inputPath);
 			content = await prettier.format(content, {
 				parser: 'html',
@@ -124,12 +129,12 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			});
 		}
 
-		if (pluginConfig?.minifier) {
-			content = await minify(content, pluginConfig.minifier);
+		if (minifierOptions) {
+			content = await minify(content, minifierOptions);
 		}
 
-		if (pluginConfig?.lineBreak) {
-			content = content.replaceAll(/\r?\n/g, pluginConfig.lineBreak);
+		if (lineBreakOptions) {
+			content = content.replaceAll(/\r?\n/g, lineBreakOptions);
 		}
 
 		if (isServe) {
@@ -162,13 +167,13 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			return iconv.encode(content, 'CP932');
 		}
 
-		if (pluginConfig?.hooks?.replace) {
+		if (replaceHook) {
 			const filePath = this.page.outputPath;
 			const dirPath = path.dirname(filePath);
 			const relativePathFromBase =
 				path.relative(dirPath, eleventyConfig.dir.output) || '.';
 
-			content = await pluginConfig.hooks.replace(
+			content = await replaceHook(
 				content,
 				{
 					filePath,
