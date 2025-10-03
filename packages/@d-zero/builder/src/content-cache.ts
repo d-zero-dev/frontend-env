@@ -29,3 +29,12 @@ export async function setContentCache(hash: string, output: string) {
 	const tmpPath = path.join(tmpDir, hash);
 	await fs.writeFile(tmpPath, output);
 }
+
+/**
+ *
+ */
+export async function clearAllContentCache() {
+	const tmpDir = path.join(os.tmpdir(), 'content-cache');
+	await fs.rm(tmpDir, { recursive: true, force: true });
+	process.stdout.write(`[dzbuild] Content cache cleared\n`);
+}
