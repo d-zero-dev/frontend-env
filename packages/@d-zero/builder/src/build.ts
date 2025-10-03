@@ -16,6 +16,11 @@ export async function build(elev: Eleventy<EleventyGlobalData>) {
 	const results = await elev.write();
 
 	const pathFormat = elev.config.globalData?.pathFormat ?? 'preserve';
+
+	if (pathFormat === 'preserve') {
+		return;
+	}
+
 	const inputDir = elev.config.dir.input;
 	const outDir = elev.config.dir.output;
 	const htmlExtension = elev.config.globalData?.extensions?.html ?? 'html';
