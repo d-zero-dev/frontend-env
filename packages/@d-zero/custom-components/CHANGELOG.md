@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @d-zero/custom-components
 
-
-
-
-
 # [5.0.0-beta.5](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.4...v5.0.0-beta.5) (2025-09-17)
 
 **Note:** Version bump only for package @d-zero/custom-components

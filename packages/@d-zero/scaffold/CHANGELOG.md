@@ -5,14 +5,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [5.0.0-beta.6](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.5...v5.0.0-beta.6) (2025-10-03)
 
-
 ### Bug Fixes
 
-* **scaffold:** filter empty strings in breadcrumb depth calculation ([02d5ffc](https://github.com/d-zero-dev/frontend-env/commit/02d5ffc7935b055d22fbb9dbf0cf2ee7767fc60a))
-
-
-
-
+- **scaffold:** filter empty strings in breadcrumb depth calculation ([02d5ffc](https://github.com/d-zero-dev/frontend-env/commit/02d5ffc7935b055d22fbb9dbf0cf2ee7767fc60a))
 
 # [5.0.0-beta.5](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.4...v5.0.0-beta.5) (2025-09-17)
 
