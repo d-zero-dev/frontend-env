@@ -17,6 +17,7 @@ import iconv from 'iconv-lite';
 import { minimatch } from 'minimatch';
 
 import { isShiftJIS } from '../charset.js';
+import { getContentCache, setContentCache } from '../content-cache.js';
 import { domSerialize } from '../dom-serialize.js';
 import { imageSizes } from '../image-sizes.js';
 import { pathTransfer } from '../path-transfer.js';
@@ -65,6 +66,31 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 		const isServe = pluginConfig.isServe ?? false;
 
 		const replaceHook = pluginConfig?.hooks?.replace ?? false;
+
+		const key = (
+			[
+				this.page.inputPath,
+				this.page.outputPath,
+				isServe.toString(),
+				pathFormat,
+				transferred,
+				(!!pluginConfig?.hooks?.beforeSerialize).toString(),
+				ImageSizesOptions.toString(),
+				(!!afterSerialize).toString(),
+				characterEntitiesOptions.toString(),
+				JSON.stringify(prettierOptions),
+				minifierOptions.toString(),
+				lineBreakOptions,
+				(!!replaceHook).toString(),
+				content,
+			] as const satisfies string[]
+		).join('');
+
+		const { hash, output } = await getContentCache(key);
+		if (output) {
+			return output;
+		}
+
 		if (pluginConfig?.hooks?.beforeSerialize) {
 			content = await pluginConfig.hooks.beforeSerialize(content, isServe);
 		}
@@ -138,6 +164,7 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 		}
 
 		if (isServe) {
+			await setContentCache(hash, content);
 			return content;
 		}
 
@@ -164,6 +191,7 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 				.replaceAll('⚠️', 'WARNING')
 				.replaceAll('〜', '&#12316;');
 
+			// TODO: Support Buffer output cache
 			return iconv.encode(content, 'CP932');
 		}
 
@@ -184,6 +212,7 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			);
 		}
 
+		await setContentCache(hash, content);
 		return content;
 	});
 };
