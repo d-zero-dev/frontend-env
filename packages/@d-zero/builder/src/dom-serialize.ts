@@ -1,5 +1,7 @@
 import { JSDOM } from 'jsdom';
 
+import { getContentCache, setContentCache } from './content-cache.js';
+
 /**
  *
  * @param html
@@ -9,9 +11,15 @@ export async function domSerialize(
 	html: string,
 	hook: (element: HTMLElement, window: Window) => Promise<void> | void,
 ) {
+	const { hash, output } = await getContentCache(html);
+	if (output) {
+		return output;
+	}
 	const dom = getDOM(html);
 	await hook(dom.element, dom.window);
-	return dom.element.outerHTML;
+	const serialized = dom.element.outerHTML;
+	await setContentCache(hash, serialized);
+	return serialized;
 }
 
 /**
