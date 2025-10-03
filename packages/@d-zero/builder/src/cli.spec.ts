@@ -98,19 +98,7 @@ describe('CLI', () => {
 			'htdocs/sub-folder.test/css/style.css {size} | gzip: {size}',
 			'htdocs/sub-folder.test/js/script.js {size} | gzip: {size}',
 			'[11ty] Wrote 17 files in {time} ({time} each, {version})',
-			'File Transfer  preserve :',
-			'index.pug                      -> index.html                      -> index.html                     ',
-			'__tmpl/index.pug               -> __tmpl/index.html               -> __tmpl/index.html              ',
-			'__tmpl/000_home.pug            -> __tmpl/000_home.html            -> __tmpl/000_home.html           ',
-			'__tmpl/100_sub.pug             -> __tmpl/100_sub.html             -> __tmpl/100_sub.html            ',
-			'__tmpl/200_blog_index.pug      -> __tmpl/200_blog_index.html      -> __tmpl/200_blog_index.html     ',
-			'__tmpl/210_blog_index.pug      -> __tmpl/210_blog_index.html      -> __tmpl/210_blog_index.html     ',
-			'__tmpl/300_form_input.pug      -> __tmpl/300_form_input.html      -> __tmpl/300_form_input.html     ',
-			'__tmpl/301_form_confirm.pug    -> __tmpl/301_form_confirm.html    -> __tmpl/301_form_confirm.html   ',
-			'__tmpl/302_form_complete.pug   -> __tmpl/302_form_complete.html   -> __tmpl/302_form_complete.html  ',
-			'sample/index.html              -> sample/index.html               -> sample/index.html              ',
-			'sub-folder.test/index.pug      -> sub-folder.test/index.html      -> sub-folder.test/index.html     ',
-			'sub-folder.test/build.test.pug -> sub-folder.test/build.test.html -> sub-folder.test/build.test.html',
+			// No output for pathFormat: preserve
 		]);
 	});
 });
