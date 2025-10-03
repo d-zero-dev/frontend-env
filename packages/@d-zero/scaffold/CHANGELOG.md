@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.7](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.6...v5.0.0-beta.7) (2025-10-03)
+
+### Features
+
+- **builder:** add --clear-cache option to CLI ([a09aa0b](https://github.com/d-zero-dev/frontend-env/commit/a09aa0b304a7c693a2b856314a39ffa25f35141e))
+
 # [5.0.0-beta.6](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.5...v5.0.0-beta.6) (2025-10-03)
 
 ### Bug Fixes

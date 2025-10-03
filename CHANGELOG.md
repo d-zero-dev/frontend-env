@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.7](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.6...v5.0.0-beta.7) (2025-10-03)
+
+### Features
+
+- **builder:** add --clear-cache option to CLI ([a09aa0b](https://github.com/d-zero-dev/frontend-env/commit/a09aa0b304a7c693a2b856314a39ffa25f35141e))
+- **builder:** add clearAllContentCache function ([d434ed8](https://github.com/d-zero-dev/frontend-env/commit/d434ed887ea44aa59cba4931f20dc8ff193fa789))
+- **builder:** add content cache functionality ([91c231d](https://github.com/d-zero-dev/frontend-env/commit/91c231d1d1608b24a5c2a0115e31ea2e99fabfaf))
+- **builder:** integrate content cache into domSerialize ([e21548d](https://github.com/d-zero-dev/frontend-env/commit/e21548d51240cfdbe9083e7723d2dfbcd20eb1ff))
+- **builder:** integrate content cache into html plugin ([7329bb3](https://github.com/d-zero-dev/frontend-env/commit/7329bb3e05b65ea220f1116b63d79bafb3eb31f0))
+
 # [5.0.0-beta.6](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.5...v5.0.0-beta.6) (2025-10-03)
 
 ### Bug Fixes
