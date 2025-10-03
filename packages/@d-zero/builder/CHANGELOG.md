@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.6](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.5...v5.0.0-beta.6) (2025-10-03)
+
+
+### Features
+
+* **builder:** add early return for preserve path format ([76cebc0](https://github.com/d-zero-dev/frontend-env/commit/76cebc0fad551e6d87eea04297f2fca8ef03e286))
+
+
+
+
+
 # [5.0.0-beta.5](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.4...v5.0.0-beta.5) (2025-09-17)
 
 ### Features
