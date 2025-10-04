@@ -163,38 +163,6 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			content = content.replaceAll(/\r?\n/g, lineBreakOptions);
 		}
 
-		if (isServe) {
-			await setContentCache(hash, content);
-			return content;
-		}
-
-		let charset =
-			typeof pluginConfig.charset === 'string'
-				? pluginConfig.charset
-				: (pluginConfig.charset?.encoding ?? 'utf8');
-
-		if (typeof pluginConfig.charset === 'object') {
-			const overrides = pluginConfig.charset.overrides ?? [];
-			for (const override of overrides) {
-				if (override.paths.some((pattern) => minimatch(outputPath, pattern))) {
-					charset = override.encoding;
-				}
-			}
-		}
-
-		if (charset && isShiftJIS(charset)) {
-			content = content
-				// Change charset
-				.replaceAll(/<meta\s+charset="utf-?8"\s*\/?>/gi, `<meta charset="${charset}">`)
-				// Change entities
-				.replaceAll('©', '&copy;')
-				.replaceAll('⚠️', 'WARNING')
-				.replaceAll('〜', '&#12316;');
-
-			// TODO: Support Buffer output cache
-			return iconv.encode(content, 'CP932');
-		}
-
 		if (replaceHook) {
 			const filePath = this.page.outputPath;
 			const dirPath = path.dirname(filePath);
@@ -210,6 +178,35 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 				},
 				isServe,
 			);
+		}
+
+		if (!isServe) {
+			let charset =
+				typeof pluginConfig.charset === 'string'
+					? pluginConfig.charset
+					: (pluginConfig.charset?.encoding ?? 'utf8');
+
+			if (typeof pluginConfig.charset === 'object') {
+				const overrides = pluginConfig.charset.overrides ?? [];
+				for (const override of overrides) {
+					if (override.paths.some((pattern) => minimatch(outputPath, pattern))) {
+						charset = override.encoding;
+					}
+				}
+			}
+
+			if (charset && isShiftJIS(charset)) {
+				content = content
+					// Change charset
+					.replaceAll(/<meta\s+charset="utf-?8"\s*\/?>/gi, `<meta charset="${charset}">`)
+					// Change entities
+					.replaceAll('©', '&copy;')
+					.replaceAll('⚠️', 'WARNING')
+					.replaceAll('〜', '&#12316;');
+
+				// TODO: Support Buffer output cache
+				return iconv.encode(content, 'CP932');
+			}
 		}
 
 		await setContentCache(hash, content);
