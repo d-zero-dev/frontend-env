@@ -22,6 +22,7 @@ export const pugPlugin: EleventyPlugin<PugPluginOptions, EleventyGlobalData> = (
 		compile(content, inputPath) {
 			return (context) => {
 				const pugRenderOptions: PugOptions = {
+					cache: true,
 					doctype: 'html',
 					...context,
 					...pluginConfig,
