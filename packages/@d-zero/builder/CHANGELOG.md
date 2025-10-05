@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.9](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.8...v5.0.0-beta.9) (2025-10-05)
+
+- feat(builder)!: support multiple root elements in DOM serialization ([b00904c](https://github.com/d-zero-dev/frontend-env/commit/b00904c83995386f46712e5e0e0f681bf17f01e6))
+
+### BREAKING CHANGES
+
+- afterSerialize hook now receives
+
+elements array as first parameter instead of window object
+
 # [5.0.0-beta.8](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.7...v5.0.0-beta.8) (2025-10-05)
 
 ### Bug Fixes
