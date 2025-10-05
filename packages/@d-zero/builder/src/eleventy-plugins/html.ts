@@ -55,7 +55,7 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 				.relative(path.join(process.cwd(), eleventyConfig.dir.input), transferred)
 				.replaceAll(path.sep, '/');
 
-		const ImageSizesOptions = pluginConfig?.imageSizes ?? true;
+		const imageSizesOptions = pluginConfig?.imageSizes ?? true;
 		const afterSerialize = pluginConfig?.hooks?.afterSerialize ?? false;
 		const characterEntitiesOptions = pluginConfig?.characterEntities ?? false;
 
@@ -75,7 +75,7 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 				pathFormat,
 				transferred,
 				(!!pluginConfig?.hooks?.beforeSerialize).toString(),
-				ImageSizesOptions.toString(),
+				imageSizesOptions.toString(),
 				(!!afterSerialize).toString(),
 				characterEntitiesOptions.toString(),
 				JSON.stringify(prettierOptions),
@@ -95,12 +95,11 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 			content = await pluginConfig.hooks.beforeSerialize(content, isServe);
 		}
 
-		if (ImageSizesOptions || afterSerialize) {
+		if (imageSizesOptions || afterSerialize) {
 			content = await domSerialize(content, async (documentElement, window) => {
 				// Hooks
-				if (ImageSizesOptions) {
-					const options =
-						typeof pluginConfig.imageSizes === 'object' ? pluginConfig.imageSizes : {};
+				if (imageSizesOptions) {
+					const options = typeof imageSizesOptions === 'object' ? imageSizesOptions : {};
 					const rootDir = path.resolve(eleventyConfig.dir.output);
 					await imageSizes(documentElement, {
 						rootDir,
