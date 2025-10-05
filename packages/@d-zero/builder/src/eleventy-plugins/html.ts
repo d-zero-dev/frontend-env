@@ -96,19 +96,19 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 		}
 
 		if (imageSizesOptions || afterSerialize) {
-			content = await domSerialize(content, async (documentElement, window) => {
+			content = await domSerialize(content, async (elements, window) => {
 				// Hooks
 				if (imageSizesOptions) {
 					const options = typeof imageSizesOptions === 'object' ? imageSizesOptions : {};
 					const rootDir = path.resolve(eleventyConfig.dir.output);
-					await imageSizes(documentElement, {
+					await imageSizes(elements, {
 						rootDir,
 						...options,
 					});
 				}
 
 				if (afterSerialize) {
-					await afterSerialize(window, isServe);
+					await afterSerialize(elements, window, isServe);
 				}
 			});
 		}

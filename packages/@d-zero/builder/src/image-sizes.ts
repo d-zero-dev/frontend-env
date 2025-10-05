@@ -20,14 +20,14 @@ async function sizeOf(filePath: string): Promise<ImageSize> {
 
 /**
  *
- * @param documentElement
+ * @param elements
  * @param options
  * @param options.rootDir
  * @param options.selector
  * @param options.ext
  */
 export async function imageSizes(
-	documentElement: HTMLElement,
+	elements: Element[],
 	{
 		rootDir,
 		selector,
@@ -37,7 +37,9 @@ export async function imageSizes(
 ) {
 	const cache = new Cache<ImageSize>('@d-zero/builder/image-sizes');
 
-	const images = [...documentElement.querySelectorAll('img, picture > source')];
+	const images = elements.flatMap((el) => [
+		...el.querySelectorAll('img, picture > source'),
+	]);
 
 	for (const img of images) {
 		if (selector && !img.matches(selector)) {

@@ -9,15 +9,15 @@ import { getContentCache, setContentCache } from './content-cache.js';
  */
 export async function domSerialize(
 	html: string,
-	hook: (element: HTMLElement, window: Window) => Promise<void> | void,
+	hook: (elements: Element[], window: Window) => Promise<void> | void,
 ) {
 	const { hash, output } = await getContentCache(html);
 	if (output) {
 		return output;
 	}
 	const dom = getDOM(html);
-	await hook(dom.element, dom.window);
-	const serialized = dom.element.outerHTML;
+	await hook(dom.elements, dom.window);
+	const serialized = dom.elements.map((node) => node.outerHTML).join('');
 	await setContentCache(hash, serialized);
 	return serialized;
 }
@@ -27,7 +27,7 @@ export async function domSerialize(
  * @param html
  */
 function getDOM(html: string): {
-	element: HTMLElement;
+	elements: Element[];
 	document: Document;
 	window: Window;
 	isFragment: boolean;
@@ -39,16 +39,9 @@ function getDOM(html: string): {
 		const document = window.document;
 		const tmpContainer = document.createElement('div');
 		tmpContainer.insertAdjacentHTML('beforeend', html);
-		const element = [...tmpContainer.children].find(
-			(el) => el instanceof window.HTMLElement,
-		);
-
-		if (!element) {
-			throw new Error('No HTMLElement in the fragment.');
-		}
 
 		return {
-			element,
+			elements: [...tmpContainer.children],
 			document,
 			window: window as unknown as Window,
 			isFragment: true,
@@ -58,7 +51,7 @@ function getDOM(html: string): {
 	const dom = new JSDOM(html);
 
 	return {
-		element: dom.window.document.documentElement,
+		elements: [dom.window.document.documentElement],
 		document: dom.window.document,
 		window: dom.window as unknown as Window,
 		isFragment: false,
