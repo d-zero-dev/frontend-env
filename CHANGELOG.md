@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.8](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.7...v5.0.0-beta.8) (2025-10-05)
+
+### Bug Fixes
+
+- **builder:** execute replace option during serve mode ([600a73a](https://github.com/d-zero-dev/frontend-env/commit/600a73a8641f8dc85dcba99907d26bb6ecca4fe7))
+
+### Features
+
+- **builder:** enable pug template caching for better performance ([ce01ff2](https://github.com/d-zero-dev/frontend-env/commit/ce01ff2e0daadb24dd59b15e344931a12ac063f4))
+
 # [5.0.0-beta.7](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.6...v5.0.0-beta.7) (2025-10-03)
 
 ### Features
