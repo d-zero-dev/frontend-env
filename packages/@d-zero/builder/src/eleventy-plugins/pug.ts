@@ -38,7 +38,8 @@ export const pugPlugin: EleventyPlugin<PugPluginOptions, EleventyGlobalData> = (
 				/**
 				 * @see https://pugjs.org/api/reference.html#pugrendersource-options-callback
 				 */
-				return render(content, pugRenderOptions);
+				const result = render(content, pugRenderOptions);
+				return result;
 			};
 		},
 	});
