@@ -43,7 +43,7 @@
 		"last 2 ios_saf version"
 	],
 	"devDependencies": {
-		"@burger-editor/local": "4.0.0-alpha.25",
+		"@burger-editor/local": "4.0.0-alpha.27",
 		"@d-zero/builder": "5.0.0-beta.9",
 		"@d-zero/linters": "5.0.0-alpha.71",
 		"@d-zero/postcss-config": "5.0.0-beta.9",
