@@ -26,17 +26,34 @@ export const scriptPlugin: EleventyPlugin<ScriptPluginConfig, EleventyGlobalData
 			return async () => {
 				const tmpPath = path.join(pluginConfig.tmpDir, inputPath);
 
-				await esbuild.build({
+				const result = await esbuild.build({
 					entryPoints: [inputPath],
 					bundle: true,
 					alias: eleventyConfig.globalData.alias,
 					outfile: tmpPath,
 					minify: !!(eleventyConfig.globalData.minifier?.minifyJS ?? true),
 					charset: 'utf8',
+					metafile: true,
 					banner: {
 						js: pluginConfig.banner,
 					},
 				});
+
+				const dependencies = result.metafile
+					? Object.keys(result.metafile.inputs)
+							.filter(
+								(key) =>
+									typeof key === 'string' &&
+									!key.startsWith('<') &&
+									!key.startsWith('node:'),
+							)
+							.map((key) => path.resolve(key))
+					: [];
+
+				if (dependencies.length > 0) {
+					// @ts-ignore
+					this.addDependencies(inputPath, dependencies);
+				}
 
 				const content = await fs.readFile(tmpPath, 'utf8');
 				return content;

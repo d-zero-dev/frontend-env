@@ -89,5 +89,11 @@ export async function compileCss(
 		to: undefined,
 	});
 
-	return result.css;
+	const dependencies = result.messages
+		.filter(
+			(message) => message.type === 'dependency' && typeof message.file === 'string',
+		)
+		.map((message) => message.file);
+
+	return { css: result.css, dependencies };
 }

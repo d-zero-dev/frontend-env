@@ -29,12 +29,18 @@ export const stylePlugin: EleventyPlugin<StylePluginConfig, EleventyGlobalData> 
 				const absInputPath = path.resolve(inputPath);
 				const cssMinify = !!(pluginConfig.minify ?? true);
 
-				let content = await compileCss(css, absInputPath, {
+				const { css: compiledCss, dependencies } = await compileCss(css, absInputPath, {
 					alias: pluginConfig.alias,
 				});
 
+				let content = compiledCss;
 				if (!cssMinify) {
 					content = await prettifyCss(content);
+				}
+
+				if (dependencies.length > 0) {
+					// @ts-ignore
+					this.addDependencies(inputPath, dependencies);
 				}
 
 				return `${pluginConfig.banner}\n${content}`;
