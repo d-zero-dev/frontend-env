@@ -17,7 +17,7 @@
 	"scripts": {
 		"build": "yarn lint && npx @d-zero/builder",
 		"build:only": "npx @d-zero/builder",
-		"dev": "npx eleventy --serve --watch",
+		"dev": "npx eleventy --serve --watch --incremental",
 		"d": "yarn dev",
 		"lint": "run-s \"lint:*\"",
 		"lint:html": "npx markuplint \"./__assets/**/*.{pug,html}\"",
