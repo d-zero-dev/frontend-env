@@ -94,33 +94,13 @@ export default function (plop) {
 		}),
 	);
 
-	plop.setActionType('Install dependencies', (answers) => {
+	plop.setActionType('Install dependencies', async (answers) => {
 		const { dest, doInstall } = answerToConfig(answers);
-
-		const { promise, resolve, reject } = Promise.withResolvers();
-
 		if (doInstall) {
-			const child = spawn('yarn', ['install'], {
-				cwd: path.resolve(process.cwd(), dest),
-				stdio: 'inherit',
-			});
-
-			child.on('exit', (code) => {
-				if (code === 0) {
-					resolve(': success');
-				} else {
-					reject(new Error('Failed to install dependencies'));
-				}
-			});
-
-			process.on('SIGINT', () => {
-				child.kill('SIGINT');
-			});
-		} else {
-			resolve(': skipped');
+			await installDependencies(dest);
+			return ': success';
 		}
-
-		return promise;
+		return ': skipped';
 	});
 
 	plop.setGenerator('basic', {
@@ -236,4 +216,31 @@ function answerToConfig(answers) {
 	const doInstall = answers['__d-zero_scaffold_yarn_install__'] ?? cli.flags.install;
 
 	return { type, dest, doInstall };
+}
+
+/**
+ *
+ * @param dest
+ */
+function installDependencies(dest) {
+	const { promise, resolve, reject } = Promise.withResolvers();
+
+	const child = spawn('yarn', ['install'], {
+		cwd: path.resolve(process.cwd(), dest),
+		stdio: 'inherit',
+	});
+
+	child.on('exit', (code) => {
+		if (code === 0) {
+			resolve(true);
+		} else {
+			reject(new Error('Failed to install dependencies'));
+		}
+	});
+
+	process.on('SIGINT', () => {
+		child.kill('SIGINT');
+	});
+
+	return promise;
 }
