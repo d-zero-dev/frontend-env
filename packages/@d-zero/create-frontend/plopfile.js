@@ -98,10 +98,17 @@ export default function (plop) {
 		const { dest, doInstall } = answerToConfig(answers);
 		if (doInstall) {
 			await installDependencies(dest);
-			rewriteDotGitignore(dest);
-			return ': success';
+			return 'success';
 		}
-		return ': skipped';
+		return 'skipped';
+	});
+
+	plop.setActionType('Finalize', async (answers) => {
+		const { dest, doInstall } = answerToConfig(answers);
+		if (doInstall) {
+			rewriteDotGitignore(dest);
+		}
+		return 'finalized';
 	});
 
 	plop.setGenerator('basic', {
@@ -201,6 +208,9 @@ export default function (plop) {
 				),
 				{
 					type: 'Install dependencies',
+				},
+				{
+					type: 'Finalize',
 				},
 			];
 		},
