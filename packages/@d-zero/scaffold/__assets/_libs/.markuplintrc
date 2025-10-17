@@ -14,6 +14,12 @@
 					}
 				}
 			}
+		},
+		{
+			"selector": "script[⚠️], script[src*=jquery]",
+			"rules": {
+				"required-attr": false
+			}
 		}
 	]
 }

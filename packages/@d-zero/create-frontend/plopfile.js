@@ -191,6 +191,12 @@ export default function (plop) {
 										}
 										break;
 									}
+									case '__assets/_libs/mixin/meta.pug': {
+										if (!config.type.startsWith('basercms')) {
+											content = content.replace('\ninclude meta-basercms.pug', '');
+										}
+										break;
+									}
 									case '__assets/htdocs/index.pug': {
 										if (config.type === 'static') {
 											content = fs.readFileSync(
