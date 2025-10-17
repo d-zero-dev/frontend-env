@@ -11,4 +11,4 @@
 | `yarn lint`                | リントチェック                                       |
 | `yarn build`               | ビルド                                               |
 | `yarn build --clear-cache` | ビルド（キャッシュをクリア）                         |
-| `yarn up`                  | 依存パッケージのアップデート                         |
+| `yarn update`              | 依存パッケージのアップデート                         |
