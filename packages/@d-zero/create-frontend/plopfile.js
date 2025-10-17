@@ -98,6 +98,7 @@ export default function (plop) {
 		const { dest, doInstall } = answerToConfig(answers);
 		if (doInstall) {
 			await installDependencies(dest);
+			rewriteDotGitignore(dest);
 			return ': success';
 		}
 		return ': skipped';
@@ -243,4 +244,23 @@ function installDependencies(dest) {
 	});
 
 	return promise;
+}
+
+/**
+ *
+ * @param dest
+ */
+function rewriteDotGitignore(dest) {
+	let gitignore = readFileSafe(path.resolve(dest, '.gitignore'));
+	if (gitignore == null) {
+		return;
+	}
+
+	// Remove after `# Document Root` section
+	const documentRootSection = gitignore.indexOf('\n# Document Root\n');
+	if (documentRootSection !== -1) {
+		gitignore = gitignore.slice(0, documentRootSection);
+	}
+
+	return fs.writeFileSync(path.resolve(dest, '.gitignore'), gitignore);
 }
