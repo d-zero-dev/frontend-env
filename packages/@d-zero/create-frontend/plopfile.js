@@ -179,7 +179,7 @@ export default function (plop) {
 										content = JSON.stringify(pkg, null, '\t');
 										break;
 									}
-									case '__assets/_libs/data/blocks.cjs': {
+									case '__assets/_libs/data/blocks.js': {
 										if (config.type === 'burger') {
 											content = content.replace("blocks.html'", "bge-blocks.html'");
 										}
