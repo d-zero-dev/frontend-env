@@ -25,7 +25,7 @@
 		"lint:css": "npx stylelint \"./__assets/**/*.css\" --fix",
 		"lint:js": "npx eslint \"./__assets/**/*.{js,mjs,cjs,jsx,ts,tsx}\" --fix",
 		"lint:ts": "tsc --noEmit",
-		"lint:format": "npx prettier --write \"{*,./__assets/**/*}.{js,jsx,ts,tsx,css,pug,html,json,yaml,*rc}\"",
+		"lint:format": "npx prettier --write \"{*,./__assets/**/*}{.{js,jsx,ts,tsx,css,pug,html,json,yaml},*rc}\"",
 		"lint:spell": "npx cspell --no-progress --show-suggestions \"**\"",
 		"lint:text": "npx textlint \"./__assets/**/*.{pug,html}\"",
 		"test": "vitest run",

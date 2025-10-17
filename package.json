@@ -13,7 +13,7 @@
 		"lint": "run-s lint:eslint lint:prettier lint:textlint lint:cspell",
 		"lint:cspell": "npx cspell --no-progress --show-suggestions \"**\"",
 		"lint:eslint": "npx eslint --fix \"./{*,**/*}.{js,cjs,mjs}\"",
-		"lint:prettier": "npx prettier --write \"{*,./**/*}.{md,mdc,mdx,js,jsx,ts,tsx,css,pug,html}\" \"**/.clinerules\" \"!**/{dist,storybook-static}/**/*\"",
+		"lint:prettier": "npx prettier --write \"{*,./**/*}{.{md,mdc,mdx,js,jsx,ts,tsx,css,pug,html},*rc}\" \"**/.clinerules\" \"!**/{dist,storybook-static}/**/*\"",
 		"lint:textlint": "npx textlint --fix \"{*,./**/*}.{md,mdc}\" && npx textlint \"{*,./**/*}.{md,mdc}\"",
 		"storybook": "lerna run storybook --scope=@d-zero/custom-components",
 		"release": "lerna publish --exact --conventional-commits --conventional-graduate",
