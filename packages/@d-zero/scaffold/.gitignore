@@ -38,3 +38,7 @@ htdocs/files/*
 !htdocs/files/images
 htdocs/files/images/*
 !htdocs/files/images/sample.png
+!htdocs/__tmpl
+htdocs/__tmpl/**/*
+!htdocs/__tmpl/__burger_editor
+!htdocs/__tmpl/__burger_editor/**/*

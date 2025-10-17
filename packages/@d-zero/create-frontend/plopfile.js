@@ -7,6 +7,7 @@ import { globSync } from 'glob';
 import ignore from 'ignore';
 import meow from 'meow';
 
+import { copyLibraries } from './libraries.js';
 import { t } from './locale.js';
 import { readFileSafe } from './read-file-safe.js';
 
@@ -104,9 +105,13 @@ export default function (plop) {
 	});
 
 	plop.setActionType('Finalize', async (answers) => {
-		const { dest, doInstall } = answerToConfig(answers);
+		const { dest, type, doInstall } = answerToConfig(answers);
 		if (doInstall) {
 			rewriteDotGitignore(dest);
+		}
+
+		if (type.startsWith('basercms')) {
+			await copyLibraries(type, dest);
 		}
 		return 'finalized';
 	});
@@ -182,6 +187,10 @@ export default function (plop) {
 										delete pkg.license;
 										delete pkg.publishConfig;
 										delete pkg.files;
+										if (config.type.startsWith('basercms')) {
+											pkg.dependencies['jquery'] = 'latest';
+											pkg.dependencies['jquery-colorbox'] = '1.5';
+										}
 										content = JSON.stringify(pkg, null, '\t');
 										break;
 									}
