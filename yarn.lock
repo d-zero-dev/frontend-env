@@ -1285,7 +1285,7 @@ __metadata:
   resolution: "@d-zero/builder@workspace:packages/@d-zero/builder"
   dependencies:
     "@11ty/eleventy": "npm:3.1.2"
-    "@d-zero/shared": "npm:0.9.2"
+    "@d-zero/shared": "npm:0.11.0"
     "@types/cli-color": "npm:2.0.6"
     "@types/html-minifier-terser": "npm:7.0.2"
     "@types/js-yaml": "npm:4.0.9"
@@ -1525,16 +1525,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@d-zero/shared@npm:0.9.2":
-  version: 0.9.2
-  resolution: "@d-zero/shared@npm:0.9.2"
+"@d-zero/shared@npm:0.11.0":
+  version: 0.11.0
+  resolution: "@d-zero/shared@npm:0.11.0"
   dependencies:
     "@holiday-jp/holiday_jp": "npm:2.5.1"
     await-event-emitter: "npm:2.0.2"
     dayjs: "npm:1.11.18"
     escape-string-regexp: "npm:5.0.0"
     front-matter: "npm:4.0.2"
-  checksum: 10c0/977657a680b0d9327823ba1c3c5707a4f2c6bffc1a5bea381c4cb39363c0557abc61ef3b354a971c005f9af57085b937411f07b44812a3782b44ed5cf5bfc0af
+  checksum: 10c0/0d4d52a4c8398a7c9fa67184a1743cf3c9046ba0ec9e4a8eb89d61296fe2591ac5b0989f2dbce15843f4dcb69280e788359ceb3ca48c380287edfab590028240
   languageName: node
   linkType: hard
 
