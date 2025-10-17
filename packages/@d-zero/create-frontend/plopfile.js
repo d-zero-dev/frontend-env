@@ -35,7 +35,7 @@ const cli = meow(
 			type: {
 				type: 'string',
 				shortFlag: 't',
-				default: 'burger',
+				default: 'static',
 			},
 			dir: {
 				type: 'string',
@@ -78,8 +78,8 @@ export default function (plop) {
 			'*.test.*',
 		])
 		.add(
-			// BurgerEditor
-			cli.flags.type === 'burger' ? [] : ['**/bge-*', '**/bge_*'],
+			// BurgerEditor for baserCMS
+			cli.flags.type.startsWith('basercms') ? [] : ['**/bge_style.css'],
 		)
 		.add(
 			// static
@@ -120,13 +120,12 @@ export default function (plop) {
 				message: t`What's the type of project?`,
 				choices: [
 					{
-						name: 'Static',
+						name: 'Static Site (with BurgerEditor Local App)',
 						value: 'static',
 					},
-					'CMS (WordPress etc.)',
 					{
-						name: 'CMS (baserCMS with BurgerEditor)',
-						value: 'burger',
+						name: 'baserCMS v4 (with BurgerEditor v2)',
+						value: 'basercms4',
 					},
 				],
 				default: cli.flags.type,
@@ -187,8 +186,8 @@ export default function (plop) {
 										break;
 									}
 									case '__assets/_libs/data/blocks.js': {
-										if (config.type === 'burger') {
-											content = content.replace("blocks.html'", "bge-blocks.html'");
+										if (config.type === 'basercms4') {
+											content = content.replace('bge-blocks.html', 'bge-blocks-v2.html');
 										}
 										break;
 									}
