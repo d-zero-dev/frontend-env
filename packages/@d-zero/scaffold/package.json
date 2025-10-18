@@ -52,7 +52,7 @@
 		"cross-env": "10.1.0",
 		"dotenv": "17.2.3",
 		"husky": "9.1.7",
-		"jsdom": "27.0.0",
+		"jsdom": "27.0.1",
 		"npm-run-all2": "8.0.4",
 		"typescript": "5.9.3",
 		"vitest": "3.2.4"
