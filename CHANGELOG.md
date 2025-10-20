@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.13](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.12...v5.0.0-beta.13) (2025-10-20)
+
+### Bug Fixes
+
+- **create-frontend:** correct typo in volta-install-node command ([a18fda9](https://github.com/d-zero-dev/frontend-env/commit/a18fda9bbfbbeab1ae5233d4eb5655936b1ed458))
+
 # [5.0.0-beta.12](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.11...v5.0.0-beta.12) (2025-10-20)
 
 ### Features
