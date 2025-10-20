@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.14](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.13...v5.0.0-beta.14) (2025-10-20)
+
+### Bug Fixes
+
+- **create-frontend:** prevent gitignore file copy from being skipped ([6b80db7](https://github.com/d-zero-dev/frontend-env/commit/6b80db70238b3e3cb403a18a4b1f03f047ef144c))
+
 # [5.0.0-beta.13](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.12...v5.0.0-beta.13) (2025-10-20)
 
 ### Bug Fixes
