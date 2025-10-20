@@ -248,13 +248,19 @@ function answerToConfig(answers) {
  * @param dest
  */
 async function installDependencies(dest) {
-	await command('volta', ['setup']).catch((error) => {
+	await command('volta', ['setup'], {
+		cwd: path.resolve(process.cwd(), dest),
+		stdio: 'inherit',
+	}).catch((error) => {
 		// eslint-disable-next-line no-console
 		console.error(error);
 	});
-	await command('yarn', ['install'], path.resolve(process.cwd(), dest)).catch(
-		() => new Error('Failed to install dependencies'),
-	);
+	await command('yarn', ['install'], {
+		cwd: path.resolve(process.cwd(), dest),
+		stdio: 'inherit',
+	}).catch(() => {
+		throw new Error('Failed to install dependencies');
+	});
 }
 
 /**
