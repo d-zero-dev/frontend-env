@@ -7,11 +7,10 @@
 空のリポジトリで次のパッケージを実行します。
 
 ```shell
-npx @d-zero/create-frontend
-
-# もしくは
-
 yarn create @d-zero/frontend
+
+# 非推奨: `.gitignore`が生成ができない
+npx @d-zero/create-frontend
 ```
 
 ### オプション
