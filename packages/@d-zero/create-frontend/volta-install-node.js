@@ -7,7 +7,7 @@ import { command } from './command.js';
  *
  */
 export async function voltaInstallNode() {
-	const node = await command('nod', ['-v']).catch(() => null);
+	const node = await command('node', ['-v']).catch(() => null);
 	if (node) {
 		return;
 	}
