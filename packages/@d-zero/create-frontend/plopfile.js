@@ -1,4 +1,3 @@
-import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { argv } from 'node:process';
@@ -7,6 +6,7 @@ import { globSync } from 'glob';
 import ignore from 'ignore';
 import meow from 'meow';
 
+import { command } from './command.js';
 import { copyLibraries } from './libraries.js';
 import { t } from './locale.js';
 import { readFileSafe } from './read-file-safe.js';
@@ -247,27 +247,10 @@ function answerToConfig(answers) {
  *
  * @param dest
  */
-function installDependencies(dest) {
-	const { promise, resolve, reject } = Promise.withResolvers();
-
-	const child = spawn('yarn', ['install'], {
-		cwd: path.resolve(process.cwd(), dest),
-		stdio: 'inherit',
-	});
-
-	child.on('exit', (code) => {
-		if (code === 0) {
-			resolve(true);
-		} else {
-			reject(new Error('Failed to install dependencies'));
-		}
-	});
-
-	process.on('SIGINT', () => {
-		child.kill('SIGINT');
-	});
-
-	return promise;
+async function installDependencies(dest) {
+	await command('yarn', ['install'], path.resolve(process.cwd(), dest)).catch(
+		() => new Error('Failed to install dependencies'),
+	);
 }
 
 /**
