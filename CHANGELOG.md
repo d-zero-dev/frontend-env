@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.10](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.9...v5.0.0-beta.10) (2025-10-20)
+
+### Bug Fixes
+
+- **create-frontend:** correct file extension from .cjs to .js in blocks data path ([b425f76](https://github.com/d-zero-dev/frontend-env/commit/b425f76b9fb51302a0b26f0149407787679f33ac))
+- update prettier glob patterns for rc files ([80231cb](https://github.com/d-zero-dev/frontend-env/commit/80231cb5af39cbcbd8c5d4c5d08bb3e5ac80a350))
+
+### Features
+
+- **create-frontend:** add gitignore rewrite functionality ([e2a6e75](https://github.com/d-zero-dev/frontend-env/commit/e2a6e75ad6d58416cee8b35642ccdc542532ab73))
+- **create-frontend:** add library copying functionality for baserCMS projects ([8e73300](https://github.com/d-zero-dev/frontend-env/commit/8e73300a730aa7dcdcc2f19bb57b99eb5f4d561c))
+- **create-frontend:** update project type options and remove unused blocks.html ([b003628](https://github.com/d-zero-dev/frontend-env/commit/b00362847c11493ab14f8c87c01f9577563f2e07))
+- **scaffold:** add baserCMS-specific meta template and conditional inclusion ([885fe35](https://github.com/d-zero-dev/frontend-env/commit/885fe352ecb692cd1ccf3ca4ee1d82749193a60d))
+
 # [5.0.0-beta.9](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.8...v5.0.0-beta.9) (2025-10-05)
 
 - feat(builder)!: support multiple root elements in DOM serialization ([b00904c](https://github.com/d-zero-dev/frontend-env/commit/b00904c83995386f46712e5e0e0f681bf17f01e6))
