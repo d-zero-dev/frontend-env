@@ -248,6 +248,10 @@ function answerToConfig(answers) {
  * @param dest
  */
 async function installDependencies(dest) {
+	await command('volta', ['setup']).catch((error) => {
+		// eslint-disable-next-line no-console
+		console.error(error);
+	});
 	await command('yarn', ['install'], path.resolve(process.cwd(), dest)).catch(
 		() => new Error('Failed to install dependencies'),
 	);

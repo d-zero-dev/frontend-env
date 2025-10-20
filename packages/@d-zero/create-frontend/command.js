@@ -22,6 +22,10 @@ export async function command(commandName, args, cwd = process.cwd()) {
 			reject(code);
 		});
 
+		child.on('error', (error) => {
+			reject(error);
+		});
+
 		process.on('SIGINT', () => {
 			child.kill('SIGINT');
 		});
