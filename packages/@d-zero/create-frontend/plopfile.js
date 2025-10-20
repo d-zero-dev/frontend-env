@@ -64,8 +64,9 @@ export default function (plop) {
 		path.dirname(import.meta.resolve('@d-zero/scaffold').replace('file:', '')),
 	);
 
-	const gitignore = readFileSafe(path.resolve(scaffoldDir, '.gitignore'));
-	const ignoreFiles = gitignore?.split('\n').filter(Boolean) ?? [];
+	const gitignoreOriginContent =
+		readFileSafe(path.resolve(scaffoldDir, '.gitignore')) ?? '';
+	const ignoreFiles = gitignoreOriginContent?.split('\n').filter(Boolean) ?? [];
 	const hasArgs = argv.length > 2;
 	const interactive = !hasArgs;
 
@@ -108,7 +109,7 @@ export default function (plop) {
 	plop.setActionType('Finalize', async (answers) => {
 		const { dest, type, doInstall } = answerToConfig(answers);
 		if (doInstall) {
-			rewriteDotGitignore(dest);
+			rewriteDotGitignore(dest, gitignoreOriginContent);
 		}
 
 		if (type.startsWith('basercms')) {
@@ -260,13 +261,11 @@ async function installDependencies(dest) {
 
 /**
  *
- * @param dest
+ * @param {string} dest
+ * @param {string} gitignoreOriginContent
  */
-function rewriteDotGitignore(dest) {
-	let gitignore = readFileSafe(path.resolve(dest, '.gitignore'));
-	if (gitignore == null) {
-		return;
-	}
+function rewriteDotGitignore(dest, gitignoreOriginContent) {
+	let gitignore = gitignoreOriginContent;
 
 	// Remove after `# Document Root` section
 	const documentRootSection = gitignore.indexOf('\n# Document Root\n');
