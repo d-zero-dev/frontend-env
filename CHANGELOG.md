@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.12](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.11...v5.0.0-beta.12) (2025-10-20)
+
+### Features
+
+- **create-frontend:** add volta and node installation support ([29e4fff](https://github.com/d-zero-dev/frontend-env/commit/29e4fff6af41be56397ba25f699e946a1f16c10a))
+
 # [5.0.0-beta.11](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.10...v5.0.0-beta.11) (2025-10-20)
 
 ### Features
