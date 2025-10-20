@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/scaffold",
-	"version": "5.0.0-beta.10",
+	"version": "5.0.0-beta.11",
 	"description": "Frontend scaffold files of D-ZERO Co., Ltd.",
 	"repository": "https://github.com/d-zero-dev/frontend-env.git",
 	"author": "D-ZERO Co., Ltd.",
@@ -44,12 +44,12 @@
 	],
 	"devDependencies": {
 		"@burger-editor/local": "4.0.0-alpha.27",
-		"@d-zero/builder": "5.0.0-beta.10",
+		"@d-zero/builder": "5.0.0-beta.11",
 		"@d-zero/cspell-config": "5.0.0-alpha.73",
 		"@d-zero/eslint-config": "5.0.0-alpha.73",
 		"@d-zero/lint-staged-config": "5.0.0-alpha.73",
 		"@d-zero/markuplint-config": "5.0.0-alpha.73",
-		"@d-zero/postcss-config": "5.0.0-beta.10",
+		"@d-zero/postcss-config": "5.0.0-beta.11",
 		"@d-zero/prettier-config": "5.0.0-alpha.73",
 		"@d-zero/pug-lint-config": "5.0.0-alpha.73",
 		"@d-zero/stylelint-config": "5.0.0-alpha.73",
@@ -67,7 +67,7 @@
 	},
 	"dependencies": {
 		"@burger-editor/css": "4.0.0-alpha.27",
-		"@d-zero/custom-components": "5.0.0-beta.10",
+		"@d-zero/custom-components": "5.0.0-beta.11",
 		"dialog-toggle-events-polyfill": "1.1.4",
 		"invokers-polyfill": "0.5.7",
 		"kiso.css": "1.2.2",
