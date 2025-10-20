@@ -10,6 +10,7 @@ import { command } from './command.js';
 import { copyLibraries } from './libraries.js';
 import { t } from './locale.js';
 import { readFileSafe } from './read-file-safe.js';
+import { voltaInstallNode } from './volta-install-node.js';
 
 const cli = meow(
 	`
@@ -248,13 +249,7 @@ function answerToConfig(answers) {
  * @param dest
  */
 async function installDependencies(dest) {
-	await command('volta', ['setup'], {
-		cwd: path.resolve(process.cwd(), dest),
-		stdio: 'inherit',
-	}).catch((error) => {
-		// eslint-disable-next-line no-console
-		console.error(error);
-	});
+	await voltaInstallNode();
 	await command('yarn', ['install'], {
 		cwd: path.resolve(process.cwd(), dest),
 		stdio: 'inherit',
