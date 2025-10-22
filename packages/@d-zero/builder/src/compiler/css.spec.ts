@@ -21,12 +21,12 @@ describe('compileCss', () => {
 			});
 
 			// Verify cssnano minification
-			expect(result).not.toContain('\n');
-			expect(result).not.toContain('  ');
-			expect(result).toContain('.button');
-			expect(result).toContain('color:red');
-			expect(result).toContain('background-color:blue');
-			expect(result).toContain('margin:10px 20px');
+			expect(result.css).not.toContain('\n');
+			expect(result.css).not.toContain('  ');
+			expect(result.css).toContain('.button');
+			expect(result.css).toContain('color:red');
+			expect(result.css).toContain('background-color:blue');
+			expect(result.css).toContain('margin:10px 20px');
 		});
 
 		it('should handle CSS comments properly', async () => {
@@ -41,8 +41,8 @@ describe('compileCss', () => {
 				alias: {},
 			});
 
-			expect(result).not.toContain('Regular comment');
-			expect(result).toContain('Important comment');
+			expect(result.css).not.toContain('Regular comment');
+			expect(result.css).toContain('Important comment');
 		});
 
 		it('should process complex CSS selectors and values', async () => {
@@ -66,10 +66,10 @@ describe('compileCss', () => {
 				alias: {},
 			});
 
-			expect(result).toContain('.card>.header:before'); // ::before gets minified to :before
-			expect(result).toContain('content:""');
-			expect(result).toContain('linear-gradient(90deg,red,#00f)'); // Actual minification result
-			expect(result).toContain('@media (min-width:768px)');
+			expect(result.css).toContain('.card>.header:before'); // ::before gets minified to :before
+			expect(result.css).toContain('content:""');
+			expect(result.css).toContain('linear-gradient(90deg,red,#00f)'); // Actual minification result
+			expect(result.css).toContain('@media (min-width:768px)');
 		});
 
 		it('should handle empty CSS', async () => {
@@ -79,7 +79,7 @@ describe('compileCss', () => {
 				alias: {},
 			});
 
-			expect(result).toBe('');
+			expect(result.css).toBe('');
 		});
 
 		it('should handle CSS with only comments', async () => {
@@ -92,7 +92,7 @@ describe('compileCss', () => {
 				alias: {},
 			});
 
-			expect(result).toBe('');
+			expect(result.css).toBe('');
 		});
 
 		it('should preserve only important comments', async () => {
@@ -106,9 +106,9 @@ describe('compileCss', () => {
 				alias: {},
 			});
 
-			expect(result).toContain('License information');
-			expect(result).toContain('Copyright information');
-			expect(result).not.toContain('Regular comment');
+			expect(result.css).toContain('License information');
+			expect(result.css).toContain('Copyright information');
+			expect(result.css).not.toContain('Regular comment');
 		});
 	});
 
@@ -120,7 +120,7 @@ describe('compileCss', () => {
 				alias: {},
 			});
 
-			expect(result).toBe('');
+			expect(result.css).toBe('');
 		});
 
 		it('should throw error for unclosed block syntax', async () => {
@@ -149,8 +149,8 @@ describe('compileCss', () => {
 				},
 			});
 
-			expect(result).toContain('.component');
-			expect(result).toContain('color:green');
+			expect(result.css).toContain('.component');
+			expect(result.css).toContain('color:green');
 		});
 	});
 });
@@ -182,8 +182,8 @@ describe('compileCss - File import functionality', () => {
 			},
 		});
 
-		expect(result).toContain('.button');
-		expect(result).toContain('padding:1rem');
+		expect(result.css).toContain('.button');
+		expect(result.css).toContain('padding:1rem');
 	});
 
 	it('should throw error when importing non-existent file', async () => {
