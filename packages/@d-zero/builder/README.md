@@ -62,6 +62,13 @@ export default function (eleventyConfig) {
 		extensions: {
 			html: 'html', // html以外の拡張子（例：'php'）も指定可能
 		},
+		parserOptions: {
+			pugOptions: {
+				pretty: false,
+				cache: true,
+				filters: { customFilter: () => {} },
+			},
+		},
 	});
 }
 ```
@@ -171,6 +178,7 @@ flowchart LR
 | `ssi`               | 開発用ローカルサーバーのSSIの設定を行います。        |
 | `htmlHooks`         | HTML処理のカスタマイズ用フックを設定します。         |
 | `extensions`        | ファイル拡張子をカスタマイズします。                 |
+| `parserOptions`     | パーサのオプションを設定します。                     |
 
 詳細は[コーディングガイドライン](https://guidelines.d-zero.co.jp/html.html#builder)を確認してください。
 

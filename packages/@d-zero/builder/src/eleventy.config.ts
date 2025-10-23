@@ -56,6 +56,7 @@ export default function (
 
 	eleventyConfig.addPlugin(pugPlugin, {
 		pretty: true,
+		...options.parserOptions?.pugOptions,
 	});
 
 	eleventyConfig.addPlugin(htmlPlugin, {
