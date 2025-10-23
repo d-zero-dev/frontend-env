@@ -34,7 +34,8 @@ export const stylePlugin: EleventyPlugin<StylePluginConfig, EleventyGlobalData> 
 				});
 
 				if (!cssMinify) {
-					content = await prettifyCss(content);
+					const prettierOptions = pluginConfig.prettier ?? false;
+					content = await prettifyCss(content, inputPath, prettierOptions);
 				}
 
 				return `${pluginConfig.banner}\n${content}`;
@@ -57,7 +58,8 @@ export const stylePlugin: EleventyPlugin<StylePluginConfig, EleventyGlobalData> 
 				});
 
 				if (!cssMinify) {
-					content = await prettifyCss(content);
+					const prettierOptions = pluginConfig.prettier ?? false;
+					content = await prettifyCss(content, inputPath, prettierOptions);
 				}
 
 				return `${pluginConfig.banner}\n${content}`;
@@ -76,12 +78,22 @@ export const stylePlugin: EleventyPlugin<StylePluginConfig, EleventyGlobalData> 
 /**
  *
  * @param content
+ * @param inputPath
+ * @param prettierOptions
  */
-async function prettifyCss(content: string) {
+async function prettifyCss(
+	content: string,
+	inputPath: string,
+	prettierOptions: PrettierOptions | boolean,
+) {
 	const prettier = await import('prettier');
+	const options = typeof prettierOptions === 'object' ? prettierOptions : {};
+	const config = await prettier.resolveConfig(inputPath);
 	return await prettier.format(content, {
 		parser: 'css',
 		tabWidth: 2,
 		useTabs: false,
+		...options,
+		...config,
 	});
 }
