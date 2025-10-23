@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.16](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.15...v5.0.0-beta.16) (2025-10-23)
+
+### Features
+
+- **builder:** add parserOptions.pugOptions configuration ([803044c](https://github.com/d-zero-dev/frontend-env/commit/803044c4d3ea2e53dbf3cb30c61d4a46df847831))
+- **scaffold:** add build scripts with cache clearing option ([6adb2be](https://github.com/d-zero-dev/frontend-env/commit/6adb2be332bf2d09b6afe1c450f7aec7c5129fc3))
+
 # [5.0.0-beta.15](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.14...v5.0.0-beta.15) (2025-10-20)
 
 **Note:** Version bump only for package @d-zero/scaffold
