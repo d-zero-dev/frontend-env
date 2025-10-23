@@ -21,7 +21,6 @@ yarn-error.log
 .serve
 
 # Document Root
-htdocs
-!__assets/htdocs
+htdocs/**/*.test.*
 
 !.gitignore
