@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.17](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.16...v5.0.0-beta.17) (2025-10-23)
+
+### Bug Fixes
+
+- **scaffold:** load jQuery before baserCMS editor scripts ([2d6130c](https://github.com/d-zero-dev/frontend-env/commit/2d6130c76393893950472d76d62bbaed2ed49890))
+
 # [5.0.0-beta.16](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.15...v5.0.0-beta.16) (2025-10-23)
 
 ### Features
