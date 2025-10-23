@@ -22,6 +22,16 @@ yarn add @d-zero/builder
 npx @d-zero/builder
 ```
 
+### オプション
+
+#### `--clear-cache`
+
+Eleventyのキャッシュをクリアしてビルドを実行します。テンプレートの変更が反映されない場合や、ビルド結果に問題がある場合に使用します。
+
+```sh
+npx @d-zero/builder --clear-cache
+```
+
 ## 利用技術
 
 - [Eleventy](https://www.11ty.dev/): HTMLトランスパイルおよび全体のビルド処理
