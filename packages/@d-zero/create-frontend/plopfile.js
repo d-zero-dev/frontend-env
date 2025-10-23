@@ -190,6 +190,9 @@ export default function (plop) {
 										delete pkg.publishConfig;
 										delete pkg.files;
 										if (config.type.startsWith('basercms')) {
+											delete pkg.scripts.bge;
+											delete pkg.devDependencies['@burger-editor/local'];
+											pkg.dependencies['@burger-editor/css'] = '2';
 											pkg.dependencies['jquery'] = 'latest';
 											pkg.dependencies['jquery-colorbox'] = '1.5';
 										}
