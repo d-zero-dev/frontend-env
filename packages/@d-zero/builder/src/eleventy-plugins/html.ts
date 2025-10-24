@@ -52,7 +52,10 @@ export const htmlPlugin: EleventyPlugin<HtmlPluginOptions, EleventyGlobalData> =
 		const outputPath =
 			'/' +
 			path
-				.relative(path.join(process.cwd(), eleventyConfig.dir.input), transferred)
+				.relative(
+					path.join(process.cwd(), eleventyConfig.dir.input),
+					path.format({ ...path.parse(transferred), base: '', ext: '.html' }),
+				)
 				.replaceAll(path.sep, '/');
 
 		const imageSizesOptions = pluginConfig?.imageSizes ?? true;
