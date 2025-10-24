@@ -18,7 +18,7 @@
 		"build": "yarn lint && npx @d-zero/builder",
 		"build:only": "npx @d-zero/builder",
 		"build:clear": "yarn lint && npx @d-zero/builder --clear-cache",
-		"build:only:cleaer": "npx @d-zero/builder --clear-cache",
+		"build:only:clear": "npx @d-zero/builder --clear-cache",
 		"dev": "npx eleventy --serve --watch",
 		"d": "yarn dev",
 		"lint": "run-s \"lint:*\"",
