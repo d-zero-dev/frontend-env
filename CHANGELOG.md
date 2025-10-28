@@ -3,6 +3,66 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.17](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.16...v5.0.0-beta.17) (2025-10-23)
+
+### Bug Fixes
+
+- **scaffold:** load jQuery before baserCMS editor scripts ([2d6130c](https://github.com/d-zero-dev/frontend-env/commit/2d6130c76393893950472d76d62bbaed2ed49890))
+
+# [5.0.0-beta.16](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.15...v5.0.0-beta.16) (2025-10-23)
+
+### Bug Fixes
+
+- **builder:** disable Pug cache by default ([55a75f9](https://github.com/d-zero-dev/frontend-env/commit/55a75f99b32829345ac2ad84786fa8124bd20808))
+
+### Features
+
+- **builder:** add parserOptions.pugOptions configuration ([803044c](https://github.com/d-zero-dev/frontend-env/commit/803044c4d3ea2e53dbf3cb30c61d4a46df847831))
+- **create-frontend:** remove burger editor scripts and add css dependency for basercms ([609d11c](https://github.com/d-zero-dev/frontend-env/commit/609d11cba279068aac411ec240f7c5d4bec24370))
+- **scaffold:** add build scripts with cache clearing option ([6adb2be](https://github.com/d-zero-dev/frontend-env/commit/6adb2be332bf2d09b6afe1c450f7aec7c5129fc3))
+
+# [5.0.0-beta.15](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.14...v5.0.0-beta.15) (2025-10-20)
+
+**Note:** Version bump only for package @d-zero/fontend-env
+
+# [5.0.0-beta.14](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.13...v5.0.0-beta.14) (2025-10-20)
+
+### Bug Fixes
+
+- **create-frontend:** prevent gitignore file copy from being skipped ([6b80db7](https://github.com/d-zero-dev/frontend-env/commit/6b80db70238b3e3cb403a18a4b1f03f047ef144c))
+
+# [5.0.0-beta.13](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.12...v5.0.0-beta.13) (2025-10-20)
+
+### Bug Fixes
+
+- **create-frontend:** correct typo in volta-install-node command ([a18fda9](https://github.com/d-zero-dev/frontend-env/commit/a18fda9bbfbbeab1ae5233d4eb5655936b1ed458))
+
+# [5.0.0-beta.12](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.11...v5.0.0-beta.12) (2025-10-20)
+
+### Features
+
+- **create-frontend:** add volta and node installation support ([29e4fff](https://github.com/d-zero-dev/frontend-env/commit/29e4fff6af41be56397ba25f699e946a1f16c10a))
+
+# [5.0.0-beta.11](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.10...v5.0.0-beta.11) (2025-10-20)
+
+### Features
+
+- **create-frontend:** improve command execution and add volta setup ([e54a526](https://github.com/d-zero-dev/frontend-env/commit/e54a526da7629a9b86fb6d5a53f0aaba72118d9b))
+
+# [5.0.0-beta.10](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.9...v5.0.0-beta.10) (2025-10-20)
+
+### Bug Fixes
+
+- **create-frontend:** correct file extension from .cjs to .js in blocks data path ([b425f76](https://github.com/d-zero-dev/frontend-env/commit/b425f76b9fb51302a0b26f0149407787679f33ac))
+- update prettier glob patterns for rc files ([80231cb](https://github.com/d-zero-dev/frontend-env/commit/80231cb5af39cbcbd8c5d4c5d08bb3e5ac80a350))
+
+### Features
+
+- **create-frontend:** add gitignore rewrite functionality ([e2a6e75](https://github.com/d-zero-dev/frontend-env/commit/e2a6e75ad6d58416cee8b35642ccdc542532ab73))
+- **create-frontend:** add library copying functionality for baserCMS projects ([8e73300](https://github.com/d-zero-dev/frontend-env/commit/8e73300a730aa7dcdcc2f19bb57b99eb5f4d561c))
+- **create-frontend:** update project type options and remove unused blocks.html ([b003628](https://github.com/d-zero-dev/frontend-env/commit/b00362847c11493ab14f8c87c01f9577563f2e07))
+- **scaffold:** add baserCMS-specific meta template and conditional inclusion ([885fe35](https://github.com/d-zero-dev/frontend-env/commit/885fe352ecb692cd1ccf3ca4ee1d82749193a60d))
+
 # [5.0.0-beta.9](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.8...v5.0.0-beta.9) (2025-10-05)
 
 - feat(builder)!: support multiple root elements in DOM serialization ([b00904c](https://github.com/d-zero-dev/frontend-env/commit/b00904c83995386f46712e5e0e0f681bf17f01e6))

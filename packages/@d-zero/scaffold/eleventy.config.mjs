@@ -67,5 +67,16 @@ export default function (eleventyConfig) {
 		 * Server Side Include options on the dev server.
 		 */
 		// ssi: { '**/*': { encoding: 'shift_jis' } },
+
+		/**
+		 * Parser options.
+		 */
+		// parserOptions: {
+		// 	/**
+		// 	 * Pug parser options.
+		// 	 * @see https://pugjs.org/api/reference.html
+		// 	 */
+		// 	pugOptions: { pretty: false },
+		// },
 	});
 }

@@ -10,7 +10,6 @@
 	"stylelint.validate": ["css"],
 	"files.associations": {
 		"*.mdc": "markdown",
-		".clinerules": "markdown",
 		".stylelintrc": "json",
 		".markuplintrc": "json",
 		".pug-lintrc": "json"

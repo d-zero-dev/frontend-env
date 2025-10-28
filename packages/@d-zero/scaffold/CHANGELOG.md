@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.17](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.16...v5.0.0-beta.17) (2025-10-23)
+
+### Bug Fixes
+
+- **scaffold:** load jQuery before baserCMS editor scripts ([2d6130c](https://github.com/d-zero-dev/frontend-env/commit/2d6130c76393893950472d76d62bbaed2ed49890))
+
+# [5.0.0-beta.16](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.15...v5.0.0-beta.16) (2025-10-23)
+
+### Features
+
+- **builder:** add parserOptions.pugOptions configuration ([803044c](https://github.com/d-zero-dev/frontend-env/commit/803044c4d3ea2e53dbf3cb30c61d4a46df847831))
+- **scaffold:** add build scripts with cache clearing option ([6adb2be](https://github.com/d-zero-dev/frontend-env/commit/6adb2be332bf2d09b6afe1c450f7aec7c5129fc3))
+
+# [5.0.0-beta.15](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.14...v5.0.0-beta.15) (2025-10-20)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
+# [5.0.0-beta.14](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.13...v5.0.0-beta.14) (2025-10-20)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
+# [5.0.0-beta.13](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.12...v5.0.0-beta.13) (2025-10-20)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
+# [5.0.0-beta.12](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.11...v5.0.0-beta.12) (2025-10-20)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
+# [5.0.0-beta.11](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.10...v5.0.0-beta.11) (2025-10-20)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
+# [5.0.0-beta.10](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.9...v5.0.0-beta.10) (2025-10-20)
+
+### Bug Fixes
+
+- update prettier glob patterns for rc files ([80231cb](https://github.com/d-zero-dev/frontend-env/commit/80231cb5af39cbcbd8c5d4c5d08bb3e5ac80a350))
+
+### Features
+
+- **create-frontend:** add library copying functionality for baserCMS projects ([8e73300](https://github.com/d-zero-dev/frontend-env/commit/8e73300a730aa7dcdcc2f19bb57b99eb5f4d561c))
+- **create-frontend:** update project type options and remove unused blocks.html ([b003628](https://github.com/d-zero-dev/frontend-env/commit/b00362847c11493ab14f8c87c01f9577563f2e07))
+- **scaffold:** add baserCMS-specific meta template and conditional inclusion ([885fe35](https://github.com/d-zero-dev/frontend-env/commit/885fe352ecb692cd1ccf3ca4ee1d82749193a60d))
+
 # [5.0.0-beta.9](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.8...v5.0.0-beta.9) (2025-10-05)
 
 **Note:** Version bump only for package @d-zero/scaffold
