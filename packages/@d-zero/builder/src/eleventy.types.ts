@@ -43,6 +43,7 @@ export type EleventyTransformContext = {
 
 export type EleventyExtensionCompiler = {
 	outputFileExtension?: string;
+	addDependencies?: (inputPath: string, dependencies: string[]) => void;
 	compile: (
 		content: string,
 		inputPath: string,

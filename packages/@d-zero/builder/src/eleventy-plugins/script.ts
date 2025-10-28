@@ -25,6 +25,7 @@ export const scriptPlugin: EleventyPlugin<ScriptPluginConfig, EleventyGlobalData
 		compile(_, inputPath) {
 			return async () => {
 				const tmpPath = path.join(pluginConfig.tmpDir, inputPath);
+				const addDependencies = this.addDependencies;
 
 				const result = await esbuild.build({
 					entryPoints: [inputPath],
@@ -50,9 +51,8 @@ export const scriptPlugin: EleventyPlugin<ScriptPluginConfig, EleventyGlobalData
 							.map((key) => path.resolve(key))
 					: [];
 
-				if (dependencies.length > 0) {
-					// @ts-ignore
-					this.addDependencies(inputPath, dependencies);
+				if (addDependencies && dependencies.length > 0) {
+					addDependencies(inputPath, dependencies);
 				}
 
 				const content = await fs.readFile(tmpPath, 'utf8');
