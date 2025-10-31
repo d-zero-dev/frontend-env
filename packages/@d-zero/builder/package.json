@@ -33,7 +33,7 @@
 		"character-entities": "2.0.2",
 		"cli-color": "2.0.4",
 		"cssnano": "7.1.2",
-		"dayjs": "1.11.18",
+		"dayjs": "1.11.19",
 		"esbuild": "0.25.11",
 		"filesize": "11.0.13",
 		"gzip-size": "7.0.0",

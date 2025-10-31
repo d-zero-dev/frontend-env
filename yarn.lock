@@ -1296,7 +1296,7 @@ __metadata:
     character-entities: "npm:2.0.2"
     cli-color: "npm:2.0.4"
     cssnano: "npm:7.1.2"
-    dayjs: "npm:1.11.18"
+    dayjs: "npm:1.11.19"
     esbuild: "npm:0.25.11"
     execa: "npm:9.6.0"
     filesize: "npm:11.0.13"
@@ -7542,6 +7542,13 @@ __metadata:
   version: 1.11.18
   resolution: "dayjs@npm:1.11.18"
   checksum: 10c0/83b67f5d977e2634edf4f5abdd91d9041a696943143638063016915d2cd8c7e57e0751e40379a07ebca8be7a48dd380bef8752d22a63670f2d15970e34f96d7a
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:1.11.19":
+  version: 1.11.19
+  resolution: "dayjs@npm:1.11.19"
+  checksum: 10c0/7d8a6074a343f821f81ea284d700bd34ea6c7abbe8d93bce7aba818948957c1b7f56131702e5e890a5622cdfc05dcebe8aed0b8313bdc6838a594d7846b0b000
   languageName: node
   linkType: hard
 
