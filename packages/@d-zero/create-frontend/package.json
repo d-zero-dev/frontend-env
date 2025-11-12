@@ -22,7 +22,7 @@
 	},
 	"devDependencies": {
 		"@types/glob": "9.0.0",
-		"@types/node": "24.10.0",
+		"@types/node": "24.10.1",
 		"execa": "9.6.0"
 	}
 }

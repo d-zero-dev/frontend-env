@@ -1343,7 +1343,7 @@ __metadata:
   dependencies:
     "@d-zero/scaffold": "npm:5.0.0-beta.17"
     "@types/glob": "npm:9.0.0"
-    "@types/node": "npm:24.10.0"
+    "@types/node": "npm:24.10.1"
     execa: "npm:9.6.0"
     glob: "npm:11.0.3"
     i18n-js: "npm:4.5.1"
@@ -1514,7 +1514,7 @@ __metadata:
     "@d-zero/textlint-config": "npm:5.0.0-alpha.73"
     "@d-zero/tsconfig": "npm:0.5.0"
     "@prettier/plugin-pug": "npm:3.4.2"
-    "@types/node": "npm:24.10.0"
+    "@types/node": "npm:24.10.1"
     cross-env: "npm:10.1.0"
     dialog-toggle-events-polyfill: "npm:1.1.4"
     dotenv: "npm:17.2.3"
@@ -4887,12 +4887,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:24.10.0":
+"@types/node@npm:*":
   version: 24.10.0
   resolution: "@types/node@npm:24.10.0"
   dependencies:
     undici-types: "npm:~7.16.0"
   checksum: 10c0/f82ed7194e16f5590ef7afdc20c6d09068c76d50278b485ede8f0c5749683536e3064ffa8def8db76915196afb3724b854aa5723c64d6571b890b14492943b46
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:24.10.1":
+  version: 24.10.1
+  resolution: "@types/node@npm:24.10.1"
+  dependencies:
+    undici-types: "npm:~7.16.0"
+  checksum: 10c0/d6bca7a78f550fbb376f236f92b405d676003a8a09a1b411f55920ef34286ee3ee51f566203920e835478784df52662b5b2af89159d9d319352e9ea21801c002
   languageName: node
   linkType: hard
 
