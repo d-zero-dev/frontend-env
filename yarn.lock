@@ -269,25 +269,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@burger-editor/blocks@npm:4.0.0-alpha.29":
-  version: 4.0.0-alpha.29
-  resolution: "@burger-editor/blocks@npm:4.0.0-alpha.29"
+"@burger-editor/blocks@npm:4.0.0-alpha.30":
+  version: 4.0.0-alpha.30
+  resolution: "@burger-editor/blocks@npm:4.0.0-alpha.30"
   dependencies:
-    "@burger-editor/core": "npm:4.0.0-alpha.29"
-    "@burger-editor/utils": "npm:4.0.0-alpha.29"
-  checksum: 10c0/1ea9f495305185ccc8b5b73a1ac253d5c870e865435de865e2298725fd8e03255a2279821e1373161b2922e47c64ee08d5dec5faad035b46d47a644cbb3fbf5c
+    "@burger-editor/core": "npm:4.0.0-alpha.30"
+    "@burger-editor/utils": "npm:4.0.0-alpha.30"
+  checksum: 10c0/1ec36e2b1f1d719fcff05853f32a038721281e4dee578e35289d96530c3d06aaded9ae9d3460df6820c5fef8710bdd8db1b27b3af929e436e3b172ad048dac26
   languageName: node
   linkType: hard
 
-"@burger-editor/core@npm:4.0.0-alpha.29":
-  version: 4.0.0-alpha.29
-  resolution: "@burger-editor/core@npm:4.0.0-alpha.29"
+"@burger-editor/core@npm:4.0.0-alpha.30":
+  version: 4.0.0-alpha.30
+  resolution: "@burger-editor/core@npm:4.0.0-alpha.30"
   dependencies:
-    "@burger-editor/frozen-patty": "npm:4.0.0-alpha.29"
-    "@burger-editor/utils": "npm:4.0.0-alpha.29"
+    "@burger-editor/frozen-patty": "npm:4.0.0-alpha.30"
+    "@burger-editor/utils": "npm:4.0.0-alpha.30"
     jaco: "npm:5.0.0"
     semver: "npm:7.7.3"
-  checksum: 10c0/8706bf292dd1295dd6bfefb212c68c076cd0f304cb3a2029f83142357c1c60b7fbfc52cf692d177747bafb4aab800f51722f64af279112535b207b929b040585
+  checksum: 10c0/6b6f51525272049547511989dc0be534ec8ff5004f27e80097bd89bec76f6d8626e49a1d21adcbc5040989694170e9ad8dba39a70d2f9bbc28ff82c59a4dc4e7
   languageName: node
   linkType: hard
 
@@ -298,45 +298,45 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@burger-editor/frozen-patty@npm:4.0.0-alpha.29":
-  version: 4.0.0-alpha.29
-  resolution: "@burger-editor/frozen-patty@npm:4.0.0-alpha.29"
+"@burger-editor/frozen-patty@npm:4.0.0-alpha.30":
+  version: 4.0.0-alpha.30
+  resolution: "@burger-editor/frozen-patty@npm:4.0.0-alpha.30"
   dependencies:
-    "@burger-editor/utils": "npm:4.0.0-alpha.29"
-  checksum: 10c0/d44fb6ec6e8e4aa9b3944c2ecac5a484f2daf55f59555e4f3073856f13018a74f6553dff0de6c9cc6abfe0bb91e75f6b5dd34dfbe5d1fc2ea6464968a829961b
+    "@burger-editor/utils": "npm:4.0.0-alpha.30"
+  checksum: 10c0/7ddbf93c3adbcf1bf8daf3f749814bd49ed6144e9d543fdb8fb3e50e36d3e4a03c8a039f237c18c26c3b66814f40633febd7d830c55ea0cd30753f9161f8e302
   languageName: node
   linkType: hard
 
-"@burger-editor/local@npm:4.0.0-alpha.29":
-  version: 4.0.0-alpha.29
-  resolution: "@burger-editor/local@npm:4.0.0-alpha.29"
+"@burger-editor/local@npm:4.0.0-alpha.30":
+  version: 4.0.0-alpha.30
+  resolution: "@burger-editor/local@npm:4.0.0-alpha.30"
   dependencies:
-    "@burger-editor/blocks": "npm:4.0.0-alpha.29"
-    "@hono/node-server": "npm:1.19.5"
+    "@burger-editor/blocks": "npm:4.0.0-alpha.30"
+    "@hono/node-server": "npm:1.19.6"
     "@hono/zod-validator": "npm:0.7.2"
     ansi-colors: "npm:4.1.3"
     cosmiconfig: "npm:9.0.0"
     debug: "npm:4.4.3"
     gray-matter: "npm:^4.0.3"
-    hono: "npm:4.10.1"
+    hono: "npm:4.10.5"
     jsdom: "npm:26.1.0"
     open: "npm:10.2.0"
     prettier: "npm:3.6.2"
     zod: "npm:4.0.17"
   bin:
     bge: ./server/index.js
-  checksum: 10c0/a9d2468ed2f161143042ae19eddd95842fbd3fb93b29ec5b5f590ffc17b69cc9168bdaa6495773450762ad68374f8ba7237c3fcbbc38d50313a4e68ff3610bae
+  checksum: 10c0/34db272671cdd4bc748cf6778fc6cec03368fbad35d0fdaa8d595e4a5514887e973e147472b3f708fd80e5ab83272b4982263f349d3364c0d94627e70023dfaa
   languageName: node
   linkType: hard
 
-"@burger-editor/utils@npm:4.0.0-alpha.29":
-  version: 4.0.0-alpha.29
-  resolution: "@burger-editor/utils@npm:4.0.0-alpha.29"
+"@burger-editor/utils@npm:4.0.0-alpha.30":
+  version: 4.0.0-alpha.30
+  resolution: "@burger-editor/utils@npm:4.0.0-alpha.30"
   dependencies:
-    dayjs: "npm:1.11.18"
-    marked: "npm:16.4.1"
-    turndown: "npm:7.2.1"
-  checksum: 10c0/31c2a3c14167bfa9d134fbad9d5087c78814b5fabfbfa81a59a1966490d39894ff8f1d84ed9ee7213e7b32dec94c586c9cc6b3a994ed2a8cd323968f481a077f
+    dayjs: "npm:1.11.19"
+    marked: "npm:16.4.2"
+    turndown: "npm:7.2.2"
+  checksum: 10c0/56180bfff0aefd881fdbeb5d0808c1f17d54017ccdb966c7319bac164fdf86fd078d8ec70877838502be7bc9bb87993a2f68ec966bcf7c67d7f731546b354752
   languageName: node
   linkType: hard
 
@@ -1500,7 +1500,7 @@ __metadata:
   resolution: "@d-zero/scaffold@workspace:packages/@d-zero/scaffold"
   dependencies:
     "@burger-editor/css": "npm:4.0.0-alpha.30"
-    "@burger-editor/local": "npm:4.0.0-alpha.29"
+    "@burger-editor/local": "npm:4.0.0-alpha.30"
     "@d-zero/builder": "npm:5.0.0-beta.17"
     "@d-zero/cspell-config": "npm:5.0.0-alpha.73"
     "@d-zero/custom-components": "npm:5.0.0-beta.17"
@@ -2137,12 +2137,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hono/node-server@npm:1.19.5":
-  version: 1.19.5
-  resolution: "@hono/node-server@npm:1.19.5"
+"@hono/node-server@npm:1.19.6":
+  version: 1.19.6
+  resolution: "@hono/node-server@npm:1.19.6"
   peerDependencies:
     hono: ^4
-  checksum: 10c0/ee935ba923bb8bc3e0453d08a59e356b595c1ddffef3c96f8b9a4199f6b587c311743fb576d8236aa57d638012d7251c1f1b1ebbbd488358a951ee1a6b6991e8
+  checksum: 10c0/f3caacbbfa1826b669ef7b3fd486ad9d66ea0df0662e4957ebaedacabaa14e3d19cc127c0a74d527ebda64b1aef3670c6949d7fad772b06a27b945a5b770d85b
   languageName: node
   linkType: hard
 
@@ -10355,10 +10355,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:4.10.1":
-  version: 4.10.1
-  resolution: "hono@npm:4.10.1"
-  checksum: 10c0/a66e2791f62db07f1b24897a0f6848f5457101be12fd1a0e317b397b487ef2afa7ac6c01373347f3795ccbe09c68cd3fc7d00a43f75cc3a1e0fb6e85bec2e821
+"hono@npm:4.10.5":
+  version: 4.10.5
+  resolution: "hono@npm:4.10.5"
+  checksum: 10c0/c7a4b5f9c9ce50e15bca589f968f991181518a6f117579fd9558799540317743bb8f2a6a017b177f492bfaa68b0efae520a7693839ae7ad7a2bff952dbedecc0
   languageName: node
   linkType: hard
 
@@ -12538,12 +12538,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:16.4.1":
-  version: 16.4.1
-  resolution: "marked@npm:16.4.1"
+"marked@npm:16.4.2":
+  version: 16.4.2
+  resolution: "marked@npm:16.4.2"
   bin:
     marked: bin/marked.js
-  checksum: 10c0/2b5bc04db3453e493ea78758f1fe5006d725ec90aab9bf991242b0820a069d9748e2ac26fb0e2603848a409649c77900e599f3f66d251d0f7e5f606576090a54
+  checksum: 10c0/fc6051142172454f2023f3d6b31cca92879ec8e1b96457086a54c70354c74b00e1b6543a76a1fad6d399366f52b90a848f6ffb8e1d65a5baff87f3ba9b8f1847
   languageName: node
   linkType: hard
 
@@ -18359,12 +18359,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turndown@npm:7.2.1":
-  version: 7.2.1
-  resolution: "turndown@npm:7.2.1"
+"turndown@npm:7.2.2":
+  version: 7.2.2
+  resolution: "turndown@npm:7.2.2"
   dependencies:
     "@mixmark-io/domino": "npm:^2.2.0"
-  checksum: 10c0/a2ed7b05624ad20d243fab424a256f029340782ea0c023229813b732a29af8857e313761b5a9e3d224aede1712bd47a382c3d0923712592b8756c698945eccb1
+  checksum: 10c0/ee09f7bd67c468505aad6c3a26b11269ca49ffce07eaa9c212926d068f242b11b4e955b31a58289f26674ff29f91209b29454907551dcaec7da712e524cc78c2
   languageName: node
   linkType: hard
 
