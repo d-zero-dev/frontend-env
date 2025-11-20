@@ -1282,7 +1282,7 @@ __metadata:
   resolution: "@d-zero/builder@workspace:packages/@d-zero/builder"
   dependencies:
     "@11ty/eleventy": "npm:3.1.2"
-    "@d-zero/shared": "npm:0.11.0"
+    "@d-zero/shared": "npm:0.15.1"
     "@types/cli-color": "npm:2.0.6"
     "@types/html-minifier-terser": "npm:7.0.2"
     "@types/js-yaml": "npm:4.0.9"
@@ -1522,16 +1522,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@d-zero/shared@npm:0.11.0":
-  version: 0.11.0
-  resolution: "@d-zero/shared@npm:0.11.0"
+"@d-zero/shared@npm:0.15.1":
+  version: 0.15.1
+  resolution: "@d-zero/shared@npm:0.15.1"
   dependencies:
     "@holiday-jp/holiday_jp": "npm:2.5.1"
     await-event-emitter: "npm:2.0.2"
-    dayjs: "npm:1.11.18"
+    dayjs: "npm:1.11.19"
     escape-string-regexp: "npm:5.0.0"
     front-matter: "npm:4.0.2"
-  checksum: 10c0/0d4d52a4c8398a7c9fa67184a1743cf3c9046ba0ec9e4a8eb89d61296fe2591ac5b0989f2dbce15843f4dcb69280e788359ceb3ca48c380287edfab590028240
+  checksum: 10c0/9430ec06733d4d3a500483f925e49420d1366ef42f61767e77ade278043080bc10d61f6fccb5483c7efebf9062103e8c3a1589a7f8882a28312f0ac97c831c3f
   languageName: node
   linkType: hard
 
@@ -7661,13 +7661,6 @@ __metadata:
   version: 3.0.3
   resolution: "dateformat@npm:3.0.3"
   checksum: 10c0/2effb8bef52ff912f87a05e4adbeacff46353e91313ad1ea9ed31412db26849f5a0fcc7e3ce36dbfb84fc6c881a986d5694f84838ad0da7000d5150693e78678
-  languageName: node
-  linkType: hard
-
-"dayjs@npm:1.11.18":
-  version: 1.11.18
-  resolution: "dayjs@npm:1.11.18"
-  checksum: 10c0/83b67f5d977e2634edf4f5abdd91d9041a696943143638063016915d2cd8c7e57e0751e40379a07ebca8be7a48dd380bef8752d22a63670f2d15970e34f96d7a
   languageName: node
   linkType: hard
 
