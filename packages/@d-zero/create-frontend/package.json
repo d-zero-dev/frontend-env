@@ -14,14 +14,12 @@
 	},
 	"dependencies": {
 		"@d-zero/scaffold": "5.0.0-beta.17",
-		"glob": "13.0.0",
 		"i18n-js": "4.5.1",
 		"ignore": "7.0.5",
 		"meow": "14.0.0",
 		"plop": "4.0.2"
 	},
 	"devDependencies": {
-		"@types/glob": "9.0.0",
 		"@types/node": "24.10.1",
 		"execa": "9.6.0"
 	}

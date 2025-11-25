@@ -1,8 +1,8 @@
 import fs from 'node:fs';
+import fsp from 'node:fs/promises';
 import path from 'node:path';
 import { argv } from 'node:process';
 
-import { globSync } from 'glob';
 import ignore from 'ignore';
 import meow from 'meow';
 
@@ -57,9 +57,34 @@ const cli = meow(
 );
 
 /**
+ * Recursively get all files in a directory
+ * @param {string} dir - Directory to search
+ * @param {string} rootDir - Root directory for relative paths
+ * @returns {Promise<string[]>} Array of relative file paths
+ */
+async function getAllFiles(dir, rootDir) {
+	const files = [];
+	const entries = await fsp.readdir(dir, { withFileTypes: true });
+
+	for (const entry of entries) {
+		const fullPath = path.join(dir, entry.name);
+		const relativePath = path.relative(rootDir, fullPath);
+
+		if (entry.isDirectory()) {
+			const subFiles = await getAllFiles(fullPath, rootDir);
+			files.push(...subFiles);
+		} else {
+			files.push(relativePath);
+		}
+	}
+
+	return files;
+}
+
+/**
  * @param {import('plop').NodePlopAPI} plop
  */
-export default function (plop) {
+export default async function (plop) {
 	const scaffoldDir = path.normalize(
 		path.dirname(import.meta.resolve('@d-zero/scaffold').replace('file:', '')),
 	);
@@ -89,13 +114,7 @@ export default function (plop) {
 			cli.flags.type === 'static' ? ['**/__tmpl/**/*'] : [],
 		);
 
-	const scaffoldFiles = ig.filter(
-		globSync('**/*', {
-			cwd: scaffoldDir,
-			nodir: true,
-			dot: true,
-		}),
-	);
+	const scaffoldFiles = ig.filter(await getAllFiles(scaffoldDir, scaffoldDir)).toSorted();
 
 	plop.setActionType('Install dependencies', async (answers) => {
 		const { dest, doInstall } = answerToConfig(answers);
