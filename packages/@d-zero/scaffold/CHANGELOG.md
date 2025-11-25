@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.18](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.17...v5.0.0-beta.18) (2025-11-25)
+
+### Bug Fixes
+
+- **scaffold:** correct typo in script name from 'cleaer' to 'clear' ([1ad45c8](https://github.com/d-zero-dev/frontend-env/commit/1ad45c8b7bb43ca665b5fd03c3e414917778dfb9))
+
 # [5.0.0-beta.17](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.16...v5.0.0-beta.17) (2025-10-23)
 
 ### Bug Fixes

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.18](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.17...v5.0.0-beta.18) (2025-11-25)
+
+### Bug Fixes
+
+- **builder:** correct output path extension to .html in html plugin ([b9154e1](https://github.com/d-zero-dev/frontend-env/commit/b9154e1f565cfb6bc38378f70038cb3edb7d8603))
+
+### Features
+
+- **builder:** allow overriding prettier options for CSS from config file ([ee77162](https://github.com/d-zero-dev/frontend-env/commit/ee77162c4c5ba2b01b69ae1970651256178f27d4))
+
 # [5.0.0-beta.17](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.16...v5.0.0-beta.17) (2025-10-23)
 
 **Note:** Version bump only for package @d-zero/builder
