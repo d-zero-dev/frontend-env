@@ -45,7 +45,7 @@
 		"@d-zero/textlint-config": "5.0.0-alpha.73",
 		"@d-zero/tsconfig": "0.5.0",
 		"husky": "9.1.7",
-		"lerna": "9.0.1",
+		"lerna": "9.0.3",
 		"npm-run-all2": "8.0.4",
 		"typescript": "5.9.3",
 		"vitest": "4.0.14"
