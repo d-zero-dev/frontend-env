@@ -57,7 +57,7 @@
 		"@types/js-yaml": "4.0.9",
 		"@types/jsdom": "27.0.0",
 		"@types/pug": "2.0.10",
-		"execa": "9.6.0",
+		"execa": "9.6.1",
 		"ignore": "7.0.5",
 		"prettier": "3.7.3",
 		"sass": "1.94.2",
