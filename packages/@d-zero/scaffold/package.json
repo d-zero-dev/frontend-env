@@ -68,7 +68,7 @@
 		"vitest": "4.0.15"
 	},
 	"dependencies": {
-		"@burger-editor/css": "4.0.0-alpha.34",
+		"@burger-editor/css": "4.0.0-alpha.42",
 		"@d-zero/custom-components": "5.0.0-beta.18",
 		"dialog-toggle-events-polyfill": "1.1.4",
 		"invokers-polyfill": "0.5.7",
