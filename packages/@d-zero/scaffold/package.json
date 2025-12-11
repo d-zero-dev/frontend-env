@@ -49,7 +49,7 @@
 		"@d-zero/builder": "5.0.0-beta.18",
 		"@d-zero/cspell-config": "5.0.0-alpha.75",
 		"@d-zero/eslint-config": "5.0.0-alpha.73",
-		"@d-zero/lint-staged-config": "5.0.0-alpha.73",
+		"@d-zero/lint-staged-config": "5.0.0-alpha.75",
 		"@d-zero/markuplint-config": "5.0.0-alpha.73",
 		"@d-zero/postcss-config": "5.0.0-beta.18",
 		"@d-zero/prettier-config": "5.0.0-alpha.73",
