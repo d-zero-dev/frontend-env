@@ -54,7 +54,7 @@
 		"@d-zero/postcss-config": "5.0.0-beta.18",
 		"@d-zero/prettier-config": "5.0.0-alpha.75",
 		"@d-zero/pug-lint-config": "5.0.0-alpha.75",
-		"@d-zero/stylelint-config": "5.0.0-alpha.73",
+		"@d-zero/stylelint-config": "5.0.0-alpha.75",
 		"@d-zero/textlint-config": "5.0.0-alpha.73",
 		"@d-zero/tsconfig": "0.5.0",
 		"@prettier/plugin-pug": "3.4.2",
