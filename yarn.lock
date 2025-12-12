@@ -1353,7 +1353,7 @@ __metadata:
     "@d-zero/commitlint-config": "npm:5.0.0-alpha.75"
     "@d-zero/cspell-config": "npm:5.0.0-alpha.75"
     "@d-zero/eslint-config": "npm:5.0.0-alpha.73"
-    "@d-zero/lint-staged-config": "npm:5.0.0-alpha.73"
+    "@d-zero/lint-staged-config": "npm:5.0.0-alpha.75"
     "@d-zero/prettier-config": "npm:5.0.0-alpha.73"
     "@d-zero/textlint-config": "npm:5.0.0-alpha.73"
     "@d-zero/tsconfig": "npm:0.5.0"
@@ -1365,13 +1365,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@d-zero/lint-staged-config@npm:5.0.0-alpha.73":
-  version: 5.0.0-alpha.73
-  resolution: "@d-zero/lint-staged-config@npm:5.0.0-alpha.73"
+"@d-zero/lint-staged-config@npm:5.0.0-alpha.75":
+  version: 5.0.0-alpha.75
+  resolution: "@d-zero/lint-staged-config@npm:5.0.0-alpha.75"
   dependencies:
-    lint-staged: "npm:16.2.4"
-    micromatch: "npm:4.0.8"
-  checksum: 10c0/6827ca5e3b211b5ed328179061bfcb15b9d674dec175901c93fa184e757334f396a08b10a3bf74dc95e6f0b14d572ed970bc8fa252b9fe71df183f1f9a037d87
+    lint-staged: "npm:16.2.7"
+  checksum: 10c0/f97f3f90fc6d9494096b2406f7b4cbf39eb6d81a3737c777a6bdac2e89abb23edd6c6d6d8457d90fa6f65213c081a373090393ab7b2f893450370dff7acb5a82
   languageName: node
   linkType: hard
 
@@ -1434,7 +1433,7 @@ __metadata:
     "@d-zero/cspell-config": "npm:5.0.0-alpha.75"
     "@d-zero/custom-components": "npm:5.0.0-beta.18"
     "@d-zero/eslint-config": "npm:5.0.0-alpha.73"
-    "@d-zero/lint-staged-config": "npm:5.0.0-alpha.73"
+    "@d-zero/lint-staged-config": "npm:5.0.0-alpha.75"
     "@d-zero/markuplint-config": "npm:5.0.0-alpha.73"
     "@d-zero/postcss-config": "npm:5.0.0-beta.18"
     "@d-zero/prettier-config": "npm:5.0.0-alpha.73"
@@ -6857,7 +6856,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^14.0.1, commander@npm:^14.0.2":
+"commander@npm:^14.0.2":
   version: 14.0.2
   resolution: "commander@npm:14.0.2"
   checksum: 10c0/245abd1349dbad5414cb6517b7b5c584895c02c4f7836ff5395f301192b8566f9796c82d7bd6c92d07eba8775fe4df86602fca5d86d8d10bcc2aded1e21c2aeb
@@ -11900,12 +11899,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:16.2.4":
-  version: 16.2.4
-  resolution: "lint-staged@npm:16.2.4"
+"lint-staged@npm:16.2.7":
+  version: 16.2.7
+  resolution: "lint-staged@npm:16.2.7"
   dependencies:
-    commander: "npm:^14.0.1"
-    listr2: "npm:^9.0.4"
+    commander: "npm:^14.0.2"
+    listr2: "npm:^9.0.5"
     micromatch: "npm:^4.0.8"
     nano-spawn: "npm:^2.0.0"
     pidtree: "npm:^0.6.0"
@@ -11913,7 +11912,7 @@ __metadata:
     yaml: "npm:^2.8.1"
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10c0/101b32040b9601938a7da6aa58195ce5a1f7a1a96998e8f700c219d9a1070e0f87ade9289d85ff8041a5f901252e834411c7e4f35538593678ed304ba2c58eba
+  checksum: 10c0/9a677c21a8112d823ae5bc565ba2c9e7b803786f2a021c46827a55fe44ed59def96edb24fc99c06a2545cdbbf366022ad82addcb3bf60c712f3b98ef92069717
   languageName: node
   linkType: hard
 
@@ -11936,7 +11935,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"listr2@npm:^9.0.4":
+"listr2@npm:^9.0.5":
   version: 9.0.5
   resolution: "listr2@npm:9.0.5"
   dependencies:
@@ -12864,7 +12863,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:4.0.8, micromatch@npm:^4.0.2, micromatch@npm:^4.0.4, micromatch@npm:^4.0.5, micromatch@npm:^4.0.8":
+"micromatch@npm:^4.0.2, micromatch@npm:^4.0.4, micromatch@npm:^4.0.5, micromatch@npm:^4.0.8":
   version: 4.0.8
   resolution: "micromatch@npm:4.0.8"
   dependencies:
