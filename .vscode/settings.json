@@ -14,16 +14,15 @@
 		".markuplintrc": "json",
 		".pug-lintrc": "json"
 	},
-
-	// Plugin settings
-	"puglint.enable": true,
-
 	// Auto format
 	"editor.formatOnSave": true,
 	"[html]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[markdown]": {
