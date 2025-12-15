@@ -58,7 +58,7 @@
 		"@kamado-io/script-compiler": "0.1.0-alpha.5",
 		"@kamado-io/style-compiler": "0.1.0-alpha.5",
 		"@prettier/plugin-pug": "3.4.2",
-		"@types/node": "24.10.3",
+		"@types/node": "24.10.4",
 		"cross-env": "10.1.0",
 		"dotenv": "17.2.3",
 		"husky": "9.1.7",
