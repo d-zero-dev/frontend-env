@@ -1,7 +1,7 @@
 .c-nav-breadcrumb
 	ol(itemscope itemtype="https://schema.org/BreadcrumbList")
 		- const HOME_TITLE = "Home";
-		- const linkList = breadcrumbs(page, collections);
+		- const linkList = breadcrumbs;
 		each link, index in linkList
 			li.c-nav-breadcrumb__item(
 				itemscope
