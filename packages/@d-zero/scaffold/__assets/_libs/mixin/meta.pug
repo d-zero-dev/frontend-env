@@ -1,6 +1,8 @@
+- const url = pkg.production.host + page.url;
+- const metaTitle = titleList({ baseURL: pkg.production.baseURL });
 meta(charset="UTF-8")
 meta(name="viewport" content="width=device-width")
-title= titlelist(page, collections, pkg, " | ")
+title= metaTitle
 meta(name="format-detection" content="telephone=no")
 meta(name="description" content=description || "")
 meta(property="og:type" content=ogType || "website")
