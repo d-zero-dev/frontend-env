@@ -38,7 +38,7 @@
 		"filesize": "11.0.13",
 		"gzip-size": "7.0.0",
 		"html-minifier-terser": "7.2.0",
-		"iconv-lite": "0.7.0",
+		"iconv-lite": "0.7.1",
 		"image-size": "2.0.2",
 		"js-yaml": "4.1.1",
 		"jsdom": "27.3.0",
