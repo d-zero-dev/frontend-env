@@ -1265,7 +1265,7 @@ __metadata:
     sass: "npm:1.96.0"
     strip-ansi: "npm:7.1.2"
     strip-css-comments: "npm:5.0.0"
-    vite: "npm:7.2.7"
+    vite: "npm:7.3.0"
   bin:
     dzbuild: ./bin/dzbuild.js
   languageName: unknown
@@ -8433,7 +8433,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:0.27.1":
+"esbuild@npm:0.27.1, esbuild@npm:^0.27.0":
   version: 0.27.1
   resolution: "esbuild@npm:0.27.1"
   dependencies:
@@ -18857,11 +18857,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:7.2.7":
-  version: 7.2.7
-  resolution: "vite@npm:7.2.7"
+"vite@npm:7.3.0":
+  version: 7.3.0
+  resolution: "vite@npm:7.3.0"
   dependencies:
-    esbuild: "npm:^0.25.0"
+    esbuild: "npm:^0.27.0"
     fdir: "npm:^6.5.0"
     fsevents: "npm:~2.3.3"
     picomatch: "npm:^4.0.3"
@@ -18908,7 +18908,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10c0/0c502d9eb898d9c05061dbd8fd199f280b524bbb4c12ab5f88c7b12779947386684a269e4dd0aa424aa35bcd857f1aa44aadb9ea764702a5043af433052455b5
+  checksum: 10c0/0457c196cdd5761ec351c0f353945430fbad330e615b9eeab729c8ae163334f18acdc1d9cd7d9d673dbf111f07f6e4f0b25d4ac32360e65b4a6df9991046f3ff
   languageName: node
   linkType: hard
 
