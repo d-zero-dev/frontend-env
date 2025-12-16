@@ -1474,9 +1474,10 @@ __metadata:
     "@d-zero/stylelint-config": "npm:5.0.0-alpha.75"
     "@d-zero/textlint-config": "npm:5.0.0-alpha.75"
     "@d-zero/tsconfig": "npm:0.5.0"
-    "@kamado-io/page-compiler": "npm:0.1.0-alpha.5"
-    "@kamado-io/script-compiler": "npm:0.1.0-alpha.5"
-    "@kamado-io/style-compiler": "npm:0.1.0-alpha.5"
+    "@kamado-io/page-compiler": "npm:0.1.0-alpha.6"
+    "@kamado-io/pug-compiler": "npm:0.1.0-alpha.6"
+    "@kamado-io/script-compiler": "npm:0.1.0-alpha.6"
+    "@kamado-io/style-compiler": "npm:0.1.0-alpha.6"
     "@prettier/plugin-pug": "npm:3.4.2"
     "@types/node": "npm:24.10.4"
     cross-env: "npm:10.1.0"
@@ -1484,7 +1485,7 @@ __metadata:
     dotenv: "npm:17.2.3"
     husky: "npm:9.1.7"
     invokers-polyfill: "npm:0.5.7"
-    kamado: "npm:0.1.0-alpha.5"
+    kamado: "npm:0.1.0-alpha.6"
     kiso.css: "npm:1.2.2"
     npm-run-all2: "npm:8.0.4"
     tslib: "npm:2.8.1"
@@ -2510,9 +2511,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kamado-io/page-compiler@npm:0.1.0-alpha.5":
-  version: 0.1.0-alpha.5
-  resolution: "@kamado-io/page-compiler@npm:0.1.0-alpha.5"
+"@kamado-io/page-compiler@npm:0.1.0-alpha.6":
+  version: 0.1.0-alpha.6
+  resolution: "@kamado-io/page-compiler@npm:0.1.0-alpha.6"
   dependencies:
     "@d-zero/shared": "npm:0.17.0"
     ansi-colors: "npm:4.1.3"
@@ -2521,33 +2522,43 @@ __metadata:
     html-minifier-terser: "npm:7.2.0"
     image-size: "npm:2.0.2"
     jsdom: "npm:27.3.0"
-    kamado: "npm:0.1.0-alpha.5"
+    kamado: "npm:0.1.0-alpha.6"
     prettier: "npm:3.7.4"
-    pug: "npm:3.0.3"
-  checksum: 10c0/583f49118cc2971934e5cf413569c93bd53137f07c449aff635db80fa4a68379509fafd971674f63f2227ce87bfd480c2d0247d66e93b190c5568d4ec1f1c826
+  checksum: 10c0/125f624c54ee69f2e6a316bff266aaa5186ffd41d3112b4d06604d95976aea3292e09c5b8ca849a309f13928872f264951e51125e10d91dad23643f08786cc94
   languageName: node
   linkType: hard
 
-"@kamado-io/script-compiler@npm:0.1.0-alpha.5":
-  version: 0.1.0-alpha.5
-  resolution: "@kamado-io/script-compiler@npm:0.1.0-alpha.5"
+"@kamado-io/pug-compiler@npm:0.1.0-alpha.6":
+  version: 0.1.0-alpha.6
+  resolution: "@kamado-io/pug-compiler@npm:0.1.0-alpha.6"
+  dependencies:
+    pug: "npm:3.0.3"
+  peerDependencies:
+    "@kamado-io/page-compiler": 0.1.0-alpha.5
+  checksum: 10c0/a17fa74943c93f7792c8299b1f46abf872698e5824c4669188705fa785131b46ef206989fb7c6e7c0c25b1563d896cce2da7796c8772be185f1f66363b4126e1
+  languageName: node
+  linkType: hard
+
+"@kamado-io/script-compiler@npm:0.1.0-alpha.6":
+  version: 0.1.0-alpha.6
+  resolution: "@kamado-io/script-compiler@npm:0.1.0-alpha.6"
   dependencies:
     esbuild: "npm:0.27.1"
-    kamado: "npm:0.1.0-alpha.5"
-  checksum: 10c0/5fa8a3c96d386e545b0bd7be7bf1882b44473ff2b13246c1c5fde53f98b1112e08ddeaa4eb5d12a37cb20959692ba18d4e371a560cba869bb160cc36a9f5e50f
+    kamado: "npm:0.1.0-alpha.6"
+  checksum: 10c0/aa498907881a9a6aee6edccbd74f5cc2563ed66f08b875ec2fcd4abcd3143759a4448430f26296dcf7b40b0e78e68906853bf4f6a298d9f6096a2384f9d4ebf0
   languageName: node
   linkType: hard
 
-"@kamado-io/style-compiler@npm:0.1.0-alpha.5":
-  version: 0.1.0-alpha.5
-  resolution: "@kamado-io/style-compiler@npm:0.1.0-alpha.5"
+"@kamado-io/style-compiler@npm:0.1.0-alpha.6":
+  version: 0.1.0-alpha.6
+  resolution: "@kamado-io/style-compiler@npm:0.1.0-alpha.6"
   dependencies:
     cssnano: "npm:7.1.2"
-    kamado: "npm:0.1.0-alpha.5"
+    kamado: "npm:0.1.0-alpha.6"
     postcss: "npm:8.5.6"
     postcss-import: "npm:16.1.1"
     postcss-load-config: "npm:6.0.1"
-  checksum: 10c0/af55e858f768ef4de821bfcdb8fcc6f32694cf52ec0c066d3ec3313d694e531fddd3d879b4ecbc233a62c665233feb6fc710bdea521d0b5c8e888220f7d96cfe
+  checksum: 10c0/e70380e37ddf6e72c71d1c756a7fbd1b1a274c58273ddf306338debe399ec6807a09cb515a1b203ba3d6b5981a4b160ae290d29f8432994b722dd8af644bd11f
   languageName: node
   linkType: hard
 
@@ -11684,9 +11695,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kamado@npm:0.1.0-alpha.5":
-  version: 0.1.0-alpha.5
-  resolution: "kamado@npm:0.1.0-alpha.5"
+"kamado@npm:0.1.0-alpha.6":
+  version: 0.1.0-alpha.6
+  resolution: "kamado@npm:0.1.0-alpha.6"
   dependencies:
     "@d-zero/dealer": "npm:1.5.2"
     "@d-zero/roar": "npm:0.2.0"
@@ -11706,7 +11717,7 @@ __metadata:
     yaml: "npm:2.8.2"
   bin:
     kamado: dist/index.js
-  checksum: 10c0/e42c12d8bfb38844aaae44e7838915bf381234fea7281e7857da8b374ccb6b72510375531c2edbdbce6ca0bd54bfca5c2f563c83ea4ce5119483162de2ca1fbe
+  checksum: 10c0/ced7d0205de5f93626122e4b69ecd51b7103f69fa8ac17f2917f9ce0224976548baf197e0e765ecf6711a2f27a4c54cab9aa0dee0bf1f0c7c7c57e7685f3d89a
   languageName: node
   linkType: hard
 

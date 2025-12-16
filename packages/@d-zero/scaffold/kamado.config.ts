@@ -3,6 +3,7 @@ import type { UserConfig } from 'kamado/config';
 import path from 'node:path';
 
 import { pageCompiler } from '@kamado-io/page-compiler';
+import { createCompileHooks } from '@kamado-io/pug-compiler';
 import { scriptCompiler } from '@kamado-io/script-compiler';
 import { styleCompiler } from '@kamado-io/style-compiler';
 
@@ -27,7 +28,9 @@ export default {
 			layouts: {
 				dir: path.resolve(import.meta.dirname, '__assets', '_libs', 'layouts'),
 			},
-			pathAlias: path.resolve(import.meta.dirname, '__assets', '_libs'),
+			compileHooks: createCompileHooks({
+				pathAlias: path.resolve(import.meta.dirname, '__assets', '_libs'),
+			}),
 		}),
 		style: styleCompiler({
 			alias: {
