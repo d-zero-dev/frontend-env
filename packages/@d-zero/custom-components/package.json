@@ -35,9 +35,9 @@
 		"@storybook/blocks": "8.6.14",
 		"@storybook/experimental-addon-test": "8.6.14",
 		"@storybook/test": "8.6.14",
-		"@storybook/web-components": "8.6.14",
-		"@storybook/web-components-vite": "8.6.14",
+		"@storybook/web-components": "8.6.15",
+		"@storybook/web-components-vite": "8.6.15",
 		"lit": "3.3.1",
-		"storybook": "8.6.14"
+		"storybook": "8.6.15"
 	}
 }
