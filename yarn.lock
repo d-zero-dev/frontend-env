@@ -1094,14 +1094,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/commitlint-config@npm:5.0.0-alpha.75":
-  version: 5.0.0-alpha.75
-  resolution: "@d-zero/commitlint-config@npm:5.0.0-alpha.75"
+"@d-zero/commitlint-config@npm:5.0.0-alpha.76":
+  version: 5.0.0-alpha.76
+  resolution: "@d-zero/commitlint-config@npm:5.0.0-alpha.76"
   dependencies:
     "@commitlint/cli": "npm:20.2.0"
     "@commitlint/config-conventional": "npm:20.2.0"
-    "@d-zero/cz-config": "npm:5.0.0-alpha.75"
-  checksum: 10c0/dc5984fa40692c076e2f47f6ce55d2b3ff4851520600588802f6135d4b35990a5b85682f2acea35c02415505c08fedfb114bef3385efdaa642b883aebcb7d98c
+    "@d-zero/cz-config": "npm:5.0.0-alpha.76"
+  checksum: 10c0/f5fec642b189f5039dbc5a45ac3c0306228e7c93bb99b1b369c4811e1e45f9e2d4cedc225d52cc8638fa4d2532ce95f30f129385caa8c2dd4247085a6ce4d87d
   languageName: node
   linkType: hard
 
@@ -1155,13 +1155,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@d-zero/cz-config@npm:5.0.0-alpha.75":
-  version: 5.0.0-alpha.75
-  resolution: "@d-zero/cz-config@npm:5.0.0-alpha.75"
+"@d-zero/cz-config@npm:5.0.0-alpha.76":
+  version: 5.0.0-alpha.76
+  resolution: "@d-zero/cz-config@npm:5.0.0-alpha.76"
   dependencies:
     commitizen: "npm:4.3.1"
     cz-customizable: "npm:7.5.1"
-  checksum: 10c0/81c03865fc0a93c088460468807fcbf66288700923410a93c15d895aebce1e0c61d4f4ff609dfd43e7ad308311189058b12d0b231bdb4d46b28865b5ebcfcf12
+  checksum: 10c0/eb02cd2d872da356ec0f5ae3ac99e2239aa7f89ead845dacab82c973ca2ab56938b43a236aeb988b39e0770b1d4f3c9e58a892094757dec1bd7378ba5dc8068d
   languageName: node
   linkType: hard
 
@@ -1197,7 +1197,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@d-zero/fontend-env@workspace:."
   dependencies:
-    "@d-zero/commitlint-config": "npm:5.0.0-alpha.75"
+    "@d-zero/commitlint-config": "npm:5.0.0-alpha.76"
     "@d-zero/cspell-config": "npm:5.0.0-alpha.75"
     "@d-zero/eslint-config": "npm:5.0.0-alpha.75"
     "@d-zero/lint-staged-config": "npm:5.0.0-alpha.75"
