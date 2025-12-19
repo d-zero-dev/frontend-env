@@ -1200,7 +1200,7 @@ __metadata:
     "@d-zero/commitlint-config": "npm:5.0.0-alpha.76"
     "@d-zero/cspell-config": "npm:5.0.0-alpha.76"
     "@d-zero/eslint-config": "npm:5.0.0-alpha.76"
-    "@d-zero/lint-staged-config": "npm:5.0.0-alpha.75"
+    "@d-zero/lint-staged-config": "npm:5.0.0-alpha.76"
     "@d-zero/prettier-config": "npm:5.0.0-alpha.75"
     "@d-zero/textlint-config": "npm:5.0.0-alpha.75"
     "@d-zero/tsconfig": "npm:0.5.0"
@@ -1212,12 +1212,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@d-zero/lint-staged-config@npm:5.0.0-alpha.75":
-  version: 5.0.0-alpha.75
-  resolution: "@d-zero/lint-staged-config@npm:5.0.0-alpha.75"
+"@d-zero/lint-staged-config@npm:5.0.0-alpha.76":
+  version: 5.0.0-alpha.76
+  resolution: "@d-zero/lint-staged-config@npm:5.0.0-alpha.76"
   dependencies:
     lint-staged: "npm:16.2.7"
-  checksum: 10c0/f97f3f90fc6d9494096b2406f7b4cbf39eb6d81a3737c777a6bdac2e89abb23edd6c6d6d8457d90fa6f65213c081a373090393ab7b2f893450370dff7acb5a82
+  checksum: 10c0/0771a6ed9abb428f3d964eb8ddcd60fef7fba8d023645a9b5ac3f0647a9e0607c0fd1e16a98e839811480a25a5c470a9e7fcde722de2ffb2b3b5194aa47e6593
   languageName: node
   linkType: hard
 
@@ -1289,7 +1289,7 @@ __metadata:
     "@d-zero/cspell-config": "npm:5.0.0-alpha.76"
     "@d-zero/custom-components": "npm:5.0.0-beta.18"
     "@d-zero/eslint-config": "npm:5.0.0-alpha.76"
-    "@d-zero/lint-staged-config": "npm:5.0.0-alpha.75"
+    "@d-zero/lint-staged-config": "npm:5.0.0-alpha.76"
     "@d-zero/markuplint-config": "npm:5.0.0-alpha.75"
     "@d-zero/postcss-config": "npm:5.0.0-beta.18"
     "@d-zero/prettier-config": "npm:5.0.0-alpha.75"
