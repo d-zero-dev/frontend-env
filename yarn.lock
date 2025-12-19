@@ -1130,12 +1130,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/csstree-scss-syntax@npm:5.0.0-alpha.75":
-  version: 5.0.0-alpha.75
-  resolution: "@d-zero/csstree-scss-syntax@npm:5.0.0-alpha.75"
+"@d-zero/csstree-scss-syntax@npm:5.0.0-alpha.76":
+  version: 5.0.0-alpha.76
+  resolution: "@d-zero/csstree-scss-syntax@npm:5.0.0-alpha.76"
   dependencies:
     css-tree: "npm:3.1.0"
-  checksum: 10c0/afbac08dff8360ab245c581bddddc5e92dd48551a7b9b868a07954fdee581e61a87e98d8158d79333956f971c598a664f40c0069a458c28678a3284d0296e956
+  checksum: 10c0/152e48ce84bbb2f70587a1b1f1a1ad8687ab6195c84391a408979d2108597a7014cf3b7c781066ccdf73e627c719fac672ee55b31f0907bccf4f7cfdec4316b0
   languageName: node
   linkType: hard
 
@@ -1294,7 +1294,7 @@ __metadata:
     "@d-zero/postcss-config": "npm:5.0.0-beta.18"
     "@d-zero/prettier-config": "npm:5.0.0-alpha.76"
     "@d-zero/pug-lint-config": "npm:5.0.0-alpha.76"
-    "@d-zero/stylelint-config": "npm:5.0.0-alpha.75"
+    "@d-zero/stylelint-config": "npm:5.0.0-alpha.76"
     "@d-zero/textlint-config": "npm:5.0.0-alpha.75"
     "@d-zero/tsconfig": "npm:0.5.0"
     "@kamado-io/page-compiler": "npm:0.1.0-alpha.6"
@@ -1343,11 +1343,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/stylelint-config@npm:5.0.0-alpha.75":
-  version: 5.0.0-alpha.75
-  resolution: "@d-zero/stylelint-config@npm:5.0.0-alpha.75"
+"@d-zero/stylelint-config@npm:5.0.0-alpha.76":
+  version: 5.0.0-alpha.76
+  resolution: "@d-zero/stylelint-config@npm:5.0.0-alpha.76"
   dependencies:
-    "@d-zero/stylelint-rules": "npm:5.0.0-alpha.75"
+    "@d-zero/stylelint-rules": "npm:5.0.0-alpha.76"
     postcss-scss: "npm:4.0.9"
     stylelint: "npm:16.26.1"
     stylelint-config-recess-order: "npm:7.4.0"
@@ -1355,20 +1355,20 @@ __metadata:
     stylelint-order: "npm:7.0.0"
     stylelint-scss: "npm:6.13.0"
     stylelint-use-logical: "npm:2.1.2"
-  checksum: 10c0/67a30cd9e4dc63cbcc9e6037eb76752bb5ef6075a144f73d347d41b53a5afdeff85945161c341f2698aa34bb039d2e14ee243a789150d16f8d26499dc0a6b6bd
+  checksum: 10c0/fae227228958b475abe75c4948490f9c2b6f952cbacef24c68d10d2594f1d0174da42aca31f75f1f81556ada86b5e427e8b3ac86f5367c372204c80902785fe9
   languageName: node
   linkType: hard
 
-"@d-zero/stylelint-rules@npm:5.0.0-alpha.75":
-  version: 5.0.0-alpha.75
-  resolution: "@d-zero/stylelint-rules@npm:5.0.0-alpha.75"
+"@d-zero/stylelint-rules@npm:5.0.0-alpha.76":
+  version: 5.0.0-alpha.76
+  resolution: "@d-zero/stylelint-rules@npm:5.0.0-alpha.76"
   dependencies:
-    "@d-zero/csstree-scss-syntax": "npm:5.0.0-alpha.75"
+    "@d-zero/csstree-scss-syntax": "npm:5.0.0-alpha.76"
     css-tree: "npm:3.1.0"
     postcss-selector-parser: "npm:7.1.1"
     postcss-value-parser: "npm:4.2.0"
     stylelint: "npm:16.26.1"
-  checksum: 10c0/5a8d1f8273a5c69727f868565db7685a790d6ec8b31eec08d9406129410546156f5547f9994fe9b1c5fc518e8b5deaea94c9f2d6b9f0c2de8157d62b4172c3e2
+  checksum: 10c0/b8d0cab48b78f1a46fdd41cc0a4232b7b594b8c6cd1cb2a467f27f6b9f111a78c3a38f2a5b96c807afb4acd6fe1c67e34f0e641276a73b7efececeee00f9710c
   languageName: node
   linkType: hard
 
