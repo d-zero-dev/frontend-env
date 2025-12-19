@@ -1308,7 +1308,7 @@ __metadata:
     dotenv: "npm:17.2.3"
     husky: "npm:9.1.7"
     invokers-polyfill: "npm:0.5.7"
-    kamado: "npm:0.1.0-alpha.6"
+    kamado: "npm:0.1.0-alpha.7"
     kiso.css: "npm:1.2.2"
     npm-run-all2: "npm:8.0.4"
     tslib: "npm:2.8.1"
@@ -10936,6 +10936,32 @@ __metadata:
   bin:
     kamado: dist/index.js
   checksum: 10c0/ced7d0205de5f93626122e4b69ecd51b7103f69fa8ac17f2917f9ce0224976548baf197e0e765ecf6711a2f27a4c54cab9aa0dee0bf1f0c7c7c57e7685f3d89a
+  languageName: node
+  linkType: hard
+
+"kamado@npm:0.1.0-alpha.7":
+  version: 0.1.0-alpha.7
+  resolution: "kamado@npm:0.1.0-alpha.7"
+  dependencies:
+    "@d-zero/dealer": "npm:1.5.2"
+    "@d-zero/roar": "npm:0.2.0"
+    "@d-zero/shared": "npm:0.17.0"
+    "@hono/node-server": "npm:1.19.7"
+    ansi-colors: "npm:4.1.3"
+    character-entities: "npm:2.0.2"
+    cli-meow-help: "npm:4.0.0"
+    cosmiconfig: "npm:9.0.0"
+    dayjs: "npm:1.11.19"
+    fast-glob: "npm:3.3.3"
+    gray-matter: "npm:4.0.3"
+    hono: "npm:4.11.1"
+    jsdom: "npm:27.3.0"
+    meow: "npm:14.0.0"
+    open: "npm:11.0.0"
+    yaml: "npm:2.8.2"
+  bin:
+    kamado: dist/index.js
+  checksum: 10c0/b18fd01f112073368eaea976d05cc9c62fad8a5a9e1c5ddbb4d2f0ee05c1e5bd0e1660081ca61677c7973fbbdaeae8884fec812c64425ff41bc1e51e61a639c1
   languageName: node
   linkType: hard
 
