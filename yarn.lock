@@ -1261,12 +1261,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/pug-lint-config@npm:5.0.0-alpha.75":
-  version: 5.0.0-alpha.75
-  resolution: "@d-zero/pug-lint-config@npm:5.0.0-alpha.75"
+"@d-zero/pug-lint-config@npm:5.0.0-alpha.76":
+  version: 5.0.0-alpha.76
+  resolution: "@d-zero/pug-lint-config@npm:5.0.0-alpha.76"
   dependencies:
     pug-lint: "npm:2.7.0"
-  checksum: 10c0/d95d75f0d94da0f12b59595c03f932ad0e85bdbebd7fe3ab398697b0e631fb287627c537a632b2029b3f630dd4b7866f022fd3b943aefb320df4e7f42f07ee87
+  checksum: 10c0/4352c4b884e63820ea85b8d32790a5b97facb67698aef4619514aac8a6168c16aebcff773175f09840bfbe4e8c69a2f705662c8ba4eee39f7280e4600d986884
   languageName: node
   linkType: hard
 
@@ -1293,7 +1293,7 @@ __metadata:
     "@d-zero/markuplint-config": "npm:5.0.0-alpha.76"
     "@d-zero/postcss-config": "npm:5.0.0-beta.18"
     "@d-zero/prettier-config": "npm:5.0.0-alpha.76"
-    "@d-zero/pug-lint-config": "npm:5.0.0-alpha.75"
+    "@d-zero/pug-lint-config": "npm:5.0.0-alpha.76"
     "@d-zero/stylelint-config": "npm:5.0.0-alpha.75"
     "@d-zero/textlint-config": "npm:5.0.0-alpha.75"
     "@d-zero/tsconfig": "npm:0.5.0"

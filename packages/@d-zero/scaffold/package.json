@@ -50,7 +50,7 @@
 		"@d-zero/markuplint-config": "5.0.0-alpha.76",
 		"@d-zero/postcss-config": "5.0.0-beta.18",
 		"@d-zero/prettier-config": "5.0.0-alpha.76",
-		"@d-zero/pug-lint-config": "5.0.0-alpha.75",
+		"@d-zero/pug-lint-config": "5.0.0-alpha.76",
 		"@d-zero/stylelint-config": "5.0.0-alpha.75",
 		"@d-zero/textlint-config": "5.0.0-alpha.75",
 		"@d-zero/tsconfig": "0.5.0",
