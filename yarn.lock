@@ -1201,7 +1201,7 @@ __metadata:
     "@d-zero/cspell-config": "npm:5.0.0-alpha.76"
     "@d-zero/eslint-config": "npm:5.0.0-alpha.76"
     "@d-zero/lint-staged-config": "npm:5.0.0-alpha.76"
-    "@d-zero/prettier-config": "npm:5.0.0-alpha.75"
+    "@d-zero/prettier-config": "npm:5.0.0-alpha.76"
     "@d-zero/textlint-config": "npm:5.0.0-alpha.75"
     "@d-zero/tsconfig": "npm:0.5.0"
     husky: "npm:9.1.7"
@@ -1248,16 +1248,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@d-zero/prettier-config@npm:5.0.0-alpha.75":
-  version: 5.0.0-alpha.75
-  resolution: "@d-zero/prettier-config@npm:5.0.0-alpha.75"
+"@d-zero/prettier-config@npm:5.0.0-alpha.76":
+  version: 5.0.0-alpha.76
+  resolution: "@d-zero/prettier-config@npm:5.0.0-alpha.76"
   dependencies:
     "@prettier/plugin-pug": "npm:>=3.0.0"
     prettier: "npm:3.7.4"
   dependenciesMeta:
     "@prettier/plugin-pug":
       optional: true
-  checksum: 10c0/c46981b3f832d7294142d67a47e8b7bf5f452b418356610ce01015f4cc9bb1e65b6d6ef322547e592685b810a088f70ab72f7bde3022e3f72e94e288d261559e
+  checksum: 10c0/df3f71fb1a9b485b1751875cf48966dadb63c57a417214220c89397209af2cb492af76932d07219a0513b343ed557d7740828da557098a0ff4c46d7cafef4e3f
   languageName: node
   linkType: hard
 
@@ -1292,7 +1292,7 @@ __metadata:
     "@d-zero/lint-staged-config": "npm:5.0.0-alpha.76"
     "@d-zero/markuplint-config": "npm:5.0.0-alpha.76"
     "@d-zero/postcss-config": "npm:5.0.0-beta.18"
-    "@d-zero/prettier-config": "npm:5.0.0-alpha.75"
+    "@d-zero/prettier-config": "npm:5.0.0-alpha.76"
     "@d-zero/pug-lint-config": "npm:5.0.0-alpha.75"
     "@d-zero/stylelint-config": "npm:5.0.0-alpha.75"
     "@d-zero/textlint-config": "npm:5.0.0-alpha.75"
