@@ -1299,7 +1299,7 @@ __metadata:
     "@d-zero/tsconfig": "npm:0.5.0"
     "@kamado-io/page-compiler": "npm:0.1.0-alpha.6"
     "@kamado-io/pug-compiler": "npm:0.1.0-alpha.6"
-    "@kamado-io/script-compiler": "npm:0.1.0-alpha.6"
+    "@kamado-io/script-compiler": "npm:0.1.0-alpha.7"
     "@kamado-io/style-compiler": "npm:0.1.0-alpha.6"
     "@prettier/plugin-pug": "npm:3.4.2"
     "@types/node": "npm:24.10.4"
@@ -2362,13 +2362,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kamado-io/script-compiler@npm:0.1.0-alpha.6":
-  version: 0.1.0-alpha.6
-  resolution: "@kamado-io/script-compiler@npm:0.1.0-alpha.6"
+"@kamado-io/script-compiler@npm:0.1.0-alpha.7":
+  version: 0.1.0-alpha.7
+  resolution: "@kamado-io/script-compiler@npm:0.1.0-alpha.7"
   dependencies:
     esbuild: "npm:0.27.1"
-    kamado: "npm:0.1.0-alpha.6"
-  checksum: 10c0/aa498907881a9a6aee6edccbd74f5cc2563ed66f08b875ec2fcd4abcd3143759a4448430f26296dcf7b40b0e78e68906853bf4f6a298d9f6096a2384f9d4ebf0
+    kamado: "npm:0.1.0-alpha.7"
+  checksum: 10c0/fd9d6619a1efaed1fcde90aa9f31d394bddd0644ff788fa660dba7c7393792947e721083cdf8aa4395140cc2f70d19dfbce5484b930bd0985e37282179d83e95
   languageName: node
   linkType: hard
 
@@ -10936,6 +10936,32 @@ __metadata:
   bin:
     kamado: dist/index.js
   checksum: 10c0/ced7d0205de5f93626122e4b69ecd51b7103f69fa8ac17f2917f9ce0224976548baf197e0e765ecf6711a2f27a4c54cab9aa0dee0bf1f0c7c7c57e7685f3d89a
+  languageName: node
+  linkType: hard
+
+"kamado@npm:0.1.0-alpha.7":
+  version: 0.1.0-alpha.7
+  resolution: "kamado@npm:0.1.0-alpha.7"
+  dependencies:
+    "@d-zero/dealer": "npm:1.5.2"
+    "@d-zero/roar": "npm:0.2.0"
+    "@d-zero/shared": "npm:0.17.0"
+    "@hono/node-server": "npm:1.19.7"
+    ansi-colors: "npm:4.1.3"
+    character-entities: "npm:2.0.2"
+    cli-meow-help: "npm:4.0.0"
+    cosmiconfig: "npm:9.0.0"
+    dayjs: "npm:1.11.19"
+    fast-glob: "npm:3.3.3"
+    gray-matter: "npm:4.0.3"
+    hono: "npm:4.11.1"
+    jsdom: "npm:27.3.0"
+    meow: "npm:14.0.0"
+    open: "npm:11.0.0"
+    yaml: "npm:2.8.2"
+  bin:
+    kamado: dist/index.js
+  checksum: 10c0/b18fd01f112073368eaea976d05cc9c62fad8a5a9e1c5ddbb4d2f0ee05c1e5bd0e1660081ca61677c7973fbbdaeae8884fec812c64425ff41bc1e51e61a639c1
   languageName: node
   linkType: hard
 
