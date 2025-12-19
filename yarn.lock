@@ -1298,7 +1298,7 @@ __metadata:
     "@d-zero/textlint-config": "npm:5.0.0-alpha.75"
     "@d-zero/tsconfig": "npm:0.5.0"
     "@kamado-io/page-compiler": "npm:0.1.0-alpha.6"
-    "@kamado-io/pug-compiler": "npm:0.1.0-alpha.6"
+    "@kamado-io/pug-compiler": "npm:0.1.0-alpha.7"
     "@kamado-io/script-compiler": "npm:0.1.0-alpha.6"
     "@kamado-io/style-compiler": "npm:0.1.0-alpha.6"
     "@prettier/plugin-pug": "npm:3.4.2"
@@ -2351,14 +2351,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kamado-io/pug-compiler@npm:0.1.0-alpha.6":
-  version: 0.1.0-alpha.6
-  resolution: "@kamado-io/pug-compiler@npm:0.1.0-alpha.6"
+"@kamado-io/pug-compiler@npm:0.1.0-alpha.7":
+  version: 0.1.0-alpha.7
+  resolution: "@kamado-io/pug-compiler@npm:0.1.0-alpha.7"
   dependencies:
     pug: "npm:3.0.3"
   peerDependencies:
     "@kamado-io/page-compiler": 0.1.0-alpha.5
-  checksum: 10c0/a17fa74943c93f7792c8299b1f46abf872698e5824c4669188705fa785131b46ef206989fb7c6e7c0c25b1563d896cce2da7796c8772be185f1f66363b4126e1
+  checksum: 10c0/4b479d740c997932729bb80d3ac64feb47c4b24eae6580e542405e959c159c83f7da2c2551e7996ccb30ea83625e7f1702b03b21a0a0c8a7f564b95f449026bd
   languageName: node
   linkType: hard
 

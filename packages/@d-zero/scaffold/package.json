@@ -55,7 +55,7 @@
 		"@d-zero/textlint-config": "5.0.0-alpha.75",
 		"@d-zero/tsconfig": "0.5.0",
 		"@kamado-io/page-compiler": "0.1.0-alpha.6",
-		"@kamado-io/pug-compiler": "0.1.0-alpha.6",
+		"@kamado-io/pug-compiler": "0.1.0-alpha.7",
 		"@kamado-io/script-compiler": "0.1.0-alpha.6",
 		"@kamado-io/style-compiler": "0.1.0-alpha.6",
 		"@prettier/plugin-pug": "3.4.2",
