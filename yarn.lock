@@ -1202,7 +1202,7 @@ __metadata:
     "@d-zero/eslint-config": "npm:5.0.0-alpha.76"
     "@d-zero/lint-staged-config": "npm:5.0.0-alpha.76"
     "@d-zero/prettier-config": "npm:5.0.0-alpha.76"
-    "@d-zero/textlint-config": "npm:5.0.0-alpha.75"
+    "@d-zero/textlint-config": "npm:5.0.0-alpha.76"
     "@d-zero/tsconfig": "npm:0.5.0"
     husky: "npm:9.1.7"
     lerna: "npm:9.0.3"
@@ -1295,7 +1295,7 @@ __metadata:
     "@d-zero/prettier-config": "npm:5.0.0-alpha.76"
     "@d-zero/pug-lint-config": "npm:5.0.0-alpha.76"
     "@d-zero/stylelint-config": "npm:5.0.0-alpha.76"
-    "@d-zero/textlint-config": "npm:5.0.0-alpha.75"
+    "@d-zero/textlint-config": "npm:5.0.0-alpha.76"
     "@d-zero/tsconfig": "npm:0.5.0"
     "@kamado-io/page-compiler": "npm:0.1.0-alpha.6"
     "@kamado-io/pug-compiler": "npm:0.1.0-alpha.6"
@@ -1372,16 +1372,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/textlint-config@npm:5.0.0-alpha.75":
-  version: 5.0.0-alpha.75
-  resolution: "@d-zero/textlint-config@npm:5.0.0-alpha.75"
+"@d-zero/textlint-config@npm:5.0.0-alpha.76":
+  version: 5.0.0-alpha.76
+  resolution: "@d-zero/textlint-config@npm:5.0.0-alpha.76"
   dependencies:
     textlint: "npm:15.5.0"
     textlint-plugin-html: "npm:1.0.1"
     textlint-rule-preset-ja-spacing: "npm:2.4.3"
     textlint-rule-preset-japanese: "npm:10.0.4"
     textlint-rule-preset-jtf-style: "npm:3.0.3"
-  checksum: 10c0/da03e22a4ecdf5e3059b0ae8b7a3eb23e9705943ea4594a8a7ba71ae737e5da4019c016d1a57da4acf0f51829800450240f8a08c199e28bc839c74f6d92d76f6
+  checksum: 10c0/76efd67ebe6d472733e9d9c74493e3310ea3d7f74739ba37444b0e0d96bb457e171a89c956c077c3b69af06eb24b78d1a5c1ae756baf7db0a772efafff210b4c
   languageName: node
   linkType: hard
 
