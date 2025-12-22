@@ -20,8 +20,9 @@ export default {
 		open: true,
 		port: 8000,
 	},
-	compilers: {
-		page: pageCompiler({
+	compilers: [
+		pageCompiler({
+			files: '**/*.{html,pug}',
 			globalData: {
 				dir: path.resolve(import.meta.dirname, '__assets', '_libs', 'data'),
 			},
@@ -32,16 +33,16 @@ export default {
 				pathAlias: path.resolve(import.meta.dirname, '__assets', '_libs'),
 			}),
 		}),
-		style: styleCompiler({
+		styleCompiler({
 			alias: {
 				'@': path.resolve(import.meta.dirname, '__assets', '_libs'),
 			},
 		}),
-		script: scriptCompiler({
+		scriptCompiler({
 			minifier: true,
 			alias: {
 				'@': path.resolve(import.meta.dirname, '__assets', '_libs'),
 			},
 		}),
-	},
+	],
 } as const satisfies UserConfig;
