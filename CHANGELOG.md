@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.19](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.18...v5.0.0-beta.19) (2025-12-22)
+
+### Features
+
+- **scaffold:** upgrade kamado to v1.0.0-alpha.1 and update config ([14186ad](https://github.com/d-zero-dev/frontend-env/commit/14186ad6fe3842950a31e005dc65649f5e09fae6))
+
 # [5.0.0-beta.18](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.17...v5.0.0-beta.18) (2025-11-25)
 
 ### Bug Fixes
