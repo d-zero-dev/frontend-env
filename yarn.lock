@@ -1300,7 +1300,7 @@ __metadata:
     husky: "npm:9.1.7"
     invokers-polyfill: "npm:0.5.7"
     kamado: "npm:1.0.0-alpha.1"
-    kiso.css: "npm:1.2.2"
+    kiso.css: "npm:1.2.3"
     npm-run-all2: "npm:8.0.4"
     tslib: "npm:2.8.1"
     typescript: "npm:5.9.3"
@@ -11214,10 +11214,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kiso.css@npm:1.2.2":
-  version: 1.2.2
-  resolution: "kiso.css@npm:1.2.2"
-  checksum: 10c0/bfa96c74b3af8efa4401768321d8dae83c9594e795544d8dec20f761d75a804e927ebc7d4554bb9b9dbd2d2d55e6838390924111f9c6853e4160d414372ec045
+"kiso.css@npm:1.2.3":
+  version: 1.2.3
+  resolution: "kiso.css@npm:1.2.3"
+  checksum: 10c0/1153bc45f06db26df2bb619ea1f8984813b580e72d649ab6a3314f8ba860600611fbab1be5a441e5919bf0fa4d758524d5e1a134ea3bd8b05f40edef51c61593
   languageName: node
   linkType: hard
 
