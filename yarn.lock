@@ -144,10 +144,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@burger-editor/css@npm:4.0.0-alpha.44":
-  version: 4.0.0-alpha.44
-  resolution: "@burger-editor/css@npm:4.0.0-alpha.44"
-  checksum: 10c0/b3f669b7839b0a07655bd624640196744975acc945a470dec29b6e23f36a75eed499efe428decdd8533a40e650dd67afa75faa7577ba1a0075acee63a84f661e
+"@burger-editor/css@npm:4.0.0-alpha.45":
+  version: 4.0.0-alpha.45
+  resolution: "@burger-editor/css@npm:4.0.0-alpha.45"
+  checksum: 10c0/2c35400c5ff410bb178d807c526b71a7846faf4b2b71631459f3503c90a15d23895840f1539fee863c609db98aa963fb46f5cdb512cdc4cd48d355f22777df38
   languageName: node
   linkType: hard
 
@@ -1275,7 +1275,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@d-zero/scaffold@workspace:packages/@d-zero/scaffold"
   dependencies:
-    "@burger-editor/css": "npm:4.0.0-alpha.44"
+    "@burger-editor/css": "npm:4.0.0-alpha.45"
     "@burger-editor/local": "npm:4.0.0-alpha.44"
     "@d-zero/cspell-config": "npm:5.0.0-alpha.76"
     "@d-zero/custom-components": "npm:5.0.0-beta.19"
