@@ -186,13 +186,4 @@ function main() {
 	process.stdout.write(stdout.join('\n'));
 }
 
-// CLIとして直接実行された場合のみmainを実行
-const isCli =
-	process.argv[1] &&
-	(process.argv[1].endsWith('check-frontend-env') ||
-		process.argv[1].endsWith('index.js') ||
-		import.meta.url === `file://${process.argv[1]}`);
-
-if (isCli) {
-	main();
-}
+main();
