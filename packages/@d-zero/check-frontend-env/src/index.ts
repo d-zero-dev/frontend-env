@@ -161,34 +161,29 @@ function main() {
 		volta: checkVolta(),
 	};
 
-	console.log('環境チェック結果:');
-	console.log('-------------------------');
-	console.log('Husky設定:');
-	console.log(`  v8 (.huskyrc): ${info.huskyConfig.v8Present ? '✅' : '❌'}`); // cspell:disable-line
-	console.log(
+	const stdout: string[] = [
+		'環境チェック結果:',
+		'-------------------------',
+		'Husky設定:',
+		`  v8 (.huskyrc): ${info.huskyConfig.v8Present ? '✅' : '❌'}`, // cspell:disable-line
 		`  v9 (.config/husky/init.sh): ${info.huskyConfig.v9Present ? '✅' : '❌'}`,
-	);
-	if (info.huskyConfig.paths.length > 0) {
-		console.log('  発見場所:');
-		for (const p of info.huskyConfig.paths) console.log(`    - ${p}`);
-	}
+		...(info.huskyConfig.paths.length > 0
+			? ['  発見場所:', ...info.huskyConfig.paths.map((p) => `    - ${p}`)]
+			: []),
+		'',
+		'各バージョン:',
+		`  Node.js: ${info.versions.node}`,
+		`  npm: ${info.versions.npm}`,
+		...(info.versions.yarn ? [`  yarn: ${info.versions.yarn}`] : []),
+		'',
+		'Volta:',
+		`  インストール: ${info.volta.present ? '✅' : '❌'}`,
+		...(info.volta.version ? [`  バージョン: ${info.volta.version}`] : []),
+		...(info.volta.path ? [`  実行ファイル: ${info.volta.path}`] : []),
+		`  ホームディレクトリ: ${info.volta.homeDir}`,
+	];
 
-	console.log('\n各バージョン:');
-	console.log(`  Node.js: ${info.versions.node}`);
-	console.log(`  npm: ${info.versions.npm}`);
-	if (info.versions.yarn) {
-		console.log(`  yarn: ${info.versions.yarn}`);
-	}
-
-	console.log('\nVolta:');
-	console.log(`  インストール: ${info.volta.present ? '✅' : '❌'}`);
-	if (info.volta.version) {
-		console.log(`  バージョン: ${info.volta.version}`);
-	}
-	if (info.volta.path) {
-		console.log(`  実行ファイル: ${info.volta.path}`);
-	}
-	console.log(`  ホームディレクトリ: ${info.volta.homeDir}`);
+	process.stdout.write(stdout.join('\n'));
 }
 
 // テスト用にエクスポート
