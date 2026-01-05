@@ -1,5 +1,5 @@
 {
-	"name": "@d-zero/fontend-env",
+	"name": "@d-zero/frontend-env",
 	"description": "D-ZERO Frontend Developer's Environment",
 	"repository": "https://github.com/d-zero-dev/frontend-env.git",
 	"author": "D-ZERO Co., Ltd.",
@@ -7,7 +7,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"build": "lerna run build --scope=@d-zero/builder --scope=@d-zero/custom-components",
+		"build": "lerna run build --scope=@d-zero/builder --scope=@d-zero/check-frontend-env --scope=@d-zero/custom-components",
 		"dev": "lerna run dev",
 		"test": "vitest run --test-timeout 60000",
 		"lint": "run-s lint:eslint lint:prettier lint:textlint lint:cspell",
