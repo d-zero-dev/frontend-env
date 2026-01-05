@@ -3,5 +3,6 @@
 	"compilerOptions": {
 		"jsx": "preserve"
 	},
+	"include": ["src/**/*", ".storybook/**/*"],
 	"exclude": ["node_modules", "dist", "storybook-static"]
 }
