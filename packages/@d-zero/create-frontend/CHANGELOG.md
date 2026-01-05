@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.19...v5.0.0) (2026-01-05)
+
+**Note:** Version bump only for package @d-zero/create-frontend
+
 # [5.0.0-beta.19](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.18...v5.0.0-beta.19) (2025-12-22)
 
 **Note:** Version bump only for package @d-zero/create-frontend
