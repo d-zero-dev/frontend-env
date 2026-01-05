@@ -1,0 +1,24 @@
+@import 'kiso.css' layer(reset);
+@import '@/style/base/root.css' layer(base);
+@import '@/style/general/all.css' layer(general);
+@import '@/style/general/body.css' layer(general);
+@import '@/style/general/button.css' layer(general);
+@import '@/style/general/img.css' layer(general);
+@import '@/component/c-page-home.css' layer(component);
+@import '@/component/c-page-sub.css' layer(component);
+@import '@/component/c-header.css' layer(component);
+@import '@/component/c-footer.css' layer(component);
+@import '@/component/c-nav-global.css' layer(component);
+@import '@/component/c-nav-sitemap.css' layer(component);
+@import '@/component/c-nav-breadcrumb.css' layer(component);
+@import '@/component/c-title-page.css' layer(component);
+@import '@/component/c-pagination.css' layer(component);
+@import '@/component/c-card-list.css' layer(component);
+@import '@/component/c-card.css' layer(component);
+@import '@/component/c-media-list.css' layer(component);
+@import '@/component/c-media.css' layer(component);
+@import '@/component/c-content-index.css' layer(component);
+@import '@burger-editor/css' layer(main-base);
+@import '@/component/c-content-main.css' layer(main);
+
+@layer reset, base, general, component, main-base, main;

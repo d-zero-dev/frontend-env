@@ -1,0 +1,100 @@
+.c-pagination {
+	clear: both;
+	display: flex;
+	justify-content: center;
+	margin-block-start: 1rem;
+	overflow: hidden;
+	text-align: center;
+
+	@media (--xs) {
+		justify-content: space-between;
+	}
+
+	a {
+		color: currentcolor;
+		text-decoration: none;
+		background: none;
+	}
+}
+
+.c-pagination__prev,
+.c-pagination__next {
+	a {
+		position: relative;
+		display: flex;
+		align-items: center;
+		padding-inline: 1rem;
+		border: 1px solid var(--border-color);
+
+		&[data-disabled='true'] {
+			pointer-events: none;
+			opacity: 0.3;
+		}
+	}
+}
+
+.c-pagination__prev {
+	order: 1;
+
+	::before {
+		content: '<';
+	}
+}
+
+.c-pagination__next {
+	order: 3;
+
+	::after {
+		content: '＞';
+	}
+}
+
+.c-pagination__numbers {
+	display: flex;
+	order: 2;
+	padding: 0;
+	margin-block: 0;
+	margin-inline: 2rem;
+	font-weight: bold;
+	list-style: none;
+
+	@media (--xs) {
+		display: none;
+	}
+}
+
+.c-pagination__number {
+	display: block;
+	margin-block: 0;
+	margin-inline: 0.5rem;
+	list-style: none;
+
+	&:hover {
+		padding-block-end: 2px;
+		border-block-end: 2px solid var(--border-color);
+	}
+
+	a {
+		display: block;
+		padding-block: 0;
+		padding-inline: 0.3rem;
+		text-align: center;
+
+		&::after {
+			display: none;
+		}
+	}
+}
+
+/* 🐲 baserCMSの仕様上 マルチクラスでしかカレントを定義できない */
+
+/* stylelint-disable selector-class-pattern */
+.c-pagination__number--current {
+	border-block-end: 2px solid var(--border-color);
+
+	&:hover {
+		padding-block-end: 0;
+	}
+}
+
+/* stylelint-enable selector-class-pattern */

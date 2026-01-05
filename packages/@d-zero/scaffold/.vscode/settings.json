@@ -7,11 +7,9 @@
 	"git.ignoreLimitWarning": true,
 	"html.format.enable": true,
 	"css.validate": false,
-	"scss.validate": false,
-	"stylelint.validate": ["css", "scss"],
+	"stylelint.validate": ["css"],
 	"files.associations": {
 		"*.mdc": "markdown",
-		".clinerules": "markdown",
 		".stylelintrc": "json",
 		".markuplintrc": "json",
 		".pug-lintrc": "json"
@@ -25,7 +23,16 @@
 	"[html]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
+	"[css]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[pug]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
 	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[markdown]": {

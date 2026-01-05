@@ -1,14 +1,16 @@
-import { spawn } from 'node:child_process';
 import fs from 'node:fs';
+import fsp from 'node:fs/promises';
 import path from 'node:path';
 import { argv } from 'node:process';
 
-import { globSync } from 'glob';
 import ignore from 'ignore';
 import meow from 'meow';
 
+import { command } from './command.js';
+import { copyLibraries } from './libraries.js';
 import { t } from './locale.js';
 import { readFileSafe } from './read-file-safe.js';
+import { voltaInstallNode } from './volta-install-node.js';
 
 const cli = meow(
 	`
@@ -35,7 +37,7 @@ const cli = meow(
 			type: {
 				type: 'string',
 				shortFlag: 't',
-				default: 'burger',
+				default: 'static',
 			},
 			dir: {
 				type: 'string',
@@ -55,15 +57,41 @@ const cli = meow(
 );
 
 /**
+ * Recursively get all files in a directory
+ * @param {string} dir - Directory to search
+ * @param {string} rootDir - Root directory for relative paths
+ * @returns {Promise<string[]>} Array of relative file paths
+ */
+async function getAllFiles(dir, rootDir) {
+	const files = [];
+	const entries = await fsp.readdir(dir, { withFileTypes: true });
+
+	for (const entry of entries) {
+		const fullPath = path.join(dir, entry.name);
+		const relativePath = path.relative(rootDir, fullPath);
+
+		if (entry.isDirectory()) {
+			const subFiles = await getAllFiles(fullPath, rootDir);
+			files.push(...subFiles);
+		} else {
+			files.push(relativePath);
+		}
+	}
+
+	return files;
+}
+
+/**
  * @param {import('plop').NodePlopAPI} plop
  */
-export default function (plop) {
+export default async function (plop) {
 	const scaffoldDir = path.normalize(
 		path.dirname(import.meta.resolve('@d-zero/scaffold').replace('file:', '')),
 	);
 
-	const gitignore = readFileSafe(path.resolve(scaffoldDir, '.gitignore'));
-	const ignoreFiles = gitignore?.split('\n').filter(Boolean) ?? [];
+	const gitignoreOriginContent =
+		readFileSafe(path.resolve(scaffoldDir, '.gitignore')) ?? '';
+	const ignoreFiles = gitignoreOriginContent?.split('\n').filter(Boolean) ?? [];
 	const hasArgs = argv.length > 2;
 	const interactive = !hasArgs;
 
@@ -78,49 +106,35 @@ export default function (plop) {
 			'*.test.*',
 		])
 		.add(
-			// BurgerEditor
-			cli.flags.type === 'burger' ? [] : ['**/bge-*', '**/bge_*'],
+			// BurgerEditor for baserCMS
+			cli.flags.type.startsWith('basercms') ? [] : ['**/bge_style.css'],
 		)
 		.add(
 			// static
 			cli.flags.type === 'static' ? ['**/__tmpl/**/*'] : [],
 		);
 
-	const scaffoldFiles = ig.filter(
-		globSync('**/*', {
-			cwd: scaffoldDir,
-			nodir: true,
-			dot: true,
-		}),
-	);
+	const scaffoldFiles = ig.filter(await getAllFiles(scaffoldDir, scaffoldDir)).toSorted();
 
-	plop.setActionType('Install dependencies', (answers) => {
+	plop.setActionType('Install dependencies', async (answers) => {
 		const { dest, doInstall } = answerToConfig(answers);
-
-		const { promise, resolve, reject } = Promise.withResolvers();
-
 		if (doInstall) {
-			const child = spawn('yarn', ['install'], {
-				cwd: path.resolve(process.cwd(), dest),
-				stdio: 'inherit',
-			});
+			await installDependencies(dest);
+			return 'success';
+		}
+		return 'skipped';
+	});
 
-			child.on('exit', (code) => {
-				if (code === 0) {
-					resolve(': success');
-				} else {
-					reject(new Error('Failed to install dependencies'));
-				}
-			});
-
-			process.on('SIGINT', () => {
-				child.kill('SIGINT');
-			});
-		} else {
-			resolve(': skipped');
+	plop.setActionType('Finalize', async (answers) => {
+		const { dest, type, doInstall } = answerToConfig(answers);
+		if (doInstall) {
+			rewriteDotGitignore(dest, gitignoreOriginContent);
 		}
 
-		return promise;
+		if (type.startsWith('basercms')) {
+			await copyLibraries(type, dest);
+		}
+		return 'finalized';
 	});
 
 	plop.setGenerator('basic', {
@@ -132,13 +146,12 @@ export default function (plop) {
 				message: t`What's the type of project?`,
 				choices: [
 					{
-						name: 'Static',
+						name: 'Static Site (with BurgerEditor Local App)',
 						value: 'static',
 					},
-					'CMS (WordPress etc.)',
 					{
-						name: 'CMS (baserCMS with BurgerEditor)',
-						value: 'burger',
+						name: 'baserCMS v4 (with BurgerEditor v2)',
+						value: 'basercms4',
 					},
 				],
 				default: cli.flags.type,
@@ -195,12 +208,25 @@ export default function (plop) {
 										delete pkg.license;
 										delete pkg.publishConfig;
 										delete pkg.files;
+										if (config.type.startsWith('basercms')) {
+											delete pkg.scripts.bge;
+											delete pkg.devDependencies['@burger-editor/local'];
+											pkg.dependencies['@burger-editor/css'] = '2';
+											pkg.dependencies['jquery'] = 'latest';
+											pkg.dependencies['jquery-colorbox'] = '1.5';
+										}
 										content = JSON.stringify(pkg, null, '\t');
 										break;
 									}
-									case '__assets/_libs/data/blocks.cjs': {
-										if (config.type === 'burger') {
-											content = content.replace("blocks.html'", "bge-blocks.html'");
+									case '__assets/_libs/data/blocks.js': {
+										if (config.type === 'basercms4') {
+											content = content.replace('bge-blocks.html', 'bge-blocks-v2.html');
+										}
+										break;
+									}
+									case '__assets/_libs/mixin/meta.pug': {
+										if (!config.type.startsWith('basercms')) {
+											content = content.replace('\ninclude meta-basercms.pug', '');
 										}
 										break;
 									}
@@ -221,6 +247,9 @@ export default function (plop) {
 				{
 					type: 'Install dependencies',
 				},
+				{
+					type: 'Finalize',
+				},
 			];
 		},
 	});
@@ -236,4 +265,35 @@ function answerToConfig(answers) {
 	const doInstall = answers['__d-zero_scaffold_yarn_install__'] ?? cli.flags.install;
 
 	return { type, dest, doInstall };
+}
+
+/**
+ *
+ * @param dest
+ */
+async function installDependencies(dest) {
+	await voltaInstallNode();
+	await command('yarn', ['install'], {
+		cwd: path.resolve(process.cwd(), dest),
+		stdio: 'inherit',
+	}).catch(() => {
+		throw new Error('Failed to install dependencies');
+	});
+}
+
+/**
+ *
+ * @param {string} dest
+ * @param {string} gitignoreOriginContent
+ */
+function rewriteDotGitignore(dest, gitignoreOriginContent) {
+	let gitignore = gitignoreOriginContent;
+
+	// Remove after `# Document Root` section
+	const documentRootSection = gitignore.indexOf('\n# Document Root\n');
+	if (documentRootSection !== -1) {
+		gitignore = gitignore.slice(0, documentRootSection);
+	}
+
+	return fs.writeFileSync(path.resolve(dest, '.gitignore'), gitignore);
 }

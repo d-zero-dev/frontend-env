@@ -1,0 +1,10 @@
+/* stylelint-disable selector-max-universal -- this is universal selector rules */
+* {
+	&,
+	&::before,
+	&::after {
+		box-sizing: border-box;
+	}
+}
+
+/* stylelint-enable selector-max-universal */

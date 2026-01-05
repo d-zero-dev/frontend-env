@@ -5,16 +5,13 @@
 	"repository": "https://github.com/d-zero-dev/frontend-env.git",
 	"author": "D-ZERO Co., Ltd.",
 	"license": "MIT",
-	"private": false,
 	"publishConfig": {
 		"access": "public"
 	},
 	"type": "module",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"bin": {
-		"check-frontend-env": "./dist/index.js"
-	},
+	"bin": "./dist/index.js",
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
@@ -30,7 +27,6 @@
 	"files": [
 		"dist"
 	],
-	"dependencies": {},
 	"devDependencies": {
 		"@types/node": "^20.11.24",
 		"typescript": "^5.3.3",

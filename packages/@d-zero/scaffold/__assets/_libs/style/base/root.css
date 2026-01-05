@@ -1,0 +1,83 @@
+:root {
+	--lightest-color: #fff;
+	--darkest-color: #333;
+
+	/* 配色 */
+	--base-font-color: var(--darkest-color);
+	--border-color: var(--darkest-color);
+
+	/* タイポグラフィ */
+	--base-font-size: 16px;
+	--base-line-height: 1.8;
+
+	/* フォントファミリー */
+	--font-family-body: sans-serif;
+	--font-family-heading: helvetica, var(--font-family-body);
+
+	/* 見出し調和数列スケーリング */
+
+	/* @see https://standard.shiftbrain.com/blog/music-math-typography */
+	--font-size-h1: calc(1em * 8 / 2);
+	--font-size-h2: calc(1em * 8 / 3);
+	--font-size-h3: calc(1em * 8 / 4);
+	--font-size-h4: calc(1em * 8 / 5);
+	--font-size-h5: calc(1em * 8 / 6);
+	--font-size-h6: calc(1em * 8 / 7);
+}
+
+/* ----------------------------------------
+ *
+ * カスタムメディア
+ *
+ * ---------------------------------------- */
+
+/* xsのみ = xs以下 */
+@custom-media --xs (width < 576px);
+
+/* smのみ */
+@custom-media --sm (576px <= width < 768px);
+
+/* mdのみ */
+@custom-media --md (768px <= width < 992px);
+
+/* lgのみ */
+@custom-media --lg (992px <= width < 1200px);
+
+/* xlのみ */
+@custom-media --xl (1200px <= width < 1400px);
+
+/* 2xlのみ = xl超え */
+@custom-media --xxl (1400px <= width);
+
+/* xs以下 = xsのみ */
+@custom-media --xs-lte (width < 576px);
+
+/* sm以下 */
+@custom-media --sm-lte (width < 768px);
+
+/* md以下 */
+@custom-media --md-lte (width < 992px);
+
+/* lg以下 */
+@custom-media --lg-lte (width < 1200px);
+
+/* xl以下 */
+@custom-media --xl-lte (width < 1400px);
+
+/* xs超え */
+@custom-media --xs-gt (576px <= width);
+
+/* sm超え */
+@custom-media --sm-gt (768px <= width);
+
+/* md超え */
+@custom-media --md-gt (992px <= width);
+
+/* lg超え */
+@custom-media --lg-gt (1200px <= width);
+
+/* xl超え */
+@custom-media --xl-gt (1400px <= width);
+
+/* high resolution */
+@custom-media --hr (2dppx <= resolution);

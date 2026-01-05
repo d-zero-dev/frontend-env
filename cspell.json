@@ -1,11 +1,16 @@
 {
 	"import": ["@d-zero/cspell-config"],
+	"ignorePaths": ["**/CHANGELOG.md"],
 	"words": [
 		//
 		"nodir",
 		"postcssrc",
 
 		//
-		"dzbuild"
+		"dzbuild",
+		"kamado",
+
+		//
+		"kiso"
 	]
 }

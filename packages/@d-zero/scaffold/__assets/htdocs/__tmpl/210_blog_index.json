@@ -1,0 +1,5 @@
+{
+	"layout": "sub.pug",
+	"title": "ブログB一覧ページ",
+	"hasPagination": true
+}

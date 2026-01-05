@@ -20,10 +20,17 @@ yarn create @d-zero/frontend
 
 | パッケージ名                                                       | 内容                                                                                                              |
 | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| [`@d-zero/builder`](./packages/%40d-zero/builder/)                 | [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)用ビルドツール                                                |
 | [`@d-zero/create-frontend`](./packages/%40d-zero/create-frontend/) | [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)の中身をコマンドから展開するパッケージ                        |
 | [`@d-zero/postcss-config`](./packages/%40d-zero/postcss-config/)   | [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)で利用している[_PostCSS_](https://postcss.org/)の設定ファイル |
 | [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)               | フロントエンド開発ボイラープレートファイル郡                                                                      |
+
+### スキャフォールドパッケージの配布戦略
+
+`@d-zero/scaffold` パッケージは create-package として配布されるため、特殊な依存関係管理を採用しています：
+
+- **yarn.lock なし管理**: scaffold ディレクトリには yarn.lock を配置せず、ワークスペースの依存解決を利用
+- **Explicit Version 指定**: package.json で依存関係は範囲指定ではなく固定バージョンを使用
+- **配布時の安定性**: packageManager フィールドと volta 設定により、配布先で安定したバージョン管理を実現
 
 ---
 

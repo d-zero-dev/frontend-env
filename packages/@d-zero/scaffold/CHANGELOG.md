@@ -3,6 +3,151 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.19](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.18...v5.0.0-beta.19) (2025-12-22)
+
+### Features
+
+- **scaffold:** upgrade kamado to v1.0.0-alpha.1 and update config ([14186ad](https://github.com/d-zero-dev/frontend-env/commit/14186ad6fe3842950a31e005dc65649f5e09fae6))
+
+# [5.0.0-beta.18](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.17...v5.0.0-beta.18) (2025-11-25)
+
+### Bug Fixes
+
+- **scaffold:** correct typo in script name from 'cleaer' to 'clear' ([1ad45c8](https://github.com/d-zero-dev/frontend-env/commit/1ad45c8b7bb43ca665b5fd03c3e414917778dfb9))
+
+# [5.0.0-beta.17](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.16...v5.0.0-beta.17) (2025-10-23)
+
+### Bug Fixes
+
+- **scaffold:** load jQuery before baserCMS editor scripts ([2d6130c](https://github.com/d-zero-dev/frontend-env/commit/2d6130c76393893950472d76d62bbaed2ed49890))
+
+# [5.0.0-beta.16](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.15...v5.0.0-beta.16) (2025-10-23)
+
+### Features
+
+- **builder:** add parserOptions.pugOptions configuration ([803044c](https://github.com/d-zero-dev/frontend-env/commit/803044c4d3ea2e53dbf3cb30c61d4a46df847831))
+- **scaffold:** add build scripts with cache clearing option ([6adb2be](https://github.com/d-zero-dev/frontend-env/commit/6adb2be332bf2d09b6afe1c450f7aec7c5129fc3))
+
+# [5.0.0-beta.15](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.14...v5.0.0-beta.15) (2025-10-20)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
+# [5.0.0-beta.14](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.13...v5.0.0-beta.14) (2025-10-20)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
+# [5.0.0-beta.13](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.12...v5.0.0-beta.13) (2025-10-20)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
+# [5.0.0-beta.12](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.11...v5.0.0-beta.12) (2025-10-20)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
+# [5.0.0-beta.11](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.10...v5.0.0-beta.11) (2025-10-20)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
+# [5.0.0-beta.10](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.9...v5.0.0-beta.10) (2025-10-20)
+
+### Bug Fixes
+
+- update prettier glob patterns for rc files ([80231cb](https://github.com/d-zero-dev/frontend-env/commit/80231cb5af39cbcbd8c5d4c5d08bb3e5ac80a350))
+
+### Features
+
+- **create-frontend:** add library copying functionality for baserCMS projects ([8e73300](https://github.com/d-zero-dev/frontend-env/commit/8e73300a730aa7dcdcc2f19bb57b99eb5f4d561c))
+- **create-frontend:** update project type options and remove unused blocks.html ([b003628](https://github.com/d-zero-dev/frontend-env/commit/b00362847c11493ab14f8c87c01f9577563f2e07))
+- **scaffold:** add baserCMS-specific meta template and conditional inclusion ([885fe35](https://github.com/d-zero-dev/frontend-env/commit/885fe352ecb692cd1ccf3ca4ee1d82749193a60d))
+
+# [5.0.0-beta.9](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.8...v5.0.0-beta.9) (2025-10-05)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
+# [5.0.0-beta.8](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.7...v5.0.0-beta.8) (2025-10-05)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
+# [5.0.0-beta.7](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.6...v5.0.0-beta.7) (2025-10-03)
+
+### Features
+
+- **builder:** add --clear-cache option to CLI ([a09aa0b](https://github.com/d-zero-dev/frontend-env/commit/a09aa0b304a7c693a2b856314a39ffa25f35141e))
+
+# [5.0.0-beta.6](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.5...v5.0.0-beta.6) (2025-10-03)
+
+### Bug Fixes
+
+- **scaffold:** filter empty strings in breadcrumb depth calculation ([02d5ffc](https://github.com/d-zero-dev/frontend-env/commit/02d5ffc7935b055d22fbb9dbf0cf2ee7767fc60a))
+
+# [5.0.0-beta.5](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.4...v5.0.0-beta.5) (2025-09-17)
+
+### Bug Fixes
+
+- **scaffold:** add dotenv ([f9e09fb](https://github.com/d-zero-dev/frontend-env/commit/f9e09fbc1e32f99dd0529b5fba40cc8c205471cb))
+- **scaffold:** remove unnecessary async keyword from breadcrumbs function ([2e1e11f](https://github.com/d-zero-dev/frontend-env/commit/2e1e11f29face454705de7b359ab1bc598c549cf))
+- **scaffold:** use rel="icon" for favicon ([af6c9e8](https://github.com/d-zero-dev/frontend-env/commit/af6c9e83c2bd2b454bf54745de0b8275063450d5))
+
+### Features
+
+- **scaffold:** add dynamic breadcrumb generation ([4816002](https://github.com/d-zero-dev/frontend-env/commit/4816002823cb0698cac60858db26bffe081ab8e0))
+- **scaffold:** add dynamic title generation using breadcrumbs ([39fd107](https://github.com/d-zero-dev/frontend-env/commit/39fd1076cd7d722bb97942751bc6f65826f93c1a))
+- **scaffold:** update c-title-page component ([77d8bbe](https://github.com/d-zero-dev/frontend-env/commit/77d8bbe534392b1ae2bd82ea0e0da02287f32ff0))
+- **scaffold:** update layout and template files ([6f95978](https://github.com/d-zero-dev/frontend-env/commit/6f9597865bf66e9d8f336a4e5e9db0462953116b))
+- **scaffold:** update meta mixin, sample page and package config ([f97f141](https://github.com/d-zero-dev/frontend-env/commit/f97f1416ddd2053cdfab38823fe66adfdf3ef5f9))
+- **scaffold:** update template data with Japanese titles ([7c60679](https://github.com/d-zero-dev/frontend-env/commit/7c606797db4a94b527de69b3ec79980fed275f61))
+
+# [5.0.0-beta.4](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.3...v5.0.0-beta.4) (2025-08-14)
+
+### Bug Fixes
+
+- **scaffold:** update burger-editor config and sample file format ([e45030d](https://github.com/d-zero-dev/frontend-env/commit/e45030d19b8adbc63ad4aef4d8abb42dcf84aff1))
+- **scaffold:** update CSS to use logical properties and fix formatting ([d2339db](https://github.com/d-zero-dev/frontend-env/commit/d2339db25cd4f227a1476af4b533b69d39c0ccb3))
+
+### Features
+
+- **scaffold:** add 11ty layout files ([fafeb55](https://github.com/d-zero-dev/frontend-env/commit/fafeb557c47d372a3037c94d5d093873ad47b84a))
+- **scaffold:** add sample page for static file production ([f2cacbd](https://github.com/d-zero-dev/frontend-env/commit/f2cacbdf90c237aa7dc80e7bae2a8b80c8732088))
+- **scaffold:** enable prettier by default in eleventy config ([ba539bd](https://github.com/d-zero-dev/frontend-env/commit/ba539bd0228fc86a0e126bd48cd04df41da91f3d))
+- **scaffold:** integrate lint check into build process ([9c99c22](https://github.com/d-zero-dev/frontend-env/commit/9c99c22eeb986ed07a774e82467c82e1403da1fe))
+- **scaffold:** update burger-editor dependencies to 4.0.0-alpha.14 ([3bec3a5](https://github.com/d-zero-dev/frontend-env/commit/3bec3a594af622aff826cd3c9ef29704ad95306b))
+
+# [5.0.0-beta.3](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.2...v5.0.0-beta.3) (2025-07-11)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
+# [5.0.0-beta.2](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.1...v5.0.0-beta.2) (2025-07-11)
+
+### Features
+
+- **scaffold:** introduce @burger-editor/local for local development ([1524937](https://github.com/d-zero-dev/frontend-env/commit/15249370d68aeeb9c5b20d7c29dd4c8dfc0d000e))
+
+# [5.0.0-beta.1](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.0...v5.0.0-beta.1) (2025-07-01)
+
+### Features
+
+- **scaffold:** add CSS layer structure and burger-editor integration ([89b4fa6](https://github.com/d-zero-dev/frontend-env/commit/89b4fa63209e43a130d592f729962b1a4a2876ca))
+
+# [5.0.0-beta.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.46...v5.0.0-beta.0) (2025-06-20)
+
+### Bug Fixes
+
+- **scaffold:** remove independent yarn.lock for workspace consistency ([3099cf7](https://github.com/d-zero-dev/frontend-env/commit/3099cf71c16b2828a092c2e32ba15f0479a1ad66))
+- **scaffold:** replace SCSS comments with CSS comments in component styles ([ff1345f](https://github.com/d-zero-dev/frontend-env/commit/ff1345fb0fd219c00ca956e4dc7f00705d03c95f))
+
+### Features
+
+- **scaffold:** add `print` command ([355a71a](https://github.com/d-zero-dev/frontend-env/commit/355a71a89a7c404d5483e05ca6a38dedb464f5d4))
+- **scaffold:** リセットCSSにdestyle.cssからkiso.cssを採用 ([c2ed37d](https://github.com/d-zero-dev/frontend-env/commit/c2ed37dc628c8d97278117a9ff8bc831e2544698))
+
+### Reverts
+
+- Revert "chore(repo): migrate to Yarn v4" ([d9d6623](https://github.com/d-zero-dev/frontend-env/commit/d9d66235d04bc0b7c423a9d2a0678bfedd6022b3))
+
+### BREAKING CHANGES
+
+- **scaffold:** destyle.cssを廃止
+
 # [5.0.0-alpha.46](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.45...v5.0.0-alpha.46) (2025-05-19)
 
 ### Features

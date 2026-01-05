@@ -3,6 +3,113 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.19](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.18...v5.0.0-beta.19) (2025-12-22)
+
+**Note:** Version bump only for package @d-zero/create-frontend
+
+# [5.0.0-beta.18](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.17...v5.0.0-beta.18) (2025-11-25)
+
+**Note:** Version bump only for package @d-zero/create-frontend
+
+# [5.0.0-beta.17](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.16...v5.0.0-beta.17) (2025-10-23)
+
+**Note:** Version bump only for package @d-zero/create-frontend
+
+# [5.0.0-beta.16](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.15...v5.0.0-beta.16) (2025-10-23)
+
+### Features
+
+- **create-frontend:** remove burger editor scripts and add css dependency for basercms ([609d11c](https://github.com/d-zero-dev/frontend-env/commit/609d11cba279068aac411ec240f7c5d4bec24370))
+
+# [5.0.0-beta.15](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.14...v5.0.0-beta.15) (2025-10-20)
+
+**Note:** Version bump only for package @d-zero/create-frontend
+
+# [5.0.0-beta.14](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.13...v5.0.0-beta.14) (2025-10-20)
+
+### Bug Fixes
+
+- **create-frontend:** prevent gitignore file copy from being skipped ([6b80db7](https://github.com/d-zero-dev/frontend-env/commit/6b80db70238b3e3cb403a18a4b1f03f047ef144c))
+
+# [5.0.0-beta.13](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.12...v5.0.0-beta.13) (2025-10-20)
+
+### Bug Fixes
+
+- **create-frontend:** correct typo in volta-install-node command ([a18fda9](https://github.com/d-zero-dev/frontend-env/commit/a18fda9bbfbbeab1ae5233d4eb5655936b1ed458))
+
+# [5.0.0-beta.12](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.11...v5.0.0-beta.12) (2025-10-20)
+
+### Features
+
+- **create-frontend:** add volta and node installation support ([29e4fff](https://github.com/d-zero-dev/frontend-env/commit/29e4fff6af41be56397ba25f699e946a1f16c10a))
+
+# [5.0.0-beta.11](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.10...v5.0.0-beta.11) (2025-10-20)
+
+### Features
+
+- **create-frontend:** improve command execution and add volta setup ([e54a526](https://github.com/d-zero-dev/frontend-env/commit/e54a526da7629a9b86fb6d5a53f0aaba72118d9b))
+
+# [5.0.0-beta.10](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.9...v5.0.0-beta.10) (2025-10-20)
+
+### Bug Fixes
+
+- **create-frontend:** correct file extension from .cjs to .js in blocks data path ([b425f76](https://github.com/d-zero-dev/frontend-env/commit/b425f76b9fb51302a0b26f0149407787679f33ac))
+
+### Features
+
+- **create-frontend:** add gitignore rewrite functionality ([e2a6e75](https://github.com/d-zero-dev/frontend-env/commit/e2a6e75ad6d58416cee8b35642ccdc542532ab73))
+- **create-frontend:** add library copying functionality for baserCMS projects ([8e73300](https://github.com/d-zero-dev/frontend-env/commit/8e73300a730aa7dcdcc2f19bb57b99eb5f4d561c))
+- **create-frontend:** update project type options and remove unused blocks.html ([b003628](https://github.com/d-zero-dev/frontend-env/commit/b00362847c11493ab14f8c87c01f9577563f2e07))
+- **scaffold:** add baserCMS-specific meta template and conditional inclusion ([885fe35](https://github.com/d-zero-dev/frontend-env/commit/885fe352ecb692cd1ccf3ca4ee1d82749193a60d))
+
+# [5.0.0-beta.9](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.8...v5.0.0-beta.9) (2025-10-05)
+
+**Note:** Version bump only for package @d-zero/create-frontend
+
+# [5.0.0-beta.8](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.7...v5.0.0-beta.8) (2025-10-05)
+
+**Note:** Version bump only for package @d-zero/create-frontend
+
+# [5.0.0-beta.7](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.6...v5.0.0-beta.7) (2025-10-03)
+
+**Note:** Version bump only for package @d-zero/create-frontend
+
+# [5.0.0-beta.6](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.5...v5.0.0-beta.6) (2025-10-03)
+
+**Note:** Version bump only for package @d-zero/create-frontend
+
+# [5.0.0-beta.5](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.4...v5.0.0-beta.5) (2025-09-17)
+
+**Note:** Version bump only for package @d-zero/create-frontend
+
+# [5.0.0-beta.4](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.3...v5.0.0-beta.4) (2025-08-14)
+
+**Note:** Version bump only for package @d-zero/create-frontend
+
+# [5.0.0-beta.3](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.2...v5.0.0-beta.3) (2025-07-11)
+
+**Note:** Version bump only for package @d-zero/create-frontend
+
+# [5.0.0-beta.2](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.1...v5.0.0-beta.2) (2025-07-11)
+
+### Features
+
+- **scaffold:** introduce @burger-editor/local for local development ([1524937](https://github.com/d-zero-dev/frontend-env/commit/15249370d68aeeb9c5b20d7c29dd4c8dfc0d000e))
+
+# [5.0.0-beta.1](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.0...v5.0.0-beta.1) (2025-07-01)
+
+**Note:** Version bump only for package @d-zero/create-frontend
+
+# [5.0.0-beta.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.46...v5.0.0-beta.0) (2025-06-20)
+
+### Bug Fixes
+
+- resolve Yarn v4 compatibility issues in tests ([c83d417](https://github.com/d-zero-dev/frontend-env/commit/c83d4172356b816133eb0e2bb30da30f5cf42083))
+
+### Reverts
+
+- Revert "chore(repo): migrate to Yarn v4" ([d9d6623](https://github.com/d-zero-dev/frontend-env/commit/d9d66235d04bc0b7c423a9d2a0678bfedd6022b3))
+
 # [5.0.0-alpha.46](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-alpha.45...v5.0.0-alpha.46) (2025-05-19)
 
 **Note:** Version bump only for package @d-zero/create-frontend

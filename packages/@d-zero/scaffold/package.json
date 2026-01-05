@@ -1,33 +1,38 @@
 {
 	"name": "@d-zero/scaffold",
-	"version": "5.0.0-alpha.46",
+	"version": "5.0.0-beta.19",
 	"description": "Frontend scaffold files of D-ZERO Co., Ltd.",
 	"repository": "https://github.com/d-zero-dev/frontend-env.git",
 	"author": "D-ZERO Co., Ltd.",
 	"license": "MIT",
-	"private": false,
 	"publishConfig": {
 		"access": "public"
 	},
 	"type": "module",
 	"main": "package.json",
+	"production": {
+		"host": "https://example.com",
+		"siteName": "__サイト名__"
+	},
 	"scripts": {
-		"build": "npx @d-zero/builder",
-		"dev": "eleventy --serve --watch",
+		"build": "yarn lint && npx kamado build",
+		"build:only": "npx kamado build",
+		"dev": "npx kamado server",
 		"d": "yarn dev",
-		"lint": "run-s lint:*",
-		"lint:html": "markuplint \"./__assets/**/*.{pug,html}\"",
-		"lint:pug": "pug-lint ./__assets/htdocs/**/*.pug -r console; pug-lint ./__assets/_libs/**/*.pug -r console;",
-		"lint:css": "stylelint \"./__assets/**/*.scss\" --fix",
-		"lint:js": "eslint \"./__assets/**/*.{js,mjs,cjs,jsx,ts,tsx}\" --fix",
+		"lint": "run-s \"lint:*\"",
+		"lint:html": "npx markuplint \"./__assets/**/*.{pug,html}\"",
+		"lint:pug": "npx pug-lint ./__assets/htdocs/**/*.pug -r console; npx pug-lint ./__assets/_libs/**/*.pug -r console;",
+		"lint:css": "npx stylelint \"./__assets/**/*.css\" --fix",
+		"lint:js": "npx eslint \"./__assets/**/*.{js,mjs,cjs,jsx,ts,tsx}\" --fix",
 		"lint:ts": "tsc --noEmit",
-		"lint:format": "prettier --write \"{*,./__assets/**/*}.{js,jsx,ts,tsx,scss,pug,html,json,yaml,*rc}\"",
-		"lint:spell": "cspell --no-progress --show-suggestions \"**\"",
-		"lint:text": "textlint \"./__assets/**/*.{pug,html}\"",
+		"lint:format": "npx prettier --write \"{*,./__assets/**/*}{.{js,jsx,ts,tsx,css,pug,html,json,yaml},*rc}\"",
+		"lint:spell": "npx cspell --no-progress --show-suggestions \"**\"",
+		"lint:text": "npx textlint \"./__assets/**/*.{pug,html}\"",
 		"test": "vitest run",
+		"bge": "npx @burger-editor/local",
 		"print": "npx @d-zero/print -f __info/print.txt --type note",
 		"prepare": "husky",
-		"up": "yarn upgrade-interactive --latest"
+		"update": "yarn upgrade-interactive"
 	},
 	"browserslist": [
 		"last 1 chrome version",
@@ -38,27 +43,42 @@
 		"last 2 ios_saf version"
 	],
 	"devDependencies": {
-		"@d-zero/builder": "5.0.0-alpha.46",
-		"@d-zero/linters": "5.0.0-alpha.63",
-		"@d-zero/postcss-config": "5.0.0-alpha.46",
-		"@d-zero/tsconfig": "0.4.1",
-		"@types/node": "22.15.21",
-		"cross-env": "7.0.3",
+		"@burger-editor/local": "4.0.0-alpha.45",
+		"@d-zero/cspell-config": "5.0.0",
+		"@d-zero/eslint-config": "5.0.0",
+		"@d-zero/lint-staged-config": "5.0.0",
+		"@d-zero/markuplint-config": "5.0.0",
+		"@d-zero/postcss-config": "5.0.0-beta.19",
+		"@d-zero/prettier-config": "5.0.0",
+		"@d-zero/pug-lint-config": "5.0.0",
+		"@d-zero/stylelint-config": "5.0.0",
+		"@d-zero/textlint-config": "5.0.0",
+		"@d-zero/tsconfig": "1.0.0",
+		"@kamado-io/page-compiler": "1.0.0",
+		"@kamado-io/pug-compiler": "1.0.0",
+		"@kamado-io/script-compiler": "1.0.0",
+		"@kamado-io/style-compiler": "1.0.0",
+		"@prettier/plugin-pug": "3.4.2",
+		"@types/node": "25.0.3",
+		"cross-env": "10.1.0",
+		"dotenv": "17.2.3",
 		"husky": "9.1.7",
-		"npm-run-all2": "8.0.3",
-		"sass": "1.89.0",
-		"typescript": "5.8.3",
-		"vitest": "3.1.4"
+		"kamado": "1.0.0",
+		"npm-run-all2": "8.0.4",
+		"typescript": "5.9.3",
+		"vitest": "4.0.16"
 	},
 	"dependencies": {
-		"@d-zero/custom-components": "5.0.0-alpha.46",
-		"destyle.css": "4.0.1",
+		"@burger-editor/css": "4.0.0-alpha.45",
+		"@d-zero/custom-components": "5.0.0-beta.19",
 		"dialog-toggle-events-polyfill": "1.1.4",
-		"invokers-polyfill": "0.5.4",
+		"invokers-polyfill": "0.5.7",
+		"kiso.css": "1.2.3",
 		"tslib": "2.8.1"
 	},
+	"packageManager": "yarn@4.12.0",
 	"volta": {
-		"node": "22.16.0",
-		"yarn": "1.22.22"
+		"node": "24.12.0",
+		"yarn": "4.12.0"
 	}
 }

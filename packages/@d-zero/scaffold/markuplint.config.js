@@ -9,6 +9,10 @@ const extended = extendsConfig({
  */
 export default {
 	...extended,
+	parserOptions: {
+		...extended.parserOptions,
+		ignoreFrontMatter: true,
+	},
 	nodeRules: [
 		...extended.nodeRules,
 		{

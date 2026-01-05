@@ -13,7 +13,7 @@ export default [
 	{
 		files: ['**/{*.{config,spec}.{js,mjs,ts},*.*rc,*.*rc.{js,mjs}}'],
 		rules: {
-			'import/no-extraneous-dependencies': 0,
+			'import-x/no-extraneous-dependencies': 0,
 		},
 	},
 	{

@@ -4,6 +4,8 @@ npm-error.log
 yarn-error.log
 .env
 .husky/_/*
+.yarn/install-state.gz
+.yarn/build-state.yml
 
 # Huge File
 *.zip
@@ -31,3 +33,12 @@ htdocs/*
 !htdocs/img
 htdocs/img/*
 !htdocs/img/*.test.*
+!htdocs/files
+htdocs/files/*
+!htdocs/files/images
+htdocs/files/images/*
+!htdocs/files/images/sample.png
+!htdocs/__tmpl
+htdocs/__tmpl/**/*
+!htdocs/__tmpl/__burger_editor
+!htdocs/__tmpl/__burger_editor/**/*

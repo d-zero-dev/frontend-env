@@ -1,0 +1,385 @@
+/* 🃏 このファイルのStylelintルールはoverridesによって特別に変更されています */
+
+/* メインコンテンツ（content-mainコンポーネント）の内容はCMSなどで管理されるHTMLを含んだり、
+ * ページ独自のスタイルを扱うことが多いので例外的に専用のルールを設ける。
+ *
+ * メインコンテンツのエレメントは基本的に自由である。
+ * ただし、クラス名は`c-`で開始してはいけない。もちろん 【`c-` + `コンポーネント名` + `__` + `エレメント名`】 という規則でクラス名をつけない。
+ * さらにそのルールに従って、メインコンテンツの中にコンポーネントを内包してはいけない。 */
+.c-content-main {
+	:where(h2, h3, h4, h5, h6, p) {
+		margin-block-end: 1rem;
+	}
+
+	:where(ul, ol, table, blockquote) {
+		margin-block-end: 2rem;
+	}
+
+	:where(h2) {
+		font-size: var(--font-size-h2);
+	}
+
+	:where(h3) {
+		font-size: var(--font-size-h3);
+	}
+
+	:where(h4) {
+		font-size: var(--font-size-h4);
+	}
+
+	:where(h5) {
+		font-size: var(--font-size-h5);
+	}
+
+	:where(h6) {
+		font-size: var(--font-size-h6);
+	}
+
+	:where(ul, ol) {
+		list-style-position: inside;
+	}
+
+	:where(blockquote) {
+		padding-inline: 1rem;
+		border-inline-start: 3px solid var(--border-color);
+	}
+
+	:where(table) {
+		inline-size: 100%;
+		border-collapse: collapse;
+	}
+
+	:where(th, td) {
+		padding: 1rem;
+		border: 1px solid var(--border-color);
+	}
+
+	[data-bgi] {
+		:where(&, & > div) {
+			:where(& > :first-child) {
+				margin-block-start: 0;
+			}
+
+			:where(& > :last-child) {
+				margin-block-end: 0;
+			}
+		}
+	}
+
+	[data-bgi='button'],
+	[data-bgi='download-file'] {
+		a {
+			display: flex;
+			justify-content: center;
+			min-inline-size: 10em;
+			max-inline-size: 20em;
+			padding-block: 0.5em;
+			padding-inline: 1em;
+			color: inherit;
+			text-decoration: none;
+			border: 1px solid currentcolor;
+			border-radius: calc(infinity * 1px);
+		}
+	}
+
+	[data-bgi='table'],
+	[data-bgi='wysiwyg'] {
+		table {
+			inline-size: 100%;
+			border-spacing: 0;
+			border-collapse: collapse;
+
+			th,
+			td {
+				padding: 1.5em;
+				border: 1px solid currentcolor;
+			}
+		}
+	}
+
+	[data-bgi='hr'] {
+		--border-color: currentcolor;
+		--border-width: 3px;
+
+		[data-bgi-hr-kind='dashed'] {
+			--border-kind: dashed;
+		}
+
+		[data-bgi-hr-kind='bold'] {
+			--border-width: 5px;
+		}
+
+		[data-bgi-hr-kind='narrow'] {
+			--border-width: 1px;
+		}
+
+		[data-bgi-hr-kind='short'] {
+			--inline-size: 50%;
+		}
+	}
+
+	@container bge-container (width < 768px) {
+		[data-bge-container='grid:1'],
+		[data-bge-container^='grid:1:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 1;
+			}
+		}
+
+		[data-bge-container='grid:2'],
+		[data-bge-container^='grid:2:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 2;
+			}
+		}
+
+		[data-bge-container='grid:3'],
+		[data-bge-container^='grid:3:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 2;
+
+				/* 最後の要素を2列分にする */
+				> :nth-child(2n + 1):last-child {
+					grid-column: span 2;
+				}
+			}
+		}
+
+		[data-bge-container='grid:4'],
+		[data-bge-container^='grid:4:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 2;
+			}
+		}
+
+		[data-bge-container='grid:5'],
+		[data-bge-container^='grid:5:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 2;
+
+				/* 最後の要素を2列分にする */
+				> :nth-child(2n + 1):last-child {
+					grid-column: span 2;
+				}
+			}
+		}
+	}
+
+	.cc-form-description {
+		font-size: calc(14 / 16 * 1rem);
+	}
+
+	.cc-form {
+		margin-block: 0;
+		margin-inline: auto;
+	}
+
+	.cc-form-field-list {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.cc-form-fieldset {
+		display: block;
+		padding-block: 1rem;
+		padding-inline: 2rem;
+
+		fieldset {
+			padding: 0;
+			margin: 0;
+			border: none;
+		}
+
+		legend {
+			padding: 0;
+			margin: 0;
+		}
+	}
+
+	.cc-form-fieldset-heading {
+		display: flex;
+		align-items: center;
+		font-size: calc(18 / 16 * 1rem);
+		font-weight: bold;
+
+		label {
+			display: block;
+			cursor: pointer;
+		}
+
+		.required,
+		.optional {
+			display: block;
+			margin-block: 0;
+			margin-inline: 0 0.5rem;
+			font-size: calc(12 / 18 * 1rem);
+			line-height: 1;
+			border-radius: 0.2rem;
+		}
+	}
+
+	.cc-form-fieldset-attention {
+		margin-block: 0.5rem;
+		margin-inline: 0;
+		font-size: calc(12 / 18 * 1rem);
+		font-weight: normal;
+	}
+
+	.cc-form-fieldset-body {
+		margin-block-start: 1rem;
+	}
+
+	.mail-field {
+		padding-block: 0 1rem;
+		padding-inline: 0;
+		margin-block: 0;
+		margin-inline: 0 1rem;
+
+		&:last-child {
+			border-block-end: 1px solid var(--border-color);
+		}
+
+		&[data-type='text'],
+		&[data-type='select'] {
+			display: grid;
+			grid-template:
+				'before-attachment input after-attachment' auto
+				'description description description' auto
+				'error-message error-message error-message' auto
+				/ auto 1fr auto;
+			gap: 0;
+
+			> * {
+				place-self: center flex-start;
+			}
+
+			.mail-before-attachment {
+				grid-area: before-attachment;
+				margin-block: 0;
+				margin-inline: 0 1rem;
+
+				&:empty {
+					margin: 0;
+				}
+			}
+
+			.mail-input {
+				grid-area: input;
+			}
+
+			.mail-after-attachment {
+				grid-area: after-attachment;
+				margin-block: 0;
+				margin-inline: 1rem 0;
+
+				&:empty {
+					margin: 0;
+				}
+			}
+
+			.mail-description {
+				grid-area: description;
+				font-size: calc(12 / 16 * 1rem);
+			}
+
+			.error-message {
+				grid-area: error-message;
+				font-size: calc(12 / 16 * 1rem);
+			}
+		}
+
+		.mail-before-attachment {
+			font-weight: bold;
+		}
+
+		.mail-input {
+			display: block;
+			grid-area: input;
+			inline-size: 100%;
+
+			input:not([type='radio'], [type='checkbox']),
+			textarea {
+				inline-size: 100%;
+				padding-inline: 0.5rem;
+				font-family: inherit;
+				font-size: inherit;
+				border: 1px solid var(--border-color);
+				border-radius: 0.2rem;
+
+				&[size] {
+					inline-size: auto;
+				}
+
+				&[type='file'] {
+					padding-block: 0;
+					padding-inline: 0 1rem;
+
+					&::-webkit-file-upload-button {
+						appearance: none;
+						border: none;
+					}
+				}
+			}
+
+			input:not([type='radio'], [type='checkbox']) {
+				&:not([size]) {
+					inline-size: 100%;
+				}
+			}
+
+			textarea {
+				&:not([cols]) {
+					inline-size: 100%;
+				}
+			}
+
+			select {
+				padding-block: 0.5rem;
+				padding-inline: 0.5rem calc(0.5rem + 24px + 2px);
+				appearance: none;
+				background-image: url('/img/bg-arrow.svg');
+				background-repeat: no-repeat;
+				background-position: right calc(0.2rem + 2px) top calc(100% / 2 + 2px);
+				border: 1px solid var(--border-color);
+				border-radius: 0.2rem;
+			}
+		}
+
+		.checkbox {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+
+			input {
+				display: block;
+				padding: 0;
+				margin: 0;
+				line-height: 1;
+			}
+
+			label {
+				cursor: pointer;
+			}
+		}
+
+		.mail-group-radio {
+			> span {
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+
+				input {
+					display: block;
+					padding: 0;
+					margin-block: 0;
+					margin-inline: 0 0.5rem;
+					line-height: 1;
+				}
+
+				label {
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}
