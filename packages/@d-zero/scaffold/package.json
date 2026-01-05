@@ -44,7 +44,7 @@
 	],
 	"devDependencies": {
 		"@burger-editor/local": "4.0.0-alpha.45",
-		"@d-zero/cspell-config": "5.0.0-alpha.76",
+		"@d-zero/cspell-config": "5.0.0",
 		"@d-zero/eslint-config": "5.0.0-alpha.76",
 		"@d-zero/lint-staged-config": "5.0.0-alpha.76",
 		"@d-zero/markuplint-config": "5.0.0-alpha.76",

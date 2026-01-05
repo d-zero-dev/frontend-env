@@ -1112,12 +1112,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@d-zero/cspell-config@npm:5.0.0-alpha.76":
-  version: 5.0.0-alpha.76
-  resolution: "@d-zero/cspell-config@npm:5.0.0-alpha.76"
+"@d-zero/cspell-config@npm:5.0.0":
+  version: 5.0.0
+  resolution: "@d-zero/cspell-config@npm:5.0.0"
   dependencies:
     cspell: "npm:9.4.0"
-  checksum: 10c0/cd98790f78b6843c61534b415f9dcba9541e40963282db5672e9187ed6bfa0160d416736b55b952568bcb8f269ad2a73ddde7fcfd114f0e8b49112b0f719cedd
+  checksum: 10c0/eaa1ab56b241b434cce1dda6dbec0579b96e7743c6a2869c3c81cfa0b9a558879d47bb03e3945bbd57017b4fe35ba5ef1716223370db9419635836cd8e7ba1b6
   languageName: node
   linkType: hard
 
@@ -1189,7 +1189,7 @@ __metadata:
   resolution: "@d-zero/fontend-env@workspace:."
   dependencies:
     "@d-zero/commitlint-config": "npm:5.0.0-alpha.76"
-    "@d-zero/cspell-config": "npm:5.0.0-alpha.76"
+    "@d-zero/cspell-config": "npm:5.0.0"
     "@d-zero/eslint-config": "npm:5.0.0-alpha.76"
     "@d-zero/lint-staged-config": "npm:5.0.0-alpha.76"
     "@d-zero/prettier-config": "npm:5.0.0-alpha.76"
@@ -1277,7 +1277,7 @@ __metadata:
   dependencies:
     "@burger-editor/css": "npm:4.0.0-alpha.45"
     "@burger-editor/local": "npm:4.0.0-alpha.45"
-    "@d-zero/cspell-config": "npm:5.0.0-alpha.76"
+    "@d-zero/cspell-config": "npm:5.0.0"
     "@d-zero/custom-components": "npm:5.0.0-beta.19"
     "@d-zero/eslint-config": "npm:5.0.0-alpha.76"
     "@d-zero/lint-staged-config": "npm:5.0.0-alpha.76"
