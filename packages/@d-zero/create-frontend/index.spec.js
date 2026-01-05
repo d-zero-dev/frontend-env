@@ -39,10 +39,15 @@ describe('CLI', () => {
 				failed: true,
 				env: {
 					NODE_NO_WARNINGS: '1',
+					NO_COLOR: '1',
+					FORCE_COLOR: '0',
 				},
 			},
 		);
-		return stdout.replaceAll(path.sep, '/').split('\n');
+		return stdout
+			.replaceAll(path.sep, '/')
+			.split('\n')
+			.filter((line) => line.trim() !== '');
 	}
 
 	test('npx', async ({ tmpDir, task }) => {
