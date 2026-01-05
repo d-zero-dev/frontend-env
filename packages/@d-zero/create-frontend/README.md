@@ -28,9 +28,9 @@ npx @d-zero/create-frontend
 - **用途**: 静的なWebサイトの開発
 - **特徴**:
   - [BurgerEditor Local App](https://github.com/d-zero-dev/BurgerEditor) v4 が組み込まれており、ローカル環境でのビジュアル編集が可能
-  - [Eleventy](https://www.11ty.dev/) による静的サイトジェネレーター
+  - [kamado](https://github.com/kamado-io/kamado) による静的サイトジェネレーター
 - **開発コマンド**:
-  - `yarn dev`: 開発サーバー起動（http://localhost:8080/）
+  - `yarn dev`: 開発サーバー起動（http://localhost:8000/）
   - `yarn bge`: BurgerEditor Local App 起動（http://localhost:8100/）
   - `yarn build`: 本番用ビルド
 
