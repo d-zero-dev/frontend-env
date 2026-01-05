@@ -53,7 +53,7 @@
 		"@d-zero/pug-lint-config": "5.0.0-alpha.76",
 		"@d-zero/stylelint-config": "5.0.0-alpha.76",
 		"@d-zero/textlint-config": "5.0.0-alpha.76",
-		"@d-zero/tsconfig": "0.5.0",
+		"@d-zero/tsconfig": "1.0.0",
 		"@kamado-io/page-compiler": "1.0.0-alpha.1",
 		"@kamado-io/pug-compiler": "1.0.0-alpha.1",
 		"@kamado-io/script-compiler": "1.0.0-alpha.1",
