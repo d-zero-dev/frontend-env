@@ -8,7 +8,7 @@ yarn add -D @d-zero/postcss-config
 
 ## 使い方
 
-`.postcssrc.js`を作成し、設定を読み込みエクスポートします。
+プロジェクトのルートに`.postcssrc.js`（または`postcss.config.js`）を作成し、設定を読み込みエクスポートします。
 
 ```js
 import postcss from '@d-zero/postcss-config';
