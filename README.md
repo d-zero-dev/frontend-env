@@ -18,11 +18,13 @@ yarn create @d-zero/frontend
 
 ## パッケージ
 
-| パッケージ名                                                       | 内容                                                                                                              |
-| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| [`@d-zero/create-frontend`](./packages/%40d-zero/create-frontend/) | [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)の中身をコマンドから展開するパッケージ                        |
-| [`@d-zero/postcss-config`](./packages/%40d-zero/postcss-config/)   | [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)で利用している[_PostCSS_](https://postcss.org/)の設定ファイル |
-| [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)               | フロントエンド開発ボイラープレートファイル郡                                                                      |
+| パッケージ名                                                             | 内容                                                                                                              |
+| ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| [`@d-zero/check-frontend-env`](./packages/%40d-zero/check-frontend-env/) | フロントエンド開発環境のチェックツール（Node.js、npm、yarn、Husky、Voltaのインストール状況とバージョンを確認）    |
+| [`@d-zero/create-frontend`](./packages/%40d-zero/create-frontend/)       | [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)の中身をコマンドから展開するパッケージ                        |
+| [`@d-zero/custom-components`](./packages/%40d-zero/custom-components/)   | D-ZEROカスタムWebコンポーネント（breadcrumbs、hamburger-menu）                                                    |
+| [`@d-zero/postcss-config`](./packages/%40d-zero/postcss-config/)         | [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)で利用している[_PostCSS_](https://postcss.org/)の設定ファイル |
+| [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)                     | フロントエンド開発ボイラープレートファイル郡                                                                      |
 
 ### スキャフォールドパッケージの配布戦略
 
@@ -44,8 +46,8 @@ yarn create @d-zero/frontend
 
 ### メンテ用コマンド
 
-| コマンド    | 内容                                      |
-| ----------- | ----------------------------------------- |
-| `yarn tsc`  | TypeScriptのコンパイルを実行します        |
-| `yarn lint` | リント（各種リントを実行します）          |
-| `yarn co`   | Gitコミットを*Commitizen*経由で実行します |
+| コマンド     | 内容                                      |
+| ------------ | ----------------------------------------- |
+| `yarn build` | 各パッケージのビルドを実行します          |
+| `yarn lint`  | リント（各種リントを実行します）          |
+| `yarn co`    | Gitコミットを*Commitizen*経由で実行します |
