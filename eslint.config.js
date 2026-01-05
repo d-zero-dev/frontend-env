@@ -17,6 +17,14 @@ export default [
 		},
 	},
 	{
+		files: ['**/.storybook/**/*.ts'],
+		languageOptions: {
+			parserOptions: {
+				project: [path.resolve('packages/@d-zero/custom-components/tsconfig.json')],
+			},
+		},
+	},
+	{
 		ignores: [
 			...scaffold.flatMap(
 				(config) =>
