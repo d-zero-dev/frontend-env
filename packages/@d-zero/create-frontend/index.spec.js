@@ -11,7 +11,7 @@ import { describe, test, expect, beforeEach } from 'vitest';
  * @param task
  */
 function getName(task) {
-	return createHash('sha256').update(`${task.suite.name}${task.name}`).digest('hex');
+	return createHash('sha256').update(`${task.suite.name}_${task.name}`).digest('hex');
 }
 
 beforeEach((ctx) => {
