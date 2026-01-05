@@ -13,7 +13,7 @@ npx @d-zero/check-frontend-env
 
 実行すると、以下の情報が表示されます：
 
-- **Husky設定**: v8とv9の両方のバージョンの設定ファイルを確認
+- **Husky設定**: v8（`.huskyrc`ファイル）とv9（`.config/husky/init.sh`ファイル）の両方のバージョンの設定ファイルを確認 <!-- cspell:disable-line -->
 - **Node.js**: 現在のバージョンを表示
 - **npm**: 現在のバージョンを表示
 - **yarn**: インストールされている場合のバージョンを表示

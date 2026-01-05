@@ -29,7 +29,7 @@ interface EnvironmentInfo {
 function checkHuskyConfig(): EnvironmentInfo['huskyConfig'] {
 	const homeDir = os.homedir();
 	const v9Path = path.join(homeDir, '.config', 'husky', 'init.sh');
-	const v8Path = path.join(homeDir, '.husky');
+	const v8Path = path.join(homeDir, '.huskyrc'); // cspell:disable-line
 
 	return {
 		v8Present: fs.existsSync(v8Path),
