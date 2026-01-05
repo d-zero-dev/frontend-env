@@ -28,8 +28,8 @@ interface EnvironmentInfo {
  */
 function checkHuskyConfig(): EnvironmentInfo['huskyConfig'] {
 	const homeDir = os.homedir();
-	const v8Path = path.join(homeDir, '.config', 'husky', 'init.sh');
-	const v9Path = path.join(homeDir, '.husky');
+	const v9Path = path.join(homeDir, '.config', 'husky', 'init.sh');
+	const v8Path = path.join(homeDir, '.husky');
 
 	return {
 		v8Present: fs.existsSync(v8Path),
@@ -115,8 +115,10 @@ function main() {
 	console.log('環境チェック結果:');
 	console.log('-------------------------');
 	console.log('Husky設定:');
-	console.log(`  v8 (.config/husky): ${info.huskyConfig.v8Present ? '✅' : '❌'}`);
-	console.log(`  v9 (.husky): ${info.huskyConfig.v9Present ? '✅' : '❌'}`);
+	console.log(`  v8 (.huskyrc): ${info.huskyConfig.v8Present ? '✅' : '❌'}`); // cspell:disable-line
+	console.log(
+		`  v9 (.config/husky/init.sh): ${info.huskyConfig.v9Present ? '✅' : '❌'}`,
+	);
 	if (info.huskyConfig.paths.length > 0) {
 		console.log('  発見場所:');
 		for (const p of info.huskyConfig.paths) console.log(`    - ${p}`);
