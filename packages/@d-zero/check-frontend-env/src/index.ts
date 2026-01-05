@@ -186,23 +186,6 @@ function main() {
 	process.stdout.write(stdout.join('\n'));
 }
 
-// テスト用にエクスポート
-export const volta = {
-	checkVolta,
-};
-
-export const husky = {
-	checkHuskyConfig,
-};
-
-export const versions = {
-	getVersions,
-};
-
-export const utils = {
-	main,
-};
-
 // CLIとして直接実行された場合のみmainを実行
 const isCli =
 	process.argv[1] &&
