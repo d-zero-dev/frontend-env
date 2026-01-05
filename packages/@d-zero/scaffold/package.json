@@ -17,7 +17,7 @@
 	"scripts": {
 		"build": "yarn lint && npx kamado build",
 		"build:only": "npx kamado build",
-		"dev": "npx kamado dev",
+		"dev": "npx kamado server",
 		"d": "yarn dev",
 		"lint": "run-s \"lint:*\"",
 		"lint:html": "npx markuplint \"./__assets/**/*.{pug,html}\"",
