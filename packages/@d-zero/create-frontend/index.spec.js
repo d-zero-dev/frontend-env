@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -10,7 +11,7 @@ import { describe, test, expect, beforeEach } from 'vitest';
  * @param task
  */
 function getName(task) {
-	return encodeURIComponent(`${task.suite.name}_${task.name}`.toLowerCase());
+	return createHash('sha256').update(`${task.suite.name}_${task.name}`).digest('hex');
 }
 
 beforeEach((ctx) => {
@@ -38,10 +39,15 @@ describe('CLI', () => {
 				failed: true,
 				env: {
 					NODE_NO_WARNINGS: '1',
+					NO_COLOR: '1',
+					FORCE_COLOR: '0',
 				},
 			},
 		);
-		return stdout.replaceAll(path.sep, '/').split('\n');
+		return stdout
+			.replaceAll(path.sep, '/')
+			.split('\n')
+			.filter((line) => line.trim() !== '');
 	}
 
 	test('npx', async ({ tmpDir, task }) => {
