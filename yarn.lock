@@ -1173,6 +1173,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@d-zero/dealer@npm:1.5.3":
+  version: 1.5.3
+  resolution: "@d-zero/dealer@npm:1.5.3"
+  dependencies:
+    "@d-zero/shared": "npm:0.17.1"
+    ansi-colors: "npm:4.1.3"
+  checksum: 10c0/c8b92ed2f36c68ec64353d7cee852589f24917f8410bbefe06bfa8cd46a03285b305df54de2a99c1587043df8149499f60f5b72578d95647e4dc9d6337d179c1
+  languageName: node
+  linkType: hard
+
 "@d-zero/eslint-config@npm:5.0.0":
   version: 5.0.0
   resolution: "@d-zero/eslint-config@npm:5.0.0"
@@ -1295,7 +1305,7 @@ __metadata:
     "@d-zero/stylelint-config": "npm:5.0.0"
     "@d-zero/textlint-config": "npm:5.0.0"
     "@d-zero/tsconfig": "npm:1.0.0"
-    "@kamado-io/page-compiler": "npm:1.0.0"
+    "@kamado-io/page-compiler": "npm:1.1.0"
     "@kamado-io/pug-compiler": "npm:1.0.0"
     "@kamado-io/script-compiler": "npm:1.0.0"
     "@kamado-io/style-compiler": "npm:1.0.0"
@@ -1325,6 +1335,19 @@ __metadata:
     escape-string-regexp: "npm:5.0.0"
     front-matter: "npm:4.0.2"
   checksum: 10c0/59597bce3f193f141e0ae28a5b1659ea778ae2490427383ccc1dcae687ea4b06c6be44c2428dac0d97fa26dacdf0bb8c72743b751434ea791b67397d7529618b
+  languageName: node
+  linkType: hard
+
+"@d-zero/shared@npm:0.17.1":
+  version: 0.17.1
+  resolution: "@d-zero/shared@npm:0.17.1"
+  dependencies:
+    "@holiday-jp/holiday_jp": "npm:2.5.1"
+    await-event-emitter: "npm:2.0.2"
+    dayjs: "npm:1.11.19"
+    escape-string-regexp: "npm:5.0.0"
+    front-matter: "npm:4.0.2"
+  checksum: 10c0/ed5f5ca2ec0ef6a6dc9b06406b6aa72c3d1252c9b4a7212330f9d19d9edd06331339084f787708cb9c5bffc23f96f5f921fd4914bf1fdaadc53a544d722e422f
   languageName: node
   linkType: hard
 
@@ -2159,20 +2182,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kamado-io/page-compiler@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@kamado-io/page-compiler@npm:1.0.0"
+"@kamado-io/page-compiler@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@kamado-io/page-compiler@npm:1.1.0"
   dependencies:
-    "@d-zero/shared": "npm:0.17.0"
+    "@d-zero/shared": "npm:0.17.1"
     ansi-colors: "npm:4.1.3"
     character-entities: "npm:2.0.2"
     fast-glob: "npm:3.3.3"
     html-minifier-terser: "npm:7.2.0"
     image-size: "npm:2.0.2"
     jsdom: "npm:27.4.0"
-    kamado: "npm:1.0.0"
+    kamado: "npm:1.1.0"
     prettier: "npm:3.7.4"
-  checksum: 10c0/73f9483d5a2ff047239475565a668c23a1f99b91ebb927f75cb86c8fbbd0d6087b5f8315798efb412764321582d81a88fb81438e79267212cbf2436ec4481f34
+  checksum: 10c0/d90778198ffdceb799ba1f79e6c14fc74a518bbfe91385d9983ed7b465034d614e0471c4d103aa1c1d34475772d28f50bee468735fd9e6e8d0ea9f1352ba0841
   languageName: node
   linkType: hard
 
@@ -10448,6 +10471,30 @@ __metadata:
   bin:
     kamado: dist/index.js
   checksum: 10c0/5e144781dfa23f7b7308b5a8c8d9ec0cff109b741911caaab3d1a7bc64e48426789f4224cb78114161c71a0bee9170cc5f29208c27eb128f210c4c81490d2be5
+  languageName: node
+  linkType: hard
+
+"kamado@npm:1.1.0":
+  version: 1.1.0
+  resolution: "kamado@npm:1.1.0"
+  dependencies:
+    "@d-zero/dealer": "npm:1.5.3"
+    "@d-zero/roar": "npm:0.2.0"
+    "@d-zero/shared": "npm:0.17.1"
+    "@hono/node-server": "npm:1.19.7"
+    ansi-colors: "npm:4.1.3"
+    character-entities: "npm:2.0.2"
+    cosmiconfig: "npm:9.0.0"
+    dayjs: "npm:1.11.19"
+    fast-glob: "npm:3.3.3"
+    gray-matter: "npm:4.0.3"
+    hono: "npm:4.11.3"
+    jsdom: "npm:27.4.0"
+    open: "npm:11.0.0"
+    yaml: "npm:2.8.2"
+  bin:
+    kamado: dist/index.js
+  checksum: 10c0/fc99aa6d49c02fab075791e86db4f46753ce7c2fb1bd7fa57b39d3e77d8226ebfa791d2108ab025ff94463cf5af1744a59bd2b86acd506d5a9c858c7fe669efb
   languageName: node
   linkType: hard
 
