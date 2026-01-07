@@ -20,7 +20,7 @@
 		"release:alpha:latest": "lerna publish --exact --force-publish --conventional-commits --conventional-prerelease --preid alpha",
 		"release:beta:latest": "lerna publish --exact --force-publish --conventional-commits --conventional-prerelease --preid beta",
 		"release:next": "lerna publish --dist-tag next --exact --force-publish --conventional-commits --conventional-prerelease --preid alpha",
-		"prepare": "husky",
+		"postinstall": "husky",
 		"commit": "npx cz",
 		"co": "npx cz",
 		"update": "yarn upgrade-interactive"
