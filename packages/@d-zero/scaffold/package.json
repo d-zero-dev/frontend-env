@@ -56,7 +56,7 @@
 		"@d-zero/tsconfig": "1.0.0",
 		"@kamado-io/page-compiler": "1.1.0",
 		"@kamado-io/pug-compiler": "1.1.0",
-		"@kamado-io/script-compiler": "1.0.0",
+		"@kamado-io/script-compiler": "1.1.0",
 		"@kamado-io/style-compiler": "1.0.0",
 		"@prettier/plugin-pug": "3.4.2",
 		"@types/node": "25.0.3",
