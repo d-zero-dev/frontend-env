@@ -43,7 +43,7 @@
 		"last 2 ios_saf version"
 	],
 	"devDependencies": {
-		"@burger-editor/local": "4.0.0-alpha.47",
+		"@burger-editor/local": "4.0.0-alpha.48",
 		"@d-zero/cspell-config": "5.0.0",
 		"@d-zero/eslint-config": "5.0.0",
 		"@d-zero/lint-staged-config": "5.0.0",
