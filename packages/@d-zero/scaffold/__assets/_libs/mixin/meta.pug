@@ -11,10 +11,10 @@ if pkg.production.siteName
 if ogDescription || description
 	meta(property="og:description" content=ogDescription || description || "")
 if pkg.production.host
-	meta(property="og:url" content=pkg.production.host + page.url)
+	meta(property="og:url" content=url)
 	meta(property="og:image" content=pkg.production.host + (ogImage || "/img/ogp.png"))
 meta(name="twitter:card" content=ogCard || "summary_large_image")
-meta(name="twitter:url" content=pkg.production.host + page.url)
+meta(name="twitter:url" content=url)
 if pkg.production.siteName
 	meta(name="twitter:title" content=pkg.production.siteName || "__サイト名__")
 if ogDescription || description
