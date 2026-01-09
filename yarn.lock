@@ -1297,7 +1297,7 @@ __metadata:
     "@d-zero/tsconfig": "npm:1.0.0"
     "@kamado-io/page-compiler": "npm:1.2.0"
     "@kamado-io/pug-compiler": "npm:1.2.0"
-    "@kamado-io/script-compiler": "npm:1.1.0"
+    "@kamado-io/script-compiler": "npm:1.2.0"
     "@kamado-io/style-compiler": "npm:1.1.0"
     "@prettier/plugin-pug": "npm:3.4.2"
     "@types/node": "npm:25.0.3"
@@ -2209,13 +2209,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kamado-io/script-compiler@npm:1.1.0":
-  version: 1.1.0
-  resolution: "@kamado-io/script-compiler@npm:1.1.0"
+"@kamado-io/script-compiler@npm:1.2.0":
+  version: 1.2.0
+  resolution: "@kamado-io/script-compiler@npm:1.2.0"
   dependencies:
     esbuild: "npm:0.27.2"
-    kamado: "npm:1.1.0"
-  checksum: 10c0/1fbee267b5fa801d70d7b60cf30885bea850bd7fc1b5e53a10ad7edecd6333eb4721629f01b7a22529db4b3e22582493faba162a19c340854d1cc76d22336149
+    kamado: "npm:1.2.0"
+  checksum: 10c0/6880cd4b37516beceec823bda0e4890f3272f813688fa0d6f4343605126b253c91b09fe0fbc2cbbc52c83dc221d6f38fe5f13d8a90afe5881962054471308512
   languageName: node
   linkType: hard
 
