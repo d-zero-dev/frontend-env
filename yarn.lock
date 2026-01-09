@@ -1296,7 +1296,7 @@ __metadata:
     "@d-zero/textlint-config": "npm:5.0.0"
     "@d-zero/tsconfig": "npm:1.0.0"
     "@kamado-io/page-compiler": "npm:1.2.0"
-    "@kamado-io/pug-compiler": "npm:1.1.0"
+    "@kamado-io/pug-compiler": "npm:1.2.0"
     "@kamado-io/script-compiler": "npm:1.1.0"
     "@kamado-io/style-compiler": "npm:1.1.0"
     "@prettier/plugin-pug": "npm:3.4.2"
@@ -2198,14 +2198,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kamado-io/pug-compiler@npm:1.1.0":
-  version: 1.1.0
-  resolution: "@kamado-io/pug-compiler@npm:1.1.0"
+"@kamado-io/pug-compiler@npm:1.2.0":
+  version: 1.2.0
+  resolution: "@kamado-io/pug-compiler@npm:1.2.0"
   dependencies:
     pug: "npm:3.0.3"
   peerDependencies:
     "@kamado-io/page-compiler": ^1.0.0
-  checksum: 10c0/b826017558eb67457c2ec47cdd55bb2daf845ee3e27bf4ea34ce02a1cd65f7437d683b79841753e63bebaec37cdd40291517e3214a4dd62baedd51ad2c512fcf
+  checksum: 10c0/aa0bf671e0456ea3e4e88648a2545daeb02104587242b1cad5ffffbcad9888fd69178d97c9963c27d38f0da5601f37eb57b098c9f986ccab18e9764582554b5c
   languageName: node
   linkType: hard
 
