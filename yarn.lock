@@ -1306,7 +1306,7 @@ __metadata:
     dotenv: "npm:17.2.3"
     husky: "npm:9.1.7"
     invokers-polyfill: "npm:0.6.1"
-    kamado: "npm:1.1.0"
+    kamado: "npm:1.2.0"
     kiso.css: "npm:1.2.3"
     npm-run-all2: "npm:8.0.4"
     tslib: "npm:2.8.1"
@@ -10455,30 +10455,6 @@ __metadata:
   version: 6.0.2
   resolution: "just-diff@npm:6.0.2"
   checksum: 10c0/1931ca1f0cea4cc480172165c189a84889033ad7a60bee302268ba8ca9f222b43773fd5f272a23ee618d43d85d3048411f06b635571a198159e9a85bb2495f5c
-  languageName: node
-  linkType: hard
-
-"kamado@npm:1.1.0":
-  version: 1.1.0
-  resolution: "kamado@npm:1.1.0"
-  dependencies:
-    "@d-zero/dealer": "npm:1.5.3"
-    "@d-zero/roar": "npm:0.2.0"
-    "@d-zero/shared": "npm:0.17.1"
-    "@hono/node-server": "npm:1.19.7"
-    ansi-colors: "npm:4.1.3"
-    character-entities: "npm:2.0.2"
-    cosmiconfig: "npm:9.0.0"
-    dayjs: "npm:1.11.19"
-    fast-glob: "npm:3.3.3"
-    gray-matter: "npm:4.0.3"
-    hono: "npm:4.11.3"
-    jsdom: "npm:27.4.0"
-    open: "npm:11.0.0"
-    yaml: "npm:2.8.2"
-  bin:
-    kamado: dist/index.js
-  checksum: 10c0/fc99aa6d49c02fab075791e86db4f46753ce7c2fb1bd7fa57b39d3e77d8226ebfa791d2108ab025ff94463cf5af1744a59bd2b86acd506d5a9c858c7fe669efb
   languageName: node
   linkType: hard
 
