@@ -1298,7 +1298,7 @@ __metadata:
     "@kamado-io/page-compiler": "npm:1.2.0"
     "@kamado-io/pug-compiler": "npm:1.2.0"
     "@kamado-io/script-compiler": "npm:1.2.0"
-    "@kamado-io/style-compiler": "npm:1.1.0"
+    "@kamado-io/style-compiler": "npm:1.2.0"
     "@prettier/plugin-pug": "npm:3.4.2"
     "@types/node": "npm:25.0.3"
     cross-env: "npm:10.1.0"
@@ -2219,16 +2219,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kamado-io/style-compiler@npm:1.1.0":
-  version: 1.1.0
-  resolution: "@kamado-io/style-compiler@npm:1.1.0"
+"@kamado-io/style-compiler@npm:1.2.0":
+  version: 1.2.0
+  resolution: "@kamado-io/style-compiler@npm:1.2.0"
   dependencies:
     cssnano: "npm:7.1.2"
-    kamado: "npm:1.1.0"
+    kamado: "npm:1.2.0"
     postcss: "npm:8.5.6"
     postcss-import: "npm:16.1.1"
     postcss-load-config: "npm:6.0.1"
-  checksum: 10c0/45af561dab931af797502a5170f3ad1b46e1c7357c34569c6dca8bf345e24b33919d9586a64a0e1749f75cdd78ced68acb9caa32dad458f8c5cbbd49f5b9da51
+  checksum: 10c0/9120b9eec63c17d56eab35087d9fdc149fac683f7d0a18cc48ddadc9488efcf39e6d1d0356ec5fea77ad6c0f690aac5ecda7cbe0427a834a7f846d34936d6ff1
   languageName: node
   linkType: hard
 
