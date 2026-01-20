@@ -69,7 +69,7 @@
 	[data-bgi='button'],
 	[data-bgi='download-file'] {
 		a {
-			display: flex;
+			display: block flex;
 			justify-content: center;
 			min-inline-size: 10em;
 			max-inline-size: 20em;
@@ -175,12 +175,12 @@
 	}
 
 	.cc-form-field-list {
-		display: flex;
+		display: block flex;
 		flex-direction: column;
 	}
 
 	.cc-form-fieldset {
-		display: block;
+		display: block flow;
 		padding-block: 1rem;
 		padding-inline: 2rem;
 
@@ -197,19 +197,19 @@
 	}
 
 	.cc-form-fieldset-heading {
-		display: flex;
+		display: block flex;
 		align-items: center;
 		font-size: calc(18 / 16 * 1rem);
 		font-weight: bold;
 
 		label {
-			display: block;
+			display: block flow;
 			cursor: pointer;
 		}
 
 		.required,
 		.optional {
-			display: block;
+			display: block flow;
 			margin-block: 0;
 			margin-inline: 0 0.5rem;
 			font-size: calc(12 / 18 * 1rem);
@@ -241,7 +241,7 @@
 
 		&[data-type='text'],
 		&[data-type='select'] {
-			display: grid;
+			display: block grid;
 			grid-template:
 				'before-attachment input after-attachment' auto
 				'description description description' auto
@@ -293,7 +293,7 @@
 		}
 
 		.mail-input {
-			display: block;
+			display: block flow;
 			grid-area: input;
 			inline-size: 100%;
 
@@ -346,12 +346,12 @@
 		}
 
 		.checkbox {
-			display: flex;
+			display: block flex;
 			align-items: center;
 			justify-content: flex-start;
 
 			input {
-				display: block;
+				display: block flow;
 				padding: 0;
 				margin: 0;
 				line-height: 1;
@@ -364,12 +364,12 @@
 
 		.mail-group-radio {
 			> span {
-				display: flex;
+				display: block flex;
 				align-items: center;
 				justify-content: flex-start;
 
 				input {
-					display: block;
+					display: block flow;
 					padding: 0;
 					margin-block: 0;
 					margin-inline: 0 0.5rem;

@@ -1,6 +1,6 @@
 .c-pagination {
 	clear: both;
-	display: flex;
+	display: block flex;
 	justify-content: center;
 	margin-block-start: 1rem;
 	overflow: hidden;
@@ -21,7 +21,7 @@
 .c-pagination__next {
 	a {
 		position: relative;
-		display: flex;
+		display: block flex;
 		align-items: center;
 		padding-inline: 1rem;
 		border: 1px solid var(--border-color);
@@ -50,7 +50,7 @@
 }
 
 .c-pagination__numbers {
-	display: flex;
+	display: block flex;
 	order: 2;
 	padding: 0;
 	margin-block: 0;
@@ -64,7 +64,7 @@
 }
 
 .c-pagination__number {
-	display: block;
+	display: block flow;
 	margin-block: 0;
 	margin-inline: 0.5rem;
 	list-style: none;
@@ -75,7 +75,7 @@
 	}
 
 	a {
-		display: block;
+		display: block flow;
 		padding-block: 0;
 		padding-inline: 0.3rem;
 		text-align: center;
