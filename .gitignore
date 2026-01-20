@@ -16,4 +16,4 @@ yarn-error.log
 *storybook.log
 
 # claude
-.claude/
+.claude/*.local.*
