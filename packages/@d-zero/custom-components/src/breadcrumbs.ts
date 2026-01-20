@@ -50,7 +50,7 @@ export class Breadcrumbs extends HTMLElement {
 				--current-color: ${Breadcrumbs.defaultStyle.currentColor};
 				--font: ${Breadcrumbs.defaultStyle.font};
 				--current-font: ${Breadcrumbs.defaultStyle.currentFont};
-				display: block;
+				display: block flow;
 			}
 			* {
 				box-sizing: border-box;
@@ -58,7 +58,7 @@ export class Breadcrumbs extends HTMLElement {
 			ol {
 				font: var(--font);
 				color: var(--color);
-				display: flex;
+				display: block flex;
 				flex-wrap: wrap;
 				list-style: none;
 				padding: 0;
@@ -69,7 +69,7 @@ export class Breadcrumbs extends HTMLElement {
 				align-items: center;
 			}
 			:host::part(separator) {
-				display: block;
+				display: block flow;
 				margin: 0 var(--separator-spacing);
 				color: var(--separator-color);
 			}
