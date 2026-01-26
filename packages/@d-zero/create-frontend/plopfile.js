@@ -5,7 +5,7 @@ import { argv } from 'node:process';
 
 import ignore from 'ignore';
 import meow from 'meow';
-import minimatch from 'minimatch';
+import { minimatch } from 'minimatch';
 
 import { command } from './command.js';
 import { copyLibraries } from './libraries.js';
