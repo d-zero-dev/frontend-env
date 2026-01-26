@@ -185,7 +185,8 @@ export default async function (plop) {
 			}
 
 			const filteredFiles = scaffoldFiles.filter(
-				(file) => !ignoredFiles.some((pattern) => minimatch(file, pattern)),
+				(file) =>
+					!ignoredFiles.some((pattern) => minimatch(file, pattern, { dot: true })),
 			);
 
 			return [
