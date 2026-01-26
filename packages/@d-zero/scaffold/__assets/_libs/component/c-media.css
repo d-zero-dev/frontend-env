@@ -12,7 +12,7 @@
 	}
 
 	> a {
-		display: grid;
+		display: block grid;
 		grid-template:
 			'img header' auto
 			'img body' auto
@@ -29,7 +29,7 @@
 	img {
 		inset-block-start: 0;
 		inset-inline-start: 0;
-		display: block;
+		display: block flow;
 		inline-size: 100%;
 		block-size: 100%;
 		aspect-ratio: 4 / 3;
@@ -85,13 +85,13 @@
 
 /* ブログのみ */
 .c-media__tag-item {
-	display: inline-block;
+	display: inline flow-root;
 	padding: 0;
 	margin: 0;
 	list-style: none;
 
 	span {
-		display: block;
+		display: block flow;
 		padding-block: 0.2em;
 		padding-inline: 1em;
 	}

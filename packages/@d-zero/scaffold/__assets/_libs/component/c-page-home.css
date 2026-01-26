@@ -4,7 +4,7 @@
 }
 
 .c-page-home__base {
-	display: grid;
+	display: block grid;
 	grid-template:
 		'header' auto
 		'nav-global' auto

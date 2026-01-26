@@ -1,5 +1,5 @@
 .c-media-list {
-	display: grid;
+	display: block grid;
 	grid-template-columns: 1fr;
 	gap: 0.5rem;
 }

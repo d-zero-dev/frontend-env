@@ -76,12 +76,12 @@ export class HamburgerMenu extends HTMLElement {
 				--padding-block: ${HamburgerMenu.defaultStyle.paddingBlockValue}${HamburgerMenu.defaultStyle.paddingBlockUnit};
 				--padding-inline: ${HamburgerMenu.defaultStyle.paddingInlineValue}${HamburgerMenu.defaultStyle.paddingInlineUnit};
 				container: hamburger-menu / inline-size;
-				display: block;
+				display: block flow;
 				inline-size: 5em;
 				block-size: 5em;
 			}
 			button {
-				display: block;
+				display: block flow;
 				width: 100%;
 				height: 100%;
 				border: none;
@@ -98,7 +98,7 @@ export class HamburgerMenu extends HTMLElement {
 				-ms-appearance: none;
 
 				> span {
-					display: flex;
+					display: block flex;
 					flex-direction: column;
 					justify-content: space-between;
 					align-items: center;
@@ -107,7 +107,7 @@ export class HamburgerMenu extends HTMLElement {
 					padding: var(--padding-block) var(--padding-inline);
 
 					> span {
-						display: block;
+						display: block flow;
 						width: var(--line-width);
 						max-width: 100%;
 						height: var(--line-height);

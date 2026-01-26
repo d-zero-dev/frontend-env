@@ -24,7 +24,7 @@
 	img {
 		inset-block-start: 0;
 		inset-inline-start: 0;
-		display: block;
+		display: block flow;
 		inline-size: 100%;
 		aspect-ratio: 4 / 3;
 		object-fit: cover;
@@ -76,13 +76,13 @@
 
 /* ブログのみ */
 .c-card__tag-item {
-	display: inline-block;
+	display: inline flow-root;
 	padding: 0;
 	margin: 0;
 	list-style: none;
 
 	span {
-		display: block;
+		display: block flow;
 		padding-block: 0.2rem;
 		padding-inline: 1rem;
 	}

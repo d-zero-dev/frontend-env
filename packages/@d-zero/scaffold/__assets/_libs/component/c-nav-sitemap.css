@@ -7,7 +7,7 @@
 	}
 
 	a {
-		display: block;
+		display: block flow;
 		padding-inline-start: 2rem;
 		color: inherit;
 		text-decoration: none;
@@ -37,7 +37,7 @@
 	}
 
 	li[data-sitemap-level='1'] {
-		display: inline-block; /* 💉 for columns item technic */
+		display: inline flow-root; /* 💉 for columns item technic */
 		inline-size: 100%; /* 💉 for columns item technic */
 		padding: 0;
 		margin: 0;
@@ -68,7 +68,7 @@
 	}
 
 	li[data-sitemap-level='2'] {
-		display: block;
+		display: block flow;
 		padding: 0;
 		margin: 0;
 		margin-block: 0 0.5em;
@@ -104,7 +104,7 @@
 	}
 
 	li[data-sitemap-level='3'] {
-		display: block;
+		display: block flow;
 		padding: 0;
 		margin: 0;
 
