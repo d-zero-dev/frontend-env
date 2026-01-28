@@ -19,6 +19,6 @@
 @import '@/component/c-media.css' layer(component);
 @import '@/component/c-content-index.css' layer(component);
 @import '@burger-editor/css' layer(main-base);
-@import '@/component/c-content-main.css' layer(main);
+@import '@/component/c-content-main/index.css' layer(main);
 
 @layer reset, base, general, component, main-base, main;
