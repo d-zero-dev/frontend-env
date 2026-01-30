@@ -1343,7 +1343,7 @@ __metadata:
     dotenv: "npm:17.2.3"
     husky: "npm:9.1.7"
     invokers-polyfill: "npm:0.6.1"
-    kamado: "npm:1.2.0"
+    kamado: "npm:1.3.0"
     kiso.css: "npm:1.2.4"
     npm-run-all2: "npm:8.0.4"
     tslib: "npm:2.8.1"
@@ -1766,15 +1766,6 @@ __metadata:
   version: 2.5.1
   resolution: "@holiday-jp/holiday_jp@npm:2.5.1"
   checksum: 10c0/ef6f64041ae12eaaf4e78eb3cdc63e9d47b2561231907840de0cf90b84037043c8349f0debc19ba584b9b7959443ef26d9b587474f55c9f9af8a0a2a5ad741c3
-  languageName: node
-  linkType: hard
-
-"@hono/node-server@npm:1.19.8":
-  version: 1.19.8
-  resolution: "@hono/node-server@npm:1.19.8"
-  peerDependencies:
-    hono: ^4
-  checksum: 10c0/47955a497523f7c90db83e9a7a3cf589a824a9ddc8b0ba80c11f849638f6b9a08f519df4e15facd69381a1993ae19bb3fa5fe31b3d562b0341940eb51b99848b
   languageName: node
   linkType: hard
 
@@ -9263,13 +9254,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:4.11.3":
-  version: 4.11.3
-  resolution: "hono@npm:4.11.3"
-  checksum: 10c0/9e68313b3329cab0d93633909c206073315b326aa05cf6f5596214cb6e3b9913c9b59650d46a86ec9e4865b4b195561289cca191623aa557a3c2380121ff39df
-  languageName: node
-  linkType: hard
-
 "hono@npm:4.11.5":
   version: 4.11.5
   resolution: "hono@npm:4.11.5"
@@ -10528,31 +10512,6 @@ __metadata:
   version: 6.0.2
   resolution: "just-diff@npm:6.0.2"
   checksum: 10c0/1931ca1f0cea4cc480172165c189a84889033ad7a60bee302268ba8ca9f222b43773fd5f272a23ee618d43d85d3048411f06b635571a198159e9a85bb2495f5c
-  languageName: node
-  linkType: hard
-
-"kamado@npm:1.2.0":
-  version: 1.2.0
-  resolution: "kamado@npm:1.2.0"
-  dependencies:
-    "@d-zero/dealer": "npm:1.5.3"
-    "@d-zero/roar": "npm:0.2.0"
-    "@d-zero/shared": "npm:0.17.1"
-    "@hono/node-server": "npm:1.19.8"
-    ansi-colors: "npm:4.1.3"
-    character-entities: "npm:2.0.2"
-    cosmiconfig: "npm:9.0.0"
-    dayjs: "npm:1.11.19"
-    fast-glob: "npm:3.3.3"
-    gray-matter: "npm:4.0.3"
-    hono: "npm:4.11.3"
-    jsdom: "npm:27.4.0"
-    open: "npm:11.0.0"
-    picomatch: "npm:4.0.3"
-    yaml: "npm:2.8.2"
-  bin:
-    kamado: dist/index.js
-  checksum: 10c0/7f48e3a11bbf7a71dc4826cf7b27601425e0d44cd32377b1e2663e6a9ddb1d2ffee9077cfdd9c77d797a092d147dbbc21afaa7e453338f444035e014883a3d64
   languageName: node
   linkType: hard
 
