@@ -1141,7 +1141,7 @@ __metadata:
   resolution: "@d-zero/create-frontend@workspace:packages/@d-zero/create-frontend"
   dependencies:
     "@d-zero/scaffold": "npm:5.0.0"
-    "@types/node": "npm:25.2.0"
+    "@types/node": "npm:25.2.1"
     execa: "npm:9.6.1"
     i18n-js: "npm:4.5.1"
     ignore: "npm:7.0.5"
@@ -1332,7 +1332,7 @@ __metadata:
     "@kamado-io/script-compiler": "npm:1.3.0"
     "@kamado-io/style-compiler": "npm:1.3.0"
     "@prettier/plugin-pug": "npm:3.4.2"
-    "@types/node": "npm:25.2.0"
+    "@types/node": "npm:25.2.1"
     cross-env: "npm:10.1.0"
     dialog-toggle-events-polyfill: "npm:1.1.4"
     dotenv: "npm:17.2.3"
@@ -4204,12 +4204,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:25.2.0":
+"@types/node@npm:*":
   version: 25.2.0
   resolution: "@types/node@npm:25.2.0"
   dependencies:
     undici-types: "npm:~7.16.0"
   checksum: 10c0/89559ea0de5c8c2da051b384f2cd3161012446816e05d18841838f814e57eb1865f000622e903f08d14f5242736063ed4003a4a359730fdd367e35e2122a8fce
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:25.2.1":
+  version: 25.2.1
+  resolution: "@types/node@npm:25.2.1"
+  dependencies:
+    undici-types: "npm:~7.16.0"
+  checksum: 10c0/ce42fa07495093c55b6398e3c4346d644a61b8c4f59d2e0c0ed152ea0e4327c60a41d5fdfa3e0fc4f4776eb925e2b783b6b942501fc044328a44980bc2de4dc6
   languageName: node
   linkType: hard
 
