@@ -1160,7 +1160,7 @@ __metadata:
     execa: "npm:9.6.1"
     i18n-js: "npm:4.5.2"
     ignore: "npm:7.0.5"
-    meow: "npm:14.0.0"
+    meow: "npm:14.1.0"
     plop: "npm:4.0.4"
   bin:
     create-dzero-frontend: ./index.js
@@ -11766,6 +11766,13 @@ __metadata:
   version: 14.0.0
   resolution: "meow@npm:14.0.0"
   checksum: 10c0/dbe4e136e0f858472d8b8c24d382054fe9898f6f47c58a42be25e6b1985e5ae31048573bf399f6e5877bf9d5b89cb840beae7350682019f998ff30baaa5e4106
+  languageName: node
+  linkType: hard
+
+"meow@npm:14.1.0":
+  version: 14.1.0
+  resolution: "meow@npm:14.1.0"
+  checksum: 10c0/f0ca4bb4fd08e4b9470fcbb7332deb61d72d40d4bda18ffb87c1a98e5014c0b44749ae9f0cab18fa532e26d61cef5d453831f9ae23ac09fa8ea0e0469be73ebc
   languageName: node
   linkType: hard
 
