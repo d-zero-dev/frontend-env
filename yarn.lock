@@ -1286,7 +1286,7 @@ __metadata:
     postcss-calc: "npm:10.1.1"
     postcss-clip-path-polyfill: "npm:1.1.0"
     postcss-color-mod-function: "npm:4.1.1"
-    postcss-custom-media: "npm:12.0.0"
+    postcss-custom-media: "npm:12.0.1"
     postcss-extend-rule: "npm:4.0.0"
     postcss-math: "npm:0.0.10"
     postcss-scss: "npm:4.0.9"
@@ -13647,9 +13647,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-custom-media@npm:12.0.0":
-  version: 12.0.0
-  resolution: "postcss-custom-media@npm:12.0.0"
+"postcss-custom-media@npm:12.0.1":
+  version: 12.0.1
+  resolution: "postcss-custom-media@npm:12.0.1"
   dependencies:
     "@csstools/cascade-layer-name-parser": "npm:^3.0.0"
     "@csstools/css-parser-algorithms": "npm:^4.0.0"
@@ -13657,7 +13657,7 @@ __metadata:
     "@csstools/media-query-list-parser": "npm:^5.0.0"
   peerDependencies:
     postcss: ^8.4
-  checksum: 10c0/bf1f3939d83a24eb7ef86f9fc2cb799026d4dc4620d3769eef9234d23fd528c73e907c2b88cb239290d169e5ddf8f0624cf8b22084874953c224e6000d55bf50
+  checksum: 10c0/93f964613e3d3e73ba86d13386a9ea981bda5f334607a843434ef55cfa3773e3989224c8032b66b03731cc822a19fc110994be2c83cac99f2b06eeb66dac66f2
   languageName: node
   linkType: hard
 
