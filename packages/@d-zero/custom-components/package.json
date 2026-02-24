@@ -31,12 +31,12 @@
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "5.0.1",
-		"@storybook/addon-docs": "10.2.11",
+		"@storybook/addon-docs": "10.2.12",
 		"@storybook/experimental-addon-test": "8.6.17",
 		"@storybook/test": "8.6.15",
-		"@storybook/web-components": "10.2.11",
-		"@storybook/web-components-vite": "10.2.11",
+		"@storybook/web-components": "10.2.12",
+		"@storybook/web-components-vite": "10.2.12",
 		"lit": "3.3.2",
-		"storybook": "10.2.11"
+		"storybook": "10.2.12"
 	}
 }
