@@ -14,14 +14,14 @@
 	},
 	"dependencies": {
 		"@d-zero/scaffold": "5.0.0",
-		"i18n-js": "4.5.1",
+		"i18n-js": "4.5.2",
 		"ignore": "7.0.5",
-		"meow": "14.0.0",
+		"meow": "14.1.0",
 		"minimatch": "10.1.1",
 		"plop": "4.0.4"
 	},
 	"devDependencies": {
-		"@types/node": "25.0.10",
+		"@types/node": "25.3.0",
 		"execa": "9.6.1"
 	}
 }
