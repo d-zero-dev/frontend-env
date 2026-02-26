@@ -17,7 +17,7 @@
 		"i18n-js": "4.5.2",
 		"ignore": "7.0.5",
 		"meow": "14.1.0",
-		"minimatch": "10.2.1",
+		"minimatch": "10.2.4",
 		"plop": "4.0.4"
 	},
 	"devDependencies": {
