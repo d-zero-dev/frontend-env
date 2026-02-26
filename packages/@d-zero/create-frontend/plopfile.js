@@ -5,6 +5,7 @@ import { argv } from 'node:process';
 
 import ignore from 'ignore';
 import meow from 'meow';
+import { minimatch } from 'minimatch';
 
 import { command } from './command.js';
 import { copyLibraries } from './libraries.js';
@@ -104,15 +105,7 @@ export default async function (plop) {
 			'**/*.test/**/*',
 			// Test Files
 			'*.test.*',
-		])
-		.add(
-			// BurgerEditor for baserCMS
-			cli.flags.type.startsWith('basercms') ? [] : ['**/bge_style.css'],
-		)
-		.add(
-			// static
-			cli.flags.type === 'static' ? ['**/__tmpl/**/*'] : [],
-		);
+		]);
 
 	const scaffoldFiles = ig.filter(await getAllFiles(scaffoldDir, scaffoldDir)).toSorted();
 
@@ -181,8 +174,23 @@ export default async function (plop) {
 				console.log(config);
 			}
 
+			const ignoredFiles = [];
+
+			if (!config.type.startsWith('basercms')) {
+				ignoredFiles.push('**/bge_style.css');
+			}
+
+			if (config.type === 'static') {
+				ignoredFiles.push('**/__tmpl/**/*');
+			}
+
+			const filteredFiles = scaffoldFiles.filter(
+				(file) =>
+					!ignoredFiles.some((pattern) => minimatch(file, pattern, { dot: true })),
+			);
+
 			return [
-				...scaffoldFiles.map(
+				...filteredFiles.map(
 					/**
 					 * @see https://plopjs.com/documentation/#add
 					 * @type {import('plop').AddActionConfig}
