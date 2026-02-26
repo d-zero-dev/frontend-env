@@ -1,0 +1,13 @@
+.c-content-main {
+	[data-bgi] {
+		:where(&, & > div) {
+			:where(& > :first-child) {
+				margin-block-start: 0;
+			}
+
+			:where(& > :last-child) {
+				margin-block-end: 0;
+			}
+		}
+	}
+}
