@@ -21,7 +21,7 @@
 		"plop": "4.0.4"
 	},
 	"devDependencies": {
-		"@types/node": "25.3.0",
+		"@types/node": "25.3.1",
 		"execa": "9.6.1"
 	}
 }
