@@ -96,7 +96,6 @@ function expectedBasercms4(dir) {
 		`✔  ++ ${dir}/__assets/htdocs/__tmpl/index.pug`,
 		`✔  ++ ${dir}/__assets/htdocs/css/bge_style.css`,
 		`✔  ++ ${dir}/__assets/htdocs/css/style.css`,
-		`✔  ++ ${dir}/__assets/htdocs/index.pug`,
 		`✔  ++ ${dir}/__assets/htdocs/js/script.ts`,
 		`✔  ++ ${dir}/__assets/htdocs/sample/index.html`,
 		`✔  ++ ${dir}/__info/print.txt`,
@@ -244,6 +243,7 @@ describe('CLI', () => {
 			`✔  ++ ${dir}/__assets/_libs/style/general/button.css`,
 			`✔  ++ ${dir}/__assets/_libs/style/general/img.css`,
 			`✔  ++ ${dir}/__assets/htdocs/css/style.css`,
+			`✔  ++ ${dir}/__assets/htdocs/index.json`,
 			`✔  ++ ${dir}/__assets/htdocs/index.pug`,
 			`✔  ++ ${dir}/__assets/htdocs/js/script.ts`,
 			`✔  ++ ${dir}/__assets/htdocs/sample/index.html`,
@@ -331,6 +331,7 @@ describe('CLI', () => {
 			`✔  ++ ${dir}/__assets/_libs/style/general/button.css`,
 			`✔  ++ ${dir}/__assets/_libs/style/general/img.css`,
 			`✔  ++ ${dir}/__assets/htdocs/css/style.css`,
+			`✔  ++ ${dir}/__assets/htdocs/index.json`,
 			`✔  ++ ${dir}/__assets/htdocs/index.pug`,
 			`✔  ++ ${dir}/__assets/htdocs/js/script.ts`,
 			`✔  ++ ${dir}/__assets/htdocs/sample/index.html`,
@@ -354,5 +355,17 @@ describe('CLI', () => {
 		const dir = path.join(tmpDir, getName(task));
 		const actual = await interactiveTest(dir, 'basercms4');
 		expect(actual).toStrictEqual(expectedBasercms4(dir));
+	});
+
+	describe('kamado.config.ts', () => {
+		test('basercms4: startPath が "__tmpl/" に設定されている', async ({
+			tmpDir,
+			task,
+		}) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'basercms4');
+			const content = fs.readFileSync(path.join(dir, 'kamado.config.ts'), 'utf8');
+			expect(content).toContain("startPath: '__tmpl/'");
+		});
 	});
 });

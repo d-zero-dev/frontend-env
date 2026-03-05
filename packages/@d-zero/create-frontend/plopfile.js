@@ -3,9 +3,12 @@ import fsp from 'node:fs/promises';
 import path from 'node:path';
 import { argv } from 'node:process';
 
+import prettierConfig from '@d-zero/prettier-config/base';
 import ignore from 'ignore';
+import { generateCode, parseModule } from 'magicast';
 import meow from 'meow';
 import { minimatch } from 'minimatch';
+import { format as prettierFormat } from 'prettier';
 
 import { command } from './command.js';
 import { copyLibraries } from './libraries.js';
@@ -182,6 +185,8 @@ export default async function (plop) {
 
 			if (config.type === 'static') {
 				ignoredFiles.push('**/__tmpl/**/*');
+			} else {
+				ignoredFiles.push('__assets/htdocs/index.pug', '__assets/htdocs/index.json');
 			}
 
 			const filteredFiles = scaffoldFiles.filter(
@@ -200,7 +205,7 @@ export default async function (plop) {
 							type: 'add',
 							path: path.resolve(config.dest, originFile),
 							templateFile: path.resolve(scaffoldDir, originFile),
-							transform(content) {
+							async transform(content) {
 								const nameCandidate = path.basename(path.resolve(config.dest));
 
 								switch (originFile) {
@@ -238,15 +243,29 @@ export default async function (plop) {
 										}
 										break;
 									}
-									case '__assets/htdocs/index.pug': {
-										if (config.type === 'static') {
-											content = fs.readFileSync(
-												path.resolve(scaffoldDir, '__assets/htdocs/__tmpl/000_home.pug'),
-												'utf8',
-											);
+									case 'kamado.config.ts': {
+										if (config.type.startsWith('basercms')) {
+											const mod = parseModule(content);
+											mod.exports.default.devServer.startPath = '__tmpl/';
+											content = generateCode(mod).code;
 										}
+										break;
 									}
 								}
+
+								const ext = path.extname(originFile);
+								const parserMap = {
+									'.ts': 'typescript',
+									'.js': 'babel',
+									'.mjs': 'babel',
+									'.cjs': 'babel',
+									'.json': 'json',
+								};
+								const parser = parserMap[ext];
+								if (parser) {
+									content = await prettierFormat(content, { ...prettierConfig, parser });
+								}
+
 								return content;
 							},
 						};
