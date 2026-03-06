@@ -5,6 +5,7 @@
 @import '@/style/general/button.css' layer(general);
 @import '@/style/general/img.css' layer(general);
 @import '@burger-editor/css' layer(main-base);
-@import '@/component/c-content-main/index.css' layer(main);
+@import '@/style/c-content-main/index.css' layer(main);
+@import '@/style/burger-editor/index.css' layer(main);
 
 @layer reset, base, general, main-base, main-component;
