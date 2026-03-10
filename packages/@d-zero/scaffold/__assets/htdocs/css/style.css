@@ -4,8 +4,12 @@
 @import '@/style/general/body.css' layer(general);
 @import '@/style/general/button.css' layer(general);
 @import '@/style/general/img.css' layer(general);
-@import '@/component/c-page-home.css' layer(component);
-@import '@/component/c-page-sub.css' layer(component);
+@import '@/component/l-home.css' layer(layout);
+@import '@/component/l-sub.css' layer(layout);
+@import '@/component/p-home.css' layer(page);
+@import '@/component/p-sub-default.css' layer(page);
+@import '@/component/p-blog-index.css' layer(page);
+@import '@/component/p-form.css' layer(page);
 @import '@/component/c-header.css' layer(component);
 @import '@/component/c-footer.css' layer(component);
 @import '@/component/c-nav-global.css' layer(component);
@@ -17,8 +21,8 @@
 @import '@/component/c-card.css' layer(component);
 @import '@/component/c-media-list.css' layer(component);
 @import '@/component/c-media.css' layer(component);
-@import '@/component/c-content-index.css' layer(component);
+@import '@/component/c-categories.css' layer(component);
 @import '@burger-editor/css' layer(main-base);
 @import '@/component/c-content-main.css' layer(main);
 
-@layer reset, base, general, component, main-base, main;
+@layer reset, base, general, layout, page, component, main-base, main;

@@ -1,0 +1,16 @@
+.p-blog-index {
+	display: block grid;
+	grid-template:
+		'categories' auto
+		'.' 2rem
+		'body' 1fr
+		/ 1fr;
+}
+
+.p-blog-index__categories {
+	grid-area: categories;
+}
+
+.p-blog-index__body {
+	grid-area: body;
+}

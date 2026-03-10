@@ -1,9 +1,9 @@
-.c-page-sub {
+.l-sub {
 	inline-size: 100%;
 	block-size: 100%;
 }
 
-.c-page-sub__base {
+.l-sub__base {
 	display: block grid;
 	grid-template:
 		'header' auto
@@ -15,49 +15,49 @@
 	block-size: 100%;
 }
 
-.c-page-sub__header {
+.l-sub__header {
 	grid-area: header;
 }
 
-.c-page-sub__nav-global {
+.l-sub__nav-global {
 	grid-area: nav-global;
 }
 
-.c-page-sub__main {
+.l-sub__main {
 	grid-area: main;
 }
 
-.c-page-sub__nav-sitemap {
+.l-sub__nav-sitemap {
 	grid-area: nav-sitemap;
 }
 
-.c-page-sub__footer {
+.l-sub__footer {
 	grid-area: footer;
 }
 
-.c-page-sub__content {
+.l-sub__content {
 	padding-inline: 2em;
 }
 
-.c-page-sub__title-page {
+.l-sub__title-page {
 	max-inline-size: var(--wide-layout-width);
 	margin-block-end: 1em;
 	margin-inline: auto;
 }
 
-.c-page-sub__nav-breadcrumb {
+.l-sub__nav-breadcrumb {
 	max-inline-size: var(--wide-layout-width);
 	margin-block-end: 2em;
 	margin-inline: auto;
 }
 
-.c-page-sub__content-index {
+.l-sub__content-index {
 	max-inline-size: var(--content-width);
 	padding-block-end: calc(60 / 17 * 1em);
 	margin-inline: auto;
 }
 
-.c-page-sub__content-main {
+.l-sub__content-main {
 	max-inline-size: var(--content-width);
 	margin-inline: auto;
 }
