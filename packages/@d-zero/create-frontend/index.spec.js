@@ -21,9 +21,15 @@ function getName(task) {
  */
 function expectedBasercms4(dir) {
 	return [
+		`✔  ++ ${dir}/.claude/commands/debug-diff.md`,
+		`✔  ++ ${dir}/.claude/commands/fix-component.md`,
+		`✔  ++ ${dir}/.claude/commands/git.md`,
+		`✔  ++ ${dir}/.claude/commands/release.md`,
+		`✔  ++ ${dir}/.claude/settings.json`,
 		`✔  ++ ${dir}/.editorconfig`,
 		`✔  ++ ${dir}/.gitignore`,
 		`✔  ++ ${dir}/.husky/pre-commit`,
+		`✔  ++ ${dir}/.mcp.json`,
 		`✔  ++ ${dir}/.npmignore`,
 		`✔  ++ ${dir}/.postcssrc.js`,
 		`✔  ++ ${dir}/.prettierrc.mjs`,
@@ -35,6 +41,7 @@ function expectedBasercms4(dir) {
 		`✔  ++ ${dir}/.vscode/settings.json`,
 		`✔  ++ ${dir}/.yarnrc.yml`,
 		`✔  ++ ${dir}/CHANGELOG.md`,
+		`✔  ++ ${dir}/CLAUDE.md`,
 		`✔  ++ ${dir}/README.md`,
 		`✔  ++ ${dir}/__assets/_libs/.markuplintrc`,
 		`✔  ++ ${dir}/__assets/_libs/component/c-card-list.css`,
@@ -185,9 +192,15 @@ describe('CLI', () => {
 		const dir = path.join(tmpDir, getName(task));
 		const actual = await cliTest(dir);
 		expect(actual).toStrictEqual([
+			`✔  ++ ${dir}/.claude/commands/debug-diff.md`,
+			`✔  ++ ${dir}/.claude/commands/fix-component.md`,
+			`✔  ++ ${dir}/.claude/commands/git.md`,
+			`✔  ++ ${dir}/.claude/commands/release.md`,
+			`✔  ++ ${dir}/.claude/settings.json`,
 			`✔  ++ ${dir}/.editorconfig`,
 			`✔  ++ ${dir}/.gitignore`,
 			`✔  ++ ${dir}/.husky/pre-commit`,
+			`✔  ++ ${dir}/.mcp.json`,
 			`✔  ++ ${dir}/.npmignore`,
 			`✔  ++ ${dir}/.postcssrc.js`,
 			`✔  ++ ${dir}/.prettierrc.mjs`,
@@ -199,6 +212,7 @@ describe('CLI', () => {
 			`✔  ++ ${dir}/.vscode/settings.json`,
 			`✔  ++ ${dir}/.yarnrc.yml`,
 			`✔  ++ ${dir}/CHANGELOG.md`,
+			`✔  ++ ${dir}/CLAUDE.md`,
 			`✔  ++ ${dir}/README.md`,
 			`✔  ++ ${dir}/__assets/_libs/.markuplintrc`,
 			`✔  ++ ${dir}/__assets/_libs/component/c-card-list.css`,
@@ -273,9 +287,15 @@ describe('CLI', () => {
 		const dir = path.join(tmpDir, getName(task));
 		const actual = await cliTest(dir, 'static');
 		expect(actual).toStrictEqual([
+			`✔  ++ ${dir}/.claude/commands/debug-diff.md`,
+			`✔  ++ ${dir}/.claude/commands/fix-component.md`,
+			`✔  ++ ${dir}/.claude/commands/git.md`,
+			`✔  ++ ${dir}/.claude/commands/release.md`,
+			`✔  ++ ${dir}/.claude/settings.json`,
 			`✔  ++ ${dir}/.editorconfig`,
 			`✔  ++ ${dir}/.gitignore`,
 			`✔  ++ ${dir}/.husky/pre-commit`,
+			`✔  ++ ${dir}/.mcp.json`,
 			`✔  ++ ${dir}/.npmignore`,
 			`✔  ++ ${dir}/.postcssrc.js`,
 			`✔  ++ ${dir}/.prettierrc.mjs`,
@@ -287,6 +307,7 @@ describe('CLI', () => {
 			`✔  ++ ${dir}/.vscode/settings.json`,
 			`✔  ++ ${dir}/.yarnrc.yml`,
 			`✔  ++ ${dir}/CHANGELOG.md`,
+			`✔  ++ ${dir}/CLAUDE.md`,
 			`✔  ++ ${dir}/README.md`,
 			`✔  ++ ${dir}/__assets/_libs/.markuplintrc`,
 			`✔  ++ ${dir}/__assets/_libs/component/c-card-list.css`,
