@@ -2,8 +2,8 @@
 	"mcpServers": {
 		"chrome-devtools": {
 			"type": "stdio",
-			"command": "npx",
-			"args": ["-y", "chrome-devtools-mcp", "--isolated"],
+			"command": "yarn",
+			"args": ["exec", "chrome-devtools-mcp", "--isolated"],
 			"env": {}
 		},
 		"figma-remote-mcp": {
