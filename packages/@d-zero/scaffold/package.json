@@ -43,6 +43,7 @@
 		"last 2 ios_saf version"
 	],
 	"devDependencies": {
+		"chrome-devtools-mcp": "0.21.0",
 		"@burger-editor/local": "4.0.0-alpha.61",
 		"@d-zero/cspell-config": "5.0.0",
 		"@d-zero/eslint-config": "5.0.0",
