@@ -12,6 +12,8 @@
 		"enabled": true,
 		"automerge": true
 	},
+	"minimumReleaseAge": "7 days",
+	"internalChecksFilter": "strict",
 	"autoApprove": true,
 	"labels": ["Dependencies", "Renovate"],
 	"packageRules": [
