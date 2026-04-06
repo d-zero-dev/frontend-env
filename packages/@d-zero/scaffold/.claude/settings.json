@@ -5,11 +5,12 @@
 			"Bash(yarn install)",
 			"Bash(yarn lint:*)",
 			"Bash(yarn test:*)",
-			"Bash(gh repo list:*)",
-			"Bash(gh repo view:*)",
-			"Bash(gh repo gitignore:*)",
-			"Bash(gh repo license:*)",
+			"Bash(gh repo list *)",
+			"Bash(gh repo view *)",
+			"Bash(gh repo gitignore *)",
+			"Bash(gh repo license *)",
 			"mcp__chrome-devtools__click",
+			"mcp__chrome-devtools__emulate",
 			"mcp__chrome-devtools__evaluate_script",
 			"mcp__chrome-devtools__list_console_messages",
 			"mcp__chrome-devtools__list_pages",
@@ -27,8 +28,8 @@
 			"Bash(rm --force)",
 			"Bash(rm -rf)",
 			"Bash(rm -f)",
-			"Bash(sed:*)",
-			"Bash(npm:*)"
+			"Bash(sed *)",
+			"Bash(npm *)"
 		]
 	},
 	"enabledMcpjsonServers": ["chrome-devtools", "figma-remote-mcp"]
