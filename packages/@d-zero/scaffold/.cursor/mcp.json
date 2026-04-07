@@ -1,0 +1,8 @@
+{
+	"mcpServers": {
+		"chrome-devtools": {
+			"command": "yarn",
+			"args": ["exec", "chrome-devtools-mcp", "--isolated"]
+		}
+	}
+}
