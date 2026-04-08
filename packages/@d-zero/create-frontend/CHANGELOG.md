@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.1.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0...v5.1.0) (2026-04-08)
+
+### Bug Fixes
+
+- **create-frontend:** correct minimatch import ([c6e5eb1](https://github.com/d-zero-dev/frontend-env/commit/c6e5eb1c078d0805015a9e619d0289d8a9ba700c))
+- **create-frontend:** correct scaffold file filtering in interactive mode ([ffa3476](https://github.com/d-zero-dev/frontend-env/commit/ffa34761a72204667605581d6ac32c2b1936babf)), closes [#804](https://github.com/d-zero-dev/frontend-env/issues/804)
+- **create-frontend:** exclude dotfiles from ignored patterns ([a4da0d0](https://github.com/d-zero-dev/frontend-env/commit/a4da0d03d36b95bb60a5990ffc916095909cfd77))
+
+### Features
+
+- **create-frontend:** exclude index files for CMS types and format generated files ([cdd2a25](https://github.com/d-zero-dev/frontend-env/commit/cdd2a25874e7ec21a055abb74a206fe681345518))
+
 # [5.0.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.19...v5.0.0) (2026-01-05)
 
 **Note:** Version bump only for package @d-zero/create-frontend

@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.1.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0...v5.1.0) (2026-04-08)
+
+### Bug Fixes
+
+- change prepare to postinstall for Yarn v4 compatibility ([cd3cac1](https://github.com/d-zero-dev/frontend-env/commit/cd3cac12daec430a9f4426c29983e9ea39fbe8e7)), closes [#766](https://github.com/d-zero-dev/frontend-env/issues/766)
+- **create-frontend:** correct minimatch import ([c6e5eb1](https://github.com/d-zero-dev/frontend-env/commit/c6e5eb1c078d0805015a9e619d0289d8a9ba700c))
+- **create-frontend:** correct scaffold file filtering in interactive mode ([ffa3476](https://github.com/d-zero-dev/frontend-env/commit/ffa34761a72204667605581d6ac32c2b1936babf)), closes [#804](https://github.com/d-zero-dev/frontend-env/issues/804)
+- **create-frontend:** exclude dotfiles from ignored patterns ([a4da0d0](https://github.com/d-zero-dev/frontend-env/commit/a4da0d03d36b95bb60a5990ffc916095909cfd77))
+- **repo:** bypass minimumReleaseAge for vulnerability alerts in Renovate ([173d81d](https://github.com/d-zero-dev/frontend-env/commit/173d81dd27e211d701665fa1e784ea61d9457ba2))
+- **repo:** disable postinstall scripts for third-party packages ([1fa4660](https://github.com/d-zero-dev/frontend-env/commit/1fa46609d04aa4811d7718a454e9c37ceb63c590))
+- **scaffold:** add defaultSemverRangePrefix to .yarnrc.yml ([14b75c3](https://github.com/d-zero-dev/frontend-env/commit/14b75c3f17da62584efba47865ae6436bf9c4faa))
+- **scaffold:** replace prepare with postinstall for husky setup ([8ee55e0](https://github.com/d-zero-dev/frontend-env/commit/8ee55e03ba0858157891ba298be2ce842dd9772a))
+- **scaffold:** update deprecated permission pattern syntax and add emulate tool ([c73e280](https://github.com/d-zero-dev/frontend-env/commit/c73e2808be5bece35793cf5135c33d5aa61e1902))
+- use url constant in meta.pug ([3b3bc48](https://github.com/d-zero-dev/frontend-env/commit/3b3bc489f8c865df01d8289ab73ee08e476f557e))
+
+### Features
+
+- **create-frontend:** exclude index files for CMS types and format generated files ([cdd2a25](https://github.com/d-zero-dev/frontend-env/commit/cdd2a25874e7ec21a055abb74a206fe681345518))
+- **repo:** add 7-day cooldown period for npm package releases ([32c0bee](https://github.com/d-zero-dev/frontend-env/commit/32c0beeee290ca96f5908dcea972d7de3e4e390f))
+- **scaffold:** add 7-day cooldown period for npm package releases ([81e20f4](https://github.com/d-zero-dev/frontend-env/commit/81e20f45534a60451fdaf2a3e28f3cb0bcc73942))
+- **scaffold:** replace redirect in index.pug with top page template ([9237385](https://github.com/d-zero-dev/frontend-env/commit/92373859f990922f7ad13d50afa57736f3dde0e7))
+
 # [5.0.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.19...v5.0.0) (2026-01-05)
 
 ### Bug Fixes
