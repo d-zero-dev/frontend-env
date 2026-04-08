@@ -2,7 +2,11 @@
 	"name": "@d-zero/create-frontend",
 	"version": "5.0.0",
 	"description": "Create a new frontend project from a scaffolding template",
-	"repository": "https://github.com/d-zero-dev/frontend-env.git",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/d-zero-dev/frontend-env.git",
+		"directory": "packages/@d-zero/create-frontend"
+	},
 	"author": "D-ZERO Co., Ltd.",
 	"license": "MIT",
 	"publishConfig": {

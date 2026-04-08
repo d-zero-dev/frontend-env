@@ -2,7 +2,11 @@
 	"name": "@d-zero/postcss-config",
 	"version": "5.0.0",
 	"description": "Configurations of PostCSS",
-	"repository": "https://github.com/d-zero-dev/frontend-env.git",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/d-zero-dev/frontend-env.git",
+		"directory": "packages/@d-zero/postcss-config"
+	},
 	"author": "D-ZERO Co., Ltd.",
 	"license": "MIT",
 	"publishConfig": {

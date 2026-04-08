@@ -2,7 +2,11 @@
 	"name": "@d-zero/check-frontend-env",
 	"version": "5.0.0",
 	"description": "Check Frontend Environment for D-ZERO",
-	"repository": "https://github.com/d-zero-dev/frontend-env.git",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/d-zero-dev/frontend-env.git",
+		"directory": "packages/@d-zero/check-frontend-env"
+	},
 	"author": "D-ZERO Co., Ltd.",
 	"license": "MIT",
 	"publishConfig": {

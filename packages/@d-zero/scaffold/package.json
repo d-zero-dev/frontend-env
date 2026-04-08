@@ -2,7 +2,11 @@
 	"name": "@d-zero/scaffold",
 	"version": "5.0.0",
 	"description": "Frontend scaffold files of D-ZERO Co., Ltd.",
-	"repository": "https://github.com/d-zero-dev/frontend-env.git",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/d-zero-dev/frontend-env.git",
+		"directory": "packages/@d-zero/scaffold"
+	},
 	"author": "D-ZERO Co., Ltd.",
 	"license": "MIT",
 	"publishConfig": {
