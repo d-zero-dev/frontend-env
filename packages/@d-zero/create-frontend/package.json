@@ -16,6 +16,11 @@
 	"bin": {
 		"create-dzero-frontend": "./index.js"
 	},
+	"dependenciesMeta": {
+		"@d-zero/scaffold": {
+			"built": false
+		}
+	},
 	"dependencies": {
 		"@d-zero/prettier-config": "5.0.0",
 		"@d-zero/scaffold": "5.1.0",
