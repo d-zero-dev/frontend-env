@@ -32,5 +32,20 @@ jobs:
         run: yarn install --immutable
       - name: Build
         run: yarn build
+      - name: Determine dist-tag
+        id: dist-tag
+        run: |
+          VERSION="${GITHUB_REF#refs/tags/v}"
+          if [[ "$VERSION" == *"-alpha"* ]]; then
+            echo "tag=alpha" >> "$GITHUB_OUTPUT"
+          elif [[ "$VERSION" == *"-beta"* ]]; then
+            echo "tag=beta" >> "$GITHUB_OUTPUT"
+          elif [[ "$VERSION" == *"-rc"* ]]; then
+            echo "tag=rc" >> "$GITHUB_OUTPUT"
+          elif [[ "$VERSION" == *"-"* ]]; then
+            echo "tag=next" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=latest" >> "$GITHUB_OUTPUT"
+          fi
       - name: Publish
-        run: npx lerna publish from-git --yes
+        run: npx lerna publish from-git --dist-tag ${{ steps.dist-tag.outputs.tag }} --yes
