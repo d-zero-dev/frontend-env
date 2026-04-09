@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.1-alpha.0](https://github.com/d-zero-dev/frontend-env/compare/v5.1.0...v5.1.1-alpha.0) (2026-04-09)
+
+### Bug Fixes
+
+- **create-frontend:** skip scaffold install scripts when installed as dependency ([beb17f5](https://github.com/d-zero-dev/frontend-env/commit/beb17f57eb37e1dc1472b33fea3fc7510f36588e))
+
 # [5.1.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0...v5.1.0) (2026-04-08)
 
 ### Bug Fixes
