@@ -31,7 +31,7 @@
 		"test": "vitest run",
 		"bge": "npx @burger-editor/local",
 		"print": "npx @d-zero/print -f __info/print.txt --type note",
-		"postinstall": "husky",
+		"prepare": "husky",
 		"update": "yarn upgrade-interactive"
 	},
 	"browserslist": [
