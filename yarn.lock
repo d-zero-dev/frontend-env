@@ -1166,6 +1166,9 @@ __metadata:
     minimatch: "npm:10.2.4"
     plop: "npm:4.0.4"
     prettier: "npm:3.8.1"
+  dependenciesMeta:
+    "@d-zero/scaffold":
+      built: false
   bin:
     create-dzero-frontend: ./index.js
   languageName: unknown
