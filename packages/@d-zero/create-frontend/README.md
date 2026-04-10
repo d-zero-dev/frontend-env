@@ -65,3 +65,9 @@ yarn create @d-zero/frontend --type basercms4 --dir ./my-cms --no-install
 オプションを指定せずにコマンドを実行すると、対話モードが開始され、プロジェクトを段階的に設定できます。
 
 インストールで展開されるファイルは[`@d-zero/scaffold`](https://github.com/d-zero-dev/frontend-env/blob/main/packages/%40d-zero/scaffold/)に格納されています。
+
+スキャフォールディング処理の中で、生成されるプロジェクトの `package.json` に次の変更が加えられます：
+
+- `postinstall: "husky"` スクリプトが追加される
+
+これにより、`yarn install` 実行時（`--install` オプション有効時はスキャフォールディング直後）に Husky の Git フックが自動的に設定されます。

@@ -228,6 +228,7 @@ export default async function (plop) {
 											pkg.dependencies['jquery'] = 'latest';
 											pkg.dependencies['jquery-colorbox'] = '1.5';
 										}
+										pkg.scripts.postinstall = 'husky';
 										content = JSON.stringify(pkg, null, '\t');
 										break;
 									}
