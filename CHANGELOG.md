@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.1-alpha.1](https://github.com/d-zero-dev/frontend-env/compare/v5.1.1-alpha.0...v5.1.1-alpha.1) (2026-04-10)
+
+### Bug Fixes
+
+- **create-frontend:** inject postinstall husky in package.json transform ([801c23b](https://github.com/d-zero-dev/frontend-env/commit/801c23b98a6cb670690b9901480abab682ebd7ca))
+- **create-frontend:** remove ineffective dependenciesMeta for @d-zero/scaffold ([ff530a3](https://github.com/d-zero-dev/frontend-env/commit/ff530a32a3cf36f8206a614a941a78c443632da4))
+- **create-frontend:** rewrite prepare to postinstall in package.json transform ([ae01a0b](https://github.com/d-zero-dev/frontend-env/commit/ae01a0b10289bc36a2c2d72b87e3d05a520b586b))
+- **github:** add dist-tag detection to publish workflow ([5e31f98](https://github.com/d-zero-dev/frontend-env/commit/5e31f98298db6f3480ff8c5a219a2f1ed2f2c4ad))
+- **scaffold:** remove husky postinstall script ([eca511b](https://github.com/d-zero-dev/frontend-env/commit/eca511b990c843adf19c7496668e6823b3f13291))
+- **scaffold:** replace postinstall with prepare for husky ([e81b36d](https://github.com/d-zero-dev/frontend-env/commit/e81b36dce310c6a91ea010fe4a5d24cd40274a26))
+
 ## [5.1.1-alpha.0](https://github.com/d-zero-dev/frontend-env/compare/v5.1.0...v5.1.1-alpha.0) (2026-04-09)
 
 ### Bug Fixes

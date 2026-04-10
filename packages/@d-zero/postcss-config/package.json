@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/postcss-config",
-	"version": "5.1.1-alpha.0",
+	"version": "5.1.1-alpha.1",
 	"description": "Configurations of PostCSS",
 	"repository": {
 		"type": "git",
