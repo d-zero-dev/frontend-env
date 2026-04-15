@@ -128,9 +128,7 @@ export default async function (plop) {
 
 	plop.setActionType('Finalize', async (answers) => {
 		const { dest, type, ignoreDocumentRoot } = answerToConfig(answers);
-		rewriteDotGitignore(dest, gitignoreOriginContent, {
-			'Document Root': ignoreDocumentRoot,
-		});
+		rewriteDotGitignore(dest, gitignoreOriginContent, ignoreDocumentRoot);
 
 		if (type.startsWith('basercms')) {
 			await copyLibraries(type, dest);
@@ -326,18 +324,15 @@ async function installDependencies(dest) {
 /**
  * @param {string} dest
  * @param {string} gitignoreOriginContent
- * @param {Record<string, boolean>} sections - Section names mapped to whether they should be included
+ * @param {boolean} ignoreDocumentRoot
  */
-function rewriteDotGitignore(dest, gitignoreOriginContent, sections) {
+function rewriteDotGitignore(dest, gitignoreOriginContent, ignoreDocumentRoot) {
 	let gitignore = gitignoreOriginContent;
 
-	for (const [name, include] of Object.entries(sections)) {
-		if (!include) {
-			// Remove from "# SectionName" until the next "# UpperCase" section or EOF
-			gitignore = gitignore.replace(
-				new RegExp(`\\n# ${name}\\n[\\s\\S]*?(?=\\n# [A-Z]|$)`),
-				'',
-			);
+	if (!ignoreDocumentRoot) {
+		const documentRootSection = gitignore.indexOf('\n# Document Root\n');
+		if (documentRootSection !== -1) {
+			gitignore = gitignore.slice(0, documentRootSection);
 		}
 	}
 
