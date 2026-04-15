@@ -5,11 +5,15 @@ const i18n = new I18n({
 		["What's the type of project?"]: "What's the type of project?",
 		['Destination path']: 'Destination path',
 		['Install dependencies with yarn?']: 'Install dependencies with yarn?',
+		['Ignore document root files in gitignore?']:
+			'Ignore document root files in gitignore?',
 	},
 	ja: {
 		["What's the type of project?"]: 'プロジェクトの種類',
 		['Destination path']: '出力先パス',
 		['Install dependencies with yarn?']: '依存関係をyarnでインストールしますか？',
+		['Ignore document root files in gitignore?']:
+			'gitignore で Document Root ファイルを追跡対象から外しますか？',
 	},
 });
 
