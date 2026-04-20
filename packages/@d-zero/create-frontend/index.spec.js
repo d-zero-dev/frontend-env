@@ -16,22 +16,12 @@ function getName(task) {
 }
 
 /**
- * fixtures/file-list/<fixtureName>.txt を読み込み、{dir} を実際のパスに置換して返す
- * @param {string} fixtureName
+ * スナップショット比較のため、実行ごとに変わる一時ディレクトリのパスを正規化する
+ * @param {string[]} lines
  * @param {string} dir
  */
-function loadFileList(fixtureName, dir) {
-	const fixturePath = path.resolve(
-		import.meta.dirname,
-		'fixtures',
-		'file-list',
-		`${fixtureName}.txt`,
-	);
-	return fs
-		.readFileSync(fixturePath, 'utf8')
-		.split('\n')
-		.filter((line) => line.trim() !== '')
-		.map((line) => line.replaceAll('{dir}', dir.replaceAll(path.sep, '/')));
+function normalizePaths(lines, dir) {
+	return lines.map((line) => line.replaceAll(dir.replaceAll(path.sep, '/'), '<tmpDir>'));
 }
 
 beforeEach((ctx) => {
@@ -102,25 +92,25 @@ describe('CLI', () => {
 	test('npx', async ({ tmpDir, task }) => {
 		const dir = path.join(tmpDir, getName(task));
 		const actual = await cliTest(dir);
-		expect(actual).toStrictEqual(loadFileList('static', dir));
+		expect(normalizePaths(actual, dir)).toMatchSnapshot();
 	});
 
 	test('npx --type basercms4', async ({ tmpDir, task }) => {
 		const dir = path.join(tmpDir, getName(task));
 		const actual = await cliTest(dir, 'basercms4');
-		expect(actual).toStrictEqual(loadFileList('basercms4', dir));
+		expect(normalizePaths(actual, dir)).toMatchSnapshot();
 	});
 
 	test('npx --type static', async ({ tmpDir, task }) => {
 		const dir = path.join(tmpDir, getName(task));
 		const actual = await cliTest(dir, 'static');
-		expect(actual).toStrictEqual(loadFileList('static', dir));
+		expect(normalizePaths(actual, dir)).toMatchSnapshot();
 	});
 
 	test('interactive basercms4', async ({ tmpDir, task }) => {
 		const dir = path.join(tmpDir, getName(task));
 		const actual = await interactiveTest(dir, 'basercms4');
-		expect(actual).toStrictEqual(loadFileList('basercms4', dir));
+		expect(normalizePaths(actual, dir)).toMatchSnapshot();
 	});
 
 	describe('kamado.config.ts', () => {
