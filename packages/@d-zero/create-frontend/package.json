@@ -9,7 +9,7 @@
 		"access": "public"
 	},
 	"scripts": {
-		"test:update": "vitest run --update --test-timeout 60000 packages/@d-zero/create-frontend/index.spec.js"
+		"test:update": "npx vitest run --update --test-timeout 60000 index.spec.js"
 	},
 	"type": "module",
 	"bin": {
