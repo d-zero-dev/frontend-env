@@ -12,6 +12,9 @@
 	"publishConfig": {
 		"access": "public"
 	},
+	"scripts": {
+		"test:update": "npx vitest run --update --test-timeout 60000 index.spec.js"
+	},
 	"type": "module",
 	"bin": {
 		"create-dzero-frontend": "./index.js"

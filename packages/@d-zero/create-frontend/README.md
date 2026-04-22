@@ -15,11 +15,12 @@ npx @d-zero/create-frontend
 
 ### オプション
 
-| オプション  | 短縮形 | 説明                                                                           | デフォルト値              |
-| ----------- | ------ | ------------------------------------------------------------------------------ | ------------------------- |
-| `--type`    | `-t`   | プロジェクトのタイプを指定します。指定した場合、対話モードはスキップされます。 | `static`                  |
-| `--dir`     | `-d`   | 出力先ディレクトリを指定します。                                               | `.`（現在のディレクトリ） |
-| `--install` | -      | スキャフォールディング後にyarnで依存関係をインストールします。                 | `true`                    |
+| オプション               | 短縮形 | 説明                                                                           | デフォルト値              |
+| ------------------------ | ------ | ------------------------------------------------------------------------------ | ------------------------- |
+| `--type`                 | `-t`   | プロジェクトのタイプを指定します。指定した場合、対話モードはスキップされます。 | `static`                  |
+| `--dir`                  | `-d`   | 出力先ディレクトリを指定します。                                               | `.`（現在のディレクトリ） |
+| `--ignore-document-root` | -      | Document Root ファイルを `.gitignore` の追跡対象から外します。                 | `true`                    |
+| `--install`              | -      | スキャフォールディング後にyarnで依存関係をインストールします。                 | `true`                    |
 
 #### プロジェクトタイプ
 
@@ -58,6 +59,9 @@ npx @d-zero/create-frontend --type static --dir ./my-project --install
 
 # baserCMS v4プロジェクトを作成（依存関係のインストールはスキップ）
 yarn create @d-zero/frontend --type basercms4 --dir ./my-cms --no-install
+
+# Document Root ファイルを追跡対象に含めて作成（デフォルトは追跡対象外）
+yarn create @d-zero/frontend --no-ignore-document-root
 ```
 
 ### 注意事項
@@ -65,3 +69,11 @@ yarn create @d-zero/frontend --type basercms4 --dir ./my-cms --no-install
 オプションを指定せずにコマンドを実行すると、対話モードが開始され、プロジェクトを段階的に設定できます。
 
 インストールで展開されるファイルは[`@d-zero/scaffold`](https://github.com/d-zero-dev/frontend-env/blob/main/packages/%40d-zero/scaffold/)に格納されています。
+
+スキャフォールディング処理の中で、生成されるプロジェクトの `package.json` に次の変更が加えられます：
+
+- `postinstall: "husky"` スクリプトが追加される
+
+これにより、`yarn install` 実行時（`--install` オプション有効時はスキャフォールディング直後）に Husky の Git フックが自動的に設定されます。
+
+生成される `.gitignore` は `@d-zero/scaffold` のテンプレートをもとに、`--ignore-document-root` の値に応じてセクションの取捨選択が行われます。デフォルトでは `# Document Root` セクションが保持され、Document Root 配下のファイルは追跡対象外になります。

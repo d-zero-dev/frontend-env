@@ -24,9 +24,10 @@ const cli = meow(
 	  $ npx @d-zero/create-frontend
 
 	Options
-	  --type, -t  Specify the type of project. Then, no interactive mode will be shown.
-	  --dir,  -d  Specify the destination directory. Default is the current directory.
-	  --install   Install dependencies with yarn after scaffolding.
+	  --type, -t             Specify the type of project. Then, no interactive mode will be shown.
+	  --dir,  -d             Specify the destination directory. Default is the current directory.
+	  --ignore-document-root Ignore document root files in .gitignore. Use --no-ignore-document-root to track them. Default is true.
+	  --install              Install dependencies with yarn after scaffolding.
 
 	Examples
 	  $ yarn create @d-zero/frontend
@@ -49,6 +50,10 @@ const cli = meow(
 				default: '.',
 			},
 			install: {
+				type: 'boolean',
+				default: true,
+			},
+			ignoreDocumentRoot: {
 				type: 'boolean',
 				default: true,
 			},
@@ -122,10 +127,8 @@ export default async function (plop) {
 	});
 
 	plop.setActionType('Finalize', async (answers) => {
-		const { dest, type, doInstall } = answerToConfig(answers);
-		if (doInstall) {
-			rewriteDotGitignore(dest, gitignoreOriginContent);
-		}
+		const { dest, type, ignoreDocumentRoot } = answerToConfig(answers);
+		rewriteDotGitignore(dest, gitignoreOriginContent, ignoreDocumentRoot);
 
 		if (type.startsWith('basercms')) {
 			await copyLibraries(type, dest);
@@ -159,6 +162,13 @@ export default async function (plop) {
 				name: '__d-zero_scaffold_dest__',
 				message: t`Destination path`,
 				default: cli.flags.dir,
+				when: interactive,
+			},
+			{
+				type: 'confirm',
+				name: '__d-zero_scaffold_ignore_document_root__',
+				message: t`Ignore document root files in gitignore?`,
+				default: cli.flags.ignoreDocumentRoot,
 				when: interactive,
 			},
 			{
@@ -228,6 +238,7 @@ export default async function (plop) {
 											pkg.dependencies['jquery'] = 'latest';
 											pkg.dependencies['jquery-colorbox'] = '1.5';
 										}
+										pkg.scripts.postinstall = 'husky';
 										content = JSON.stringify(pkg, null, '\t');
 										break;
 									}
@@ -290,8 +301,10 @@ function answerToConfig(answers) {
 	const type = answers['__d-zero_project_type__'] ?? cli.flags.type;
 	const dest = answers['__d-zero_scaffold_dest__'] ?? cli.flags.dir;
 	const doInstall = answers['__d-zero_scaffold_yarn_install__'] ?? cli.flags.install;
+	const ignoreDocumentRoot =
+		answers['__d-zero_scaffold_ignore_document_root__'] ?? cli.flags.ignoreDocumentRoot;
 
-	return { type, dest, doInstall };
+	return { type, dest, doInstall, ignoreDocumentRoot };
 }
 
 /**
@@ -309,17 +322,18 @@ async function installDependencies(dest) {
 }
 
 /**
- *
  * @param {string} dest
  * @param {string} gitignoreOriginContent
+ * @param {boolean} ignoreDocumentRoot
  */
-function rewriteDotGitignore(dest, gitignoreOriginContent) {
+function rewriteDotGitignore(dest, gitignoreOriginContent, ignoreDocumentRoot) {
 	let gitignore = gitignoreOriginContent;
 
-	// Remove after `# Document Root` section
-	const documentRootSection = gitignore.indexOf('\n# Document Root\n');
-	if (documentRootSection !== -1) {
-		gitignore = gitignore.slice(0, documentRootSection);
+	if (!ignoreDocumentRoot) {
+		const documentRootSection = gitignore.indexOf('\n# Document Root\n');
+		if (documentRootSection !== -1) {
+			gitignore = gitignore.slice(0, documentRootSection);
+		}
 	}
 
 	return fs.writeFileSync(path.resolve(dest, '.gitignore'), gitignore);
