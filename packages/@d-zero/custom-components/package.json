@@ -1,11 +1,13 @@
 {
 	"name": "@d-zero/custom-components",
-	"version": "5.0.0",
+	"version": "5.1.1-alpha.1",
 	"description": "D-ZERO custom components",
 	"author": "D-ZERO",
 	"license": "MIT",
 	"repository": {
-		"url": "https://github.com/d-zero-dev/frontend-env.git"
+		"type": "git",
+		"url": "https://github.com/d-zero-dev/frontend-env.git",
+		"directory": "packages/@d-zero/custom-components"
 	},
 	"publishConfig": {
 		"access": "public"
