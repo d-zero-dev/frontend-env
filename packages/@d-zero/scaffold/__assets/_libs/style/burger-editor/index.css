@@ -1,7 +1,7 @@
-@import './bge-item/bgi-base.css';
+@import './bge-container/bge-container.css';
 @import './bge-item/bgi-button.css';
 @import './bge-item/bgi-download-file.css';
+@import './bge-item/bgi-hr.css';
 @import './bge-item/bgi-table.css';
 @import './bge-item/bgi-wysiwyg.css';
-@import './bge-item/bgi-hr.css';
-@import './bge-container/bge-container.css';
+@import './bge-item/bgi.css';
