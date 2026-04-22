@@ -1,11 +1,31 @@
 ---
-description: Update documentation commands
+description: ドキュメント更新コマンド
 ---
 
-Thoroughly identify any omissions or inconsistencies in the documentation. **The implementation is the absolute source of truth.**
+ドキュメントの漏れや矛盾を徹底的に洗い出す。**実装が絶対的な正とする。**
 
-- README.md is intended for API users
-- ARCHITECTURE.md is intended for contributors
-- Other documents should match their respective content
+# 対象範囲
 
-Use the language specified in each document.
+- README.md は API ユーザー向け
+- ソースコード内の JSDoc コメント
+- その他のドキュメントはそれぞれの内容に対応
+
+# ルール
+
+- 各ドキュメントで指定されている言語を使用すること
+- **実装を絶対に変更しない** — 関数本体、型定義、export 文、関数や型定義の順序すら変更しないこと
+- **特定の依存パッケージのバージョン番号をドキュメントに含めない** — バージョンの正は `package.json` を参照
+- コードやドキュメントの意図が不明な場合は、推測せずユーザーに確認すること
+
+# JSDoc
+
+- エクスポートされた全ての関数と型に JSDoc コメントを付与すること
+- 必須タグ:
+  - `@param` — 各パラメータに対して。説明は必須
+  - `@returns` — 戻り値の説明は必須
+  - `@template` — 各型パラメータに対して
+- TypeScript が既に提供している冗長な型注釈は追加しない
+
+# 最終ステップ（必須）
+
+ドキュメントの変更が全て完了したら、**必ず `yarn lint` を実行**してフォーマット、スペル、スタイルを検証する。エラーがあればコミット前に修正すること。
