@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/check-frontend-env",
-	"version": "5.0.0",
+	"version": "5.1.1-alpha.1",
 	"description": "Check Frontend Environment for D-ZERO",
 	"repository": {
 		"type": "git",

@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/create-frontend",
-	"version": "5.0.0",
+	"version": "5.1.1-alpha.1",
 	"description": "Create a new frontend project from a scaffolding template",
 	"repository": {
 		"type": "git",
@@ -21,7 +21,7 @@
 	},
 	"dependencies": {
 		"@d-zero/prettier-config": "5.0.0",
-		"@d-zero/scaffold": "5.0.0",
+		"@d-zero/scaffold": "5.1.1-alpha.1",
 		"i18n-js": "4.5.2",
 		"ignore": "7.0.5",
 		"magicast": "0.5.2",
