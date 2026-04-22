@@ -10,6 +10,7 @@
 		"build": "lerna run build --scope=@d-zero/builder --scope=@d-zero/check-frontend-env --scope=@d-zero/custom-components",
 		"dev": "lerna run dev",
 		"test": "vitest run --test-timeout 60000",
+		"test:update": "lerna run test:update",
 		"lint": "run-s lint:eslint lint:prettier lint:textlint lint:cspell",
 		"lint:cspell": "npx cspell --no-progress --show-suggestions \"**\"",
 		"lint:eslint": "npx eslint --fix \"./{*,**/*}.{js,cjs,mjs,ts,tsx}\"",
