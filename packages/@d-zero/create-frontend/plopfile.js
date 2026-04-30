@@ -152,6 +152,10 @@ export default async function (plop) {
 						name: 'baserCMS v4 (with BurgerEditor v2)',
 						value: 'basercms4',
 					},
+					{
+						name: 'baserCMS v5 (with BurgerEditor v2)',
+						value: 'basercms5',
+					},
 				],
 				default: cli.flags.type,
 				filter: (val) => val.toLowerCase(),
@@ -211,9 +215,13 @@ export default async function (plop) {
 					 * @type {import('plop').AddActionConfig}
 					 */
 					(originFile) => {
+						const destFile =
+							config.type === 'basercms5' && originFile.startsWith('htdocs/')
+								? path.join('htdocs', 'webroot', originFile.slice('htdocs/'.length))
+								: originFile;
 						return {
 							type: 'add',
-							path: path.resolve(config.dest, originFile),
+							path: path.resolve(config.dest, destFile),
 							templateFile: path.resolve(scaffoldDir, originFile),
 							async transform(content) {
 								const nameCandidate = path.basename(path.resolve(config.dest));
@@ -243,7 +251,7 @@ export default async function (plop) {
 										break;
 									}
 									case '__assets/_libs/data/blocks.js': {
-										if (config.type === 'basercms4') {
+										if (config.type === 'basercms4' || config.type === 'basercms5') {
 											content = content.replace('bge-blocks.html', 'bge-blocks-v2.html');
 										}
 										break;
@@ -259,6 +267,12 @@ export default async function (plop) {
 											const mod = parseModule(content);
 											mod.exports.default.devServer.startPath = '__tmpl/';
 											content = generateCode(mod).code;
+										}
+										if (config.type === 'basercms5') {
+											content = content.replace(
+												"path.resolve(import.meta.dirname, 'htdocs')",
+												"path.resolve(import.meta.dirname, 'htdocs', 'webroot')",
+											);
 										}
 										break;
 									}
@@ -282,6 +296,20 @@ export default async function (plop) {
 						};
 					},
 				),
+				...(config.type === 'basercms5'
+					? [
+							{
+								type: 'add',
+								path: path.resolve(config.dest, 'htdocs', '.htaccess'),
+								template: '',
+							},
+							{
+								type: 'add',
+								path: path.resolve(config.dest, 'htdocs', 'webroot', '.htaccess'),
+								template: '',
+							},
+						]
+					: []),
 				{
 					type: 'Install dependencies',
 				},

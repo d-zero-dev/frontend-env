@@ -113,6 +113,18 @@ describe('CLI', () => {
 		expect(normalizePaths(actual, dir)).toMatchSnapshot();
 	});
 
+	test('npx --type basercms5', async ({ tmpDir, task }) => {
+		const dir = path.join(tmpDir, getName(task));
+		const actual = await cliTest(dir, 'basercms5');
+		expect(normalizePaths(actual, dir)).toMatchSnapshot();
+	});
+
+	test('interactive basercms5', async ({ tmpDir, task }) => {
+		const dir = path.join(tmpDir, getName(task));
+		const actual = await interactiveTest(dir, 'basercms5');
+		expect(normalizePaths(actual, dir)).toMatchSnapshot();
+	});
+
 	describe('kamado.config.ts', () => {
 		test('basercms4: startPath が "__tmpl/" に設定されている', async ({
 			tmpDir,
@@ -122,6 +134,26 @@ describe('CLI', () => {
 			await interactiveTest(dir, 'basercms4');
 			const content = fs.readFileSync(path.join(dir, 'kamado.config.ts'), 'utf8');
 			expect(content).toContain("startPath: '__tmpl/'");
+		});
+
+		test('basercms5: startPath が "__tmpl/" に設定されている', async ({
+			tmpDir,
+			task,
+		}) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'basercms5');
+			const content = fs.readFileSync(path.join(dir, 'kamado.config.ts'), 'utf8');
+			expect(content).toContain("startPath: '__tmpl/'");
+		});
+
+		test('basercms5: output が "htdocs/webroot" に設定されている', async ({
+			tmpDir,
+			task,
+		}) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'basercms5');
+			const content = fs.readFileSync(path.join(dir, 'kamado.config.ts'), 'utf8');
+			expect(content).toContain("path.resolve(import.meta.dirname, 'htdocs', 'webroot')");
 		});
 	});
 });
