@@ -113,9 +113,22 @@ export default async function (plop) {
 			'**/*.test/**/*',
 			// Test Files
 			'*.test.*',
-		]);
+		])
+		// Ignore type-specific files (handled separately per type)
+		.add(['__type/**/*']);
 
 	const scaffoldFiles = ig.filter(await getAllFiles(scaffoldDir, scaffoldDir)).toSorted();
+
+	const typeBaseDir = path.resolve(scaffoldDir, '__type');
+	const typeFilesMap = {};
+	if (fs.existsSync(typeBaseDir)) {
+		for (const entry of fs.readdirSync(typeBaseDir, { withFileTypes: true })) {
+			if (entry.isDirectory()) {
+				const typeDir = path.resolve(typeBaseDir, entry.name);
+				typeFilesMap[entry.name] = await getAllFiles(typeDir, typeDir);
+			}
+		}
+	}
 
 	plop.setActionType('Install dependencies', async (answers) => {
 		const { dest, doInstall } = answerToConfig(answers);
@@ -296,20 +309,11 @@ export default async function (plop) {
 						};
 					},
 				),
-				...(config.type === 'basercms5'
-					? [
-							{
-								type: 'add',
-								path: path.resolve(config.dest, 'htdocs', '.htaccess'),
-								template: '',
-							},
-							{
-								type: 'add',
-								path: path.resolve(config.dest, 'htdocs', 'webroot', '.htaccess'),
-								template: '',
-							},
-						]
-					: []),
+				...(typeFilesMap[config.type] ?? []).map((typeFile) => ({
+					type: 'add',
+					path: path.resolve(config.dest, typeFile),
+					templateFile: path.resolve(scaffoldDir, '__type', config.type, typeFile),
+				})),
 				{
 					type: 'Install dependencies',
 				},
