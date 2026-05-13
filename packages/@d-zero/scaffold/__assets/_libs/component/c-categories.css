@@ -1,7 +1,0 @@
-.c-categories {
-	li:has([aria-current='page']) {
-		&::before {
-			content: '-';
-		}
-	}
-}
