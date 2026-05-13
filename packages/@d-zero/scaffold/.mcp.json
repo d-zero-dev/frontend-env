@@ -1,0 +1,14 @@
+{
+	"mcpServers": {
+		"chrome-devtools": {
+			"type": "stdio",
+			"command": "yarn",
+			"args": ["exec", "chrome-devtools-mcp", "--isolated"],
+			"env": {}
+		},
+		"figma-remote-mcp": {
+			"type": "http",
+			"url": "https://mcp.figma.com/mcp"
+		}
+	}
+}
