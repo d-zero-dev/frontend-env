@@ -1,0 +1,10 @@
+.p-home {
+	display: block grid;
+	grid-template:
+		'main' 1fr
+		/ 1fr;
+}
+
+.p-home__main {
+	grid-area: main;
+}

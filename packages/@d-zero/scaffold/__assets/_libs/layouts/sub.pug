@@ -2,24 +2,24 @@ doctype html
 html(lang=lang || "ja")
 	head
 		include /mixin/meta.pug
-	body.c-page-sub
-		.c-page-sub__base
-			.c-page-sub__header
+	body.l-sub
+		.l-sub__base
+			.l-sub__header
 				include /component/c-header.pug
-			.c-page-sub__nav-global
+			.l-sub__nav-global
 				include /component/c-nav-global.pug
-			.c-page-sub__main
+			.l-sub__main
 				main
-					article.c-page-sub__content
-						.c-page-sub__title-page
+					article.l-sub__content
+						.l-sub__title-page
 							include /component/c-title-page.pug
-						.c-page-sub__nav-breadcrumb
+						.l-sub__nav-breadcrumb
 							include /component/c-nav-breadcrumb.pug
-						.c-page-sub__content-body !{ content }
+						.l-sub__content-body !{ content }
 						if hasPagination
-							.c-page-sub__pagination
+							.l-sub__pagination
 								include /component/c-pagination.pug
-			.c-page-sub__nav-sitemap
+			.l-sub__nav-sitemap
 				include /component/c-nav-sitemap.pug
-			.c-page-sub__footer
+			.l-sub__footer
 				include /component/c-footer.pug
