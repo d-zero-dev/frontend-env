@@ -18,7 +18,7 @@
 			}
 		},
 		{
-			"files": ["c-content-main.css"],
+			"files": ["**/c-content-main/**/*.css"],
 			"rules": {
 				"selector-class-pattern": null,
 				"selector-nested-pattern": "^(?!\\.c-).*"

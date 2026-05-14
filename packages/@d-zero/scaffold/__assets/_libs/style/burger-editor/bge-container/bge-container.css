@@ -1,0 +1,48 @@
+.c-content-main {
+	@container bge-container (width < 768px) {
+		[data-bge-container='grid:1'],
+		[data-bge-container^='grid:1:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 1;
+			}
+		}
+
+		[data-bge-container='grid:2'],
+		[data-bge-container^='grid:2:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 2;
+			}
+		}
+
+		[data-bge-container='grid:3'],
+		[data-bge-container^='grid:3:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 2;
+
+				/* 最後の要素を2列分にする */
+				> :nth-child(2n + 1):last-child {
+					grid-column: span 2;
+				}
+			}
+		}
+
+		[data-bge-container='grid:4'],
+		[data-bge-container^='grid:4:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 2;
+			}
+		}
+
+		[data-bge-container='grid:5'],
+		[data-bge-container^='grid:5:'] {
+			[data-bge-container-frame] {
+				--bge-grid-col: 2;
+
+				/* 最後の要素を2列分にする */
+				> :nth-child(2n + 1):last-child {
+					grid-column: span 2;
+				}
+			}
+		}
+	}
+}

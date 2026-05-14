@@ -1,0 +1,22 @@
+.c-content-main {
+	[data-bgi='hr'] {
+		--border-color: currentcolor;
+		--border-width: 3px;
+
+		[data-bgi-hr-kind='dashed'] {
+			--border-kind: dashed;
+		}
+
+		[data-bgi-hr-kind='bold'] {
+			--border-width: 5px;
+		}
+
+		[data-bgi-hr-kind='narrow'] {
+			--border-width: 1px;
+		}
+
+		[data-bgi-hr-kind='short'] {
+			--inline-size: 50%;
+		}
+	}
+}
