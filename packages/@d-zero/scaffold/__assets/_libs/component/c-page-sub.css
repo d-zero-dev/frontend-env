@@ -40,3 +40,8 @@
 	margin-block-end: 2em;
 	margin-inline: auto;
 }
+
+.c-page-sub__content-main {
+	max-inline-size: var(--content-width);
+	margin-inline: auto;
+}
