@@ -7,11 +7,7 @@ html(lang=lang || "ja")
 			.c-page-home__header
 				- const isHome = true;
 				include /component/c-header.pug
-			.c-page-home__nav-global
-				include /component/c-nav-global.pug
 			.c-page-home__main
 				main !{ content }
-			.c-page-home__nav-sitemap
-				include /component/c-nav-sitemap.pug
 			.c-page-home__footer
 				include /component/c-footer.pug
