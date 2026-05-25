@@ -5,6 +5,8 @@
 		// Libraries
 		"splide",
 		"kamado",
-		"kiso"
+		"kiso",
+		// Google Fonts CDN domain
+		"gstatic"
 	]
 }
