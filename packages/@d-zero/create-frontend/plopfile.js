@@ -235,7 +235,7 @@ export default async function (plop) {
 											delete pkg.scripts.bge;
 											delete pkg.devDependencies['@burger-editor/local'];
 											pkg.dependencies['@burger-editor/css'] = '2';
-											pkg.dependencies['jquery'] = 'latest';
+											pkg.dependencies['jquery'] = '3.7.1'; // jQuery 4系で削除されたAPIとの互換性のため3系の最新版を利用
 											pkg.dependencies['jquery-colorbox'] = '1.5';
 										}
 										pkg.scripts.postinstall = 'husky';
