@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.1-alpha.1](https://github.com/d-zero-dev/frontend-env/compare/v5.1.1-alpha.0...v5.1.1-alpha.1) (2026-04-10)
+
+### Bug Fixes
+
+- **create-frontend:** inject postinstall husky in package.json transform ([801c23b](https://github.com/d-zero-dev/frontend-env/commit/801c23b98a6cb670690b9901480abab682ebd7ca))
+- **create-frontend:** remove ineffective dependenciesMeta for @d-zero/scaffold ([ff530a3](https://github.com/d-zero-dev/frontend-env/commit/ff530a32a3cf36f8206a614a941a78c443632da4))
+- **create-frontend:** rewrite prepare to postinstall in package.json transform ([ae01a0b](https://github.com/d-zero-dev/frontend-env/commit/ae01a0b10289bc36a2c2d72b87e3d05a520b586b))
+
+## [5.1.1-alpha.0](https://github.com/d-zero-dev/frontend-env/compare/v5.1.0...v5.1.1-alpha.0) (2026-04-09)
+
+### Bug Fixes
+
+- **create-frontend:** skip scaffold install scripts when installed as dependency ([beb17f5](https://github.com/d-zero-dev/frontend-env/commit/beb17f57eb37e1dc1472b33fea3fc7510f36588e))
+
+# [5.1.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0...v5.1.0) (2026-04-08)
+
+### Bug Fixes
+
+- **create-frontend:** correct minimatch import ([c6e5eb1](https://github.com/d-zero-dev/frontend-env/commit/c6e5eb1c078d0805015a9e619d0289d8a9ba700c))
+- **create-frontend:** correct scaffold file filtering in interactive mode ([ffa3476](https://github.com/d-zero-dev/frontend-env/commit/ffa34761a72204667605581d6ac32c2b1936babf)), closes [#804](https://github.com/d-zero-dev/frontend-env/issues/804)
+- **create-frontend:** exclude dotfiles from ignored patterns ([a4da0d0](https://github.com/d-zero-dev/frontend-env/commit/a4da0d03d36b95bb60a5990ffc916095909cfd77))
+
+### Features
+
+- **create-frontend:** exclude index files for CMS types and format generated files ([cdd2a25](https://github.com/d-zero-dev/frontend-env/commit/cdd2a25874e7ec21a055abb74a206fe681345518))
+
 # [5.0.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.19...v5.0.0) (2026-01-05)
 
 **Note:** Version bump only for package @d-zero/create-frontend
