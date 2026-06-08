@@ -5,6 +5,7 @@
 		// Libraries
 		"splide",
 		"kamado",
-		"kiso"
+		"kiso",
+		"scaffdog"
 	]
 }
