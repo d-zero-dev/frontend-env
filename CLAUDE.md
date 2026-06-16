@@ -57,3 +57,4 @@ D-ZERO 株式会社のフロントエンド開発環境パッケージ群（`@d-
 | --------------- | ----------------------------------------- | ------------------------------------------------------- |
 | Product Manager | `.claude/skills/product-manager/SKILL.md` | リポジトリ分析、ドキュメント生成・レビュー、PR レビュー |
 | QA Engineer     | `.claude/skills/qa-engineer/SKILL.md`     | コードレビュー、テスト品質チェック、カバレッジ改善      |
+| Impl            | `.claude/skills/impl/SKILL.md`            | 合意済み計画の実装 → レビュー → コミット → PR 作成      |
