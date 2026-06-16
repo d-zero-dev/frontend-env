@@ -11,6 +11,11 @@
 		"kamado",
 
 		//
-		"kiso"
+		"kiso",
+
+		//
+		"srcsets",
+		"unstub",
+		"whatwg"
 	]
 }
