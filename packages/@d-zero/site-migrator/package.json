@@ -9,9 +9,7 @@
 	},
 	"author": "D-ZERO Co., Ltd.",
 	"license": "MIT",
-	"publishConfig": {
-		"access": "public"
-	},
+	"private": true,
 	"type": "module",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
