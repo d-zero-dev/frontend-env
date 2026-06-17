@@ -1,0 +1,45 @@
+{
+	"name": "@d-zero/site-migrator",
+	"version": "5.1.1-alpha.1",
+	"description": "Website migration toolkit driven by a .nitpicker archive",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/d-zero-dev/frontend-env.git",
+		"directory": "packages/@d-zero/site-migrator"
+	},
+	"author": "D-ZERO Co., Ltd.",
+	"license": "MIT",
+	"private": true,
+	"type": "module",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"bin": {
+		"dz-migrate": "./dist/cli.js"
+	},
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"scripts": {
+		"build": "tsc --project tsconfig.build.json",
+		"dev": "tsc --watch --project tsconfig.build.json",
+		"test": "vitest",
+		"test:run": "vitest run"
+	},
+	"files": [
+		"dist"
+	],
+	"dependencies": {
+		"@d-zero/dealer": "1.8.0",
+		"@d-zero/shared": "0.22.0",
+		"@nitpicker/crawler": "0.9.0",
+		"@nitpicker/query": "0.9.0",
+		"parse5": "8.0.1",
+		"parse5-html-rewriting-stream": "8.0.1"
+	},
+	"devDependencies": {
+		"@types/node": "25.3.3"
+	}
+}
