@@ -1,6 +1,6 @@
 # `@d-zero/site-migrator`
 
-`.nitpicker` アーカイブを入力とするウェブサイト移植ツールキット。サブリソースのローカル DL とページ HTML のレイアウト剥がしを行う CLI、および後続の変換処理で使うユーティリティ関数群を提供する。
+`.nitpicker` アーカイブを入力とするウェブサイト移植ツールキット。サブリソースのローカル DL、ページ HTML のレイアウト剥がし、`.nitpicker` DB のページメタを YAML frontmatter として prepend する CLI、および後続の変換処理で使うユーティリティ関数群を提供する。
 
 ## Installation
 
@@ -19,7 +19,7 @@ npx dz-migrate <archive.nitpicker> -o <htdocs-dir> [--limit <n>] [--extract-limi
 - `--limit <n>` — 並列 DL 数（デフォルト 10）
 - `--extract-limit <n>` — 並列ページ抽出数（デフォルト 10）
 
-リソースは fetch で DL、ページ HTML はアーカイブ内のスナップショットを読み、`extractMainContent` でレイアウト共通部分を剥がしてから `.html` として書き出す。
+リソースは fetch で DL、ページ HTML はアーカイブ内のスナップショットを読み、`extractMainContent` でレイアウト共通部分を剥がし、`.nitpicker` DB のページメタを `getFrontmatter` で読み出して `formatFrontmatter` が生成する `---\n…\n---\n` YAML ブロックを先頭に prepend してから `.html` として書き出す。
 
 ## Programmatic API
 
@@ -30,32 +30,36 @@ import {
 	listInternalPages,
 	listInternalResources,
 	getPageHtml,
+	getFrontmatter,
 	downloadResources,
 	urlToOutputPath,
 	rewriteAssetRefs,
-	extractFrontmatter,
 	extractMainContent,
 	extractPages,
+	formatFrontmatter,
+	splitTitle,
 } from '@d-zero/site-migrator';
 ```
 
 主要 API:
 
-| 関数                    | 概要                                                               |
-| ----------------------- | ------------------------------------------------------------------ |
-| `migrate`               | アーカイブを開き、リソース DL とページ抽出を並列実行する全体フロー |
-| `openArchive`           | `.nitpicker` を開いてセッションを返す（要 `close()`）              |
-| `listInternalPages`     | 内部ページ URL を順に yield する非同期イテラブル                   |
-| `listInternalResources` | 内部リソース URL を順に yield する非同期イテラブル                 |
-| `getPageHtml`           | レンダリング後 HTML を全長で取得（truncate なし）                  |
-| `downloadResources`     | URL リストを並列 fetch してローカルへ保存                          |
-| `urlToOutputPath`       | URL を `<htdocs-dir>` 配下のローカルパスへ変換                     |
-| `rewriteAssetRefs`      | HTML 内のアセット参照を resolver で書き換える（streaming）         |
-| `extractFrontmatter`    | `<head>` のメタ情報を構造化オブジェクトへ抽出                      |
-| `extractMainContent`    | レイアウト共通部分を剥がして本文要素の `outerHTML` を返す          |
-| `extractPages`          | ページ一覧に対して `extractMainContent` を並列適用して書き出す     |
+| 関数                    | 概要                                                                             |
+| ----------------------- | -------------------------------------------------------------------------------- | ------------------------------------------ |
+| `migrate`               | アーカイブを開き、リソース DL とページ抽出を並列実行する全体フロー               |
+| `openArchive`           | `.nitpicker` を開いてセッションを返す（要 `close()`）                            |
+| `listInternalPages`     | 内部ページ URL を順に yield する非同期イテラブル                                 |
+| `listInternalResources` | 内部リソース URL を順に yield する非同期イテラブル                               |
+| `getPageHtml`           | レンダリング後 HTML を全長で取得（truncate なし）                                |
+| `getFrontmatter`        | `.nitpicker` DB の flat meta カラムを `Frontmatter` へマップ                     |
+| `downloadResources`     | URL リストを並列 fetch してローカルへ保存                                        |
+| `urlToOutputPath`       | URL を `<htdocs-dir>` 配下のローカルパスへ変換                                   |
+| `rewriteAssetRefs`      | HTML 内のアセット参照を resolver で書き換える（streaming）                       |
+| `extractMainContent`    | レイアウト共通部分を剥がして本文要素の `outerHTML` を返す                        |
+| `extractPages`          | ページ一覧に `extractMainContent` + `getFrontmatter` を適用して書き出す          |
+| `formatFrontmatter`     | `Frontmatter` を後段パイプライン互換の `---\n…\n---\n` YAML ブロック文字列にする |
+| `splitTitle`            | タイトル文字列を `｜` / `                                                        | `で分割し`{title, rawTitle?}` を返す純関数 |
 
-`extractFrontmatter` の出力構造は [`Frontmatter`](./src/types.ts) を参照。`title` / `og.title` / `twitter.title` は `｜` `|` で分割して最初の非空セグメントを採用し、raw と異なる場合のみ `rawTitle` 等に raw を保持する。
+`Frontmatter` の出力構造は [`./src/types.ts`](./src/types.ts) を参照。`title` / `og.title` / `twitter.title` は `｜` `|` で分割して最初の非空セグメントを採用し、分割が起きたときだけ `rawTitle` 等に元文字列を保持する。
 
 ### `extractMainContent` のヒューリスティクス
 
@@ -77,7 +81,16 @@ import {
 - 同一トークン substring の副作用: `class="sitemap-main-link"` のように `main` を含むトークンを持つ要素が複数あると rung 1 が「2 個以上」で失格しフォールスルーする。雑な実装の代償として許容。
 - ページ URL が `outputDir` 配下で衝突する場合（例: `/about/` と `/about/index.html` が両方ページとして登録されている）、2 つ目以降は `failed` として報告し書き込まない。
 - リソース URL とページ URL が衝突した場合は、ページ書き出しが後勝ちで上書きする（レイアウト剥がし後の HTML を canonical 版とみなすため）。
+- 出力 `.html` を直接ブラウザで開くと、frontmatter ブロックがページ先頭に visible text として表示され、DOCTYPE が先頭にないため Quirks Mode に落ちる。これは中間成果物として後続の scaffold パイプラインに渡す前提の挙動で、エンドユーザー向けのレンダリング対象ではない。
 
-## 設計上の注意
+### Frontmatter（DB ベース）
 
-`extractFrontmatter` / `rewriteAssetRefs` / `extractMainContent` は parse5 を内部で使うが、外部 API としては「HTML 文字列 → 構造化データ／HTML 文字列」の純関数。将来 nitpicker がメタを DB カラムとして保持した場合などに差し替えやすいよう、parse5 に依存するコードは `src/html/` 配下に閉じている。
+`getFrontmatter` は `.nitpicker` DB の flat meta カラムを `Frontmatter` 型にマップする。`title` / `og.title` / `twitter.title` は `splitTitle` を通り、`｜` / `|` で先頭セグメントが抜き出されたら元文字列を `rawTitle` 等に保持する（DB に rawTitle カラムが存在しないため `title` 全文から生成）。空文字列 / null / whitespace-only カラムは出力から落とすので、`description: ""` のような placeholder は発生しない。
+
+`formatFrontmatter` は後続の scaffold パイプラインがそのまま消費できる YAML を生成する。og.\* / twitter.\* は nested map で、サブオブジェクト全体が空なら親キーも省略される。`twitter.url` は DB に対応カラムがないため型・出力ともに非対応（`og.url` で代替する慣習に従う）。
+
+`extractPages` は `extractMainContent` と `getFrontmatter` を並列実行し、生成した YAML ブロックを抽出 HTML の先頭に prepend してから書き出す。DB に該当 URL の行がない場合は frontmatter を prepend せず HTML だけを書き出す。`getFrontmatter` 自体が例外を投げた場合も fail-soft で HTML 本文は保存される（メタ取得失敗は本文保存より優先しない）。
+
+### 設計上の注意
+
+`extractMainContent` / `rewriteAssetRefs` は parse5 を内部で使う純関数、`getFrontmatter` は `@nitpicker/query` の DB 読み出しに依存する。両者の責務分離は `src/html/` (parse5) と `src/archive/` (`@nitpicker/query`) のディレクトリ構造で表現している。

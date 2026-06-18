@@ -34,12 +34,14 @@
 	"dependencies": {
 		"@d-zero/dealer": "1.8.0",
 		"@d-zero/shared": "0.22.0",
-		"@nitpicker/crawler": "0.9.0",
-		"@nitpicker/query": "0.9.0",
+		"@nitpicker/crawler": "0.11.0",
+		"@nitpicker/query": "0.11.0",
+		"js-yaml": "4.2.0",
 		"parse5": "8.0.1",
 		"parse5-html-rewriting-stream": "8.0.1"
 	},
 	"devDependencies": {
+		"@types/js-yaml": "4.0.9",
 		"@types/node": "25.3.3"
 	}
 }
