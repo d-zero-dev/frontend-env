@@ -6,9 +6,11 @@ import path from 'node:path';
 
 import { deal } from '@d-zero/dealer';
 
+import { getFrontmatter } from '../archive/get-frontmatter.js';
 import { getPageHtml } from '../archive/get-page-html.js';
 import { urlToOutputPath } from '../downloader/url-to-output-path.js';
 import { extractMainContent } from '../html/extract-main-content.js';
+import { formatFrontmatter } from '../html/format-frontmatter.js';
 
 /**
  * Single page to extract. Wrapped as an object so `@d-zero/dealer` (which
@@ -52,19 +54,22 @@ export type ExtractPageResult =
 
 /**
  * For each page URL, reads the HTML snapshot from the archive, strips the
- * shared layout via {@link extractMainContent}, and writes the result to disk
- * under `outputDir` mirroring the URL pathname.
+ * shared layout via {@link extractMainContent}, reads the per-page metadata
+ * from the `.nitpicker` DB via {@link getFrontmatter}, and writes the result
+ * to disk under `outputDir` mirroring the URL pathname.
  *
  * Mirrors {@link import('../downloader/download-resources.js').downloadResources}
  * in shape: failures (including pages absent from the archive) are surfaced via
  * `onResult`, never thrown, so a single bad page does not abort the run.
  *
- * Output shapes intentionally differ by outcome:
+ * Output layout per file:
  *
- * - `extracted` — the matched element's `outerHTML` fragment is written
- *   verbatim (no `<!doctype>` / `<html>` wrapper).
- * - `fallback` — the entire original document, including its DOCTYPE, is
- *   written as-is so downstream tooling never sees an empty file.
+ * - A `---\n…\n---\n` YAML frontmatter block is prepended whenever the DB
+ *   yields any non-empty meta. If the DB has no row for the URL, or every
+ *   meta column is empty, no frontmatter block is written.
+ * - The body that follows depends on the outcome:
+ *   - `extracted` — the matched element's `outerHTML` fragment.
+ *   - `fallback` — the entire original document, DOCTYPE included.
  * @param options
  */
 export async function extractPages(options: ExtractPagesOptions): Promise<void> {
@@ -130,13 +135,27 @@ export async function extractPages(options: ExtractPagesOptions): Promise<void> 
 				return;
 			}
 			try {
-				const html = await getPageHtml(session, entry.url);
+				// Parallelise the two SQLite reads — they're independent and the
+				// page worker is the loop hot-path. Use `allSettled` so a flaky
+				// meta read doesn't lose the HTML body: we already paid the cost
+				// of fetching the page, write what we have and surface the meta
+				// failure separately rather than dropping the page.
+				const [htmlSettled, metaSettled] = await Promise.allSettled([
+					getPageHtml(session, entry.url),
+					getFrontmatter(session, entry.url),
+				]);
+				if (htmlSettled.status === 'rejected') {
+					throw htmlSettled.reason;
+				}
+				const html = htmlSettled.value;
 				if (html === null) {
 					onResult?.({ url: entry.url, outcome: 'missing' });
 					return;
 				}
 				const result = extractMainContent(html);
-				await writeFile(entry.outputPath, result.html, 'utf8');
+				const meta = metaSettled.status === 'fulfilled' ? metaSettled.value : null;
+				const frontmatterBlock = meta === null ? '' : formatFrontmatter(meta);
+				await writeFile(entry.outputPath, frontmatterBlock + result.html, 'utf8');
 				if (result.matched && result.matchedBy !== undefined) {
 					onResult?.({
 						url: entry.url,

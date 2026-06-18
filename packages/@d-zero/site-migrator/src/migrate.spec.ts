@@ -16,17 +16,22 @@ vi.mock('./archive/list-internal-pages.js', () => ({
 vi.mock('./archive/get-page-html.js', () => ({
 	getPageHtml: vi.fn(),
 }));
+vi.mock('./archive/get-frontmatter.js', () => ({
+	getFrontmatter: vi.fn(),
+}));
 
 const { openArchive } = await import('./archive/open-archive.js');
 const { listInternalResources } = await import('./archive/list-internal-resources.js');
 const { listInternalPages } = await import('./archive/list-internal-pages.js');
 const { getPageHtml } = await import('./archive/get-page-html.js');
+const { getFrontmatter } = await import('./archive/get-frontmatter.js');
 const { migrate } = await import('./migrate.js');
 
 const openArchiveMock = vi.mocked(openArchive);
 const listInternalResourcesMock = vi.mocked(listInternalResources);
 const listInternalPagesMock = vi.mocked(listInternalPages);
 const getPageHtmlMock = vi.mocked(getPageHtml);
+const getFrontmatterMock = vi.mocked(getFrontmatter);
 
 const closeMock = vi.fn(() => Promise.resolve());
 
@@ -59,6 +64,8 @@ describe('migrate', () => {
 		listInternalResourcesMock.mockReset();
 		listInternalPagesMock.mockReset();
 		getPageHtmlMock.mockReset();
+		getFrontmatterMock.mockReset();
+		getFrontmatterMock.mockResolvedValue(null);
 		closeMock.mockClear();
 
 		openArchiveMock.mockResolvedValue({
@@ -170,6 +177,26 @@ describe('migrate', () => {
 		expect(callOrder).toEqual(['fetch', 'getPageHtml']);
 		const written = await readFile(path.join(outputDir, 'p1.html'), 'utf8');
 		expect(written).toBe('<main>PAGE</main>');
+	});
+
+	test('end-to-end: prepends YAML frontmatter to the extracted HTML when DB meta is available', async () => {
+		listInternalResourcesMock.mockReturnValue(iter([]));
+		listInternalPagesMock.mockReturnValue(iter([{ url: 'https://example.com/p1' }]));
+		vi.stubGlobal('fetch', vi.fn());
+		getPageHtmlMock.mockResolvedValueOnce(
+			'<!doctype html><html><head></head><body><main><p>body</p></main></body></html>',
+		);
+		getFrontmatterMock.mockResolvedValueOnce({
+			title: 'P1',
+			og: { title: 'OG P1' },
+		});
+
+		await migrate({ archivePath: '/tmp/fake.nitpicker', outputDir });
+
+		const written = await readFile(path.join(outputDir, 'p1.html'), 'utf8');
+		expect(written).toBe(
+			'---\ntitle: "P1"\nog:\n  title: "OG P1"\n---\n<main><p>body</p></main>',
+		);
 	});
 
 	test('closes the archive session even when the resource pipeline throws', async () => {

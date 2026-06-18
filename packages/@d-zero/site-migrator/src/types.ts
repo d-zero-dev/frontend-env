@@ -28,8 +28,10 @@ export interface InternalResource {
 }
 
 /**
- * Structured frontmatter extracted from an HTML `<head>` section. See the package
- * README for the title-splitting rule and key naming conventions.
+ * Structured frontmatter sourced from the `.nitpicker` DB (per page row). See
+ * the package README for the title-splitting rule and key naming conventions.
+ * Fields are optional because empty / null DB columns are dropped at the
+ * mapping layer (so the consumer never sees `description: ""`).
  */
 export interface Frontmatter {
 	title?: string;
@@ -54,13 +56,17 @@ export interface OgFrontmatter {
 	siteName?: string;
 }
 
+/**
+ * Twitter Card fields. `url` is omitted because nitpicker DB does not store a
+ * dedicated `twitter:url` column — sites that need a Twitter-specific URL
+ * conventionally reuse `og:url`, so consumers should read `og.url` instead.
+ */
 export interface TwitterFrontmatter {
 	card?: string;
 	title?: string;
 	rawTitle?: string;
 	description?: string;
 	image?: string;
-	url?: string;
 }
 
 /**

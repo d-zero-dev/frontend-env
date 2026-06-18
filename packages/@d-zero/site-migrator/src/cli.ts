@@ -6,6 +6,11 @@ import { migrate } from './migrate.js';
 const USAGE = `Usage:
   dz-migrate <archive.nitpicker> -o <htdocs-dir> [--limit <n>] [--extract-limit <n>]
 
+Downloads sub-resources from the archive and, for each internal page, strips
+the shared layout and prepends a YAML frontmatter block sourced from the
+.nitpicker DB. Output files are intermediate artifacts for the scaffold
+pipeline, not for direct browser rendering.
+
 Options:
   -o, --output <htdocs-dir>      Output destination. URL pathnames are mirrored verbatim
                                  for both downloaded resources and extracted page HTML.
