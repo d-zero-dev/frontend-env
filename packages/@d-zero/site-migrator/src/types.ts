@@ -11,16 +11,17 @@ export interface ArchiveSession {
 }
 
 /**
- * Single internal page entry yielded by {@link listInternalPages}. Only the URL is exposed
- * here because callers either fetch the HTML on demand via {@link getPageHtml} or look up
- * structured metadata via `@nitpicker/query` directly.
+ * Single internal page entry yielded by `listInternalPages`. Only the URL is
+ * exposed here because callers either fetch the HTML on demand via
+ * `getPageHtml` or look up structured metadata via `@nitpicker/query`
+ * directly.
  */
 export interface InternalPage {
 	url: string;
 }
 
 /**
- * Single internal resource entry yielded by {@link listInternalResources}.
+ * Single internal resource entry yielded by `listInternalResources`.
  */
 export interface InternalResource {
 	url: string;
@@ -70,8 +71,8 @@ export interface TwitterFrontmatter {
 }
 
 /**
- * Resolver callback used by {@link rewriteAssetRefs}. Return a replacement URL or `null`
- * to leave the attribute value as-is.
+ * Resolver callback used by `rewriteAssetRefs`. Return a replacement URL or
+ * `null` to leave the attribute value as-is.
  */
 export type AssetResolver = (
 	url: string,
