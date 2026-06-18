@@ -18,3 +18,7 @@ yarn-error.log
 # claude
 .claude/*.local.*
 *.nitpicker
+
+# codex / other agent runtimes
+.agents/
+AGENTS.md

@@ -4,12 +4,14 @@ import { parseArgs } from 'node:util';
 import { migrate } from './migrate.js';
 
 const USAGE = `Usage:
-  dz-migrate <archive.nitpicker> -o <htdocs-dir> [--limit <n>]
+  dz-migrate <archive.nitpicker> -o <htdocs-dir> [--limit <n>] [--extract-limit <n>]
 
 Options:
-  -o, --output <htdocs-dir>   Resource download destination. URL pathnames are mirrored verbatim.
-  --limit <n>                 Concurrent download limit (default: 10).
-  -h, --help                  Show this help message.
+  -o, --output <htdocs-dir>      Output destination. URL pathnames are mirrored verbatim
+                                 for both downloaded resources and extracted page HTML.
+  --limit <n>                    Concurrent resource download limit (default: 10).
+  --extract-limit <n>            Concurrent page extraction limit (default: 10).
+  -h, --help                     Show this help message.
 `;
 
 /**
@@ -26,6 +28,7 @@ async function main(argv: readonly string[]): Promise<number> {
 			options: {
 				output: { type: 'string', short: 'o' },
 				limit: { type: 'string' },
+				'extract-limit': { type: 'string' },
 				help: { type: 'boolean', short: 'h', default: false },
 			},
 		});
@@ -57,19 +60,18 @@ async function main(argv: readonly string[]): Promise<number> {
 		return 2;
 	}
 
-	let downloadLimit: number | undefined;
-	if (parsed.values.limit !== undefined) {
-		// Reject decimals, trailing garbage ("10abc"), scientific notation,
-		// and signs — parseInt is too lenient for CLI input.
-		if (!/^\d+$/.test(parsed.values.limit)) {
-			process.stderr.write(`Error: --limit must be a positive integer\n`);
-			return 2;
-		}
-		downloadLimit = Number.parseInt(parsed.values.limit, 10);
-		if (downloadLimit < 1) {
-			process.stderr.write(`Error: --limit must be a positive integer\n`);
-			return 2;
-		}
+	const downloadLimit = parsePositiveInt(parsed.values.limit, '--limit');
+	if (downloadLimit instanceof Error) {
+		process.stderr.write(`Error: ${downloadLimit.message}\n`);
+		return 2;
+	}
+	const extractLimit = parsePositiveInt(
+		parsed.values['extract-limit'],
+		'--extract-limit',
+	);
+	if (extractLimit instanceof Error) {
+		process.stderr.write(`Error: ${extractLimit.message}\n`);
+		return 2;
 	}
 
 	const controller = new AbortController();
@@ -81,29 +83,81 @@ async function main(argv: readonly string[]): Promise<number> {
 			archivePath,
 			outputDir,
 			downloadLimit,
+			extractLimit,
 			signal: controller.signal,
-			onResult: (event) => {
+			onResource: (event) => {
 				if (event.outcome === 'failed') {
 					process.stderr.write(`fail: ${event.url} — ${event.error.message}\n`);
 				} else {
 					process.stdout.write(`save: ${event.url}\n`);
 				}
 			},
+			onPage: (event) => {
+				switch (event.outcome) {
+					case 'extracted': {
+						process.stdout.write(`page: ${event.url} (${event.matchedBy})\n`);
+						break;
+					}
+					case 'fallback': {
+						process.stdout.write(`page: ${event.url} (full document — no main found)\n`);
+						break;
+					}
+					case 'missing': {
+						process.stderr.write(`miss: ${event.url} — archive has no snapshot\n`);
+						break;
+					}
+					case 'failed': {
+						process.stderr.write(`fail: ${event.url} — ${event.error.message}\n`);
+						break;
+					}
+				}
+			},
 		});
 
-		const handled = report.saved + report.failed;
-		const skipped = report.totalResources - handled;
+		const resourcesHandled = report.resourcesSaved + report.resourcesFailed;
+		const resourcesSkipped = report.totalResources - resourcesHandled;
+		const pagesHandled =
+			report.pagesExtracted +
+			report.pagesFallback +
+			report.pagesMissing +
+			report.pagesFailed;
+		const pagesSkipped = report.totalPages - pagesHandled;
 		process.stdout.write(
-			`\nDone. ${report.saved} saved, ${report.failed} failed, ${skipped} skipped (out of ${report.totalResources}).\n`,
+			`\nResources: ${report.resourcesSaved} saved, ${report.resourcesFailed} failed, ${resourcesSkipped} skipped (out of ${report.totalResources}).\n` +
+				`Pages: ${report.pagesExtracted} extracted, ${report.pagesFallback} fallback, ${report.pagesMissing} missing, ${report.pagesFailed} failed, ${pagesSkipped} skipped (out of ${report.totalPages}).\n`,
 		);
-		if (skipped > 0 || controller.signal.aborted) {
+		if (controller.signal.aborted || resourcesSkipped > 0 || pagesSkipped > 0) {
 			return 130;
 		}
-		return report.failed === 0 ? 0 : 1;
+		return report.resourcesFailed === 0 && report.pagesFailed === 0 ? 0 : 1;
 	} finally {
 		process.off('SIGINT', onSigint);
 		process.off('SIGTERM', onSigint);
 	}
+}
+
+/**
+ *
+ * @param raw
+ * @param flag
+ */
+function parsePositiveInt(
+	raw: string | undefined,
+	flag: string,
+): number | undefined | Error {
+	if (raw === undefined) {
+		return undefined;
+	}
+	// Reject decimals, trailing garbage ("10abc"), scientific notation,
+	// and signs — parseInt is too lenient for CLI input.
+	if (!/^\d+$/.test(raw)) {
+		return new Error(`${flag} must be a positive integer`);
+	}
+	const value = Number.parseInt(raw, 10);
+	if (value < 1) {
+		return new Error(`${flag} must be a positive integer`);
+	}
+	return value;
 }
 
 try {

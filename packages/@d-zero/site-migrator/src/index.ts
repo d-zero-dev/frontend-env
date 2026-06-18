@@ -12,6 +12,11 @@ export type {
 export { urlToOutputPath } from './downloader/url-to-output-path.js';
 
 export { extractFrontmatter } from './html/extract-frontmatter.js';
+export { extractMainContent } from './html/extract-main-content.js';
+export type {
+	ExtractMainCriterion,
+	ExtractMainResult,
+} from './html/extract-main-content.js';
 export { rewriteAssetRefs } from './html/rewrite-asset-refs.js';
 export {
 	ASSET_ATTRIBUTES,
@@ -19,6 +24,13 @@ export {
 	parseSrcset,
 	serializeSrcset,
 } from './html/selectors.js';
+
+export { extractPages } from './page-extractor/extract-pages.js';
+export type {
+	ExtractPageItem,
+	ExtractPageResult,
+	ExtractPagesOptions,
+} from './page-extractor/extract-pages.js';
 
 export { migrate } from './migrate.js';
 export type { MigrateOptions, MigrateReport } from './migrate.js';
