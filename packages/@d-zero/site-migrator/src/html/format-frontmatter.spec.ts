@@ -77,4 +77,14 @@ describe('formatFrontmatter', () => {
 		// js-yaml double-quote rules escape `"` as `\"` and tab as `\t`.
 		expect(out).toContain('title: "Quote \\"inside\\" & Tab\\there"');
 	});
+
+	test('emits id at the top of the block as a bare integer (not quoted)', () => {
+		const out = formatFrontmatter({ id: 42, title: 'T' });
+		expect(out).toBe('---\nid: 42\ntitle: "T"\n---\n');
+	});
+
+	test('omits id when undefined', () => {
+		const out = formatFrontmatter({ title: 'T' });
+		expect(out).not.toContain('id:');
+	});
 });

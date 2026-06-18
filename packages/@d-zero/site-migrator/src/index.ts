@@ -34,6 +34,15 @@ export type {
 	ExtractPageResult,
 	ExtractPagesOptions,
 } from './page-extractor/extract-pages.js';
+export { assignPageIds } from './page-extractor/assign-page-ids.js';
+export {
+	buildPageIdLookup,
+	rewritePageRefs,
+} from './page-extractor/rewrite-page-refs.js';
+export type {
+	PageIdLookup,
+	RewritePageRefsOptions,
+} from './page-extractor/rewrite-page-refs.js';
 
 export { migrate } from './migrate.js';
 export type { MigrateOptions, MigrateReport } from './migrate.js';
@@ -41,6 +50,7 @@ export type { MigrateOptions, MigrateReport } from './migrate.js';
 export type {
 	ArchiveSession,
 	AssetResolver,
+	AssetResolverTagAttribute,
 	Frontmatter,
 	InternalPage,
 	InternalResource,

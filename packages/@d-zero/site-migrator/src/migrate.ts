@@ -34,6 +34,18 @@ export interface MigrateReport {
 	pagesFallback: number;
 	pagesMissing: number;
 	pagesFailed: number;
+	/**
+	 * Subset of `pagesExtracted` + `pagesFallback` whose `rewritePageRefs`
+	 * threw. The body was still written; surfaced here so programmatic
+	 * consumers can audit fail-soft rewrites without subscribing to `onPage`.
+	 */
+	pagesRewriteFailed: number;
+	/**
+	 * Subset of `pagesExtracted` + `pagesFallback` whose `getFrontmatter` read
+	 * threw. The id-only frontmatter was still written; surfaced for the same
+	 * reason as `pagesRewriteFailed`.
+	 */
+	pagesMetaFailed: number;
 }
 
 /**
@@ -97,6 +109,8 @@ export async function migrate(options: MigrateOptions): Promise<MigrateReport> {
 		let pagesFallback = 0;
 		let pagesMissing = 0;
 		let pagesFailed = 0;
+		let pagesRewriteFailed = 0;
+		let pagesMetaFailed = 0;
 		await extractPages({
 			session,
 			items: pageItems,
@@ -122,6 +136,18 @@ export async function migrate(options: MigrateOptions): Promise<MigrateReport> {
 						break;
 					}
 				}
+				if (
+					(event.outcome === 'extracted' || event.outcome === 'fallback') &&
+					event.rewriteError
+				) {
+					pagesRewriteFailed += 1;
+				}
+				if (
+					(event.outcome === 'extracted' || event.outcome === 'fallback') &&
+					event.metaError
+				) {
+					pagesMetaFailed += 1;
+				}
 				onPage?.(event);
 			},
 		});
@@ -135,6 +161,8 @@ export async function migrate(options: MigrateOptions): Promise<MigrateReport> {
 			pagesFallback,
 			pagesMissing,
 			pagesFailed,
+			pagesRewriteFailed,
+			pagesMetaFailed,
 		};
 	} finally {
 		await session.close();

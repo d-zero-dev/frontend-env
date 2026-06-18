@@ -46,4 +46,20 @@ describe('rewriteAssetRefs', () => {
 			{ url: '/y', attribute: 'href', tag: 'link' },
 		]);
 	});
+
+	test('forwards the start tag’s full attribute list so resolvers can branch on siblings (e.g. rel on <link>)', async () => {
+		const seen: { tag: string; href: string; rel: string | null }[] = [];
+		await rewriteAssetRefs(
+			'<link rel="icon" href="/icon.png">' + '<link rel="canonical" href="/about/">',
+			(url, _attr, tag, tagAttrs) => {
+				const rel = tagAttrs.find((a) => a.name === 'rel')?.value ?? null;
+				seen.push({ tag, href: url, rel });
+				return null;
+			},
+		);
+		expect(seen).toEqual([
+			{ tag: 'link', href: '/icon.png', rel: 'icon' },
+			{ tag: 'link', href: '/about/', rel: 'canonical' },
+		]);
+	});
 });

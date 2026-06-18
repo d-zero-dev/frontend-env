@@ -35,6 +35,12 @@ export interface InternalResource {
  * mapping layer (so the consumer never sees `description: ""`).
  */
 export interface Frontmatter {
+	/**
+	 * Stable integer id assigned by `assignPageIds`. Emitted at the top of the
+	 * YAML block so the downstream scaffold pipeline can route a `{{<id>}}`
+	 * template token back to this page without parsing the rest of the meta.
+	 */
+	id?: number;
 	title?: string;
 	rawTitle?: string;
 	description?: string;
@@ -71,11 +77,27 @@ export interface TwitterFrontmatter {
 }
 
 /**
+ * One `name`/`value` pair from the current start-tag, surfaced to
+ * {@link AssetResolver} so resolvers can branch on other attributes (e.g. gate
+ * `<link href>` on the `rel` attribute).
+ */
+export interface AssetResolverTagAttribute {
+	readonly name: string;
+	readonly value: string;
+}
+
+/**
  * Resolver callback used by `rewriteAssetRefs`. Return a replacement URL or
  * `null` to leave the attribute value as-is.
+ *
+ * `tagAttrs` is the start-tag's full attribute list (the rewriter forwards
+ * parse5's tokens unchanged) so a resolver can read sibling attributes — e.g.
+ * to gate `<link>` href rewriting on the `rel` attribute. Treat it as
+ * read-only; mutations are not surfaced to the rewriter.
  */
 export type AssetResolver = (
 	url: string,
 	attribute: string,
 	tagName: string,
+	tagAttrs: readonly AssetResolverTagAttribute[],
 ) => string | null;
