@@ -37,6 +37,7 @@ export async function rewriteAssetRefs(
 					attribute.value,
 					attribute.name,
 					startTag.tagName,
+					startTag.attrs,
 					resolver,
 				);
 			}
@@ -52,12 +53,14 @@ export async function rewriteAssetRefs(
  * @param original
  * @param attributeName
  * @param tagName
+ * @param tagAttrs
  * @param resolver
  */
 function rewriteAttributeValue(
 	original: string,
 	attributeName: string,
 	tagName: string,
+	tagAttrs: readonly { name: string; value: string }[],
 	resolver: AssetResolver,
 ): string {
 	if (original === '') {
@@ -66,12 +69,12 @@ function rewriteAttributeValue(
 	if (attributeName === 'srcset') {
 		const candidates = parseSrcset(original);
 		const next = candidates.map(({ url, descriptor }) => {
-			const replaced = resolver(url, attributeName, tagName);
+			const replaced = resolver(url, attributeName, tagName, tagAttrs);
 			return { url: replaced ?? url, descriptor };
 		});
 		return serializeSrcset(next);
 	}
-	const replaced = resolver(original, attributeName, tagName);
+	const replaced = resolver(original, attributeName, tagName, tagAttrs);
 	return replaced ?? original;
 }
 

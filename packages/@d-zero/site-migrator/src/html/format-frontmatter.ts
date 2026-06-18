@@ -41,6 +41,7 @@ export function formatFrontmatter(meta: Frontmatter): string {
 }
 
 const TOP_LEVEL_KEYS = [
+	'id',
 	'title',
 	'rawTitle',
 	'description',

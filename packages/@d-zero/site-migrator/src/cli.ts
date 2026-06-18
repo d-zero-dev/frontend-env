@@ -7,9 +7,11 @@ const USAGE = `Usage:
   dz-migrate <archive.nitpicker> -o <htdocs-dir> [--limit <n>] [--extract-limit <n>]
 
 Downloads sub-resources from the archive and, for each internal page, strips
-the shared layout and prepends a YAML frontmatter block sourced from the
-.nitpicker DB. Output files are intermediate artifacts for the scaffold
-pipeline, not for direct browser rendering.
+the shared layout, assigns a stable integer id, prepends a YAML frontmatter
+block (id + DB-sourced meta), and rewrites same-origin URL references inside
+the body (asset URLs → root-relative paths; <a href> / <form action> → the
+{{<id>}} template token consumed by the downstream scaffold pipeline). Output
+files are intermediate artifacts, not for direct browser rendering.
 
 Options:
   -o, --output <htdocs-dir>      Output destination. URL pathnames are mirrored verbatim
@@ -109,12 +111,25 @@ async function main(argv: readonly string[]): Promise<number> {
 					}
 					case 'missing': {
 						process.stderr.write(`miss: ${event.url} — archive has no snapshot\n`);
-						break;
+						return;
 					}
 					case 'failed': {
 						process.stderr.write(`fail: ${event.url} — ${event.error.message}\n`);
-						break;
+						return;
 					}
+				}
+				// Soft-error warnings sit outside the outcome switch because they
+				// can fire on both extracted and fallback events without changing
+				// the success classification.
+				if (event.rewriteError) {
+					process.stderr.write(
+						`warn: ${event.url} — rewrite failed, raw HTML kept: ${event.rewriteError.message}\n`,
+					);
+				}
+				if (event.metaError) {
+					process.stderr.write(
+						`warn: ${event.url} — meta read failed, id-only frontmatter kept: ${event.metaError.message}\n`,
+					);
 				}
 			},
 		});
@@ -129,7 +144,8 @@ async function main(argv: readonly string[]): Promise<number> {
 		const pagesSkipped = report.totalPages - pagesHandled;
 		process.stdout.write(
 			`\nResources: ${report.resourcesSaved} saved, ${report.resourcesFailed} failed, ${resourcesSkipped} skipped (out of ${report.totalResources}).\n` +
-				`Pages: ${report.pagesExtracted} extracted, ${report.pagesFallback} fallback, ${report.pagesMissing} missing, ${report.pagesFailed} failed, ${pagesSkipped} skipped (out of ${report.totalPages}).\n`,
+				`Pages: ${report.pagesExtracted} extracted, ${report.pagesFallback} fallback, ${report.pagesMissing} missing, ${report.pagesFailed} failed, ${pagesSkipped} skipped (out of ${report.totalPages}).\n` +
+				`Soft errors (body still written): ${report.pagesRewriteFailed} rewrite, ${report.pagesMetaFailed} meta.\n`,
 		);
 		if (controller.signal.aborted || resourcesSkipped > 0 || pagesSkipped > 0) {
 			return 130;
