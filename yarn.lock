@@ -1428,7 +1428,7 @@ __metadata:
     "@kamado-io/style-compiler": "npm:1.3.0"
     "@prettier/plugin-pug": "npm:3.4.2"
     "@types/node": "npm:25.3.3"
-    chrome-devtools-mcp: "npm:0.21.0"
+    chrome-devtools-mcp: "npm:1.1.0"
     cross-env: "npm:10.1.0"
     dialog-toggle-events-polyfill: "npm:1.1.4"
     dotenv: "npm:17.3.1"
@@ -6627,13 +6627,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chrome-devtools-mcp@npm:0.21.0":
-  version: 0.21.0
-  resolution: "chrome-devtools-mcp@npm:0.21.0"
+"chrome-devtools-mcp@npm:1.1.0":
+  version: 1.1.0
+  resolution: "chrome-devtools-mcp@npm:1.1.0"
   bin:
     chrome-devtools: build/src/bin/chrome-devtools.js
     chrome-devtools-mcp: build/src/bin/chrome-devtools-mcp.js
-  checksum: 10c0/eb3a6a80cad23ae33b898873b6b50df91f3dbcd4f902d346228e4e7e27c2fafe675114f6049f57ad869b2d18c949b63a99a332945803ed7cb04060ca7fb37406
+  checksum: 10c0/7ac8642d0e32669922c22168eecf26ca5aeb640850120157ee310e6446f8bc33b8bb360c54e04a177ec003cc4cc47dd6b90606e53a4ad78290cd9fbfffc951ff
   languageName: node
   linkType: hard
 
