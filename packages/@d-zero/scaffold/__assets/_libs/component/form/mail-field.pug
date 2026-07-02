@@ -1,0 +1,114 @@
+//- isGrouped: 同一 fieldset/legend 内に複数フィールドを配置する場合に true。
+	親の見出し構造と一致させること（グループ化あり = fieldset/legend、なし = div/label）
+mixin mailField(params = {})
+	-
+		const props = Object.assign({ input: {
+			type: "text",
+			maxlength: null,
+			size: null,
+			},
+			name: "", beforeAttachment: "", afterAttachment: "", description: "", errorMessage: "", isRequired: false, isGrouped: false }, params);
+		const nameFirstLetterUppercased = props.name.charAt(0).toUpperCase() + props.name.slice(1);
+		const idInput = `MailMessage${nameFirstLetterUppercased}`;
+		const idField = `FieldMailMessage${nameFirstLetterUppercased}`;
+		// checkbox / radio は各選択肢が label を持つため、前後見出しは label にしない
+		const hasOwnOptionLabels = props.input.type === "checkbox" || props.input.type === "radio";
+		// CMS要件: グループ化している場合は 前見出し を labelとする。前見出しが空であれば 後見出しを labelとする
+		const isBeforeAttachmentLabel = Boolean(props.isGrouped && !hasOwnOptionLabels && props.beforeAttachment);
+		const isAfterAttachmentLabel = Boolean(props.isGrouped && !hasOwnOptionLabels && !props.beforeAttachment && props.afterAttachment);
+		// pug-lint がスプレッド構文を解析できないため Object.assign で合成する
+		const inputProps = Object.assign({}, props, { idInput: idInput });
+	.mail-field(data-type=props.input.type id=idField)
+		if isBeforeAttachmentLabel
+			label.mail-before-attachment(for=idInput) #{ props.beforeAttachment }
+		else
+			span.mail-before-attachment #{ props.beforeAttachment }
+
+		span.mail-input
+			if props.input.type === "text"
+				+mailInputText(Object.assign({}, inputProps, { maxlength: props.input.maxlength, size: props.input.size }))
+			else if props.input.type === "select"
+				+mailInputSelect(Object.assign({}, inputProps, { options: props.input.options }))
+			else if props.input.type === "checkbox"
+				+mailInputCheckbox({ name: props.name, idInput: idInput, options: props.input.options })
+			else if props.input.type === "radio"
+				+mailInputRadio(Object.assign({}, inputProps, { options: props.input.options }))
+			else if props.input.type === "textarea"
+				+mailInputTextarea(Object.assign({}, inputProps, { rows: props.input.rows, cols: props.input.cols }))
+			else if props.input.type === "file"
+				+mailInputFile(inputProps)
+
+		if isAfterAttachmentLabel
+			label.mail-after-attachment(for=idInput) #{ props.afterAttachment }
+		else
+			span.mail-after-attachment #{ props.afterAttachment }
+		.mail-description #{ props.description }
+		.error-message #{ props.errorMessage }
+
+mixin mailInputText(params = {})
+	-
+		const props = Object.assign({ name: "field1", idInput: "MailMessageField1", maxlength: null, size: null, isRequired: true }, params);
+		const inputName = `data[MailMessage][${props.name}]`;
+	input(
+		type="text"
+		name=inputName
+		maxlength=props.maxlength
+		size=props.size
+		required=props.isRequired
+		id=props.idInput)
+
+mixin mailInputSelect(params = {})
+	-
+		const props = Object.assign({ name: "address1", idInput: "MailMessageAddress1", options: [{value: "", label: "選択してください"}], isRequired: true }, params);
+		const inputName = `data[MailMessage][${props.name}]`;
+	select(name=inputName required=props.isRequired id=props.idInput)
+		each option in props.options
+			option(value=option.value)= option.label
+
+//- checkbox には required を出力しない（各 input に付くと「全項目チェック必須」の挙動になるため。
+	「1つ以上選択必須」の検証はサーバー側の責務）
+mixin mailInputCheckbox(params = {})
+	-
+		const props = Object.assign({ name: "category", idInput: "MailMessageCategory", options: [{value: "Item1", label: "項目1"}] }, params);
+		const hiddenName = `data[MailMessage][${props.name}]`;
+		const inputName = `data[MailMessage][${props.name}][]`;
+	//- 未選択時にもキーが送信されるようにするための hidden（CMS 仕様）
+	input(type="hidden" name=hiddenName value id=props.idInput)
+	each option in props.options
+		-
+			const id = props.idInput + option.value;
+		.checkbox
+			input(type="checkbox" name=inputName value=option.value id=id)
+			label(for=id) #{ option.label }
+
+mixin mailInputRadio(params = {})
+	-
+		const props = Object.assign({ name: "sex", idInput: "MailMessageSex", options: [{value: "1", label: "男性"}, {value: "2", label: "女性"}], isRequired: true }, params);
+		const inputName = `data[MailMessage][${props.name}]`;
+		const idHidden = `${props.idInput}_`;
+	//- 未選択時にもキーが送信されるようにするための hidden（CMS 仕様）
+	input(type="hidden" name=inputName value id=idHidden)
+	each option in props.options
+		-
+			const id = props.idInput + option.value;
+		.mail-group-radio
+			span
+				input(type="radio" name=inputName required=props.isRequired value=option.value id=id)
+				label(for=id) #{ option.label }
+
+mixin mailInputTextarea(params = {})
+	-
+		const props = Object.assign({ name: "message", idInput: "MailMessageMessage", rows: null, cols: null, isRequired: true }, params);
+		const inputName = `data[MailMessage][${props.name}]`;
+	textarea(
+		name=inputName
+		rows=props.rows
+		cols=props.cols
+		required=props.isRequired
+		id=props.idInput)
+
+mixin mailInputFile(params = {})
+	-
+		const props = Object.assign({ name: "file", idInput: "MailMessageFile", isRequired: true }, params);
+		const inputName = `data[MailMessage][${props.name}]`;
+	input(name=inputName type="file" required=props.isRequired id=props.idInput)
