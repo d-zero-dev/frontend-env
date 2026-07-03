@@ -1332,16 +1332,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/dealer@npm:1.8.0":
-  version: 1.8.0
-  resolution: "@d-zero/dealer@npm:1.8.0"
-  dependencies:
-    "@d-zero/shared": "npm:0.22.0"
-    ansi-colors: "npm:4.1.3"
-  checksum: 10c0/ae244785cf127433555ab20e81a0dc7d31fce663c239edf347461cb7b965ddbd6c5b88c07da7aef7c3cfb84bbdf520e95971a79ae11d7918c6b6a54f3c3f8800
-  languageName: node
-  linkType: hard
-
 "@d-zero/dealer@npm:1.9.0":
   version: 1.9.0
   resolution: "@d-zero/dealer@npm:1.9.0"
@@ -1349,6 +1339,16 @@ __metadata:
     "@d-zero/shared": "npm:0.22.0"
     ansi-colors: "npm:4.1.3"
   checksum: 10c0/70418ef52bd13280a9a03347776bdd27d046ea5249fff7fcef008e95cbca4f3167a8b9ea851ab174571f2885ee2e01dcc858c1bf7d633618be2d51ff793c8b0c
+  languageName: node
+  linkType: hard
+
+"@d-zero/dealer@npm:1.9.2":
+  version: 1.9.2
+  resolution: "@d-zero/dealer@npm:1.9.2"
+  dependencies:
+    "@d-zero/shared": "npm:0.22.0"
+    ansi-colors: "npm:4.1.3"
+  checksum: 10c0/313146c442fc126bc97e4eb103ab29ceb1838d4a21b4f1fa4340cda7977486e9129ff8659235a9ee65530a033e6827f75d8e474211c15346215358888a1a27de
   languageName: node
   linkType: hard
 
@@ -1600,7 +1600,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@d-zero/site-migrator@workspace:packages/@d-zero/site-migrator"
   dependencies:
-    "@d-zero/dealer": "npm:1.8.0"
+    "@d-zero/dealer": "npm:1.9.2"
     "@d-zero/shared": "npm:0.22.0"
     "@nitpicker/crawler": "npm:0.11.0"
     "@nitpicker/query": "npm:0.11.0"
