@@ -28,7 +28,7 @@
 		"meow": "14.1.0",
 		"minimatch": "10.2.5",
 		"plop": "4.0.4",
-		"prettier": "3.9.3"
+		"prettier": "3.9.4"
 	},
 	"devDependencies": {
 		"@types/node": "25.9.4",
