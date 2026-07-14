@@ -1,3 +1,6 @@
+include /component/form/cc-form-fieldset.pug
+include /component/form/mail-field-confirm.pug
+
 .c-content-main
 	.cc-form-description
 		p 以下の内容を送信します。
@@ -12,178 +15,41 @@
 		input#Token__TOKEN__(type="hidden" name="data[_Token][key]" value="__TOKEN__")
 		input#MailMessageMode(type="hidden" name="data[MailMessage][mode]")
 		.cc-form-field-list
-			.cc-form-fieldset
-				div
-					.cc-form-fieldset-heading
-						span フィールドグループ名
-						span.required 必須
-					.cc-form-fieldset-body
-						.mail-field(data-type="text")
-							span.mail-before-attachment 前見出し
-							span.mail-input __入力内容__
-							span.mail-after-attachment 後見出し
-						.mail-field(data-type="text")
-							span.mail-before-attachment
-							span.mail-input __入力内容__
-							span.mail-after-attachment 後見出し
-			.cc-form-fieldset
-				div
-					.cc-form-fieldset-heading
-						span 単体フィールド名
-						span.required 必須
-					.cc-form-fieldset-body
-						.mail-field(data-type="text")
-							span.mail-before-attachment 前見出し
-							span.mail-input __入力内容__
-							span.mail-after-attachment 後見出し
-			.cc-form-fieldset
-				div
-					.cc-form-fieldset-heading
-						span 氏名
-						span.required 必須
-					.cc-form-fieldset-body
-						.mail-field(data-type="text")
-							span.mail-before-attachment 姓
-							span.mail-input __入力内容__
-							span.mail-after-attachment
-						.mail-field(data-type="text")
-							span.mail-before-attachment 名
-							span.mail-input __入力内容__
-							span.mail-after-attachment
-			.cc-form-fieldset
-				div
-					.cc-form-fieldset-heading
-						span フリガナ
-						span.optional 任意
-					.cc-form-fieldset-body
-						.mail-field(data-type="text")
-							span.mail-before-attachment セイ
-							span.mail-input __入力内容__
-							span.mail-after-attachment
-						.mail-field(data-type="text")
-							span.mail-before-attachment メイ
-							span.mail-input __入力内容__
-							span.mail-after-attachment
-			.cc-form-fieldset
-				div
-					.cc-form-fieldset-heading
-						span 住所
-						span.optional 任意
-					.cc-form-fieldset-body
-						.mail-field(data-type="text")
-							span.mail-before-attachment 〒
-							span.mail-input __入力内容__
-							span.mail-after-attachment
-						.mail-field(data-type="select")
-							span.mail-before-attachment 都道府県
-							span.mail-input __入力内容__
-							span.mail-after-attachment
-						.mail-field(data-type="text")
-							span.mail-before-attachment 市区町村
-							span.mail-input __入力内容__
-							span.mail-after-attachment
-						.mail-field(data-type="text")
-							span.mail-before-attachment 番地
-							span.mail-input __入力内容__
-							span.mail-after-attachment
-			.cc-form-fieldset
-				div
-					.cc-form-fieldset-heading
-						span チェックボックス単体
-						span.required 必須
-					.cc-form-fieldset-body
-						.mail-field(data-type="checkbox")
-							span.mail-before-attachment チェックボックス前見出し
-							div
-								ul
-									li __選択項目1__
-									li __選択項目2__
-			.cc-form-fieldset
-				div
-					.cc-form-fieldset-heading
-						span チェックボックス
-						span.required 必須
-					.cc-form-fieldset-body
-						.mail-field(data-type="checkbox")
-							div
-								ul
-									li __選択項目1__
-									li __選択項目2__
-						.mail-field(data-type="text")
-							span.mail-before-attachment その他
-							span.mail-input __入力内容__
-							span.mail-after-attachment
-			.cc-form-fieldset
-				div
-					.cc-form-fieldset-heading
-						span 電話番号
-					.cc-form-fieldset-body
-						.mail-field(data-type="text")
-							span.mail-before-attachment
-							span.mail-input __入力内容__
-							span.mail-after-attachment
-			.cc-form-fieldset
-				div
-					.cc-form-fieldset-heading
-						span メールアドレス
-						span.required 必須
-					.cc-form-fieldset-body
-						.mail-field(data-type="text")
-							span.mail-before-attachment
-							span.mail-input __入力内容__
-							span.mail-after-attachment
-			.cc-form-fieldset
-				div
-					.cc-form-fieldset-heading
-						span 生まれ年
-						span.required 必須
-					.cc-form-fieldset-body
-						.mail-field(data-type="select")
-							span.mail-before-attachment
-							span.mail-input __入力内容__
-							span.mail-after-attachment
-			.cc-form-fieldset
-				div
-					.cc-form-fieldset-heading
-						span 性別
-						span.optional 任意
-					.cc-form-fieldset-body
-						.mail-field(data-type="radio")
-							span.mail-before-attachment
-							.mail-radio
-								span.mail-input __選択項目__
-			.cc-form-fieldset
-				div
-					.cc-form-fieldset-heading
-						span テキストエリア
-						span.optional 任意
-					.cc-form-fieldset-attention
-						.mail-attention 注意書き
-					.cc-form-fieldset-body
-						.mail-field(data-type="textarea")
-							span.mail-before-attachment
-							p.mail-input __入力内容__
-							span.mail-after-attachment
-			.cc-form-fieldset
-				div
-					.cc-form-fieldset-heading
-						span テキストエリア
-						span.optional 任意
-					.cc-form-fieldset-body
-						.mail-field(data-type="textarea")
-							span.mail-before-attachment 前見出し
-							p.mail-input __入力内容__
-							span.mail-after-attachment 後見出し
-			.cc-form-fieldset
-				div
-					.cc-form-fieldset-heading
-						span ファイル添付
-						span.optional 任意
-					.cc-form-fieldset-body
-						.mail-field(data-type="file")
-							span.mail-before-attachment 前見出し
-							span.mail-input __ファイル名__
-							span.mail-after-attachment 後見出し
+			+ccFormFieldset({ isGrouped: false, heading: "フィールドグループ名", isRequired: true })
+				+mailFieldConfirm({ beforeAttachment: "前見出し", afterAttachment: "後見出し" })
+				+mailFieldConfirm({ beforeAttachment: "", afterAttachment: "後見出し" })
+			+ccFormFieldset({ isGrouped: false, heading: "単体フィールド名", isRequired: true })
+				+mailFieldConfirm({ beforeAttachment: "前見出し", afterAttachment: "後見出し" })
+			+ccFormFieldset({ isGrouped: false, heading: "氏名", isRequired: true })
+				+mailFieldConfirm({ beforeAttachment: "姓", afterAttachment: "" })
+				+mailFieldConfirm({ beforeAttachment: "名", afterAttachment: "" })
+			+ccFormFieldset({ isGrouped: false, heading: "フリガナ", isRequired: false })
+				+mailFieldConfirm({ beforeAttachment: "セイ", afterAttachment: "" })
+				+mailFieldConfirm({ beforeAttachment: "メイ", afterAttachment: "" })
+			+ccFormFieldset({ isGrouped: false, heading: "住所", isRequired: false })
+				+mailFieldConfirm({ beforeAttachment: "〒", afterAttachment: "" })
+				+mailFieldConfirm({ type: "select", beforeAttachment: "都道府県", afterAttachment: "" })
+				+mailFieldConfirm({ beforeAttachment: "市区町村", afterAttachment: "" })
+				+mailFieldConfirm({ beforeAttachment: "番地", afterAttachment: "" })
+			+ccFormFieldset({ isGrouped: false, heading: "チェックボックス単体", isRequired: true })
+				+mailFieldConfirm({ type: "checkbox", beforeAttachment: "チェックボックス前見出し", options: ["__選択項目1__", "__選択項目2__"] })
+			+ccFormFieldset({ isGrouped: false, heading: "チェックボックス", isRequired: true })
+				+mailFieldConfirm({ type: "checkbox", options: ["__選択項目1__", "__選択項目2__"] })
+				+mailFieldConfirm({ beforeAttachment: "その他", afterAttachment: "" })
+			+ccFormFieldset({ isGrouped: false, heading: "電話番号", isRequired: false })
+				+mailFieldConfirm({ beforeAttachment: "", afterAttachment: "" })
+			+ccFormFieldset({ isGrouped: false, heading: "メールアドレス", isRequired: true })
+				+mailFieldConfirm({ beforeAttachment: "", afterAttachment: "" })
+			+ccFormFieldset({ isGrouped: false, heading: "生まれ年", isRequired: true })
+				+mailFieldConfirm({ type: "select", beforeAttachment: "", afterAttachment: "" })
+			+ccFormFieldset({ isGrouped: false, heading: "性別", isRequired: false })
+				+mailFieldConfirm({ type: "radio", beforeAttachment: "", afterAttachment: "", value: "__選択項目__" })
+			+ccFormFieldset({ isGrouped: false, heading: "テキストエリア", isRequired: false, attention: "注意書き" })
+				+mailFieldConfirm({ type: "textarea", beforeAttachment: "", afterAttachment: "" })
+			+ccFormFieldset({ isGrouped: false, heading: "テキストエリア", isRequired: false })
+				+mailFieldConfirm({ type: "textarea", beforeAttachment: "前見出し", afterAttachment: "後見出し" })
+			+ccFormFieldset({ isGrouped: false, heading: "ファイル添付", isRequired: false })
+				+mailFieldConfirm({ type: "file", beforeAttachment: "前見出し", afterAttachment: "後見出し", value: "__ファイル名__" })
 		.cc-form-submit
 			button(type="submit"): span 入力画面に戻る
 			button(type="submit"): span 送信する

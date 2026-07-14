@@ -19,7 +19,10 @@ mixin ccFormFieldset(params = {})
 		else
 			div
 				.cc-form-fieldset-heading
-					label(for=props.labelFor)= props.heading
+					if props.labelFor
+						label(for=props.labelFor)= props.heading
+					else
+						span= props.heading
 					span(class=badgeClass)= badgeLabel
 				if props.attention
 					.cc-form-fieldset-attention
