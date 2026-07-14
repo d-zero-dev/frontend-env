@@ -1,0 +1,28 @@
+//- isGrouped: fieldset/legend 構造にする場合 true。単一フィールドでも checkbox/radio は
+	CMS要件により isGrouped: true にする(呼び出し側で判断・コメントする)
+mixin ccFormFieldset(params = {})
+	-
+		const props = Object.assign({ id: null, isGrouped: false, heading: "", labelFor: null, isRequired: false, attention: "" }, params);
+		const badgeClass = props.isRequired ? "required" : "optional";
+		const badgeLabel = props.isRequired ? "必須" : "任意";
+	.cc-form-fieldset(id=props.id)
+		if props.isGrouped
+			fieldset
+				legend.cc-form-fieldset-heading
+					span= props.heading
+					span(class=badgeClass)= badgeLabel
+				if props.attention
+					.cc-form-fieldset-attention
+						.mail-attention= props.attention
+				.cc-form-fieldset-body
+					block
+		else
+			div
+				.cc-form-fieldset-heading
+					label(for=props.labelFor)= props.heading
+					span(class=badgeClass)= badgeLabel
+				if props.attention
+					.cc-form-fieldset-attention
+						.mail-attention= props.attention
+				.cc-form-fieldset-body
+					block
