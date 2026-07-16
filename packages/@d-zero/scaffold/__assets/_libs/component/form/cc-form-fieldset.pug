@@ -1,12 +1,20 @@
-//- isGrouped: fieldset/legend 構造にする場合 true。単一フィールドでも checkbox/radio は
-	CMS要件により isGrouped: true にする(呼び出し側で判断・コメントする)
+//- name/key のどちらを渡すかで fieldset/legend（isGrouped）か div/label かを自動判定する:
+	- name: 単一 input に label-for で紐付けられる場合（text/select/textarea/file の単一フィールド）
+	- key: 単一 input に紐付けられない場合（複数フィールドをまとめる、または checkbox/radio は
+	CMS要件により単一フィールドでも fieldset/legend にする）を、意味のわかる短い語で渡す
 mixin ccFormFieldset(params = {})
 	-
-		const props = Object.assign({ id: null, isGrouped: false, heading: "", labelFor: null, isRequired: false, attention: "" }, params);
+		const props = Object.assign({ heading: "", name: null, key: null, isRequired: false, attention: "" }, params);
 		const badgeClass = props.isRequired ? "required" : "optional";
 		const badgeLabel = props.isRequired ? "必須" : "任意";
-	.cc-form-fieldset(id=props.id)
-		if props.isGrouped
+		const isGrouped = Boolean(props.key);
+		// mail-field.pug の idInput と同じ計算式（name/key から MailMessage+PascalCase のidを導出）
+		const toPascalCase = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+		const groupSource = props.key || props.name;
+		const id = groupSource ? `GroupMailMessage${toPascalCase(groupSource)}` : null;
+		const labelFor = !isGrouped && props.name ? `MailMessage${toPascalCase(props.name)}` : null;
+	.cc-form-fieldset(id=id)
+		if isGrouped
 			fieldset
 				legend.cc-form-fieldset-heading
 					span= props.heading
@@ -19,8 +27,8 @@ mixin ccFormFieldset(params = {})
 		else
 			div
 				.cc-form-fieldset-heading
-					if props.labelFor
-						label(for=props.labelFor)= props.heading
+					if labelFor
+						label(for=labelFor)= props.heading
 					else
 						span= props.heading
 					span(class=badgeClass)= badgeLabel
