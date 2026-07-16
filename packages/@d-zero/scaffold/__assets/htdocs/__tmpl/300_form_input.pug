@@ -1,4 +1,5 @@
 include /component/form/mail-field.pug
+include /component/form/mail-input.pug
 include /component/form/cc-form-fieldset.pug
 
 .c-content-main
@@ -18,87 +19,87 @@ include /component/form/cc-form-fieldset.pug
 		input#MailMessageMode(type="hidden" name="data[MailMessage][mode]")
 		.cc-form-field-list
 			+ccFormFieldset({ key: "field1", heading: "フィールドグループ名", isRequired: true, attention: "注意書き" })
-				+mailField({ input: { type: "text", maxlength: 255 }, name: "field1", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "説明文", errorMessage: "エラーメッセージ", isGrouped: true, isRequired: true })
-				+mailField({ input: { type: "text", maxlength: 255 }, name: "field2", beforeAttachment: "", afterAttachment: "後見出し", description: "説明文", errorMessage: "エラーメッセージ", isGrouped: true, isRequired: true })
+				+mailField({ type: "text", name: "field1", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "説明文", errorMessage: "エラーメッセージ", isGrouped: true })
+					+mailInputText({ name: "field1", maxlength: 255, isRequired: true })
+				+mailField({ type: "text", name: "field2", beforeAttachment: "", afterAttachment: "後見出し", description: "説明文", errorMessage: "エラーメッセージ", isGrouped: true })
+					+mailInputText({ name: "field2", maxlength: 255, isRequired: true })
 			+ccFormFieldset({ heading: "単体フィールド名", name: "field3", isRequired: true, attention: "注意書き" })
-				+mailField({ input: { type: "text", maxlength: 255 }, name: "field3", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "説明文", errorMessage: "エラーメッセージ", isGrouped: false, isRequired: true })
+				+mailField({ type: "text", name: "field3", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "説明文", errorMessage: "エラーメッセージ", isGrouped: false })
+					+mailInputText({ name: "field3", maxlength: 255, isRequired: true })
 			+ccFormFieldset({ key: "name", heading: "氏名", isRequired: true })
-				+mailField({ input: { type: "text" }, name: "lastName", beforeAttachment: "姓", afterAttachment: "", description: "", errorMessage: "", isGrouped: true, isRequired: true })
-				+mailField({ input: { type: "text" }, name: "firstName", beforeAttachment: "名", afterAttachment: "", description: "", errorMessage: "", isGrouped: true, isRequired: true })
+				+mailField({ type: "text", name: "lastName", beforeAttachment: "姓", afterAttachment: "", description: "", errorMessage: "", isGrouped: true })
+					+mailInputText({ name: "lastName", isRequired: true })
+				+mailField({ type: "text", name: "firstName", beforeAttachment: "名", afterAttachment: "", description: "", errorMessage: "", isGrouped: true })
+					+mailInputText({ name: "firstName", isRequired: true })
 			+ccFormFieldset({ key: "nameKana1", heading: "フリガナ", isRequired: false, attention: "カタカナで入力してください" })
-				+mailField({ input: { type: "text" }, name: "lastNameKana", beforeAttachment: "セイ", afterAttachment: "", description: "", errorMessage: "", isGrouped: true, isRequired: true })
-				+mailField({ input: { type: "text" }, name: "firstNameKana", beforeAttachment: "メイ", afterAttachment: "", description: "", errorMessage: "", isGrouped: true, isRequired: true })
+				+mailField({ type: "text", name: "lastNameKana", beforeAttachment: "セイ", afterAttachment: "", description: "", errorMessage: "", isGrouped: true })
+					+mailInputText({ name: "lastNameKana", isRequired: true })
+				+mailField({ type: "text", name: "firstNameKana", beforeAttachment: "メイ", afterAttachment: "", description: "", errorMessage: "", isGrouped: true })
+					+mailInputText({ name: "firstNameKana", isRequired: true })
 			+ccFormFieldset({ key: "zip", heading: "住所", isRequired: false })
-				+mailField({ input: { type: "text", maxlength: 8, size: 10 }, name: "zip", beforeAttachment: "〒", afterAttachment: "", description: "ハイフンを除く半角数字で入力してください", errorMessage: "", isGrouped: true, isRequired: false })
-				+mailField({ input: { type: "select", options: [{ value: "", label: "選択してください" }, ...data.prefectureOptions] }, name: "address1", beforeAttachment: "都道府県", afterAttachment: "", description: "", errorMessage: "", isGrouped: true, isRequired: false })
-				+mailField({ input: { type: "text", maxlength: 200, size: 30 }, name: "address2", beforeAttachment: "市区町村", afterAttachment: "", description: "", errorMessage: "", isGrouped: true, isRequired: false })
-				+mailField({ input: { type: "text", maxlength: 200, size: 30 }, name: "address3", beforeAttachment: "番地", afterAttachment: "", description: "", errorMessage: "", isGrouped: true, isRequired: false })
+				+mailField({ type: "text", name: "zip", beforeAttachment: "〒", afterAttachment: "", description: "ハイフンを除く半角数字で入力してください", errorMessage: "", isGrouped: true })
+					+mailInputText({ name: "zip", maxlength: 8, size: 10, isRequired: false })
+				+mailField({ type: "select", name: "address1", beforeAttachment: "都道府県", afterAttachment: "", description: "", errorMessage: "", isGrouped: true })
+					+mailInputSelect({ name: "address1", options: [{ value: "", label: "選択してください" }, ...data.prefectureOptions], isRequired: false })
+				+mailField({ type: "text", name: "address2", beforeAttachment: "市区町村", afterAttachment: "", description: "", errorMessage: "", isGrouped: true })
+					+mailInputText({ name: "address2", maxlength: 200, size: 30, isRequired: false })
+				+mailField({ type: "text", name: "address3", beforeAttachment: "番地", afterAttachment: "", description: "", errorMessage: "", isGrouped: true })
+					+mailInputText({ name: "address3", maxlength: 200, size: 30, isRequired: false })
 			// CMS要件: グループ化していない場合でも チェックボックスでは fieldset/legend の構造
 			+ccFormFieldset({ key: "category", heading: "チェックボックス単体", isRequired: true })
-				+mailField({
-	input: {
-		type: "checkbox",
-		options: [
-			{ value: "Item1", label: "項目1" },
-			{ value: "Item2", label: "項目2" },
-			{ value: "Item3", label: "項目3" },
-		],
-	},
+				+mailField({ type: "checkbox", name: "category", beforeAttachment: "チェックボックス前見出し", afterAttachment: "チェックボックス後見出し", description: "", errorMessage: "" })
+					+mailInputCheckbox({
 	name: "category",
-	beforeAttachment: "チェックボックス前見出し",
-	afterAttachment: "チェックボックス後見出し",
-	description: "",
-	errorMessage: "",
+	options: [
+		{ value: "Item1", label: "項目1" },
+		{ value: "Item2", label: "項目2" },
+		{ value: "Item3", label: "項目3" },
+	],
 })
 			+ccFormFieldset({ key: "contents", heading: "チェックボックス", isRequired: true, attention: "注意書き" })
-				+mailField({
-	input: {
-		type: "checkbox",
-		options: [
-			{ value: "1", label: "生麦生米生卵" },
-			{ value: "2", label: "赤パジャマ黄パジャマ茶パジャマ" },
-			{ value: "3", label: "青巻紙赤巻紙黄巻紙" },
-			{ value: "4", label: "隣の客はよく柿食う客だ" },
-			{ value: "5", label: "かえるぴょこぴょこ3ぴょこぴょこ あわせてぴょこぴょこ6ぴょこぴょこ" },
-			{ value: "6", label: "東京特許許可局許可局長" },
-			{ value: "7", label: "その他" },
-		],
-	},
+				+mailField({ type: "checkbox", name: "contents", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "" })
+					+mailInputCheckbox({
 	name: "contents",
-	beforeAttachment: "前見出し",
-	afterAttachment: "後見出し",
-	description: "",
-	errorMessage: "",
+	options: [
+		{ value: "1", label: "生麦生米生卵" },
+		{ value: "2", label: "赤パジャマ黄パジャマ茶パジャマ" },
+		{ value: "3", label: "青巻紙赤巻紙黄巻紙" },
+		{ value: "4", label: "隣の客はよく柿食う客だ" },
+		{ value: "5", label: "かえるぴょこぴょこ3ぴょこぴょこ あわせてぴょこぴょこ6ぴょこぴょこ" },
+		{ value: "6", label: "東京特許許可局許可局長" },
+		{ value: "7", label: "その他" },
+	],
 })
-				+mailField({ input: { type: "text", maxlength: 255, size: 30 }, name: "contentsOther", beforeAttachment: "その他", afterAttachment: "後見出し", description: "その他を選択された場合は内容をご入力ください。", errorMessage: "", isGrouped: true, isRequired: false })
+				+mailField({ type: "text", name: "contentsOther", beforeAttachment: "その他", afterAttachment: "後見出し", description: "その他を選択された場合は内容をご入力ください。", errorMessage: "", isGrouped: true })
+					+mailInputText({ name: "contentsOther", maxlength: 255, size: 30, isRequired: false })
 			+ccFormFieldset({ heading: "電話番号", name: "tel", isRequired: false, attention: "注意書き" })
-				+mailField({ input: { type: "text", maxlength: 13, size: 15 }, name: "tel", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "", isGrouped: false, isRequired: false })
+				+mailField({ type: "text", name: "tel", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "", isGrouped: false })
+					+mailInputText({ name: "tel", maxlength: 13, size: 15, isRequired: false })
 			+ccFormFieldset({ heading: "メールアドレス", name: "email1", isRequired: true, attention: "注意書き" })
-				+mailField({ input: { type: "text", maxlength: 255, size: 30 }, name: "email1", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "", isGrouped: false, isRequired: false })
+				+mailField({ type: "text", name: "email1", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "", isGrouped: false })
+					+mailInputText({ name: "email1", maxlength: 255, size: 30, isRequired: false })
 			+ccFormFieldset({ heading: "生まれ年", name: "birth", isRequired: true, attention: "注意書き" })
-				+mailField({ input: { type: "select", options: [{ value: "", label: "選択してください" }, ...data.birthYearOptions] }, name: "birth", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "", isGrouped: false, isRequired: false })
+				+mailField({ type: "select", name: "birth", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "", isGrouped: false })
+					+mailInputSelect({ name: "birth", options: [{ value: "", label: "選択してください" }, ...data.birthYearOptions], isRequired: false })
 			+ccFormFieldset({ key: "sex", heading: "性別", isRequired: false, attention: "注意書き" })
-				+mailField({
-	input: {
-		type: "radio",
-		options: [
-			{ value: "1", label: "男性" },
-			{ value: "2", label: "女性" },
-		],
-	},
+				+mailField({ type: "radio", name: "sex", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "" })
+					+mailInputRadio({
 	name: "sex",
-	beforeAttachment: "前見出し",
-	afterAttachment: "後見出し",
-	description: "",
-	errorMessage: "",
+	options: [
+		{ value: "1", label: "男性" },
+		{ value: "2", label: "女性" },
+	],
 	isRequired: false,
 })
 			+ccFormFieldset({ heading: "テキストエリア", name: "message", isRequired: false, attention: "注意書き" })
-				+mailField({ input: { type: "textarea", rows: 10, cols: null }, name: "message", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "", isGrouped: false, isRequired: false })
+				+mailField({ type: "textarea", name: "message", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "", isGrouped: false })
+					+mailInputTextarea({ name: "message", rows: 10, cols: null, isRequired: false })
 			+ccFormFieldset({ heading: "テキストエリア", name: "message2", isRequired: false, attention: "注意書き" })
-				+mailField({ input: { type: "textarea", rows: 10, cols: 20 }, name: "message2", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "", isGrouped: false, isRequired: false })
+				+mailField({ type: "textarea", name: "message2", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "", isGrouped: false })
+					+mailInputTextarea({ name: "message2", rows: 10, cols: 20, isRequired: false })
 			+ccFormFieldset({ heading: "ファイル添付", name: "file", isRequired: false, attention: "注意書き" })
-				+mailField({ input: { type: "file" }, name: "file", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "", isGrouped: false, isRequired: false })
+				+mailField({ type: "file", name: "file", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "", isGrouped: false })
+					+mailInputFile({ name: "file", isRequired: false })
 		.cc-form-agreement
 			p
 				| 送信前に
