@@ -1,0 +1,77 @@
+include /component/form/c-form-fieldset.pug
+include /component/form/c-form-field.pug
+include /component/form/c-form-input-confirm.pug
+
+.c-content-main
+	.cc-form-description
+		p 以下の内容を送信します。
+
+	form#MailMessageIndexForm.cc-form(
+		action="__PATH_TO__"
+		enctype="multipart/form-data"
+		method="post"
+		accept-charset="utf-8"
+		novalidate)
+		input(type="hidden" name="_method" value="POST")
+		input#Token__TOKEN__(type="hidden" name="data[_Token][key]" value="__TOKEN__")
+		input#MailMessageMode(type="hidden" name="data[MailMessage][mode]")
+		.cc-form-field-list
+			+cFormFieldset({ heading: "フィールドグループ名", isRequired: true })
+				+cFormField({ beforeAttachment: "前見出し", afterAttachment: "後見出し", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+				+cFormField({ beforeAttachment: "", afterAttachment: "後見出し", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+			+cFormFieldset({ heading: "単体フィールド名", isRequired: true })
+				+cFormField({ beforeAttachment: "前見出し", afterAttachment: "後見出し", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+			+cFormFieldset({ heading: "氏名", isRequired: true })
+				+cFormField({ beforeAttachment: "姓", afterAttachment: "", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+				+cFormField({ beforeAttachment: "名", afterAttachment: "", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+			+cFormFieldset({ heading: "フリガナ", isRequired: false })
+				+cFormField({ beforeAttachment: "セイ", afterAttachment: "", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+				+cFormField({ beforeAttachment: "メイ", afterAttachment: "", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+			+cFormFieldset({ heading: "住所", isRequired: false })
+				+cFormField({ beforeAttachment: "〒", afterAttachment: "", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+				+cFormField({ type: "select", beforeAttachment: "都道府県", afterAttachment: "", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+				+cFormField({ beforeAttachment: "市区町村", afterAttachment: "", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+				+cFormField({ beforeAttachment: "番地", afterAttachment: "", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+			+cFormFieldset({ heading: "チェックボックス単体", isRequired: true })
+				+cFormField({ type: "checkbox", beforeAttachment: "チェックボックス前見出し", isConfirm: true })
+					+cFormInputConfirmMulti({ value: ["__選択項目1__", "__選択項目2__"] })
+			+cFormFieldset({ heading: "チェックボックス", isRequired: true })
+				+cFormField({ type: "checkbox", isConfirm: true })
+					+cFormInputConfirmMulti({ value: ["__選択項目1__", "__選択項目2__"] })
+				+cFormField({ beforeAttachment: "その他", afterAttachment: "", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+			+cFormFieldset({ heading: "電話番号", isRequired: false })
+				+cFormField({ beforeAttachment: "", afterAttachment: "", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+			+cFormFieldset({ heading: "メールアドレス", isRequired: true })
+				+cFormField({ beforeAttachment: "", afterAttachment: "", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+			+cFormFieldset({ heading: "生まれ年", isRequired: true })
+				+cFormField({ type: "select", beforeAttachment: "", afterAttachment: "", isConfirm: true })
+					+cFormInputConfirmText({ value: "__入力内容__" })
+			+cFormFieldset({ heading: "性別", isRequired: false })
+				+cFormField({ type: "radio", beforeAttachment: "", afterAttachment: "", value: "__選択項目__", isConfirm: true })
+					+cFormInputConfirmText({ value: "__選択項目__" })
+			+cFormFieldset({ heading: "テキストエリア", isRequired: false, attention: "注意書き" })
+				+cFormField({ type: "textarea", beforeAttachment: "", afterAttachment: "", isConfirm: true })
+					+cFormInputConfirmTextarea({ value: "__入力内容__" })
+			+cFormFieldset({ heading: "テキストエリア", isRequired: false })
+				+cFormField({ type: "textarea", beforeAttachment: "前見出し", afterAttachment: "後見出し", isConfirm: true })
+					+cFormInputConfirmTextarea({ value: "__入力内容__" })
+			+cFormFieldset({ heading: "ファイル添付", isRequired: false })
+				+cFormField({ type: "file", beforeAttachment: "前見出し", afterAttachment: "後見出し", value: "__ファイル名__", isConfirm: true })
+					+cFormInputConfirmText({ value: "__ファイル名__" })
+		.cc-form-submit
+			button(type="submit"): span 入力画面に戻る
+			button(type="submit"): span 送信する
