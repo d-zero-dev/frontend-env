@@ -1,0 +1,76 @@
+.c-form-field {
+	display: block flow;
+	container: c-form-field / inline-size;
+}
+
+.c-form-field__grid {
+	display: grid;
+	grid-template:
+		'main' auto
+		'.' 0.5rem
+		'description' auto
+		'.' 0.5rem
+		'error-message' auto / minmax(0, 1fr);
+
+	> :where(.c-form-field__main) {
+		grid-area: main;
+	}
+
+	> :where(.c-form-field__description) {
+		grid-area: description;
+	}
+
+	> :where(.c-form-field__error-message) {
+		grid-area: error-message;
+	}
+}
+
+.c-form-field__main {
+	&:has(
+		.c-form-field__input > .c-form-input-text,
+		.c-form-field__input > .c-form-input-select
+	) {
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+
+		@container (max-inline-size: 40ch) {
+			flex-direction: column;
+			align-items: start;
+		}
+
+		> :where(:not(:empty) + :not(:empty)) {
+			margin-inline-start: 0.5rem;
+
+			@container (max-inline-size: 40ch) {
+				margin-inline-start: 0;
+			}
+		}
+
+		> :where(.c-form-field__attachment-before, .c-form-field__attachment-after) {
+			flex-shrink: 0;
+			max-inline-size: calc(100% / 4);
+		}
+
+		> :where(.c-form-field__input) {
+			min-inline-size: 0;
+			max-inline-size: 100%;
+		}
+	}
+}
+
+.c-form-field__attachment-before {
+	/* 前見出しのスタイルを記述 */
+}
+
+.c-form-field__attachment-after {
+	/* 後見出しのスタイルを記述 */
+}
+
+.c-form-field__description {
+	/* 説明文のスタイルを記述 */
+}
+
+.c-form-field__error-message {
+	/* エラーメッセージのスタイルを記述 */
+}

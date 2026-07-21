@@ -18,6 +18,10 @@
 @import '@/component/c-media-list.css' layer(component);
 @import '@/component/c-media.css' layer(component);
 @import '@/component/c-content-index.css' layer(component);
+@import '@/component/form/c-form-fieldset.css' layer(component);
+@import '@/component/form/c-form-field.css' layer(component);
+@import '@/component/form/c-form-input.css' layer(component);
+@import '@/component/form/c-form-input-confirm.css' layer(component);
 @import '@burger-editor/css' layer(main-base);
 @import '@/component/c-content-main.css' layer(main);
 

@@ -1,9 +1,9 @@
-mixin mailInputText(params = {})
+mixin cFormInputText(params = {})
 	-
 		const props = Object.assign({ name: "field1", maxlength: null, size: null, isRequired: true }, params);
 		const inputName = `data[MailMessage][${props.name}]`;
 		const idInput = `MailMessage${props.name.charAt(0).toUpperCase() + props.name.slice(1)}`;
-	input(
+	input.c-form-input-text(
 		type="text"
 		name=inputName
 		maxlength=props.maxlength
@@ -11,63 +11,65 @@ mixin mailInputText(params = {})
 		required=props.isRequired
 		id=idInput)
 
-mixin mailInputSelect(params = {})
+mixin cFormInputSelect(params = {})
 	-
 		const props = Object.assign({ name: "address1", options: [{value: "", label: "選択してください"}], isRequired: true }, params);
 		const inputName = `data[MailMessage][${props.name}]`;
 		const idInput = `MailMessage${props.name.charAt(0).toUpperCase() + props.name.slice(1)}`;
-	select(name=inputName required=props.isRequired id=idInput)
+	select.c-form-input-select(name=inputName required=props.isRequired id=idInput)
 		each option in props.options
 			option(value=option.value)= option.label
 
 //- checkbox には required を出力しない（各 input に付くと「全項目チェック必須」の挙動になるため。
 	「1つ以上選択必須」の検証はサーバー側の責務）
-mixin mailInputCheckbox(params = {})
+mixin cFormInputCheckbox(params = {})
 	-
 		const props = Object.assign({ name: "category", options: [{value: "Item1", label: "項目1"}] }, params);
 		const idInput = `MailMessage${props.name.charAt(0).toUpperCase() + props.name.slice(1)}`;
 		const hiddenName = `data[MailMessage][${props.name}]`;
 		const inputName = `data[MailMessage][${props.name}][]`;
 	//- 未選択時にもキーが送信されるようにするための hidden（CMS 仕様）
-	input(type="hidden" name=hiddenName value id=idInput)
-	each option in props.options
-		-
-			const id = idInput + option.value;
-		.checkbox
-			input(type="checkbox" name=inputName value=option.value id=id)
-			label(for=id) #{ option.label }
+	.c-form-input-checkbox
+		input.c-form-input-checkbox__hidden(type="hidden" name=hiddenName value id=idInput)
+		each option in props.options
+			-
+				const id = idInput + option.value;
+			.c-form-input-checkbox__item
+				input(type="checkbox" name=inputName value=option.value id=id)
+				label(for=id) #{ option.label }
 
-mixin mailInputRadio(params = {})
+mixin cFormInputRadio(params = {})
 	-
 		const props = Object.assign({ name: "sex", options: [{value: "1", label: "男性"}, {value: "2", label: "女性"}], isRequired: true }, params);
 		const idInput = `MailMessage${props.name.charAt(0).toUpperCase() + props.name.slice(1)}`;
 		const inputName = `data[MailMessage][${props.name}]`;
 		const idHidden = `${idInput}_`;
 	//- 未選択時にもキーが送信されるようにするための hidden（CMS 仕様）
-	input(type="hidden" name=inputName value id=idHidden)
-	each option in props.options
-		-
-			const id = idInput + option.value;
-		.mail-group-radio
-			span
-				input(type="radio" name=inputName required=props.isRequired value=option.value id=id)
-				label(for=id) #{ option.label }
+	.c-form-input-radio
+		input.c-form-input-radio__hidden(type="hidden" name=inputName value id=idHidden)
+		each option in props.options
+			-
+				const id = idInput + option.value;
+			.c-form-input-radio__item
+				span
+					input(type="radio" name=inputName required=props.isRequired value=option.value id=id)
+					label(for=id) #{ option.label }
 
-mixin mailInputTextarea(params = {})
+mixin cFormInputTextarea(params = {})
 	-
 		const props = Object.assign({ name: "message", rows: null, cols: null, isRequired: true }, params);
 		const inputName = `data[MailMessage][${props.name}]`;
 		const idInput = `MailMessage${props.name.charAt(0).toUpperCase() + props.name.slice(1)}`;
-	textarea(
+	textarea.c-form-input-textarea(
 		name=inputName
 		rows=props.rows
 		cols=props.cols
 		required=props.isRequired
 		id=idInput)
 
-mixin mailInputFile(params = {})
+mixin cFormInputFile(params = {})
 	-
 		const props = Object.assign({ name: "file", isRequired: true }, params);
 		const inputName = `data[MailMessage][${props.name}]`;
 		const idInput = `MailMessage${props.name.charAt(0).toUpperCase() + props.name.slice(1)}`;
-	input(name=inputName type="file" required=props.isRequired id=idInput)
+	input.c-form-input-file(name=inputName type="file" required=props.isRequired id=idInput)

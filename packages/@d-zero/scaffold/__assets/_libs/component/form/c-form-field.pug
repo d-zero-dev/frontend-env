@@ -1,9 +1,9 @@
 //- isGrouped: 同一 fieldset/legend 内に複数フィールドを配置する場合に true。
 	親の見出し構造と一致させること（グループ化あり = fieldset/legend、なし = div/label）
-	span.mail-input の中身（mailInputXxx の呼び出し）は呼び出し側が block で渡す
-mixin mailField(params = {})
+	.c-form-field__input の中身（cFormInputXxx の呼び出し）は呼び出し側が block で渡す
+mixin cFormField(params = {})
 	-
-		const props = Object.assign({ type: "text", name: "", beforeAttachment: "", afterAttachment: "", description: "", errorMessage: "", isGrouped: false }, params);
+		const props = Object.assign({ type: "text", name: "", beforeAttachment: "", afterAttachment: "", description: "", errorMessage: "", isGrouped: false, isConfirm: false }, params);
 		const nameFirstLetterUppercased = props.name.charAt(0).toUpperCase() + props.name.slice(1);
 		const idInput = `MailMessage${nameFirstLetterUppercased}`;
 		const idField = `FieldMailMessage${nameFirstLetterUppercased}`;
@@ -12,18 +12,26 @@ mixin mailField(params = {})
 		// CMS要件: グループ化している場合は 前見出し を labelとする。前見出しが空であれば 後見出しを labelとする
 		const isBeforeAttachmentLabel = Boolean(props.isGrouped && !hasOwnOptionLabels && props.beforeAttachment);
 		const isAfterAttachmentLabel = Boolean(props.isGrouped && !hasOwnOptionLabels && !props.beforeAttachment && props.afterAttachment);
-	.mail-field(data-type=props.type id=idField)
-		if isBeforeAttachmentLabel
-			label.mail-before-attachment(for=idInput) #{ props.beforeAttachment }
-		else
-			span.mail-before-attachment #{ props.beforeAttachment }
+	.c-form-field(data-type=props.type id=idField)
+		.c-form-field__grid
+			.c-form-field__main
+				.c-form-field__attachment-before
+					if isBeforeAttachmentLabel
+						label(for=idInput) #{ props.beforeAttachment }
+					else if props.beforeAttachment
+						span #{ props.beforeAttachment }
 
-		span.mail-input
-			block
+				.c-form-field__input
+					block
 
-		if isAfterAttachmentLabel
-			label.mail-after-attachment(for=idInput) #{ props.afterAttachment }
-		else
-			span.mail-after-attachment #{ props.afterAttachment }
-		.mail-description #{ props.description }
-		.error-message #{ props.errorMessage }
+				.c-form-field__attachment-after
+					if isAfterAttachmentLabel
+						label(for=idInput) #{ props.afterAttachment }
+					else if props.afterAttachment
+						span #{ props.afterAttachment }
+
+			if !props.isConfirm
+				.c-form-field__description
+					span #{ props.description }
+				.c-form-field__error-message
+					span #{ props.errorMessage }
