@@ -179,6 +179,56 @@
 		flex-direction: column;
 	}
 
+	.cc-form-fieldset {
+		display: block flow;
+		padding-block: 1rem;
+		padding-inline: 2rem;
+
+		fieldset {
+			padding: 0;
+			margin: 0;
+			border: none;
+		}
+
+		legend {
+			padding: 0;
+			margin: 0;
+		}
+	}
+
+	.cc-form-fieldset-heading {
+		display: block flex;
+		align-items: center;
+		font-size: calc(18 / 16 * 1rem);
+		font-weight: bold;
+
+		label {
+			display: block flow;
+			cursor: pointer;
+		}
+
+		.required,
+		.optional {
+			display: block flow;
+			margin-block: 0;
+			margin-inline: 0 0.5rem;
+			font-size: calc(12 / 18 * 1rem);
+			line-height: 1;
+			border-radius: 0.2rem;
+		}
+	}
+
+	.cc-form-fieldset-attention {
+		margin-block: 0.5rem;
+		margin-inline: 0;
+		font-size: calc(12 / 18 * 1rem);
+		font-weight: normal;
+	}
+
+	.cc-form-fieldset-body {
+		margin-block-start: 1rem;
+	}
+
 	.mail-field {
 		padding-block: 0 1rem;
 		padding-inline: 0;
