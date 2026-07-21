@@ -1,8 +1,12 @@
 {
 	"name": "@d-zero/create-frontend",
-	"version": "5.0.0",
+	"version": "5.1.1-alpha.1",
 	"description": "Create a new frontend project from a scaffolding template",
-	"repository": "https://github.com/d-zero-dev/frontend-env.git",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/d-zero-dev/frontend-env.git",
+		"directory": "packages/@d-zero/create-frontend"
+	},
 	"author": "D-ZERO Co., Ltd.",
 	"license": "MIT",
 	"publishConfig": {
@@ -16,18 +20,18 @@
 		"create-dzero-frontend": "./index.js"
 	},
 	"dependencies": {
-		"@d-zero/prettier-config": "5.0.0",
-		"@d-zero/scaffold": "5.0.0",
-		"i18n-js": "4.5.2",
+		"@d-zero/prettier-config": "5.1.0",
+		"@d-zero/scaffold": "5.1.1-alpha.1",
+		"i18n-js": "4.5.3",
 		"ignore": "7.0.5",
 		"magicast": "0.5.2",
 		"meow": "14.1.0",
-		"minimatch": "10.2.4",
+		"minimatch": "10.2.5",
 		"plop": "4.0.4",
-		"prettier": "3.8.1"
+		"prettier": "3.9.4"
 	},
 	"devDependencies": {
-		"@types/node": "25.3.3",
+		"@types/node": "25.9.4",
 		"execa": "9.6.1"
 	}
 }

@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.1-alpha.1](https://github.com/d-zero-dev/frontend-env/compare/v5.1.1-alpha.0...v5.1.1-alpha.1) (2026-04-10)
+
+### Bug Fixes
+
+- **scaffold:** remove husky postinstall script ([eca511b](https://github.com/d-zero-dev/frontend-env/commit/eca511b990c843adf19c7496668e6823b3f13291))
+- **scaffold:** replace postinstall with prepare for husky ([e81b36d](https://github.com/d-zero-dev/frontend-env/commit/e81b36dce310c6a91ea010fe4a5d24cd40274a26))
+
+## [5.1.1-alpha.0](https://github.com/d-zero-dev/frontend-env/compare/v5.1.0...v5.1.1-alpha.0) (2026-04-09)
+
+**Note:** Version bump only for package @d-zero/scaffold
+
+# [5.1.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0...v5.1.0) (2026-04-08)
+
+### Bug Fixes
+
+- **repo:** disable postinstall scripts for third-party packages ([1fa4660](https://github.com/d-zero-dev/frontend-env/commit/1fa46609d04aa4811d7718a454e9c37ceb63c590))
+- **scaffold:** add defaultSemverRangePrefix to .yarnrc.yml ([14b75c3](https://github.com/d-zero-dev/frontend-env/commit/14b75c3f17da62584efba47865ae6436bf9c4faa))
+- **scaffold:** replace prepare with postinstall for husky setup ([8ee55e0](https://github.com/d-zero-dev/frontend-env/commit/8ee55e03ba0858157891ba298be2ce842dd9772a))
+- **scaffold:** update deprecated permission pattern syntax and add emulate tool ([c73e280](https://github.com/d-zero-dev/frontend-env/commit/c73e2808be5bece35793cf5135c33d5aa61e1902))
+- use url constant in meta.pug ([3b3bc48](https://github.com/d-zero-dev/frontend-env/commit/3b3bc489f8c865df01d8289ab73ee08e476f557e))
+
+### Features
+
+- **scaffold:** add 7-day cooldown period for npm package releases ([81e20f4](https://github.com/d-zero-dev/frontend-env/commit/81e20f45534a60451fdaf2a3e28f3cb0bcc73942))
+- **scaffold:** replace redirect in index.pug with top page template ([9237385](https://github.com/d-zero-dev/frontend-env/commit/92373859f990922f7ad13d50afa57736f3dde0e7))
+
 # [5.0.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.19...v5.0.0) (2026-01-05)
 
 ### Bug Fixes

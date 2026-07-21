@@ -1,8 +1,12 @@
 {
 	"name": "@d-zero/postcss-config",
-	"version": "5.0.0",
+	"version": "5.1.1-alpha.1",
 	"description": "Configurations of PostCSS",
-	"repository": "https://github.com/d-zero-dev/frontend-env.git",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/d-zero-dev/frontend-env.git",
+		"directory": "packages/@d-zero/postcss-config"
+	},
 	"author": "D-ZERO Co., Ltd.",
 	"license": "MIT",
 	"publishConfig": {
@@ -11,8 +15,8 @@
 	"type": "module",
 	"main": "./.postcssrc.js",
 	"dependencies": {
-		"autoprefixer": "10.4.27",
-		"postcss": "8.5.6",
+		"autoprefixer": "10.5.2",
+		"postcss": "8.5.16",
 		"postcss-base64": "0.7.1",
 		"postcss-calc": "10.1.1",
 		"postcss-clip-path-polyfill": "1.1.0",
