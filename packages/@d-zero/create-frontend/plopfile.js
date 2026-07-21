@@ -113,9 +113,22 @@ export default async function (plop) {
 			'**/*.test/**/*',
 			// Test Files
 			'*.test.*',
-		]);
+		])
+		// Ignore type-specific files (handled separately per type)
+		.add(['__type/**/*']);
 
 	const scaffoldFiles = ig.filter(await getAllFiles(scaffoldDir, scaffoldDir)).toSorted();
+
+	const typeBaseDir = path.resolve(scaffoldDir, '__type');
+	const typeFilesMap = {};
+	if (fs.existsSync(typeBaseDir)) {
+		for (const entry of fs.readdirSync(typeBaseDir, { withFileTypes: true })) {
+			if (entry.isDirectory()) {
+				const typeDir = path.resolve(typeBaseDir, entry.name);
+				typeFilesMap[entry.name] = await getAllFiles(typeDir, typeDir);
+			}
+		}
+	}
 
 	plop.setActionType('Install dependencies', async (answers) => {
 		const { dest, doInstall } = answerToConfig(answers);
@@ -151,6 +164,10 @@ export default async function (plop) {
 					{
 						name: 'baserCMS v4 (with BurgerEditor v2)',
 						value: 'basercms4',
+					},
+					{
+						name: 'baserCMS v5 (with BurgerEditor v2)',
+						value: 'basercms5',
 					},
 				],
 				default: cli.flags.type,
@@ -211,9 +228,13 @@ export default async function (plop) {
 					 * @type {import('plop').AddActionConfig}
 					 */
 					(originFile) => {
+						const destFile =
+							config.type === 'basercms5' && originFile.startsWith('htdocs/')
+								? path.join('htdocs', 'webroot', originFile.slice('htdocs/'.length))
+								: originFile;
 						return {
 							type: 'add',
-							path: path.resolve(config.dest, originFile),
+							path: path.resolve(config.dest, destFile),
 							templateFile: path.resolve(scaffoldDir, originFile),
 							async transform(content) {
 								const nameCandidate = path.basename(path.resolve(config.dest));
@@ -235,7 +256,7 @@ export default async function (plop) {
 											delete pkg.scripts.bge;
 											delete pkg.devDependencies['@burger-editor/local'];
 											pkg.dependencies['@burger-editor/css'] = '2';
-											pkg.dependencies['jquery'] = 'latest';
+											pkg.dependencies['jquery'] = '3.7.1'; // colorbox が jQuery 4系と互換性がないため、3系の最新版に固定
 											pkg.dependencies['jquery-colorbox'] = '1.5';
 										}
 										pkg.scripts.postinstall = 'husky';
@@ -243,7 +264,7 @@ export default async function (plop) {
 										break;
 									}
 									case '__assets/_libs/data/blocks.js': {
-										if (config.type === 'basercms4') {
+										if (config.type === 'basercms4' || config.type === 'basercms5') {
 											content = content.replace('bge-blocks.html', 'bge-blocks-v2.html');
 										}
 										break;
@@ -259,6 +280,12 @@ export default async function (plop) {
 											const mod = parseModule(content);
 											mod.exports.default.devServer.startPath = '__tmpl/';
 											content = generateCode(mod).code;
+										}
+										if (config.type === 'basercms5') {
+											content = content.replace(
+												"path.resolve(import.meta.dirname, 'htdocs')",
+												"path.resolve(import.meta.dirname, 'htdocs', 'webroot')",
+											);
 										}
 										break;
 									}
@@ -282,6 +309,11 @@ export default async function (plop) {
 						};
 					},
 				),
+				...(typeFilesMap[config.type] ?? []).map((typeFile) => ({
+					type: 'add',
+					path: path.resolve(config.dest, typeFile),
+					templateFile: path.resolve(scaffoldDir, '__type', config.type, typeFile),
+				})),
 				{
 					type: 'Install dependencies',
 				},

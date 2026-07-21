@@ -1,6 +1,6 @@
 {
 	"import": ["@d-zero/cspell-config"],
-	"ignorePaths": ["**/CHANGELOG.md"],
+	"ignorePaths": ["**/CHANGELOG.md", "**/CODEOWNERS"],
 	"words": [
 		//
 		"nodir",
@@ -11,6 +11,13 @@
 		"kamado",
 
 		//
-		"kiso"
+		"kiso",
+
+		//
+		"absolutised",
+		"srcsets",
+		"unstub",
+		"vbscript",
+		"whatwg"
 	]
 }
