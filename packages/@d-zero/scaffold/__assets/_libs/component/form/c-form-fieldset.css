@@ -1,0 +1,64 @@
+.c-form-fieldset {
+	display: block flow;
+}
+
+.c-form-fieldset__grid {
+	display: grid;
+	grid-template:
+		'heading' auto
+		'.' 0.5rem
+		'attention' auto
+		'.' 0.5rem
+		'field' auto
+		/ 1fr auto;
+
+	> :where(.c-form-fieldset__heading) {
+		grid-area: heading;
+	}
+
+	> :where(.c-form-fieldset__attention) {
+		grid-area: attention;
+	}
+
+	> :where(.c-form-fieldset__field) {
+		grid-area: field;
+	}
+}
+
+.c-form-fieldset__heading {
+	> :where(*) {
+		display: inline flow;
+	}
+
+	> :where(:not(:first-child)) {
+		margin-inline: 0.5rem 0;
+	}
+}
+
+.c-form-fieldset__field {
+	> :where(:not(:first-child)) {
+		margin-block-start: 1rem;
+	}
+}
+
+.c-form-fieldset__heading-main {
+	&:where(label) {
+		cursor: pointer;
+	}
+}
+
+.c-form-fieldset__heading-badge {
+	/* 必須・任意バッジのスタイルを記述 */
+
+	&:where([data-kind='required']) {
+		/* 必須バッジのスタイルを記述 */
+	}
+
+	&:where([data-kind='optional']) {
+		/* 任意バッジのスタイルを記述 */
+	}
+}
+
+.c-form-fieldset__attention {
+	/* 注意書きのスタイルを記述 */
+}
