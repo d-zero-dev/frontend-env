@@ -1282,7 +1282,7 @@ __metadata:
   dependencies:
     "@d-zero/prettier-config": "npm:5.1.0"
     "@d-zero/scaffold": "npm:5.1.1-alpha.1"
-    "@types/node": "npm:25.9.4"
+    "@types/node": "npm:25.9.5"
     execa: "npm:9.6.1"
     i18n-js: "npm:4.5.3"
     ignore: "npm:7.0.5"
@@ -1539,7 +1539,7 @@ __metadata:
     "@kamado-io/script-compiler": "npm:1.3.0"
     "@kamado-io/style-compiler": "npm:1.3.0"
     "@prettier/plugin-pug": "npm:3.4.2"
-    "@types/node": "npm:25.9.4"
+    "@types/node": "npm:25.9.5"
     chrome-devtools-mcp: "npm:1.4.0"
     cross-env: "npm:10.1.0"
     dialog-toggle-events-polyfill: "npm:1.1.4"
@@ -1622,7 +1622,7 @@ __metadata:
     "@nitpicker/crawler": "npm:0.11.0"
     "@nitpicker/query": "npm:0.11.0"
     "@types/js-yaml": "npm:4.0.9"
-    "@types/node": "npm:25.9.4"
+    "@types/node": "npm:25.9.5"
     js-yaml: "npm:4.3.0"
     parse5: "npm:8.0.1"
     parse5-html-rewriting-stream: "npm:8.0.1"
@@ -5201,12 +5201,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:25.9.4":
-  version: 25.9.4
-  resolution: "@types/node@npm:25.9.4"
+"@types/node@npm:25.9.5":
+  version: 25.9.5
+  resolution: "@types/node@npm:25.9.5"
   dependencies:
     undici-types: "npm:>=7.24.0 <7.24.7"
-  checksum: 10c0/4b19670ef5dbefa836a2d4a9ed0b5ac6befbc0844bfdd12833234ff8fa68da1f65e6362d2ef87acf7e7da9d6ff649bf81c454d12e802b7e7fa9246a15c0edcf6
+  checksum: 10c0/addbfe55f14d6a7f149a8796c2fca68463ac6caf911c623f552d07385691d36c0669a9c38724350d0e958131827d59a63c18781e753dede8113a903dd62b7932
   languageName: node
   linkType: hard
 
