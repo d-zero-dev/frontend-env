@@ -23,6 +23,7 @@
 @import '@/component/form/c-form-input.css' layer(component);
 @import '@/component/form/c-form-input-confirm.css' layer(component);
 @import '@burger-editor/css' layer(main-base);
-@import '@/component/c-content-main.css' layer(main);
+@import '@/style/c-content-main/index.css' layer(main);
+@import '@/style/burger-editor/index.css' layer(main);
 
 @layer reset, base, general, component, main-base, main;

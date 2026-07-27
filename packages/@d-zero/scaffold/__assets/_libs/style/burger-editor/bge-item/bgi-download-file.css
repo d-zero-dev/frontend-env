@@ -1,0 +1,16 @@
+.c-content-main {
+	[data-bgi='download-file'] {
+		a {
+			display: block flex;
+			justify-content: center;
+			min-inline-size: 10em;
+			max-inline-size: 20em;
+			padding-block: 0.5em;
+			padding-inline: 1em;
+			color: inherit;
+			text-decoration: none;
+			border: 1px solid currentcolor;
+			border-radius: calc(infinity * 1px);
+		}
+	}
+}

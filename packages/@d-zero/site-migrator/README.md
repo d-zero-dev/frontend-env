@@ -46,24 +46,24 @@ import {
 
 主要 API:
 
-| 関数                    | 概要                                                                                      |
+| 関数 | 概要 |
 | ----------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------ |
-| `migrate`               | アーカイブを開き、リソース DL とページ抽出を並列実行する全体フロー                        |
-| `openArchive`           | `.nitpicker` を開いてセッションを返す（要 `close()`）                                     |
-| `listInternalPages`     | 内部ページ URL を順に yield する非同期イテラブル                                          |
-| `listInternalResources` | 内部リソース URL を順に yield する非同期イテラブル                                        |
-| `getPageHtml`           | レンダリング後 HTML を全長で取得（truncate なし）                                         |
-| `getFrontmatter`        | `.nitpicker` DB の flat meta カラムを `Frontmatter` へマップ                              |
-| `downloadResources`     | URL リストを並列 fetch してローカルへ保存                                                 |
-| `urlToOutputPath`       | URL を `<htdocs-dir>` 配下のローカルパスへ変換                                            |
-| `rewriteAssetRefs`      | HTML 内のアセット参照を resolver で書き換える（streaming）                                |
-| `extractMainContent`    | レイアウト共通部分を剥がして本文要素の `outerHTML` を返す                                 |
-| `extractPages`          | ページ一覧に `extractMainContent` + `getFrontmatter` を適用して書き出す                   |
-| `formatFrontmatter`     | `Frontmatter` を後段パイプライン互換の `---\n…\n---\n` YAML ブロック文字列にする          |
-| `splitTitle`            | タイトル文字列を `｜` / `                                                                 | `で分割し`{title, rawTitle?}` を返す純関数 |
-| `assignPageIds`         | URL リストから ディレクトリグループ採番ルールに従って `Map<url, id>` を組み立てる純関数   |
-| `buildPageIdLookup`     | `assignPageIds` の結果から `rewritePageRefs` 用ルックアップ表を一度だけ構築する純関数     |
-| `rewritePageRefs`       | 同一オリジンの asset/page 参照を root-relative path / `{{<id>}}` テンプレートに書き換える |
+| `migrate` | アーカイブを開き、リソース DL とページ抽出を並列実行する全体フロー |
+| `openArchive` | `.nitpicker` を開いてセッションを返す（要 `close()`） |
+| `listInternalPages` | 内部ページ URL を順に yield する非同期イテラブル |
+| `listInternalResources` | 内部リソース URL を順に yield する非同期イテラブル |
+| `getPageHtml` | レンダリング後 HTML を全長で取得（truncate なし） |
+| `getFrontmatter` | `.nitpicker` DB の flat meta カラムを `Frontmatter` へマップ |
+| `downloadResources` | URL リストを並列 fetch してローカルへ保存 |
+| `urlToOutputPath` | URL を `<htdocs-dir>` 配下のローカルパスへ変換 |
+| `rewriteAssetRefs` | HTML 内のアセット参照を resolver で書き換える（streaming） |
+| `extractMainContent` | レイアウト共通部分を剥がして本文要素の `outerHTML` を返す |
+| `extractPages` | ページ一覧に `extractMainContent` + `getFrontmatter` を適用して書き出す |
+| `formatFrontmatter` | `Frontmatter` を後段パイプライン互換の `---\n…\n---\n` YAML ブロック文字列にする |
+| `splitTitle` | タイトル文字列を `｜` / `                                                                |`で分割し`{title, rawTitle?}` を返す純関数 |
+| `assignPageIds` | URL リストから ディレクトリグループ採番ルールに従って `Map<url, id>` を組み立てる純関数 |
+| `buildPageIdLookup` | `assignPageIds` の結果から `rewritePageRefs` 用ルックアップ表を一度だけ構築する純関数 |
+| `rewritePageRefs` | 同一オリジンの asset/page 参照を root-relative path / `{{<id>}}` テンプレートに書き換える |
 
 `Frontmatter` の出力構造は [`./src/types.ts`](./src/types.ts) を参照。`title` / `og.title` / `twitter.title` は `｜` `|` で分割して最初の非空セグメントを採用し、分割が起きたときだけ `rawTitle` 等に元文字列を保持する。
 
