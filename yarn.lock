@@ -1633,7 +1633,7 @@ __metadata:
   resolution: "@d-zero/site-migrator@workspace:packages/@d-zero/site-migrator"
   dependencies:
     "@d-zero/dealer": "npm:1.10.1"
-    "@d-zero/shared": "npm:0.22.0"
+    "@d-zero/shared": "npm:0.22.2"
     "@nitpicker/crawler": "npm:0.11.0"
     "@nitpicker/query": "npm:0.11.0"
     "@types/js-yaml": "npm:4.0.9"
