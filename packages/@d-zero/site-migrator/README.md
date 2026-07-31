@@ -41,6 +41,7 @@ import {
 	assignPageIds,
 	buildPageIdLookup,
 	rewritePageRefs,
+	resolveIdTemplate,
 } from '@d-zero/site-migrator';
 ```
 
@@ -64,6 +65,7 @@ import {
 | `assignPageIds`         | URL リストから ディレクトリグループ採番ルールに従って `Map<url, id>` を組み立てる純関数   |
 | `buildPageIdLookup`     | `assignPageIds` の結果から `rewritePageRefs` 用ルックアップ表を一度だけ構築する純関数     |
 | `rewritePageRefs`       | 同一オリジンの asset/page 参照を root-relative path / `{{<id>}}` テンプレートに書き換える |
+| `resolveIdTemplate`     | `{{<id>}}` token を id→URL マップで実 URL に解決する純関数（後段ビルドツール用）          |
 
 `Frontmatter` の出力構造は [`./src/types.ts`](./src/types.ts) を参照。`title` / `og.title` / `twitter.title` は `｜` `|` で分割して最初の非空セグメントを採用し、分割が起きたときだけ `rawTitle` 等に元文字列を保持する。
 
@@ -111,6 +113,14 @@ import {
 - id 写像のルックアップは origin+pathname+search の完全一致を先に試し、ヒットしなければ trailing-slash を吸収した origin+pathname にフォールバックする。これにより `/list?p=1` / `/list?p=2` の両方が `pageIds` に登録されていれば各々別の id に解決され、片方しか無ければ pathname-only の fallback で拾われる。`<a href="/about">` と `pageIds` の `/about/` も双方向にマッチする。
 
 `rewritePageRefs` が例外を投げた場合は fail-soft で書き換え前の HTML を出力し、`onResult` の `extracted` / `fallback` outcome に `rewriteError` フィールドを乗せてレポートする（`migrate()` の `pagesRewriteFailed` で集計）。フロントマター付与・id 採番は HTML 書き換えと独立して走るので、片方が失敗してももう片方は影響を受けない。
+
+### `{{<id>}}` token の解決（後段ビルドツール）
+
+`rewritePageRefs` が残す `{{<id>}}` token は、後段のビルドツール（scaffold + kamado を想定）が `resolveIdTemplate` を通して実 URL に置換する想定。site-migrator 自身は URL を知らない（出力ディレクトリ構造やビルドツールのルーティング規約は site-migrator のスコープ外）ので、解決はビルド側の責務に切り出した。
+
+`resolveIdTemplate({ html, idMap, onUnresolved? })` は純関数で、`{{42}}?q=foo#frag` のような末尾 `?query#fragment` は `idMap.get(42)` の URL の後ろにそのまま連結される（同じ URL に再度 `?` が含まれる場合のマージはしない — 必要なら呼び出し側で前処理する）。未解決の id は `{{42}}` のまま残し `onUnresolved(42)` を呼ぶことで、リンク切れがログ／例外で早期検出できる。
+
+ビルドツール側の組み込みは別 PR で対応する。
 
 ### Frontmatter（DB ベース）
 
