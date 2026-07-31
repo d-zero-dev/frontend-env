@@ -1540,7 +1540,7 @@ __metadata:
     "@kamado-io/style-compiler": "npm:1.3.0"
     "@prettier/plugin-pug": "npm:3.4.2"
     "@types/node": "npm:25.9.5"
-    chrome-devtools-mcp: "npm:1.4.0"
+    chrome-devtools-mcp: "npm:1.6.0"
     cross-env: "npm:10.1.0"
     dialog-toggle-events-polyfill: "npm:1.1.4"
     dotenv: "npm:17.4.2"
@@ -7161,13 +7161,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chrome-devtools-mcp@npm:1.4.0":
-  version: 1.4.0
-  resolution: "chrome-devtools-mcp@npm:1.4.0"
+"chrome-devtools-mcp@npm:1.6.0":
+  version: 1.6.0
+  resolution: "chrome-devtools-mcp@npm:1.6.0"
+  peerDependencies:
+    "@blackwell-systems/gcf": ^2.2.2
+    "@toon-format/toon": ^2.2.0
+  peerDependenciesMeta:
+    "@blackwell-systems/gcf":
+      optional: true
+    "@toon-format/toon":
+      optional: true
   bin:
     chrome-devtools: build/src/bin/chrome-devtools.js
     chrome-devtools-mcp: build/src/bin/chrome-devtools-mcp.js
-  checksum: 10c0/bb1031690c511e38f45abeb55fe21d9047fa33624a7cb9f6517cfa9986f7c55151ed0a8f259c107e9b7a549aa9a2788f92a224c7e88b88f91245d8be8f60c79b
+  checksum: 10c0/a5321ff66f011c202d08e0cbf82580c018cedebd6fd46afc70a90fe69729809fad181d6358e15b3089fea76fd6bafbd932afb70b7fc535450a819c0a591757a5
   languageName: node
   linkType: hard
 
