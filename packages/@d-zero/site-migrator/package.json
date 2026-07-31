@@ -33,7 +33,7 @@
 	],
 	"dependencies": {
 		"@d-zero/dealer": "1.10.1",
-		"@d-zero/shared": "0.22.0",
+		"@d-zero/shared": "0.22.2",
 		"@nitpicker/crawler": "0.11.0",
 		"@nitpicker/query": "0.11.0",
 		"js-yaml": "4.3.0",
