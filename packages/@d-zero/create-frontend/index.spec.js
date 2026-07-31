@@ -156,4 +156,13 @@ describe('CLI', () => {
 			expect(content).toContain("path.resolve(import.meta.dirname, 'htdocs', 'webroot')");
 		});
 	});
+
+	describe('package.json', () => {
+		test('basercms4: jquery が 3.7.1 に固定されている', async ({ tmpDir, task }) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'basercms4');
+			const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'));
+			expect(pkg.dependencies['jquery']).toBe('3.7.1');
+		});
+	});
 });

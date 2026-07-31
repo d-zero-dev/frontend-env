@@ -32,7 +32,7 @@
 		"dist"
 	],
 	"dependencies": {
-		"@d-zero/dealer": "1.9.2",
+		"@d-zero/dealer": "1.10.1",
 		"@d-zero/shared": "0.22.0",
 		"@nitpicker/crawler": "0.11.0",
 		"@nitpicker/query": "0.11.0",
@@ -42,6 +42,6 @@
 	},
 	"devDependencies": {
 		"@types/js-yaml": "4.0.9",
-		"@types/node": "25.9.4"
+		"@types/node": "25.9.5"
 	}
 }
