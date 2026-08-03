@@ -1,5 +1,5 @@
 ---
-description: 合意済み計画を実装し、レビュー・QA・PdM・ドキュメント・lint/test を通して PR 作成まで進める実行系オーケストレーター
+description: 合意済み計画を実装し、レビュー・QA・PdM・lint/test を通して PR 作成まで進める実行系オーケストレーター
 when_to_use: ユーザーが「実装して」「進めて」「/impl」と指示した場合。grill-me で合意済みの計画を実装フェーズに進めるとき
 disable-model-invocation: true
 ---
@@ -7,18 +7,27 @@ disable-model-invocation: true
 # 手順
 
 1. 実装スコープ・アプローチ・トレードオフの合意が会話文脈で成立しているか確認する。未成立なら `/grill-me` を起動し、合意してから次へ
-2. 合意した計画の通りに実装する
-3. `/code-review xhigh` を実行し、指摘を fix all
-4. `/qa-engineer` を実行し、指摘を fix all
-5. `/product-manager` を実行し、指摘を fix all
-6. `/doc` を実行し、指摘を fix all
-7. `yarn lint` を実行し、エラーを修正
-8. `yarn test` を実行し、失敗を修正
-9. `/git` の手順でコミット
-10. `/pr` の手順で PR 作成
+2. **ブランチ確認**: 現在のブランチを確認し、`dev` / `main` 上にいる場合は `git checkout -b` でサブブランチを切ってから進む。git worktree かどうかの確認は行わない（エージェントは worktree 起動が前提のため、あえてチェックしない）
+3. **索引確認**: ARCHITECTURE.md の索引（Reading paths / 不変条件・負の知識 / 境界と所有権）を確認し、該当する Reading path に従って対象コードを読んでから実装に入る（索引が無いリポジトリではこのステップをスキップ）
+4. 合意した計画の通りに実装する
+5. **`/code-review medium`（ユーザー実行が必須）**: `/code-review` は `disable-model-invocation` のため Claude からは起動できない。以下を提示してユーザーに実行を依頼し、**結果が返るまでここで待つ**。返ってきた指摘を fix all
+
+   ```
+   /code-review medium
+   ```
+
+   自分で代替レビューを書いて済ませたり、「起動できないので次へ進む」と判断してこのステップを飛ばすことは**禁止**
+
+6. `/qa-engineer` を実行し、指摘を fix all
+7. `/product-manager` を実行し、指摘を fix all（ドキュメント整合 — JSDoc・コメント原則・索引と実装の一致 — のチェックを含む）
+8. `yarn lint` を実行し、エラーを修正
+9. `yarn test` を実行し、失敗を修正
+10. `.claude/skills/git/SKILL.md` の手順でコミット
+11. `.claude/skills/pr/SKILL.md` の手順で PR 作成
 
 # 重要ルール
 
 - **fix all の範囲**: コードレベル・テスト追加・ドキュメント修正の指摘はその場で適用。仕様変更やスコープ拡張を伴う指摘はユーザーに許可を取る
-- **ループバック**: いずれかのステップで重大な方向転換や巨大なコード変更が発生したら、ステップ 3（`/code-review xhigh`）からやり直す
+- **ループバック**: いずれかのステップで重大な方向転換や巨大なコード変更が発生したら、ステップ 5（`/code-review medium`）からやり直す
+- **ステップのスキップ禁止**: 特にステップ 5 の `/code-review` は Claude から起動できないが、それは「飛ばしてよい理由」ではない。ユーザーに実行を依頼して待つのが正しい進め方。ユーザーが明示的に「スキップして」と言った場合のみ飛ばす
 - **スコープ厳守**: grill-me で合意したスコープを勝手に拡張しない
