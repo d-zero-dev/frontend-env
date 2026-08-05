@@ -130,6 +130,24 @@ import {
 
 `extractPages` は `extractMainContent` と `getFrontmatter` を並列実行し、生成した YAML ブロックを抽出 HTML の先頭に prepend してから書き出す。整数 id は常に付与されるので「DB 行なし」のページでも `---\nid: <number>\n---\n` ブロックは出る。`getFrontmatter` が例外を投げた場合は fail-soft で id-only frontmatter と本文を書き出し、`onResult` の outcome に `metaError` を載せて警告する（`migrate()` レポートでは `pagesMetaFailed` として集計される）。
 
+### レイアウト → BlockData 変換（`classifyBlockItem` / `layoutToBlockData`）
+
+既存サイトを BurgerEditor ブロックへ移行するパイプライン（親 Issue #977）向けの純関数群。`resolvePageLayouts`（#973 実装済み）と同様、現時点ではパイプライン全体への統合前のため `index.ts` からは export していない（`src/page-extractor/classify-block-item.ts` / `layout-to-block-data.ts` を直接 import する内部 API）。統合とパイプライン公開範囲の判断は #976 で行う。
+
+- `classifyBlockItem(block: LayoutBlock): ClassifiedBlockItem` — anatomist の `LayoutBlock` 1 個を `image`/`title-h2`/`title-h3`/`youtube`/`google-maps`/`download-file`/`button`/`table`/`wysiwyg` の BurgerEditor アイテム種別へヒューリスティック分類する。`children`/`boundingBox`/`confidence` は見ない純関数。
+- `layoutToBlockData(results: LayoutAnalysisResult[], options?): { blocks: BlockData[], fallbacks: {blockIndex, reason}[] }` — 同一 URL の複数ビューポート分の解析結果を受け取り、PC ビューポートを主として深さ圧縮・行列変換・`containerProps` マッピングを行う純関数。`fallbacks` はブロック単位の構造フォールバック（`viewport-mismatch` / `malformed-row-sizes` / `low-confidence`）の理由を記録し、#976 のレポート拡張にそのまま使える。
+
+#### 既知の制限（重要）
+
+anatomist の `LayoutBlock`/`RawLayoutNode` は要素の属性（`href` / `src` / `srcset` / `alt` / `width` / `height` 等）を保持しない（保持されるのは `tagName`/`id`/`classList`/`boundingBox`/`style`/`innerHTML`/`children` のみ）。加えて `should-recurse.ts` の collapse ロジックにより `<picture><source><img></picture>` のようなラッパー構造は最終的に `img` 自身（void 要素、`innerHTML` は空）だけが残る。そのため **実データでは `image` / `youtube` / `google-maps` / `download-file` / `button.link` の判定条件（src/href）がほぼ常に取得できず、safe に `wysiwyg` へフォールバックする**。これはバグではなく、属性情報が存在しないデータに対する意図された安全側の挙動であり、コード自体は正しいロジックを実装している（anatomist が将来属性を捕捉するようになれば自動的に機能する）。anatomist 側の属性キャプチャ拡張は別途フォローアップ課題として扱う。
+
+その他の設計上のポイント:
+
+- `confidence` はコンテナ系 `layoutType`（vertical-stack/horizontal-row/simple-grid/complex-grid/float-wrap）にのみ `0.5` 閾値で二重チェックする。`leaf` の `confidence` は anatomist 側で常に `0` 固定なので、`classifyBlockItem` はこの値を一切参照しない（参照すると分類対象を全て `wysiwyg` に落とす自己矛盾になる）。
+- 深さ圧縮（`BlockData.items` は「ブロック → 行×列 → item」の 2 階層まで）は、depth-2 ノードの `children` を一切読まず `classifyBlockItem` に丸投げすることで実現している。`classifyBlockItem` が `innerHTML` 文字列のみを見るため、depth-3 以降の `layoutType` 情報は自動的に破棄される。
+- `BlockData.name` は固定値 `'migrated'`（ブロックの見た目上の種別名は #975/#976 で命名確定するまでのプレースホルダー）。
+- `download-file` の `size`/`formatedSize` は空文字列のプレースホルダー。実 DL と実サイズの反映は既存の `downloadResources` と連携させて #976 で行う（`classifyBlockItem` はネットワーク I/O を一切行わない）。
+
 ### 設計上の注意
 
 `extractMainContent` / `rewriteAssetRefs` は parse5 を内部で使う純関数、`getFrontmatter` は `@nitpicker/query` の DB 読み出しに依存する。両者の責務分離は `src/html/` (parse5) と `src/archive/` (`@nitpicker/query`) のディレクトリ構造で表現している。
