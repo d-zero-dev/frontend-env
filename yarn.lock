@@ -1718,6 +1718,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@d-zero/site-migrator@workspace:packages/@d-zero/site-migrator"
   dependencies:
+    "@burger-editor/core": "npm:4.0.0-alpha.65"
     "@d-zero/anatomist": "npm:0.2.0"
     "@d-zero/dealer": "npm:1.10.1"
     "@d-zero/shared": "npm:0.22.2"
