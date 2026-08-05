@@ -512,10 +512,7 @@ function firstSrcsetCandidate(srcset: string | undefined): string | undefined {
  * @param value
  * @param fallback
  */
-function toNumberOrFallback(
-	value: string | undefined,
-	fallback: string | undefined,
-): number {
+function toNumberOrFallback(value: string | undefined, fallback?: string): number {
 	const resolved = value ?? fallback;
 	const parsed = resolved === undefined ? Number.NaN : Number.parseInt(resolved, 10);
 	return Number.isNaN(parsed) ? 0 : parsed;
