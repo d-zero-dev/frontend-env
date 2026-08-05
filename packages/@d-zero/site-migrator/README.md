@@ -148,6 +148,12 @@ anatomist の `LayoutBlock`/`RawLayoutNode` は要素の属性（`href` / `src` 
 - `BlockData.name` は固定値 `'migrated'`（ブロックの見た目上の種別名は #975/#976 で命名確定するまでのプレースホルダー）。
 - `download-file` の `size`/`formatedSize` は空文字列のプレースホルダー。実 DL と実サイズの反映は既存の `downloadResources` と連携させて #976 で行う（`classifyBlockItem` はネットワーク I/O を一切行わない）。
 
+### BurgerEditor ブロックの HTML 化（`renderBlocks`）
+
+`layoutToBlockData` が返す `BlockData[]`（1 ページ分）を、BurgerEditor 公式の `@burger-editor/core` `render()` API を使って `data-bge-*` 付き HTML へ変換する純関数群。マークアップ仕様を自前で再実装せず、公式 API と `@burger-editor/blocks` の既定アイテムカタログ（カスタマイズ不可）にそのまま委譲する。`render()` は内部で `document.createElement` / `new Range()` 等の DOM API に依存するため、初回呼び出し時のみ jsdom を起動して `globalThis` へ反映する（既に DOM 環境が存在する場合は何もしない）。`classifyBlockItem` / `layoutToBlockData` 同様、統合前の内部 API のため `index.ts` からは export していない（`src/page-extractor/render-blocks.ts` を直接 import する）。統合先（`extractMainContent` 後段への差し込み、ページ単位のフォールバック判断）は #976 で行う。
+
+- `renderBlocks(blocks: BlockData[], options: { contentClass: string }): Promise<string>` — 1 ブロックずつ `render()` へ渡して HTML 要素を生成・連結し、`contentClass` を持つラッパー `<div>` で囲んだ 1 ページ分の HTML 文字列を返す。
+
 ### 設計上の注意
 
 `extractMainContent` / `rewriteAssetRefs` は parse5 を内部で使う純関数、`getFrontmatter` は `@nitpicker/query` の DB 読み出しに依存する。両者の責務分離は `src/html/` (parse5) と `src/archive/` (`@nitpicker/query`) のディレクトリ構造で表現している。
