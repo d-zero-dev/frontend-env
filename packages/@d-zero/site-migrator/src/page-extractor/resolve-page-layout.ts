@@ -203,8 +203,18 @@ export async function resolvePageLayouts(
 		);
 	} finally {
 		if (browserPromise !== undefined) {
-			const browser = await browserPromise;
-			await browser.close();
+			// Best-effort cleanup, mirroring the `page?.close()` handling above:
+			// `browserPromise` itself may be the *rejected* `launch()` promise
+			// (e.g. no Chrome binary / sandbox restrictions). Every per-item
+			// worker already reports that failure as `missing` and settles
+			// normally, so re-awaiting the same rejection here must not throw
+			// and take down the whole (otherwise fail-soft) run.
+			try {
+				const browser = await browserPromise;
+				await browser.close();
+			} catch {
+				/* ignore */
+			}
 		}
 	}
 }
