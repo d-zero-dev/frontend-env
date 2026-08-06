@@ -179,6 +179,12 @@ anatomist の `LayoutBlock`/`RawLayoutNode` は要素の属性（`href` / `src` 
 
 `downloadBlockFiles` は `migrate()` が事前に収集した通常のリソース URL 集合（`knownResourceUrls`）と重複しない `download-file` アイテムの `path` だけを `downloadResources` へ追加投入する（fetch 処理そのものは再実装しない）。ダウンロード後（または既にカバー済みでスキップした場合も含めて）実ファイルサイズを `stat` で読み、`size`/`formatedSize` を実測値で書き戻す。同一ファイルが複数ページ・複数アイテムから参照されていてもダウンロードは 1 回で済ませる。
 
+### BurgerEditor ブロック内の同一オリジン参照書き換え（`rewriteBlockRefs`）
+
+`layoutToBlockData` が返す `BlockData[]` に含まれる同一オリジン URL（`wysiwyg` 内の `<a href>` 等、`button.link`、`image.path[]`、`download-file.path`）を、既存の `rewritePageRefs` と同じ正規化ルールで書き換える純関数（Issue #979）。`renderBlocks` を呼ぶ**前**、`BlockData` の段階で書き換える — レンダリング後の HTML 文字列に対して既存の `rewritePageRefs` をタグ名ベースで適用する方式だと、`button`/`download-file` アイテムはどちらも `<a href>` へレンダリングされ、両者を区別する `data-bgi` 属性が `<a>` 自身ではなく祖先要素に付与されるため、「button は page-ref 扱い（`{{<id>}}` 化あり）、download-file は asset 扱い（root-relative のみ）」を確実に区別できない。アイテム種別（`item.name`）が型として確定しているこの段階で書き換えることで、誤判定なく両者を区別する。`classifyBlockItem`/`layoutToBlockData`/`renderBlocks` 同様、統合前の内部 API のため `index.ts` からは export していない（`src/page-extractor/rewrite-block-refs.ts` を直接 import する）。統合先（`layoutToBlockData` → `rewriteBlockRefs` → `renderBlocks` の結線）は #976 で行う。
+
+- `rewriteBlockRefs(options: { blocks: BlockData[], baseUrl: string, pageIdLookup: PageIdLookup }): Promise<{ blocks: BlockData[], errors: RewriteBlockRefsError[] }>` — `wysiwyg` は `rewritePageRefs` へそのまま委譲、`button.link` はページ参照ルール（既知ページなら `{{<id>}}` 化）、`image.path[]`/`download-file.path` はアセットルール（root-relative のみ、`{{<id>}}` 化はしない）、`google-maps`/`youtube` の `url` は外部オリジンのため対象外。`wysiwyg` の `rewritePageRefs` 呼び出しが失敗した場合は fail-soft で元の内容を保持し、`errors` に `{blockIndex, rowIndex, itemIndex, error}` を記録する（他のアイテム・ブロックの処理は継続する）。
+
 ### 設計上の注意
 
 `extractMainContent` / `rewriteAssetRefs` / `mergeMainContent` は parse5 を内部で使う純関数、`getFrontmatter` は `@nitpicker/query` の DB 読み出しに依存する。両者の責務分離は `src/html/` (parse5) と `src/archive/` (`@nitpicker/query`) のディレクトリ構造で表現している。
