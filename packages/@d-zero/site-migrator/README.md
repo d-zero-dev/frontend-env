@@ -114,7 +114,7 @@ import {
 - それ以外のアセット属性（`<img src>`, `<img srcset>`, `<script src>`, `<source src/srcset>`, `<embed src>`, `<video src/poster>`, `<audio src>`, `<track src>`、および `<link>` の非ページ用法）は同一オリジンであれば root-relative path に書き換える。
 - id 写像のルックアップは origin+pathname+search の完全一致を先に試し、ヒットしなければ trailing-slash を吸収した origin+pathname にフォールバックする。これにより `/list?p=1` / `/list?p=2` の両方が `pageIds` に登録されていれば各々別の id に解決され、片方しか無ければ pathname-only の fallback で拾われる。`<a href="/about">` と `pageIds` の `/about/` も双方向にマッチする。
 
-`rewritePageRefs` が例外を投げた場合は fail-soft で書き換え前の HTML を出力し、`onResult` の `extracted` / `fallback` outcome に `rewriteError` フィールドを乗せてレポートする（`migrate()` の `pagesRewriteFailed` で集計）。フロントマター付与・id 採番は HTML 書き換えと独立して走るので、片方が失敗してももう片方は影響を受けない。
+`rewritePageRefs`（main 非検出・ブロック変換失敗ページ）または `rewriteBlockRefs`（ブロック変換成功ページ、詳細は後述）が失敗した場合は fail-soft で書き換え前の内容を出力し、`onResult` の `extracted` / `fallback` outcome に `rewriteError` フィールドを乗せてレポートする（`migrate()` の `pagesRewriteFailed` で集計）。フロントマター付与・id 採番は HTML 書き換えと独立して走るので、片方が失敗してももう片方は影響を受けない。
 
 ### `{{<id>}}` token の解決（後段ビルドツール）
 
@@ -143,6 +143,7 @@ import {
 | `resolvePageLayouts` | `--layout-json` の事前生成 JSONL を優先し、無ければ Puppeteer + `@d-zero/anatomist` でライブ解析する                                                                            |
 | `classifyBlockItem`  | anatomist の `LayoutBlock` 1 個を `image`/`title-h2`/`title-h3`/`youtube`/`google-maps`/`download-file`/`button`/`table`/`wysiwyg` へヒューリスティック分類する純関数           |
 | `layoutToBlockData`  | 複数ビューポート分の解析結果から `BlockData[]` を組み立てる純関数。ブロック単位の低信頼度は個別に `wysiwyg` へ倒し `fallbacks` に記録する                                       |
+| `rewriteBlockRefs`   | `BlockData[]` 内の同一オリジン URL を `renderBlocks` 前に書き換える（詳細は後述の専用節）                                                                                       |
 | `renderBlocks`       | `@burger-editor/core` の公式 `render()` で `BlockData[]` を `data-bge-*` 付き HTML へ変換する                                                                                   |
 | `mergeMainContent`   | `renderBlocks` のラッパー `<div>` の中身だけを既存 main 要素の子要素として差し替え、`--content-class` を main 要素自身の `classList` に追加する（新規ラッパー要素は追加しない） |
 | `isMainConsistent`   | anatomist の `mainSelector` と `extractMainContent` がマッチした要素の `outerHTML` を比較する簡易整合性チェック                                                                 |
@@ -152,7 +153,7 @@ import {
 
 1. `getPageHtml` + `extractMainContent` + `getFrontmatter` を全ページ分並列実行し、main が見つかったページ（ブロック変換対象）と見つからなかったページ（`outcome: 'fallback'`）を仕分ける。
 2. ブロック変換対象の全 URL をまとめて **1 回**の `resolvePageLayouts` 呼び出しに渡す（ページごとに呼ぶと Puppeteer ブラウザをページ数だけ起動することになり実運用サイト規模では致命的に遅くなるため）。
-3. ページごとに `isMainConsistent` → `layoutToBlockData` → `downloadBlockFiles`（バッチ） → `renderBlocks` → `mergeMainContent` → `rewritePageRefs` → frontmatter 付与 → 書き出し、という順で処理する。
+3. ページごとに `isMainConsistent` → `layoutToBlockData` → `downloadBlockFiles`（バッチ） → `rewriteBlockRefs` → `renderBlocks` → `mergeMainContent` → frontmatter 付与 → 書き出し、という順で処理する。ブロック変換に成功したページ（`converted`/`partial`）はこの時点で本文全体が書き換え済みのため、後段の `rewritePageRefs` は**適用しない**（適用すると `rewriteBlockRefs` が埋め込んだ `{{<id>}}` トークンを通常 URL として再解釈し文字化けする）。main 非検出・ブロック変換失敗（`fallback`）ページは元の HTML に `{{<id>}}` token が無いため、従来通り `rewritePageRefs` を適用する。
 
 #### ブロック単位フォールバックとページ単位フォールバックの区別
 
@@ -173,7 +174,7 @@ anatomist の `LayoutBlock`/`RawLayoutNode` は要素の属性（`href` / `src` 
 - 深さ圧縮（`BlockData.items` は「ブロック → 行×列 → item」の 2 階層まで）は、depth-2 ノードの `children` を一切読まず `classifyBlockItem` に丸投げすることで実現している。`classifyBlockItem` が `innerHTML` 文字列のみを見るため、depth-3 以降の `layoutType` 情報は自動的に破棄される。
 - `BlockData.name` は固定値 `'migrated'`（ブロックの見た目上の種別名は未確定のプレースホルダー）。
 - `render()` は内部で `document.createElement` / `new Range()` 等の DOM API に依存するため、初回呼び出し時のみ jsdom を起動して `globalThis` へ反映する（既に DOM 環境が存在する場合は何もしない）。
-- 生成したブロック内（wysiwyg の `<a href>`、image の `path` 等）の URL 自体は `rewritePageRefs` の対象外（既存 main 要素の外側にあった参照のみが書き換え対象）。ブロック内 URL への適用は将来の課題として切り出されている。
+- 生成したブロック内（wysiwyg の `<a href>`、`button.link`、`image.path[]`、`download-file.path`）の URL は `renderBlocks` 前に `rewriteBlockRefs` が書き換える（詳細は次節）。
 
 ### 出力先ライブラリ連携（`downloadBlockFiles`）
 
@@ -181,9 +182,10 @@ anatomist の `LayoutBlock`/`RawLayoutNode` は要素の属性（`href` / `src` 
 
 ### BurgerEditor ブロック内の同一オリジン参照書き換え（`rewriteBlockRefs`）
 
-`layoutToBlockData` が返す `BlockData[]` に含まれる同一オリジン URL（`wysiwyg` 内の `<a href>` 等、`button.link`、`image.path[]`、`download-file.path`）を、既存の `rewritePageRefs` と同じ正規化ルールで書き換える純関数（Issue #979）。`renderBlocks` を呼ぶ**前**、`BlockData` の段階で書き換える — レンダリング後の HTML 文字列に対して既存の `rewritePageRefs` をタグ名ベースで適用する方式だと、`button`/`download-file` アイテムはどちらも `<a href>` へレンダリングされ、両者を区別する `data-bgi` 属性が `<a>` 自身ではなく祖先要素に付与されるため、「button は page-ref 扱い（`{{<id>}}` 化あり）、download-file は asset 扱い（root-relative のみ）」を確実に区別できない。アイテム種別（`item.name`）が型として確定しているこの段階で書き換えることで、誤判定なく両者を区別する。`classifyBlockItem`/`layoutToBlockData`/`renderBlocks` 同様、統合前の内部 API のため `index.ts` からは export していない（`src/page-extractor/rewrite-block-refs.ts` を直接 import する）。統合先（`layoutToBlockData` → `rewriteBlockRefs` → `renderBlocks` の結線）は #976 で行う。
+`layoutToBlockData` が返す `BlockData[]` に含まれる同一オリジン URL（`wysiwyg` 内の `<a href>` 等、`button.link`、`image.path[]`、`download-file.path`）を、既存の `rewritePageRefs` と同じ正規化ルールで書き換える純関数（Issue #979）。`extractPages` が `renderBlocks` を呼ぶ**前**、`BlockData` の段階で書き換える — レンダリング後の HTML 文字列に対して既存の `rewritePageRefs` をタグ名ベースで適用する方式だと、`button`/`download-file` アイテムはどちらも `<a href>` へレンダリングされ、両者を区別する `data-bgi` 属性が `<a>` 自身ではなく祖先要素に付与されるため、「button は page-ref 扱い（`{{<id>}}` 化あり）、download-file は asset 扱い（root-relative のみ）」を確実に区別できない。アイテム種別（`item.name`）が型として確定しているこの段階で書き換えることで、誤判定なく両者を区別する。`classifyBlockItem`/`layoutToBlockData`/`renderBlocks` 同様、`index.ts` からは export していない内部 API（`src/page-extractor/rewrite-block-refs.ts` を直接 import する）。
 
 - `rewriteBlockRefs(options: { blocks: BlockData[], baseUrl: string, pageIdLookup: PageIdLookup }): Promise<{ blocks: BlockData[], errors: RewriteBlockRefsError[] }>` — `wysiwyg` は `rewritePageRefs` へそのまま委譲、`button.link` はページ参照ルール（既知ページなら `{{<id>}}` 化）、`image.path[]`/`download-file.path` はアセットルール（root-relative のみ、`{{<id>}}` 化はしない）、`google-maps`/`youtube` の `url` は外部オリジンのため対象外。`wysiwyg` の `rewritePageRefs` 呼び出しが失敗した場合は fail-soft で元の内容を保持し、`errors` に `{blockIndex, rowIndex, itemIndex, error}` を記録する（他のアイテム・ブロックの処理は継続する）。
+- `extractPages` は `errors` が空でなければ、それらを 1 件の `Error`（`ExtractPageResult.rewriteError`）へ集約して報告する — 既存の `rewriteError`（`rewritePageRefs` 由来）と同じフィールドを共有する。
 
 ### 設計上の注意
 

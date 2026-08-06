@@ -421,11 +421,15 @@ describe('extractPages', () => {
 		expect(written).not.toContain('href="/about/"');
 	});
 
-	test('fail-soft on rewritePageRefs throw: writes pre-rewrite HTML and surfaces rewriteError on the outcome', async () => {
+	test('fail-soft on rewriteBlockRefs (wysiwyg→rewritePageRefs) throw: writes pre-rewrite HTML and surfaces an aggregate rewriteError on the outcome', async () => {
 		getPageHtmlMock.mockResolvedValueOnce(
 			docWith('<main><a href="/about/">about</a></main>'),
 		);
 		mockConvertedLayout('<a href="/about/">about</a>');
+		// Converted pages no longer run the whole-body rewritePageRefs pass (it would
+		// double-process the already-rewritten block markup) — the single wysiwyg item
+		// produced from this layout is what invokes rewritePageRefs now, via
+		// rewriteBlockRefs.
 		rewritePageRefsMock.mockRejectedValueOnce(new Error('parse5 boom'));
 
 		const results: ExtractPageResult[] = [];
@@ -442,7 +446,10 @@ describe('extractPages', () => {
 		expect(results[0]).toMatchObject({
 			url: 'https://example.com/p',
 			outcome: 'extracted',
-			rewriteError: { message: 'parse5 boom' },
+			rewriteError: {
+				message:
+					'rewriteBlockRefs failed for 1 item(s): block 0/row 0/item 0: parse5 boom',
+			},
 		});
 		const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
 		// Body is the un-rewritten merged fragment (no {{id}} substitution).
@@ -510,6 +517,58 @@ describe('extractPages', () => {
 	});
 
 	describe('BurgerEditorブロック変換パイプライン', () => {
+		test('button: known-page link becomes {{id}} without double-rewrite corruption', async () => {
+			getPageHtmlMock.mockResolvedValueOnce(
+				docWith('<main><a class="btn" href="/about/">about</a></main>'),
+			);
+			mockConvertedLayout('<a class="btn" href="/about/">about</a>');
+
+			await extractPages({
+				session: FAKE_SESSION,
+				items: [
+					{ url: 'https://example.com/index.html' },
+					{ url: 'https://example.com/about/' },
+				],
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				limit: 2,
+			});
+
+			const written = await readFile(path.join(outputDir, 'index.html'), 'utf8');
+			// `/index.html` is root section -> id 5, `/about/` is subdir section 1 -> id
+			// 10000 (see the wysiwyg-equivalent id-template test above).
+			expect(written).toContain('{{10000}}');
+			expect(written).not.toContain('href="/about/"');
+			// If rewriteBlockRefs' {{10000}} token got double-processed by the outer
+			// rewritePageRefs pass, it would corrupt into `%7B%7B10000%7D%7D`.
+			expect(written).not.toContain('%7B');
+		});
+
+		test('download-file: href pathname matching a known page id still stays root-relative (asset rule)', async () => {
+			getPageHtmlMock.mockResolvedValueOnce(
+				docWith('<main><a href="/files/report.pdf">Report</a></main>'),
+			);
+			mockConvertedLayout('<a href="/files/report.pdf">Report</a>');
+
+			await extractPages({
+				session: FAKE_SESSION,
+				items: [
+					{ url: 'https://example.com/index.html' },
+					// This URL's pathname exactly matches the download-file href above, to
+					// confirm the button/download-file distinction does not depend on
+					// pathname collisions with known pages.
+					{ url: 'https://example.com/files/report.pdf' },
+				],
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				limit: 2,
+			});
+
+			const written = await readFile(path.join(outputDir, 'index.html'), 'utf8');
+			expect(written).toContain('href="/files/report.pdf"');
+			expect(written).not.toContain('{{');
+		});
+
 		test('resolvePageLayoutsを一括で1回だけ呼び、複数の一致ページをまとめて処理する', async () => {
 			getPageHtmlMock.mockResolvedValueOnce(docWith('<main><p>a</p></main>'));
 			getPageHtmlMock.mockResolvedValueOnce(docWith('<main><p>b</p></main>'));

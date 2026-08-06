@@ -28,7 +28,12 @@ import {
 	resolvePageLayouts,
 	type ResolvePageLayoutResult,
 } from './resolve-page-layout.js';
-import { buildPageIdLookup, rewritePageRefs } from './rewrite-page-refs.js';
+import { rewriteBlockRefs, type RewriteBlockRefsError } from './rewrite-block-refs.js';
+import {
+	buildPageIdLookup,
+	rewritePageRefs,
+	type PageIdLookup,
+} from './rewrite-page-refs.js';
 
 /**
  * Single page to extract. Wrapped as an object so `@d-zero/dealer` (which
@@ -87,9 +92,11 @@ export type ExtractPageResult =
 			/** `blockConversion`が`fallback`のときのみセットされる致命的エラー。 */
 			blockConversionError?: Error;
 			/**
-			 * Present only when {@link rewritePageRefs} threw. The page body was
-			 * still written (fail-soft), but with original asset / page references
-			 * instead of the rewritten ones.
+			 * Present only when {@link rewritePageRefs} (unconverted/fallback pages)
+			 * or {@link rewriteBlockRefs} (converted/partial pages, one aggregate
+			 * `Error` per page even when multiple items failed) threw. The page
+			 * body was still written (fail-soft), but with original asset / page
+			 * references instead of the rewritten ones for the affected part.
 			 */
 			rewriteError?: Error;
 			/**
@@ -155,9 +162,17 @@ type BlockOutcome = FatalBlockOutcome | ResolvedBlockOutcome;
  * 渡す — ページごとに呼ぶとPuppeteerブラウザをページ数だけlaunch/closeすることになり
  * 実運用サイト規模では致命的に遅くなるため、ブラウザを1回だけ起動して使い回す。続けて
  * 各ページについて{@link layoutToBlockData}でBurgerEditorの`BlockData[]`へ変換し、
- * {@link renderBlocks}で`data-bge-*`付きHTMLへ変換し、{@link mergeMainContent}で
- * ラッパー要素を挟まずに既存main要素へ埋め込み、`rewritePageRefs`→frontmatter→
- * 書き出し、という既存の後段パイプラインへ合流させる。
+ * {@link rewriteBlockRefs}で`BlockData[]`内の同一オリジンURL（wysiwyg内の`<a href>`等、
+ * button.link、image.path[]、download-file.path）を書き換えてから{@link renderBlocks}で
+ * `data-bge-*`付きHTMLへ変換し、{@link mergeMainContent}でラッパー要素を挟まずに既存main
+ * 要素へ埋め込み、frontmatter→書き出し、という既存の後段パイプラインへ合流させる。
+ *
+ * ブロック変換したページの本文はこの時点で既に`rewriteBlockRefs`により書き換え済みのため、
+ * 後段の`rewritePageRefs`（本文全体への同一オリジン参照書き換え）は**適用しない** —
+ * 適用すると`rewriteBlockRefs`が既に埋め込んだ`{{<id>}}`トークンを`rewritePageRefs`が
+ * 通常URLとして再解釈し、`%7B%7B<id>%7D%7D`のようなpercent-encode文字列へ壊してしまう
+ * （ブロック変換が効かなかったページ・main非検出ページは元HTMLに`{{<id>}}`token が
+ * 存在しないため、従来通り`rewritePageRefs`を適用する）。
  *
  * ### ページ単位の致命的フォールバック
  *
@@ -188,7 +203,9 @@ type BlockOutcome = FatalBlockOutcome | ResolvedBlockOutcome;
  * - In both cases same-origin URLs are rewritten: `<a href>` / `<form action>`
  *   pointing at a known page → `{{<id>}}<query><fragment>`; other same-origin
  *   asset references → root-relative paths. Cross-origin URLs are left
- *   untouched. 生成したブロック内のURL自体の書き換えは対象外（#979の責務）。
+ *   untouched. ブロック変換したページ（`converted`/`partial`）は`rewriteBlockRefs`が
+ *   `button.link`をページ参照、`image.path[]`/`download-file.path`をアセット参照として
+ *   個別に扱う（詳細は{@link rewriteBlockRefs}のJSDoc参照）。
  *
  * Rewrite failure is fail-soft: the original HTML body is written and
  * `rewriteError` is set on the result so the caller can log a warning without
@@ -403,18 +420,32 @@ export async function extractPages(options: ExtractPagesOptions): Promise<void> 
 				}
 
 				const blockOutcome = blockOutcomeByUrl.get(entry.url)!;
-				const built = await buildExtractedBody(state, blockOutcome, contentClass);
+				const built = await buildExtractedBody(
+					state,
+					blockOutcome,
+					contentClass,
+					entry.url,
+					pageIdLookup,
+				);
 
 				let bodyHtml = built.body;
 				let rewriteError: Error | undefined;
-				try {
-					bodyHtml = await rewritePageRefs({
-						html: built.body,
-						baseUrl: entry.url,
-						pageIdLookup,
-					});
-				} catch (error) {
-					rewriteError = toError(error);
+				if (built.alreadyRewritten) {
+					// rewriteBlockRefsが既にbuilt.bodyを完全に書き換え済み。ここで
+					// rewritePageRefsをbody全体へ再適用すると、既に埋め込まれた`{{<id>}}`
+					// トークンが通常URLとして再解釈され文字化けするため、二重適用を避ける
+					// （buildExtractedBodyのJSDoc参照）。
+					rewriteError = aggregateBlockRewriteErrors(built.blockRewriteErrors);
+				} else {
+					try {
+						bodyHtml = await rewritePageRefs({
+							html: built.body,
+							baseUrl: entry.url,
+							pageIdLookup,
+						});
+					} catch (error) {
+						rewriteError = toError(error);
+					}
 				}
 
 				await writeFile(
@@ -502,46 +533,89 @@ function resolveBlockOutcome(
 }
 
 /**
- * `blockOutcome`から、rewritePageRefs適用前の本文HTMLと`blockConversion`分類を組み立てる。
+ * `blockOutcome`から本文HTMLと`blockConversion`分類を組み立てる。ブロック変換できた
+ * ページ（`converted`/`partial`）は`renderBlocks`を呼ぶ**前**に{@link rewriteBlockRefs}で
+ * `BlockData[]`内の同一オリジンURLを書き換えるため、返す`body`はこの時点で既に
+ * 書き換え済み（`alreadyRewritten: true`）— 呼び出し側は`rewritePageRefs`を`body`全体へ
+ * 重ねて適用してはならない（`{{<id>}}`トークンの二重処理による文字化けを防ぐため）。
  * `renderBlocks`/`mergeMainContent`が例外を投げた場合もここでfatalとして扱い、ページ全体の
- * 元の完全なHTMLへフォールバックする。
+ * 元の完全なHTMLへフォールバックする（この場合`alreadyRewritten: false`— 元の完全なHTMLは
+ * 未書き換えのため、呼び出し側の従来通りの`rewritePageRefs`適用が必要）。
  * @param state
  * @param state.originalHtml
  * @param state.extractedHtml
  * @param blockOutcome
  * @param contentClass
+ * @param baseUrl
+ * @param pageIdLookup
  */
 async function buildExtractedBody(
 	state: { readonly originalHtml: string; readonly extractedHtml: string },
 	blockOutcome: BlockOutcome,
 	contentClass: string,
+	baseUrl: string,
+	pageIdLookup: PageIdLookup,
 ): Promise<{
 	body: string;
 	blockConversion: 'converted' | 'partial' | 'fallback';
 	blockConversionError?: Error;
+	alreadyRewritten: boolean;
+	blockRewriteErrors?: readonly RewriteBlockRefsError[];
 }> {
 	if (blockOutcome.kind === 'fatal') {
 		return {
 			body: state.originalHtml,
 			blockConversion: 'fallback',
 			blockConversionError: blockOutcome.error,
+			alreadyRewritten: false,
 		};
 	}
 	try {
-		const wrapperHtml = await renderBlocks(blockOutcome.blocks, { contentClass });
+		const rewritten = await rewriteBlockRefs({
+			blocks: blockOutcome.blocks,
+			baseUrl,
+			pageIdLookup,
+		});
+		const wrapperHtml = await renderBlocks(rewritten.blocks, { contentClass });
 		const merged = mergeMainContent({
 			mainHtml: state.extractedHtml,
 			wrapperHtml,
 			contentClass,
 		});
-		return { body: merged, blockConversion: blockOutcome.kind };
+		return {
+			body: merged,
+			blockConversion: blockOutcome.kind,
+			alreadyRewritten: true,
+			...(rewritten.errors.length > 0 ? { blockRewriteErrors: rewritten.errors } : {}),
+		};
 	} catch (error) {
 		return {
 			body: state.originalHtml,
 			blockConversion: 'fallback',
 			blockConversionError: toError(error),
+			alreadyRewritten: false,
 		};
 	}
+}
+
+/**
+ * {@link rewriteBlockRefs}が返す複数の項目単位のエラーを、既存の`rewriteError?: Error`
+ * （1ページにつき1個）という`ExtractPageResult`の形へ合わせるため単一の`Error`へ集約する。
+ * @param errors
+ */
+function aggregateBlockRewriteErrors(
+	errors: readonly RewriteBlockRefsError[] | undefined,
+): Error | undefined {
+	if (!errors || errors.length === 0) {
+		return undefined;
+	}
+	const detail = errors
+		.map(
+			(e) =>
+				`block ${e.blockIndex}/row ${e.rowIndex}/item ${e.itemIndex}: ${e.error.message}`,
+		)
+		.join('; ');
+	return new Error(`rewriteBlockRefs failed for ${errors.length} item(s): ${detail}`);
 }
 
 /**
