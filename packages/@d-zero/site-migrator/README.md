@@ -1,6 +1,6 @@
 # `@d-zero/site-migrator`
 
-`.nitpicker` アーカイブを入力とするウェブサイト移植ツールキット。サブリソースのローカル DL、ページ HTML のレイアウト剥がし、`.nitpicker` DB のページメタと採番した整数 id を YAML frontmatter として prepend する CLI、同一オリジン参照を後段パイプライン向けに書き換えるリライタ、および周辺ユーティリティ関数群を提供する。
+`.nitpicker` アーカイブを入力とするウェブサイト移植ツールキット。サブリソースのローカル DL、ページ HTML のレイアウト剥がしと BurgerEditor ブロックへの変換、`.nitpicker` DB のページメタと採番した整数 id を YAML frontmatter として prepend する CLI、同一オリジン参照を後段パイプライン向けに書き換えるリライタ、および周辺ユーティリティ関数群を提供する。
 
 ## Installation
 
@@ -11,15 +11,17 @@ yarn add @d-zero/site-migrator
 ## CLI
 
 ```sh
-npx dz-migrate <archive.nitpicker> -o <htdocs-dir> [--limit <n>] [--extract-limit <n>]
+npx dz-migrate <archive.nitpicker> -o <htdocs-dir> --content-class <name> [--layout-json <path>] [--limit <n>] [--extract-limit <n>]
 ```
 
 - `<archive.nitpicker>` — [nitpicker](https://github.com/d-zero-dev/nitpicker) で生成済みのアーカイブファイル
 - `-o, --output <htdocs-dir>` — 出力先。URL の pathname をそのままミラーする（例: `https://example.com/img/a.png` → `<htdocs-dir>/img/a.png`、`https://example.com/about/` → `<htdocs-dir>/about/index.html`）
+- `--content-class <name>` — **必須**。BurgerEditor の `editableArea` セレクタに対応させるクラス名。生成したブロック群を埋め込む既存 main 要素自身の `classList` に追加する（移行先サイトの BurgerEditor 設定に依存する値のため既定値は無い）
+- `--layout-json <path>` — 事前生成済みの anatomist レイアウト解析 JSONL（1 ファイルで対象 URL 全件分）。省略時は全ページをライブ解析する
 - `--limit <n>` — 並列 DL 数（デフォルト 10）
-- `--extract-limit <n>` — 並列ページ抽出数（デフォルト 10）
+- `--extract-limit <n>` — 並列ページ抽出数（デフォルト 10）。ライブレイアウト解析の並列数もこれを共用する
 
-リソースは fetch で DL、ページ HTML はアーカイブ内のスナップショットを読み、`extractMainContent` でレイアウト共通部分を剥がし、`assignPageIds` で URL → 整数 id の写像を組み立てて `.nitpicker` DB のページメタと併せて `formatFrontmatter` が生成する `---\n…\n---\n` YAML ブロックを先頭に prepend、本文中の同一オリジン参照を `rewritePageRefs` が書き換えてから `.html` として書き出す。
+リソースは fetch で DL、ページ HTML はアーカイブ内のスナップショットを読み、`extractMainContent` でレイアウト共通部分を剥がし、そのページのレイアウトを BurgerEditor ブロックへ変換して既存 main 要素へ埋め込み（後述）、`assignPageIds` で URL → 整数 id の写像を組み立てて `.nitpicker` DB のページメタと併せて `formatFrontmatter` が生成する `---\n…\n---\n` YAML ブロックを先頭に prepend、本文中の同一オリジン参照を `rewritePageRefs` が書き換えてから `.html` として書き出す。
 
 ## Programmatic API
 
@@ -128,14 +130,38 @@ import {
 
 `formatFrontmatter` は後続の scaffold パイプラインがそのまま消費できる YAML を生成する。og.\* / twitter.\* は nested map で、サブオブジェクト全体が空なら親キーも省略される。`twitter.url` は DB に対応カラムがないため型・出力ともに非対応（`og.url` で代替する慣習に従う）。
 
-`extractPages` は `extractMainContent` と `getFrontmatter` を並列実行し、生成した YAML ブロックを抽出 HTML の先頭に prepend してから書き出す。整数 id は常に付与されるので「DB 行なし」のページでも `---\nid: <number>\n---\n` ブロックは出る。`getFrontmatter` が例外を投げた場合は fail-soft で id-only frontmatter と本文を書き出し、`onResult` の outcome に `metaError` を載せて警告する（`migrate()` レポートでは `pagesMetaFailed` として集計される）。
+`extractPages` は `extractMainContent` と `getFrontmatter` を並列実行し、main 要素が見つかったページには続けて BurgerEditor ブロック変換パイプライン（後述）を適用したうえで、生成した YAML ブロックを本文の先頭に prepend してから書き出す。整数 id は常に付与されるので「DB 行なし」のページでも `---\nid: <number>\n---\n` ブロックは出る。`getFrontmatter` が例外を投げた場合は fail-soft で id-only frontmatter と本文を書き出し、`onResult` の outcome に `metaError` を載せて警告する（`migrate()` レポートでは `pagesMetaFailed` として集計される）。
 
-### レイアウト → BlockData 変換（`classifyBlockItem` / `layoutToBlockData`）
+### BurgerEditor ブロック変換パイプライン（`dz-migrate` のデフォルト動作）
 
-既存サイトを BurgerEditor ブロックへ移行するパイプライン（親 Issue #977）向けの純関数群。`resolvePageLayouts`（#973 実装済み）と同様、現時点ではパイプライン全体への統合前のため `index.ts` からは export していない（`src/page-extractor/classify-block-item.ts` / `layout-to-block-data.ts` を直接 import する内部 API）。統合とパイプライン公開範囲の判断は #976 で行う。
+`.nitpicker` アーカイブベースのレイアウト剥がしだけでは `data-bge-*` マーカーが無く、BurgerEditor 上では「1 個の wysiwyg フォールバックブロック」としてしか扱えない。site-migrator の存在意義は既存サイトを BurgerEditor で編集可能なブロック構造に変換することなので、このブロック変換はオプトインフラグではなく `extractPages` / `dz-migrate` の既定動作になっている（`--content-class` は必須オプションだが、指定すれば必ず変換が走る）。
 
-- `classifyBlockItem(block: LayoutBlock): ClassifiedBlockItem` — anatomist の `LayoutBlock` 1 個を `image`/`title-h2`/`title-h3`/`youtube`/`google-maps`/`download-file`/`button`/`table`/`wysiwyg` の BurgerEditor アイテム種別へヒューリスティック分類する。`children`/`boundingBox`/`confidence` は見ない純関数。
-- `layoutToBlockData(results: LayoutAnalysisResult[], options?): { blocks: BlockData[], fallbacks: {blockIndex, reason}[] }` — 同一 URL の複数ビューポート分の解析結果を受け取り、PC ビューポートを主として深さ圧縮・行列変換・`containerProps` マッピングを行う純関数。`fallbacks` はブロック単位の構造フォールバック（`viewport-mismatch` / `malformed-row-sizes` / `low-confidence`）の理由を記録し、#976 のレポート拡張にそのまま使える。
+処理は次の要素で構成される（いずれも `src/page-extractor/` 配下、統合前は内部 API だったが `extractPages` に組み込まれた現在も `index.ts` からは export していない）:
+
+| 関数                 | 概要                                                                                                                                                                            |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `resolvePageLayouts` | `--layout-json` の事前生成 JSONL を優先し、無ければ Puppeteer + `@d-zero/anatomist` でライブ解析する                                                                            |
+| `classifyBlockItem`  | anatomist の `LayoutBlock` 1 個を `image`/`title-h2`/`title-h3`/`youtube`/`google-maps`/`download-file`/`button`/`table`/`wysiwyg` へヒューリスティック分類する純関数           |
+| `layoutToBlockData`  | 複数ビューポート分の解析結果から `BlockData[]` を組み立てる純関数。ブロック単位の低信頼度は個別に `wysiwyg` へ倒し `fallbacks` に記録する                                       |
+| `renderBlocks`       | `@burger-editor/core` の公式 `render()` で `BlockData[]` を `data-bge-*` 付き HTML へ変換する                                                                                   |
+| `mergeMainContent`   | `renderBlocks` のラッパー `<div>` の中身だけを既存 main 要素の子要素として差し替え、`--content-class` を main 要素自身の `classList` に追加する（新規ラッパー要素は追加しない） |
+| `isMainConsistent`   | anatomist の `mainSelector` と `extractMainContent` がマッチした要素の `outerHTML` を比較する簡易整合性チェック                                                                 |
+| `downloadBlockFiles` | 生成ブロック内の `download-file` アイテムの `path` を集めて `downloadResources` へ二重 DL を避けつつ追加投入し、実ファイルサイズを `size`/`formatedSize` に反映する             |
+
+`extractPages` はページごとに以下の順で処理する:
+
+1. `getPageHtml` + `extractMainContent` + `getFrontmatter` を全ページ分並列実行し、main が見つかったページ（ブロック変換対象）と見つからなかったページ（`outcome: 'fallback'`）を仕分ける。
+2. ブロック変換対象の全 URL をまとめて **1 回**の `resolvePageLayouts` 呼び出しに渡す（ページごとに呼ぶと Puppeteer ブラウザをページ数だけ起動することになり実運用サイト規模では致命的に遅くなるため）。
+3. ページごとに `isMainConsistent` → `layoutToBlockData` → `downloadBlockFiles`（バッチ） → `renderBlocks` → `mergeMainContent` → `rewritePageRefs` → frontmatter 付与 → 書き出し、という順で処理する。
+
+#### ブロック単位フォールバックとページ単位フォールバックの区別
+
+- **ブロック単位**（致命的ではない）: `layoutToBlockData` が低信頼度・ビューポート不一致・`rowSizes` 不正形状と判断した個別ブロックだけを `wysiwyg` 単一アイテムに倒す。閾値は設けない。他の高信頼度ブロックはそのまま出力し、ページ全体は諦めない。この場合 `ExtractPageResult.blockConversion` は `'partial'` になる。
+- **ページ単位**（致命的）: 以下のいずれかに該当する場合のみ、そのページ全体を `data-bge-*` マーカー無しのプレーンな元の完全な HTML として出力する（`blockConversion: 'fallback'`、原因は `blockConversionError`）。**品質判断（低信頼度ブロックが多い等）によるページ全体フォールバックは行わない**:
+  - `resolvePageLayouts` がそのページについて完全に失敗した（ライブ URL 到達不可等）
+  - `isMainConsistent` が anatomist の `mainSelector` と `extractMainContent` のマッチ不一致と判定した（簡易判定。厳密な整合化は将来の課題）
+  - `layoutToBlockData` が空の `blocks` を返した（anatomist 側で `root` が見つからなかった）
+  - `renderBlocks` または `mergeMainContent` が例外を投げた
 
 #### 既知の制限（重要）
 
@@ -145,15 +171,14 @@ anatomist の `LayoutBlock`/`RawLayoutNode` は要素の属性（`href` / `src` 
 
 - `confidence` はコンテナ系 `layoutType`（vertical-stack/horizontal-row/simple-grid/complex-grid/float-wrap）にのみ `0.5` 閾値で二重チェックする。`leaf` の `confidence` は anatomist 側で常に `0` 固定なので、`classifyBlockItem` はこの値を一切参照しない（参照すると分類対象を全て `wysiwyg` に落とす自己矛盾になる）。
 - 深さ圧縮（`BlockData.items` は「ブロック → 行×列 → item」の 2 階層まで）は、depth-2 ノードの `children` を一切読まず `classifyBlockItem` に丸投げすることで実現している。`classifyBlockItem` が `innerHTML` 文字列のみを見るため、depth-3 以降の `layoutType` 情報は自動的に破棄される。
-- `BlockData.name` は固定値 `'migrated'`（ブロックの見た目上の種別名は #975/#976 で命名確定するまでのプレースホルダー）。
-- `download-file` の `size`/`formatedSize` は空文字列のプレースホルダー。実 DL と実サイズの反映は既存の `downloadResources` と連携させて #976 で行う（`classifyBlockItem` はネットワーク I/O を一切行わない）。
+- `BlockData.name` は固定値 `'migrated'`（ブロックの見た目上の種別名は未確定のプレースホルダー）。
+- `render()` は内部で `document.createElement` / `new Range()` 等の DOM API に依存するため、初回呼び出し時のみ jsdom を起動して `globalThis` へ反映する（既に DOM 環境が存在する場合は何もしない）。
+- 生成したブロック内（wysiwyg の `<a href>`、image の `path` 等）の URL 自体は `rewritePageRefs` の対象外（既存 main 要素の外側にあった参照のみが書き換え対象）。ブロック内 URL への適用は将来の課題として切り出されている。
 
-### BurgerEditor ブロックの HTML 化（`renderBlocks`）
+### 出力先ライブラリ連携（`downloadBlockFiles`）
 
-`layoutToBlockData` が返す `BlockData[]`（1 ページ分）を、BurgerEditor 公式の `@burger-editor/core` `render()` API を使って `data-bge-*` 付き HTML へ変換する純関数群。マークアップ仕様を自前で再実装せず、公式 API と `@burger-editor/blocks` の既定アイテムカタログ（カスタマイズ不可）にそのまま委譲する。`render()` は内部で `document.createElement` / `new Range()` 等の DOM API に依存するため、初回呼び出し時のみ jsdom を起動して `globalThis` へ反映する（既に DOM 環境が存在する場合は何もしない）。`classifyBlockItem` / `layoutToBlockData` 同様、統合前の内部 API のため `index.ts` からは export していない（`src/page-extractor/render-blocks.ts` を直接 import する）。統合先（`extractMainContent` 後段への差し込み、ページ単位のフォールバック判断）は #976 で行う。
-
-- `renderBlocks(blocks: BlockData[], options: { contentClass: string }): Promise<string>` — 1 ブロックずつ `render()` へ渡して HTML 要素を生成・連結し、`contentClass` を持つラッパー `<div>` で囲んだ 1 ページ分の HTML 文字列を返す。
+`downloadBlockFiles` は `migrate()` が事前に収集した通常のリソース URL 集合（`knownResourceUrls`）と重複しない `download-file` アイテムの `path` だけを `downloadResources` へ追加投入する（fetch 処理そのものは再実装しない）。ダウンロード後（または既にカバー済みでスキップした場合も含めて）実ファイルサイズを `stat` で読み、`size`/`formatedSize` を実測値で書き戻す。同一ファイルが複数ページ・複数アイテムから参照されていてもダウンロードは 1 回で済ませる。
 
 ### 設計上の注意
 
-`extractMainContent` / `rewriteAssetRefs` は parse5 を内部で使う純関数、`getFrontmatter` は `@nitpicker/query` の DB 読み出しに依存する。両者の責務分離は `src/html/` (parse5) と `src/archive/` (`@nitpicker/query`) のディレクトリ構造で表現している。
+`extractMainContent` / `rewriteAssetRefs` / `mergeMainContent` は parse5 を内部で使う純関数、`getFrontmatter` は `@nitpicker/query` の DB 読み出しに依存する。両者の責務分離は `src/html/` (parse5) と `src/archive/` (`@nitpicker/query`) のディレクトリ構造で表現している。

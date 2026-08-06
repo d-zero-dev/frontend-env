@@ -182,6 +182,23 @@ describe('resolvePageLayouts', () => {
 		expect(results[0]?.outcome).toBe('missing');
 	});
 
+	test('resolves (does not reject) when launch() itself fails — no Chrome binary / sandbox restrictions', async () => {
+		launchMock.mockRejectedValueOnce(new Error('spawn ENOENT'));
+
+		const results: ResolvePageLayoutResult[] = [];
+		await expect(
+			resolvePageLayouts({
+				items: [{ url: 'https://example.com/a' }, { url: 'https://example.com/b' }],
+				onResult: (event) => results.push(event),
+			}),
+		).resolves.toBeUndefined();
+
+		expect(results).toHaveLength(2);
+		for (const result of results) {
+			expect(result.outcome).toBe('missing');
+		}
+	});
+
 	test('does not hang and still reports the result when page.close() rejects during cleanup', async () => {
 		const page = {
 			close: vi.fn().mockRejectedValueOnce(new Error('Protocol error: Target closed')),

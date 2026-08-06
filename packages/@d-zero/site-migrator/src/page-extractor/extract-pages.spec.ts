@@ -1,4 +1,5 @@
 import type { ArchiveSession } from '../types.js';
+import type { LayoutBlock } from '@d-zero/anatomist/types';
 
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -9,6 +10,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { extractPages, type ExtractPageResult } from './extract-pages.js';
 
 type RewritePageRefsModule = typeof import('./rewrite-page-refs.js');
+type RenderBlocksModule = typeof import('./render-blocks.js');
 
 vi.mock('../archive/get-page-html.js', () => ({
 	getPageHtml: vi.fn(),
@@ -23,13 +25,27 @@ vi.mock('./rewrite-page-refs.js', async (importOriginal) => {
 		rewritePageRefs: vi.fn(actual.rewritePageRefs),
 	};
 });
+vi.mock('./resolve-page-layout.js', () => ({
+	resolvePageLayouts: vi.fn(),
+}));
+vi.mock('./render-blocks.js', async (importOriginal) => {
+	const actual = await importOriginal<RenderBlocksModule>();
+	return {
+		...actual,
+		renderBlocks: vi.fn(actual.renderBlocks),
+	};
+});
 
 const { getPageHtml } = await import('../archive/get-page-html.js');
 const { getFrontmatter } = await import('../archive/get-frontmatter.js');
 const { rewritePageRefs } = await import('./rewrite-page-refs.js');
+const { resolvePageLayouts } = await import('./resolve-page-layout.js');
+const { renderBlocks } = await import('./render-blocks.js');
 const getPageHtmlMock = vi.mocked(getPageHtml);
 const getFrontmatterMock = vi.mocked(getFrontmatter);
 const rewritePageRefsMock = vi.mocked(rewritePageRefs);
+const resolvePageLayoutsMock = vi.mocked(resolvePageLayouts);
+const renderBlocksMock = vi.mocked(renderBlocks);
 
 const FAKE_SESSION = {
 	archiveId: 'test',
@@ -39,8 +55,78 @@ const FAKE_SESSION = {
 	},
 } satisfies ArchiveSession;
 
+const CONTENT_CLASS = 'js-bge-content';
+
 const docWith = (body: string) =>
 	`<!doctype html><html><head><title>t</title></head><body>${body}</body></html>`;
+
+/**
+ * @param overrides
+ */
+function sampleLeafBlock(overrides: Partial<LayoutBlock> = {}): LayoutBlock {
+	return {
+		layoutType: 'leaf',
+		tagName: 'DIV',
+		id: null,
+		classList: [],
+		boundingBox: { x: 0, y: 0, width: 0, height: 0 },
+		innerHTML: '',
+		confidence: 0,
+		signals: {},
+		children: [],
+		...overrides,
+	};
+}
+
+/**
+ * `resolvePageLayouts`のモックを、渡された全URLについて「main一致・単一wysiwygブロックへの
+ * 変換に成功する」決定的な結果を返すよう設定する。`mainSelector: 'main'`で、テストフィクスチャの
+ * `<main>...</main>`（`extractMainContent`がタグでマッチする唯一の要素）と一致させる。
+ * @param childInnerHTML 生成される単一wysiwygブロックの`innerHTML`（既定は空）。
+ */
+function mockConvertedLayout(childInnerHTML = ''): void {
+	resolvePageLayoutsMock.mockImplementation((options) => {
+		for (const item of options.items) {
+			options.onResult?.({
+				url: item.url,
+				outcome: 'resolved-live',
+				results: [
+					{
+						url: item.url,
+						viewport: { name: 'pc', width: 1280 },
+						mainSelector: 'main',
+						root: {
+							...sampleLeafBlock(),
+							layoutType: 'vertical-stack',
+							confidence: 1,
+							children: [sampleLeafBlock({ innerHTML: childInnerHTML })],
+						},
+					},
+				],
+			});
+		}
+		return Promise.resolve();
+	});
+}
+
+/**
+ * `resolvePageLayouts`が全URLについて致命的に失敗した（`missing`）ことにするモック。
+ * ページ単位の致命的フォールバック（`blockConversion: 'fallback'`）を発火させるために使う。
+ * @param message
+ */
+function mockMissingLayout(message = 'live analysis failed'): void {
+	resolvePageLayoutsMock.mockImplementation((options) => {
+		for (const item of options.items) {
+			options.onResult?.({
+				url: item.url,
+				outcome: 'missing',
+				error: new Error(message),
+				kind: 'unknown',
+			});
+		}
+		return Promise.resolve();
+	});
+}
 
 describe('extractPages', () => {
 	let outputDir = '';
@@ -49,12 +135,23 @@ describe('extractPages', () => {
 		outputDir = await mkdtemp(path.join(tmpdir(), 'site-migrator-pages-'));
 		getPageHtmlMock.mockReset();
 		getFrontmatterMock.mockReset();
+		resolvePageLayoutsMock.mockReset();
 		// Default: no DB row → only the id is emitted in frontmatter.
 		getFrontmatterMock.mockResolvedValue(null);
-		// Default: delegate to the real rewriter so other tests exercise it.
-		// Override per-test to force a rewrite failure.
-		const real = await vi.importActual<RewritePageRefsModule>('./rewrite-page-refs.js');
-		rewritePageRefsMock.mockImplementation(real.rewritePageRefs);
+		// Default: delegate to the real rewriter/renderer so other tests
+		// exercise the real implementation. Override per-test to force a
+		// failure.
+		const realRewrite = await vi.importActual<RewritePageRefsModule>(
+			'./rewrite-page-refs.js',
+		);
+		rewritePageRefsMock.mockImplementation(realRewrite.rewritePageRefs);
+		const realRender = await vi.importActual<RenderBlocksModule>('./render-blocks.js');
+		renderBlocksMock.mockImplementation(realRender.renderBlocks);
+		// Default: layout resolution + block conversion succeeds for every
+		// matched page, producing one empty wysiwyg block. Most tests here are
+		// about extraction / frontmatter / rewrite behaviour, not about block
+		// conversion itself (that's covered by the dedicated tests below).
+		mockConvertedLayout();
 	});
 
 	afterEach(async () => {
@@ -71,21 +168,32 @@ describe('extractPages', () => {
 			session: FAKE_SESSION,
 			items: [{ url: 'https://example.com/about/' }],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
 
-		expect(results).toEqual([
+		expect(results).toMatchObject([
 			{
 				url: 'https://example.com/about/',
 				outcome: 'extracted',
 				outputPath: path.join(outputDir, 'about', 'index.html'),
 				matchedBy: 'tag:main',
+				blockConversion: 'converted',
 			},
 		]);
 		const written = await readFile(path.join(outputDir, 'about', 'index.html'), 'utf8');
 		// `/about/` is the only page in its subdirectory section → id 10000.
-		expect(written).toBe('---\nid: 10000\n---\n<main><p>hello</p></main>');
+		// The original `<p>hello</p>` is replaced by the rendered block group;
+		// exact BurgerEditor markup is `render-blocks.spec.ts`'s concern, so we
+		// only assert the frontmatter, the main-element merge, and that a
+		// block was actually rendered into it.
+		expect(
+			written.startsWith(`---\nid: 10000\n---\n<main class="${CONTENT_CLASS}">`),
+		).toBe(true);
+		expect(written.endsWith('</main>')).toBe(true);
+		expect(written).toContain('data-bge-name="migrated"');
+		expect(written).not.toContain('<p>hello</p>');
 	});
 
 	test('writes the original document when no rung matches (outcome=fallback)', async () => {
@@ -97,6 +205,7 @@ describe('extractPages', () => {
 			session: FAKE_SESSION,
 			items: [{ url: 'https://example.com/x' }],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -110,6 +219,8 @@ describe('extractPages', () => {
 		]);
 		const written = await readFile(path.join(outputDir, 'x.html'), 'utf8');
 		expect(written).toBe(`---\nid: 5\n---\n${original}`);
+		// No main was found, so block conversion is never attempted.
+		expect(resolvePageLayoutsMock).not.toHaveBeenCalled();
 	});
 
 	test('emits outcome=missing without writing to disk when archive returns null', async () => {
@@ -120,6 +231,7 @@ describe('extractPages', () => {
 			session: FAKE_SESSION,
 			items: [{ url: 'https://example.com/nope' }],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -136,6 +248,7 @@ describe('extractPages', () => {
 			session: FAKE_SESSION,
 			items: [{ url: 'https://example.com/x' }],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -153,6 +266,7 @@ describe('extractPages', () => {
 			session: FAKE_SESSION,
 			items: [],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 1,
 		});
 		expect(getPageHtmlMock).not.toHaveBeenCalled();
@@ -171,6 +285,7 @@ describe('extractPages', () => {
 				{ url: 'https://example.com/about/index.html' },
 			],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 2,
 			onResult: (event) => results.push(event),
 		});
@@ -180,7 +295,10 @@ describe('extractPages', () => {
 		const failed = results.find(
 			(event) => event.url === 'https://example.com/about/index.html',
 		);
-		expect(extracted).toMatchObject({ outcome: 'extracted' });
+		expect(extracted).toMatchObject({
+			outcome: 'extracted',
+			blockConversion: 'converted',
+		});
 		expect(failed).toMatchObject({
 			outcome: 'failed',
 			error: { message: expect.stringMatching(/duplicate output path/i) },
@@ -199,13 +317,16 @@ describe('extractPages', () => {
 			session: FAKE_SESSION,
 			items: [{ url: 'https://example.com/p' }],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 1,
 		});
 
 		const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
-		expect(written).toBe(
-			'---\nid: 5\ntitle: "Page"\nog:\n  title: "OG Page"\n---\n<main><p>body</p></main>',
-		);
+		expect(
+			written.startsWith(
+				`---\nid: 5\ntitle: "Page"\nog:\n  title: "OG Page"\n---\n<main class="${CONTENT_CLASS}">`,
+			),
+		).toBe(true);
 	});
 
 	test('prepends frontmatter even when extractMainContent falls back to the full document', async () => {
@@ -218,6 +339,7 @@ describe('extractPages', () => {
 			session: FAKE_SESSION,
 			items: [{ url: 'https://example.com/p' }],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -235,11 +357,14 @@ describe('extractPages', () => {
 			session: FAKE_SESSION,
 			items: [{ url: 'https://example.com/p' }],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 1,
 		});
 
 		const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
-		expect(written).toBe('---\nid: 5\n---\n<main><p>x</p></main>');
+		expect(written.startsWith(`---\nid: 5\n---\n<main class="${CONTENT_CLASS}">`)).toBe(
+			true,
+		);
 	});
 
 	test('fails soft when getFrontmatter errors: the id-only frontmatter is still emitted', async () => {
@@ -254,6 +379,7 @@ describe('extractPages', () => {
 			session: FAKE_SESSION,
 			items: [{ url: 'https://example.com/p' }],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -262,15 +388,21 @@ describe('extractPages', () => {
 		expect(results[0]).toMatchObject({
 			url: 'https://example.com/p',
 			outcome: 'extracted',
+			metaError: { message: 'db boom' },
 		});
 		const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
-		expect(written).toBe('---\nid: 5\n---\n<main><p>x</p></main>');
+		expect(written.startsWith(`---\nid: 5\n---\n<main class="${CONTENT_CLASS}">`)).toBe(
+			true,
+		);
 	});
 
 	test('rewrites same-origin <a href> to the id template using the items-derived id map', async () => {
 		getPageHtmlMock.mockResolvedValueOnce(
 			docWith('<main><a href="/about/">about</a></main>'),
 		);
+		// Route the same href through the mocked block so the merged body (what
+		// rewritePageRefs actually runs against) contains it.
+		mockConvertedLayout('<a href="/about/">about</a>');
 
 		await extractPages({
 			session: FAKE_SESSION,
@@ -279,18 +411,21 @@ describe('extractPages', () => {
 				{ url: 'https://example.com/about/' },
 			],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 2,
 		});
 
 		const written = await readFile(path.join(outputDir, 'index.html'), 'utf8');
 		// `/index.html` is root section → id 5, `/about/` is subdir section 1 → id 10000.
-		expect(written).toBe('---\nid: 5\n---\n<main><a href="{{10000}}">about</a></main>');
+		expect(written).toContain('{{10000}}');
+		expect(written).not.toContain('href="/about/"');
 	});
 
 	test('fail-soft on rewritePageRefs throw: writes pre-rewrite HTML and surfaces rewriteError on the outcome', async () => {
 		getPageHtmlMock.mockResolvedValueOnce(
 			docWith('<main><a href="/about/">about</a></main>'),
 		);
+		mockConvertedLayout('<a href="/about/">about</a>');
 		rewritePageRefsMock.mockRejectedValueOnce(new Error('parse5 boom'));
 
 		const results: ExtractPageResult[] = [];
@@ -298,6 +433,7 @@ describe('extractPages', () => {
 			session: FAKE_SESSION,
 			items: [{ url: 'https://example.com/p' }],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -309,8 +445,9 @@ describe('extractPages', () => {
 			rewriteError: { message: 'parse5 boom' },
 		});
 		const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
-		// Body is the un-rewritten extracted fragment (no {{id}} substitution).
-		expect(written).toBe('---\nid: 5\n---\n<main><a href="/about/">about</a></main>');
+		// Body is the un-rewritten merged fragment (no {{id}} substitution).
+		expect(written).toContain('href="/about/"');
+		expect(written).not.toContain('{{');
 	});
 
 	test('surfaces getFrontmatter rejection as metaError on the outcome (id-only frontmatter still written)', async () => {
@@ -322,6 +459,7 @@ describe('extractPages', () => {
 			session: FAKE_SESSION,
 			items: [{ url: 'https://example.com/p' }],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -337,16 +475,18 @@ describe('extractPages', () => {
 		getPageHtmlMock.mockResolvedValueOnce(
 			docWith('<main><img src="../img/a.png"></main>'),
 		);
+		mockConvertedLayout('<img src="../img/a.png">');
 
 		await extractPages({
 			session: FAKE_SESSION,
 			items: [{ url: 'https://example.com/sub/page.html' }],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 1,
 		});
 
 		const written = await readFile(path.join(outputDir, 'sub', 'page.html'), 'utf8');
-		expect(written).toBe('---\nid: 10000\n---\n<main><img src="/img/a.png"></main>');
+		expect(written).toContain('src="/img/a.png"');
 	});
 
 	test('returns immediately and writes nothing when signal is already aborted', async () => {
@@ -358,6 +498,7 @@ describe('extractPages', () => {
 			session: FAKE_SESSION,
 			items: [{ url: 'https://example.com/x' }],
 			outputDir,
+			contentClass: CONTENT_CLASS,
 			limit: 1,
 			signal: controller.signal,
 			onResult: (event) => results.push(event),
@@ -366,5 +507,276 @@ describe('extractPages', () => {
 		expect(results).toEqual([]);
 		expect(getPageHtmlMock).not.toHaveBeenCalled();
 		await expect(readFile(path.join(outputDir, 'x.html'))).rejects.toThrow();
+	});
+
+	describe('BurgerEditorブロック変換パイプライン', () => {
+		test('resolvePageLayoutsを一括で1回だけ呼び、複数の一致ページをまとめて処理する', async () => {
+			getPageHtmlMock.mockResolvedValueOnce(docWith('<main><p>a</p></main>'));
+			getPageHtmlMock.mockResolvedValueOnce(docWith('<main><p>b</p></main>'));
+
+			await extractPages({
+				session: FAKE_SESSION,
+				items: [{ url: 'https://example.com/a' }, { url: 'https://example.com/b' }],
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				limit: 2,
+			});
+
+			expect(resolvePageLayoutsMock).toHaveBeenCalledTimes(1);
+			const call = resolvePageLayoutsMock.mock.calls[0]![0];
+			expect(call.items.map((item) => item.url).toSorted()).toEqual([
+				'https://example.com/a',
+				'https://example.com/b',
+			]);
+		});
+
+		test('layoutJsonPathをresolvePageLayoutsへそのまま転送する', async () => {
+			getPageHtmlMock.mockResolvedValueOnce(docWith('<main><p>a</p></main>'));
+
+			await extractPages({
+				session: FAKE_SESSION,
+				items: [{ url: 'https://example.com/a' }],
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				layoutJsonPath: '/tmp/layout.jsonl',
+				limit: 1,
+			});
+
+			expect(resolvePageLayoutsMock).toHaveBeenCalledWith(
+				expect.objectContaining({ layoutJsonPath: '/tmp/layout.jsonl' }),
+			);
+		});
+
+		test('一部ブロックが低信頼度でwysiwygフォールバックされた場合はblockConversion=partialになる', async () => {
+			getPageHtmlMock.mockResolvedValueOnce(docWith('<main><p>x</p></main>'));
+			resolvePageLayoutsMock.mockImplementation((options) => {
+				for (const item of options.items) {
+					options.onResult?.({
+						url: item.url,
+						outcome: 'resolved-live',
+						results: [
+							{
+								url: item.url,
+								viewport: { name: 'pc', width: 1280 },
+								mainSelector: 'main',
+								root: {
+									...sampleLeafBlock(),
+									layoutType: 'vertical-stack',
+									confidence: 1,
+									children: [
+										{
+											...sampleLeafBlock(),
+											layoutType: 'simple-grid',
+											confidence: 0.9,
+											// rowSizes合計(3) !== children.length(1) → malformed-row-sizes
+											signals: { rowSizes: [3] },
+											children: [sampleLeafBlock()],
+										},
+									],
+								},
+							},
+						],
+					});
+				}
+				return Promise.resolve();
+			});
+
+			const results: ExtractPageResult[] = [];
+			await extractPages({
+				session: FAKE_SESSION,
+				items: [{ url: 'https://example.com/p' }],
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				limit: 1,
+				onResult: (event) => results.push(event),
+			});
+
+			expect(results[0]).toMatchObject({
+				outcome: 'extracted',
+				blockConversion: 'partial',
+			});
+		});
+
+		test('resolvePageLayoutsが致命的に失敗した場合はページ全体をプレーンHTMLでフォールバックする', async () => {
+			const original = docWith('<main><p>hello</p></main>');
+			getPageHtmlMock.mockResolvedValueOnce(original);
+			mockMissingLayout('getaddrinfo ENOTFOUND');
+
+			const results: ExtractPageResult[] = [];
+			await extractPages({
+				session: FAKE_SESSION,
+				items: [{ url: 'https://example.com/p' }],
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				limit: 1,
+				onResult: (event) => results.push(event),
+			});
+
+			expect(results[0]).toMatchObject({
+				outcome: 'extracted',
+				blockConversion: 'fallback',
+				blockConversionError: { message: 'getaddrinfo ENOTFOUND' },
+			});
+			const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
+			expect(written).toBe(`---\nid: 5\n---\n${original}`);
+		});
+
+		test('anatomistのmainSelectorとextractMainContentのマッチが不整合な場合はページ全体をフォールバックする', async () => {
+			const original = docWith('<main><p>hello</p></main><section></section>');
+			getPageHtmlMock.mockResolvedValueOnce(original);
+			resolvePageLayoutsMock.mockImplementation((options) => {
+				for (const item of options.items) {
+					options.onResult?.({
+						url: item.url,
+						outcome: 'resolved-live',
+						results: [
+							{
+								url: item.url,
+								viewport: { name: 'pc', width: 1280 },
+								// extractMainContentは<main>を選ぶが、anatomistは<section>を指している。
+								mainSelector: 'section',
+								root: {
+									...sampleLeafBlock(),
+									layoutType: 'vertical-stack',
+									confidence: 1,
+									children: [sampleLeafBlock()],
+								},
+							},
+						],
+					});
+				}
+				return Promise.resolve();
+			});
+
+			const results: ExtractPageResult[] = [];
+			await extractPages({
+				session: FAKE_SESSION,
+				items: [{ url: 'https://example.com/p' }],
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				limit: 1,
+				onResult: (event) => results.push(event),
+			});
+
+			expect(results[0]).toMatchObject({
+				outcome: 'extracted',
+				blockConversion: 'fallback',
+			});
+			const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
+			expect(written).toBe(`---\nid: 5\n---\n${original}`);
+		});
+
+		test('anatomist側でmainのrootが見つからない(root:null)場合はページ全体をフォールバックする', async () => {
+			const original = docWith('<main><p>hello</p></main>');
+			getPageHtmlMock.mockResolvedValueOnce(original);
+			resolvePageLayoutsMock.mockImplementation((options) => {
+				for (const item of options.items) {
+					options.onResult?.({
+						url: item.url,
+						outcome: 'resolved-live',
+						results: [
+							{
+								url: item.url,
+								viewport: { name: 'pc', width: 1280 },
+								mainSelector: null,
+								root: null,
+							},
+						],
+					});
+				}
+				return Promise.resolve();
+			});
+
+			const results: ExtractPageResult[] = [];
+			await extractPages({
+				session: FAKE_SESSION,
+				items: [{ url: 'https://example.com/p' }],
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				limit: 1,
+				onResult: (event) => results.push(event),
+			});
+
+			expect(results[0]).toMatchObject({
+				outcome: 'extracted',
+				blockConversion: 'fallback',
+			});
+		});
+
+		test('renderBlocksが例外を投げた場合はページ全体をフォールバックする', async () => {
+			const original = docWith('<main><p>hello</p></main>');
+			getPageHtmlMock.mockResolvedValueOnce(original);
+			renderBlocksMock.mockRejectedValueOnce(new Error('render boom'));
+
+			const results: ExtractPageResult[] = [];
+			await extractPages({
+				session: FAKE_SESSION,
+				items: [{ url: 'https://example.com/p' }],
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				limit: 1,
+				onResult: (event) => results.push(event),
+			});
+
+			expect(results[0]).toMatchObject({
+				outcome: 'extracted',
+				blockConversion: 'fallback',
+				blockConversionError: { message: 'render boom' },
+			});
+			const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
+			expect(written).toBe(`---\nid: 5\n---\n${original}`);
+		});
+
+		test('resolvePageLayoutsが一致したURLについて結果を1件も返さない場合もページ全体をフォールバックする', async () => {
+			const original = docWith('<main><p>hello</p></main>');
+			getPageHtmlMock.mockResolvedValueOnce(original);
+			// Misbehaving mock: never calls onResult for the URL it was given.
+			resolvePageLayoutsMock.mockImplementation(() => Promise.resolve());
+
+			const results: ExtractPageResult[] = [];
+			await extractPages({
+				session: FAKE_SESSION,
+				items: [{ url: 'https://example.com/p' }],
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				limit: 1,
+				onResult: (event) => results.push(event),
+			});
+
+			expect(results[0]).toMatchObject({
+				outcome: 'extracted',
+				blockConversion: 'fallback',
+			});
+			const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
+			expect(written).toBe(`---\nid: 5\n---\n${original}`);
+		});
+
+		test('resolvePageLayoutsが空のresults配列を返した場合もページ全体をフォールバックする', async () => {
+			const original = docWith('<main><p>hello</p></main>');
+			getPageHtmlMock.mockResolvedValueOnce(original);
+			resolvePageLayoutsMock.mockImplementation((options) => {
+				for (const item of options.items) {
+					options.onResult?.({ url: item.url, outcome: 'resolved-live', results: [] });
+				}
+				return Promise.resolve();
+			});
+
+			const results: ExtractPageResult[] = [];
+			await extractPages({
+				session: FAKE_SESSION,
+				items: [{ url: 'https://example.com/p' }],
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				limit: 1,
+				onResult: (event) => results.push(event),
+			});
+
+			expect(results[0]).toMatchObject({
+				outcome: 'extracted',
+				blockConversion: 'fallback',
+			});
+			const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
+			expect(written).toBe(`---\nid: 5\n---\n${original}`);
+		});
 	});
 });

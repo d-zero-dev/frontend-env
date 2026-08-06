@@ -20,7 +20,7 @@ export interface LayoutToBlockDataResult {
 	fallbacks: { blockIndex: number; reason: BlockFallbackReason }[];
 }
 
-const DEFAULT_PRIMARY_VIEWPORT_NAME = 'pc';
+export const DEFAULT_PRIMARY_VIEWPORT_NAME = 'pc';
 
 /**
  * コンテナ系`layoutType`（vertical-stack/horizontal-row/simple-grid/complex-grid/float-wrap）
@@ -112,10 +112,13 @@ export function layoutToBlockData(
 }
 
 /**
+ * `results`（同一URLの複数ビューポート分の解析結果）から、構造判定の主とするエントリを選ぶ。
+ * `layoutToBlockData`内部と、ページ単位フォールバック判定（#976の簡易anatomist不整合検出）の
+ * 両方から同じ選定ロジックを使うためexportしている。
  * @param results
  * @param primaryViewportName
  */
-function selectPrimary(
+export function selectPrimary(
 	results: readonly LayoutAnalysisResult[],
 	primaryViewportName: string,
 ): LayoutAnalysisResult | undefined {
