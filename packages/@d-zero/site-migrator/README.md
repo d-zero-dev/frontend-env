@@ -138,16 +138,16 @@ import {
 
 処理は次の要素で構成される（いずれも `src/page-extractor/` 配下、統合前は内部 API だったが `extractPages` に組み込まれた現在も `index.ts` からは export していない）:
 
-| 関数                 | 概要                                                                                                                                                                            |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `resolvePageLayouts` | `--layout-json` の事前生成 JSONL を優先し、無ければ Puppeteer + `@d-zero/anatomist` でライブ解析する                                                                            |
-| `classifyBlockItem`  | anatomist の `LayoutBlock` 1 個を `image`/`title-h2`/`title-h3`/`youtube`/`google-maps`/`download-file`/`button`/`table`/`wysiwyg` へヒューリスティック分類する純関数           |
-| `layoutToBlockData`  | 複数ビューポート分の解析結果から `BlockData[]` を組み立てる純関数。ブロック単位の低信頼度は個別に `wysiwyg` へ倒し `fallbacks` に記録する                                       |
-| `rewriteBlockRefs`   | `BlockData[]` 内の同一オリジン URL を `renderBlocks` 前に書き換える（詳細は後述の専用節）                                                                                       |
-| `renderBlocks`       | `@burger-editor/core` の公式 `render()` で `BlockData[]` を `data-bge-*` 付き HTML へ変換する                                                                                   |
-| `mergeMainContent`   | `renderBlocks` のラッパー `<div>` の中身だけを既存 main 要素の子要素として差し替え、`--content-class` を main 要素自身の `classList` に追加する（新規ラッパー要素は追加しない） |
-| `isMainConsistent`   | anatomist の `mainSelector` と `extractMainContent` がマッチした要素の `outerHTML` を比較する簡易整合性チェック                                                                 |
-| `downloadBlockFiles` | 生成ブロック内の `download-file` アイテムの `path` を集めて `downloadResources` へ二重 DL を避けつつ追加投入し、実ファイルサイズを `size`/`formatedSize` に反映する             |
+| 関数                 | 概要                                                                                                                                                                                                                                                                     |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `resolvePageLayouts` | `--layout-json` の事前生成 JSONL を優先し、無ければ Puppeteer + `@d-zero/anatomist` でライブ解析する                                                                                                                                                                     |
+| `classifyBlockItem`  | anatomist の `LayoutBlock` 1 個を `image`/`title-h2`/`title-h3`/`youtube`/`google-maps`/`download-file`/`button`/`table`/`wysiwyg` へヒューリスティック分類する純関数                                                                                                    |
+| `layoutToBlockData`  | 複数ビューポート分の解析結果から `BlockData[]` を組み立てる純関数。ブロック単位の低信頼度は個別に `wysiwyg` へ倒し `fallbacks` に記録する                                                                                                                                |
+| `rewriteBlockRefs`   | `BlockData[]` 内の同一オリジン URL を `renderBlocks` 前に書き換える（詳細は後述の専用節）                                                                                                                                                                                |
+| `renderBlocks`       | `@burger-editor/core` の公式 `render()` で `BlockData[]` を `data-bge-*` 付き HTML へ変換する。ブロックごとに `render()` 直後に `parseHTMLToBlockData` で逆パースし変換元と構造的に一致するか往復検証し、不一致なら `wysiwyg` 単一アイテムへ倒す（詳細は次のセクション） |
+| `mergeMainContent`   | `renderBlocks` のラッパー `<div>` の中身だけを既存 main 要素の子要素として差し替え、`--content-class` を main 要素自身の `classList` に追加する（新規ラッパー要素は追加しない）                                                                                          |
+| `isMainConsistent`   | anatomist の `mainSelector` と `extractMainContent` がマッチした要素の `outerHTML` を比較する簡易整合性チェック                                                                                                                                                          |
+| `downloadBlockFiles` | 生成ブロック内の `download-file` アイテムの `path` を集めて `downloadResources` へ二重 DL を避けつつ追加投入し、実ファイルサイズを `size`/`formatedSize` に反映する                                                                                                      |
 
 `extractPages` はページごとに以下の順で処理する:
 
@@ -158,6 +158,7 @@ import {
 #### ブロック単位フォールバックとページ単位フォールバックの区別
 
 - **ブロック単位**（致命的ではない）: `layoutToBlockData` が低信頼度・ビューポート不一致・`rowSizes` 不正形状と判断した個別ブロックだけを `wysiwyg` 単一アイテムに倒す。閾値は設けない。他の高信頼度ブロックはそのまま出力し、ページ全体は諦めない。この場合 `ExtractPageResult.blockConversion` は `'partial'` になる。
+- **往復検証によるブロック単位フォールバック**（致命的ではない、Issue #980）: `layoutToBlockData` が高信頼度と判断したブロックでも、`renderBlocks` が `render()` 直後に `parseHTMLToBlockData` で逆パースし直し、`name`/`containerProps.type`/`items` の行数・列数・各アイテムの `name` が変換元と一致するかを確認する。不一致（`render()`/`parseHTMLToBlockData` 側の未知のバグ等）を検出したブロックのみ、`render()` が実際に生成した HTML をそのまま `wysiwyg` 単一アイテムとして包み直す（他ブロックには影響しない）。往復検証の不一致は `renderBlocks` の `onRoundTripMismatch` コールバック（開発時デバッグ用途、既定では未使用）でのみ観測でき、現時点では `ExtractPageResult.blockConversion`／`onResult` には反映されない（パイプライン統合・レポートへの組み込みは Issue #976 の範囲）。
 - **ページ単位**（致命的）: 以下のいずれかに該当する場合のみ、そのページ全体を `data-bge-*` マーカー無しのプレーンな元の完全な HTML として出力する（`blockConversion: 'fallback'`、原因は `blockConversionError`）。**品質判断（低信頼度ブロックが多い等）によるページ全体フォールバックは行わない**:
   - `resolvePageLayouts` がそのページについて完全に失敗した（ライブ URL 到達不可等）
   - `isMainConsistent` が anatomist の `mainSelector` と `extractMainContent` のマッチ不一致と判定した（簡易判定。厳密な整合化は将来の課題）
