@@ -140,20 +140,20 @@ import {
 
 | 関数                 | 概要                                                                                                                                                                                                                                                                     |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `resolvePageLayouts` | `--layout-json` の事前生成 JSONL を優先し、無ければ Puppeteer + `@d-zero/anatomist` でライブ解析する                                                                                                                                                                     |
+| `resolvePageLayouts` | `--layout-json` の事前生成 JSONL を優先し、無ければ Puppeteer + `@d-zero/anatomist` でライブ解析する。ライブ解析時は `extractMainContent` のマッチ結果から構築した CSS セレクタを anatomist の `mainContentSelector` に渡し、同じ要素を解析対象にする                    |
 | `classifyBlockItem`  | anatomist の `LayoutBlock` 1 個を `image`/`title-h2`/`title-h3`/`youtube`/`google-maps`/`download-file`/`button`/`table`/`wysiwyg` へヒューリスティック分類する純関数                                                                                                    |
 | `layoutToBlockData`  | 複数ビューポート分の解析結果から `BlockData[]` を組み立てる純関数。ブロック単位の低信頼度は個別に `wysiwyg` へ倒し `fallbacks` に記録する                                                                                                                                |
 | `rewriteBlockRefs`   | `BlockData[]` 内の同一オリジン URL を `renderBlocks` 前に書き換える（詳細は後述の専用節）                                                                                                                                                                                |
 | `renderBlocks`       | `@burger-editor/core` の公式 `render()` で `BlockData[]` を `data-bge-*` 付き HTML へ変換する。ブロックごとに `render()` 直後に `parseHTMLToBlockData` で逆パースし変換元と構造的に一致するか往復検証し、不一致なら `wysiwyg` 単一アイテムへ倒す（詳細は次のセクション） |
 | `mergeMainContent`   | `renderBlocks` のラッパー `<div>` の中身だけを既存 main 要素の子要素として差し替え、`--content-class` を main 要素自身の `classList` に追加する（新規ラッパー要素は追加しない）                                                                                          |
-| `isMainConsistent`   | anatomist の `mainSelector` と `extractMainContent` がマッチした要素の `outerHTML` を比較する簡易整合性チェック                                                                                                                                                          |
+| `isMainConsistent`   | 事前生成 JSON 使用時のみ、anatomist が検出した main 要素（`LayoutBlock`）と `extractMainContent` がマッチした要素の `tagName`/`id`/`classList` を比較する整合性チェック                                                                                                  |
 | `downloadBlockFiles` | 生成ブロック内の `download-file` アイテムの `path` を集めて `downloadResources` へ二重 DL を避けつつ追加投入し、実ファイルサイズを `size`/`formatedSize` に反映する                                                                                                      |
 
 `extractPages` はページごとに以下の順で処理する:
 
 1. `getPageHtml` + `extractMainContent` + `getFrontmatter` を全ページ分並列実行し、main が見つかったページ（ブロック変換対象）と見つからなかったページ（`outcome: 'fallback'`）を仕分ける。
 2. ブロック変換対象の全 URL をまとめて **1 回**の `resolvePageLayouts` 呼び出しに渡す（ページごとに呼ぶと Puppeteer ブラウザをページ数だけ起動することになり実運用サイト規模では致命的に遅くなるため）。
-3. ページごとに `isMainConsistent` → `layoutToBlockData` → `downloadBlockFiles`（バッチ） → `rewriteBlockRefs` → `renderBlocks` → `mergeMainContent` → frontmatter 付与 → 書き出し、という順で処理する。ブロック変換に成功したページ（`converted`/`partial`）はこの時点で本文全体が書き換え済みのため、後段の `rewritePageRefs` は**適用しない**（適用すると `rewriteBlockRefs` が埋め込んだ `{{<id>}}` トークンを通常 URL として再解釈し文字化けする）。main 非検出・ブロック変換失敗（`fallback`）ページは元の HTML に `{{<id>}}` token が無いため、従来通り `rewritePageRefs` を適用する。
+3. ページごとに（事前生成 JSON 使用時のみ）`isMainConsistent` → `layoutToBlockData` → `downloadBlockFiles`（バッチ） → `rewriteBlockRefs` → `renderBlocks` → `mergeMainContent` → frontmatter 付与 → 書き出し、という順で処理する。ライブ解析時は 2. の時点で `mainContentSelector` により同じ要素を解析対象にしているため構造的に整合が保証されており、`isMainConsistent` は呼ばない。ブロック変換に成功したページ（`converted`/`partial`）はこの時点で本文全体が書き換え済みのため、後段の `rewritePageRefs` は**適用しない**（適用すると `rewriteBlockRefs` が埋め込んだ `{{<id>}}` トークンを通常 URL として再解釈し文字化けする）。main 非検出・ブロック変換失敗（`fallback`）ページは元の HTML に `{{<id>}}` token が無いため、従来通り `rewritePageRefs` を適用する。
 
 #### ブロック単位フォールバックとページ単位フォールバックの区別
 
@@ -161,7 +161,7 @@ import {
 - **往復検証によるブロック単位フォールバック**（致命的ではない、Issue #980）: `layoutToBlockData` が高信頼度と判断したブロックでも、`renderBlocks` が `render()` 直後に `parseHTMLToBlockData` で逆パースし直し、`name`/`containerProps.type`/`items` の行数・列数・各アイテムの `name` が変換元と一致するかを確認する。不一致（`render()`/`parseHTMLToBlockData` 側の未知のバグ等）を検出したブロックのみ、`render()` が実際に生成した HTML をそのまま `wysiwyg` 単一アイテムとして包み直す（他ブロックには影響しない）。往復検証の不一致は `renderBlocks` の `onRoundTripMismatch` コールバック（開発時デバッグ用途、既定では未使用）でのみ観測でき、現時点では `ExtractPageResult.blockConversion`／`onResult` には反映されない（パイプライン統合・レポートへの組み込みは Issue #976 の範囲）。
 - **ページ単位**（致命的）: 以下のいずれかに該当する場合のみ、そのページ全体を `data-bge-*` マーカー無しのプレーンな元の完全な HTML として出力する（`blockConversion: 'fallback'`、原因は `blockConversionError`）。**品質判断（低信頼度ブロックが多い等）によるページ全体フォールバックは行わない**:
   - `resolvePageLayouts` がそのページについて完全に失敗した（ライブ URL 到達不可等）
-  - `isMainConsistent` が anatomist の `mainSelector` と `extractMainContent` のマッチ不一致と判定した（簡易判定。厳密な整合化は将来の課題）
+  - 事前生成 JSON 使用時、`isMainConsistent` が anatomist の `LayoutBlock`（root）と `extractMainContent` のマッチした要素の `tagName`/`id`/`classList` 不一致と判定した（ライブ解析は `mainContentSelector` により構造的に整合が保証されるためこのチェックを行わない）
   - `layoutToBlockData` が空の `blocks` を返した（anatomist 側で `root` が見つからなかった）
   - `renderBlocks` または `mergeMainContent` が例外を投げた
 

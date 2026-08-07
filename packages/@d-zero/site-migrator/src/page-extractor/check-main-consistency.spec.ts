@@ -1,37 +1,86 @@
+import type { LayoutBlock } from '@d-zero/anatomist/types';
+
 import { describe, expect, test } from 'vitest';
 
 import { isMainConsistent } from './check-main-consistency.js';
 
-const docWith = (body: string) =>
-	`<!doctype html><html><head><title>t</title></head><body>${body}</body></html>`;
+const sampleRoot = (overrides: Partial<LayoutBlock> = {}): LayoutBlock => ({
+	layoutType: 'leaf',
+	tagName: 'MAIN',
+	id: null,
+	classList: [],
+	boundingBox: { x: 0, y: 0, width: 0, height: 0 },
+	innerHTML: '',
+	confidence: 0,
+	signals: {},
+	children: [],
+	...overrides,
+});
 
 describe('isMainConsistent', () => {
-	test('mainSelectorがnullの場合は無条件に不整合とみなす', () => {
-		const html = docWith('<main><p>x</p></main>');
-		expect(isMainConsistent(html, '<main><p>x</p></main>', null)).toBe(false);
-	});
-
-	test('mainSelectorが指す要素のouterHTMLがextractMainContentのマッチと一致すれば整合', () => {
-		const html = docWith('<main class="l-main"><p>x</p></main>');
-		expect(isMainConsistent(html, '<main class="l-main"><p>x</p></main>', 'main')).toBe(
-			true,
-		);
-	});
-
-	test('mainSelectorが別の要素を指している場合は不整合', () => {
-		const html = docWith('<main><p>x</p></main><section><p>y</p></section>');
-		expect(isMainConsistent(html, '<main><p>x</p></main>', 'section')).toBe(false);
-	});
-
-	test('mainSelectorにマッチする要素が存在しない場合は不整合', () => {
-		const html = docWith('<main><p>x</p></main>');
-		expect(isMainConsistent(html, '<main><p>x</p></main>', '.does-not-exist')).toBe(
+	test('rootがnullの場合は無条件に不整合とみなす', () => {
+		expect(isMainConsistent({ tagName: 'main', id: null, classList: [] }, null)).toBe(
 			false,
 		);
 	});
 
-	test('mainSelectorが不正なセレクタで例外を投げる場合も不整合として扱う', () => {
-		const html = docWith('<main><p>x</p></main>');
-		expect(isMainConsistent(html, '<main><p>x</p></main>', ':::invalid:::')).toBe(false);
+	test('tagNameが大文字小文字違いでも一致すれば整合', () => {
+		expect(
+			isMainConsistent({ tagName: 'main', id: null, classList: [] }, sampleRoot()),
+		).toBe(true);
+	});
+
+	test('tagNameが異なれば不整合', () => {
+		expect(
+			isMainConsistent(
+				{ tagName: 'section', id: null, classList: [] },
+				sampleRoot({ tagName: 'MAIN' }),
+			),
+		).toBe(false);
+	});
+
+	test('idが異なれば不整合', () => {
+		expect(
+			isMainConsistent(
+				{ tagName: 'main', id: 'a', classList: [] },
+				sampleRoot({ id: 'b' }),
+			),
+		).toBe(false);
+	});
+
+	test('idの大文字小文字が異なれば不整合', () => {
+		expect(
+			isMainConsistent(
+				{ tagName: 'main', id: 'Main', classList: [] },
+				sampleRoot({ id: 'main' }),
+			),
+		).toBe(false);
+	});
+
+	test('classListは順序が異なっても集合として一致すれば整合', () => {
+		expect(
+			isMainConsistent(
+				{ tagName: 'main', id: null, classList: ['a', 'b'] },
+				sampleRoot({ classList: ['b', 'a'] }),
+			),
+		).toBe(true);
+	});
+
+	test('classListの要素数が異なれば不整合', () => {
+		expect(
+			isMainConsistent(
+				{ tagName: 'main', id: null, classList: ['a'] },
+				sampleRoot({ classList: ['a', 'b'] }),
+			),
+		).toBe(false);
+	});
+
+	test('classListの内容が異なれば不整合', () => {
+		expect(
+			isMainConsistent(
+				{ tagName: 'main', id: null, classList: ['a'] },
+				sampleRoot({ classList: ['b'] }),
+			),
+		).toBe(false);
 	});
 });

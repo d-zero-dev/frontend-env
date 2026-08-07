@@ -77,6 +77,22 @@ describe('resolvePageLayouts', () => {
 		expect(browser.close).toHaveBeenCalledTimes(1);
 	});
 
+	test('forwards mainContentSelector to analyzePageLayout for live URLs only', async () => {
+		const browser = fakeBrowser();
+		launchMock.mockResolvedValueOnce(browser as unknown as Browser);
+		analyzePageLayoutMock.mockResolvedValueOnce([sampleResult('https://example.com/a')]);
+
+		await resolvePageLayouts({
+			items: [{ url: 'https://example.com/a', mainContentSelector: 'main.l-main' }],
+		});
+
+		expect(analyzePageLayoutMock).toHaveBeenCalledWith(
+			expect.anything(),
+			'https://example.com/a',
+			{ mainContentSelector: 'main.l-main' },
+		);
+	});
+
 	test('uses a JSON hit as-is (including root:null) and live-analyzes only the rest', async () => {
 		const hitResult = sampleResult('https://example.com/hit');
 		const jsonlPath = path.join(tmpDir, 'layout.jsonl');

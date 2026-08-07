@@ -16,6 +16,16 @@ import { launch } from 'puppeteer';
  */
 export interface ResolvePageLayoutItem {
 	url: string;
+	/**
+	 * `extractMainContent`がマッチした要素から構築したCSSセレクタ
+	 * （{@link import('../html/build-main-content-selector.js').buildMainContentSelector}）。
+	 * ライブ解析（JSONヒットしなかったURL）にのみ`analyzePageLayout`の
+	 * `mainContentSelector`として転送される — anatomistが独自の優先順位リストで
+	 * main候補を探す代わりに、`extractMainContent`と同じ要素を解析対象にすることで、
+	 * ライブ実行時のmain要素検出結果の整合を構造的に保証する（#978）。JSONヒット時は
+	 * 生成済みの解析結果をそのまま使うため無視される。
+	 */
+	mainContentSelector?: string | null;
 }
 
 export type ResolvePageLayoutResult =
@@ -124,6 +134,12 @@ export function parseLayoutJsonl(content: string): Map<string, LayoutAnalysisRes
  * while adding an unnecessary hit against the live site. Interpreting
  * `root: null` is left to the caller (the BlockData conversion step).
  *
+ * Each item's `mainContentSelector` (when set) is forwarded to
+ * `analyzePageLayout` only for URLs that actually go live — it has no
+ * effect on a JSONL hit. This is what guarantees live analysis targets the
+ * exact same element `extractMainContent` matched (#978), rather than
+ * anatomist independently re-resolving one via its own priority list.
+ *
  * Live failures — including a `browser.newPage()`/`page.close()` failure,
  * not just `analyzePageLayout` itself — are classified via
  * `@nitpicker/query`'s `classifyErrorKind` and reported as `missing` through
@@ -178,7 +194,9 @@ export async function resolvePageLayouts(
 				try {
 					const browser = await getBrowser();
 					page = await browser.newPage();
-					const results = await analyzePageLayout(page, item.url);
+					const results = await analyzePageLayout(page, item.url, {
+						mainContentSelector: item.mainContentSelector,
+					});
 					onResult?.({ url: item.url, outcome: 'resolved-live', results });
 				} catch (error) {
 					const err = error instanceof Error ? error : new Error(String(error));
