@@ -11,9 +11,11 @@ import { deal } from '@d-zero/dealer';
 import { getFrontmatter } from '../archive/get-frontmatter.js';
 import { getPageHtml } from '../archive/get-page-html.js';
 import { urlToOutputPath } from '../downloader/url-to-output-path.js';
+import { buildMainContentSelector } from '../html/build-main-content-selector.js';
 import { extractMainContent } from '../html/extract-main-content.js';
 import { formatFrontmatter } from '../html/format-frontmatter.js';
 import { mergeMainContent } from '../html/merge-main-content.js';
+import { parseMainTag } from '../html/parse-main-tag.js';
 
 import { assignPageIds } from './assign-page-ids.js';
 import { isMainConsistent } from './check-main-consistency.js';
@@ -183,8 +185,12 @@ type BlockOutcome = FatalBlockOutcome | ResolvedBlockOutcome;
  *
  * - {@link resolvePageLayouts}がそのページについて完全に失敗した（`missing` outcome。
  *   ライブURL到達不可等）
- * - anatomistの`mainSelector`と`extractMainContent`がマッチした要素が一致しない
- *   （{@link isMainConsistent}による簡易判定。厳密な整合化は#978の責務）
+ * - 事前生成JSON（`--layout-json`）使用時、anatomistが検出したmain要素と
+ *   `extractMainContent`がマッチした要素の`tagName`/`id`/`classList`が一致しない
+ *   （{@link isMainConsistent}、#978。ライブ実行時は`resolvePageLayouts`呼び出し時に
+ *   `extractMainContent`のマッチ結果から構築したセレクタを`mainContentSelector`として
+ *   渡し、anatomistに同じ要素を解析させているため構造的に整合が保証されており、この
+ *   チェックは行わない）
  * - {@link layoutToBlockData}が空の`blocks`を返した（anatomist側で`root`が
  *   見つからなかった — mainは検出できたがブロック化できる構造が無い）
  * - {@link renderBlocks}または{@link mergeMainContent}が例外を投げた
@@ -347,7 +353,10 @@ export async function extractPages(options: ExtractPagesOptions): Promise<void> 
 	const layoutResultsByUrl = new Map<string, ResolvePageLayoutResult>();
 	if (matchedStates.length > 0) {
 		await resolvePageLayouts({
-			items: matchedStates.map((state) => ({ url: state.entry.url })),
+			items: matchedStates.map((state) => ({
+				url: state.entry.url,
+				mainContentSelector: buildMainContentSelector(parseMainTag(state.extractedHtml)),
+			})),
 			layoutJsonPath,
 			limit,
 			signal,
@@ -476,17 +485,21 @@ export async function extractPages(options: ExtractPagesOptions): Promise<void> 
 /**
  * `resolvePageLayouts`の結果と`extractMainContent`の結果から、そのページのブロック変換が
  * 続行可能かを判定する。続行不能（致命的）と判定した場合は理由を`Error`として保持する。
+ *
+ * main要素検出結果の整合チェック（#978）は`resolved-from-json`のときのみ行う。
+ * `resolved-live`はライブ解析の呼び出し時点で`extractMainContent`のマッチ結果から
+ * 構築したセレクタを`mainContentSelector`として渡し、anatomistに同じ要素を解析させて
+ * いるため（`extract-pages.ts`の`resolvePageLayouts`呼び出し箇所参照）、構造的に整合が
+ * 保証されており追加チェックは不要。
  * @param state
  * @param state.entry
  * @param state.entry.url
- * @param state.originalHtml
  * @param state.extractedHtml
  * @param layoutResultsByUrl
  */
 function resolveBlockOutcome(
 	state: {
 		readonly entry: { readonly url: string };
-		readonly originalHtml: string;
 		readonly extractedHtml: string;
 	},
 	layoutResultsByUrl: ReadonlyMap<string, ResolvePageLayoutResult>,
@@ -502,21 +515,18 @@ function resolveBlockOutcome(
 		return { kind: 'fatal', error: layoutEvent.error };
 	}
 
-	const { results } = layoutEvent;
+	const { results, outcome } = layoutEvent;
 	const primary = selectPrimary(results, DEFAULT_PRIMARY_VIEWPORT_NAME);
-	if (
-		!isMainConsistent(
-			state.originalHtml,
-			state.extractedHtml,
-			primary?.mainSelector ?? null,
-		)
-	) {
-		return {
-			kind: 'fatal',
-			error: new Error(
-				'anatomist(mainSelector)とextractMainContentのmain要素検出結果が不整合です（簡易判定 — 厳密な整合化は#978）',
-			),
-		};
+	if (outcome === 'resolved-from-json') {
+		const matchedTag = parseMainTag(state.extractedHtml);
+		if (!isMainConsistent(matchedTag, primary?.root ?? null)) {
+			return {
+				kind: 'fatal',
+				error: new Error(
+					'anatomist(事前生成JSON)とextractMainContentのmain要素検出結果が不整合です（tagName/id/classList比較、#978）',
+				),
+			};
+		}
 	}
 
 	const { blocks, fallbacks } = layoutToBlockData(results);

@@ -589,6 +589,31 @@ describe('extractPages', () => {
 			]);
 		});
 
+		test('extractMainContentのマッチ結果から構築したセレクタをmainContentSelectorとして転送する', async () => {
+			getPageHtmlMock.mockResolvedValueOnce(
+				docWith('<div id="content" class="l-main"><p>a</p></div>'),
+			);
+
+			await extractPages({
+				session: FAKE_SESSION,
+				items: [{ url: 'https://example.com/a' }],
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				limit: 1,
+			});
+
+			expect(resolvePageLayoutsMock).toHaveBeenCalledWith(
+				expect.objectContaining({
+					items: [
+						expect.objectContaining({
+							url: 'https://example.com/a',
+							mainContentSelector: 'div#content.l-main',
+						}),
+					],
+				}),
+			);
+		});
+
 		test('layoutJsonPathをresolvePageLayoutsへそのまま転送する', async () => {
 			getPageHtmlMock.mockResolvedValueOnce(docWith('<main><p>a</p></main>'));
 
@@ -680,9 +705,101 @@ describe('extractPages', () => {
 			expect(written).toBe(`---\nid: 5\n---\n${original}`);
 		});
 
-		test('anatomistのmainSelectorとextractMainContentのマッチが不整合な場合はページ全体をフォールバックする', async () => {
+		test('事前生成JSON使用時、anatomistのrootとextractMainContentのマッチが一致すればブロック変換を続行する', async () => {
+			getPageHtmlMock.mockResolvedValueOnce(docWith('<main><p>hello</p></main>'));
+			resolvePageLayoutsMock.mockImplementation((options) => {
+				for (const item of options.items) {
+					options.onResult?.({
+						url: item.url,
+						outcome: 'resolved-from-json',
+						results: [
+							{
+								url: item.url,
+								viewport: { name: 'pc', width: 1280 },
+								mainSelector: 'main',
+								root: {
+									// extractMainContentがマッチする<main>（id無し・class無し）と
+									// tagName/id/classListが一致する。
+									...sampleLeafBlock({ tagName: 'MAIN' }),
+									layoutType: 'vertical-stack',
+									confidence: 1,
+									children: [sampleLeafBlock()],
+								},
+							},
+						],
+					});
+				}
+				return Promise.resolve();
+			});
+
+			const results: ExtractPageResult[] = [];
+			await extractPages({
+				session: FAKE_SESSION,
+				items: [{ url: 'https://example.com/p' }],
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				layoutJsonPath: '/tmp/layout.jsonl',
+				limit: 1,
+				onResult: (event) => results.push(event),
+			});
+
+			expect(results[0]).toMatchObject({
+				outcome: 'extracted',
+				blockConversion: 'converted',
+			});
+		});
+
+		test('事前生成JSON使用時、anatomistのrootとextractMainContentのマッチがtagName不一致の場合はページ全体をフォールバックする', async () => {
 			const original = docWith('<main><p>hello</p></main><section></section>');
 			getPageHtmlMock.mockResolvedValueOnce(original);
+			resolvePageLayoutsMock.mockImplementation((options) => {
+				for (const item of options.items) {
+					options.onResult?.({
+						url: item.url,
+						outcome: 'resolved-from-json',
+						results: [
+							{
+								url: item.url,
+								viewport: { name: 'pc', width: 1280 },
+								mainSelector: 'section',
+								root: {
+									// extractMainContentは<main>を選ぶが、事前生成JSON側は
+									// <section>を指している(tagName不一致)。
+									...sampleLeafBlock({ tagName: 'SECTION' }),
+									layoutType: 'vertical-stack',
+									confidence: 1,
+									children: [sampleLeafBlock()],
+								},
+							},
+						],
+					});
+				}
+				return Promise.resolve();
+			});
+
+			const results: ExtractPageResult[] = [];
+			await extractPages({
+				session: FAKE_SESSION,
+				items: [{ url: 'https://example.com/p' }],
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				layoutJsonPath: '/tmp/layout.jsonl',
+				limit: 1,
+				onResult: (event) => results.push(event),
+			});
+
+			expect(results[0]).toMatchObject({
+				outcome: 'extracted',
+				blockConversion: 'fallback',
+			});
+			const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
+			expect(written).toBe(`---\nid: 5\n---\n${original}`);
+		});
+
+		test('ライブ実行結果(resolved-live)の場合はmain要素検出結果の整合チェックを行わない', async () => {
+			// mainContentSelectorをanatomistへ渡して同一要素を解析させる前提のため、
+			// tagNameが一見食い違って見えても(resolved-live)は致命的フォールバックにしない。
+			getPageHtmlMock.mockResolvedValueOnce(docWith('<main><p>hello</p></main>'));
 			resolvePageLayoutsMock.mockImplementation((options) => {
 				for (const item of options.items) {
 					options.onResult?.({
@@ -692,10 +809,9 @@ describe('extractPages', () => {
 							{
 								url: item.url,
 								viewport: { name: 'pc', width: 1280 },
-								// extractMainContentは<main>を選ぶが、anatomistは<section>を指している。
 								mainSelector: 'section',
 								root: {
-									...sampleLeafBlock(),
+									...sampleLeafBlock({ tagName: 'SECTION' }),
 									layoutType: 'vertical-stack',
 									confidence: 1,
 									children: [sampleLeafBlock()],
@@ -719,10 +835,8 @@ describe('extractPages', () => {
 
 			expect(results[0]).toMatchObject({
 				outcome: 'extracted',
-				blockConversion: 'fallback',
+				blockConversion: 'converted',
 			});
-			const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
-			expect(written).toBe(`---\nid: 5\n---\n${original}`);
 		});
 
 		test('anatomist側でmainのrootが見つからない(root:null)場合はページ全体をフォールバックする', async () => {
