@@ -1,6 +1,7 @@
 import type { BlockData, BlockItem, ContainerProps } from '@burger-editor/core';
 import type { LayoutAnalysisResult, LayoutBlock } from '@d-zero/anatomist/types';
 
+import { buildWysiwygFallbackBlock } from './build-wysiwyg-fallback-block.js';
 import { classifyBlockItem, wysiwygItem } from './classify-block-item.js';
 
 export type BlockFallbackReason =
@@ -285,11 +286,9 @@ function readFloatDirection(signals: Record<string, unknown>): 'start' | 'end' |
  * @param node
  */
 function wysiwygBlockData(node: LayoutBlock): BlockData {
-	return {
+	return buildWysiwygFallbackBlock(wysiwygItem(node).data.wysiwyg, {
 		name: MIGRATED_BLOCK_NAME,
-		containerProps: { type: 'grid', columns: 1 },
-		items: [[toBlockItem(wysiwygItem(node))]],
-	};
+	});
 }
 
 /**
