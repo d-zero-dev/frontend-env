@@ -110,14 +110,18 @@ const GOOGLE_MAPS_HOST_PATTERN = /google\.\w+\/maps/;
  *    image/youtube/google-maps/download-file/button/title-h2/title-h3を試す。
  *    いずれにも該当しなければ `wysiwyg`。
  *
- * **重大な制約**: anatomistの`LayoutBlock`/`RawLayoutNode`は要素の属性（`href`/`src`/
- * `srcset`/`alt`/`width`/`height`等）を保持しない（`tagName`/`id`/`classList`/`boundingBox`/
- * `style`/`innerHTML`/`children`のみ）。加えて`should-recurse.ts`のcollapseロジックにより
- * `<picture><source><img></picture>`のようなラッパー構造は最終的に`img`自身（void要素、
- * `innerHTML`は空）だけが残る。そのため実データでは`image`/`youtube`/`google-maps`/
- * `download-file`/`button.link`の判定条件（src/href）がほぼ常に取得できず、safeに`wysiwyg`
- * へフォールバックする。これはバグではなく、属性情報が存在しないデータに対する意図された
- * 安全側の挙動である。anatomist側の属性キャプチャ拡張は別途フォローアップ課題として扱う。
+ * **`block`自身のタグが`<a>`/`<img>`/`<iframe>`になったケース**: `should-recurse.ts`の
+ * collapseロジックにより`<picture><source><img></picture>`のようなラッパー構造は最終的に
+ * `img`自身（void要素、`innerHTML`は空）だけが残ることがある。`@d-zero/anatomist`
+ * 0.3.0以降、`LayoutBlock.attributes`（`href`/`src`/`srcset`/`action`/`alt`/`target`/
+ * `download`の固定allowlist、生値のまま）経由でこのケースの`href`/`src`を取得できる
+ * （それ以前のバージョンでは`attributes`が`undefined`になり、常に`wysiwyg`へ
+ * フォールバックしていた）。ただし`width`/`height`/`loading`/iframeの`title`属性は
+ * allowlist外のため未取得のまま（`image`アイテムは`width`/`height`を`0`、`loading`を
+ * `'eager'`固定でフォールバックする）。また、`<a href><picture>…</picture></a>`のように
+ * ラッパー側（子ではなく祖先）が属性を持つケースは、collapseで祖先自体が消えるため
+ * `attributes`があっても引き続き救済されない（祖先の属性を`collapsedFrom`のような形で
+ * 保持する仕組みが別途必要）。
  * @param block
  * @example
  * ```ts
@@ -151,12 +155,13 @@ export function classifyBlockItem(block: LayoutBlock): ClassifiedBlockItem {
 	}
 
 	if (selfTag === 'a') {
-		// ブロック自身がaの場合、collapseによりhref/親要素の情報は失われている
-		// （LayoutBlockにhrefフィールドが存在しないため常にundefined）。
+		// ブロック自身がaの場合、collapseにより親要素の情報は失われているが、`href`自身は
+		// `block.attributes`（anatomist 0.3.0+）から取得できる（無ければ`undefined`のまま
+		// classifyAnchorLikeへ渡り、従来通りwysiwygへフォールバックする）。
 		return (
 			classifyAnchorLike(
 				block.classList,
-				undefined,
+				block.attributes?.href,
 				extractTextContent(parseFragment(block.innerHTML)),
 				[],
 			) ?? wysiwygItem(block)
@@ -171,9 +176,20 @@ export function classifyBlockItem(block: LayoutBlock): ClassifiedBlockItem {
 		return wysiwygItem(block);
 	}
 
-	if (selfTag === 'img' || selfTag === 'iframe') {
-		// img: void要素なのでinnerHTMLは常に空。iframe: srcはLayoutBlockに保存されない。
-		// いずれも属性を読む手段が無いため即フォールバック。
+	if (selfTag === 'img') {
+		// img: void要素なのでinnerHTMLは常に空。`src`は`block.attributes`から取得する。
+		const image = buildImageItemFromAttributes(block.attributes);
+		if (image) {
+			return image;
+		}
+		return wysiwygItem(block);
+	}
+
+	if (selfTag === 'iframe') {
+		const iframeItem = classifyIframeLike(block.attributes?.src);
+		if (iframeItem) {
+			return iframeItem;
+		}
 		return wysiwygItem(block);
 	}
 
@@ -197,18 +213,12 @@ export function classifyBlockItem(block: LayoutBlock): ClassifiedBlockItem {
 	}
 
 	if (tag === 'iframe') {
-		const src = getAttr(element, 'src');
-		if (src === undefined) {
-			return wysiwygItem(block);
-		}
-		if (YOUTUBE_HOST_PATTERN.test(src)) {
-			return buildYoutubeItem(src, getAttr(element, 'title'));
-		}
-		if (GOOGLE_MAPS_HOST_PATTERN.test(src)) {
-			const googleMaps = extractGoogleMaps(src);
-			if (googleMaps) {
-				return googleMaps;
-			}
+		const iframeItem = classifyIframeLike(
+			getAttr(element, 'src'),
+			getAttr(element, 'title'),
+		);
+		if (iframeItem) {
+			return iframeItem;
 		}
 		return wysiwygItem(block);
 	}
@@ -403,6 +413,33 @@ function extractGoogleMaps(
 }
 
 /**
+ * `<iframe>`（子要素として現れるケース・ブロック自身のタグになったケースの両方）を
+ * youtube/google-mapsへ分類する共通ロジック。`src`が無い、またはいずれのホストパターンにも
+ * マッチしない場合は`undefined`を返し、呼び出し側が`wysiwyg`にフォールバックする。
+ * @param src
+ * @param title - 省略可（`selfTag==='iframe'`のcollapseケースはanatomistの`attributes`
+ *   allowlistに`title`が含まれないため常に未取得。省略時はbuildYoutubeItemが既定タイトルを使う）。
+ */
+function classifyIframeLike(
+	src: string | undefined,
+	title?: string,
+):
+	| { name: 'youtube'; data: YoutubeItemData }
+	| { name: 'google-maps'; data: GoogleMapsItemData }
+	| undefined {
+	if (src === undefined) {
+		return undefined;
+	}
+	if (YOUTUBE_HOST_PATTERN.test(src)) {
+		return buildYoutubeItem(src, title);
+	}
+	if (GOOGLE_MAPS_HOST_PATTERN.test(src)) {
+		return extractGoogleMaps(src);
+	}
+	return undefined;
+}
+
+/**
  * `<picture>`配下の`<source>`/`<img>`を文書順に1エントリとして拾い、`path`/`alt`/`width`/
  * `height`/`media`/`loading`の配列を構築する。`path`が1件も取れない場合（属性を持つ
  * `<source>`/`<img>`が実際には無い、実データで高頻度に起きるケース）は`undefined`を返し、
@@ -493,6 +530,34 @@ function extractImageFromImgElement(
 			height: [toNumberOrFallback(getAttr(element, 'height'))],
 			media: [''],
 			loading: [normalizeLoading(getAttr(element, 'loading'))],
+		},
+	};
+}
+
+/**
+ * `extractImageFromImgElement`と同じデータ形を、parse5の`Element`ではなく`block.attributes`
+ * （anatomist 0.3.0+、`img`自身がブロックのルートタグになったcollapseケース向け）から
+ * 直接組み立てる。allowlistに`width`/`height`/`loading`が含まれないため、これらは常に
+ * フォールバック値（`0`/`'eager'`）になる — `src`/`alt`が取れるだけでも、従来の
+ * 無条件`wysiwyg`フォールバックより情報量が増える。
+ * @param attributes
+ */
+function buildImageItemFromAttributes(
+	attributes: Readonly<Record<string, string>> | undefined,
+): { name: 'image'; data: ImageEntryData } | undefined {
+	const src = attributes?.src;
+	if (src === undefined) {
+		return undefined;
+	}
+	return {
+		name: 'image',
+		data: {
+			path: [src],
+			alt: [attributes?.alt ?? ''],
+			width: [toNumberOrFallback(attributes?.width)],
+			height: [toNumberOrFallback(attributes?.height)],
+			media: [''],
+			loading: [normalizeLoading(attributes?.loading)],
 		},
 	};
 }

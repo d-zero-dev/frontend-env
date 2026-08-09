@@ -167,7 +167,7 @@ import {
 
 #### 既知の制限（重要）
 
-anatomist の `LayoutBlock`/`RawLayoutNode` は要素の属性（`href` / `src` / `srcset` / `alt` / `width` / `height` 等）を保持しない（保持されるのは `tagName`/`id`/`classList`/`boundingBox`/`style`/`innerHTML`/`children` のみ）。加えて `should-recurse.ts` の collapse ロジックにより `<picture><source><img></picture>` のようなラッパー構造は最終的に `img` 自身（void 要素、`innerHTML` は空）だけが残る。そのため **実データでは `image` / `youtube` / `google-maps` / `download-file` / `button.link` の判定条件（src/href）がほぼ常に取得できず、safe に `wysiwyg` へフォールバックする**。これはバグではなく、属性情報が存在しないデータに対する意図された安全側の挙動であり、コード自体は正しいロジックを実装している（anatomist が将来属性を捕捉するようになれば自動的に機能する）。anatomist 側の属性キャプチャ拡張は別途フォローアップ課題として扱う。
+`should-recurse.ts` の collapse ロジックにより `<picture><source><img></picture>` のようなラッパー構造は最終的に `img` 自身（void 要素、`innerHTML` は空）だけが残ることがある。anatomist 0.3.0 以降、`LayoutBlock.attributes`（`href`/`src`/`srcset`/`action`/`alt`/`target`/`download` の固定 allowlist、生値のまま）経由でこのケースの `href`/`src` を取得できるため、`classifyBlockItem` はブロック自身のタグが `<a>`/`<img>`/`<iframe>` になったケースでも `button`/`download-file`/`image`/`youtube`/`google-maps` へ分類できる（`d-zero-dev/tools` Issue #941）。ただし `width`/`height`/`loading`/iframe の `title` 属性は allowlist 外のため未取得のままで、`image` アイテムは `width`/`height` を `0`、`loading` を `'eager'` 固定でフォールバックする。また `<a href><picture>…</picture></a>` のようにラッパー側（子ではなく祖先）が属性を持つケースは、collapse で祖先自体が消えるため引き続き救済されない（祖先の属性を保持する仕組みが別途必要で、フォローアップ課題として扱う）。
 
 その他の設計上のポイント:
 

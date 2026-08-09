@@ -15,6 +15,7 @@ function sampleBlock(overrides: Partial<LayoutBlock> = {}): LayoutBlock {
 		classList: [],
 		boundingBox: { x: 0, y: 0, width: 100, height: 100 },
 		innerHTML: '',
+		attributes: {},
 		confidence: 0,
 		signals: {},
 		children: [],
@@ -211,12 +212,63 @@ describe('classifyBlockItem', () => {
 		expect(result.name).toBe('wysiwyg');
 	});
 
-	test('collapseによりimg自身がブロックになった場合（innerHTMLが空、属性取得不能）はwysiwygにフォールバックする', () => {
+	test('collapseによりimg自身がブロックになった場合、attributesが無ければwysiwygにフォールバックする', () => {
 		// 実データで高頻度に起きるケース: anatomistのcollapseロジックによりpicture/figure等の
 		// ラッパー情報が失われ、img自身（void要素、innerHTMLは空）だけがLayoutBlockとして残る。
-		const block = sampleBlock({ tagName: 'IMG', innerHTML: '' });
+		// anatomist 0.2.x等、attributesを持たないデータではsrcを取得できずwysiwygのまま。
+		const block = sampleBlock({ tagName: 'IMG', innerHTML: '', attributes: undefined });
 		const result = classifyBlockItem(block);
 		expect(result.name).toBe('wysiwyg');
+	});
+
+	test('collapseによりimg自身がブロックになった場合でも、attributesにsrcがあればimageになる', () => {
+		const block = sampleBlock({
+			tagName: 'IMG',
+			innerHTML: '',
+			attributes: { src: '/photo.png', alt: '写真' },
+		});
+		const result = classifyBlockItem(block);
+		expect(result).toStrictEqual({
+			name: 'image',
+			data: {
+				path: ['/photo.png'],
+				alt: ['写真'],
+				width: [0],
+				height: [0],
+				media: [''],
+				loading: ['eager'],
+			},
+		});
+	});
+
+	test('img自身がブロックになった場合、attributesにsrcが無ければwysiwygにフォールバックする', () => {
+		const block = sampleBlock({
+			tagName: 'IMG',
+			innerHTML: '',
+			attributes: { alt: '写真のみ' },
+		});
+		const result = classifyBlockItem(block);
+		expect(result.name).toBe('wysiwyg');
+	});
+
+	test('img自身がブロックになった場合、attributesにaltが無ければ空文字になる', () => {
+		const block = sampleBlock({
+			tagName: 'IMG',
+			innerHTML: '',
+			attributes: { src: '/x.jpg' },
+		});
+		const result = classifyBlockItem(block);
+		expect(result).toStrictEqual({
+			name: 'image',
+			data: {
+				path: ['/x.jpg'],
+				alt: [''],
+				width: [0],
+				height: [0],
+				media: [''],
+				loading: ['eager'],
+			},
+		});
 	});
 
 	test('iframe（youtube）はidを抽出し、thumb/urlをBurgerEditor正規形で生成する', () => {
@@ -317,6 +369,53 @@ describe('classifyBlockItem', () => {
 		expect(result.name).toBe('wysiwyg');
 	});
 
+	test('collapseによりiframe自身がブロックになった場合でも、attributesのsrcからyoutubeを分類できる', () => {
+		const block = sampleBlock({
+			tagName: 'IFRAME',
+			innerHTML: '',
+			attributes: { src: 'https://www.youtube.com/embed/ZZZZ' },
+		});
+		const result = classifyBlockItem(block);
+		expect(result).toStrictEqual({
+			name: 'youtube',
+			data: {
+				id: 'ZZZZ',
+				title: 'YouTube動画',
+				thumb: '//img.youtube.com/vi/ZZZZ/maxresdefault.jpg',
+				url: '//www.youtube.com/embed/ZZZZ?rel=0&loop=1&autoplay=1&autohide=1&start=0',
+			},
+		});
+	});
+
+	test('collapseによりiframe自身がブロックになった場合でも、attributesのsrcからgoogle-mapsを分類できる', () => {
+		const block = sampleBlock({
+			tagName: 'IFRAME',
+			innerHTML: '',
+			attributes: { src: 'https://www.google.com/maps?q=35.1,139.1' },
+		});
+		const result = classifyBlockItem(block);
+		expect(result).toStrictEqual({
+			name: 'google-maps',
+			data: {
+				lat: 35.1,
+				lng: 139.1,
+				zoom: 16,
+				url: '//maps.apple.com/?q=35.1,139.1',
+				img: '',
+			},
+		});
+	});
+
+	test('iframe自身がブロックになった場合、attributesにsrcが無ければwysiwygにフォールバックする', () => {
+		const block = sampleBlock({
+			tagName: 'IFRAME',
+			innerHTML: '',
+			attributes: undefined,
+		});
+		const result = classifyBlockItem(block);
+		expect(result.name).toBe('wysiwyg');
+	});
+
 	test('既知拡張子かつボタン風クラスを持つaはdownload-fileが勝つ（button優先順位テスト）', () => {
 		const block = sampleBlock({
 			tagName: 'DIV',
@@ -394,11 +493,12 @@ describe('classifyBlockItem', () => {
 		expect(result.name).toBe('button');
 	});
 
-	test('ブロック自身がaの場合、collapseによりhrefが取得できずbuttonに倒れる', () => {
+	test('ブロック自身がaの場合、attributesが無ければhrefが取得できずlinkが空のままbuttonに倒れる', () => {
 		const block = sampleBlock({
 			tagName: 'A',
 			classList: ['c-btn'],
 			innerHTML: 'お問い合わせ',
+			attributes: undefined,
 		});
 		const result = classifyBlockItem(block);
 		expect(result).toStrictEqual({
@@ -413,6 +513,58 @@ describe('classifyBlockItem', () => {
 				afterIcon: 'none',
 			},
 		});
+	});
+
+	test('ブロック自身がaの場合、attributesのhrefからlinkを取得してbuttonになる', () => {
+		const block = sampleBlock({
+			tagName: 'A',
+			classList: ['c-btn'],
+			innerHTML: 'お問い合わせ',
+			attributes: { href: '/contact' },
+		});
+		const result = classifyBlockItem(block);
+		expect(result).toStrictEqual({
+			name: 'button',
+			data: {
+				link: '/contact',
+				target: '',
+				text: 'お問い合わせ',
+				subtext: '',
+				kind: 'primary',
+				beforeIcon: 'none',
+				afterIcon: 'none',
+			},
+		});
+	});
+
+	test('ブロック自身がaの場合、attributesのhrefが既知拡張子ならdownload-fileになる', () => {
+		const block = sampleBlock({
+			tagName: 'A',
+			innerHTML: '資料',
+			attributes: { href: '/docs/file.pdf' },
+		});
+		const result = classifyBlockItem(block);
+		expect(result).toStrictEqual({
+			name: 'download-file',
+			data: {
+				path: '/docs/file.pdf',
+				download: '',
+				name: 'file.pdf',
+				formatedSize: '',
+				size: '',
+				downloadCheck: false,
+			},
+		});
+	});
+
+	test('ブロック自身がaの場合、attributesにhrefがあってもボタン風クラスが無ければwysiwygになる', () => {
+		const block = sampleBlock({
+			tagName: 'A',
+			innerHTML: '会社概要',
+			attributes: { href: '/about' },
+		});
+		const result = classifyBlockItem(block);
+		expect(result.name).toBe('wysiwyg');
 	});
 
 	test('button要素は分類対象外でwysiwygになる', () => {
