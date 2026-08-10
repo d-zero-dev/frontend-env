@@ -421,6 +421,64 @@ describe('extractPages', () => {
 		expect(written).not.toContain('href="/about/"');
 	});
 
+	test('idUrls widens the id map beyond items, so a link to an excluded page still resolves to {{<id>}}', async () => {
+		getPageHtmlMock.mockResolvedValueOnce(
+			docWith('<main><a href="/about/">about</a></main>'),
+		);
+		mockConvertedLayout('<a href="/about/">about</a>');
+
+		await extractPages({
+			session: FAKE_SESSION,
+			items: [{ url: 'https://example.com/index.html' }],
+			idUrls: ['https://example.com/index.html', 'https://example.com/about/'],
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			limit: 1,
+		});
+
+		const written = await readFile(path.join(outputDir, 'index.html'), 'utf8');
+		expect(written.startsWith('---\nid: 5\n')).toBe(true);
+		expect(written).toContain('{{10000}}');
+	});
+
+	test('without idUrls, a link to a page absent from items falls back to a root-relative path (no id assigned)', async () => {
+		getPageHtmlMock.mockResolvedValueOnce(
+			docWith('<main><a href="/about/">about</a></main>'),
+		);
+		mockConvertedLayout('<a href="/about/">about</a>');
+
+		await extractPages({
+			session: FAKE_SESSION,
+			items: [{ url: 'https://example.com/index.html' }],
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			limit: 1,
+		});
+
+		const written = await readFile(path.join(outputDir, 'index.html'), 'utf8');
+		expect(written).toContain('href="/about/"');
+		expect(written).not.toContain('{{');
+	});
+
+	test('a page URL absent from idUrls is still extracted, but written without a frontmatter block', async () => {
+		getPageHtmlMock.mockResolvedValueOnce(docWith('<main><p>x</p></main>'));
+
+		await extractPages({
+			session: FAKE_SESSION,
+			items: [{ url: 'https://example.com/orphan.html' }],
+			idUrls: ['https://example.com/other.html'],
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			limit: 1,
+		});
+
+		const written = await readFile(path.join(outputDir, 'orphan.html'), 'utf8');
+		// No id (excluded from idUrls) and no DB row (default mock) → `buildFrontmatterBlock`
+		// emits no frontmatter block at all, not even an empty `---\n---\n`.
+		expect(written.startsWith('---')).toBe(false);
+		expect(written).toContain(`<main class="${CONTENT_CLASS}">`);
+	});
+
 	test('fail-soft on rewriteBlockRefs (wysiwyg→rewritePageRefs) throw: writes pre-rewrite HTML and surfaces an aggregate rewriteError on the outcome', async () => {
 		getPageHtmlMock.mockResolvedValueOnce(
 			docWith('<main><a href="/about/">about</a></main>'),

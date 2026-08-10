@@ -50,6 +50,17 @@ export interface ExtractPagesOptions {
 	items: readonly ExtractPageItem[];
 	outputDir: string;
 	/**
+	 * {@link assignPageIds}の採番母集合となるURL一覧。省略時は`items`のURLから
+	 * 採番する（従来互換）。`items`のスーパーセットであること — 呼び出し側が
+	 * `items`を絞り込む場合（例: `migrate`の`include`オプション）でも、ここに
+	 * アーカイブの全ページURLを渡すことで部分実行時のidが全体実行時と一致し、
+	 * `items`に含まれないページへの`<a href>` / `<form action>`も
+	 * {@link rewritePageRefs} 経由で `{{<id>}}` に書き換わる。`items`に含まれない
+	 * URLは実際には抽出されないため、そのページ自身のfrontmatterは書き出されない
+	 * （idの割り当て先が存在しないだけで、副作用はない）。
+	 */
+	idUrls?: readonly string[];
+	/**
 	 * BurgerEditorの`editableArea`セレクタに対応させるクラス名。生成したブロック群を
 	 * 埋め込む既存main要素自身の`classList`に追加する（新規ラッパー要素は追加しない）。
 	 * 移行先サイトのBurgerEditor設定に依存する値であり、決め打ちのデフォルトを持たせると
@@ -225,6 +236,7 @@ export async function extractPages(options: ExtractPagesOptions): Promise<void> 
 		outputDir,
 		contentClass,
 		layoutJsonPath,
+		idUrls,
 		knownResourceUrls = new Set(),
 		limit = 10,
 		onResult,
@@ -276,12 +288,14 @@ export async function extractPages(options: ExtractPagesOptions): Promise<void> 
 	}
 	await Promise.all([...directories].map((dir) => mkdir(dir, { recursive: true })));
 
-	// Build the URL → id map up front from the full items list. Each page's id
-	// stays stable even when only a subset of pages succeeds, because the map
-	// is computed before any page worker runs. Build the pre-keyed lookup once
-	// alongside it so per-page rewritePageRefs calls don't pay an O(N²)
-	// rebuild.
-	const pageIds = assignPageIds(items.map((item) => item.url));
+	// Build the URL → id map up front from `idUrls` — the full archive page
+	// list when the caller filters `items` down to a subset (see
+	// MigrateOptions.include) — or, by default, from the full items list.
+	// Each page's id stays stable even when only a subset of pages runs or
+	// succeeds, because the map is computed from this invariant population
+	// before any page worker runs. Build the pre-keyed lookup once alongside
+	// it so per-page rewritePageRefs calls don't pay an O(N²) rebuild.
+	const pageIds = assignPageIds(idUrls ?? items.map((item) => item.url));
 	const pageIdLookup = buildPageIdLookup(pageIds);
 
 	// --- Fetch + extractMainContent + meta, per page, concurrent ---
