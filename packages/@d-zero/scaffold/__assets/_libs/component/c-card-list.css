@@ -1,5 +1,0 @@
-.c-card-list {
-	display: block grid;
-	grid-template-columns: repeat(auto-fit, minmax(calc(200 / 17 * 1rem), 1fr));
-	gap: 0.5rem;
-}
