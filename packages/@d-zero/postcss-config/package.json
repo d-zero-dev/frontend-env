@@ -16,7 +16,7 @@
 	"main": "./.postcssrc.js",
 	"dependencies": {
 		"autoprefixer": "10.5.4",
-		"postcss": "8.5.23",
+		"postcss": "8.5.25",
 		"postcss-base64": "0.7.1",
 		"postcss-calc": "10.1.1",
 		"postcss-clip-path-polyfill": "1.1.0",
