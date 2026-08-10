@@ -24,7 +24,7 @@
 		"@d-zero/scaffold": "5.1.1-alpha.1",
 		"i18n-js": "4.5.3",
 		"ignore": "7.0.6",
-		"magicast": "0.5.2",
+		"magicast": "0.5.4",
 		"meow": "14.1.0",
 		"minimatch": "10.2.5",
 		"plop": "4.0.4",
