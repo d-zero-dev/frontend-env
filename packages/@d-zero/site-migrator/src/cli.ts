@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 import { parseArgs } from 'node:util';
 
+import { IncludeNoMatchError, parseIncludePattern } from './include-filter.js';
 import { migrate } from './migrate.js';
 
 const USAGE = `Usage:
-  dz-migrate <archive.nitpicker> -o <htdocs-dir> --content-class <name> [--layout-json <path>] [--limit <n>] [--extract-limit <n>]
+  dz-migrate <archive.nitpicker> -o <htdocs-dir> --content-class <name> [--layout-json <path>] [--limit <n>] [--extract-limit <n>] [--include <path>]...
 
 Downloads sub-resources from the archive and, for each internal page, strips
 the shared layout, assigns a stable integer id, prepends a YAML frontmatter
@@ -27,6 +28,14 @@ Options:
   --limit <n>                    Concurrent resource download limit (default: 10).
   --extract-limit <n>            Concurrent page extraction limit (default: 10). Also shared
                                  by live layout analysis concurrency.
+  --include <path>               Restrict page extraction to matching pages. Repeatable
+                                 (union). "/dir/" (trailing slash) selects the directory
+                                 subtree including its index page; any other value selects
+                                 the single page whose pathname matches exactly. Full
+                                 http(s):// URLs are accepted — only the pathname is used.
+                                 A value matching no page aborts with exit 2 before any
+                                 download or write. Resources are always downloaded in
+                                 full, and page ids stay identical to an unfiltered run.
   -h, --help                     Show this help message.
 `;
 
@@ -47,6 +56,7 @@ async function main(argv: readonly string[]): Promise<number> {
 				'layout-json': { type: 'string' },
 				limit: { type: 'string' },
 				'extract-limit': { type: 'string' },
+				include: { type: 'string', multiple: true },
 				help: { type: 'boolean', short: 'h', default: false },
 			},
 		});
@@ -99,6 +109,18 @@ async function main(argv: readonly string[]): Promise<number> {
 		return 2;
 	}
 
+	const include = parsed.values.include;
+	if (include) {
+		for (const value of include) {
+			try {
+				parseIncludePattern(value);
+			} catch (error) {
+				process.stderr.write(`Error: ${(error as Error).message}\n\n${USAGE}`);
+				return 2;
+			}
+		}
+	}
+
 	const controller = new AbortController();
 	const onSigint = () => controller.abort();
 	process.on('SIGINT', onSigint);
@@ -111,7 +133,13 @@ async function main(argv: readonly string[]): Promise<number> {
 			layoutJsonPath,
 			downloadLimit,
 			extractLimit,
+			include,
 			signal: controller.signal,
+			onInclude: (event) => {
+				process.stdout.write(
+					`Include: ${event.selected} of ${event.total} pages selected\n`,
+				);
+			},
 			onResource: (event) => {
 				if (event.outcome === 'failed') {
 					process.stderr.write(`fail: ${event.url} — ${event.error.message}\n`);
@@ -178,6 +206,16 @@ async function main(argv: readonly string[]): Promise<number> {
 			return 130;
 		}
 		return report.resourcesFailed === 0 && report.pagesFailed === 0 ? 0 : 1;
+	} catch (error) {
+		// `InvalidIncludeValueError` is not caught here: every `--include` value
+		// was already run through the same `parseIncludePattern` above, so by
+		// the time `migrate()` re-parses it via `filterUrlsByInclude`, it cannot
+		// throw that error again (deterministic, pure function, same input).
+		if (error instanceof IncludeNoMatchError) {
+			process.stderr.write(`Error: ${error.message}\n`);
+			return 2;
+		}
+		throw error;
 	} finally {
 		process.off('SIGINT', onSigint);
 		process.off('SIGTERM', onSigint);

@@ -8,6 +8,7 @@ import { listInternalPages } from './archive/list-internal-pages.js';
 import { listInternalResources } from './archive/list-internal-resources.js';
 import { openArchive } from './archive/open-archive.js';
 import { downloadResources } from './downloader/download-resources.js';
+import { filterUrlsByInclude } from './include-filter.js';
 import { extractPages } from './page-extractor/extract-pages.js';
 
 export interface MigrateOptions {
@@ -30,6 +31,24 @@ export interface MigrateOptions {
 	downloadLimit?: number;
 	/** Maximum concurrent page extractions. Defaults to 10. */
 	extractLimit?: number;
+	/**
+	 * 移行対象ページを絞り込む`--include`生値のリスト（`/path`形式または
+	 * `http(s)://`URL）。各値はpathnameとして解釈され、末尾`/`はプレフィックス
+	 * 一致（ディレクトリ配下＋indexページ自身）、それ以外は完全一致
+	 * （{@link filterUrlsByInclude}参照）。省略時・空配列時は全ページが対象。
+	 * フィルタ対象は**ページのみ**で、リソースDLは常に全件（絞り込みによる
+	 * 参照切れリスクよりユーザーの明示選択を優先する設計判断）。形式不正の
+	 * 値は{@link import('./include-filter.js').InvalidIncludeValueError}、
+	 * 1ページもマッチしない値があれば
+	 * {@link import('./include-filter.js').IncludeNoMatchError}を、
+	 * DL・抽出を一切実行する前にthrowする。
+	 * id採番の母集合は常にアーカイブ全ページ
+	 * （{@link import('./page-extractor/extract-pages.js').ExtractPagesOptions.idUrls}参照）
+	 * のため、部分実行でもidと`{{<id>}}`参照は全体実行と一致する。
+	 */
+	include?: readonly string[];
+	/** `include`によるフィルタ適用直後（DL開始前）に1回だけ呼ばれる。`include`省略時は呼ばれない。 */
+	onInclude?: (event: { selected: number; total: number }) => void;
 	/**
 	 * Forwarded to both {@link downloadResources}（通常のリソースDL）と`extractPages`の
 	 * block内`download-file`アイテムの追加DL。後者は`MigrateReport`の`totalResources`/
@@ -100,6 +119,8 @@ export async function migrate(options: MigrateOptions): Promise<MigrateReport> {
 		layoutJsonPath,
 		downloadLimit,
 		extractLimit,
+		include,
+		onInclude,
 		onResource,
 		onPage,
 		signal,
@@ -115,6 +136,22 @@ export async function migrate(options: MigrateOptions): Promise<MigrateReport> {
 		const pageItems: ExtractPageItem[] = [];
 		for await (const page of listInternalPages(session)) {
 			pageItems.push({ url: page.url });
+		}
+
+		// --include filter: pages only. Runs BEFORE downloadResources so a
+		// no-match / invalid-value error aborts without downloading or writing
+		// anything. `allPageUrls` (the full archive page list, unfiltered)
+		// stays the id-numbering population passed to extractPages as
+		// `idUrls` below — unconditionally, whether or not `include` is set —
+		// so a partial run always assigns the same ids as a full run, and
+		// links to pages excluded by the filter still rewrite to `{{<id>}}`
+		// instead of silently falling back to a root-relative path.
+		const allPageUrls = pageItems.map((item) => item.url);
+		let selectedPageItems: ExtractPageItem[] = pageItems;
+		if (include !== undefined && include.length > 0) {
+			const selected = new Set(filterUrlsByInclude(include, allPageUrls));
+			selectedPageItems = pageItems.filter((item) => selected.has(item.url));
+			onInclude?.({ selected: selectedPageItems.length, total: pageItems.length });
 		}
 
 		// `totalResources`/`resourcesSaved`/`resourcesFailed` cover only this
@@ -161,7 +198,8 @@ export async function migrate(options: MigrateOptions): Promise<MigrateReport> {
 		let pagesBlockConversionFailed = 0;
 		await extractPages({
 			session,
-			items: pageItems,
+			items: selectedPageItems,
+			idUrls: allPageUrls,
 			outputDir,
 			contentClass,
 			layoutJsonPath,
@@ -222,7 +260,7 @@ export async function migrate(options: MigrateOptions): Promise<MigrateReport> {
 			totalResources,
 			resourcesSaved,
 			resourcesFailed,
-			totalPages: pageItems.length,
+			totalPages: selectedPageItems.length,
 			pagesExtracted,
 			pagesFallback,
 			pagesMissing,
