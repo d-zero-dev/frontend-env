@@ -43,6 +43,8 @@ export type {
 	PageIdLookup,
 	RewritePageRefsOptions,
 } from './page-extractor/rewrite-page-refs.js';
+export { resolveIdTemplate } from './page-extractor/resolve-id-template.js';
+export type { ResolveIdTemplateOptions } from './page-extractor/resolve-id-template.js';
 
 export { migrate } from './migrate.js';
 export type { MigrateOptions, MigrateReport } from './migrate.js';
