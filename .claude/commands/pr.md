@@ -1,7 +1,14 @@
 ---
-description: Create and push a pull request
+description: プルリクエストの作成とプッシュ
 ---
 
-1. Ensure that you are on a topic branch that is not `dev` or `main`.
-2. Review the changes on the current topic branch using appropriate `git` commands.
-3. Generate and execute a one-liner `gh pr create` command to create a pull request.
+1. `dev` や `main` ではないトピックブランチにいることを確認する。
+2. **プリフライトチェック（必須 — 省略不可）:**
+   - `yarn lint`、`yarn build`、`yarn test` がこのセッション内でまだ実行・成功していない場合、続行する前に**今すぐ実行**する。
+   - 全てがパスしなければならない。失敗があれば続行前に修正する。
+3. 適切な `git` コマンドを使って現在のトピックブランチの変更をレビューする。
+4. `gh pr create` コマンドのワンライナーを生成・実行してプルリクエストを作成する。
+5. **CI 監視:**
+   - PR 作成直後に `gh pr checks --watch` で CI の完了を待機する。
+   - テストが途中で失敗した場合は完了を待たずに修正作業に戻る。
+   - 全テストが通りマージ可能になったらユーザーに報告する。

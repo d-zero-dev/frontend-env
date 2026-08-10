@@ -7,7 +7,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"build": "lerna run build --scope=@d-zero/builder --scope=@d-zero/check-frontend-env --scope=@d-zero/custom-components",
+		"build": "lerna run build --scope=@d-zero/builder --scope=@d-zero/check-frontend-env --scope=@d-zero/custom-components --scope=@d-zero/site-migrator",
 		"dev": "lerna run dev",
 		"test": "vitest run --test-timeout 60000",
 		"test:update": "lerna run test:update",
@@ -17,10 +17,10 @@
 		"lint:prettier": "npx prettier --write \"{*,./**/*}{.{md,mdc,mdx,js,jsx,ts,tsx,css,pug,html},*rc}\" \"!**/{dist,storybook-static}/**/*\"",
 		"lint:textlint": "npx textlint --fix \"{*,./**/*}.{md,mdc}\" && npx textlint \"{*,./**/*}.{md,mdc}\"",
 		"storybook": "lerna run storybook --scope=@d-zero/custom-components",
-		"release": "lerna publish --exact --conventional-commits --conventional-graduate",
-		"release:alpha:latest": "lerna publish --exact --force-publish --conventional-commits --conventional-prerelease --preid alpha",
-		"release:beta:latest": "lerna publish --exact --force-publish --conventional-commits --conventional-prerelease --preid beta",
-		"release:next": "lerna publish --dist-tag next --exact --force-publish --conventional-commits --conventional-prerelease --preid alpha",
+		"release": "lerna version --exact --conventional-commits --conventional-graduate --no-push",
+		"release:alpha": "lerna version --exact --force-publish --conventional-commits --conventional-prerelease --preid alpha --no-push",
+		"release:beta": "lerna version --exact --force-publish --conventional-commits --conventional-prerelease --preid beta --no-push",
+		"release:rc": "lerna version --exact --force-publish --conventional-commits --conventional-prerelease --preid rc --no-push",
 		"postinstall": "husky",
 		"commit": "npx cz",
 		"co": "npx cz",
@@ -46,10 +46,10 @@
 		"@d-zero/textlint-config": "5.0.0",
 		"@d-zero/tsconfig": "1.0.0",
 		"husky": "9.1.7",
-		"lerna": "9.0.4",
+		"lerna": "9.0.7",
 		"npm-run-all2": "8.0.4",
 		"typescript": "5.9.3",
-		"vitest": "4.0.18"
+		"vitest": "4.1.9"
 	},
 	"packageManager": "yarn@4.12.0",
 	"volta": {
