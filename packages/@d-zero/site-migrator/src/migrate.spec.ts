@@ -6,6 +6,8 @@ import path from 'node:path';
 
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
+import { IncludeNoMatchError, InvalidIncludeValueError } from './include-filter.js';
+
 vi.mock('./archive/open-archive.js', () => ({
 	openArchive: vi.fn(),
 }));
@@ -469,5 +471,180 @@ describe('migrate', () => {
 			}),
 		).rejects.toThrow('listing crashed');
 		expect(closeMock).toHaveBeenCalledTimes(1);
+	});
+
+	test('include filters pages while resources are still downloaded in full', async () => {
+		listInternalResourcesMock.mockReturnValue(
+			iter([
+				{ url: 'https://example.com/a.css', contentType: 'text/css' },
+				{ url: 'https://example.com/b.css', contentType: 'text/css' },
+			]),
+		);
+		listInternalPagesMock.mockReturnValue(
+			iter([
+				{ url: 'https://example.com/index.html' },
+				{ url: 'https://example.com/about/' },
+				{ url: 'https://example.com/about/team.html' },
+			]),
+		);
+		const fetchMock = vi.fn(() =>
+			Promise.resolve(new Response(new Uint8Array([1]), { status: 200 })),
+		);
+		vi.stubGlobal('fetch', fetchMock);
+		getPageHtmlMock.mockImplementation(() =>
+			Promise.resolve(
+				'<!doctype html><html><head></head><body><main><p>x</p></main></body></html>',
+			),
+		);
+
+		const report = await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			include: ['/about/'],
+		});
+
+		expect(report).toMatchObject({ totalPages: 2, pagesExtracted: 2 });
+		// Resources are never filtered by `include` — both are still downloaded.
+		expect(fetchMock).toHaveBeenCalledTimes(2);
+		expect(getPageHtmlMock).toHaveBeenCalledTimes(2);
+		await expect(readFile(path.join(outputDir, 'index.html'))).rejects.toThrow();
+	});
+
+	test('include keeps ids identical to a full run and rewrites links to excluded pages to {{<id>}}', async () => {
+		listInternalResourcesMock.mockReturnValue(iter([]));
+		listInternalPagesMock.mockReturnValue(
+			iter([
+				{ url: 'https://example.com/index.html' },
+				{ url: 'https://example.com/about/' },
+			]),
+		);
+		vi.stubGlobal('fetch', vi.fn());
+		const indexInnerHtml = '<a href="/about/">about</a>';
+		getPageHtmlMock.mockResolvedValueOnce(
+			`<!doctype html><html><head></head><body><main>${indexInnerHtml}</main></body></html>`,
+		);
+		mockConvertedLayout({ 'https://example.com/index.html': indexInnerHtml });
+
+		await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			include: ['/index.html'],
+		});
+
+		const written = await readFile(path.join(outputDir, 'index.html'), 'utf8');
+		// `/about/` was excluded by `include`, yet its id (subdir section 1 → 10000)
+		// is identical to an unfiltered run because the id population stays the
+		// full archive page list.
+		expect(written.startsWith(`---\nid: 5\n---\n<main class="${CONTENT_CLASS}">`)).toBe(
+			true,
+		);
+		expect(written).toContain('{{10000}}');
+		await expect(readFile(path.join(outputDir, 'about', 'index.html'))).rejects.toThrow();
+	});
+
+	test('include with no matching pages rejects before any download or write', async () => {
+		listInternalResourcesMock.mockReturnValue(
+			iter([{ url: 'https://example.com/a.css', contentType: 'text/css' }]),
+		);
+		listInternalPagesMock.mockReturnValue(
+			iter([{ url: 'https://example.com/index.html' }]),
+		);
+		const fetchMock = vi.fn();
+		vi.stubGlobal('fetch', fetchMock);
+
+		await expect(
+			migrate({
+				archivePath: '/tmp/fake.nitpicker',
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				include: ['/nope/'],
+			}),
+		).rejects.toThrow(IncludeNoMatchError);
+		expect(fetchMock).not.toHaveBeenCalled();
+		expect(getPageHtmlMock).not.toHaveBeenCalled();
+		expect(closeMock).toHaveBeenCalledTimes(1);
+	});
+
+	test('include with an invalid value rejects before any download or write', async () => {
+		listInternalResourcesMock.mockReturnValue(iter([]));
+		listInternalPagesMock.mockReturnValue(
+			iter([{ url: 'https://example.com/index.html' }]),
+		);
+		const fetchMock = vi.fn();
+		vi.stubGlobal('fetch', fetchMock);
+
+		await expect(
+			migrate({
+				archivePath: '/tmp/fake.nitpicker',
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				include: ['news/'],
+			}),
+		).rejects.toThrow(InvalidIncludeValueError);
+		expect(fetchMock).not.toHaveBeenCalled();
+		expect(getPageHtmlMock).not.toHaveBeenCalled();
+	});
+
+	test('an empty include array behaves as no filter', async () => {
+		listInternalResourcesMock.mockReturnValue(iter([]));
+		listInternalPagesMock.mockReturnValue(
+			iter([
+				{ url: 'https://example.com/index.html' },
+				{ url: 'https://example.com/about/' },
+			]),
+		);
+		vi.stubGlobal('fetch', vi.fn());
+		getPageHtmlMock.mockImplementation(() =>
+			Promise.resolve(
+				'<!doctype html><html><head></head><body><main><p>x</p></main></body></html>',
+			),
+		);
+
+		const report = await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			include: [],
+		});
+
+		expect(report).toMatchObject({ totalPages: 2, pagesExtracted: 2 });
+	});
+
+	test('onInclude fires once with selected/total when include is given, and not at all otherwise', async () => {
+		listInternalResourcesMock.mockReturnValue(iter([]));
+		listInternalPagesMock.mockReturnValue(
+			iter([
+				{ url: 'https://example.com/index.html' },
+				{ url: 'https://example.com/about/' },
+				{ url: 'https://example.com/about/team.html' },
+			]),
+		);
+		vi.stubGlobal('fetch', vi.fn());
+		getPageHtmlMock.mockImplementation(() =>
+			Promise.resolve(
+				'<!doctype html><html><head></head><body><main><p>x</p></main></body></html>',
+			),
+		);
+
+		const events: unknown[] = [];
+		await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			include: ['/about/'],
+			onInclude: (event) => events.push(event),
+		});
+		expect(events).toStrictEqual([{ selected: 2, total: 3 }]);
+
+		events.length = 0;
+		await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			onInclude: (event) => events.push(event),
+		});
+		expect(events).toStrictEqual([]);
 	});
 });

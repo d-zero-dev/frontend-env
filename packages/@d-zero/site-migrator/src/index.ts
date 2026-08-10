@@ -46,6 +46,14 @@ export type {
 export { resolveIdTemplate } from './page-extractor/resolve-id-template.js';
 export type { ResolveIdTemplateOptions } from './page-extractor/resolve-id-template.js';
 
+export {
+	filterUrlsByInclude,
+	IncludeNoMatchError,
+	InvalidIncludeValueError,
+	parseIncludePattern,
+} from './include-filter.js';
+export type { IncludePattern } from './include-filter.js';
+
 export { migrate } from './migrate.js';
 export type { MigrateOptions, MigrateReport } from './migrate.js';
 

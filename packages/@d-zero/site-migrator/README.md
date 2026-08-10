@@ -11,7 +11,7 @@ yarn add @d-zero/site-migrator
 ## CLI
 
 ```sh
-npx dz-migrate <archive.nitpicker> -o <htdocs-dir> --content-class <name> [--layout-json <path>] [--limit <n>] [--extract-limit <n>]
+npx dz-migrate <archive.nitpicker> -o <htdocs-dir> --content-class <name> [--layout-json <path>] [--limit <n>] [--extract-limit <n>] [--include <path>]...
 ```
 
 - `<archive.nitpicker>` — [nitpicker](https://github.com/d-zero-dev/nitpicker) で生成済みのアーカイブファイル
@@ -20,6 +20,7 @@ npx dz-migrate <archive.nitpicker> -o <htdocs-dir> --content-class <name> [--lay
 - `--layout-json <path>` — 事前生成済みの anatomist レイアウト解析 JSONL（1 ファイルで対象 URL 全件分）。省略時は全ページをライブ解析する
 - `--limit <n>` — 並列 DL 数（デフォルト 10）
 - `--extract-limit <n>` — 並列ページ抽出数（デフォルト 10）。ライブレイアウト解析の並列数もこれを共用する
+- `--include <path>` — 移行対象ページの絞り込み（複数指定可、和集合）。値は `/` 始まりの pathname、または `http(s)://` の完全 URL（pathname 部のみ使用、ホストは無視）。末尾が `/` の値はそのディレクトリ配下＋index ページ自身へのプレフィックス一致、それ以外は pathname の完全一致（`?query` / `#fragment` は比較対象外で、それらを含む値自体はエラー）。`--include /` や `--include https://example.com`（pathname が `/` になる値）はプレフィックス一致ルールの帰結として全ページ一致＝フィルタなしと等価になる。リソースの DL は常に全件。1 ページもマッチしない値が 1 つでもあれば、その値をすべて列挙して何も DL・書き出しせずに exit code 2 で終了する。id 採番の母集合は常にアーカイブ全ページのため、部分実行でも id と `{{<id>}}` 参照は全体実行と完全に一致する（後述）
 
 リソースは fetch で DL、ページ HTML はアーカイブ内のスナップショットを読み、`extractMainContent` でレイアウト共通部分を剥がし、そのページのレイアウトを BurgerEditor ブロックへ変換して既存 main 要素へ埋め込み（後述）、`assignPageIds` で URL → 整数 id の写像を組み立てて `.nitpicker` DB のページメタと併せて `formatFrontmatter` が生成する `---\n…\n---\n` YAML ブロックを先頭に prepend、本文中の同一オリジン参照を `rewritePageRefs` が書き換えてから `.html` として書き出す。
 
@@ -44,30 +45,34 @@ import {
 	buildPageIdLookup,
 	rewritePageRefs,
 	resolveIdTemplate,
+	parseIncludePattern,
+	filterUrlsByInclude,
 } from '@d-zero/site-migrator';
 ```
 
 主要 API:
 
-| 関数                    | 概要                                                                                      |
-| ----------------------- | ----------------------------------------------------------------------------------------- |
-| `migrate`               | アーカイブを開き、リソース DL とページ抽出を並列実行する全体フロー                        |
-| `openArchive`           | `.nitpicker` を開いてセッションを返す（要 `close()`）                                     |
-| `listInternalPages`     | 内部ページ URL を順に yield する非同期イテラブル                                          |
-| `listInternalResources` | 内部リソース URL を順に yield する非同期イテラブル                                        |
-| `getPageHtml`           | レンダリング後 HTML を全長で取得（truncate なし）                                         |
-| `getFrontmatter`        | `.nitpicker` DB の flat meta カラムを `Frontmatter` へマップ                              |
-| `downloadResources`     | URL リストを並列 fetch してローカルへ保存                                                 |
-| `urlToOutputPath`       | URL を `<htdocs-dir>` 配下のローカルパスへ変換                                            |
-| `rewriteAssetRefs`      | HTML 内のアセット参照を resolver で書き換える（streaming）                                |
-| `extractMainContent`    | レイアウト共通部分を剥がして本文要素の `outerHTML` を返す                                 |
-| `extractPages`          | ページ一覧に `extractMainContent` + `getFrontmatter` を適用して書き出す                   |
-| `formatFrontmatter`     | `Frontmatter` を後段パイプライン互換の `---\n…\n---\n` YAML ブロック文字列にする          |
-| `splitTitle`            | タイトル文字列を `｜` / `\|` で分割し `{title, rawTitle?}` を返す純関数                   |
-| `assignPageIds`         | URL リストから ディレクトリグループ採番ルールに従って `Map<url, id>` を組み立てる純関数   |
-| `buildPageIdLookup`     | `assignPageIds` の結果から `rewritePageRefs` 用ルックアップ表を一度だけ構築する純関数     |
-| `rewritePageRefs`       | 同一オリジンの asset/page 参照を root-relative path / `{{<id>}}` テンプレートに書き換える |
-| `resolveIdTemplate`     | `{{<id>}}` token を id→URL マップで実 URL に解決する純関数（後段ビルドツール用）          |
+| 関数                    | 概要                                                                                                |
+| ----------------------- | --------------------------------------------------------------------------------------------------- |
+| `migrate`               | アーカイブを開き、リソース DL とページ抽出を並列実行する全体フロー                                  |
+| `parseIncludePattern`   | `--include` 生値 1 個を pathname プレフィックス/完全一致パターンへ解釈する純関数                    |
+| `filterUrlsByInclude`   | `--include` 値のリストでページ URL リストを絞り込む純関数。未マッチ値があれば `IncludeNoMatchError` |
+| `openArchive`           | `.nitpicker` を開いてセッションを返す（要 `close()`）                                               |
+| `listInternalPages`     | 内部ページ URL を順に yield する非同期イテラブル                                                    |
+| `listInternalResources` | 内部リソース URL を順に yield する非同期イテラブル                                                  |
+| `getPageHtml`           | レンダリング後 HTML を全長で取得（truncate なし）                                                   |
+| `getFrontmatter`        | `.nitpicker` DB の flat meta カラムを `Frontmatter` へマップ                                        |
+| `downloadResources`     | URL リストを並列 fetch してローカルへ保存                                                           |
+| `urlToOutputPath`       | URL を `<htdocs-dir>` 配下のローカルパスへ変換                                                      |
+| `rewriteAssetRefs`      | HTML 内のアセット参照を resolver で書き換える（streaming）                                          |
+| `extractMainContent`    | レイアウト共通部分を剥がして本文要素の `outerHTML` を返す                                           |
+| `extractPages`          | ページ一覧に `extractMainContent` + `getFrontmatter` を適用して書き出す                             |
+| `formatFrontmatter`     | `Frontmatter` を後段パイプライン互換の `---\n…\n---\n` YAML ブロック文字列にする                    |
+| `splitTitle`            | タイトル文字列を `｜` / `\|` で分割し `{title, rawTitle?}` を返す純関数                             |
+| `assignPageIds`         | URL リストから ディレクトリグループ採番ルールに従って `Map<url, id>` を組み立てる純関数             |
+| `buildPageIdLookup`     | `assignPageIds` の結果から `rewritePageRefs` 用ルックアップ表を一度だけ構築する純関数               |
+| `rewritePageRefs`       | 同一オリジンの asset/page 参照を root-relative path / `{{<id>}}` テンプレートに書き換える           |
+| `resolveIdTemplate`     | `{{<id>}}` token を id→URL マップで実 URL に解決する純関数（後段ビルドツール用）                    |
 
 `Frontmatter` の出力構造は [`./src/types.ts`](./src/types.ts) を参照。`title` / `og.title` / `twitter.title` は `｜` `|` で分割して最初の非空セグメントを採用し、分割が起きたときだけ `rawTitle` 等に元文字列を保持する。
 
@@ -95,7 +100,7 @@ import {
 
 ### ページ id 採番と参照書き換え
 
-`extractPages` は処理開始時に `items` の全 URL を `assignPageIds` に渡して URL → 整数 id の写像を組み立てる。各ページの frontmatter には `id: <number>` がトップに埋め込まれ、本文中の同一オリジン参照は `rewritePageRefs` が次のルールで書き換える。
+`extractPages` は処理開始時に `idUrls`（省略時は `items`）の全 URL を `assignPageIds` に渡して URL → 整数 id の写像を組み立てる。各ページの frontmatter には `id: <number>` がトップに埋め込まれ、本文中の同一オリジン参照は `rewritePageRefs` が次のルールで書き換える。`dz-migrate` は `--include` 指定の有無に関わらず**アーカイブの全ページ URL** を `idUrls` として渡すので、部分移行（`--include` で `items` を絞り込んだ場合）でも各ページの id は全体移行時と一致し、フィルタ対象外ページへの `<a href>` も root-relative フォールバックではなく `{{<id>}}` に書き換わる（未解決の id は後段の `resolveIdTemplate` の `onUnresolved` で検出できる）。
 
 採番ルール:
 
