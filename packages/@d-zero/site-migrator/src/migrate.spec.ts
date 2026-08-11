@@ -1,3 +1,4 @@
+import type { BlockTargetAdapter } from './adapter.js';
 import type { LayoutBlock } from '@d-zero/anatomist/types';
 
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
@@ -7,6 +8,7 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { IncludeNoMatchError, InvalidIncludeValueError } from './include-filter.js';
+import { burgerEditorAdapter } from './page-extractor/burger-editor-adapter.js';
 
 vi.mock('./archive/open-archive.js', () => ({
 	openArchive: vi.fn(),
@@ -187,6 +189,7 @@ describe('migrate', () => {
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 		});
 
 		expect(report).toEqual({
@@ -269,6 +272,7 @@ describe('migrate', () => {
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 		});
 
 		expect(report).toMatchObject({
@@ -298,6 +302,7 @@ describe('migrate', () => {
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			onResource: (event) => resources.push(event),
 			onPage: (event) => pages.push(event),
 		});
@@ -339,6 +344,7 @@ describe('migrate', () => {
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 		});
 
 		expect(callOrder).toEqual(['fetch', 'getPageHtml']);
@@ -365,6 +371,7 @@ describe('migrate', () => {
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 		});
 
 		const written = await readFile(path.join(outputDir, 'p1.html'), 'utf8');
@@ -402,6 +409,7 @@ describe('migrate', () => {
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 		});
 
 		const written = await readFile(path.join(outputDir, 'index.html'), 'utf8');
@@ -424,6 +432,7 @@ describe('migrate', () => {
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 		});
 
 		expect(report).toMatchObject({
@@ -448,6 +457,7 @@ describe('migrate', () => {
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 		});
 
 		expect(report).toMatchObject({
@@ -468,6 +478,7 @@ describe('migrate', () => {
 				archivePath: '/tmp/fake.nitpicker',
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 			}),
 		).rejects.toThrow('listing crashed');
 		expect(closeMock).toHaveBeenCalledTimes(1);
@@ -501,6 +512,7 @@ describe('migrate', () => {
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			include: ['/about/'],
 		});
 
@@ -530,6 +542,7 @@ describe('migrate', () => {
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			include: ['/index.html'],
 		});
 
@@ -559,6 +572,7 @@ describe('migrate', () => {
 				archivePath: '/tmp/fake.nitpicker',
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				include: ['/nope/'],
 			}),
 		).rejects.toThrow(IncludeNoMatchError);
@@ -580,6 +594,7 @@ describe('migrate', () => {
 				archivePath: '/tmp/fake.nitpicker',
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				include: ['news/'],
 			}),
 		).rejects.toThrow(InvalidIncludeValueError);
@@ -606,6 +621,7 @@ describe('migrate', () => {
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			include: [],
 		});
 
@@ -633,6 +649,7 @@ describe('migrate', () => {
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			include: ['/about/'],
 			onInclude: (event) => events.push(event),
 		});
@@ -643,8 +660,42 @@ describe('migrate', () => {
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			onInclude: (event) => events.push(event),
 		});
 		expect(events).toStrictEqual([]);
+	});
+
+	test('forwards options.adapter through to extractPages instead of hardcoding burgerEditorAdapter', async () => {
+		listInternalResourcesMock.mockReturnValue(iter([]));
+		listInternalPagesMock.mockReturnValue(iter([{ url: 'https://example.com/p' }]));
+		vi.stubGlobal('fetch', vi.fn());
+		getPageHtmlMock.mockResolvedValueOnce(
+			'<!doctype html><html><head></head><body><main><p>x</p></main></body></html>',
+		);
+
+		// A non-BurgerEditor adapter (`TBlocks` is `string`, not `BlockData[]`).
+		// If `migrate()` ever hardcoded `burgerEditorAdapter` internally instead of
+		// forwarding `options.adapter` to `extractPages`, every other test in this
+		// file (which all pass `burgerEditorAdapter`) would still pass — only this
+		// test, asserting on the fake adapter's own markup, would catch it.
+		const fakeAdapter: BlockTargetAdapter<string> = {
+			classify: () => ({ kind: 'converted', blocks: 'FAKE-BLOCKS' }),
+			rewriteRefs: (blocks) => Promise.resolve({ blocks, errors: [] }),
+			render: (blocks, contentClass) =>
+				Promise.resolve(`<div class="${contentClass}">${blocks}</div>`),
+		};
+
+		await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: fakeAdapter,
+		});
+
+		const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
+		expect(written).toBe(
+			`---\nid: 5\n---\n<main class="${CONTENT_CLASS}">FAKE-BLOCKS</main>`,
+		);
 	});
 });

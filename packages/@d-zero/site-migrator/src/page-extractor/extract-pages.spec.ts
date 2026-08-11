@@ -1,3 +1,4 @@
+import type { BlockTargetAdapter } from '../adapter.js';
 import type { ArchiveSession } from '../types.js';
 import type { LayoutBlock } from '@d-zero/anatomist/types';
 
@@ -7,6 +8,7 @@ import path from 'node:path';
 
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
+import { burgerEditorAdapter } from './burger-editor-adapter.js';
 import { extractPages, type ExtractPageResult } from './extract-pages.js';
 
 type RewritePageRefsModule = typeof import('./rewrite-page-refs.js');
@@ -169,6 +171,7 @@ describe('extractPages', () => {
 			items: [{ url: 'https://example.com/about/' }],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -206,6 +209,7 @@ describe('extractPages', () => {
 			items: [{ url: 'https://example.com/x' }],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -232,6 +236,7 @@ describe('extractPages', () => {
 			items: [{ url: 'https://example.com/nope' }],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -249,6 +254,7 @@ describe('extractPages', () => {
 			items: [{ url: 'https://example.com/x' }],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -267,6 +273,7 @@ describe('extractPages', () => {
 			items: [],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 		});
 		expect(getPageHtmlMock).not.toHaveBeenCalled();
@@ -286,6 +293,7 @@ describe('extractPages', () => {
 			],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 2,
 			onResult: (event) => results.push(event),
 		});
@@ -318,6 +326,7 @@ describe('extractPages', () => {
 			items: [{ url: 'https://example.com/p' }],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 		});
 
@@ -340,6 +349,7 @@ describe('extractPages', () => {
 			items: [{ url: 'https://example.com/p' }],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -358,6 +368,7 @@ describe('extractPages', () => {
 			items: [{ url: 'https://example.com/p' }],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 		});
 
@@ -380,6 +391,7 @@ describe('extractPages', () => {
 			items: [{ url: 'https://example.com/p' }],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -412,6 +424,7 @@ describe('extractPages', () => {
 			],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 2,
 		});
 
@@ -433,6 +446,7 @@ describe('extractPages', () => {
 			idUrls: ['https://example.com/index.html', 'https://example.com/about/'],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 		});
 
@@ -452,6 +466,7 @@ describe('extractPages', () => {
 			items: [{ url: 'https://example.com/index.html' }],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 		});
 
@@ -469,6 +484,7 @@ describe('extractPages', () => {
 			idUrls: ['https://example.com/other.html'],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 		});
 
@@ -496,6 +512,7 @@ describe('extractPages', () => {
 			items: [{ url: 'https://example.com/p' }],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -506,7 +523,7 @@ describe('extractPages', () => {
 			outcome: 'extracted',
 			rewriteError: {
 				message:
-					'rewriteBlockRefs failed for 1 item(s): block 0/row 0/item 0: parse5 boom',
+					'adapter.rewriteRefs failed for 1 item(s): block 0/row 0/item 0: parse5 boom',
 			},
 		});
 		const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
@@ -525,6 +542,7 @@ describe('extractPages', () => {
 			items: [{ url: 'https://example.com/p' }],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 			onResult: (event) => results.push(event),
 		});
@@ -547,6 +565,7 @@ describe('extractPages', () => {
 			items: [{ url: 'https://example.com/sub/page.html' }],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 		});
 
@@ -564,6 +583,7 @@ describe('extractPages', () => {
 			items: [{ url: 'https://example.com/x' }],
 			outputDir,
 			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			limit: 1,
 			signal: controller.signal,
 			onResult: (event) => results.push(event),
@@ -589,6 +609,7 @@ describe('extractPages', () => {
 				],
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				limit: 2,
 			});
 
@@ -619,6 +640,7 @@ describe('extractPages', () => {
 				],
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				limit: 2,
 			});
 
@@ -636,6 +658,7 @@ describe('extractPages', () => {
 				items: [{ url: 'https://example.com/a' }, { url: 'https://example.com/b' }],
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				limit: 2,
 			});
 
@@ -657,6 +680,7 @@ describe('extractPages', () => {
 				items: [{ url: 'https://example.com/a' }],
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				limit: 1,
 			});
 
@@ -680,6 +704,7 @@ describe('extractPages', () => {
 				items: [{ url: 'https://example.com/a' }],
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				layoutJsonPath: '/tmp/layout.jsonl',
 				limit: 1,
 			});
@@ -729,6 +754,7 @@ describe('extractPages', () => {
 				items: [{ url: 'https://example.com/p' }],
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				limit: 1,
 				onResult: (event) => results.push(event),
 			});
@@ -750,6 +776,7 @@ describe('extractPages', () => {
 				items: [{ url: 'https://example.com/p' }],
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				limit: 1,
 				onResult: (event) => results.push(event),
 			});
@@ -796,6 +823,7 @@ describe('extractPages', () => {
 				items: [{ url: 'https://example.com/p' }],
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				layoutJsonPath: '/tmp/layout.jsonl',
 				limit: 1,
 				onResult: (event) => results.push(event),
@@ -841,6 +869,7 @@ describe('extractPages', () => {
 				items: [{ url: 'https://example.com/p' }],
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				layoutJsonPath: '/tmp/layout.jsonl',
 				limit: 1,
 				onResult: (event) => results.push(event),
@@ -887,6 +916,7 @@ describe('extractPages', () => {
 				items: [{ url: 'https://example.com/p' }],
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				limit: 1,
 				onResult: (event) => results.push(event),
 			});
@@ -924,6 +954,7 @@ describe('extractPages', () => {
 				items: [{ url: 'https://example.com/p' }],
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				limit: 1,
 				onResult: (event) => results.push(event),
 			});
@@ -945,6 +976,7 @@ describe('extractPages', () => {
 				items: [{ url: 'https://example.com/p' }],
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				limit: 1,
 				onResult: (event) => results.push(event),
 			});
@@ -970,6 +1002,7 @@ describe('extractPages', () => {
 				items: [{ url: 'https://example.com/p' }],
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				limit: 1,
 				onResult: (event) => results.push(event),
 			});
@@ -998,6 +1031,7 @@ describe('extractPages', () => {
 				items: [{ url: 'https://example.com/p' }],
 				outputDir,
 				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
 				limit: 1,
 				onResult: (event) => results.push(event),
 			});
@@ -1009,5 +1043,92 @@ describe('extractPages', () => {
 			const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
 			expect(written).toBe(`---\nid: 5\n---\n${original}`);
 		});
+	});
+});
+
+describe('extractPages with a non-BurgerEditor adapter', () => {
+	// `burgerEditorAdapter`と異なる`TBlocks`（ここでは単純な文字列）を使うフェイクアダプタで
+	// パイプラインを回し、`extractPages`本体がBurgerEditorの型・関数に一切依存していない
+	// （`options.adapter`だけを介して変換先を差し替えられる）ことを検証する。
+	let outputDir = '';
+
+	beforeEach(async () => {
+		outputDir = await mkdtemp(path.join(tmpdir(), 'site-migrator-fake-adapter-'));
+		getPageHtmlMock.mockReset();
+		getFrontmatterMock.mockReset();
+		resolvePageLayoutsMock.mockReset();
+		getFrontmatterMock.mockResolvedValue(null);
+		mockConvertedLayout();
+	});
+
+	afterEach(async () => {
+		await rm(outputDir, { recursive: true, force: true });
+	});
+
+	test('classify/rewriteRefs/renderを経由してBurgerEditor以外の出力を書き出せる', async () => {
+		getPageHtmlMock.mockResolvedValueOnce(
+			docWith('<header></header><main><p>hello</p></main>'),
+		);
+
+		const fakeAdapter: BlockTargetAdapter<string> = {
+			classify: () => ({ kind: 'converted', blocks: 'FAKE-BLOCKS' }),
+			rewriteRefs: (blocks) =>
+				Promise.resolve({ blocks: `${blocks}-rewritten`, errors: [] }),
+			render: (blocks, contentClass) =>
+				Promise.resolve(`<div class="${contentClass}">${blocks}</div>`),
+		};
+
+		const results: ExtractPageResult[] = [];
+		await extractPages({
+			session: FAKE_SESSION,
+			items: [{ url: 'https://example.com/about/' }],
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: fakeAdapter,
+			limit: 1,
+			onResult: (event) => results.push(event),
+		});
+
+		expect(results).toMatchObject([
+			{
+				url: 'https://example.com/about/',
+				outcome: 'extracted',
+				blockConversion: 'converted',
+			},
+		]);
+		const written = await readFile(path.join(outputDir, 'about', 'index.html'), 'utf8');
+		expect(written).toBe(
+			`---\nid: 10000\n---\n<main class="${CONTENT_CLASS}">FAKE-BLOCKS-rewritten</main>`,
+		);
+	});
+
+	test('adapter.classifyがfatalを返した場合は元の完全なHTMLへフォールバックする', async () => {
+		const original = docWith('<main><p>hello</p></main>');
+		getPageHtmlMock.mockResolvedValueOnce(original);
+
+		const fakeAdapter: BlockTargetAdapter<string> = {
+			classify: () => ({ kind: 'fatal', error: new Error('fake adapter refuses') }),
+			rewriteRefs: (blocks) => Promise.resolve({ blocks, errors: [] }),
+			render: (blocks, contentClass) =>
+				Promise.resolve(`<div class="${contentClass}">${blocks}</div>`),
+		};
+
+		const results: ExtractPageResult[] = [];
+		await extractPages({
+			session: FAKE_SESSION,
+			items: [{ url: 'https://example.com/p' }],
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: fakeAdapter,
+			limit: 1,
+			onResult: (event) => results.push(event),
+		});
+
+		expect(results[0]).toMatchObject({
+			outcome: 'extracted',
+			blockConversion: 'fallback',
+		});
+		const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
+		expect(written).toBe(`---\nid: 5\n---\n${original}`);
 	});
 });
