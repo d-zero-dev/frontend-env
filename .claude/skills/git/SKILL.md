@@ -1,7 +1,6 @@
 ---
 name: git
 description: Git 操作ルール（コミット作成、メッセージ形式、事前チェック）
-disable-model-invocation: true
 ---
 
 # コミット作成

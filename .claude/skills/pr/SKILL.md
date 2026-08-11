@@ -1,7 +1,6 @@
 ---
 name: pr
 description: プルリクエストの作成とプッシュ（プリフライトチェック、base 追従、コンフリクト検知含む）
-disable-model-invocation: true
 ---
 
 1. `dev` や `main` ではないトピックブランチにいることを確認する。
