@@ -96,33 +96,42 @@ gh run list --branch main --limit 5
 
 ## 7. リリース内容の提示
 
-現在のバージョンと前回タグからの差分をユーザーに提示し、リリース種別（graduate / alpha / beta / rc）の判断材料にする。
+現在のバージョンと前回タグからの差分をユーザーに提示する。
 
 ```bash
 git describe --tags --abbrev=0
 git log --oneline $(git describe --tags --abbrev=0)..HEAD
 ```
 
-fixed モードのため全パッケージが同一バージョンで上がる。現在のバージョンは `lerna.json` の `version` を確認する。
+fixed モードのため全パッケージが同一バージョンで上がる。現在のバージョンは `lerna.json` の `version` を確認する。`yarn release` は conventional commits からバージョンを自動決定するため、**リリース種別（graduate / alpha / beta / rc）をユーザーに確認する必要はない**。差分は「何が入るか」の確認材料として提示するだけでよい。
 
 ## 8. バージョニングと tag push（ユーザー実行）
 
-`lerna version` はインタラクティブなため Claude からは実行できない。リリース種別を確認したうえで、`!` プレフィックス付きでユーザーに実行を依頼し、**完了報告を待つ**。
+`lerna version` は選択・確認のプロンプトを出すインタラクティブコマンドで、Claude Code の `!` 経由では対話できない（プロンプトが表示されても入力できず止まる）。ユーザーに次の手順を依頼する:
+
+1. Claude Code のセッションを終了する（`exit`）
+2. ターミナルで直接 `yarn release` を実行し、プロンプトに対話的に回答する
+3. 完了したら `claude --continue` で会話に戻る
 
 ```
-! yarn release          # graduate（正式リリース）
-! yarn release:alpha    # alpha プレリリース
-! yarn release:beta     # beta プレリリース
-! yarn release:rc       # RC プレリリース
+yarn release          # graduate（正式リリース。通常はこれだけで十分）
 ```
 
-`lerna version` は自動 push しないため、コミットとタグの push が**必須**。続けて以下を依頼する。
+alpha / beta / rc のプレリリースが必要な場合は、ユーザーが会話の中で明示的に指示したときだけ、上記と同じ exit → 実行 → `--continue` の手順で該当コマンドを案内する。
+
+```
+yarn release:alpha    # alpha プレリリース
+yarn release:beta     # beta プレリリース
+yarn release:rc       # RC プレリリース
+```
+
+`lerna version` は自動 push しないため、コミットとタグの push が**必須**。ユーザーから完了報告を受けたら、続けて以下を依頼する。
 
 ```
 ! git push origin main --follow-tags
 ```
 
-ユーザーから完了報告を受けたら、実際にタグが push されたことを確認してから次へ進む。
+実際にタグが push されたことを確認してから次へ進む。
 
 ```bash
 git ls-remote --tags origin
