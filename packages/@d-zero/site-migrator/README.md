@@ -1,6 +1,6 @@
 # `@d-zero/site-migrator`
 
-`.nitpicker` アーカイブを入力とするウェブサイト移植ツールキット。サブリソースのローカル DL、ページ HTML のレイアウト剥がしと BurgerEditor ブロックへの変換、`.nitpicker` DB のページメタと採番した整数 id を YAML frontmatter として prepend する CLI、同一オリジン参照を後段パイプライン向けに書き換えるリライタ、および周辺ユーティリティ関数群を提供する。
+`.nitpicker` アーカイブを入力とするウェブサイト移植ツールキット。サブリソースのローカル DL、ページ HTML のレイアウト剥がしとブロック CMS 向け構造化データへの変換（既定は BurgerEditor ブロック、`BlockTargetAdapter` で差し替え可能）、`.nitpicker` DB のページメタと採番した整数 id を YAML frontmatter として prepend する CLI、同一オリジン参照を後段パイプライン向けに書き換えるリライタ、および周辺ユーティリティ関数群を提供する。
 
 ## Installation
 
@@ -39,6 +39,7 @@ import {
 	rewriteAssetRefs,
 	extractMainContent,
 	extractPages,
+	burgerEditorAdapter,
 	formatFrontmatter,
 	splitTitle,
 	assignPageIds,
@@ -54,7 +55,8 @@ import {
 
 | 関数                    | 概要                                                                                                |
 | ----------------------- | --------------------------------------------------------------------------------------------------- |
-| `migrate`               | アーカイブを開き、リソース DL とページ抽出を並列実行する全体フロー                                  |
+| `migrate`               | アーカイブを開き、リソース DL とページ抽出を並列実行する全体フロー。`adapter` オプション必須        |
+| `burgerEditorAdapter`   | `migrate`/`extractPages` の `adapter` に渡す、BurgerEditor 向け既定の `BlockTargetAdapter` 実装     |
 | `parseIncludePattern`   | `--include` 生値 1 個を pathname プレフィックス/完全一致パターンへ解釈する純関数                    |
 | `filterUrlsByInclude`   | `--include` 値のリストでページ URL リストを絞り込む純関数。未マッチ値があれば `IncludeNoMatchError` |
 | `openArchive`           | `.nitpicker` を開いてセッションを返す（要 `close()`）                                               |
@@ -66,7 +68,7 @@ import {
 | `urlToOutputPath`       | URL を `<htdocs-dir>` 配下のローカルパスへ変換                                                      |
 | `rewriteAssetRefs`      | HTML 内のアセット参照を resolver で書き換える（streaming）                                          |
 | `extractMainContent`    | レイアウト共通部分を剥がして本文要素の `outerHTML` を返す                                           |
-| `extractPages`          | ページ一覧に `extractMainContent` + `getFrontmatter` を適用して書き出す                             |
+| `extractPages`          | ページ一覧に `extractMainContent` + `getFrontmatter` を適用して書き出す。`adapter` オプション必須   |
 | `formatFrontmatter`     | `Frontmatter` を後段パイプライン互換の `---\n…\n---\n` YAML ブロック文字列にする                    |
 | `splitTitle`            | タイトル文字列を `｜` / `\|` で分割し `{title, rawTitle?}` を返す純関数                             |
 | `assignPageIds`         | URL リストから ディレクトリグループ採番ルールに従って `Map<url, id>` を組み立てる純関数             |
@@ -75,6 +77,21 @@ import {
 | `resolveIdTemplate`     | `{{<id>}}` token を id→URL マップで実 URL に解決する純関数（後段ビルドツール用）                    |
 
 `Frontmatter` の出力構造は [`./src/types.ts`](./src/types.ts) を参照。`title` / `og.title` / `twitter.title` は `｜` `|` で分割して最初の非空セグメントを採用し、分割が起きたときだけ `rawTitle` 等に元文字列を保持する。
+
+### 変換先ブロック CMS の差し替え（`BlockTargetAdapter`）
+
+`extractPages`/`migrate` はレイアウト解析結果（anatomist 由来の `LayoutAnalysisResult`）をどう構造化データへ変換しどう HTML にレンダリングするかを一切知らず、必須オプション `adapter`（`BlockTargetAdapter<TBlocks>`）に委譲する。fetch・main 判定・anatomist 呼び出し・id 採番・frontmatter 生成・同一オリジン参照の `{{<id>}}` 解決・書き出しは変換先に依存しない共通処理として `extractPages` 自身が担う。
+
+アダプタは 4 メソッドで構成される。
+
+| メソッド        | 必須 | 役割                                                                                  |
+| --------------- | ---- | ------------------------------------------------------------------------------------- |
+| `classify`      | 必須 | anatomist のレイアウト解析結果から `TBlocks` を組み立てる。構造化できなければ `fatal` |
+| `rewriteRefs`   | 必須 | `TBlocks` 内の同一オリジン URL を `pageIdLookup` で書き換える                         |
+| `render`        | 必須 | `TBlocks` を最終的なラッパー HTML 文字列へレンダリングする                            |
+| `downloadFiles` | 任意 | コーパス全体を 1 回のバッチで扱い、ダウンロード対象アイテムの重複 DL を回避する       |
+
+BurgerEditor 向けの既定実装が `burgerEditorAdapter` で、`dz-migrate` CLI はこれを固定で使う。プログラマティック API では別のブロック CMS 向けに独自の `BlockTargetAdapter` 実装を渡せる（型と `@example` は [`./src/adapter.ts`](./src/adapter.ts) を参照）。
 
 ### `extractMainContent` のヒューリスティクス
 
@@ -137,11 +154,11 @@ import {
 
 `extractPages` は `extractMainContent` と `getFrontmatter` を並列実行し、main 要素が見つかったページには続けて BurgerEditor ブロック変換パイプライン（後述）を適用したうえで、生成した YAML ブロックを本文の先頭に prepend してから書き出す。整数 id は常に付与されるので「DB 行なし」のページでも `---\nid: <number>\n---\n` ブロックは出る。`getFrontmatter` が例外を投げた場合は fail-soft で id-only frontmatter と本文を書き出し、`onResult` の outcome に `metaError` を載せて警告する（`migrate()` レポートでは `pagesMetaFailed` として集計される）。
 
-### BurgerEditor ブロック変換パイプライン（`dz-migrate` のデフォルト動作）
+### BurgerEditor ブロック変換パイプライン（`burgerEditorAdapter` の内部実装）
 
-`.nitpicker` アーカイブベースのレイアウト剥がしだけでは `data-bge-*` マーカーが無く、BurgerEditor 上では「1 個の wysiwyg フォールバックブロック」としてしか扱えない。site-migrator の存在意義は既存サイトを BurgerEditor で編集可能なブロック構造に変換することなので、このブロック変換はオプトインフラグではなく `extractPages` / `dz-migrate` の既定動作になっている（`--content-class` は必須オプションだが、指定すれば必ず変換が走る）。
+`.nitpicker` アーカイブベースのレイアウト剥がしだけでは `data-bge-*` マーカーが無く、BurgerEditor 上では「1 個の wysiwyg フォールバックブロック」としてしか扱えない。site-migrator の存在意義は既存サイトを BurgerEditor で編集可能なブロック構造に変換することなので、このブロック変換はオプトインフラグではなく `dz-migrate` の既定動作になっている（`--content-class` は必須オプションだが、指定すれば必ず変換が走る。`dz-migrate` は `adapter` に `burgerEditorAdapter` を固定で渡す）。
 
-処理は次の要素で構成される（いずれも `src/page-extractor/` 配下、統合前は内部 API だったが `extractPages` に組み込まれた現在も `index.ts` からは export していない）:
+処理は次の要素で構成される（いずれも `src/page-extractor/` 配下）。`resolvePageLayouts`/`mergeMainContent`/`isMainConsistent` は `extractPages` 自身が変換先非依存の共通処理として直接呼び、`classifyBlockItem`/`layoutToBlockData`/`rewriteBlockRefs`/`renderBlocks` は前節の `burgerEditorAdapter`（`index.ts` から export 済み）が内部で呼ぶ。いずれの個別関数自体も `index.ts` からは export していない:
 
 | 関数                 | 概要                                                                                                                                                                                                                                                                     |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

@@ -1,3 +1,10 @@
+export type {
+	BlockTargetAdapter,
+	ClassifyResult,
+	DownloadFilesContext,
+	RewriteRefsResult,
+} from './adapter.js';
+
 export { openArchive } from './archive/open-archive.js';
 export { listInternalPages } from './archive/list-internal-pages.js';
 export { listInternalResources } from './archive/list-internal-resources.js';
@@ -28,6 +35,7 @@ export {
 export { splitTitle } from './html/split-title.js';
 export type { TitlePair } from './html/split-title.js';
 
+export { burgerEditorAdapter } from './page-extractor/burger-editor-adapter.js';
 export { extractPages } from './page-extractor/extract-pages.js';
 export type {
 	ExtractPageItem,

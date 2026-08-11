@@ -1,7 +1,7 @@
+import type { BlockTargetAdapter } from '../adapter.js';
 import type { DownloadResult } from '../downloader/download-resources.js';
 import type { ExtractMainCriterion } from '../html/extract-main-content.js';
 import type { ArchiveSession, Frontmatter } from '../types.js';
-import type { BlockData } from '@burger-editor/core';
 
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -19,18 +19,11 @@ import { parseMainTag } from '../html/parse-main-tag.js';
 
 import { assignPageIds } from './assign-page-ids.js';
 import { isMainConsistent } from './check-main-consistency.js';
-import { downloadBlockFiles } from './download-block-files.js';
-import {
-	DEFAULT_PRIMARY_VIEWPORT_NAME,
-	layoutToBlockData,
-	selectPrimary,
-} from './layout-to-block-data.js';
-import { renderBlocks } from './render-blocks.js';
+import { DEFAULT_PRIMARY_VIEWPORT_NAME, selectPrimary } from './layout-to-block-data.js';
 import {
 	resolvePageLayouts,
 	type ResolvePageLayoutResult,
 } from './resolve-page-layout.js';
-import { rewriteBlockRefs, type RewriteBlockRefsError } from './rewrite-block-refs.js';
 import {
 	buildPageIdLookup,
 	rewritePageRefs,
@@ -45,10 +38,15 @@ export interface ExtractPageItem {
 	url: string;
 }
 
-export interface ExtractPagesOptions {
+export interface ExtractPagesOptions<TBlocks> {
 	session: ArchiveSession;
 	items: readonly ExtractPageItem[];
 	outputDir: string;
+	/**
+	 * anatomistのレイアウト解析結果を変換先のブロックCMS向け構造化データへ変換する
+	 * アダプタ。BurgerEditor向けには`burgerEditorAdapter`を渡す。
+	 */
+	adapter: BlockTargetAdapter<TBlocks>;
 	/**
 	 * {@link assignPageIds}の採番母集合となるURL一覧。省略時は`items`のURLから
 	 * 採番する（従来互換）。`items`のスーパーセットであること — 呼び出し側が
@@ -61,9 +59,10 @@ export interface ExtractPagesOptions {
 	 */
 	idUrls?: readonly string[];
 	/**
-	 * BurgerEditorの`editableArea`セレクタに対応させるクラス名。生成したブロック群を
-	 * 埋め込む既存main要素自身の`classList`に追加する（新規ラッパー要素は追加しない）。
-	 * 移行先サイトのBurgerEditor設定に依存する値であり、決め打ちのデフォルトを持たせると
+	 * `adapter.render`に転送されるクラス名。生成したブロック群を埋め込む既存main要素
+	 * 自身の`classList`に追加する（新規ラッパー要素は追加しない、{@link mergeMainContent}
+	 * 参照）。BurgerEditor向け（`burgerEditorAdapter`）では`editableArea`セレクタに対応
+	 * させる値。移行先の変換対象設定に依存する値であり、決め打ちのデフォルトを持たせると
 	 * 気づかれないまま不整合な出力を生成しうるため必須。
 	 */
 	contentClass: string;
@@ -106,7 +105,7 @@ export type ExtractPageResult =
 			blockConversionError?: Error;
 			/**
 			 * Present only when {@link rewritePageRefs} (unconverted/fallback pages)
-			 * or {@link rewriteBlockRefs} (converted/partial pages, one aggregate
+			 * or `adapter.rewriteRefs` (converted/partial pages, one aggregate
 			 * `Error` per page even when multiple items failed) threw. The page
 			 * body was still written (fail-soft), but with original asset / page
 			 * references instead of the rewritten ones for the affected part.
@@ -148,41 +147,43 @@ interface FatalBlockOutcome {
 	readonly error: Error;
 }
 
-interface ResolvedBlockOutcome {
+interface ResolvedBlockOutcome<TBlocks> {
 	readonly kind: 'converted' | 'partial';
-	readonly blocks: BlockData[];
+	readonly blocks: TBlocks;
 }
 
-type BlockOutcome = FatalBlockOutcome | ResolvedBlockOutcome;
+type BlockOutcome<TBlocks> = FatalBlockOutcome | ResolvedBlockOutcome<TBlocks>;
 
 /**
  * For each page URL, reads the HTML snapshot from the archive, strips the
  * shared layout via {@link extractMainContent}, reads the per-page metadata
  * from the `.nitpicker` DB via {@link getFrontmatter}, converts the page's
- * anatomist layout analysis into BurgerEditor blocks (see below), rewrites
- * same-origin URL references via {@link rewritePageRefs}, and writes the
- * result to disk under `outputDir` mirroring the URL pathname.
+ * anatomist layout analysis into the caller's `options.adapter` block
+ * structure (see below), rewrites same-origin URL references via
+ * {@link rewritePageRefs}, and writes the result to disk under `outputDir`
+ * mirroring the URL pathname.
  *
  * Mirrors {@link import('../downloader/download-resources.js').downloadResources}
  * in shape: failures (including pages absent from the archive) are surfaced via
  * `onResult`, never thrown, so a single bad page does not abort the run.
  *
- * ## BurgerEditorブロック変換パイプライン（親Issue #977）
+ * ## ブロック変換パイプライン（アダプタ経由、親Issue #977）
  *
  * 全ページの`getPageHtml`+`extractMainContent`+`getFrontmatter`を並列実行し、
  * main要素が見つかったページ（`extracted`候補）と見つからなかったページ（`fallback`）を
  * 仕分ける。main候補となった全URLはまとめて**1回**の{@link resolvePageLayouts}呼び出しに
  * 渡す — ページごとに呼ぶとPuppeteerブラウザをページ数だけlaunch/closeすることになり
  * 実運用サイト規模では致命的に遅くなるため、ブラウザを1回だけ起動して使い回す。続けて
- * 各ページについて{@link layoutToBlockData}でBurgerEditorの`BlockData[]`へ変換し、
- * {@link rewriteBlockRefs}で`BlockData[]`内の同一オリジンURL（wysiwyg内の`<a href>`等、
- * button.link、image.path[]、download-file.path）を書き換えてから{@link renderBlocks}で
- * `data-bge-*`付きHTMLへ変換し、{@link mergeMainContent}でラッパー要素を挟まずに既存main
- * 要素へ埋め込み、frontmatter→書き出し、という既存の後段パイプラインへ合流させる。
+ * 各ページについて`options.adapter.classify`で変換先の構造化データ（`TBlocks`）へ変換し、
+ * `options.adapter.rewriteRefs`で構造化データ内の同一オリジンURLを書き換えてから
+ * `options.adapter.render`でラッパーHTMLへ変換し、{@link mergeMainContent}でラッパー要素を
+ * 挟まずに既存main要素へ埋め込み、frontmatter→書き出し、という既存の後段パイプラインへ
+ * 合流させる。main要素検出自体（`extractMainContent`とanatomist検出結果の整合性）は
+ * `options.adapter`の関与なくこの関数自身が判定する（{@link isMainConsistent}参照）。
  *
- * ブロック変換したページの本文はこの時点で既に`rewriteBlockRefs`により書き換え済みのため、
- * 後段の`rewritePageRefs`（本文全体への同一オリジン参照書き換え）は**適用しない** —
- * 適用すると`rewriteBlockRefs`が既に埋め込んだ`{{<id>}}`トークンを`rewritePageRefs`が
+ * ブロック変換したページの本文はこの時点で既に`adapter.rewriteRefs`により書き換え済みの
+ * ため、後段の`rewritePageRefs`（本文全体への同一オリジン参照書き換え）は**適用しない** —
+ * 適用すると`adapter.rewriteRefs`が既に埋め込んだ`{{<id>}}`トークンを`rewritePageRefs`が
  * 通常URLとして再解釈し、`%7B%7B<id>%7D%7D`のようなpercent-encode文字列へ壊してしまう
  * （ブロック変換が効かなかったページ・main非検出ページは元HTMLに`{{<id>}}`token が
  * 存在しないため、従来通り`rewritePageRefs`を適用する）。
@@ -190,9 +191,10 @@ type BlockOutcome = FatalBlockOutcome | ResolvedBlockOutcome;
  * ### ページ単位の致命的フォールバック
  *
  * 以下のいずれかに該当する場合、そのページのブロック変換は諦め、`blockConversion:
- * 'fallback'`として**ページ全体の元の完全なHTML**（`data-bge-*`マーカー無し）を書き出す
- * （品質判断によるページ全体フォールバックは行わない — 個別ブロックの低信頼度は
- * `blockConversion: 'partial'`として扱い、ページ全体は諦めない）:
+ * 'fallback'`として**ページ全体の元の完全なHTML**（{@link toRawFallback}が組み立てる、
+ * adapter未介入のプレーンHTML）を書き出す（品質判断によるページ全体フォールバックは
+ * 行わない — 個別ブロックの低信頼度は`blockConversion: 'partial'`として扱い、ページ全体
+ * は諦めない）:
  *
  * - {@link resolvePageLayouts}がそのページについて完全に失敗した（`missing` outcome。
  *   ライブURL到達不可等）
@@ -202,9 +204,9 @@ type BlockOutcome = FatalBlockOutcome | ResolvedBlockOutcome;
  *   `extractMainContent`のマッチ結果から構築したセレクタを`mainContentSelector`として
  *   渡し、anatomistに同じ要素を解析させているため構造的に整合が保証されており、この
  *   チェックは行わない）
- * - {@link layoutToBlockData}が空の`blocks`を返した（anatomist側で`root`が
- *   見つからなかった — mainは検出できたがブロック化できる構造が無い）
- * - {@link renderBlocks}または{@link mergeMainContent}が例外を投げた
+ * - `options.adapter.classify`が`{kind: 'fatal'}`を返した（構造化できる構造が見つから
+ *   なかった等、理由はアダプタ実装依存）
+ * - `options.adapter.render`または{@link mergeMainContent}が例外を投げた
  *
  * Output layout per file:
  *
@@ -213,28 +215,31 @@ type BlockOutcome = FatalBlockOutcome | ResolvedBlockOutcome;
  *   non-empty meta from the DB. The id is the only mandatory field.
  * - The body that follows depends on the outcome:
  *   - `extracted`（`blockConversion: 'converted'`/`'partial'`）— main要素の`outerHTML`
- *     フラグメント。子要素はBurgerEditorブロック群に置き換わり、`contentClass`が
+ *     フラグメント。子要素はadapterが生成したブロック群に置き換わり、`contentClass`が
  *     main要素自身の`classList`に追加されている。
  *   - `extracted`（`blockConversion: 'fallback'`）／`fallback` — the entire original
  *     document, DOCTYPE included.
  * - In both cases same-origin URLs are rewritten: `<a href>` / `<form action>`
  *   pointing at a known page → `{{<id>}}<query><fragment>`; other same-origin
  *   asset references → root-relative paths. Cross-origin URLs are left
- *   untouched. ブロック変換したページ（`converted`/`partial`）は`rewriteBlockRefs`が
- *   `button.link`をページ参照、`image.path[]`/`download-file.path`をアセット参照として
- *   個別に扱う（詳細は{@link rewriteBlockRefs}のJSDoc参照）。
+ *   untouched. ブロック変換したページ（`converted`/`partial`）は`adapter.rewriteRefs`が
+ *   アイテム種別ごとにページ参照/アセット参照を判定する（詳細は使用中のアダプタ実装の
+ *   JSDoc参照。例: {@link import('./burger-editor-adapter.js').burgerEditorAdapter}）。
  *
  * Rewrite failure is fail-soft: the original HTML body is written and
  * `rewriteError` is set on the result so the caller can log a warning without
  * losing the page.
  * @param options
  */
-export async function extractPages(options: ExtractPagesOptions): Promise<void> {
+export async function extractPages<TBlocks>(
+	options: ExtractPagesOptions<TBlocks>,
+): Promise<void> {
 	const {
 		session,
 		items,
 		outputDir,
 		contentClass,
+		adapter,
 		layoutJsonPath,
 		idUrls,
 		knownResourceUrls = new Set(),
@@ -380,27 +385,26 @@ export async function extractPages(options: ExtractPagesOptions): Promise<void> 
 		});
 	}
 
-	// --- Resolve each matched page's BlockData (or the fatal reason it
-	// can't be produced), independent of rendering. ---
-	const blockOutcomeByUrl = new Map<string, BlockOutcome>();
+	// --- Resolve each matched page's TBlocks (or the fatal reason it can't be
+	// produced), independent of rendering. ---
+	const blockOutcomeByUrl = new Map<string, BlockOutcome<TBlocks>>();
 	for (const state of matchedStates) {
 		blockOutcomeByUrl.set(
 			state.entry.url,
-			resolveBlockOutcome(state, layoutResultsByUrl),
+			resolveBlockOutcome(state, layoutResultsByUrl, adapter),
 		);
 	}
 
 	// --- download-file dedupe + real DL, batched across every page that has a
-	// usable BlockData tree (fatal pages have nothing to scan). ---
-	const blocksByUrl = new Map<string, readonly BlockData[]>();
+	// usable TBlocks tree (fatal pages have nothing to scan). ---
+	const blocksByUrl = new Map<string, TBlocks>();
 	for (const [url, outcome] of blockOutcomeByUrl) {
 		if (outcome.kind !== 'fatal') {
 			blocksByUrl.set(url, outcome.blocks);
 		}
 	}
 	if (blocksByUrl.size > 0) {
-		await downloadBlockFiles({
-			blocksByUrl,
+		await adapter.downloadFiles?.(blocksByUrl, {
 			outputDir,
 			knownResourceUrls,
 			limit,
@@ -416,11 +420,12 @@ export async function extractPages(options: ExtractPagesOptions): Promise<void> 
 			const { entry } = state;
 			try {
 				if (!state.matched) {
-					let bodyHtml = state.extractedHtml;
+					const fallback = toRawFallback(state);
+					let bodyHtml = fallback.html;
 					let rewriteError: Error | undefined;
 					try {
 						bodyHtml = await rewritePageRefs({
-							html: state.extractedHtml,
+							html: fallback.html,
 							baseUrl: entry.url,
 							pageIdLookup,
 						});
@@ -449,6 +454,7 @@ export async function extractPages(options: ExtractPagesOptions): Promise<void> 
 					contentClass,
 					entry.url,
 					pageIdLookup,
+					adapter,
 				);
 
 				let bodyHtml = built.body;
@@ -499,25 +505,29 @@ export async function extractPages(options: ExtractPagesOptions): Promise<void> 
 /**
  * `resolvePageLayouts`の結果と`extractMainContent`の結果から、そのページのブロック変換が
  * 続行可能かを判定する。続行不能（致命的）と判定した場合は理由を`Error`として保持する。
+ * `TBlocks`の形に依存しないmain要素検出結果の整合チェック（#978）はこの関数自身が行い、
+ * それを通過したものだけを`adapter.classify`（アダプタ実装依存の構造化可否判定）へ渡す。
  *
- * main要素検出結果の整合チェック（#978）は`resolved-from-json`のときのみ行う。
- * `resolved-live`はライブ解析の呼び出し時点で`extractMainContent`のマッチ結果から
- * 構築したセレクタを`mainContentSelector`として渡し、anatomistに同じ要素を解析させて
- * いるため（`extract-pages.ts`の`resolvePageLayouts`呼び出し箇所参照）、構造的に整合が
- * 保証されており追加チェックは不要。
+ * main要素検出結果の整合チェックは`resolved-from-json`のときのみ行う。`resolved-live`は
+ * ライブ解析の呼び出し時点で`extractMainContent`のマッチ結果から構築したセレクタを
+ * `mainContentSelector`として渡し、anatomistに同じ要素を解析させているため
+ * （`extract-pages.ts`の`resolvePageLayouts`呼び出し箇所参照）、構造的に整合が保証されて
+ * おり追加チェックは不要。
  * @param state
  * @param state.entry
  * @param state.entry.url
  * @param state.extractedHtml
  * @param layoutResultsByUrl
+ * @param adapter
  */
-function resolveBlockOutcome(
+function resolveBlockOutcome<TBlocks>(
 	state: {
 		readonly entry: { readonly url: string };
 		readonly extractedHtml: string;
 	},
 	layoutResultsByUrl: ReadonlyMap<string, ResolvePageLayoutResult>,
-): BlockOutcome {
+	adapter: BlockTargetAdapter<TBlocks>,
+): BlockOutcome<TBlocks> {
 	const layoutEvent = layoutResultsByUrl.get(state.entry.url);
 	if (!layoutEvent) {
 		return {
@@ -530,8 +540,8 @@ function resolveBlockOutcome(
 	}
 
 	const { results, outcome } = layoutEvent;
-	const primary = selectPrimary(results, DEFAULT_PRIMARY_VIEWPORT_NAME);
 	if (outcome === 'resolved-from-json') {
+		const primary = selectPrimary(results, DEFAULT_PRIMARY_VIEWPORT_NAME);
 		const matchedTag = parseMainTag(state.extractedHtml);
 		if (!isMainConsistent(matchedTag, primary?.root ?? null)) {
 			return {
@@ -543,64 +553,88 @@ function resolveBlockOutcome(
 		}
 	}
 
-	const { blocks, fallbacks } = layoutToBlockData(results);
-	if (blocks.length === 0) {
-		return {
-			kind: 'fatal',
-			error: new Error(
-				'レイアウト解析でブロック化可能なmain要素の子構造が見つかりませんでした',
-			),
-		};
-	}
+	return adapter.classify(results);
+}
 
-	return { kind: fallbacks.length > 0 ? 'partial' : 'converted', blocks };
+/**
+ * 「変換が一切行われない」2つのケース（main非検出／main検出はできたがadapterが構造化
+ * できなかった）を統一的に表す内部ヘルパー値（adapterの公開型ではなく、この関数自身の
+ * 実装詳細）。常に元の完全なHTML（DOCTYPE含む）を持つ。
+ */
+interface RawFallback {
+	readonly html: string;
+}
+
+/**
+ * @param state
+ * @param state.originalHtml
+ * @param state.extractedHtml
+ * @param state.matched
+ */
+function toRawFallback(state: {
+	readonly originalHtml: string;
+	readonly extractedHtml: string;
+	readonly matched: boolean;
+}): RawFallback {
+	// main非検出時（`!matched`）は`extractMainContent`が不一致で`extractedHtml`に元のHTML
+	// 全体そのものを返すため、`originalHtml`/`extractedHtml`のどちらを使っても値は一致する
+	// が、意図を明示するため分岐する。
+	return { html: state.matched ? state.originalHtml : state.extractedHtml };
 }
 
 /**
  * `blockOutcome`から本文HTMLと`blockConversion`分類を組み立てる。ブロック変換できた
- * ページ（`converted`/`partial`）は`renderBlocks`を呼ぶ**前**に{@link rewriteBlockRefs}で
- * `BlockData[]`内の同一オリジンURLを書き換えるため、返す`body`はこの時点で既に
- * 書き換え済み（`alreadyRewritten: true`）— 呼び出し側は`rewritePageRefs`を`body`全体へ
- * 重ねて適用してはならない（`{{<id>}}`トークンの二重処理による文字化けを防ぐため）。
- * `renderBlocks`/`mergeMainContent`が例外を投げた場合もここでfatalとして扱い、ページ全体の
- * 元の完全なHTMLへフォールバックする（この場合`alreadyRewritten: false`— 元の完全なHTMLは
- * 未書き換えのため、呼び出し側の従来通りの`rewritePageRefs`適用が必要）。
+ * ページ（`converted`/`partial`）は`adapter.render`を呼ぶ**前**に`adapter.rewriteRefs`で
+ * `TBlocks`内の同一オリジンURLを書き換えるため、返す`body`はこの時点で既に書き換え済み
+ * （`alreadyRewritten: true`）— 呼び出し側は`rewritePageRefs`を`body`全体へ重ねて適用しては
+ * ならない（`{{<id>}}`トークンの二重処理による文字化けを防ぐため）。`adapter.render`/
+ * {@link mergeMainContent}が例外を投げた場合もここでfatalとして扱い、{@link toRawFallback}
+ * が組み立てるページ全体の元の完全なHTMLへフォールバックする（この場合
+ * `alreadyRewritten: false`— 元の完全なHTMLは未書き換えのため、呼び出し側の従来通りの
+ * `rewritePageRefs`適用が必要）。
  * @param state
  * @param state.originalHtml
  * @param state.extractedHtml
+ * @param state.matched
  * @param blockOutcome
  * @param contentClass
  * @param baseUrl
  * @param pageIdLookup
+ * @param adapter
  */
-async function buildExtractedBody(
-	state: { readonly originalHtml: string; readonly extractedHtml: string },
-	blockOutcome: BlockOutcome,
+async function buildExtractedBody<TBlocks>(
+	state: {
+		readonly originalHtml: string;
+		readonly extractedHtml: string;
+		readonly matched: boolean;
+	},
+	blockOutcome: BlockOutcome<TBlocks>,
 	contentClass: string,
 	baseUrl: string,
 	pageIdLookup: PageIdLookup,
+	adapter: BlockTargetAdapter<TBlocks>,
 ): Promise<{
 	body: string;
 	blockConversion: 'converted' | 'partial' | 'fallback';
 	blockConversionError?: Error;
 	alreadyRewritten: boolean;
-	blockRewriteErrors?: readonly RewriteBlockRefsError[];
+	blockRewriteErrors?: readonly Error[];
 }> {
 	if (blockOutcome.kind === 'fatal') {
 		return {
-			body: state.originalHtml,
+			body: toRawFallback(state).html,
 			blockConversion: 'fallback',
 			blockConversionError: blockOutcome.error,
 			alreadyRewritten: false,
 		};
 	}
 	try {
-		const rewritten = await rewriteBlockRefs({
-			blocks: blockOutcome.blocks,
+		const rewritten = await adapter.rewriteRefs(
+			blockOutcome.blocks,
 			baseUrl,
 			pageIdLookup,
-		});
-		const wrapperHtml = await renderBlocks(rewritten.blocks, { contentClass });
+		);
+		const wrapperHtml = await adapter.render(rewritten.blocks, contentClass);
 		const merged = mergeMainContent({
 			mainHtml: state.extractedHtml,
 			wrapperHtml,
@@ -614,7 +648,7 @@ async function buildExtractedBody(
 		};
 	} catch (error) {
 		return {
-			body: state.originalHtml,
+			body: toRawFallback(state).html,
 			blockConversion: 'fallback',
 			blockConversionError: toError(error),
 			alreadyRewritten: false,
@@ -623,23 +657,20 @@ async function buildExtractedBody(
 }
 
 /**
- * {@link rewriteBlockRefs}が返す複数の項目単位のエラーを、既存の`rewriteError?: Error`
- * （1ページにつき1個）という`ExtractPageResult`の形へ合わせるため単一の`Error`へ集約する。
+ * `adapter.rewriteRefs`が返す複数の項目単位のエラー（どのアイテムが失敗したかの詳細は
+ * `error.message`にアダプタ側が整形済みで含める契約、{@link BlockTargetAdapter}参照）を、
+ * 既存の`rewriteError?: Error`（1ページにつき1個）という`ExtractPageResult`の形へ合わせる
+ * ため単一の`Error`へ集約する。
  * @param errors
  */
 function aggregateBlockRewriteErrors(
-	errors: readonly RewriteBlockRefsError[] | undefined,
+	errors: readonly Error[] | undefined,
 ): Error | undefined {
 	if (!errors || errors.length === 0) {
 		return undefined;
 	}
-	const detail = errors
-		.map(
-			(e) =>
-				`block ${e.blockIndex}/row ${e.rowIndex}/item ${e.itemIndex}: ${e.error.message}`,
-		)
-		.join('; ');
-	return new Error(`rewriteBlockRefs failed for ${errors.length} item(s): ${detail}`);
+	const detail = errors.map((e) => e.message).join('; ');
+	return new Error(`adapter.rewriteRefs failed for ${errors.length} item(s): ${detail}`);
 }
 
 /**

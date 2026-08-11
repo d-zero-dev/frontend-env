@@ -3,6 +3,7 @@ import { parseArgs } from 'node:util';
 
 import { IncludeNoMatchError, parseIncludePattern } from './include-filter.js';
 import { migrate } from './migrate.js';
+import { burgerEditorAdapter } from './page-extractor/burger-editor-adapter.js';
 
 const USAGE = `Usage:
   dz-migrate <archive.nitpicker> -o <htdocs-dir> --content-class <name> [--layout-json <path>] [--limit <n>] [--extract-limit <n>] [--include <path>]...
@@ -130,6 +131,7 @@ async function main(argv: readonly string[]): Promise<number> {
 			archivePath,
 			outputDir,
 			contentClass,
+			adapter: burgerEditorAdapter,
 			layoutJsonPath,
 			downloadLimit,
 			extractLimit,

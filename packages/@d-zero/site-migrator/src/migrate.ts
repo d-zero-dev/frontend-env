@@ -1,3 +1,4 @@
+import type { BlockTargetAdapter } from './adapter.js';
 import type { DownloadItem, DownloadResult } from './downloader/download-resources.js';
 import type {
 	ExtractPageItem,
@@ -11,14 +12,19 @@ import { downloadResources } from './downloader/download-resources.js';
 import { filterUrlsByInclude } from './include-filter.js';
 import { extractPages } from './page-extractor/extract-pages.js';
 
-export interface MigrateOptions {
+export interface MigrateOptions<TBlocks> {
 	archivePath: string;
 	outputDir: string;
 	/**
-	 * BurgerEditorの`editableArea`セレクタに対応させるクラス名。生成したブロック群を
-	 * 埋め込む既存main要素自身の`classList`に追加する。移行先サイトのBurgerEditor設定に
-	 * 依存する値であり、決め打ちのデフォルトを持たせると気づかれないまま不整合な出力を
-	 * 生成しうるため必須（{@link import('./page-extractor/extract-pages.js').ExtractPagesOptions.contentClass}参照）。
+	 * anatomistのレイアウト解析結果を変換先のブロックCMS向け構造化データへ変換する
+	 * アダプタ。BurgerEditor向けには`burgerEditorAdapter`を渡す。
+	 */
+	adapter: BlockTargetAdapter<TBlocks>;
+	/**
+	 * `adapter.render`に転送されるクラス名。生成したブロック群を埋め込む既存main要素
+	 * 自身の`classList`に追加する。移行先の変換対象設定に依存する値であり、決め打ちの
+	 * デフォルトを持たせると気づかれないまま不整合な出力を生成しうるため必須
+	 * （{@link import('./page-extractor/extract-pages.js').ExtractPagesOptions.contentClass}参照）。
 	 */
 	contentClass: string;
 	/**
@@ -111,11 +117,14 @@ export interface MigrateReport {
  * abort the whole migration.
  * @param options
  */
-export async function migrate(options: MigrateOptions): Promise<MigrateReport> {
+export async function migrate<TBlocks>(
+	options: MigrateOptions<TBlocks>,
+): Promise<MigrateReport> {
 	const {
 		archivePath,
 		outputDir,
 		contentClass,
+		adapter,
 		layoutJsonPath,
 		downloadLimit,
 		extractLimit,
@@ -202,6 +211,7 @@ export async function migrate(options: MigrateOptions): Promise<MigrateReport> {
 			idUrls: allPageUrls,
 			outputDir,
 			contentClass,
+			adapter,
 			layoutJsonPath,
 			knownResourceUrls,
 			limit: extractLimit,
