@@ -1723,7 +1723,7 @@ __metadata:
     dialog-toggle-events-polyfill: "npm:1.1.4"
     dotenv: "npm:17.4.2"
     husky: "npm:9.1.7"
-    invokers-polyfill: "npm:0.6.1"
+    invokers-polyfill: "npm:1.0.3"
     kamado: "npm:1.3.0"
     kiso.css: "npm:1.2.4"
     npm-run-all2: "npm:8.0.4"
@@ -1781,7 +1781,7 @@ __metadata:
     parse5-html-rewriting-stream: "npm:8.0.1"
     puppeteer: "npm:25.3.0"
   bin:
-    dz-migrate: ./dist/cli.js
+    dz-migrate: dist/cli.js
   languageName: unknown
   linkType: soft
 
@@ -11958,10 +11958,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"invokers-polyfill@npm:0.6.1":
-  version: 0.6.1
-  resolution: "invokers-polyfill@npm:0.6.1"
-  checksum: 10c0/c16ca6efbdd178b1fd15707105c9833e7f40c6dc91700f6872a2bb62de4306c6e8c83d45a9c4550f5d9e23d4bd325ce1957576013bf2194aa37233fbb409843b
+"invokers-polyfill@npm:1.0.3":
+  version: 1.0.3
+  resolution: "invokers-polyfill@npm:1.0.3"
+  checksum: 10c0/94544bf22d13c121b48a07a2be28ee63c1f92db87f08a84f3a9e7c5f0f3324f678d300ef89910feca8547f0400ae9c5fa9c99350f5b4c51bd8d333ac1c8f77cb
   languageName: node
   linkType: hard
 
