@@ -23,8 +23,7 @@ disable-model-invocation: true
 | `packages/@d-zero/custom-components`  | `@d-zero/custom-components`  |
 | `packages/@d-zero/postcss-config`     | `@d-zero/postcss-config`     |
 | `packages/@d-zero/scaffold`           | `@d-zero/scaffold`           |
-
-`packages/@d-zero/site-migrator` は `private: true` のため publish 対象外。
+| `packages/@d-zero/site-migrator`      | `@d-zero/site-migrator`      |
 
 # 手順
 
@@ -157,6 +156,7 @@ npm view @d-zero/create-frontend version
 npm view @d-zero/custom-components version
 npm view @d-zero/postcss-config version
 npm view @d-zero/scaffold version
+npm view @d-zero/site-migrator version
 ```
 
 確認項目:
