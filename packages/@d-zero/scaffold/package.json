@@ -35,6 +35,7 @@
 		"test": "vitest run",
 		"bge": "npx @burger-editor/local",
 		"print": "npx @d-zero/print -f __info/print.txt --type note",
+		"skills:sync": "npx --yes skills@1.5.22 add https://github.com/d-zero-dev/frontend-guidelines/tree/main/skills --skill '*' --agent claude-code --copy -y",
 		"update": "yarn upgrade-interactive"
 	},
 	"browserslist": [
