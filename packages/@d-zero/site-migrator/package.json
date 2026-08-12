@@ -9,12 +9,11 @@
 	},
 	"author": "D-ZERO Co., Ltd.",
 	"license": "MIT",
-	"private": true,
 	"type": "module",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"bin": {
-		"dz-migrate": "./dist/cli.js"
+		"dz-migrate": "dist/cli.js"
 	},
 	"exports": {
 		".": {
