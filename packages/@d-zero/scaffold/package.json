@@ -76,7 +76,7 @@
 		"@burger-editor/css": "^4.0.0-alpha.71",
 		"@d-zero/custom-components": "5.2.0",
 		"dialog-toggle-events-polyfill": "1.1.4",
-		"invokers-polyfill": "0.6.1",
+		"invokers-polyfill": "1.0.3",
 		"kiso.css": "1.2.4",
 		"tslib": "2.8.1"
 	},
