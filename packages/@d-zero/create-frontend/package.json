@@ -32,6 +32,6 @@
 	},
 	"devDependencies": {
 		"@types/node": "25.9.5",
-		"execa": "9.6.1"
+		"execa": "10.0.1"
 	}
 }
