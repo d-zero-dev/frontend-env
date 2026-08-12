@@ -16,6 +16,12 @@ import { t } from './locale.js';
 import { readFileSafe } from './read-file-safe.js';
 import { voltaInstallNode } from './volta-install-node.js';
 
+// エージェントスキルの取得元とバージョン。
+// @d-zero/scaffold の package.json の scripts["skills:sync"] と同期させること
+const AGENT_SKILLS_CLI = 'skills@1.5.22';
+const AGENT_SKILLS_SOURCE =
+	'https://github.com/d-zero-dev/frontend-guidelines/tree/main/skills';
+
 const cli = meow(
 	`
 	Usage
@@ -137,6 +143,14 @@ export default async function (plop) {
 			return 'success';
 		}
 		return 'skipped';
+	});
+
+	plop.setActionType('Install agent skills', async (answers) => {
+		const { dest, doInstall } = answerToConfig(answers);
+		if (!doInstall) {
+			return 'skipped';
+		}
+		return await installAgentSkills(dest);
 	});
 
 	plop.setActionType('Finalize', async (answers) => {
@@ -318,6 +332,9 @@ export default async function (plop) {
 					type: 'Install dependencies',
 				},
 				{
+					type: 'Install agent skills',
+				},
+				{
 					type: 'Finalize',
 				},
 			];
@@ -351,6 +368,39 @@ async function installDependencies(dest) {
 	}).catch(() => {
 		throw new Error('Failed to install dependencies');
 	});
+}
+
+/**
+ * D-ZERO 共通のエージェントスキルを .claude/skills/ に展開する
+ * @param {string} dest
+ * @returns {Promise<string>}
+ */
+async function installAgentSkills(dest) {
+	try {
+		await command(
+			'npx',
+			[
+				'--yes',
+				AGENT_SKILLS_CLI,
+				'add',
+				AGENT_SKILLS_SOURCE,
+				'--skill',
+				'*',
+				'--agent',
+				'claude-code',
+				'--copy',
+				'-y',
+			],
+			{
+				cwd: path.resolve(process.cwd(), dest),
+				stdio: 'inherit',
+			},
+		);
+		return 'success';
+	} catch {
+		// オフライン等で失敗しても生成自体は継続する（後から yarn skills:sync で導入できる）
+		return 'skipped (failed to fetch skills; run `yarn skills:sync` later)';
+	}
 }
 
 /**
