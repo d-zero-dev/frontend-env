@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/site-migrator",
-	"version": "5.1.1-alpha.1",
+	"version": "5.2.0",
 	"description": "Website migration toolkit driven by a .nitpicker archive",
 	"repository": {
 		"type": "git",
