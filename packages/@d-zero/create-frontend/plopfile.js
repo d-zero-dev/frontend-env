@@ -16,12 +16,6 @@ import { t } from './locale.js';
 import { readFileSafe } from './read-file-safe.js';
 import { voltaInstallNode } from './volta-install-node.js';
 
-// エージェントスキルの取得元とバージョン。
-// @d-zero/scaffold の package.json の scripts["skills:sync"] と同期させること
-const AGENT_SKILLS_CLI = 'skills@1.5.22';
-const AGENT_SKILLS_SOURCE =
-	'https://github.com/d-zero-dev/frontend-guidelines/tree/main/skills';
-
 const cli = meow(
 	`
 	Usage
@@ -371,31 +365,18 @@ async function installDependencies(dest) {
 }
 
 /**
- * D-ZERO 共通のエージェントスキルを .claude/skills/ に展開する
+ * D-ZERO 共通のエージェントスキルを .claude/skills/ に展開する。
+ * 取得元は scaffold の package.json の scripts["skills:sync"] に定義されている
+ * （skills CLI 本体は devDependencies としてインストール済み）
  * @param {string} dest
  * @returns {Promise<string>}
  */
 async function installAgentSkills(dest) {
 	try {
-		await command(
-			'npx',
-			[
-				'--yes',
-				AGENT_SKILLS_CLI,
-				'add',
-				AGENT_SKILLS_SOURCE,
-				'--skill',
-				'*',
-				'--agent',
-				'claude-code',
-				'--copy',
-				'-y',
-			],
-			{
-				cwd: path.resolve(process.cwd(), dest),
-				stdio: 'inherit',
-			},
-		);
+		await command('yarn', ['skills:sync'], {
+			cwd: path.resolve(process.cwd(), dest),
+			stdio: 'inherit',
+		});
 		return 'success';
 	} catch {
 		// オフライン等で失敗しても生成自体は継続する（後から yarn skills:sync で導入できる）
