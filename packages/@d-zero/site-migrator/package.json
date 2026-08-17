@@ -36,7 +36,7 @@
 	"dependencies": {
 		"@burger-editor/blocks": "^4.0.0-alpha.71",
 		"@burger-editor/core": "^4.0.0-alpha.71",
-		"@d-zero/anatomist": "^0.3.1",
+		"@d-zero/anatomist": "^0.3.2",
 		"@d-zero/dealer": "^1.10.4",
 		"@d-zero/shared": "^0.22.5",
 		"@nitpicker/crawler": "^0.18.0",
@@ -45,7 +45,7 @@
 		"jsdom": "30.0.1",
 		"parse5": "8.0.1",
 		"parse5-html-rewriting-stream": "8.0.1",
-		"puppeteer": "25.3.0"
+		"puppeteer": "25.5.0"
 	},
 	"devDependencies": {
 		"@types/js-yaml": "4.0.9",
