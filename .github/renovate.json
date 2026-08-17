@@ -39,6 +39,12 @@
 			"matchUpdateTypes": ["minor", "patch", "pin", "digest"],
 			"matchCurrentVersion": "!/^0/",
 			"automerge": true
+		},
+		{
+			"description": "Group site-migrator puppeteer with @d-zero/anatomist so a version bump on either side prefers landing together in one PR — site-migrator launches puppeteer itself and passes the resulting Page across the package boundary into anatomist analyzePageLayout(), and the two must resolve the same puppeteer-core install or TypeScript rejects the Page argument as structurally incompatible (TS2345)",
+			"matchFileNames": ["packages/@d-zero/site-migrator/package.json"],
+			"matchDepNames": ["puppeteer", "@d-zero/anatomist"],
+			"groupName": "site-migrator puppeteer stack"
 		}
 	]
 }
