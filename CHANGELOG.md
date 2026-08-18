@@ -3,6 +3,94 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://github.com/d-zero-dev/frontend-env/compare/v5.1.1-alpha.1...v5.2.0) (2026-08-12)
+
+### Bug Fixes
+
+- **create-frontend:** pin jQuery to 3.7.1 for basercms4 projects ([79099bb](https://github.com/d-zero-dev/frontend-env/commit/79099bbbab8e27547235deb5fc009163a2becc6f))
+- **create-frontend:** update comment to clarify colorbox incompatibility ([36a7ee4](https://github.com/d-zero-dev/frontend-env/commit/36a7ee4872c2ba0da1943bcbd2e95ae9e58ea39d))
+- **github:** disable platformAutomerge to keep Renovate direct-merge ([b83d8ef](https://github.com/d-zero-dev/frontend-env/commit/b83d8ef7b5e42332d9229920f169ee46507542f2))
+- **repo:** allow model to invoke git/pr skills from /impl ([65021f5](https://github.com/d-zero-dev/frontend-env/commit/65021f5ed5c1bd173783d11168c5e2b5116b8096))
+- **scaffold:** restore .c-page-sub__content-main style in c-page-sub.css ([f725fa5](https://github.com/d-zero-dev/frontend-env/commit/f725fa5d24d3ed662d017c0ad972ba723d2b8269))
+- **site-migrator:** make toNumberOrFallback's fallback param optional ([f8b6c1c](https://github.com/d-zero-dev/frontend-env/commit/f8b6c1c124c4d7bda24ddda12fe0560085f11a6e))
+- **site-migrator:** replace function {[@link](https://github.com/link)} refs with backticks in types JSDoc ([6cbdb38](https://github.com/d-zero-dev/frontend-env/commit/6cbdb3807dfea49422fa642785c5ec1ea3751ccf))
+- **site-migrator:** wire rewriteBlockRefs into extractPages before renderBlocks ([466a202](https://github.com/d-zero-dev/frontend-env/commit/466a202127dcc21fec2241a368154d2a565f9260))
+
+- feat(site-migrator)!: extract BlockTargetAdapter to decouple BurgerEditor conversion ([68cee5a](https://github.com/d-zero-dev/frontend-env/commit/68cee5aa5e17dbd71989cededb46ea30e6ff466a))
+- feat(site-migrator)!: integrate BurgerEditor block conversion into extractPages ([71cd4cb](https://github.com/d-zero-dev/frontend-env/commit/71cd4cb3480cbf48150b1448f662d987f1d70d33))
+
+### Features
+
+- **create-frontend:** add --ignore-document-root flag to configure .gitignore Document Root section ([469fcd8](https://github.com/d-zero-dev/frontend-env/commit/469fcd82ca037b44c9d3455da7d03b8bb37f6468))
+- **create-frontend:** add basercms5 project type ([60f87f3](https://github.com/d-zero-dev/frontend-env/commit/60f87f3de7799afb7bdce9fd8b416874d8ee8c83))
+- **repo:** add grill-me command to build shared understanding via questioning ([78dfea3](https://github.com/d-zero-dev/frontend-env/commit/78dfea3918926ae8fb5daf4f7a1540fe48d5240f))
+- **repo:** add impl skill for agreed-plan implementation flow ([0522d05](https://github.com/d-zero-dev/frontend-env/commit/0522d058d14c2f81a16f77dd54b7e251db740ad3))
+- **scaffold:** add __type directory for type-specific static files ([c45db5c](https://github.com/d-zero-dev/frontend-env/commit/c45db5ce2e2972700a9f16f7bace20365ac63179))
+- **scaffold:** add .htaccess content for basercms5 type ([adc4ff9](https://github.com/d-zero-dev/frontend-env/commit/adc4ff991fe3c3aa0c053e77156ee7512b81558c))
+- **scaffold:** add grill-me command to scaffold template ([8561e5e](https://github.com/d-zero-dev/frontend-env/commit/8561e5e227c11811d4066081fb9bc1bfef8c5c49))
+- **site-migrator:** add --include option to dz-migrate ([0fc5deb](https://github.com/d-zero-dev/frontend-env/commit/0fc5debd4b417bda96392544553945d9b311b488)), closes [#967](https://github.com/d-zero-dev/frontend-env/issues/967)
+- **site-migrator:** add resolveIdTemplate pure function for downstream id token resolution ([a24265f](https://github.com/d-zero-dev/frontend-env/commit/a24265f325e9869891c0adbd32deec3ebd2f85ce))
+- **site-migrator:** add website migration toolkit driven by .nitpicker archive ([a053530](https://github.com/d-zero-dev/frontend-env/commit/a0535306a3ca86da5a36e989b3b27684672bf96f))
+- **site-migrator:** classify collapsed a/img/iframe blocks via anatomist attributes ([c691161](https://github.com/d-zero-dev/frontend-env/commit/c691161f765203d38baae95b4abeb0c6139860b5)), closes [d-zero-dev/tools#941](https://github.com/d-zero-dev/tools/issues/941)
+- **site-migrator:** convert LayoutBlock tree to BurgerEditor BlockData ([40bdd21](https://github.com/d-zero-dev/frontend-env/commit/40bdd2118b11d22bfba5c0b83c99f2f4549a3e1a))
+- **site-migrator:** generate BurgerEditor data-bge-* HTML via render() ([3fadb99](https://github.com/d-zero-dev/frontend-env/commit/3fadb991daaee9df1eac5c1f0f7cfe3466a7f3fb))
+- **site-migrator:** generate YAML frontmatter from nitpicker DB and prepend to extracted pages ([3a03c6d](https://github.com/d-zero-dev/frontend-env/commit/3a03c6ddb69bf4801a8582275ed6ab2c14bef90f))
+- **site-migrator:** reconcile anatomist and extractMainContent main detection ([7bba6bf](https://github.com/d-zero-dev/frontend-env/commit/7bba6bf70406b8cd32560c796d915c930ce316bc)), closes [#976](https://github.com/d-zero-dev/frontend-env/issues/976)
+- **site-migrator:** resolve page layout via anatomist JSONL or live analysis ([e24a511](https://github.com/d-zero-dev/frontend-env/commit/e24a511bb5567c9b5e0f8252d413bf575dbb95e7))
+- **site-migrator:** rewrite same-origin refs in BurgerEditor block data ([05fb8c3](https://github.com/d-zero-dev/frontend-env/commit/05fb8c3ab5a9d72ec0c20d3281a3a8d8dcfa6d5e)), closes [#979](https://github.com/d-zero-dev/frontend-env/issues/979)
+- **site-migrator:** rewrite same-origin URL refs and assign per-page integer ids ([d125c60](https://github.com/d-zero-dev/frontend-env/commit/d125c6031815e7d165307dff5796c3d3c5a828fd))
+- **site-migrator:** strip shared layouts from archive page snapshots ([1ac3bda](https://github.com/d-zero-dev/frontend-env/commit/1ac3bda93609596d8bf5fb63c20aec0be0580110))
+- **site-migrator:** verify rendered blocks round-trip through parseHTMLToBlockData ([b3dd87e](https://github.com/d-zero-dev/frontend-env/commit/b3dd87ef454d70e1814afe67db6c50b82ddf460c))
+
+### BREAKING CHANGES
+
+- `adapter` is now a required option on `extractPages` and
+  `migrate`. Existing callers (including `dz-migrate`) must pass `burgerEditorAdapter`
+  explicitly. No migration guide is provided (package is still 5.x-alpha and unused
+  by any consumer).
+- extractPages/migrate/dz-migrate now require a
+  --content-class / contentClass value (no default), since block conversion
+  is no longer optional.
+
+## [5.1.1-alpha.1](https://github.com/d-zero-dev/frontend-env/compare/v5.1.1-alpha.0...v5.1.1-alpha.1) (2026-04-10)
+
+### Bug Fixes
+
+- **create-frontend:** inject postinstall husky in package.json transform ([801c23b](https://github.com/d-zero-dev/frontend-env/commit/801c23b98a6cb670690b9901480abab682ebd7ca))
+- **create-frontend:** remove ineffective dependenciesMeta for @d-zero/scaffold ([ff530a3](https://github.com/d-zero-dev/frontend-env/commit/ff530a32a3cf36f8206a614a941a78c443632da4))
+- **create-frontend:** rewrite prepare to postinstall in package.json transform ([ae01a0b](https://github.com/d-zero-dev/frontend-env/commit/ae01a0b10289bc36a2c2d72b87e3d05a520b586b))
+- **github:** add dist-tag detection to publish workflow ([5e31f98](https://github.com/d-zero-dev/frontend-env/commit/5e31f98298db6f3480ff8c5a219a2f1ed2f2c4ad))
+- **scaffold:** remove husky postinstall script ([eca511b](https://github.com/d-zero-dev/frontend-env/commit/eca511b990c843adf19c7496668e6823b3f13291))
+- **scaffold:** replace postinstall with prepare for husky ([e81b36d](https://github.com/d-zero-dev/frontend-env/commit/e81b36dce310c6a91ea010fe4a5d24cd40274a26))
+
+## [5.1.1-alpha.0](https://github.com/d-zero-dev/frontend-env/compare/v5.1.0...v5.1.1-alpha.0) (2026-04-09)
+
+### Bug Fixes
+
+- **create-frontend:** skip scaffold install scripts when installed as dependency ([beb17f5](https://github.com/d-zero-dev/frontend-env/commit/beb17f57eb37e1dc1472b33fea3fc7510f36588e))
+
+# [5.1.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0...v5.1.0) (2026-04-08)
+
+### Bug Fixes
+
+- change prepare to postinstall for Yarn v4 compatibility ([cd3cac1](https://github.com/d-zero-dev/frontend-env/commit/cd3cac12daec430a9f4426c29983e9ea39fbe8e7)), closes [#766](https://github.com/d-zero-dev/frontend-env/issues/766)
+- **create-frontend:** correct minimatch import ([c6e5eb1](https://github.com/d-zero-dev/frontend-env/commit/c6e5eb1c078d0805015a9e619d0289d8a9ba700c))
+- **create-frontend:** correct scaffold file filtering in interactive mode ([ffa3476](https://github.com/d-zero-dev/frontend-env/commit/ffa34761a72204667605581d6ac32c2b1936babf)), closes [#804](https://github.com/d-zero-dev/frontend-env/issues/804)
+- **create-frontend:** exclude dotfiles from ignored patterns ([a4da0d0](https://github.com/d-zero-dev/frontend-env/commit/a4da0d03d36b95bb60a5990ffc916095909cfd77))
+- **repo:** bypass minimumReleaseAge for vulnerability alerts in Renovate ([173d81d](https://github.com/d-zero-dev/frontend-env/commit/173d81dd27e211d701665fa1e784ea61d9457ba2))
+- **repo:** disable postinstall scripts for third-party packages ([1fa4660](https://github.com/d-zero-dev/frontend-env/commit/1fa46609d04aa4811d7718a454e9c37ceb63c590))
+- **scaffold:** add defaultSemverRangePrefix to .yarnrc.yml ([14b75c3](https://github.com/d-zero-dev/frontend-env/commit/14b75c3f17da62584efba47865ae6436bf9c4faa))
+- **scaffold:** replace prepare with postinstall for husky setup ([8ee55e0](https://github.com/d-zero-dev/frontend-env/commit/8ee55e03ba0858157891ba298be2ce842dd9772a))
+- **scaffold:** update deprecated permission pattern syntax and add emulate tool ([c73e280](https://github.com/d-zero-dev/frontend-env/commit/c73e2808be5bece35793cf5135c33d5aa61e1902))
+- use url constant in meta.pug ([3b3bc48](https://github.com/d-zero-dev/frontend-env/commit/3b3bc489f8c865df01d8289ab73ee08e476f557e))
+
+### Features
+
+- **create-frontend:** exclude index files for CMS types and format generated files ([cdd2a25](https://github.com/d-zero-dev/frontend-env/commit/cdd2a25874e7ec21a055abb74a206fe681345518))
+- **repo:** add 7-day cooldown period for npm package releases ([32c0bee](https://github.com/d-zero-dev/frontend-env/commit/32c0beeee290ca96f5908dcea972d7de3e4e390f))
+- **scaffold:** add 7-day cooldown period for npm package releases ([81e20f4](https://github.com/d-zero-dev/frontend-env/commit/81e20f45534a60451fdaf2a3e28f3cb0bcc73942))
+- **scaffold:** replace redirect in index.pug with top page template ([9237385](https://github.com/d-zero-dev/frontend-env/commit/92373859f990922f7ad13d50afa57736f3dde0e7))
+
 # [5.0.0](https://github.com/d-zero-dev/frontend-env/compare/v5.0.0-beta.19...v5.0.0) (2026-01-05)
 
 ### Bug Fixes

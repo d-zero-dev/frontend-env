@@ -1,5 +1,7 @@
 CHANGELOG.md
 **/CHANGELOG.md
 .agent/**/*
+.agents/**/*
+AGENTS.md
 .claude/**/*
 .cursor/**/*

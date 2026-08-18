@@ -29,7 +29,13 @@
 			"Bash(rm -rf)",
 			"Bash(rm -f)",
 			"Bash(sed *)",
-			"Bash(npm *)"
+			"Bash(npm *)",
+			"Read(**/.env)",
+			"Read(**/.env.*)",
+			"Edit(**/.env)",
+			"Edit(**/.env.*)",
+			"Write(**/.env)",
+			"Write(**/.env.*)"
 		]
 	},
 	"enabledMcpjsonServers": ["chrome-devtools", "figma-remote-mcp"]
