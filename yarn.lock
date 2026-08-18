@@ -1883,7 +1883,7 @@ __metadata:
     "@types/js-yaml": "npm:4.0.9"
     "@types/jsdom": "npm:30.0.0"
     "@types/node": "npm:25.9.5"
-    js-yaml: "npm:4.3.1"
+    js-yaml: "npm:5.2.3"
     jsdom: "npm:30.0.1"
     parse5: "npm:8.0.1"
     parse5-html-rewriting-stream: "npm:8.0.1"
@@ -12505,14 +12505,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:4.3.1":
-  version: 4.3.1
-  resolution: "js-yaml@npm:4.3.1"
+"js-yaml@npm:5.2.3":
+  version: 5.2.3
+  resolution: "js-yaml@npm:5.2.3"
   dependencies:
     argparse: "npm:^2.0.1"
   bin:
-    js-yaml: bin/js-yaml.js
-  checksum: 10c0/13c500ca322e0c3f8c81686e6ecda96d2ea37b45247a420c17c7db36932d6965cc27391abc2d1a104501600e7f0d947a5f8b7be6db619c4fefa87901b3512807
+    js-yaml: bin/js-yaml.mjs
+  checksum: 10c0/55cd6310c8eee88d432ae038d451ac9d6aa0eb9e5d38a94df3d6c4a4015d08c9dad7c18669e0e8854e4173a615d6b6b7448bd0aac408773f8a46122ffd863c69
   languageName: node
   linkType: hard
 
