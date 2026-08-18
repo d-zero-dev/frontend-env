@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/postcss-config",
-	"version": "5.1.1-alpha.1",
+	"version": "5.2.0",
 	"description": "Configurations of PostCSS",
 	"repository": {
 		"type": "git",
@@ -16,7 +16,7 @@
 	"main": "./.postcssrc.js",
 	"dependencies": {
 		"autoprefixer": "10.5.4",
-		"postcss": "8.5.21",
+		"postcss": "8.5.26",
 		"postcss-base64": "0.7.1",
 		"postcss-calc": "10.1.1",
 		"postcss-clip-path-polyfill": "1.1.0",

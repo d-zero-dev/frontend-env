@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://github.com/d-zero-dev/frontend-env/compare/v5.1.1-alpha.1...v5.2.0) (2026-08-12)
+
+### Bug Fixes
+
+- **create-frontend:** pin jQuery to 3.7.1 for basercms4 projects ([79099bb](https://github.com/d-zero-dev/frontend-env/commit/79099bbbab8e27547235deb5fc009163a2becc6f))
+- **create-frontend:** update comment to clarify colorbox incompatibility ([36a7ee4](https://github.com/d-zero-dev/frontend-env/commit/36a7ee4872c2ba0da1943bcbd2e95ae9e58ea39d))
+
+### Features
+
+- **create-frontend:** add --ignore-document-root flag to configure .gitignore Document Root section ([469fcd8](https://github.com/d-zero-dev/frontend-env/commit/469fcd82ca037b44c9d3455da7d03b8bb37f6468))
+- **create-frontend:** add basercms5 project type ([60f87f3](https://github.com/d-zero-dev/frontend-env/commit/60f87f3de7799afb7bdce9fd8b416874d8ee8c83))
+
 ## [5.1.1-alpha.1](https://github.com/d-zero-dev/frontend-env/compare/v5.1.1-alpha.0...v5.1.1-alpha.1) (2026-04-10)
 
 ### Bug Fixes

@@ -38,22 +38,22 @@
 		}
 	},
 	"devDependencies": {
-		"@d-zero/commitlint-config": "5.1.0",
-		"@d-zero/cspell-config": "5.1.0",
-		"@d-zero/eslint-config": "5.0.0",
-		"@d-zero/lint-staged-config": "5.1.0",
-		"@d-zero/prettier-config": "5.1.0",
-		"@d-zero/textlint-config": "5.1.0",
-		"@d-zero/tsconfig": "1.0.0",
+		"@d-zero/commitlint-config": "^5.1.0",
+		"@d-zero/cspell-config": "^5.1.0",
+		"@d-zero/eslint-config": "^5.0.0",
+		"@d-zero/lint-staged-config": "^5.1.0",
+		"@d-zero/prettier-config": "^5.1.0",
+		"@d-zero/textlint-config": "^5.1.0",
+		"@d-zero/tsconfig": "^2.0.0",
 		"husky": "9.1.7",
-		"lerna": "9.0.7",
-		"npm-run-all2": "8.0.4",
+		"lerna": "10.0.0",
+		"npm-run-all2": "9.0.3",
 		"typescript": "5.9.3",
 		"vitest": "4.1.10"
 	},
-	"packageManager": "yarn@4.17.1",
+	"packageManager": "yarn@4.18.0",
 	"volta": {
-		"node": "24.18.0",
-		"yarn": "4.17.1"
+		"node": "24.19.0",
+		"yarn": "4.18.0"
 	}
 }

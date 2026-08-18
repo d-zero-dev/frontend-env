@@ -1,3 +1,10 @@
+export type {
+	BlockTargetAdapter,
+	ClassifyResult,
+	DownloadFilesContext,
+	RewriteRefsResult,
+} from './adapter.js';
+
 export { openArchive } from './archive/open-archive.js';
 export { listInternalPages } from './archive/list-internal-pages.js';
 export { listInternalResources } from './archive/list-internal-resources.js';
@@ -28,6 +35,7 @@ export {
 export { splitTitle } from './html/split-title.js';
 export type { TitlePair } from './html/split-title.js';
 
+export { burgerEditorAdapter } from './page-extractor/burger-editor-adapter.js';
 export { extractPages } from './page-extractor/extract-pages.js';
 export type {
 	ExtractPageItem,
@@ -45,6 +53,14 @@ export type {
 } from './page-extractor/rewrite-page-refs.js';
 export { resolveIdTemplate } from './page-extractor/resolve-id-template.js';
 export type { ResolveIdTemplateOptions } from './page-extractor/resolve-id-template.js';
+
+export {
+	filterUrlsByInclude,
+	IncludeNoMatchError,
+	InvalidIncludeValueError,
+	parseIncludePattern,
+} from './include-filter.js';
+export type { IncludePattern } from './include-filter.js';
 
 export { migrate } from './migrate.js';
 export type { MigrateOptions, MigrateReport } from './migrate.js';

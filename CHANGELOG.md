@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://github.com/d-zero-dev/frontend-env/compare/v5.1.1-alpha.1...v5.2.0) (2026-08-12)
+
+### Bug Fixes
+
+- **create-frontend:** pin jQuery to 3.7.1 for basercms4 projects ([79099bb](https://github.com/d-zero-dev/frontend-env/commit/79099bbbab8e27547235deb5fc009163a2becc6f))
+- **create-frontend:** update comment to clarify colorbox incompatibility ([36a7ee4](https://github.com/d-zero-dev/frontend-env/commit/36a7ee4872c2ba0da1943bcbd2e95ae9e58ea39d))
+- **github:** disable platformAutomerge to keep Renovate direct-merge ([b83d8ef](https://github.com/d-zero-dev/frontend-env/commit/b83d8ef7b5e42332d9229920f169ee46507542f2))
+- **repo:** allow model to invoke git/pr skills from /impl ([65021f5](https://github.com/d-zero-dev/frontend-env/commit/65021f5ed5c1bd173783d11168c5e2b5116b8096))
+- **scaffold:** restore .c-page-sub__content-main style in c-page-sub.css ([f725fa5](https://github.com/d-zero-dev/frontend-env/commit/f725fa5d24d3ed662d017c0ad972ba723d2b8269))
+- **site-migrator:** make toNumberOrFallback's fallback param optional ([f8b6c1c](https://github.com/d-zero-dev/frontend-env/commit/f8b6c1c124c4d7bda24ddda12fe0560085f11a6e))
+- **site-migrator:** replace function {[@link](https://github.com/link)} refs with backticks in types JSDoc ([6cbdb38](https://github.com/d-zero-dev/frontend-env/commit/6cbdb3807dfea49422fa642785c5ec1ea3751ccf))
+- **site-migrator:** wire rewriteBlockRefs into extractPages before renderBlocks ([466a202](https://github.com/d-zero-dev/frontend-env/commit/466a202127dcc21fec2241a368154d2a565f9260))
+
+- feat(site-migrator)!: extract BlockTargetAdapter to decouple BurgerEditor conversion ([68cee5a](https://github.com/d-zero-dev/frontend-env/commit/68cee5aa5e17dbd71989cededb46ea30e6ff466a))
+- feat(site-migrator)!: integrate BurgerEditor block conversion into extractPages ([71cd4cb](https://github.com/d-zero-dev/frontend-env/commit/71cd4cb3480cbf48150b1448f662d987f1d70d33))
+
+### Features
+
+- **create-frontend:** add --ignore-document-root flag to configure .gitignore Document Root section ([469fcd8](https://github.com/d-zero-dev/frontend-env/commit/469fcd82ca037b44c9d3455da7d03b8bb37f6468))
+- **create-frontend:** add basercms5 project type ([60f87f3](https://github.com/d-zero-dev/frontend-env/commit/60f87f3de7799afb7bdce9fd8b416874d8ee8c83))
+- **repo:** add grill-me command to build shared understanding via questioning ([78dfea3](https://github.com/d-zero-dev/frontend-env/commit/78dfea3918926ae8fb5daf4f7a1540fe48d5240f))
+- **repo:** add impl skill for agreed-plan implementation flow ([0522d05](https://github.com/d-zero-dev/frontend-env/commit/0522d058d14c2f81a16f77dd54b7e251db740ad3))
+- **scaffold:** add __type directory for type-specific static files ([c45db5c](https://github.com/d-zero-dev/frontend-env/commit/c45db5ce2e2972700a9f16f7bace20365ac63179))
+- **scaffold:** add .htaccess content for basercms5 type ([adc4ff9](https://github.com/d-zero-dev/frontend-env/commit/adc4ff991fe3c3aa0c053e77156ee7512b81558c))
+- **scaffold:** add grill-me command to scaffold template ([8561e5e](https://github.com/d-zero-dev/frontend-env/commit/8561e5e227c11811d4066081fb9bc1bfef8c5c49))
+- **site-migrator:** add --include option to dz-migrate ([0fc5deb](https://github.com/d-zero-dev/frontend-env/commit/0fc5debd4b417bda96392544553945d9b311b488)), closes [#967](https://github.com/d-zero-dev/frontend-env/issues/967)
+- **site-migrator:** add resolveIdTemplate pure function for downstream id token resolution ([a24265f](https://github.com/d-zero-dev/frontend-env/commit/a24265f325e9869891c0adbd32deec3ebd2f85ce))
+- **site-migrator:** add website migration toolkit driven by .nitpicker archive ([a053530](https://github.com/d-zero-dev/frontend-env/commit/a0535306a3ca86da5a36e989b3b27684672bf96f))
+- **site-migrator:** classify collapsed a/img/iframe blocks via anatomist attributes ([c691161](https://github.com/d-zero-dev/frontend-env/commit/c691161f765203d38baae95b4abeb0c6139860b5)), closes [d-zero-dev/tools#941](https://github.com/d-zero-dev/tools/issues/941)
+- **site-migrator:** convert LayoutBlock tree to BurgerEditor BlockData ([40bdd21](https://github.com/d-zero-dev/frontend-env/commit/40bdd2118b11d22bfba5c0b83c99f2f4549a3e1a))
+- **site-migrator:** generate BurgerEditor data-bge-* HTML via render() ([3fadb99](https://github.com/d-zero-dev/frontend-env/commit/3fadb991daaee9df1eac5c1f0f7cfe3466a7f3fb))
+- **site-migrator:** generate YAML frontmatter from nitpicker DB and prepend to extracted pages ([3a03c6d](https://github.com/d-zero-dev/frontend-env/commit/3a03c6ddb69bf4801a8582275ed6ab2c14bef90f))
+- **site-migrator:** reconcile anatomist and extractMainContent main detection ([7bba6bf](https://github.com/d-zero-dev/frontend-env/commit/7bba6bf70406b8cd32560c796d915c930ce316bc)), closes [#976](https://github.com/d-zero-dev/frontend-env/issues/976)
+- **site-migrator:** resolve page layout via anatomist JSONL or live analysis ([e24a511](https://github.com/d-zero-dev/frontend-env/commit/e24a511bb5567c9b5e0f8252d413bf575dbb95e7))
+- **site-migrator:** rewrite same-origin refs in BurgerEditor block data ([05fb8c3](https://github.com/d-zero-dev/frontend-env/commit/05fb8c3ab5a9d72ec0c20d3281a3a8d8dcfa6d5e)), closes [#979](https://github.com/d-zero-dev/frontend-env/issues/979)
+- **site-migrator:** rewrite same-origin URL refs and assign per-page integer ids ([d125c60](https://github.com/d-zero-dev/frontend-env/commit/d125c6031815e7d165307dff5796c3d3c5a828fd))
+- **site-migrator:** strip shared layouts from archive page snapshots ([1ac3bda](https://github.com/d-zero-dev/frontend-env/commit/1ac3bda93609596d8bf5fb63c20aec0be0580110))
+- **site-migrator:** verify rendered blocks round-trip through parseHTMLToBlockData ([b3dd87e](https://github.com/d-zero-dev/frontend-env/commit/b3dd87ef454d70e1814afe67db6c50b82ddf460c))
+
+### BREAKING CHANGES
+
+- `adapter` is now a required option on `extractPages` and
+  `migrate`. Existing callers (including `dz-migrate`) must pass `burgerEditorAdapter`
+  explicitly. No migration guide is provided (package is still 5.x-alpha and unused
+  by any consumer).
+- extractPages/migrate/dz-migrate now require a
+  --content-class / contentClass value (no default), since block conversion
+  is no longer optional.
+
 ## [5.1.1-alpha.1](https://github.com/d-zero-dev/frontend-env/compare/v5.1.1-alpha.0...v5.1.1-alpha.1) (2026-04-10)
 
 ### Bug Fixes

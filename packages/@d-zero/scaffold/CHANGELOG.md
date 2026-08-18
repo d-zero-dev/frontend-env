@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://github.com/d-zero-dev/frontend-env/compare/v5.1.1-alpha.1...v5.2.0) (2026-08-12)
+
+### Bug Fixes
+
+- **scaffold:** restore .c-page-sub__content-main style in c-page-sub.css ([f725fa5](https://github.com/d-zero-dev/frontend-env/commit/f725fa5d24d3ed662d017c0ad972ba723d2b8269))
+
+### Features
+
+- **scaffold:** add __type directory for type-specific static files ([c45db5c](https://github.com/d-zero-dev/frontend-env/commit/c45db5ce2e2972700a9f16f7bace20365ac63179))
+- **scaffold:** add .htaccess content for basercms5 type ([adc4ff9](https://github.com/d-zero-dev/frontend-env/commit/adc4ff991fe3c3aa0c053e77156ee7512b81558c))
+- **scaffold:** add grill-me command to scaffold template ([8561e5e](https://github.com/d-zero-dev/frontend-env/commit/8561e5e227c11811d4066081fb9bc1bfef8c5c49))
+
 ## [5.1.1-alpha.1](https://github.com/d-zero-dev/frontend-env/compare/v5.1.1-alpha.0...v5.1.1-alpha.1) (2026-04-10)
 
 ### Bug Fixes

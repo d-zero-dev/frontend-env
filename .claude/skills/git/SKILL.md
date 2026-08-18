@@ -1,5 +1,6 @@
 ---
-description: Git 操作ルール
+name: git
+description: Git 操作ルール（コミット作成、メッセージ形式、事前チェック）
 ---
 
 # コミット作成
@@ -31,8 +32,33 @@ description: Git 操作ルール
 
 # コミット前コンテンツチェック
 
-- `git commit` を実行する前に、必ず `git diff --staged` をスキャンし、プロジェクト固有の名称、企業名、顧客情報など、リポジトリに含めるべきでない情報がないか確認する。
-- 該当するものがあれば、コミット前にステージングから除外する。
+`git commit` を実行する前に、必ず `git diff --staged` をスキャンして以下の 2 点を確認する。
+
+## 1. 機密・案件情報の検出
+
+プロジェクト固有の名称、企業名、顧客情報、API キー・トークンなど、リポジトリに含めるべきでない情報がないか確認する。
+
+## 2. サンプル値の慣例チェック
+
+サンプル値が「無いこと」ではなく「**予約済み慣例に従っていること**」を確認する。
+
+**許可される値（予約済み慣例）:**
+
+- ドメイン: `example.com` / `example.org` / `example.net`、`*.example` / `*.test` / `*.invalid` / `*.localhost`（RFC 2606 / RFC 6761）
+- IP: `127.0.0.1`、TEST-NET（`192.0.2.0/24`, `198.51.100.0/24`, `203.0.113.0/24`）、`2001:db8::/32`
+- メール: `user@example.com` 系
+
+**検出対象（混入してはいけない値）:**
+
+- 実在する無関係ドメイン・URL・パス
+- 未取得の創作ドメイン（もっともらしい造語ドメインは将来第三者が取得しうる — supply-chain / SEO リスク）
+- 案件キーワード・顧客識別子・実データ由来の識別子
+- 実データ・実コーパスでの実験・デバッグの残骸（実 URL、実ページタイトル、実クエリ値など）
+
+**検出時の対処:**
+
+- ステージングから除外するのではなく、**汎用値（example.com 等）へ書き換える**（fixture 内の実ドメインは除外しても解決しない）。書き換え後にテストが通ることを確認してからコミットする
+- 判断が難しい場合（実データが検証に不可欠に見える等）はユーザーに確認する
 
 # パッケージのコミット順序（依存元優先）
 
@@ -48,7 +74,7 @@ description: Git 操作ルール
 - Conventional Commits を使用すること
   - 使用するタイプ: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`
   - 使用するスコープ:
-    - 各パッケージ名（ネームスペースなし）: `builder`, `check-frontend-env`, `create-frontend`, `custom-components`, `postcss-config`, `scaffold`
+    - 各パッケージ名（ネームスペースなし）: `check-frontend-env`, `create-frontend`, `custom-components`, `postcss-config`, `scaffold`, `site-migrator`
     - `repo`, `deps`, `github`
 - メッセージ本文の各行は100文字以下
 - 件名は sentence-case, start-case, pascal-case, upper-case にしない

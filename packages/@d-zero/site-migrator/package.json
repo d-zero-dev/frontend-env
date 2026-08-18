@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/site-migrator",
-	"version": "5.1.1-alpha.1",
+	"version": "5.2.0",
 	"description": "Website migration toolkit driven by a .nitpicker archive",
 	"repository": {
 		"type": "git",
@@ -9,12 +9,14 @@
 	},
 	"author": "D-ZERO Co., Ltd.",
 	"license": "MIT",
-	"private": true,
+	"publishConfig": {
+		"access": "public"
+	},
 	"type": "module",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"bin": {
-		"dz-migrate": "./dist/cli.js"
+		"dz-migrate": "dist/cli.js"
 	},
 	"exports": {
 		".": {
@@ -32,16 +34,22 @@
 		"dist"
 	],
 	"dependencies": {
-		"@d-zero/dealer": "1.10.1",
-		"@d-zero/shared": "0.22.2",
-		"@nitpicker/crawler": "0.11.0",
-		"@nitpicker/query": "0.11.0",
-		"js-yaml": "4.3.0",
+		"@burger-editor/blocks": "^4.0.0-alpha.71",
+		"@burger-editor/core": "^4.0.0-alpha.71",
+		"@d-zero/anatomist": "^0.3.1",
+		"@d-zero/dealer": "^1.10.4",
+		"@d-zero/shared": "^0.22.5",
+		"@nitpicker/crawler": "^0.18.0",
+		"@nitpicker/query": "^0.18.0",
+		"js-yaml": "4.3.1",
+		"jsdom": "30.0.1",
 		"parse5": "8.0.1",
-		"parse5-html-rewriting-stream": "8.0.1"
+		"parse5-html-rewriting-stream": "8.0.1",
+		"puppeteer": "25.3.0"
 	},
 	"devDependencies": {
 		"@types/js-yaml": "4.0.9",
+		"@types/jsdom": "28.0.3",
 		"@types/node": "25.9.5"
 	}
 }
