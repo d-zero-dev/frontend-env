@@ -41,14 +41,13 @@
 		"@d-zero/shared": "^0.22.5",
 		"@nitpicker/crawler": "^0.18.0",
 		"@nitpicker/query": "^0.18.0",
-		"js-yaml": "4.3.1",
+		"js-yaml": "5.2.3",
 		"jsdom": "30.0.1",
 		"parse5": "8.0.1",
 		"parse5-html-rewriting-stream": "8.0.1",
 		"puppeteer": "25.5.0"
 	},
 	"devDependencies": {
-		"@types/js-yaml": "4.0.9",
 		"@types/jsdom": "30.0.0",
 		"@types/node": "25.9.5"
 	}
