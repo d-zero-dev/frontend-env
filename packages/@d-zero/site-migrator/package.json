@@ -38,7 +38,7 @@
 		"@burger-editor/core": "^4.0.0-alpha.71",
 		"@d-zero/anatomist": "^0.3.2",
 		"@d-zero/dealer": "^1.10.4",
-		"@d-zero/shared": "^0.22.5",
+		"@d-zero/shared": "^0.23.0",
 		"@nitpicker/crawler": "^0.18.0",
 		"@nitpicker/query": "^0.18.0",
 		"js-yaml": "5.2.3",
