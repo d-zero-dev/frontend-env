@@ -48,7 +48,6 @@
 		"puppeteer": "25.5.0"
 	},
 	"devDependencies": {
-		"@types/js-yaml": "4.0.9",
 		"@types/jsdom": "30.0.0",
 		"@types/node": "25.9.5"
 	}
