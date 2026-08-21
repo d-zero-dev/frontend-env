@@ -1577,7 +1577,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/dealer@npm:1.10.4, @d-zero/dealer@npm:^1.10.4":
+"@d-zero/dealer@npm:1.10.4":
   version: 1.10.4
   resolution: "@d-zero/dealer@npm:1.10.4"
   dependencies:
@@ -1587,7 +1587,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/dealer@npm:1.11.0":
+"@d-zero/dealer@npm:1.11.0, @d-zero/dealer@npm:^1.10.4":
   version: 1.11.0
   resolution: "@d-zero/dealer@npm:1.11.0"
   dependencies:
