@@ -1443,18 +1443,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/anatomist@npm:^0.3.1":
-  version: 0.3.1
-  resolution: "@d-zero/anatomist@npm:0.3.1"
+"@d-zero/anatomist@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "@d-zero/anatomist@npm:0.3.2"
   dependencies:
-    "@d-zero/beholder": "npm:4.2.2"
-    "@d-zero/dealer": "npm:1.10.4"
-    "@d-zero/puppeteer-page-scan": "npm:4.6.8"
-    "@d-zero/shared": "npm:0.22.5"
-    puppeteer: "npm:25.3.0"
+    "@d-zero/beholder": "npm:4.2.3"
+    "@d-zero/cli-core": "npm:1.4.0"
+    "@d-zero/dealer": "npm:1.11.0"
+    "@d-zero/puppeteer-page-scan": "npm:4.6.9"
+    "@d-zero/shared": "npm:0.23.0"
+    puppeteer: "npm:25.5.0"
   bin:
     anatomist: dist/cli.js
-  checksum: 10c0/adfaea602495ddda8a051a78fff44258fd7d4671b58404a39bf579898cea2de233642f5db78014d1af1ef3055618b5228d10ca5c7c33fee670e2f95180976190
+  checksum: 10c0/5a44b3e21c5c8409458f16a4284000dc7583d4773db6456eeb62cf49de40e239b01b7f8393acd036216e6c19a6634bdac2790865dfd2193e6d11670f66878be8
   languageName: node
   linkType: hard
 
@@ -1471,6 +1472,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@d-zero/beholder@npm:4.2.3":
+  version: 4.2.3
+  resolution: "@d-zero/beholder@npm:4.2.3"
+  dependencies:
+    "@d-zero/puppeteer-page-scan": "npm:4.6.9"
+    "@d-zero/shared": "npm:0.23.0"
+    debug: "npm:4.4.3"
+    puppeteer: "npm:25.5.0"
+    simple-wappalyzer: "npm:1.1.100"
+  checksum: 10c0/83fb2c087d75f11056519228e8bee9bd4a3dda4b96c162d0f1989babb44fe85a917cc6d27590b70cbdb3dbe1912d66fc40170911878fd3d68cbb118c77890165
+  languageName: node
+  linkType: hard
+
 "@d-zero/check-frontend-env@workspace:packages/@d-zero/check-frontend-env":
   version: 0.0.0-use.local
   resolution: "@d-zero/check-frontend-env@workspace:packages/@d-zero/check-frontend-env"
@@ -1478,6 +1492,16 @@ __metadata:
     check-frontend-env: ./dist/index.js
   languageName: unknown
   linkType: soft
+
+"@d-zero/cli-core@npm:1.4.0":
+  version: 1.4.0
+  resolution: "@d-zero/cli-core@npm:1.4.0"
+  dependencies:
+    "@d-zero/shared": "npm:0.23.0"
+    minimist: "npm:1.2.8"
+  checksum: 10c0/ad3f7ad8b4f90b5eee07d15503495016d2a28df1e5364e3b5bce26683fd2374dcdc70223d288a35cd36da0f2f2736262d3118ec30761af5ebde6576d7e3eaa67
+  languageName: node
+  linkType: hard
 
 "@d-zero/commitlint-config@npm:^5.1.0":
   version: 5.1.0
@@ -1533,13 +1557,13 @@ __metadata:
   resolution: "@d-zero/custom-components@workspace:packages/@d-zero/custom-components"
   dependencies:
     "@chromatic-com/storybook": "npm:5.3.0"
-    "@storybook/addon-docs": "npm:10.5.7"
+    "@storybook/addon-docs": "npm:10.5.8"
     "@storybook/experimental-addon-test": "npm:8.6.18"
     "@storybook/test": "npm:8.6.15"
-    "@storybook/web-components": "npm:10.5.7"
-    "@storybook/web-components-vite": "npm:10.5.7"
+    "@storybook/web-components": "npm:10.5.8"
+    "@storybook/web-components-vite": "npm:10.5.8"
     lit: "npm:3.3.3"
-    storybook: "npm:10.5.7"
+    storybook: "npm:10.5.8"
   languageName: unknown
   linkType: soft
 
@@ -1553,13 +1577,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/dealer@npm:1.10.4, @d-zero/dealer@npm:^1.10.4":
+"@d-zero/dealer@npm:1.10.4":
   version: 1.10.4
   resolution: "@d-zero/dealer@npm:1.10.4"
   dependencies:
     "@d-zero/shared": "npm:0.22.5"
     ansi-colors: "npm:4.1.3"
   checksum: 10c0/6d85dc7b7f810c12be96ce2683c730cd7a41206991f7941afaf9c4d1b50911f676e58a57609759de447a173dc32c6ec58b4e20a471f77a1cb3ca469d3e8018c3
+  languageName: node
+  linkType: hard
+
+"@d-zero/dealer@npm:1.11.0, @d-zero/dealer@npm:^1.10.4":
+  version: 1.11.0
+  resolution: "@d-zero/dealer@npm:1.11.0"
+  dependencies:
+    "@d-zero/shared": "npm:0.23.0"
+    ansi-colors: "npm:4.1.3"
+  checksum: 10c0/398f0e03f97dea3b8e6bf24b1cc3e08e3a71b0b62be6f6f8b9e5347229505d85c526a13230106dc69619cc9e344287e66d53f703a8c58c97365b99d7b212a6f2
   languageName: node
   linkType: hard
 
@@ -1687,6 +1721,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@d-zero/puppeteer-general-actions@npm:1.2.7":
+  version: 1.2.7
+  resolution: "@d-zero/puppeteer-general-actions@npm:1.2.7"
+  dependencies:
+    ansi-colors: "npm:4.1.3"
+  checksum: 10c0/2c6d96e1a6f94a6eff5ad0792b9c6df2e71d79d12efb902d9941df428acccfa287e766ca44e0586b7207feacfbbd4cc23949569b6f3f3bcb55d03c04cdd3ff87
+  languageName: node
+  linkType: hard
+
 "@d-zero/puppeteer-page-scan@npm:4.6.8":
   version: 4.6.8
   resolution: "@d-zero/puppeteer-page-scan@npm:4.6.8"
@@ -1700,6 +1743,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@d-zero/puppeteer-page-scan@npm:4.6.9":
+  version: 4.6.9
+  resolution: "@d-zero/puppeteer-page-scan@npm:4.6.9"
+  dependencies:
+    "@d-zero/puppeteer-general-actions": "npm:1.2.7"
+    "@d-zero/puppeteer-scroll": "npm:4.0.12"
+    "@d-zero/shared": "npm:0.23.0"
+  peerDependencies:
+    puppeteer: 25.5.0
+  checksum: 10c0/b335cb6633dd8b75e5baa0e533f795d890fbefeb05480b0339cc786312c1d0d96c3f1554cf3c5b109b1693e9613276aff3ef4a498b9292a853fc0d712093f8a3
+  languageName: node
+  linkType: hard
+
 "@d-zero/puppeteer-scroll@npm:4.0.11":
   version: 4.0.11
   resolution: "@d-zero/puppeteer-scroll@npm:4.0.11"
@@ -1708,6 +1764,17 @@ __metadata:
   peerDependencies:
     puppeteer: 25.2.1
   checksum: 10c0/67b25868ee844dcebc11aa408307d21dc9f4b2fbfeca1a26d80558763fb8aefba7312fb9b9fcf2a38d3148b35fb83537c7db5426f2fa137518a9f3c6fcfda270
+  languageName: node
+  linkType: hard
+
+"@d-zero/puppeteer-scroll@npm:4.0.12":
+  version: 4.0.12
+  resolution: "@d-zero/puppeteer-scroll@npm:4.0.12"
+  dependencies:
+    "@d-zero/shared": "npm:0.23.0"
+  peerDependencies:
+    puppeteer: 25.5.0
+  checksum: 10c0/02a1b8a57a9af85bbc09a2effca0e4dade25ae74d6d2f0c1d94b34ae55361f59f675cee3ed34152122cdc88501993b7805264d2d3a1fad123b80131683d8e9d1
   languageName: node
   linkType: hard
 
@@ -1744,7 +1811,7 @@ __metadata:
     "@kamado-io/style-compiler": "npm:1.3.0"
     "@prettier/plugin-pug": "npm:3.4.2"
     "@types/node": "npm:25.9.5"
-    chrome-devtools-mcp: "npm:1.6.0"
+    chrome-devtools-mcp: "npm:1.7.0"
     cross-env: "npm:10.1.0"
     dialog-toggle-events-polyfill: "npm:1.1.4"
     dotenv: "npm:17.4.2"
@@ -1773,7 +1840,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/shared@npm:0.22.5, @d-zero/shared@npm:^0.22.5":
+"@d-zero/shared@npm:0.22.5":
   version: 0.22.5
   resolution: "@d-zero/shared@npm:0.22.5"
   dependencies:
@@ -1788,25 +1855,39 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@d-zero/shared@npm:0.23.0, @d-zero/shared@npm:^0.23.0":
+  version: 0.23.0
+  resolution: "@d-zero/shared@npm:0.23.0"
+  dependencies:
+    "@holiday-jp/holiday_jp": "npm:2.5.1"
+    await-event-emitter: "npm:2.0.2"
+    dayjs: "npm:1.11.21"
+    escape-string-regexp: "npm:5.0.0"
+    front-matter: "npm:4.0.2"
+    micromatch: "npm:4.0.8"
+    sanitize-filename: "npm:1.6.4"
+  checksum: 10c0/56a4e76c117d5918a2a0dfa34daf75138812db1349217d89cf65ee329ab2f2f7a9be4c9241a80fcc8ab732254f233b0381776e8fa4e4e9b96e630bba5d2ccd55
+  languageName: node
+  linkType: hard
+
 "@d-zero/site-migrator@workspace:packages/@d-zero/site-migrator":
   version: 0.0.0-use.local
   resolution: "@d-zero/site-migrator@workspace:packages/@d-zero/site-migrator"
   dependencies:
     "@burger-editor/blocks": "npm:^4.0.0-alpha.71"
     "@burger-editor/core": "npm:^4.0.0-alpha.71"
-    "@d-zero/anatomist": "npm:^0.3.1"
+    "@d-zero/anatomist": "npm:^0.3.2"
     "@d-zero/dealer": "npm:^1.10.4"
-    "@d-zero/shared": "npm:^0.22.5"
+    "@d-zero/shared": "npm:^0.23.0"
     "@nitpicker/crawler": "npm:^0.18.0"
     "@nitpicker/query": "npm:^0.18.0"
-    "@types/js-yaml": "npm:4.0.9"
     "@types/jsdom": "npm:30.0.0"
     "@types/node": "npm:25.9.5"
-    js-yaml: "npm:4.3.1"
+    js-yaml: "npm:5.2.3"
     jsdom: "npm:30.0.1"
     parse5: "npm:8.0.1"
     parse5-html-rewriting-stream: "npm:8.0.1"
-    puppeteer: "npm:25.3.0"
+    puppeteer: "npm:25.5.0"
   bin:
     dz-migrate: dist/cli.js
   languageName: unknown
@@ -4388,6 +4469,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@puppeteer/browsers@npm:3.1.0":
+  version: 3.1.0
+  resolution: "@puppeteer/browsers@npm:3.1.0"
+  dependencies:
+    modern-tar: "npm:^0.7.6"
+    yargs: "npm:^18.0.0"
+  peerDependencies:
+    proxy-agent: ">=8.0.1"
+    yauzl: ^2.10.0 || ^3.4.0
+  peerDependenciesMeta:
+    proxy-agent:
+      optional: true
+    yauzl:
+      optional: true
+  bin:
+    browsers: lib/main-cli.js
+  checksum: 10c0/cab18c02f6e77a8d261a08a062c3cebd1227666d425f3731bc91cd001331beeaf165046bc20d3d25dc1eaf5869a6d9f4f8fc5d3d76f1dace28d79b616846291f
+  languageName: node
+  linkType: hard
+
 "@rolldown/binding-android-arm64@npm:1.1.2":
   version: 1.1.2
   resolution: "@rolldown/binding-android-arm64@npm:1.1.2"
@@ -4646,49 +4747,49 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-docs@npm:10.5.7":
-  version: 10.5.7
-  resolution: "@storybook/addon-docs@npm:10.5.7"
+"@storybook/addon-docs@npm:10.5.8":
+  version: 10.5.8
+  resolution: "@storybook/addon-docs@npm:10.5.8"
   dependencies:
     "@mdx-js/react": "npm:^3.0.0"
-    "@storybook/csf-plugin": "npm:10.5.7"
+    "@storybook/csf-plugin": "npm:10.5.8"
     "@storybook/icons": "npm:^2.0.2"
-    "@storybook/react-dom-shim": "npm:10.5.7"
+    "@storybook/react-dom-shim": "npm:10.5.8"
     react: "npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
     react-dom: "npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
     ts-dedent: "npm:^2.0.0"
   peerDependencies:
     "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    storybook: ^10.5.7
+    storybook: ^10.5.8
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10c0/e7726dbaeedd04e6012c6125a71d4c6bf98752f12da1d25a5205b493f7ed2aa0a8067d3e3b187e29ed5b91fdeaeb68df002349eb5271c88738c7bb83b2c805dc
+  checksum: 10c0/5cb2d7520bcefaefe0dab899f450cfc3d2c95bba4f5ae96f10cd8fc11fcdc7283a7184c804d308424c7686285a8b555d0e77d2392624afaae48ee3d9ff1de3c8
   languageName: node
   linkType: hard
 
-"@storybook/builder-vite@npm:10.5.7":
-  version: 10.5.7
-  resolution: "@storybook/builder-vite@npm:10.5.7"
+"@storybook/builder-vite@npm:10.5.8":
+  version: 10.5.8
+  resolution: "@storybook/builder-vite@npm:10.5.8"
   dependencies:
-    "@storybook/csf-plugin": "npm:10.5.7"
+    "@storybook/csf-plugin": "npm:10.5.8"
     ts-dedent: "npm:^2.0.0"
   peerDependencies:
-    storybook: ^10.5.7
+    storybook: ^10.5.8
     vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
-  checksum: 10c0/b80a3ca236ed8482c712eea2a87b6f7352714283ac195fcf107e20f4e2f1c0a084c13f8ec72578bbc357664c63082f53c6c79d90342eba4bcc40b177234bfdb4
+  checksum: 10c0/cad826e9b173e786e36546c961d0b381f8a7b708107be86778b1d0d84b6ae5d7e8ad2feeb3ab4845c1af53fed6f729489616202c1d27254552c40a85f2df1ef0
   languageName: node
   linkType: hard
 
-"@storybook/csf-plugin@npm:10.5.7":
-  version: 10.5.7
-  resolution: "@storybook/csf-plugin@npm:10.5.7"
+"@storybook/csf-plugin@npm:10.5.8":
+  version: 10.5.8
+  resolution: "@storybook/csf-plugin@npm:10.5.8"
   dependencies:
     unplugin: "npm:^2.3.5"
   peerDependencies:
     esbuild: "*"
     rollup: "*"
-    storybook: ^10.5.7
+    storybook: ^10.5.8
     vite: "*"
     webpack: "*"
   peerDependenciesMeta:
@@ -4700,7 +4801,7 @@ __metadata:
       optional: true
     webpack:
       optional: true
-  checksum: 10c0/4810090f209c0615d75d94954bc5a2bac29fbb5a83a1167037569d52a4ba9cd74526dd757a19ede396b3f130b7a85cd8471b0e35e401248338291c48adad1cc0
+  checksum: 10c0/9bf0961e69f0ab481f9122eb6f545c0b1f1ec84fe31d21d32a792f3a4f87029580db3d75df0705aaa23ca5be240fc8a080a6d12a194a9a460e6218a4eb395318
   languageName: node
   linkType: hard
 
@@ -4781,21 +4882,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-dom-shim@npm:10.5.7":
-  version: 10.5.7
-  resolution: "@storybook/react-dom-shim@npm:10.5.7"
+"@storybook/react-dom-shim@npm:10.5.8":
+  version: 10.5.8
+  resolution: "@storybook/react-dom-shim@npm:10.5.8"
   peerDependencies:
     "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     "@types/react-dom": ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    storybook: ^10.5.7
+    storybook: ^10.5.8
   peerDependenciesMeta:
     "@types/react":
       optional: true
     "@types/react-dom":
       optional: true
-  checksum: 10c0/587f66a4d54263e6aaa95be1bdd9544359f72e307afd8e9dca7e5356594438a266e52b8700771f3fd6fa43ee86c88f7544823051c9c18e0d92bcb24d1cc055dc
+  checksum: 10c0/9f39797d905046a9e58c276824c8c0e5d6ed06b977799fe6f9ae82601dbb621ce59b953ce63e123253736a1852e2ca29d14167f5070fb03ae0c37bbf2a84503f
   languageName: node
   linkType: hard
 
@@ -4833,30 +4934,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/web-components-vite@npm:10.5.7":
-  version: 10.5.7
-  resolution: "@storybook/web-components-vite@npm:10.5.7"
+"@storybook/web-components-vite@npm:10.5.8":
+  version: 10.5.8
+  resolution: "@storybook/web-components-vite@npm:10.5.8"
   dependencies:
-    "@storybook/builder-vite": "npm:10.5.7"
-    "@storybook/web-components": "npm:10.5.7"
+    "@storybook/builder-vite": "npm:10.5.8"
+    "@storybook/web-components": "npm:10.5.8"
   peerDependencies:
-    storybook: ^10.5.7
+    storybook: ^10.5.8
     vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
-  checksum: 10c0/2aad6fdb4d528849c94dbb1fb03be48b8e771b34cadcc45a046dd7c7ceeed8f6aa230579b90d18757c69bd9bb5e093ae9e855677346d66f77bcab88e30943e55
+  checksum: 10c0/486ddcc71da0109dc69f18c5675ee2ea024fc62b4c5af6accb899b9da2649a44805d4f3e1bb70afc5f09a27c4558a298ee3d175d819fc3bafdf4ed6ae5b16aca
   languageName: node
   linkType: hard
 
-"@storybook/web-components@npm:10.5.7":
-  version: 10.5.7
-  resolution: "@storybook/web-components@npm:10.5.7"
+"@storybook/web-components@npm:10.5.8":
+  version: 10.5.8
+  resolution: "@storybook/web-components@npm:10.5.8"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
     tiny-invariant: "npm:^1.3.1"
     ts-dedent: "npm:^2.0.0"
   peerDependencies:
     lit: ^2.0.0 || ^3.0.0
-    storybook: ^10.5.7
-  checksum: 10c0/cc7c3024e068950b4692d5937705ad8b51e428852607b7be23012c7c1a1f1cb434f19ac1c71e46cfe80279942d220b5fba15da53023631901f3be818330cbb85
+    storybook: ^10.5.8
+  checksum: 10c0/55c61c9f8c96dbe1758ea682f385c270da18b1cd8f76695dcb29d900031dd1f1f3556748911cf386eb749ff3a4456fb054f5a5c00ee74592e545878544ac72e8
   languageName: node
   linkType: hard
 
@@ -5707,13 +5808,6 @@ __metadata:
     "@types/through": "npm:*"
     rxjs: "npm:^7.2.0"
   checksum: 10c0/235a02a3afa5b238ca9093ef7064e17d763ba134b1afd5a263ffc363ccdb6d1f7d64aa3866ca93e7ad52be4ff21324368a983d20d35caf21c16475cfb32db8c8
-  languageName: node
-  linkType: hard
-
-"@types/js-yaml@npm:4.0.9":
-  version: 4.0.9
-  resolution: "@types/js-yaml@npm:4.0.9"
-  checksum: 10c0/24de857aa8d61526bbfbbaa383aa538283ad17363fcd5bb5148e2c7f604547db36646440e739d78241ed008702a8920665d1add5618687b6743858fae00da211
   languageName: node
   linkType: hard
 
@@ -7654,9 +7748,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chrome-devtools-mcp@npm:1.6.0":
-  version: 1.6.0
-  resolution: "chrome-devtools-mcp@npm:1.6.0"
+"chrome-devtools-mcp@npm:1.7.0":
+  version: 1.7.0
+  resolution: "chrome-devtools-mcp@npm:1.7.0"
   peerDependencies:
     "@blackwell-systems/gcf": ^2.2.2
     "@toon-format/toon": ^2.2.0
@@ -7668,7 +7762,7 @@ __metadata:
   bin:
     chrome-devtools: build/src/bin/chrome-devtools.js
     chrome-devtools-mcp: build/src/bin/chrome-devtools-mcp.js
-  checksum: 10c0/a5321ff66f011c202d08e0cbf82580c018cedebd6fd46afc70a90fe69729809fad181d6358e15b3089fea76fd6bafbd932afb70b7fc535450a819c0a591757a5
+  checksum: 10c0/4389199ab60a059d02c19a552a4652715c2e08308dd23af5a3a858b5db3501c5386ec81e02fd5f384847c64d3abed6692ad5e744ed13806830665681beb71ec8
   languageName: node
   linkType: hard
 
@@ -7681,6 +7775,18 @@ __metadata:
   peerDependencies:
     devtools-protocol: "*"
   checksum: 10c0/cfd67f14c4e1f2d2f5e2a3661300c7f487f964445314956eb4005d46c056814fa9d1dcb854a2c6c3537de37d7c134a3889703901f948524d994ae8b76cf7e9bc
+  languageName: node
+  linkType: hard
+
+"chromium-bidi@npm:17.0.2":
+  version: 17.0.2
+  resolution: "chromium-bidi@npm:17.0.2"
+  dependencies:
+    mitt: "npm:^3.0.1"
+    zod: "npm:^3.24.1"
+  peerDependencies:
+    devtools-protocol: "*"
+  checksum: 10c0/cc1fcbdf2309f2f0083096c78a299342918c6dc8e80158487aada8e2ee73160ed7301bb54c5520274e4514f2a14f05e45d730a536e0a95f2e204dd8bf42eebee
   languageName: node
   linkType: hard
 
@@ -9065,6 +9171,13 @@ __metadata:
   version: 0.0.1638949
   resolution: "devtools-protocol@npm:0.0.1638949"
   checksum: 10c0/68aab193628a6a9c06487c1d68f39a106f50e3f83784a8767ee8d703a1f1fde4f055a59f239bda3a0bb76941fecf1da3122d3b66b81b5ea36dc0532223479c79
+  languageName: node
+  linkType: hard
+
+"devtools-protocol@npm:0.0.1653615":
+  version: 0.0.1653615
+  resolution: "devtools-protocol@npm:0.0.1653615"
+  checksum: 10c0/2a8e63aac7fb7ee4a7eef0e75bf17b7f03f44f085c79ac4e2c53b82e86f908094c1d1b2a0f85f2a7742b3d420e5a3ff8e522bca3dc609c98850239dbd2ce5428
   languageName: node
   linkType: hard
 
@@ -12385,14 +12498,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:4.3.1":
-  version: 4.3.1
-  resolution: "js-yaml@npm:4.3.1"
+"js-yaml@npm:5.2.3":
+  version: 5.2.3
+  resolution: "js-yaml@npm:5.2.3"
   dependencies:
     argparse: "npm:^2.0.1"
   bin:
-    js-yaml: bin/js-yaml.js
-  checksum: 10c0/13c500ca322e0c3f8c81686e6ecda96d2ea37b45247a420c17c7db36932d6965cc27391abc2d1a104501600e7f0d947a5f8b7be6db619c4fefa87901b3512807
+    js-yaml: bin/js-yaml.mjs
+  checksum: 10c0/55cd6310c8eee88d432ae038d451ac9d6aa0eb9e5d38a94df3d6c4a4015d08c9dad7c18669e0e8854e4173a615d6b6b7448bd0aac408773f8a46122ffd863c69
   languageName: node
   linkType: hard
 
@@ -16832,6 +16945,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"puppeteer-core@npm:25.5.0":
+  version: 25.5.0
+  resolution: "puppeteer-core@npm:25.5.0"
+  dependencies:
+    "@puppeteer/browsers": "npm:3.1.0"
+    chromium-bidi: "npm:17.0.2"
+    devtools-protocol: "npm:0.0.1653615"
+    typed-query-selector: "npm:^2.12.2"
+    webdriver-bidi-protocol: "npm:0.4.2"
+    ws: "npm:^8.21.1"
+  checksum: 10c0/137132e4977ac9aa77c6ddbfb12a9412f3c67a312381800b85a602cabbe3a3659fe41c64ee8c5ab42d3793ba8933987145e7ba06d85999cae406446b3fcb077a
+  languageName: node
+  linkType: hard
+
 "puppeteer@npm:25.3.0":
   version: 25.3.0
   resolution: "puppeteer@npm:25.3.0"
@@ -16845,6 +16972,22 @@ __metadata:
   bin:
     puppeteer: lib/puppeteer/node/cli.js
   checksum: 10c0/0c4a52dad12f30f8d7f90f2f8cde3cff686b0d496d482cedd5206a9fb40af38b958ab33f4ff4e086af0937a5af011ba4351bd556cc07924af208edbcdaf96fc2
+  languageName: node
+  linkType: hard
+
+"puppeteer@npm:25.5.0":
+  version: 25.5.0
+  resolution: "puppeteer@npm:25.5.0"
+  dependencies:
+    "@puppeteer/browsers": "npm:3.1.0"
+    chromium-bidi: "npm:17.0.2"
+    devtools-protocol: "npm:0.0.1653615"
+    lilconfig: "npm:^3.1.3"
+    puppeteer-core: "npm:25.5.0"
+    typed-query-selector: "npm:^2.12.2"
+  bin:
+    puppeteer: lib/puppeteer/node/cli.js
+  checksum: 10c0/c331e7ecb1f6c3f675490ba793307b5f6f7c7c0ef748f65717fe01bae0b9804d29c39c2cffc00f2857e4ed6939f5f916bf917bd465b260675c0ddc114f87def7
   languageName: node
   linkType: hard
 
@@ -18146,9 +18289,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook@npm:10.5.7":
-  version: 10.5.7
-  resolution: "storybook@npm:10.5.7"
+"storybook@npm:10.5.8":
+  version: 10.5.8
+  resolution: "storybook@npm:10.5.8"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
     "@storybook/icons": "npm:^2.0.2"
@@ -18180,7 +18323,7 @@ __metadata:
       optional: true
   bin:
     storybook: ./dist/bin/dispatcher.js
-  checksum: 10c0/01554ee06435b0404759b7d90b56eaa24cd4b139b80b089a8621a45b4692f56cbca0f24222b9d9a46087891f9e513fe3a333744e2a40dc600cf2cad1d6a35fb3
+  checksum: 10c0/f98d04ddef82fadf0447de2fab05d372dfc980a7c156d3452ae9547cac93a179f7bca3a67b8d0a26a59a180365fd0d658d04079951f1595bc71df44e3bbb4d80
   languageName: node
   linkType: hard
 
