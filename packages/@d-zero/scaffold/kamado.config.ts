@@ -32,6 +32,14 @@ export default {
 			compileHooks: createCompileHooks({
 				pathAlias: path.resolve(import.meta.dirname, '__assets', '_libs'),
 			}),
+			replace: (content) => {
+				// JSDOMが &amp; に変換した Google Fonts URL の & を元に戻す
+				// Cloudflare Fonts が &amp; を正しく解釈できずフォント読み込みに失敗するため
+				return content.replaceAll(
+					/href="(https:\/\/fonts\.(?:googleapis|gstatic)\.com[^"]*)"/g,
+					(_, url) => `href="${url.replaceAll('&amp;', '&')}"`,
+				);
+			},
 		}),
 		styleCompiler({
 			alias: {
