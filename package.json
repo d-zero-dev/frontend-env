@@ -17,7 +17,7 @@
 		"lint:prettier": "npx prettier --write \"{*,./**/*}{.{md,mdc,mdx,js,jsx,ts,tsx,css,pug,html},*rc}\" \"!**/{dist,storybook-static}/**/*\"",
 		"lint:textlint": "npx textlint --fix \"{*,./**/*}.{md,mdc}\" && npx textlint \"{*,./**/*}.{md,mdc}\"",
 		"storybook": "lerna run storybook --scope=@d-zero/custom-components",
-		"release": "lerna version --exact --conventional-commits --conventional-graduate --no-push",
+		"release": "lerna version --exact --force-publish --conventional-commits --conventional-graduate --no-push",
 		"release:alpha": "lerna version --exact --force-publish --conventional-commits --conventional-prerelease --preid alpha --no-push",
 		"release:beta": "lerna version --exact --force-publish --conventional-commits --conventional-prerelease --preid beta --no-push",
 		"release:rc": "lerna version --exact --force-publish --conventional-commits --conventional-prerelease --preid rc --no-push",
