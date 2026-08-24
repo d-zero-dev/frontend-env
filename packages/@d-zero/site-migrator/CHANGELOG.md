@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.3.0](https://github.com/d-zero-dev/frontend-env/compare/v5.2.0...v5.3.0) (2026-08-24)
+
+### Bug Fixes
+
+- **site-migrator:** adapt YAML frontmatter dump to js-yaml v5 ([2cfd7ed](https://github.com/d-zero-dev/frontend-env/commit/2cfd7ed89d8e48133d8f0401df10445f9a0b98f6))
+- **site-migrator:** resolve TS2345 by aligning puppeteer with anatomist ([1744248](https://github.com/d-zero-dev/frontend-env/commit/17442489397b51e78783393edfad7b3e817d4d79))
+- **site-migrator:** set publishConfig access to public for scoped package ([0871fc6](https://github.com/d-zero-dev/frontend-env/commit/0871fc68fe676be0f7852caadaafb749e36df225))
+
+### Features
+
+- **site-migrator:** make package publishable ([7153f73](https://github.com/d-zero-dev/frontend-env/commit/7153f7336433a76e2d7d7572af93c177ba04fd05))
+
 # [5.2.0](https://github.com/d-zero-dev/frontend-env/compare/v5.1.1-alpha.1...v5.2.0) (2026-08-12)
 
 ### Bug Fixes

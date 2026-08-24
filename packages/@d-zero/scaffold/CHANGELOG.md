@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.3.0](https://github.com/d-zero-dev/frontend-env/compare/v5.2.0...v5.3.0) (2026-08-24)
+
+### Features
+
+- **scaffold:** distribute agent skills and make AGENTS.md the canonical agent instructions ([e93906a](https://github.com/d-zero-dev/frontend-env/commit/e93906a454ad2d202cf3c64b02e85bd0647c71bc))
+
 # [5.2.0](https://github.com/d-zero-dev/frontend-env/compare/v5.1.1-alpha.1...v5.2.0) (2026-08-12)
 
 ### Bug Fixes
