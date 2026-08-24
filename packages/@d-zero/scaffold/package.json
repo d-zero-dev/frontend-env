@@ -35,6 +35,7 @@
 		"test": "vitest run",
 		"bge": "npx @burger-editor/local",
 		"print": "npx @d-zero/print -f __info/print.txt --type note",
+		"skills:sync": "npx skills add https://github.com/d-zero-dev/frontend-guidelines/tree/main/skills --skill '*' --agent claude-code --copy -y",
 		"update": "yarn upgrade-interactive"
 	},
 	"browserslist": [
@@ -69,6 +70,7 @@
 		"husky": "9.1.7",
 		"kamado": "1.3.0",
 		"npm-run-all2": "9.0.3",
+		"skills": "1.5.22",
 		"typescript": "5.9.3",
 		"vitest": "4.1.10"
 	},

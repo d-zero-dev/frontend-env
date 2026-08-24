@@ -139,6 +139,14 @@ export default async function (plop) {
 		return 'skipped';
 	});
 
+	plop.setActionType('Install agent skills', async (answers) => {
+		const { dest, doInstall } = answerToConfig(answers);
+		if (!doInstall) {
+			return 'skipped';
+		}
+		return await installAgentSkills(dest);
+	});
+
 	plop.setActionType('Finalize', async (answers) => {
 		const { dest, type, ignoreDocumentRoot } = answerToConfig(answers);
 		rewriteDotGitignore(dest, gitignoreOriginContent, ignoreDocumentRoot);
@@ -318,6 +326,9 @@ export default async function (plop) {
 					type: 'Install dependencies',
 				},
 				{
+					type: 'Install agent skills',
+				},
+				{
 					type: 'Finalize',
 				},
 			];
@@ -351,6 +362,26 @@ async function installDependencies(dest) {
 	}).catch(() => {
 		throw new Error('Failed to install dependencies');
 	});
+}
+
+/**
+ * D-ZERO 共通のエージェントスキルを .claude/skills/ に展開する。
+ * 取得元は scaffold の package.json の scripts["skills:sync"] に定義されている
+ * （skills CLI 本体は devDependencies としてインストール済み）
+ * @param {string} dest
+ * @returns {Promise<string>}
+ */
+async function installAgentSkills(dest) {
+	try {
+		await command('yarn', ['skills:sync'], {
+			cwd: path.resolve(process.cwd(), dest),
+			stdio: 'inherit',
+		});
+		return 'success';
+	} catch {
+		// オフライン等で失敗しても生成自体は継続する（後から yarn skills:sync で導入できる）
+		return 'skipped (failed to fetch skills; run `yarn skills:sync` later)';
+	}
 }
 
 /**
