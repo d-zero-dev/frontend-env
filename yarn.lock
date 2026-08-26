@@ -1587,7 +1587,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/dealer@npm:1.11.0, @d-zero/dealer@npm:^1.10.4":
+"@d-zero/dealer@npm:1.11.0":
   version: 1.11.0
   resolution: "@d-zero/dealer@npm:1.11.0"
   dependencies:
@@ -1604,6 +1604,16 @@ __metadata:
     "@d-zero/shared": "npm:0.17.1"
     ansi-colors: "npm:4.1.3"
   checksum: 10c0/c8b92ed2f36c68ec64353d7cee852589f24917f8410bbefe06bfa8cd46a03285b305df54de2a99c1587043df8149499f60f5b72578d95647e4dc9d6337d179c1
+  languageName: node
+  linkType: hard
+
+"@d-zero/dealer@npm:^1.10.4":
+  version: 1.12.0
+  resolution: "@d-zero/dealer@npm:1.12.0"
+  dependencies:
+    "@d-zero/shared": "npm:0.23.0"
+    ansi-colors: "npm:4.1.3"
+  checksum: 10c0/ebd09ed7d9614d17afaf50fd5437a5cd7150d9853bf185956e39776b7e0e0a09c6244633633140541563e0c6a2a5d00606b1ff9d846791cc319ad83fd111bcb0
   languageName: node
   linkType: hard
 
