@@ -1820,7 +1820,7 @@ __metadata:
     kamado: "npm:1.3.0"
     kiso.css: "npm:1.2.4"
     npm-run-all2: "npm:9.0.3"
-    skills: "npm:1.5.22"
+    skills: "npm:1.5.23"
     tslib: "npm:2.8.1"
     typescript: "npm:5.9.3"
     vitest: "npm:4.1.11"
@@ -18048,16 +18048,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"skills@npm:1.5.22":
-  version: 1.5.22
-  resolution: "skills@npm:1.5.22"
+"skills@npm:1.5.23":
+  version: 1.5.23
+  resolution: "skills@npm:1.5.23"
   dependencies:
     tar: "npm:^7.5.20"
     yaml: "npm:^2.8.3"
   bin:
     add-skill: bin/cli.mjs
     skills: bin/cli.mjs
-  checksum: 10c0/b5c2c1e37976b37b8e3beb3f471bf49efcfc6769030feb2dffef7fcdc265625e90bd07bf0628db38e3060c43260b050550290d6fe130554f0e6b70c2fd7a1ac1
+  checksum: 10c0/59cc1b326da8bc395ad0a557c548d222ef3971d985d863900912e3548b57b24532426e19ac97dd63b74464dae3eda48425f98d65956ac01020af34f9e2c5a90d
   languageName: node
   linkType: hard
 
