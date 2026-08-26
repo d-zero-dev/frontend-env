@@ -72,7 +72,7 @@
 		"npm-run-all2": "9.0.3",
 		"skills": "1.5.22",
 		"typescript": "5.9.3",
-		"vitest": "4.1.10"
+		"vitest": "4.1.11"
 	},
 	"dependencies": {
 		"@burger-editor/css": "^4.0.0-alpha.71",

@@ -49,7 +49,7 @@
 		"lerna": "10.0.0",
 		"npm-run-all2": "9.0.3",
 		"typescript": "5.9.3",
-		"vitest": "4.1.10"
+		"vitest": "4.1.11"
 	},
 	"packageManager": "yarn@4.18.0",
 	"volta": {
