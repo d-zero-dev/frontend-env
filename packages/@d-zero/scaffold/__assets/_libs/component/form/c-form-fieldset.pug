@@ -1,23 +1,19 @@
-//- name/key のどちらを渡すかで fieldset/legend（isGrouped）か div/label かを自動判定する:
-	- name: 単一 input に label-for で紐付けられる場合（text/select/textarea/file の単一フィールド）
-	- key: 単一 input に紐付けられない場合（複数フィールドをまとめる、または checkbox/radio は
-	CMS要件により単一フィールドでも fieldset/legend にする）を、意味のわかる短い語で渡す
+//- isGrouped: fieldset/legend の構造にする場合に true。
+	複数フィールドをまとめる場合、および checkbox/radio のように単一フィールドでも
+	CMS要件で fieldset/legend にする場合に渡す。false のときは div + 見出しの構造
+	id: グループ（.c-form-fieldset）の id。渡さなければ id 属性を出力しない
+	for: 見出しを label にして紐付ける input の id（isGrouped: false のときのみ有効）。
+	渡さなければ見出しは span になる
 mixin cFormFieldset(params = {})
 	-
-		const props = Object.assign({ heading: "", name: null, key: null, isRequired: false, attention: "" }, params);
+		const props = Object.assign({ label: "", id: null, for: null, isGrouped: false, isRequired: false, attention: "" }, params);
 		const badgeKind = props.isRequired ? "required" : "optional";
 		const badgeLabel = props.isRequired ? "必須" : "任意";
-		const isGrouped = Boolean(props.key);
-		// c-form-field.pug の idInput と同じ計算式（name/key から MailMessage+PascalCase のidを導出）
-		const toPascalCase = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-		const groupSource = props.key || props.name;
-		const id = groupSource ? `GroupMailMessage${toPascalCase(groupSource)}` : null;
-		const labelFor = !isGrouped && props.name ? `MailMessage${toPascalCase(props.name)}` : null;
-	.c-form-fieldset(id=id)
-		if isGrouped
+	.c-form-fieldset(id=props.id)
+		if props.isGrouped
 			fieldset.c-form-fieldset__grid
 				legend.c-form-fieldset__heading
-					span.c-form-fieldset__heading-main #{ props.heading }
+					span.c-form-fieldset__heading-main #{ props.label }
 					span.c-form-fieldset__heading-badge(data-kind=badgeKind) #{ badgeLabel }
 				.c-form-fieldset__attention
 					span #{ props.attention }
@@ -26,10 +22,10 @@ mixin cFormFieldset(params = {})
 		else
 			.c-form-fieldset__grid
 				.c-form-fieldset__heading
-					if labelFor
-						label.c-form-fieldset__heading-main(for=labelFor) #{ props.heading }
+					if props.for
+						label.c-form-fieldset__heading-main(for=props.for) #{ props.label }
 					else
-						span.c-form-fieldset__heading-main #{ props.heading }
+						span.c-form-fieldset__heading-main #{ props.label }
 					span.c-form-fieldset__heading-badge(data-kind=badgeKind) #{ badgeLabel }
 				.c-form-fieldset__attention
 					span #{ props.attention }

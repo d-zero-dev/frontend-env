@@ -1,23 +1,20 @@
-//- isGrouped: 同一 fieldset/legend 内に複数フィールドを配置する場合に true。
-	親の見出し構造と一致させること（グループ化あり = fieldset/legend、なし = div/label）
+//- id: フィールド（.c-form-field）の id。渡さなければ id 属性を出力しない
+	for: 紐付ける input の id。渡すと前後見出しのどちらかが label(for) になる。
+	渡さなければ前後見出しはどちらも span になる（単体フィールドのように親の fieldset 側が
+	label を持つ場合、checkbox/radio のように各選択肢が label を持つ場合）
 	.c-form-field__input の中身（cFormInputXxx の呼び出し）は呼び出し側が block で渡す
 mixin cFormField(params = {})
 	-
-		const props = Object.assign({ type: "text", name: "", beforeAttachment: "", afterAttachment: "", description: "", errorMessage: "", isGrouped: false, isConfirm: false }, params);
-		const nameFirstLetterUppercased = props.name.charAt(0).toUpperCase() + props.name.slice(1);
-		const idInput = `MailMessage${nameFirstLetterUppercased}`;
-		const idField = `FieldMailMessage${nameFirstLetterUppercased}`;
-		// checkbox / radio は各選択肢が label を持つため、前後見出しは label にしない
-		const hasOwnOptionLabels = props.type === "checkbox" || props.type === "radio";
-		// CMS要件: グループ化している場合は 前見出し を labelとする。前見出しが空であれば 後見出しを labelとする
-		const isBeforeAttachmentLabel = Boolean(props.isGrouped && !hasOwnOptionLabels && props.beforeAttachment);
-		const isAfterAttachmentLabel = Boolean(props.isGrouped && !hasOwnOptionLabels && !props.beforeAttachment && props.afterAttachment);
-	.c-form-field(data-type=props.type id=idField)
+		const props = Object.assign({ type: "text", id: null, for: null, beforeAttachment: "", afterAttachment: "", description: "", errorMessage: "", isConfirm: false }, params);
+		// CMS要件: for を渡した場合は 前見出し を labelとする。前見出しが空であれば 後見出しを labelとする
+		const isBeforeAttachmentLabel = Boolean(props.for && props.beforeAttachment);
+		const isAfterAttachmentLabel = Boolean(props.for && !props.beforeAttachment && props.afterAttachment);
+	.c-form-field(data-type=props.type id=props.id)
 		.c-form-field__grid
 			.c-form-field__main
 				.c-form-field__attachment-before
 					if isBeforeAttachmentLabel
-						label(for=idInput) #{ props.beforeAttachment }
+						label(for=props.for) #{ props.beforeAttachment }
 					else if props.beforeAttachment
 						span #{ props.beforeAttachment }
 
@@ -26,7 +23,7 @@ mixin cFormField(params = {})
 
 				.c-form-field__attachment-after
 					if isAfterAttachmentLabel
-						label(for=idInput) #{ props.afterAttachment }
+						label(for=props.for) #{ props.afterAttachment }
 					else if props.afterAttachment
 						span #{ props.afterAttachment }
 
