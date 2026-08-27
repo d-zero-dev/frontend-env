@@ -1647,7 +1647,7 @@ __metadata:
     "@d-zero/textlint-config": "npm:^5.1.0"
     "@d-zero/tsconfig": "npm:^2.0.0"
     husky: "npm:9.1.7"
-    lerna: "npm:10.0.0"
+    lerna: "npm:10.0.1"
     npm-run-all2: "npm:9.0.3"
     typescript: "npm:5.9.3"
     vitest: "npm:4.1.11"
@@ -8338,15 +8338,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-commits-parser@npm:7.1.0":
-  version: 7.1.0
-  resolution: "conventional-commits-parser@npm:7.1.0"
+"conventional-commits-parser@npm:7.1.2, conventional-commits-parser@npm:^7.1.0":
+  version: 7.1.2
+  resolution: "conventional-commits-parser@npm:7.1.2"
   dependencies:
     "@simple-libs/stream-utils": "npm:^2.0.0"
     argue-cli: "npm:^3.1.0"
   bin:
     conventional-commits-parser: ./dist/cli/index.js
-  checksum: 10c0/7056dbe22c844561675dc08b9a3062da07d56e93fa4360fa1cb72dc5df5811b165cc5b2a317a6e05803cc3399ddcb641d701ed456443cffb36c407b2a17d1f97
+  checksum: 10c0/dd1478a5ef4fddd52cdd67fa4a97d1f47908a20d22287ccfa3f5e09b8298a3bcf3eb49ed117744805cc07ca31edf8835ce0913e96b1bcf7c385cf9bcefb3cf54
   languageName: node
   linkType: hard
 
@@ -8370,18 +8370,6 @@ __metadata:
   bin:
     conventional-commits-parser: dist/cli/index.js
   checksum: 10c0/3595b85b420a3f431dbad65f7c367e803ee8bca500ec24482e8669d4ed5ff6febbb5e9a17c52f07ebe882abdee3418e759245bcb06e4d1e2cce09d638f31d5ce
-  languageName: node
-  linkType: hard
-
-"conventional-commits-parser@npm:^7.1.0":
-  version: 7.1.2
-  resolution: "conventional-commits-parser@npm:7.1.2"
-  dependencies:
-    "@simple-libs/stream-utils": "npm:^2.0.0"
-    argue-cli: "npm:^3.1.0"
-  bin:
-    conventional-commits-parser: ./dist/cli/index.js
-  checksum: 10c0/dd1478a5ef4fddd52cdd67fa4a97d1f47908a20d22287ccfa3f5e09b8298a3bcf3eb49ed117744805cc07ca31edf8835ce0913e96b1bcf7c385cf9bcefb3cf54
   languageName: node
   linkType: hard
 
@@ -12973,9 +12961,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lerna@npm:10.0.0":
-  version: 10.0.0
-  resolution: "lerna@npm:10.0.0"
+"lerna@npm:10.0.1":
+  version: 10.0.1
+  resolution: "lerna@npm:10.0.1"
   dependencies:
     "@npmcli/arborist": "npm:9.1.6"
     "@npmcli/package-json": "npm:7.0.2"
@@ -12989,7 +12977,7 @@ __metadata:
     conventional-changelog: "npm:8.1.0"
     conventional-changelog-angular: "npm:9.2.1"
     conventional-commits-filter: "npm:6.0.1"
-    conventional-commits-parser: "npm:7.1.0"
+    conventional-commits-parser: "npm:7.1.2"
     conventional-recommended-bump: "npm:12.1.0"
     cosmiconfig: "npm:9.0.0"
     dedent: "npm:1.5.3"
@@ -13020,7 +13008,7 @@ __metadata:
     signal-exit: "npm:3.0.7"
     ssri: "npm:12.0.0"
     string-width: "npm:^4.2.3"
-    tar: "npm:7.5.20"
+    tar: "npm:7.5.22"
     tinyglobby: "npm:0.2.12"
     validate-npm-package-license: "npm:3.0.4"
     validate-npm-package-name: "npm:6.0.2"
@@ -13028,7 +13016,7 @@ __metadata:
     yargs: "npm:17.7.2"
   bin:
     lerna: dist/cli.js
-  checksum: 10c0/49e09f922df4eda5860cde0035873e6393960e828f81aabf14fe94538760ece86908233d1d0a85f0570c70140949dca8c89989c3093ef6c8f05b10e1eaf4dec4
+  checksum: 10c0/f5c162eef98ebe98c830ff0b60424ac8ce49b8451c03411f1cc79039c924e337f6330d468c43b8208b3b5d34acda4ea7850211728beaa33a39a3c430fbd62bf2
   languageName: node
   linkType: hard
 
@@ -18816,19 +18804,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar@npm:7.5.20":
-  version: 7.5.20
-  resolution: "tar@npm:7.5.20"
-  dependencies:
-    "@isaacs/fs-minipass": "npm:^4.0.0"
-    chownr: "npm:^3.0.0"
-    minipass: "npm:^7.1.2"
-    minizlib: "npm:^3.1.0"
-    yallist: "npm:^5.0.0"
-  checksum: 10c0/4df4335c6d958b76adf1eaced55889dec3ca1c51f450658a074af80694bb0d9c154a8e93fdf4da617372d1575b121295379993961bbe4cd4b0867c0e5689846a
-  languageName: node
-  linkType: hard
-
 "tar@npm:7.5.21":
   version: 7.5.21
   resolution: "tar@npm:7.5.21"
@@ -18842,6 +18817,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tar@npm:7.5.22, tar@npm:^7.5.20":
+  version: 7.5.22
+  resolution: "tar@npm:7.5.22"
+  dependencies:
+    "@isaacs/fs-minipass": "npm:^4.0.0"
+    chownr: "npm:^3.0.0"
+    minipass: "npm:^7.1.2"
+    minizlib: "npm:^3.1.0"
+    yallist: "npm:^5.0.0"
+  checksum: 10c0/1311f6be85a8157ac4c9147bae43e13923d2a1aae15e4aa1bd5239e4e03d2cf53cfe103dde7f35832fbb4c938b042856bc8e9a0afd29abd05e2d1608788c4fea
+  languageName: node
+  linkType: hard
+
 "tar@npm:^7.4.3, tar@npm:^7.5.4":
   version: 7.5.9
   resolution: "tar@npm:7.5.9"
@@ -18852,19 +18840,6 @@ __metadata:
     minizlib: "npm:^3.1.0"
     yallist: "npm:^5.0.0"
   checksum: 10c0/e870beb1b2477135ca2abe86b2d18f7b35d0a4e3a37bbc523d3b8f7adca268dfab543f26528a431d569897f8c53a7cac745cdfbc4411c2f89aeeacc652b81b0a
-  languageName: node
-  linkType: hard
-
-"tar@npm:^7.5.20":
-  version: 7.5.22
-  resolution: "tar@npm:7.5.22"
-  dependencies:
-    "@isaacs/fs-minipass": "npm:^4.0.0"
-    chownr: "npm:^3.0.0"
-    minipass: "npm:^7.1.2"
-    minizlib: "npm:^3.1.0"
-    yallist: "npm:^5.0.0"
-  checksum: 10c0/1311f6be85a8157ac4c9147bae43e13923d2a1aae15e4aa1bd5239e4e03d2cf53cfe103dde7f35832fbb4c938b042856bc8e9a0afd29abd05e2d1608788c4fea
   languageName: node
   linkType: hard
 
