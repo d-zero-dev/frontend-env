@@ -1,0 +1,7 @@
+.c-form-input-text {
+	max-inline-size: 100%;
+
+	&:not([size]) {
+		inline-size: 100%;
+	}
+}

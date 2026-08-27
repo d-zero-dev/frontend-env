@@ -1,8 +1,0 @@
-{
-	// TODO: コミットを通すための暫定設定。PR 作成までにルールの上書き内容を調整する
-	"extends": ["../../../../markuplint.config.js"],
-	"rules": {
-		"class-naming": false,
-		"placeholder-label-option": false
-	}
-}

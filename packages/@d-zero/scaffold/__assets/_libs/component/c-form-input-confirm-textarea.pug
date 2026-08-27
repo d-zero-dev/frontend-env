@@ -1,0 +1,5 @@
+mixin cFormInputConfirmTextarea(params = {})
+	-
+		const props = Object.assign({ value: "__選択項目__" }, params);
+	.c-form-input-confirm-textarea
+		p #{ props.value }

@@ -1,0 +1,5 @@
+.c-form-input-textarea {
+	&:not([cols]) {
+		inline-size: 100%;
+	}
+}
