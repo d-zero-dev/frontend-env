@@ -1,6 +1,8 @@
 {
 	"extends": ["@d-zero/stylelint-config"],
 	"rules": {
+		"at-rule-prelude-no-invalid": null,
+		"declaration-property-value-no-unknown": null,
 		"selector-type-no-unknown": [
 			true,
 			{
