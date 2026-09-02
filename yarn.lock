@@ -1608,12 +1608,12 @@ __metadata:
   linkType: hard
 
 "@d-zero/dealer@npm:^1.10.4":
-  version: 1.13.0
-  resolution: "@d-zero/dealer@npm:1.13.0"
+  version: 1.13.1
+  resolution: "@d-zero/dealer@npm:1.13.1"
   dependencies:
     "@d-zero/shared": "npm:0.23.0"
     ansi-colors: "npm:4.1.3"
-  checksum: 10c0/c3b931252762692d414fce3d74a425441a4f05ab30581dd3a42fe1cef714ad788b6fac72a690e44e4fb18312ad4305042385c0d9d82d928753102284458a99e5
+  checksum: 10c0/752b6e9d6752d200354cd788cf5a0ec53c5c759ee83f2e30577ca6562d63269d9a93076746bf49754b311dae70ef48bca8a03698eed18c3f111a395d36aa9e61
   languageName: node
   linkType: hard
 
