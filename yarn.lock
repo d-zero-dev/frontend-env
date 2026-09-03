@@ -1597,6 +1597,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@d-zero/dealer@npm:1.13.1, @d-zero/dealer@npm:^1.10.4":
+  version: 1.13.1
+  resolution: "@d-zero/dealer@npm:1.13.1"
+  dependencies:
+    "@d-zero/shared": "npm:0.23.0"
+    ansi-colors: "npm:4.1.3"
+  checksum: 10c0/752b6e9d6752d200354cd788cf5a0ec53c5c759ee83f2e30577ca6562d63269d9a93076746bf49754b311dae70ef48bca8a03698eed18c3f111a395d36aa9e61
+  languageName: node
+  linkType: hard
+
 "@d-zero/dealer@npm:1.5.3":
   version: 1.5.3
   resolution: "@d-zero/dealer@npm:1.5.3"
@@ -1604,16 +1614,6 @@ __metadata:
     "@d-zero/shared": "npm:0.17.1"
     ansi-colors: "npm:4.1.3"
   checksum: 10c0/c8b92ed2f36c68ec64353d7cee852589f24917f8410bbefe06bfa8cd46a03285b305df54de2a99c1587043df8149499f60f5b72578d95647e4dc9d6337d179c1
-  languageName: node
-  linkType: hard
-
-"@d-zero/dealer@npm:^1.10.4":
-  version: 1.13.1
-  resolution: "@d-zero/dealer@npm:1.13.1"
-  dependencies:
-    "@d-zero/shared": "npm:0.23.0"
-    ansi-colors: "npm:4.1.3"
-  checksum: 10c0/752b6e9d6752d200354cd788cf5a0ec53c5c759ee83f2e30577ca6562d63269d9a93076746bf49754b311dae70ef48bca8a03698eed18c3f111a395d36aa9e61
   languageName: node
   linkType: hard
 
@@ -1661,6 +1661,16 @@ __metadata:
     archiver: "npm:8.0.0"
     unzipper: "npm:0.12.5"
   checksum: 10c0/9bc7022bfb5a3f1bbd2ade96a0228e8d524cf21901fb30e6e88c4f6b8638d0f19a20d31c87c8d4c2a2091674a6fe2f0b038d5ae979fd65afd0d00f545b27660a
+  languageName: node
+  linkType: hard
+
+"@d-zero/fs@npm:0.2.7":
+  version: 0.2.7
+  resolution: "@d-zero/fs@npm:0.2.7"
+  dependencies:
+    archiver: "npm:8.0.0"
+    unzipper: "npm:0.12.5"
+  checksum: 10c0/f5c65eef834aaff069d48ad98c2f507aaf306fab1e96e1497349e52f7a2dd02c0d6fd011fb4ca8d8f79c60c056be16e18bb74dced08ef7ee8c41d2dacbb7145a
   languageName: node
   linkType: hard
 
@@ -1890,7 +1900,7 @@ __metadata:
     "@d-zero/dealer": "npm:^1.10.4"
     "@d-zero/shared": "npm:^0.23.0"
     "@nitpicker/crawler": "npm:^0.18.0"
-    "@nitpicker/query": "npm:^0.18.0"
+    "@nitpicker/query": "npm:^0.21.0"
     "@types/jsdom": "npm:30.0.0"
     "@types/node": "npm:25.9.5"
     js-yaml: "npm:5.3.0"
@@ -3609,7 +3619,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nitpicker/crawler@npm:0.18.0, @nitpicker/crawler@npm:^0.18.0":
+"@nitpicker/crawler@npm:0.21.0":
+  version: 0.21.0
+  resolution: "@nitpicker/crawler@npm:0.21.0"
+  dependencies:
+    "@d-zero/beholder": "npm:4.2.3"
+    "@d-zero/dealer": "npm:1.13.1"
+    "@d-zero/fs": "npm:0.2.7"
+    "@d-zero/shared": "npm:0.23.0"
+    ansi-colors: "npm:4.1.3"
+    debug: "npm:4.4.3"
+    follow-redirects: "npm:1.16.0"
+    fs-extra: "npm:11.4.0"
+    knex: "npm:3.3.0"
+    libsql: "npm:0.5.29"
+    puppeteer: "npm:25.5.0"
+    robots-parser: "npm:3.0.1"
+    tar: "npm:7.5.22"
+  checksum: 10c0/26509fa87c41208f5d76d6afc4de9048d5310f7e826e29bedef6f38d5e59b8600b388590a6df8bb04050cb6ad56fce9b740e2a389bcc8015e083a16df4840973
+  languageName: node
+  linkType: hard
+
+"@nitpicker/crawler@npm:^0.18.0":
   version: 0.18.0
   resolution: "@nitpicker/crawler@npm:0.18.0"
   dependencies:
@@ -3630,13 +3661,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nitpicker/query@npm:^0.18.0":
-  version: 0.18.0
-  resolution: "@nitpicker/query@npm:0.18.0"
+"@nitpicker/query@npm:^0.21.0":
+  version: 0.21.0
+  resolution: "@nitpicker/query@npm:0.21.0"
   dependencies:
-    "@d-zero/shared": "npm:0.22.5"
-    "@nitpicker/crawler": "npm:0.18.0"
-  checksum: 10c0/cf5777a7318ef3482813f9294a9d22e63f321b3a077e57cb3e7e84e3410deba35ba9c440fdb5250151b92803b962e7add1b278c381582ee4f38b0286fb074880
+    "@d-zero/shared": "npm:0.23.0"
+    "@nitpicker/crawler": "npm:0.21.0"
+  checksum: 10c0/551b79abe74fe0de6cca30181e9a0618c849d9ac118fe4ef2dddd9c63c5381a6bd290b0d62885daeef558aecac843505f4a6040db1acd013586bf371258ec6bd
   languageName: node
   linkType: hard
 
@@ -10778,6 +10809,17 @@ __metadata:
     jsonfile: "npm:^6.0.1"
     universalify: "npm:^2.0.0"
   checksum: 10c0/191c96bf71519fe08595f7920b6e568f6e44b48ed968624f35cb3bb7f4f9b05718b99cd6bf81938c0f7b1daa6d151383c33e0cbfdfe4d95419d7ea121de8e91a
+  languageName: node
+  linkType: hard
+
+"fs-extra@npm:11.4.0":
+  version: 11.4.0
+  resolution: "fs-extra@npm:11.4.0"
+  dependencies:
+    graceful-fs: "npm:^4.2.0"
+    jsonfile: "npm:^6.0.1"
+    universalify: "npm:^2.0.0"
+  checksum: 10c0/1e311eca820a12d3d795f2043dcd5628d017f4d21e634f3f9ef314ae68bee9979758262fb9cb35ffa6f26454c3fffe8b15558733e91e8fc729b07b10bb98d8b6
   languageName: node
   linkType: hard
 
