@@ -45,7 +45,7 @@
 		"jsdom": "30.0.1",
 		"parse5": "8.0.1",
 		"parse5-html-rewriting-stream": "8.0.1",
-		"puppeteer": "25.5.0"
+		"puppeteer": "25.9.0"
 	},
 	"devDependencies": {
 		"@types/jsdom": "30.0.0",
