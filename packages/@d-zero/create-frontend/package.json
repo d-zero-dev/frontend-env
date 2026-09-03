@@ -27,7 +27,7 @@
 		"magicast": "0.5.4",
 		"meow": "14.1.0",
 		"minimatch": "10.2.6",
-		"plop": "4.0.4",
+		"plop": "4.0.5",
 		"prettier": "3.9.6"
 	},
 	"devDependencies": {
