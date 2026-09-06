@@ -1523,7 +1523,7 @@ __metadata:
     "@types/node": "npm:25.9.5"
     execa: "npm:10.0.1"
     i18n-js: "npm:4.5.3"
-    ignore: "npm:7.0.6"
+    ignore: "npm:7.0.7"
     magicast: "npm:0.5.4"
     meow: "npm:14.1.0"
     minimatch: "npm:10.2.6"
@@ -11723,10 +11723,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore@npm:7.0.6":
-  version: 7.0.6
-  resolution: "ignore@npm:7.0.6"
-  checksum: 10c0/fc01ef1d14efbe003439b60538726351e81483d1b6f55bdbb3a4465c6346d9481afad5b350dfbd604ddd7049618ef9093ff26dc147984aabc303c56ba53ea3b5
+"ignore@npm:7.0.7":
+  version: 7.0.7
+  resolution: "ignore@npm:7.0.7"
+  checksum: 10c0/9f6552572f0c1e95eda40ce382afd7d54287e8359f591ef5fe45ad6eca71a7c792b5170ece3d4e9ce3b9a45dd9a2ac18054c8ed9c706b4c27048bdcda488a709
   languageName: node
   linkType: hard
 
