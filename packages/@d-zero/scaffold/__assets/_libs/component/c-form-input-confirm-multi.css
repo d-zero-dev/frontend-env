@@ -1,0 +1,7 @@
+.c-form-input-confirm-multi {
+	display: block flow;
+
+	:where(ul li) {
+		list-style: disc;
+	}
+}

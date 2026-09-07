@@ -1,0 +1,20 @@
+.c-form {
+	display: block flow;
+}
+
+.c-form__field-list {
+	display: block flow;
+
+	> :where(*) {
+		padding-block: 1rem;
+		padding-inline: 2rem;
+	}
+}
+
+.c-form__agreement {
+	/* 同意文のスタイルを記述 */
+}
+
+.c-form__submit {
+	display: block flow;
+}

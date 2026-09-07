@@ -1,0 +1,60 @@
+.c-form-field {
+	display: block flow;
+}
+
+.c-form-field__grid {
+	display: block grid;
+	grid-template:
+		'main' auto
+		'description' auto
+		'error-message' auto / minmax(0, 1fr);
+
+	> :where(.c-form-field__main) {
+		grid-area: main;
+	}
+
+	> :where(.c-form-field__description) {
+		grid-area: description;
+	}
+
+	> :where(.c-form-field__error-message) {
+		grid-area: error-message;
+	}
+}
+
+.c-form-field__main {
+	&:where(:is([data-type='text'], [data-type='select']) *) {
+		display: block flex;
+		flex-flow: row nowrap;
+		align-items: center;
+
+		> :where(.c-form-field__attachment-before:not(:empty)) {
+			margin-inline-end: 1rem;
+		}
+
+		> :where(.c-form-field__attachment-after:not(:empty)) {
+			margin-inline-start: 1rem;
+		}
+
+		> :where(.c-form-field__input) {
+			flex: 1 1 auto;
+			min-inline-size: 0;
+		}
+	}
+}
+
+.c-form-field__attachment-before {
+	font-weight: bold;
+}
+
+.c-form-field__attachment-after {
+	/* 後見出しのスタイルを記述 */
+}
+
+.c-form-field__description {
+	font-size: calc(12 / 16 * 1rem);
+}
+
+.c-form-field__error-message {
+	font-size: calc(12 / 16 * 1rem);
+}

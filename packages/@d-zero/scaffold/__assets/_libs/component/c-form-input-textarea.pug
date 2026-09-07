@@ -1,0 +1,9 @@
+mixin cFormInputTextarea(params = {})
+	-
+		const props = Object.assign({ id: null, name: null, rows: null, cols: null, isRequired: false }, params);
+	textarea.c-form-input-textarea(
+		name=props.name
+		rows=props.rows
+		cols=props.cols
+		required=props.isRequired
+		id=props.id)
