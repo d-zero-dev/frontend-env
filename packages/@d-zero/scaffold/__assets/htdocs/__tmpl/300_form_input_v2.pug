@@ -64,7 +64,7 @@ include /component/c-form-input-file.pug
 	],
 })
 			+cFormFieldset({ label: "チェックボックス", id: "GroupMessageContents", isGrouped: true, isRequired: true, attention: "注意書き" })
-				+cFormField({ type: "checkbox", id: "FieldMessageContents", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "" })
+				+cFormField({ type: "checkbox", id: "FieldMessageContents", beforeAttachment: "前見出し", afterAttachment: "", description: "", errorMessage: "" })
 					+cFormInputCheckbox({
 	hiddenId: "MailMessageField4",
 	hiddenName: "data[MailMessage][contents]",
@@ -86,7 +86,7 @@ include /component/c-form-input-file.pug
 					+cFormInputText({ id: "MailMessageTel", name: "data[MailMessage][tel]", maxlength: 13, size: 15, isRequired: false })
 			+cFormFieldset({ label: "メールアドレス", id: "GroupMessageEmail1", for: "MailMessageEmail1", isRequired: true, attention: "注意書き" })
 				+cFormField({ type: "text", id: "FieldMessageEmail1", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "" })
-					+cFormInputText({ id: "MailMessageEmail1", name: "data[MailMessage][email_1]", maxlength: 255, size: 30, isRequired: false })
+					+cFormInputText({ id: "MailMessageEmail1", name: "data[MailMessage][email_1]", maxlength: 255, isRequired: false })
 			+cFormFieldset({ label: "生まれ年", id: "GroupMessageBirth", for: "MailMessageBirth", isRequired: true, attention: "注意書き" })
 				+cFormField({ type: "select", id: "FieldMessageBirth", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "" })
 					+cFormInputSelect({ id: "MailMessageBirth", name: "data[MailMessage][birth]", options: [{ value: "", label: "選択してください" }, ...data.birthYearOptions], isRequired: false })

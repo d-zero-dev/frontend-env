@@ -1,16 +1,13 @@
 .c-form {
 	display: block flow;
-
-	> :where(.c-form__agreement, .c-form__submit) {
-		margin-block-start: 2rem;
-	}
 }
 
 .c-form__field-list {
 	display: block flow;
 
-	> :where(:not(:first-child)) {
-		margin-block-start: 2rem;
+	> :where(*) {
+		padding-block: 1rem;
+		padding-inline: 2rem;
 	}
 }
 
@@ -19,8 +16,5 @@
 }
 
 .c-form__submit {
-	display: block flex;
-	flex-flow: row wrap;
-	gap: 1rem;
-	justify-content: center;
+	display: block flow;
 }
