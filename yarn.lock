@@ -1543,12 +1543,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/csstree-scss-syntax@npm:5.1.0":
-  version: 5.1.0
-  resolution: "@d-zero/csstree-scss-syntax@npm:5.1.0"
+"@d-zero/csstree-scss-syntax@npm:6.0.0-alpha.2":
+  version: 6.0.0-alpha.2
+  resolution: "@d-zero/csstree-scss-syntax@npm:6.0.0-alpha.2"
   dependencies:
     css-tree: "npm:3.1.0"
-  checksum: 10c0/d6032255905be40f61ebb728c80ebec7628253ed57b8930f5b0b8dca3eeae16dbbbc52da77a746035aba92600330aacb92613faf42f66209e64e8ad83e0e8f7b
+  checksum: 10c0/5f6c36d9ddacdbe3de9ac2af6053b63fb188699da0fe807de08d0f1e77d58e485bd46f50e1ab30649c1b6bdeaf1c885973237816431b06a2a04c765b67b27779
   languageName: node
   linkType: hard
 
@@ -1673,13 +1673,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/markuplint-config@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "@d-zero/markuplint-config@npm:5.1.0"
+"@d-zero/markuplint-config@npm:^6.0.0-alpha.2":
+  version: 6.0.0-alpha.2
+  resolution: "@d-zero/markuplint-config@npm:6.0.0-alpha.2"
   dependencies:
     "@markuplint/pug-parser": "npm:4.6.23"
     markuplint: "npm:4.14.0"
-  checksum: 10c0/579f0f4dee7f21383aee04adf2f7141250542a2a60fe555df849985283e0439fb97f6de187ceea9b38765731a5cbb58436751e91fb8dfe25af8c050625cfb5ef
+  checksum: 10c0/68a566de339331d8253e8c9f0cae6697c0d59e03094664f3036e501633e908ef9e6ec2d6ba2ca34aa922bee6bcc86b992581251370126c1b729090adea2f161b
   languageName: node
   linkType: hard
 
@@ -1808,11 +1808,11 @@ __metadata:
     "@d-zero/custom-components": "npm:5.3.0"
     "@d-zero/eslint-config": "npm:^5.0.0"
     "@d-zero/lint-staged-config": "npm:^5.1.0"
-    "@d-zero/markuplint-config": "npm:^5.1.0"
+    "@d-zero/markuplint-config": "npm:^6.0.0-alpha.2"
     "@d-zero/postcss-config": "npm:5.3.0"
     "@d-zero/prettier-config": "npm:^5.1.0"
     "@d-zero/pug-lint-config": "npm:^5.1.0"
-    "@d-zero/stylelint-config": "npm:^5.1.0"
+    "@d-zero/stylelint-config": "npm:^6.0.0-alpha.2"
     "@d-zero/textlint-config": "npm:^5.1.0"
     "@d-zero/tsconfig": "npm:^2.0.0"
     "@kamado-io/page-compiler": "npm:1.3.0"
@@ -1903,11 +1903,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@d-zero/stylelint-config@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "@d-zero/stylelint-config@npm:5.1.0"
+"@d-zero/stylelint-config@npm:^6.0.0-alpha.2":
+  version: 6.0.0-alpha.2
+  resolution: "@d-zero/stylelint-config@npm:6.0.0-alpha.2"
   dependencies:
-    "@d-zero/stylelint-rules": "npm:5.1.0"
+    "@d-zero/stylelint-rules": "npm:6.0.0-alpha.2"
     postcss-scss: "npm:4.0.9"
     stylelint: "npm:17.4.0"
     stylelint-config-recess-order: "npm:7.6.1"
@@ -1915,20 +1915,20 @@ __metadata:
     stylelint-order: "npm:7.0.1"
     stylelint-scss: "npm:7.0.0"
     stylelint-use-logical: "npm:2.1.3"
-  checksum: 10c0/0123250f139d2454f786c3fe5e530e09b3d78ecfe1961d4948c1bb832339ca142f770f75fd57f311256cb77430891c13eb14587ef30b181df52ad2fe31cdfd34
+  checksum: 10c0/995e9a7149165b826572b787459e2503094f8280617b592b8c3292c04d472ca585ef3472ced90f7debddaa700ed4901492083d231b2a31b1be1951b0cce79a34
   languageName: node
   linkType: hard
 
-"@d-zero/stylelint-rules@npm:5.1.0":
-  version: 5.1.0
-  resolution: "@d-zero/stylelint-rules@npm:5.1.0"
+"@d-zero/stylelint-rules@npm:6.0.0-alpha.2":
+  version: 6.0.0-alpha.2
+  resolution: "@d-zero/stylelint-rules@npm:6.0.0-alpha.2"
   dependencies:
-    "@d-zero/csstree-scss-syntax": "npm:5.1.0"
+    "@d-zero/csstree-scss-syntax": "npm:6.0.0-alpha.2"
     css-tree: "npm:3.1.0"
     postcss-selector-parser: "npm:7.1.1"
     postcss-value-parser: "npm:4.2.0"
     stylelint: "npm:17.4.0"
-  checksum: 10c0/ae95d0e8860c419caed49fa4846f17df67f3bf796cbc472bfaec53755c9427946af24d4f335f8c4781dea0d600df002f82dccc6db2a503dd31fd27edcec7e1fc
+  checksum: 10c0/6c4a3825221f06ed0ab21c4d7853b6ff1c59eed7c5ecc8eb5a4fc42e6fca35986b36a87292b6cb3a43f894617ad015fd380168035c2eb6f4369349d93481239e
   languageName: node
   linkType: hard
 
