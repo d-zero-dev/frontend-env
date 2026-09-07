@@ -18,6 +18,7 @@
 @import '@/component/c-media-list.css' layer(component);
 @import '@/component/c-media.css' layer(component);
 @import '@/component/c-content-index.css' layer(component);
+@import '@/component/c-form.css' layer(component);
 @import '@/component/c-form-fieldset.css' layer(component);
 @import '@/component/c-form-field.css' layer(component);
 @import '@/component/c-form-input-text.css' layer(component);

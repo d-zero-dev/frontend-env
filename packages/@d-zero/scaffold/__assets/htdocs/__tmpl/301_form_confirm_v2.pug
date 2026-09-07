@@ -8,7 +8,7 @@ include /component/c-form-input-confirm-textarea.pug
 	.cc-form-description
 		p 以下の内容を送信します。
 
-	form#MailMessageIndexForm.cc-form(
+	form#MailMessageIndexForm.c-form(
 		action="__PATH_TO__"
 		enctype="multipart/form-data"
 		method="post"
@@ -17,7 +17,7 @@ include /component/c-form-input-confirm-textarea.pug
 		input(type="hidden" name="_method" value="POST")
 		input#Token__TOKEN__(type="hidden" name="data[_Token][key]" value="__TOKEN__")
 		input#MailMessageMode(type="hidden" name="data[MailMessage][mode]")
-		.cc-form-field-list
+		.c-form__field-list
 			+cFormFieldset({ label: "フィールドグループ名", isRequired: true })
 				+cFormField({ beforeAttachment: "前見出し", afterAttachment: "後見出し", isConfirm: true })
 					+cFormInputConfirmText({ value: "__入力内容__" })
@@ -74,6 +74,6 @@ include /component/c-form-input-confirm-textarea.pug
 			+cFormFieldset({ label: "ファイル添付", isRequired: false })
 				+cFormField({ type: "file", beforeAttachment: "前見出し", afterAttachment: "後見出し", isConfirm: true })
 					+cFormInputConfirmText({ value: "__ファイル名__" })
-		.cc-form-submit
+		.c-form__submit
 			button(type="submit"): span 入力画面に戻る
 			button(type="submit"): span 送信する

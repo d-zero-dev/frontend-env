@@ -13,7 +13,7 @@ include /component/c-form-input-file.pug
 		p こちらのフォームよりご応募ください。記入いただいた内容を検討の上、弊社人事担当者よりメールにてご返信いたします。
 	// CMS要件: メールフォーム概要ここまで
 
-	form#MailMessageIndexForm.cc-form(
+	form#MailMessageIndexForm.c-form(
 		action="__PATH_TO__"
 		enctype="multipart/form-data"
 		method="post"
@@ -22,7 +22,7 @@ include /component/c-form-input-file.pug
 		input(type="hidden" name="_method" value="POST")
 		input#Token__TOKEN__(type="hidden" name="data[_Token][key]" value="__TOKEN__")
 		input#MailMessageMode(type="hidden" name="data[MailMessage][mode]")
-		.cc-form-field-list
+		.c-form__field-list
 			+cFormFieldset({ label: "フィールドグループ名", id: "GroupMailMessageField1", isGrouped: true, isRequired: true, attention: "注意書き" })
 				+cFormField({ type: "text", id: "FieldMailMessageField1", for: "MailMessageField1", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "説明文", errorMessage: "エラーメッセージ" })
 					+cFormInputText({ id: "MailMessageField1", name: "data[MailMessage][field1]", maxlength: 255, isRequired: true })
@@ -110,12 +110,12 @@ include /component/c-form-input-file.pug
 			+cFormFieldset({ label: "ファイル添付", id: "GroupMessageFile", for: "MailMessageFile", isRequired: false, attention: "注意書き" })
 				+cFormField({ type: "file", id: "FieldMessageFile", beforeAttachment: "前見出し", afterAttachment: "後見出し", description: "", errorMessage: "" })
 					+cFormInputFile({ id: "MailMessageFile", name: "data[MailMessage][File]", isRequired: false })
-		.cc-form-agreement
+		.c-form__agreement
 			p
 				| 送信前に
 				a(href="__PATH_TO__") 個人情報保護方針
 				| をご確認ください。
-		.cc-form-submit
+		.c-form__submit
 			button#BtnMessageConfirm(type="submit"): span 送信内容を確認
 		input#TokenFields__TOKEN(type="hidden" name="data[_Token][fields]" value="__TOKEN__")
 		input#TokenUnlocked__TOKEN(

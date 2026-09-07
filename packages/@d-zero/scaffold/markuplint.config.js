@@ -39,5 +39,20 @@ export default {
 				'placeholder-label-option': false,
 			},
 		},
+		'__assets/htdocs/__tmpl/*_v2.pug': {
+			nodeRules: [
+				{
+					// 新デザインのフォームは c-content-main 直下に c-form コンポーネントを置く意図的な例外。
+					// form.c-form の specificity で基底の「c-content-main 配下は c- 禁止」ルールを上書きする
+					selector: 'form.c-form',
+					rules: {
+						'class-naming': {
+							severity: 'error',
+							value: '/^c-form$/',
+						},
+					},
+				},
+			],
+		},
 	},
 };
