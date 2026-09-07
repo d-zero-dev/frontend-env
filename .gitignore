@@ -22,3 +22,5 @@ yarn-error.log
 # codex / other agent runtimes
 .agents/
 AGENTS.md
+# scaffold テンプレートの AGENTS.md は配布物なので除外しない
+!packages/@d-zero/scaffold/AGENTS.md

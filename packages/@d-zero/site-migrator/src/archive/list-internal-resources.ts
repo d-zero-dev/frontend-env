@@ -10,14 +10,22 @@ const PAGE_SIZE = 500;
  * Yields every internal sub-resource (CSS / JS / image / font / …) URL from the
  * archive.
  * @param session
+ * @yields {InternalResource}
  */
-export function listInternalResources(
+export async function* listInternalResources(
 	session: ArchiveSession,
 ): AsyncIterable<InternalResource> {
-	return paginate(
+	const rows = paginate(
 		(offset, limit) =>
 			listResources(session.accessor, { isExternal: false, limit, offset }),
 		(row) => ({ url: row.url, contentType: row.contentType }),
 		PAGE_SIZE,
 	);
+	for await (const row of rows) {
+		// `url` is null for resources whose identity is a large `data:` URI
+		// (routed to blob_refs instead of url_refs); nothing to download.
+		if (row.url !== null) {
+			yield { url: row.url, contentType: row.contentType };
+		}
+	}
 }

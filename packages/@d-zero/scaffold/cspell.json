@@ -5,6 +5,8 @@
 		// Libraries
 		"splide",
 		"kamado",
-		"kiso"
+		"kiso",
+		// D-ZERO
+		"dzero"
 	]
 }

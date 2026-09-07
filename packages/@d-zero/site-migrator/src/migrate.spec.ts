@@ -1,8 +1,14 @@
+import type { BlockTargetAdapter } from './adapter.js';
+import type { LayoutBlock } from '@d-zero/anatomist/types';
+
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
+
+import { IncludeNoMatchError, InvalidIncludeValueError } from './include-filter.js';
+import { burgerEditorAdapter } from './page-extractor/burger-editor-adapter.js';
 
 vi.mock('./archive/open-archive.js', () => ({
 	openArchive: vi.fn(),
@@ -27,6 +33,9 @@ vi.mock('./page-extractor/rewrite-page-refs.js', async (importOriginal) => {
 		rewritePageRefs: vi.fn(actual.rewritePageRefs),
 	};
 });
+vi.mock('./page-extractor/resolve-page-layout.js', () => ({
+	resolvePageLayouts: vi.fn(),
+}));
 
 const { openArchive } = await import('./archive/open-archive.js');
 const { listInternalResources } = await import('./archive/list-internal-resources.js');
@@ -34,6 +43,7 @@ const { listInternalPages } = await import('./archive/list-internal-pages.js');
 const { getPageHtml } = await import('./archive/get-page-html.js');
 const { getFrontmatter } = await import('./archive/get-frontmatter.js');
 const { rewritePageRefs } = await import('./page-extractor/rewrite-page-refs.js');
+const { resolvePageLayouts } = await import('./page-extractor/resolve-page-layout.js');
 const { migrate } = await import('./migrate.js');
 
 const openArchiveMock = vi.mocked(openArchive);
@@ -42,6 +52,61 @@ const listInternalPagesMock = vi.mocked(listInternalPages);
 const getPageHtmlMock = vi.mocked(getPageHtml);
 const getFrontmatterMock = vi.mocked(getFrontmatter);
 const rewritePageRefsMock = vi.mocked(rewritePageRefs);
+const resolvePageLayoutsMock = vi.mocked(resolvePageLayouts);
+
+const CONTENT_CLASS = 'js-bge-content';
+
+/**
+ * @param overrides
+ */
+function sampleLeafBlock(overrides: Partial<LayoutBlock> = {}): LayoutBlock {
+	return {
+		layoutType: 'leaf',
+		tagName: 'DIV',
+		id: null,
+		classList: [],
+		boundingBox: { x: 0, y: 0, width: 0, height: 0 },
+		innerHTML: '',
+		confidence: 0,
+		signals: {},
+		children: [],
+		...overrides,
+	};
+}
+
+/**
+ * `resolvePageLayouts`のモックを、渡された全URLについて「main一致・単一wysiwygブロックへの
+ * 変換に成功する」決定的な結果を返すよう設定する（`extract-pages.spec.ts`と同じ方針）。
+ * @param innerHTMLByUrl 単一文字列なら全URL共通、`Record`ならURLごとの`innerHTML`（未指定は空）。
+ */
+function mockConvertedLayout(innerHTMLByUrl: Record<string, string> | string = ''): void {
+	resolvePageLayoutsMock.mockImplementation((options) => {
+		for (const item of options.items) {
+			const innerHTML =
+				typeof innerHTMLByUrl === 'string'
+					? innerHTMLByUrl
+					: (innerHTMLByUrl[item.url] ?? '');
+			options.onResult?.({
+				url: item.url,
+				outcome: 'resolved-live',
+				results: [
+					{
+						url: item.url,
+						viewport: { name: 'pc', width: 1280 },
+						mainSelector: 'main',
+						root: {
+							...sampleLeafBlock(),
+							layoutType: 'vertical-stack',
+							confidence: 1,
+							children: [sampleLeafBlock({ innerHTML })],
+						},
+					},
+				],
+			});
+		}
+		return Promise.resolve();
+	});
+}
 
 const closeMock = vi.fn(() => Promise.resolve());
 
@@ -81,6 +146,12 @@ describe('migrate', () => {
 			'./page-extractor/rewrite-page-refs.js',
 		);
 		rewritePageRefsMock.mockImplementation(real.rewritePageRefs);
+		resolvePageLayoutsMock.mockReset();
+		// Default: layout resolution + block conversion succeeds for every
+		// matched page, producing one empty wysiwyg block. Most tests here are
+		// about the resource/page pipeline orchestration, not about block
+		// conversion itself (that's `extract-pages.spec.ts`'s concern).
+		mockConvertedLayout();
 		closeMock.mockClear();
 
 		openArchiveMock.mockResolvedValue({
@@ -117,6 +188,8 @@ describe('migrate', () => {
 		const report = await migrate({
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 		});
 
 		expect(report).toEqual({
@@ -130,8 +203,84 @@ describe('migrate', () => {
 			pagesFailed: 0,
 			pagesRewriteFailed: 0,
 			pagesMetaFailed: 0,
+			pagesBlockConverted: 1,
+			pagesBlockPartial: 0,
+			pagesBlockConversionFailed: 0,
 		});
 		expect(closeMock).toHaveBeenCalledTimes(1);
+	});
+
+	test('aggregates pagesBlockPartial and pagesBlockConversionFailed from distinct pages', async () => {
+		listInternalResourcesMock.mockReturnValue(iter([]));
+		listInternalPagesMock.mockReturnValue(
+			iter([
+				{ url: 'https://example.com/partial' },
+				{ url: 'https://example.com/fatal' },
+			]),
+		);
+		vi.stubGlobal('fetch', vi.fn());
+		getPageHtmlMock.mockResolvedValueOnce(
+			'<!doctype html><html><head></head><body><main><p>x</p></main></body></html>',
+		);
+		getPageHtmlMock.mockResolvedValueOnce(
+			'<!doctype html><html><head></head><body><main><p>y</p></main></body></html>',
+		);
+		resolvePageLayoutsMock.mockImplementation((options) => {
+			for (const item of options.items) {
+				if (item.url === 'https://example.com/partial') {
+					// simple-grid with malformed rowSizes → the block falls back to
+					// wysiwyg, but the page itself is still `converted`→`partial`.
+					options.onResult?.({
+						url: item.url,
+						outcome: 'resolved-live',
+						results: [
+							{
+								url: item.url,
+								viewport: { name: 'pc', width: 1280 },
+								mainSelector: 'main',
+								root: {
+									...sampleLeafBlock(),
+									layoutType: 'vertical-stack',
+									confidence: 1,
+									children: [
+										{
+											...sampleLeafBlock(),
+											layoutType: 'simple-grid',
+											confidence: 0.9,
+											signals: { rowSizes: [3] },
+											children: [sampleLeafBlock()],
+										},
+									],
+								},
+							},
+						],
+					});
+				} else {
+					// Fatal: resolvePageLayouts failed outright for this page.
+					options.onResult?.({
+						url: item.url,
+						outcome: 'missing',
+						error: new Error('live analysis failed'),
+						kind: 'unknown',
+					});
+				}
+			}
+			return Promise.resolve();
+		});
+
+		const report = await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
+		});
+
+		expect(report).toMatchObject({
+			pagesExtracted: 2,
+			pagesBlockConverted: 0,
+			pagesBlockPartial: 1,
+			pagesBlockConversionFailed: 1,
+		});
 	});
 
 	test('forwards onResource and onPage callbacks for every per-item event', async () => {
@@ -152,6 +301,8 @@ describe('migrate', () => {
 		await migrate({
 			archivePath: '/tmp/fake.nitpicker',
 			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
 			onResource: (event) => resources.push(event),
 			onPage: (event) => pages.push(event),
 		});
@@ -189,11 +340,19 @@ describe('migrate', () => {
 			);
 		});
 
-		await migrate({ archivePath: '/tmp/fake.nitpicker', outputDir });
+		await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
+		});
 
 		expect(callOrder).toEqual(['fetch', 'getPageHtml']);
 		const written = await readFile(path.join(outputDir, 'p1.html'), 'utf8');
-		expect(written).toBe('---\nid: 5\n---\n<main>PAGE</main>');
+		expect(written.startsWith(`---\nid: 5\n---\n<main class="${CONTENT_CLASS}">`)).toBe(
+			true,
+		);
+		expect(written.endsWith('</main>')).toBe(true);
 	});
 
 	test('end-to-end: prepends YAML frontmatter (id + DB meta) to the extracted HTML', async () => {
@@ -208,12 +367,19 @@ describe('migrate', () => {
 			og: { title: 'OG P1' },
 		});
 
-		await migrate({ archivePath: '/tmp/fake.nitpicker', outputDir });
+		await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
+		});
 
 		const written = await readFile(path.join(outputDir, 'p1.html'), 'utf8');
-		expect(written).toBe(
-			'---\nid: 5\ntitle: "P1"\nog:\n  title: "OG P1"\n---\n<main><p>body</p></main>',
-		);
+		expect(
+			written.startsWith(
+				`---\nid: 5\ntitle: "P1"\nog:\n  title: "OG P1"\n---\n<main class="${CONTENT_CLASS}">`,
+			),
+		).toBe(true);
 	});
 
 	test('end-to-end: rewrites same-origin <a href> to {{<id>}} and assets to root-relative paths', async () => {
@@ -225,27 +391,32 @@ describe('migrate', () => {
 			]),
 		);
 		vi.stubGlobal('fetch', vi.fn());
+		const indexInnerHtml =
+			'<a href="/about/">about</a>' +
+			'<img src="../img/logo.png">' +
+			'<a href="https://other.example/x">ext</a>';
 		getPageHtmlMock.mockResolvedValueOnce(
-			'<!doctype html><html><head></head><body><main>' +
-				'<a href="/about/">about</a>' +
-				'<img src="../img/logo.png">' +
-				'<a href="https://other.example/x">ext</a>' +
-				'</main></body></html>',
+			`<!doctype html><html><head></head><body><main>${indexInnerHtml}</main></body></html>`,
 		);
 		getPageHtmlMock.mockResolvedValueOnce(
 			'<!doctype html><html><head></head><body><main>body</main></body></html>',
 		);
+		// Route the same markup through the mocked block so the merged body
+		// (what rewritePageRefs actually runs against) contains it.
+		mockConvertedLayout({ 'https://example.com/index.html': indexInnerHtml });
 
-		await migrate({ archivePath: '/tmp/fake.nitpicker', outputDir });
+		await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
+		});
 
 		const written = await readFile(path.join(outputDir, 'index.html'), 'utf8');
-		expect(written).toBe(
-			'---\nid: 5\n---\n<main>' +
-				'<a href="{{10000}}">about</a>' +
-				'<img src="/img/logo.png">' +
-				'<a href="https://other.example/x">ext</a>' +
-				'</main>',
-		);
+		expect(written).toContain('{{10000}}');
+		expect(written).toContain('<img src="/img/logo.png">');
+		expect(written).toContain('https://other.example/x');
+		expect(written).not.toContain('href="/about/"');
 	});
 
 	test('counts pages whose rewritePageRefs rejection was surfaced as rewriteError under pagesRewriteFailed', async () => {
@@ -257,7 +428,12 @@ describe('migrate', () => {
 		);
 		rewritePageRefsMock.mockRejectedValueOnce(new Error('rewrite boom'));
 
-		const report = await migrate({ archivePath: '/tmp/fake.nitpicker', outputDir });
+		const report = await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
+		});
 
 		expect(report).toMatchObject({
 			pagesExtracted: 1,
@@ -277,7 +453,12 @@ describe('migrate', () => {
 		getFrontmatterMock.mockReset();
 		getFrontmatterMock.mockRejectedValueOnce(new Error('sqlite boom'));
 
-		const report = await migrate({ archivePath: '/tmp/fake.nitpicker', outputDir });
+		const report = await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
+		});
 
 		expect(report).toMatchObject({
 			pagesExtracted: 1,
@@ -293,8 +474,228 @@ describe('migrate', () => {
 		listInternalPagesMock.mockReturnValue(iter([]));
 
 		await expect(
-			migrate({ archivePath: '/tmp/fake.nitpicker', outputDir }),
+			migrate({
+				archivePath: '/tmp/fake.nitpicker',
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
+			}),
 		).rejects.toThrow('listing crashed');
 		expect(closeMock).toHaveBeenCalledTimes(1);
+	});
+
+	test('include filters pages while resources are still downloaded in full', async () => {
+		listInternalResourcesMock.mockReturnValue(
+			iter([
+				{ url: 'https://example.com/a.css', contentType: 'text/css' },
+				{ url: 'https://example.com/b.css', contentType: 'text/css' },
+			]),
+		);
+		listInternalPagesMock.mockReturnValue(
+			iter([
+				{ url: 'https://example.com/index.html' },
+				{ url: 'https://example.com/about/' },
+				{ url: 'https://example.com/about/team.html' },
+			]),
+		);
+		const fetchMock = vi.fn(() =>
+			Promise.resolve(new Response(new Uint8Array([1]), { status: 200 })),
+		);
+		vi.stubGlobal('fetch', fetchMock);
+		getPageHtmlMock.mockImplementation(() =>
+			Promise.resolve(
+				'<!doctype html><html><head></head><body><main><p>x</p></main></body></html>',
+			),
+		);
+
+		const report = await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
+			include: ['/about/'],
+		});
+
+		expect(report).toMatchObject({ totalPages: 2, pagesExtracted: 2 });
+		// Resources are never filtered by `include` — both are still downloaded.
+		expect(fetchMock).toHaveBeenCalledTimes(2);
+		expect(getPageHtmlMock).toHaveBeenCalledTimes(2);
+		await expect(readFile(path.join(outputDir, 'index.html'))).rejects.toThrow();
+	});
+
+	test('include keeps ids identical to a full run and rewrites links to excluded pages to {{<id>}}', async () => {
+		listInternalResourcesMock.mockReturnValue(iter([]));
+		listInternalPagesMock.mockReturnValue(
+			iter([
+				{ url: 'https://example.com/index.html' },
+				{ url: 'https://example.com/about/' },
+			]),
+		);
+		vi.stubGlobal('fetch', vi.fn());
+		const indexInnerHtml = '<a href="/about/">about</a>';
+		getPageHtmlMock.mockResolvedValueOnce(
+			`<!doctype html><html><head></head><body><main>${indexInnerHtml}</main></body></html>`,
+		);
+		mockConvertedLayout({ 'https://example.com/index.html': indexInnerHtml });
+
+		await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
+			include: ['/index.html'],
+		});
+
+		const written = await readFile(path.join(outputDir, 'index.html'), 'utf8');
+		// `/about/` was excluded by `include`, yet its id (subdir section 1 → 10000)
+		// is identical to an unfiltered run because the id population stays the
+		// full archive page list.
+		expect(written.startsWith(`---\nid: 5\n---\n<main class="${CONTENT_CLASS}">`)).toBe(
+			true,
+		);
+		expect(written).toContain('{{10000}}');
+		await expect(readFile(path.join(outputDir, 'about', 'index.html'))).rejects.toThrow();
+	});
+
+	test('include with no matching pages rejects before any download or write', async () => {
+		listInternalResourcesMock.mockReturnValue(
+			iter([{ url: 'https://example.com/a.css', contentType: 'text/css' }]),
+		);
+		listInternalPagesMock.mockReturnValue(
+			iter([{ url: 'https://example.com/index.html' }]),
+		);
+		const fetchMock = vi.fn();
+		vi.stubGlobal('fetch', fetchMock);
+
+		await expect(
+			migrate({
+				archivePath: '/tmp/fake.nitpicker',
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
+				include: ['/nope/'],
+			}),
+		).rejects.toThrow(IncludeNoMatchError);
+		expect(fetchMock).not.toHaveBeenCalled();
+		expect(getPageHtmlMock).not.toHaveBeenCalled();
+		expect(closeMock).toHaveBeenCalledTimes(1);
+	});
+
+	test('include with an invalid value rejects before any download or write', async () => {
+		listInternalResourcesMock.mockReturnValue(iter([]));
+		listInternalPagesMock.mockReturnValue(
+			iter([{ url: 'https://example.com/index.html' }]),
+		);
+		const fetchMock = vi.fn();
+		vi.stubGlobal('fetch', fetchMock);
+
+		await expect(
+			migrate({
+				archivePath: '/tmp/fake.nitpicker',
+				outputDir,
+				contentClass: CONTENT_CLASS,
+				adapter: burgerEditorAdapter,
+				include: ['news/'],
+			}),
+		).rejects.toThrow(InvalidIncludeValueError);
+		expect(fetchMock).not.toHaveBeenCalled();
+		expect(getPageHtmlMock).not.toHaveBeenCalled();
+	});
+
+	test('an empty include array behaves as no filter', async () => {
+		listInternalResourcesMock.mockReturnValue(iter([]));
+		listInternalPagesMock.mockReturnValue(
+			iter([
+				{ url: 'https://example.com/index.html' },
+				{ url: 'https://example.com/about/' },
+			]),
+		);
+		vi.stubGlobal('fetch', vi.fn());
+		getPageHtmlMock.mockImplementation(() =>
+			Promise.resolve(
+				'<!doctype html><html><head></head><body><main><p>x</p></main></body></html>',
+			),
+		);
+
+		const report = await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
+			include: [],
+		});
+
+		expect(report).toMatchObject({ totalPages: 2, pagesExtracted: 2 });
+	});
+
+	test('onInclude fires once with selected/total when include is given, and not at all otherwise', async () => {
+		listInternalResourcesMock.mockReturnValue(iter([]));
+		listInternalPagesMock.mockReturnValue(
+			iter([
+				{ url: 'https://example.com/index.html' },
+				{ url: 'https://example.com/about/' },
+				{ url: 'https://example.com/about/team.html' },
+			]),
+		);
+		vi.stubGlobal('fetch', vi.fn());
+		getPageHtmlMock.mockImplementation(() =>
+			Promise.resolve(
+				'<!doctype html><html><head></head><body><main><p>x</p></main></body></html>',
+			),
+		);
+
+		const events: unknown[] = [];
+		await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
+			include: ['/about/'],
+			onInclude: (event) => events.push(event),
+		});
+		expect(events).toStrictEqual([{ selected: 2, total: 3 }]);
+
+		events.length = 0;
+		await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: burgerEditorAdapter,
+			onInclude: (event) => events.push(event),
+		});
+		expect(events).toStrictEqual([]);
+	});
+
+	test('forwards options.adapter through to extractPages instead of hardcoding burgerEditorAdapter', async () => {
+		listInternalResourcesMock.mockReturnValue(iter([]));
+		listInternalPagesMock.mockReturnValue(iter([{ url: 'https://example.com/p' }]));
+		vi.stubGlobal('fetch', vi.fn());
+		getPageHtmlMock.mockResolvedValueOnce(
+			'<!doctype html><html><head></head><body><main><p>x</p></main></body></html>',
+		);
+
+		// A non-BurgerEditor adapter (`TBlocks` is `string`, not `BlockData[]`).
+		// If `migrate()` ever hardcoded `burgerEditorAdapter` internally instead of
+		// forwarding `options.adapter` to `extractPages`, every other test in this
+		// file (which all pass `burgerEditorAdapter`) would still pass — only this
+		// test, asserting on the fake adapter's own markup, would catch it.
+		const fakeAdapter: BlockTargetAdapter<string> = {
+			classify: () => ({ kind: 'converted', blocks: 'FAKE-BLOCKS' }),
+			rewriteRefs: (blocks) => Promise.resolve({ blocks, errors: [] }),
+			render: (blocks, contentClass) =>
+				Promise.resolve(`<div class="${contentClass}">${blocks}</div>`),
+		};
+
+		await migrate({
+			archivePath: '/tmp/fake.nitpicker',
+			outputDir,
+			contentClass: CONTENT_CLASS,
+			adapter: fakeAdapter,
+		});
+
+		const written = await readFile(path.join(outputDir, 'p.html'), 'utf8');
+		expect(written).toBe(
+			`---\nid: 5\n---\n<main class="${CONTENT_CLASS}">FAKE-BLOCKS</main>`,
+		);
 	});
 });

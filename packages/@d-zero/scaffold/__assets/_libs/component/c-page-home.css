@@ -7,9 +7,7 @@
 	display: block grid;
 	grid-template:
 		'header' auto
-		'nav-global' auto
 		'main' 1fr
-		'nav-sitemap' auto
 		'footer' auto
 		/ 1fr;
 	inline-size: 100%;
@@ -20,10 +18,6 @@
 	grid-area: header;
 }
 
-.c-page-home__nav-global {
-	grid-area: nav-global;
-}
-
 .c-page-home__main {
 	grid-area: main;
 
@@ -32,10 +26,6 @@
 		padding-inline: 1rem;
 		margin-inline: auto;
 	}
-}
-
-.c-page-home__nav-sitemap {
-	grid-area: nav-sitemap;
 }
 
 .c-page-home__footer {

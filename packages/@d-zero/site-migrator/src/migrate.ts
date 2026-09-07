@@ -1,3 +1,4 @@
+import type { BlockTargetAdapter } from './adapter.js';
 import type { DownloadItem, DownloadResult } from './downloader/download-resources.js';
 import type {
 	ExtractPageItem,
@@ -8,16 +9,59 @@ import { listInternalPages } from './archive/list-internal-pages.js';
 import { listInternalResources } from './archive/list-internal-resources.js';
 import { openArchive } from './archive/open-archive.js';
 import { downloadResources } from './downloader/download-resources.js';
+import { filterUrlsByInclude } from './include-filter.js';
 import { extractPages } from './page-extractor/extract-pages.js';
 
-export interface MigrateOptions {
+export interface MigrateOptions<TBlocks> {
 	archivePath: string;
 	outputDir: string;
+	/**
+	 * anatomistのレイアウト解析結果を変換先のブロックCMS向け構造化データへ変換する
+	 * アダプタ。BurgerEditor向けには`burgerEditorAdapter`を渡す。
+	 */
+	adapter: BlockTargetAdapter<TBlocks>;
+	/**
+	 * `adapter.render`に転送されるクラス名。生成したブロック群を埋め込む既存main要素
+	 * 自身の`classList`に追加する。移行先の変換対象設定に依存する値であり、決め打ちの
+	 * デフォルトを持たせると気づかれないまま不整合な出力を生成しうるため必須
+	 * （{@link import('./page-extractor/extract-pages.js').ExtractPagesOptions.contentClass}参照）。
+	 */
+	contentClass: string;
+	/**
+	 * 事前生成済みのanatomistレイアウト解析JSONL（1ファイルで全URL分）。
+	 * {@link import('./page-extractor/extract-pages.js').extractPages}にそのまま転送される。
+	 * 省略時は全ページをライブ解析する。
+	 */
+	layoutJsonPath?: string;
 	/** Maximum concurrent downloads. Defaults to 10. */
 	downloadLimit?: number;
 	/** Maximum concurrent page extractions. Defaults to 10. */
 	extractLimit?: number;
-	/** Forwarded to {@link downloadResources}; useful for CLI progress logging. */
+	/**
+	 * 移行対象ページを絞り込む`--include`生値のリスト（`/path`形式または
+	 * `http(s)://`URL）。各値はpathnameとして解釈され、末尾`/`はプレフィックス
+	 * 一致（ディレクトリ配下＋indexページ自身）、それ以外は完全一致
+	 * （{@link filterUrlsByInclude}参照）。省略時・空配列時は全ページが対象。
+	 * フィルタ対象は**ページのみ**で、リソースDLは常に全件（絞り込みによる
+	 * 参照切れリスクよりユーザーの明示選択を優先する設計判断）。形式不正の
+	 * 値は{@link import('./include-filter.js').InvalidIncludeValueError}、
+	 * 1ページもマッチしない値があれば
+	 * {@link import('./include-filter.js').IncludeNoMatchError}を、
+	 * DL・抽出を一切実行する前にthrowする。
+	 * id採番の母集合は常にアーカイブ全ページ
+	 * （{@link import('./page-extractor/extract-pages.js').ExtractPagesOptions.idUrls}参照）
+	 * のため、部分実行でもidと`{{<id>}}`参照は全体実行と一致する。
+	 */
+	include?: readonly string[];
+	/** `include`によるフィルタ適用直後（DL開始前）に1回だけ呼ばれる。`include`省略時は呼ばれない。 */
+	onInclude?: (event: { selected: number; total: number }) => void;
+	/**
+	 * Forwarded to both {@link downloadResources}（通常のリソースDL）と`extractPages`の
+	 * block内`download-file`アイテムの追加DL。後者は`MigrateReport`の`totalResources`/
+	 * `resourcesSaved`/`resourcesFailed`には含まれない（`totalResources`は中断時の
+	 * skip検出に使う既知の総数であり、実行中に動的発見される追加DL分を混ぜると
+	 * その計算が壊れるため）。ログ等での可視化のみこのコールバックで行う。
+	 */
 	onResource?: (event: DownloadResult) => void;
 	/** Per-page extraction progress callback. */
 	onPage?: (event: ExtractPageResult) => void;
@@ -46,6 +90,18 @@ export interface MigrateReport {
 	 * reason as `pagesRewriteFailed`.
 	 */
 	pagesMetaFailed: number;
+	/** Subset of `pagesExtracted` whose ブロック変換が全ブロック成功した（`blockConversion: 'converted'`）。 */
+	pagesBlockConverted: number;
+	/**
+	 * Subset of `pagesExtracted` whose 一部ブロックのみ低信頼度でwysiwygフォールバックされたが
+	 * 致命的ではなかった（`blockConversion: 'partial'`）。
+	 */
+	pagesBlockPartial: number;
+	/**
+	 * Subset of `pagesExtracted` whose 致命的エラーによりページ全体がプレーンHTML
+	 * （`data-bge-*`マーカー無し）で出力された（`blockConversion: 'fallback'`）。
+	 */
+	pagesBlockConversionFailed: number;
 }
 
 /**
@@ -61,12 +117,19 @@ export interface MigrateReport {
  * abort the whole migration.
  * @param options
  */
-export async function migrate(options: MigrateOptions): Promise<MigrateReport> {
+export async function migrate<TBlocks>(
+	options: MigrateOptions<TBlocks>,
+): Promise<MigrateReport> {
 	const {
 		archivePath,
 		outputDir,
+		contentClass,
+		adapter,
+		layoutJsonPath,
 		downloadLimit,
 		extractLimit,
+		include,
+		onInclude,
 		onResource,
 		onPage,
 		signal,
@@ -84,8 +147,35 @@ export async function migrate(options: MigrateOptions): Promise<MigrateReport> {
 			pageItems.push({ url: page.url });
 		}
 
+		// --include filter: pages only. Runs BEFORE downloadResources so a
+		// no-match / invalid-value error aborts without downloading or writing
+		// anything. `allPageUrls` (the full archive page list, unfiltered)
+		// stays the id-numbering population passed to extractPages as
+		// `idUrls` below — unconditionally, whether or not `include` is set —
+		// so a partial run always assigns the same ids as a full run, and
+		// links to pages excluded by the filter still rewrite to `{{<id>}}`
+		// instead of silently falling back to a root-relative path.
+		const allPageUrls = pageItems.map((item) => item.url);
+		let selectedPageItems: ExtractPageItem[] = pageItems;
+		if (include !== undefined && include.length > 0) {
+			const selected = new Set(filterUrlsByInclude(include, allPageUrls));
+			selectedPageItems = pageItems.filter((item) => selected.has(item.url));
+			onInclude?.({ selected: selectedPageItems.length, total: pageItems.length });
+		}
+
+		// `totalResources`/`resourcesSaved`/`resourcesFailed` cover only this
+		// upfront, fully-enumerated pass — `resourcesSkipped` in the CLI is
+		// derived as `totalResources - (resourcesSaved + resourcesFailed)`, so
+		// `totalResources` must stay the fixed, known-upfront count for that
+		// arithmetic to mean anything (e.g. after a SIGINT abort). The block
+		// conversion pipeline's own `download-file` dedupe pass (see below)
+		// discovers extra URLs *during* page extraction — those still reach
+		// the caller's `onResource` for visibility, but are intentionally left
+		// out of these three counters rather than corrupting the skip count.
+		const totalResources = resourceItems.length;
 		let resourcesSaved = 0;
 		let resourcesFailed = 0;
+
 		await downloadResources({
 			items: resourceItems,
 			outputDir,
@@ -105,22 +195,46 @@ export async function migrate(options: MigrateOptions): Promise<MigrateReport> {
 		// (rare — typically a stand-alone `.html` referenced as a sub-resource),
 		// the layout-stripped page output is the canonical version and should
 		// win over the raw network body.
+		const knownResourceUrls = new Set(resourceItems.map((item) => item.url));
 		let pagesExtracted = 0;
 		let pagesFallback = 0;
 		let pagesMissing = 0;
 		let pagesFailed = 0;
 		let pagesRewriteFailed = 0;
 		let pagesMetaFailed = 0;
+		let pagesBlockConverted = 0;
+		let pagesBlockPartial = 0;
+		let pagesBlockConversionFailed = 0;
 		await extractPages({
 			session,
-			items: pageItems,
+			items: selectedPageItems,
+			idUrls: allPageUrls,
 			outputDir,
+			contentClass,
+			adapter,
+			layoutJsonPath,
+			knownResourceUrls,
 			limit: extractLimit,
 			signal,
+			onResource,
 			onResult: (event) => {
 				switch (event.outcome) {
 					case 'extracted': {
 						pagesExtracted += 1;
+						switch (event.blockConversion) {
+							case 'converted': {
+								pagesBlockConverted += 1;
+								break;
+							}
+							case 'partial': {
+								pagesBlockPartial += 1;
+								break;
+							}
+							case 'fallback': {
+								pagesBlockConversionFailed += 1;
+								break;
+							}
+						}
 						break;
 					}
 					case 'fallback': {
@@ -153,16 +267,19 @@ export async function migrate(options: MigrateOptions): Promise<MigrateReport> {
 		});
 
 		return {
-			totalResources: resourceItems.length,
+			totalResources,
 			resourcesSaved,
 			resourcesFailed,
-			totalPages: pageItems.length,
+			totalPages: selectedPageItems.length,
 			pagesExtracted,
 			pagesFallback,
 			pagesMissing,
 			pagesFailed,
 			pagesRewriteFailed,
 			pagesMetaFailed,
+			pagesBlockConverted,
+			pagesBlockPartial,
+			pagesBlockConversionFailed,
 		};
 	} finally {
 		await session.close();

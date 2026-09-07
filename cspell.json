@@ -18,6 +18,9 @@
 		"srcsets",
 		"unstub",
 		"vbscript",
-		"whatwg"
+		"whatwg",
+
+		//
+		"youtu"
 	]
 }
