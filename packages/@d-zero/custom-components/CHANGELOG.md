@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.3.0](https://github.com/d-zero-dev/frontend-env/compare/v5.2.0...v5.3.0) (2026-08-24)
+
+**Note:** Version bump only for package @d-zero/custom-components
+
 # [5.2.0](https://github.com/d-zero-dev/frontend-env/compare/v5.1.1-alpha.1...v5.2.0) (2026-08-12)
 
 **Note:** Version bump only for package @d-zero/custom-components

@@ -15,6 +15,7 @@ exports[`CLI > interactive basercms4 1`] = `
   "✔  ++ <tmpDir>/.mcp.json",
   "✔  ++ <tmpDir>/.npmignore",
   "✔  ++ <tmpDir>/.postcssrc.js",
+  "✔  ++ <tmpDir>/.prettierignore",
   "✔  ++ <tmpDir>/.prettierrc.mjs",
   "✔  ++ <tmpDir>/.pug-lintrc",
   "✔  ++ <tmpDir>/.stylelintrc",
@@ -23,6 +24,7 @@ exports[`CLI > interactive basercms4 1`] = `
   "✔  ++ <tmpDir>/.vscode/extensions.json",
   "✔  ++ <tmpDir>/.vscode/settings.json",
   "✔  ++ <tmpDir>/.yarnrc.yml",
+  "✔  ++ <tmpDir>/AGENTS.md",
   "✔  ++ <tmpDir>/CHANGELOG.md",
   "✔  ++ <tmpDir>/CLAUDE.md",
   "✔  ++ <tmpDir>/README.md",
@@ -94,6 +96,7 @@ exports[`CLI > interactive basercms4 1`] = `
   "✔  ++ <tmpDir>/prh.yaml",
   "✔  ++ <tmpDir>/tsconfig.json",
   "✔  Install dependencies skipped",
+  "✔  Install agent skills skipped",
   "✔  Finalize finalized",
 ]
 `;
@@ -113,6 +116,7 @@ exports[`CLI > interactive basercms5 1`] = `
   "✔  ++ <tmpDir>/.mcp.json",
   "✔  ++ <tmpDir>/.npmignore",
   "✔  ++ <tmpDir>/.postcssrc.js",
+  "✔  ++ <tmpDir>/.prettierignore",
   "✔  ++ <tmpDir>/.prettierrc.mjs",
   "✔  ++ <tmpDir>/.pug-lintrc",
   "✔  ++ <tmpDir>/.stylelintrc",
@@ -121,6 +125,7 @@ exports[`CLI > interactive basercms5 1`] = `
   "✔  ++ <tmpDir>/.vscode/extensions.json",
   "✔  ++ <tmpDir>/.vscode/settings.json",
   "✔  ++ <tmpDir>/.yarnrc.yml",
+  "✔  ++ <tmpDir>/AGENTS.md",
   "✔  ++ <tmpDir>/CHANGELOG.md",
   "✔  ++ <tmpDir>/CLAUDE.md",
   "✔  ++ <tmpDir>/README.md",
@@ -194,6 +199,7 @@ exports[`CLI > interactive basercms5 1`] = `
   "✔  ++ <tmpDir>/htdocs/.htaccess",
   "✔  ++ <tmpDir>/htdocs/webroot/.htaccess",
   "✔  Install dependencies skipped",
+  "✔  Install agent skills skipped",
   "✔  Finalize finalized",
 ]
 `;
@@ -213,6 +219,7 @@ exports[`CLI > npx --type basercms4 1`] = `
   "✔  ++ <tmpDir>/.mcp.json",
   "✔  ++ <tmpDir>/.npmignore",
   "✔  ++ <tmpDir>/.postcssrc.js",
+  "✔  ++ <tmpDir>/.prettierignore",
   "✔  ++ <tmpDir>/.prettierrc.mjs",
   "✔  ++ <tmpDir>/.pug-lintrc",
   "✔  ++ <tmpDir>/.stylelintrc",
@@ -221,6 +228,7 @@ exports[`CLI > npx --type basercms4 1`] = `
   "✔  ++ <tmpDir>/.vscode/extensions.json",
   "✔  ++ <tmpDir>/.vscode/settings.json",
   "✔  ++ <tmpDir>/.yarnrc.yml",
+  "✔  ++ <tmpDir>/AGENTS.md",
   "✔  ++ <tmpDir>/CHANGELOG.md",
   "✔  ++ <tmpDir>/CLAUDE.md",
   "✔  ++ <tmpDir>/README.md",
@@ -292,6 +300,7 @@ exports[`CLI > npx --type basercms4 1`] = `
   "✔  ++ <tmpDir>/prh.yaml",
   "✔  ++ <tmpDir>/tsconfig.json",
   "✔  Install dependencies skipped",
+  "✔  Install agent skills skipped",
   "✔  Finalize finalized",
 ]
 `;
@@ -311,6 +320,7 @@ exports[`CLI > npx --type basercms5 1`] = `
   "✔  ++ <tmpDir>/.mcp.json",
   "✔  ++ <tmpDir>/.npmignore",
   "✔  ++ <tmpDir>/.postcssrc.js",
+  "✔  ++ <tmpDir>/.prettierignore",
   "✔  ++ <tmpDir>/.prettierrc.mjs",
   "✔  ++ <tmpDir>/.pug-lintrc",
   "✔  ++ <tmpDir>/.stylelintrc",
@@ -319,6 +329,7 @@ exports[`CLI > npx --type basercms5 1`] = `
   "✔  ++ <tmpDir>/.vscode/extensions.json",
   "✔  ++ <tmpDir>/.vscode/settings.json",
   "✔  ++ <tmpDir>/.yarnrc.yml",
+  "✔  ++ <tmpDir>/AGENTS.md",
   "✔  ++ <tmpDir>/CHANGELOG.md",
   "✔  ++ <tmpDir>/CLAUDE.md",
   "✔  ++ <tmpDir>/README.md",
@@ -392,6 +403,7 @@ exports[`CLI > npx --type basercms5 1`] = `
   "✔  ++ <tmpDir>/htdocs/.htaccess",
   "✔  ++ <tmpDir>/htdocs/webroot/.htaccess",
   "✔  Install dependencies skipped",
+  "✔  Install agent skills skipped",
   "✔  Finalize finalized",
 ]
 `;
@@ -411,6 +423,7 @@ exports[`CLI > npx --type static 1`] = `
   "✔  ++ <tmpDir>/.mcp.json",
   "✔  ++ <tmpDir>/.npmignore",
   "✔  ++ <tmpDir>/.postcssrc.js",
+  "✔  ++ <tmpDir>/.prettierignore",
   "✔  ++ <tmpDir>/.prettierrc.mjs",
   "✔  ++ <tmpDir>/.pug-lintrc",
   "✔  ++ <tmpDir>/.stylelintrc",
@@ -419,6 +432,7 @@ exports[`CLI > npx --type static 1`] = `
   "✔  ++ <tmpDir>/.vscode/extensions.json",
   "✔  ++ <tmpDir>/.vscode/settings.json",
   "✔  ++ <tmpDir>/.yarnrc.yml",
+  "✔  ++ <tmpDir>/AGENTS.md",
   "✔  ++ <tmpDir>/CHANGELOG.md",
   "✔  ++ <tmpDir>/CLAUDE.md",
   "✔  ++ <tmpDir>/README.md",
@@ -477,6 +491,7 @@ exports[`CLI > npx --type static 1`] = `
   "✔  ++ <tmpDir>/prh.yaml",
   "✔  ++ <tmpDir>/tsconfig.json",
   "✔  Install dependencies skipped",
+  "✔  Install agent skills skipped",
   "✔  Finalize finalized",
 ]
 `;
@@ -496,6 +511,7 @@ exports[`CLI > npx 1`] = `
   "✔  ++ <tmpDir>/.mcp.json",
   "✔  ++ <tmpDir>/.npmignore",
   "✔  ++ <tmpDir>/.postcssrc.js",
+  "✔  ++ <tmpDir>/.prettierignore",
   "✔  ++ <tmpDir>/.prettierrc.mjs",
   "✔  ++ <tmpDir>/.pug-lintrc",
   "✔  ++ <tmpDir>/.stylelintrc",
@@ -504,6 +520,7 @@ exports[`CLI > npx 1`] = `
   "✔  ++ <tmpDir>/.vscode/extensions.json",
   "✔  ++ <tmpDir>/.vscode/settings.json",
   "✔  ++ <tmpDir>/.yarnrc.yml",
+  "✔  ++ <tmpDir>/AGENTS.md",
   "✔  ++ <tmpDir>/CHANGELOG.md",
   "✔  ++ <tmpDir>/CLAUDE.md",
   "✔  ++ <tmpDir>/README.md",
@@ -562,6 +579,7 @@ exports[`CLI > npx 1`] = `
   "✔  ++ <tmpDir>/prh.yaml",
   "✔  ++ <tmpDir>/tsconfig.json",
   "✔  Install dependencies skipped",
+  "✔  Install agent skills skipped",
   "✔  Finalize finalized",
 ]
 `;
