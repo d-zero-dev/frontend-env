@@ -6,6 +6,7 @@ yarn-error.log
 .husky/_/*
 .yarn/install-state.gz
 .yarn/build-state.yml
+.direnv
 
 # Huge File
 *.zip

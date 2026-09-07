@@ -1,0 +1,3 @@
+# skills CLI（yarn skills:sync）が管理するファイル。整形すると配布元との差分が生まれるため除外する
+skills-lock.json
+.claude/skills/
