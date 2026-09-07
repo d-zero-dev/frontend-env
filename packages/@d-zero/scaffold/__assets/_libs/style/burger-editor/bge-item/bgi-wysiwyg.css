@@ -1,15 +1,49 @@
-.c-content-main {
-	[data-bgi='wysiwyg'] {
-		table {
-			inline-size: 100%;
-			border-spacing: 0;
-			border-collapse: collapse;
+[data-bgi='wysiwyg'] {
+	:where(h2, h3, h4, h5, h6, p) {
+		margin-block-end: 1rem;
+	}
 
-			th,
-			td {
-				padding: 1.5em;
-				border: 1px solid currentcolor;
-			}
+	:where(ul, ol, table, blockquote) {
+		margin-block-end: 2rem;
+	}
+
+	:where(h2) {
+		font-size: var(--font-size-h2);
+	}
+
+	:where(h3) {
+		font-size: var(--font-size-h3);
+	}
+
+	:where(h4) {
+		font-size: var(--font-size-h4);
+	}
+
+	:where(h5) {
+		font-size: var(--font-size-h5);
+	}
+
+	:where(h6) {
+		font-size: var(--font-size-h6);
+	}
+
+	:where(ul, ol) {
+		list-style-position: inside;
+	}
+
+	:where(blockquote) {
+		padding-inline: 1rem;
+		border-inline-start: 3px solid var(--border-color);
+	}
+
+	:where(table) {
+		inline-size: 100%;
+		border-spacing: 0;
+		border-collapse: collapse;
+
+		:where(th, td) {
+			padding: 1.5em;
+			border: 1px solid currentcolor;
 		}
 	}
 }
