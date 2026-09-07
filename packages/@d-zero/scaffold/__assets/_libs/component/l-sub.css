@@ -7,9 +7,7 @@
 	display: block grid;
 	grid-template:
 		'header' auto
-		'nav-global' auto
 		'main' 1fr
-		'nav-sitemap' auto
 		'footer' auto / 1fr;
 	inline-size: 100%;
 	block-size: 100%;
@@ -19,16 +17,8 @@
 	grid-area: header;
 }
 
-.l-sub__nav-global {
-	grid-area: nav-global;
-}
-
 .l-sub__main {
 	grid-area: main;
-}
-
-.l-sub__nav-sitemap {
-	grid-area: nav-sitemap;
 }
 
 .l-sub__footer {
@@ -48,12 +38,6 @@
 .l-sub__nav-breadcrumb {
 	max-inline-size: var(--wide-layout-width);
 	margin-block-end: 2em;
-	margin-inline: auto;
-}
-
-.l-sub__content-index {
-	max-inline-size: var(--content-width);
-	padding-block-end: calc(60 / 17 * 1em);
 	margin-inline: auto;
 }
 

@@ -6,8 +6,6 @@ html(lang=lang || "ja")
 		.l-sub__base
 			.l-sub__header
 				include /component/c-header.pug
-			.l-sub__nav-global
-				include /component/c-nav-global.pug
 			.l-sub__main
 				main
 					article.l-sub__content
@@ -19,7 +17,5 @@ html(lang=lang || "ja")
 						if hasPagination
 							.l-sub__pagination
 								include /component/c-pagination.pug
-			.l-sub__nav-sitemap
-				include /component/c-nav-sitemap.pug
 			.l-sub__footer
 				include /component/c-footer.pug
