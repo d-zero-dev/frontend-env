@@ -23,10 +23,7 @@
 }
 
 .c-form-field__main {
-	&:has(
-		.c-form-field__input > .c-form-input-text,
-		.c-form-field__input > .c-form-input-select
-	) {
+	&:where(:is([data-type='text'], [data-type='select']) *) {
 		display: block flex;
 		flex-flow: row nowrap;
 		align-items: center;
