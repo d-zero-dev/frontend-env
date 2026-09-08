@@ -1690,7 +1690,7 @@ __metadata:
     autoprefixer: "npm:10.5.4"
     postcss: "npm:8.5.26"
     postcss-base64: "npm:0.7.1"
-    postcss-calc: "npm:11.0.2"
+    postcss-calc: "npm:11.0.3"
     postcss-clip-path-polyfill: "npm:1.1.0"
     postcss-color-mod-function: "npm:4.1.1"
     postcss-custom-media: "npm:12.0.1"
@@ -15843,15 +15843,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-calc@npm:11.0.2":
-  version: 11.0.2
-  resolution: "postcss-calc@npm:11.0.2"
+"postcss-calc@npm:11.0.3":
+  version: 11.0.3
+  resolution: "postcss-calc@npm:11.0.3"
   dependencies:
-    "@csstools/css-parser-algorithms": "npm:^4.0.0"
     "@csstools/css-tokenizer": "npm:^4.0.0"
   peerDependencies:
     postcss: ^8.5.25
-  checksum: 10c0/6292cb24ec027cdcde20cd5abd1913b7e7991d6cb2fd80812e69068ce2b8d1417633693aaabaed18db7a70c732d8b4fb7fdf9f027f94c0c5ea1565e7e75a9dc5
+  checksum: 10c0/6dc90a89313def9891105ef291ba8701c84d03b30ad70f00a851e5b85f829ae9ef84f461c8f677202324d920814b0eb0b0d7585bb41e7b390886222c41abed3d
   languageName: node
   linkType: hard
 
