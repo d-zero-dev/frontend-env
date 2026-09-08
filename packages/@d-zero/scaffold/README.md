@@ -12,6 +12,16 @@
 | `yarn build`  | ビルド                                               |
 | `yarn update` | 依存パッケージのアップデート                         |
 
+## Nix で使う場合
+
+Node/Yarn は基本的に [Volta](https://volta.sh/)（`package.json` の `volta` / `packageManager`）で管理していますが、[Nix](https://nixos.org/) 経由で同じバージョンを再現したい場合は `flake.nix` / `flake.lock` を使えます。
+
+```sh
+nix build .#toolchain
+```
+
+`result/bin` に `node` と `yarn` が展開されます。Volta を使う場合はこの手順は不要です。
+
 ## AIコマンド（Claude Code）
 
 | コマンド                | 説明                                                 |

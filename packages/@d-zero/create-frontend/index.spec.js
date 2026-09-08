@@ -165,4 +165,41 @@ describe('CLI', () => {
 			expect(pkg.dependencies['jquery']).toBe('3.7.1');
 		});
 	});
+
+	describe('flake.nix', () => {
+		test('volta の node メジャーバージョンと同じ nixpkgs パッケージを参照している', async ({
+			tmpDir,
+			task,
+		}) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'static');
+			const scaffoldPkg = JSON.parse(
+				fs.readFileSync(
+					path.resolve(import.meta.dirname, '../scaffold/package.json'),
+					'utf8',
+				),
+			);
+			const nodeMajor = scaffoldPkg.volta.node.split('.')[0];
+			const content = fs.readFileSync(path.join(dir, 'flake.nix'), 'utf8');
+			expect(content).toContain(`pkgs.nodejs_${nodeMajor}`);
+			expect(content).toContain('pkgs.yarn-berry_4');
+		});
+
+		test('プロジェクト内の他ファイルを参照しない自己完結した構成になっている', async ({
+			tmpDir,
+			task,
+		}) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'static');
+			const content = fs.readFileSync(path.join(dir, 'flake.nix'), 'utf8');
+			expect(content).not.toMatch(/import\s+\.{1,2}\//);
+			expect(content).not.toMatch(/path:\.{1,2}\//);
+		});
+
+		test('flake.lock が同時に生成される', async ({ tmpDir, task }) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'static');
+			expect(fs.existsSync(path.join(dir, 'flake.lock'))).toBe(true);
+		});
+	});
 });

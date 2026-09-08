@@ -16,3 +16,11 @@ indent_style = space
 [*.yml]
 indent_style = space
 indent_size = 4
+
+[*.nix]
+indent_style = space
+indent_size = 2
+
+[flake.lock]
+indent_style = space
+indent_size = 2

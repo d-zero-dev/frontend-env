@@ -34,6 +34,7 @@ yarn create @d-zero/frontend
 - **Explicit Version 指定**: package.json で依存関係は範囲指定ではなく固定バージョンを使用
 - **配布時の安定性**: packageManager フィールドと volta 設定により、配布先で安定したバージョン管理を実現
 - **Husky の後付け注入**: `@d-zero/scaffold` 自体は `postinstall` を持たない。`@d-zero/create-frontend` のスキャフォールディング処理で生成プロジェクトの `package.json` に `postinstall: "husky"` を注入することで、`yarn install` 実行時に Git フックが設定される
+- **Nix 連携**: `flake.nix` / `flake.lock` を同梱し、`nix build .#toolchain` でも同じ Node/Yarn バージョンを再現できる。Node のメジャーバージョンを更新する際は `package.json` の `volta.node` と `flake.nix` の `nodejs_*` 属性の両方を更新すること
 
 ---
 
