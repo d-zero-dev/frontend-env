@@ -164,6 +164,16 @@ describe('CLI', () => {
 			const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'));
 			expect(pkg.dependencies['jquery']).toBe('3.7.1');
 		});
+
+		test('static: skills:sync がプロジェクト配下の一時ディレクトリ(.tmp)を使用する', async ({
+			tmpDir,
+			task,
+		}) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'static');
+			const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'));
+			expect(pkg.scripts['skills:sync']).toContain('TMPDIR=./.tmp');
+		});
 	});
 
 	describe('flake.nix', () => {
