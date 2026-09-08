@@ -40,7 +40,7 @@
 		"@d-zero/dealer": "^1.10.4",
 		"@d-zero/shared": "^0.23.0",
 		"@nitpicker/crawler": "^0.18.0",
-		"@nitpicker/query": "^0.18.0",
+		"@nitpicker/query": "^0.21.0",
 		"js-yaml": "5.3.0",
 		"jsdom": "30.0.1",
 		"parse5": "8.0.1",
