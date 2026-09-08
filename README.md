@@ -36,6 +36,10 @@ yarn create @d-zero/frontend
 - **Husky の後付け注入**: `@d-zero/scaffold` 自体は `postinstall` を持たない。`@d-zero/create-frontend` のスキャフォールディング処理で生成プロジェクトの `package.json` に `postinstall: "husky"` を注入することで、`yarn install` 実行時に Git フックが設定される
 - **Nix 連携**: `flake.nix` / `flake.lock` を同梱し、`nix build .#toolchain` でも同じ Node/Yarn バージョンを再現できる。Node のメジャーバージョンを更新する際は `package.json` の `volta.node` と `flake.nix` の `nodejs_*` 属性の両方を更新すること
 
+### AI エージェントの実行環境を考慮した設計
+
+scaffold は、ディーゼロ社内のプライベート AI エージェントサンドボックス環境（`dzenv`）を含む、ネットワークアクセスやプロセス起動に制限のある環境で AI エージェントが作業する可能性を前提に設計している（`dzenv` 自体の詳細はこのリポジトリの範囲外）。`.mcp.json` の MCP サーバー構成など scaffold 内のツール選定・設定はこの制約を考慮したものであり、制限下で動作しないツールについては利用側の環境に応じた代替手段の検討を促す形で [`@d-zero/scaffold` の `AGENTS.md`](./packages/%40d-zero/scaffold/AGENTS.md) に注記している。
+
 ---
 
 ## メンテナンス環境
