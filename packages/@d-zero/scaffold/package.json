@@ -35,7 +35,7 @@
 		"test": "vitest run",
 		"bge": "npx @burger-editor/local",
 		"print": "npx @d-zero/print -f __info/print.txt --type note",
-		"skills:sync": "npx skills add https://github.com/d-zero-dev/frontend-guidelines/tree/main/skills --skill '*' --agent claude-code --copy -y",
+		"skills:sync": "mkdir -p .tmp && TMPDIR=./.tmp npx skills add https://github.com/d-zero-dev/frontend-guidelines/tree/main/skills --skill '*' --agent claude-code --copy -y",
 		"update": "yarn upgrade-interactive"
 	},
 	"browserslist": [

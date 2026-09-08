@@ -24,6 +24,7 @@ yarn-error.log
 .11ty
 .serve
 .cache
+.tmp
 
 # Tools
 .print
