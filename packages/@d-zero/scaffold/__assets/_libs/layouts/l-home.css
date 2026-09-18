@@ -1,9 +1,9 @@
-.c-page-home {
+.l-home {
 	inline-size: 100%;
 	block-size: 100%;
 }
 
-.c-page-home__base {
+.l-home__base {
 	display: block grid;
 	grid-template:
 		'header' auto
@@ -14,11 +14,11 @@
 	block-size: 100%;
 }
 
-.c-page-home__header {
+.l-home__header {
 	grid-area: header;
 }
 
-.c-page-home__main {
+.l-home__main {
 	grid-area: main;
 
 	> * {
@@ -28,6 +28,6 @@
 	}
 }
 
-.c-page-home__footer {
+.l-home__footer {
 	grid-area: footer;
 }

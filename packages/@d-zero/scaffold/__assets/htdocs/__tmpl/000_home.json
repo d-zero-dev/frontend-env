@@ -1,4 +1,4 @@
 {
-	"layout": "home.pug",
+	"layout": "l-home.pug",
 	"title": "トップページ"
 }

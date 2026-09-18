@@ -1,0 +1,10 @@
+.p-form {
+	display: block grid;
+	grid-template:
+		'main' 1fr
+		/ 1fr;
+}
+
+.p-form__main {
+	grid-area: main;
+}
