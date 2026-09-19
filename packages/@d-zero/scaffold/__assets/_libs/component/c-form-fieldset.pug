@@ -1,0 +1,33 @@
+//- isGrouped: fieldset/legend の構造にする場合に true。
+	複数フィールドをまとめる場合、および checkbox/radio のように単一フィールドでも
+	CMS要件で fieldset/legend にする場合に渡す。false のときは div + 見出しの構造
+	id: グループ（.c-form-fieldset）の id。渡さなければ id 属性を出力しない
+	for: 見出しを label にして紐付ける input の id（isGrouped: false のときのみ有効）。
+	渡さなければ見出しは span になる
+mixin cFormFieldset(params = {})
+	-
+		const props = Object.assign({ label: "", id: null, for: null, isGrouped: false, isRequired: false, attention: "" }, params);
+		const badgeKind = props.isRequired ? "required" : "optional";
+		const badgeLabel = props.isRequired ? "必須" : "任意";
+	.c-form-fieldset(id=props.id)
+		if props.isGrouped
+			fieldset.c-form-fieldset__grid
+				legend.c-form-fieldset__heading
+					span.c-form-fieldset__heading-main #{ props.label }
+					span.c-form-fieldset__heading-badge(data-kind=badgeKind) #{ badgeLabel }
+				.c-form-fieldset__attention
+					span #{ props.attention }
+				.c-form-fieldset__field
+					block
+		else
+			.c-form-fieldset__grid
+				.c-form-fieldset__heading
+					if props.for
+						label.c-form-fieldset__heading-main(for=props.for) #{ props.label }
+					else
+						span.c-form-fieldset__heading-main #{ props.label }
+					span.c-form-fieldset__heading-badge(data-kind=badgeKind) #{ badgeLabel }
+				.c-form-fieldset__attention
+					span #{ props.attention }
+				.c-form-fieldset__field
+					block

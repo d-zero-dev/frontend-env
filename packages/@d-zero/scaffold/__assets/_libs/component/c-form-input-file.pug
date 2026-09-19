@@ -1,0 +1,4 @@
+mixin cFormInputFile(params = {})
+	-
+		const props = Object.assign({ id: null, name: null, isRequired: false }, params);
+	input.c-form-input-file(name=props.name type="file" required=props.isRequired id=props.id)
