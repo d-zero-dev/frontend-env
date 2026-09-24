@@ -1485,6 +1485,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@d-zero/beholder@npm:5.0.0":
+  version: 5.0.0
+  resolution: "@d-zero/beholder@npm:5.0.0"
+  dependencies:
+    "@d-zero/puppeteer-page-scan": "npm:4.7.0"
+    "@d-zero/puppeteer-scroll": "npm:4.0.12"
+    "@d-zero/shared": "npm:0.23.0"
+    debug: "npm:4.4.3"
+    puppeteer: "npm:25.5.0"
+    simple-wappalyzer: "npm:1.1.100"
+  checksum: 10c0/6a10f66abf0d9da02c84f1d556dda33c283928b66f088ad5bae3157d5c9049abdaae517c4d322de473aa348bc9d66aac0388c63584cead9c5e28023e3b03fc6a
+  languageName: node
+  linkType: hard
+
 "@d-zero/check-frontend-env@workspace:packages/@d-zero/check-frontend-env":
   version: 0.0.0-use.local
   resolution: "@d-zero/check-frontend-env@workspace:packages/@d-zero/check-frontend-env"
@@ -1597,6 +1611,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@d-zero/dealer@npm:1.14.0":
+  version: 1.14.0
+  resolution: "@d-zero/dealer@npm:1.14.0"
+  dependencies:
+    "@d-zero/shared": "npm:0.23.0"
+    ansi-colors: "npm:4.1.3"
+  checksum: 10c0/513d7b2920e18365fa5bac2dc9bc67603fd0a4ed12dedee21aa1e721e2342d18d694efb03e918b895a5a862fb8f6bfd766a37d4ed1b8db6e37377ed855d1a824
+  languageName: node
+  linkType: hard
+
 "@d-zero/dealer@npm:1.5.3":
   version: 1.5.3
   resolution: "@d-zero/dealer@npm:1.5.3"
@@ -1661,6 +1685,16 @@ __metadata:
     archiver: "npm:8.0.0"
     unzipper: "npm:0.12.5"
   checksum: 10c0/9bc7022bfb5a3f1bbd2ade96a0228e8d524cf21901fb30e6e88c4f6b8638d0f19a20d31c87c8d4c2a2091674a6fe2f0b038d5ae979fd65afd0d00f545b27660a
+  languageName: node
+  linkType: hard
+
+"@d-zero/fs@npm:0.2.7":
+  version: 0.2.7
+  resolution: "@d-zero/fs@npm:0.2.7"
+  dependencies:
+    archiver: "npm:8.0.0"
+    unzipper: "npm:0.12.5"
+  checksum: 10c0/f5c65eef834aaff069d48ad98c2f507aaf306fab1e96e1497349e52f7a2dd02c0d6fd011fb4ca8d8f79c60c056be16e18bb74dced08ef7ee8c41d2dacbb7145a
   languageName: node
   linkType: hard
 
@@ -1763,6 +1797,19 @@ __metadata:
   peerDependencies:
     puppeteer: 25.5.0
   checksum: 10c0/b335cb6633dd8b75e5baa0e533f795d890fbefeb05480b0339cc786312c1d0d96c3f1554cf3c5b109b1693e9613276aff3ef4a498b9292a853fc0d712093f8a3
+  languageName: node
+  linkType: hard
+
+"@d-zero/puppeteer-page-scan@npm:4.7.0":
+  version: 4.7.0
+  resolution: "@d-zero/puppeteer-page-scan@npm:4.7.0"
+  dependencies:
+    "@d-zero/puppeteer-general-actions": "npm:1.2.7"
+    "@d-zero/puppeteer-scroll": "npm:4.0.12"
+    "@d-zero/shared": "npm:0.23.0"
+  peerDependencies:
+    puppeteer: 25.5.0
+  checksum: 10c0/70580cc953d9820dcd5e457c3259f1969d125801eb3ba1ec781312e15cde02282a3a4a9c22cf3bb8bd8b05134ab93e22322eadfd8df4a95e1ec64222ef3d3054
   languageName: node
   linkType: hard
 
@@ -1889,7 +1936,7 @@ __metadata:
     "@d-zero/anatomist": "npm:^0.3.2"
     "@d-zero/dealer": "npm:^1.10.4"
     "@d-zero/shared": "npm:^0.23.0"
-    "@nitpicker/crawler": "npm:^0.18.0"
+    "@nitpicker/crawler": "npm:^0.22.0"
     "@nitpicker/query": "npm:^0.18.0"
     "@types/jsdom": "npm:30.0.0"
     "@types/node": "npm:25.9.5"
@@ -3609,7 +3656,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nitpicker/crawler@npm:0.18.0, @nitpicker/crawler@npm:^0.18.0":
+"@nitpicker/crawler@npm:0.18.0":
   version: 0.18.0
   resolution: "@nitpicker/crawler@npm:0.18.0"
   dependencies:
@@ -3627,6 +3674,27 @@ __metadata:
     robots-parser: "npm:3.0.1"
     tar: "npm:7.5.21"
   checksum: 10c0/65ac42f7bc58ba040e6456322a30ec7d50b2e51bd92e3806bd02cf698d2a828434ab3c2e9901789ca1adfd04a1157521f1759a97a763e6584a68936fb2aede8c
+  languageName: node
+  linkType: hard
+
+"@nitpicker/crawler@npm:^0.22.0":
+  version: 0.22.0
+  resolution: "@nitpicker/crawler@npm:0.22.0"
+  dependencies:
+    "@d-zero/beholder": "npm:5.0.0"
+    "@d-zero/dealer": "npm:1.14.0"
+    "@d-zero/fs": "npm:0.2.7"
+    "@d-zero/shared": "npm:0.23.0"
+    ansi-colors: "npm:4.1.3"
+    debug: "npm:4.4.3"
+    follow-redirects: "npm:1.16.0"
+    fs-extra: "npm:11.4.0"
+    knex: "npm:3.3.0"
+    libsql: "npm:0.5.29"
+    puppeteer: "npm:25.5.0"
+    robots-parser: "npm:3.0.1"
+    tar: "npm:7.5.22"
+  checksum: 10c0/82eeafa072ace7d3c81c559864d942fad51160dc28c679ee9e2981efdc5543634f4792aea18460859b1d04c109196dc7abb43f7228323be405d83afe85ff2faa
   languageName: node
   linkType: hard
 
@@ -10778,6 +10846,17 @@ __metadata:
     jsonfile: "npm:^6.0.1"
     universalify: "npm:^2.0.0"
   checksum: 10c0/191c96bf71519fe08595f7920b6e568f6e44b48ed968624f35cb3bb7f4f9b05718b99cd6bf81938c0f7b1daa6d151383c33e0cbfdfe4d95419d7ea121de8e91a
+  languageName: node
+  linkType: hard
+
+"fs-extra@npm:11.4.0":
+  version: 11.4.0
+  resolution: "fs-extra@npm:11.4.0"
+  dependencies:
+    graceful-fs: "npm:^4.2.0"
+    jsonfile: "npm:^6.0.1"
+    universalify: "npm:^2.0.0"
+  checksum: 10c0/1e311eca820a12d3d795f2043dcd5628d017f4d21e634f3f9ef314ae68bee9979758262fb9cb35ffa6f26454c3fffe8b15558733e91e8fc729b07b10bb98d8b6
   languageName: node
   linkType: hard
 
