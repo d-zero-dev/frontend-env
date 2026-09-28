@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.4.0](https://github.com/d-zero-dev/frontend-env/compare/v5.3.0...v5.4.0) (2026-09-08)
+
+### Bug Fixes
+
+- **scaffold:** ignore .claude/settings.local.json ([d78940c](https://github.com/d-zero-dev/frontend-env/commit/d78940cfe613274ba5134a80e99b426505139735)), closes [#1055](https://github.com/d-zero-dev/frontend-env/issues/1055)
+- **scaffold:** sandbox skills:sync tmp dir under project root ([8bf9f4f](https://github.com/d-zero-dev/frontend-env/commit/8bf9f4fdf2e3c0d6e8658c1260c03ad92a2a9ac6)), closes [#1054](https://github.com/d-zero-dev/frontend-env/issues/1054)
+
+### Features
+
+- **scaffold:** add flake.nix and flake.lock for nix-based toolchain ([4553a74](https://github.com/d-zero-dev/frontend-env/commit/4553a7455f403f7eb87dac5f7ce43ce5177650af))
+
 # [5.3.0](https://github.com/d-zero-dev/frontend-env/compare/v5.2.0...v5.3.0) (2026-08-24)
 
 ### Features

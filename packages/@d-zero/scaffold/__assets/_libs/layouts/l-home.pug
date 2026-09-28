@@ -2,12 +2,12 @@ doctype html
 html(lang=lang || "ja")
 	head
 		include /mixin/meta.pug
-	body.c-page-home
-		.c-page-home__base
-			.c-page-home__header
+	body.l-home
+		.l-home__base
+			.l-home__header
 				- const isHome = true;
 				include /component/c-header.pug
-			.c-page-home__main
+			.l-home__main
 				main !{ content }
-			.c-page-home__footer
+			.l-home__footer
 				include /component/c-footer.pug

@@ -1,13 +1,17 @@
 {
 	"import": ["@d-zero/cspell-config"],
-	"ignorePaths": ["**/CHANGELOG.md", "**/CODEOWNERS"],
+	"ignorePaths": ["**/CHANGELOG.md", "**/CODEOWNERS", "**/flake.lock"],
 	"words": [
 		//
 		"nodir",
 		"postcssrc",
 
 		//
+		"nixpkgs",
+
+		//
 		"dzbuild",
+		"dzenv",
 		"kamado",
 
 		//

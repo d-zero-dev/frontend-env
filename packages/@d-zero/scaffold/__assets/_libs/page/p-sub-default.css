@@ -1,0 +1,10 @@
+.p-sub-default {
+	display: block grid;
+	grid-template:
+		'main' 1fr
+		/ 1fr;
+}
+
+.p-sub-default__main {
+	grid-area: main;
+}
