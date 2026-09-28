@@ -1,12 +1,17 @@
 {
 	"import": ["@d-zero/cspell-config"],
-	"ignorePaths": ["./.claude", "./htdocs", "./CHANGELOG.md"],
+	"ignorePaths": ["./.claude", "./htdocs", "./CHANGELOG.md", "./flake.lock"],
 	"words": [
 		// Libraries
 		"splide",
 		"kamado",
 		"kiso",
 		// D-ZERO
-		"dzero"
+		"dzero",
+		"dzenv",
+		// Nix
+		"nixpkgs",
+		"nixos",
+		"pkgs"
 	]
 }

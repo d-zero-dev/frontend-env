@@ -4,6 +4,7 @@ npm-error.log
 yarn-error.log
 .env
 .husky/_/*
+.claude/settings.local.json
 .yarn/install-state.gz
 .yarn/build-state.yml
 .direnv
@@ -24,9 +25,12 @@ yarn-error.log
 .11ty
 .serve
 .cache
+.tmp
 
 # Tools
 .print
+result
+result-*
 
 # Document Root
 htdocs/*
