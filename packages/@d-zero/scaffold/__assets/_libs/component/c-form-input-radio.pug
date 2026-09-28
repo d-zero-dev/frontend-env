@@ -1,0 +1,18 @@
+//- options の各要素は { value, label, id }。hidden と各 radio は同じ name を共有するため
+	hidden 側は id（hiddenId）のみ受け取る
+mixin cFormInputRadio(params = {})
+	-
+		const props = Object.assign({ hiddenId: null, name: null, options: [], isRequired: false }, params);
+	//- 未選択時にもキーが送信されるようにするための hidden（CMS 仕様）
+	.c-form-input-radio
+		input.c-form-input-radio__hidden(type="hidden" name=props.name value id=props.hiddenId)
+		each option in props.options
+			.c-form-input-radio__item
+				span
+					input(
+						type="radio"
+						name=props.name
+						required=props.isRequired
+						value=option.value
+						id=option.id)
+					label(for=option.id) #{ option.label }

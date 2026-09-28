@@ -1,0 +1,10 @@
+mixin cFormInputText(params = {})
+	-
+		const props = Object.assign({ id: null, name: null, maxlength: null, size: null, isRequired: false }, params);
+	input.c-form-input-text(
+		type="text"
+		name=props.name
+		maxlength=props.maxlength
+		size=props.size
+		required=props.isRequired
+		id=props.id)

@@ -31,10 +31,13 @@ export default {
 			},
 		},
 	],
-	// overrides: {
-	// 	...extended.overrides,
-	// 	'**/*.pug': {
-	// 		...
-	// 	},
-	// },
+	overrides: {
+		...extended.overrides,
+		'__assets/_libs/component/c-form-input-select.pug': {
+			rules: {
+				// options が動的なため静的解析で判定できない。プレースホルダーは呼び出し側が先頭に渡すこと
+				'placeholder-label-option': false,
+			},
+		},
+	},
 };

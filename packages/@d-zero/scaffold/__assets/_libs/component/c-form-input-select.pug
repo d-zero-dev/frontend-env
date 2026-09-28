@@ -1,0 +1,6 @@
+mixin cFormInputSelect(params = {})
+	-
+		const props = Object.assign({ id: null, name: null, options: [], isRequired: false }, params);
+	select.c-form-input-select(name=props.name required=props.isRequired id=props.id)
+		each option in props.options
+			option(value=option.value)= option.label

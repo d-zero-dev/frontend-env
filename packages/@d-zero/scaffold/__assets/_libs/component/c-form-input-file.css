@@ -1,0 +1,12 @@
+.c-form-input-file {
+	inline-size: 100%;
+	padding-block: 0;
+	padding-inline: 0 1rem;
+	border: 1px solid var(--border-color);
+	border-radius: 0.2rem;
+
+	&::file-selector-button {
+		appearance: none;
+		border: none;
+	}
+}

@@ -1,0 +1,78 @@
+.c-form-fieldset {
+	display: block flow;
+}
+
+.c-form-fieldset__grid {
+	display: block grid;
+	grid-template:
+		'heading' auto
+		'attention' auto
+		'field' auto / minmax(0, 1fr);
+
+	> :where(.c-form-fieldset__heading) {
+		grid-area: heading;
+	}
+
+	> :where(.c-form-fieldset__attention) {
+		grid-area: attention;
+	}
+
+	> :where(.c-form-fieldset__field) {
+		grid-area: field;
+	}
+}
+
+.c-form-fieldset__heading {
+	display: block flex;
+	align-items: center;
+	font-size: calc(18 / 16 * 1rem);
+	font-weight: bold;
+
+	> :where(*) {
+		display: block flow;
+	}
+}
+
+.c-form-fieldset__field {
+	margin-block-start: 1rem;
+
+	> :where(*) {
+		padding-block-end: 1rem;
+		margin-inline-end: 1rem;
+	}
+
+	> :where(:last-child) {
+		border-block-end: 1px solid var(--border-color);
+	}
+}
+
+.c-form-fieldset__heading-main {
+	&:where(label) {
+		cursor: pointer;
+	}
+}
+
+.c-form-fieldset__heading-badge {
+	margin-inline: 0 0.5rem;
+	font-size: calc(12 / 18 * 1rem);
+	line-height: 1;
+	border-radius: 0.2rem;
+
+	&:where([data-kind='required']) {
+		/* 必須バッジのスタイルを記述 */
+	}
+
+	&:where([data-kind='optional']) {
+		/* 任意バッジのスタイルを記述 */
+	}
+}
+
+.c-form-fieldset__attention {
+	margin-block-start: 0.5rem;
+	font-size: calc(12 / 18 * 1rem);
+	font-weight: normal;
+
+	&:has(> :empty) {
+		display: none;
+	}
+}
