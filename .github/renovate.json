@@ -9,6 +9,7 @@
 		":pinDevDependencies",
 		":semanticCommitTypeAll(chore)"
 	],
+	"rangeStrategy": "pin",
 	"lockFileMaintenance": {
 		"enabled": true,
 		"automerge": true
