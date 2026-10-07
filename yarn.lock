@@ -1503,7 +1503,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/commitlint-config@npm:^5.1.0":
+"@d-zero/commitlint-config@npm:5.1.0":
   version: 5.1.0
   resolution: "@d-zero/commitlint-config@npm:5.1.0"
   dependencies:
@@ -1534,7 +1534,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@d-zero/cspell-config@npm:^5.1.0":
+"@d-zero/cspell-config@npm:5.1.0, @d-zero/cspell-config@npm:^5.1.0":
   version: 5.1.0
   resolution: "@d-zero/cspell-config@npm:5.1.0"
   dependencies:
@@ -1617,7 +1617,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/eslint-config@npm:^5.0.0":
+"@d-zero/eslint-config@npm:5.0.0, @d-zero/eslint-config@npm:^5.0.0":
   version: 5.0.0
   resolution: "@d-zero/eslint-config@npm:5.0.0"
   dependencies:
@@ -1639,13 +1639,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@d-zero/frontend-env@workspace:."
   dependencies:
-    "@d-zero/commitlint-config": "npm:^5.1.0"
-    "@d-zero/cspell-config": "npm:^5.1.0"
-    "@d-zero/eslint-config": "npm:^5.0.0"
-    "@d-zero/lint-staged-config": "npm:^5.1.0"
-    "@d-zero/prettier-config": "npm:^5.1.0"
-    "@d-zero/textlint-config": "npm:^5.1.0"
-    "@d-zero/tsconfig": "npm:^2.0.0"
+    "@d-zero/commitlint-config": "npm:5.1.0"
+    "@d-zero/cspell-config": "npm:5.1.0"
+    "@d-zero/eslint-config": "npm:5.0.0"
+    "@d-zero/lint-staged-config": "npm:5.1.0"
+    "@d-zero/prettier-config": "npm:5.1.0"
+    "@d-zero/textlint-config": "npm:5.1.0"
+    "@d-zero/tsconfig": "npm:2.0.0"
     husky: "npm:9.1.7"
     lerna: "npm:10.0.1"
     npm-run-all2: "npm:9.0.3"
@@ -1664,7 +1664,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/lint-staged-config@npm:^5.1.0":
+"@d-zero/lint-staged-config@npm:5.1.0, @d-zero/lint-staged-config@npm:^5.1.0":
   version: 5.1.0
   resolution: "@d-zero/lint-staged-config@npm:5.1.0"
   dependencies:
@@ -1700,7 +1700,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@d-zero/prettier-config@npm:^5.1.0":
+"@d-zero/prettier-config@npm:5.1.0, @d-zero/prettier-config@npm:^5.1.0":
   version: 5.1.0
   resolution: "@d-zero/prettier-config@npm:5.1.0"
   dependencies:
@@ -1932,7 +1932,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/textlint-config@npm:^5.1.0":
+"@d-zero/textlint-config@npm:5.1.0, @d-zero/textlint-config@npm:^5.1.0":
   version: 5.1.0
   resolution: "@d-zero/textlint-config@npm:5.1.0"
   dependencies:
@@ -1945,7 +1945,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/tsconfig@npm:^2.0.0":
+"@d-zero/tsconfig@npm:2.0.0, @d-zero/tsconfig@npm:^2.0.0":
   version: 2.0.0
   resolution: "@d-zero/tsconfig@npm:2.0.0"
   dependencies:
