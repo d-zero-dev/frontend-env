@@ -1518,7 +1518,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@d-zero/create-frontend@workspace:packages/@d-zero/create-frontend"
   dependencies:
-    "@d-zero/prettier-config": "npm:^5.1.0"
+    "@d-zero/prettier-config": "npm:5.1.0"
     "@d-zero/scaffold": "npm:5.4.0"
     "@types/node": "npm:25.9.5"
     execa: "npm:10.0.1"
@@ -1700,7 +1700,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@d-zero/prettier-config@npm:5.1.0, @d-zero/prettier-config@npm:^5.1.0":
+"@d-zero/prettier-config@npm:5.1.0":
   version: 5.1.0
   resolution: "@d-zero/prettier-config@npm:5.1.0"
   dependencies:
