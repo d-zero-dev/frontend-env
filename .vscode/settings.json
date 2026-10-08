@@ -5,6 +5,7 @@
 	"files.trimTrailingWhitespace": true,
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"git.ignoreLimitWarning": true,
+	"git.requireGitUserConfig": false,
 	"html.format.enable": true,
 	"css.validate": false,
 	"stylelint.validate": ["css"],
