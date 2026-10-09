@@ -34,7 +34,7 @@
 		"dist"
 	],
 	"dependencies": {
-		"@burger-editor/blocks": "4.0.0-alpha.71",
+		"@burger-editor/blocks": "4.0.0-alpha.75",
 		"@burger-editor/core": "4.0.0-alpha.71",
 		"@d-zero/anatomist": "0.3.2",
 		"@d-zero/dealer": "1.13.1",
