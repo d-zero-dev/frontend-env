@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.4.1](https://github.com/d-zero-dev/frontend-env/compare/v5.4.0...v5.4.1) (2026-10-07)
+
+**Note:** Version bump only for package @d-zero/frontend-env
+
 # [5.4.0](https://github.com/d-zero-dev/frontend-env/compare/v5.3.0...v5.4.0) (2026-09-08)
 
 ### Bug Fixes
