@@ -34,6 +34,8 @@ export default [
 			),
 			'**/dist/**/*',
 			'**/storybook-static/**/*',
+			// Claude Code の運用スクリプトと worktree はプロダクトコードではない
+			'.claude/**',
 		],
 	},
 ];

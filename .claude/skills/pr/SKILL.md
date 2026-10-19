@@ -1,28 +1,33 @@
 ---
 name: pr
-description: プルリクエストの作成とプッシュ（プリフライトチェック、base 追従、コンフリクト検知含む）
+description: プルリクエストの作成とプッシュ（プリフライトチェック、base 追従、コンフリクト検知、PR 本文の節構成、CI 監視。マージ後は merged スキルへ）
 ---
 
-1. `dev` や `main` ではないトピックブランチにいることを確認する。
-2. **base 追従（コンフリクト予防）**: `git fetch origin <base>` を実行し、`git log HEAD..origin/<base> --oneline` で base が進んでいないか確認する。進んでいれば push 前に `git rebase origin/<base>` する。ドキュメント系のコンフリクトは機械的に解決せず、base 側で追加された内容を方針（索引・JSDoc 配置）に沿って取り込むこと。
+1. `dev` / `main` / `v6` ではないトピックブランチにいることを確認する。base は、トピックブランチを切った元のライン（v5 の作業なら `dev`、v6 の作業なら `v6`。ルート `CLAUDE.md` の「ブランチ構成」）。以下 `<base>` と書く。
+2. **base 追従（コンフリクト予防）**: `git fetch origin <base>` を実行し、`git log HEAD..origin/<base> --oneline` で base が進んでいないか確認する。進んでいれば push 前に `git merge origin/<base>` で取り込む。**rebase はしない** — worktree では rebase 中の `git commit --amend` で husky のフック解決が壊れることがあり、merge ならレビュー済みの履歴がそのまま残る。ドキュメント系のコンフリクトは機械的に解決せず、base 側で追加された内容を方針（README / JSDoc の役割分担）に沿って取り込むこと。
 3. **プリフライトチェック（必須 — 省略不可）:**
-   - `yarn lint`、`yarn build`、`yarn test` がこのセッション内でまだ実行・成功していない場合、続行する前に**今すぐ実行**する。rebase を行った場合は rebase 後に再実行する。
-   - 全てがパスしなければならない。失敗があれば続行前に修正する。
+   - `yarn lint`、`yarn build`、`yarn test` がこのセッション内でまだ実行・成功していない場合、続行する前に**今すぐ実行**する。base を取り込んだ場合は取り込み後に再実行する。
+   - 全てがパスしなければならない。失敗があれば続行前に修正する。`create-frontend` のスナップショットが落ちたら、それが意図した scaffold の変更によるものかを確認してから `yarn test:update` で更新し、差分をコミットに含める（`.claude/rules/spec-files.md`）。
+   - **`yarn lint` が prettier で意図しない再整形を出した場合は要注意**: コミット済みの整形と食い違う差分は prettier のバージョン差異による drift の可能性がある。自分の変更と無関係な再整形は取り込まず、ユーザーに報告する。
 4. 適切な `git` コマンドを使って現在のトピックブランチの変更をレビューする。
-   - **機密・案件情報とサンプル慣例のダブルチェック**: base branch との全 diff（`git diff <base>...HEAD`）に対して、`.claude/skills/git/SKILL.md` の「機密・案件情報の検出」と「サンプル値の慣例チェック」を再実行する。コミット単位のチェックをすり抜けた企業名・顧客情報・実在ドメイン・未取得ドメイン・案件識別子・実データ断片がないかを PR 全体で確認する。検出したら汎用値へ書き換えて追加コミットする。
-5. **PR body を一時ファイルに保存する**: scratchpad ディレクトリに PR body（markdown）を書き出す。**PR body は diff の要約であり会話の要約ではない** — セッション中に出てきた顧客名・案件名・社外秘情報は、diff 自体に含まれていない限り書き込まない。
-6. **push と PR 作成はユーザーが実行する**: エージェントは `git push` / `gh pr create` を実行せず、ユーザーがそのまま実行できる `!` 付きコマンドを提示する。ファイルパス引数は必ずダブルクオーテーションで囲む。
+   - **機密・案件情報とサンプル慣例のダブルチェック**: base branch との全 diff（`git diff origin/<base>...HEAD`）に対して、`.claude/skills/git/SKILL.md` の「機密・案件情報の検出」と「サンプル値の慣例チェック」を再実行する。コミット単位のチェックをすり抜けた企業名・顧客情報・実在ドメイン・未取得ドメイン・案件識別子・実データ断片がないかを PR 全体で確認する。検出したら汎用値へ書き換えて追加コミットする。
+5. **PR body を一時ファイルに保存する**: scratchpad ディレクトリに PR body（markdown）を書き出す。タイトルは英語、本文は日本語で書く。**PR body は diff の要約であり会話の要約ではない** — セッション中に出てきた顧客名・案件名・社外秘情報は、diff 自体に含まれていない限り書き込まない。以下の 3 つの節は見出しの文字列をこのとおりに書く（スクリプトとレビューが見出しで節を探す）。
+   - **`## 振る舞いの変更`**: diff がランタイムの振る舞い、公開 API（`exports` で公開する関数・型、CLI のオプション）、展開されるファイルの内容・構成（scaffold のテンプレート、`create-frontend` の出力）、`check-frontend-env` の判定、`site-migrator` の出力、設定（PostCSS 設定）の意味を変えるときに置く。docs やテストだけの PR には置かない。変更ごとに (a) 判定 — `not breaking`（意図された使い方が動き続ける。その理由を書く）か `breaking`（意図された使い方が壊れる。許されるかどうかは現バージョン段階とラインで決まり、`git` スキルの「破壊的変更と振る舞いの変更」に従う。`v6` でも、この節に before → after とユーザーがすることを書く。安定ラインではマイグレーションガイドをこの節に書く）、(b) 影響するデータ・API・オプション、(c) before → after の例、(d) ユーザーがすること（展開済みプロジェクトに手当てが要るならそれも）。`product-manager` のレビューがこの節を検査する。
+   - **`## 対象外`**: 持ち越し台帳。マージ後に `impl` の手順 15 がスクリプトで読む。1 件につき `- ` の箇条書き 1 つ。各項目はこの会話が無くても Issue にできるだけの内容 — 最小の入力、観察した出力、疑われる原因とそのファイル — を書き、末尾に ` — Filed as #N` を付ける。`impl` 経由ならこの節は計画ファイルの `Carry-over` 台帳をそのまま写したもので、`impl` の手順 12 がコミット前に全項目を Issue にしている。このスキルを単独で動かすときも同じ形式で書き、`gh pr create` の前に 1 件ずつ `create-issue` スキルで Issue にしてマーカーを付ける。マーカーの無い項目はメモではなく未完の作業。何も無ければ節の本文を `なし` にする（スクリプトが読む表記。節ごと省いてもよい）。「変更しないと決めたもの」は持ち越しではなく、次の節に入れる。
+   - **`## 意図的に変更しないもの`**: 変更しないという決定と、そのユーザーの理由（`impl` 経由なら計画の `Decisions` の `leave as is` の項目）。無ければ省く。
+6. **push と PR 作成はユーザーが実行する**: エージェントは `git push` / `gh pr create` を実行せず（`.claude/settings.json` で deny されている）、ユーザーがそのまま実行できる `!` 付きコマンドを提示する。ファイルパス引数は必ずダブルクオーテーションで囲む。`--base` は省略しない（省略するとデフォルトブランチの `dev` になり、`v6` の作業が `dev` に向く）。
 
    ```
    ! git push -u origin <branch>
-   ! gh pr create --title "<title>" --body-file "<PR body の一時ファイルパス>"
+   ! gh pr create --base <base> --title "<title>" --body-file "<PR body の一時ファイルパス>"
    ```
 
 7. **マージ可能性の確認（CI watch では捕捉できない）:**
-   - ユーザーから PR 作成の報告を受けたら、まず `gh pr view <number> --json mergeable,mergeStateStatus` で **`CONFLICTING` / `DIRTY` を検知**する。`gh pr checks --watch` はステータスチェックしか見ないため、コンフリクトは黙って素通りする。
-   - `CONFLICTING` なら CI を待たずにステップ 2 の base 追従（rebase + 方針に沿った解決）に戻り、解決後にユーザーへ `! git push --force-with-lease` を依頼する。
+   - ユーザーから PR 作成の報告を受けたら、まず `gh pr view <number> --json baseRefName,mergeable,mergeStateStatus` で **`baseRefName` が `<base>` であること**と、**`CONFLICTING` / `DIRTY` でないこと**を確認する。`gh pr checks --watch` はステータスチェックしか見ないため、コンフリクトは黙って素通りする。
+   - `CONFLICTING` なら CI を待たずにステップ 2 の base 追従（merge + 方針に沿った解決）に戻り、解決後にユーザーへ `! git push` を依頼する。
 8. **CI 監視:**
    - `gh pr checks --watch` を**バックグラウンド実行**で起動して CI の完了を待機する（フォアグラウンド実行はターン内タイムアウトで出力が欠損する）。
    - テストが途中で失敗した場合は完了を待たずに修正作業に戻る。
    - 全テストが通ったら、`gh pr view <number> --json mergeable,mergeStateStatus` で再度 `CONFLICTING` / `DIRTY` になっていないか確認する（CI 実行中に base が進んで新たにコンフリクトが発生している可能性があるため）。
    - `CONFLICTING` ならステップ 7 の対処に戻る。問題なければ `gh pr view <number> --web` でブラウザを開き、マージ可能であることをユーザーに報告してマージを促す。
+9. **ユーザーから「マージした」と聞いたら**: Skill ツールで `merged` スキルを PR 番号付きで起動する。マージ後の手順（完了コメント、linked issue への報告、`v6` へのマージで閉じなかった issue のクローズ）はすべてそちらにある。CI 待ちの間ずっと持ち回るのではなく、実行する瞬間に読むため。`impl` 経由の PR では、続けて `impl` の手順 15（`## 対象外` の台帳確認）がある。
