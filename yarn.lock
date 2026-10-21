@@ -1558,7 +1558,7 @@ __metadata:
   dependencies:
     "@chromatic-com/storybook": "npm:5.3.0"
     "@storybook/addon-docs": "npm:10.5.10"
-    "@storybook/experimental-addon-test": "npm:8.6.18"
+    "@storybook/experimental-addon-test": "npm:8.6.19"
     "@storybook/test": "npm:8.6.15"
     "@storybook/web-components": "npm:10.5.10"
     "@storybook/web-components-vite": "npm:10.5.10"
@@ -4815,21 +4815,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/experimental-addon-test@npm:8.6.18":
-  version: 8.6.18
-  resolution: "@storybook/experimental-addon-test@npm:8.6.18"
+"@storybook/experimental-addon-test@npm:8.6.19":
+  version: 8.6.19
+  resolution: "@storybook/experimental-addon-test@npm:8.6.19"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
     "@storybook/icons": "npm:^1.2.12"
-    "@storybook/instrumenter": "npm:8.6.18"
-    "@storybook/test": "npm:8.6.18"
+    "@storybook/instrumenter": "npm:8.6.19"
+    "@storybook/test": "npm:8.6.19"
     polished: "npm:^4.2.2"
     prompts: "npm:^2.4.0"
     ts-dedent: "npm:^2.2.0"
   peerDependencies:
     "@vitest/browser": ^2.1.1 || ^3.0.0
     "@vitest/runner": ^2.1.1 || ^3.0.0
-    storybook: ^8.6.18
+    storybook: ^8.6.19
     vitest: ^2.1.1 || ^3.0.0
   peerDependenciesMeta:
     "@vitest/browser":
@@ -4838,7 +4838,7 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: 10c0/eea0a42bf349385f3009189235c870b25121ddbd3d3ad6668a3b53f7af3e09c48f6569ad1f8ada0b07bf94cd7fd1b747dd5f8ee93673a8d1fca1658df423443a
+  checksum: 10c0/a36fc6ed50e1b3be19eb547aab97597a9e23095d2dee823e795e18277734ac55c74819e032dc536e8bfd57c598947011250bf1eaf4e436ae5808e1bb59d3079d
   languageName: node
   linkType: hard
 
@@ -4880,15 +4880,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/instrumenter@npm:8.6.18":
-  version: 8.6.18
-  resolution: "@storybook/instrumenter@npm:8.6.18"
+"@storybook/instrumenter@npm:8.6.19":
+  version: 8.6.19
+  resolution: "@storybook/instrumenter@npm:8.6.19"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
     "@vitest/utils": "npm:^2.1.1"
   peerDependencies:
-    storybook: ^8.6.18
-  checksum: 10c0/b90f029dc73f7ff676a9d6270ecb0f50d4ed2cf45f0969eb778c89f815a1b3cbb08ecd4f44bfaee6b658615996084e4663e8ff0cab0af4dcdd6cef99f6c85503
+    storybook: ^8.6.19
+  checksum: 10c0/58ea9871bc7429ae7f4b02c19d8d30f1be69eb4863bb288552b833a8a25c82c9e5365627d6494d8aefaecbc0821f2c5429d20c9a9365342074563f9f0041ad35
   languageName: node
   linkType: hard
 
@@ -4927,20 +4927,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/test@npm:8.6.18":
-  version: 8.6.18
-  resolution: "@storybook/test@npm:8.6.18"
+"@storybook/test@npm:8.6.19":
+  version: 8.6.19
+  resolution: "@storybook/test@npm:8.6.19"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
-    "@storybook/instrumenter": "npm:8.6.18"
+    "@storybook/instrumenter": "npm:8.6.19"
     "@testing-library/dom": "npm:10.4.0"
     "@testing-library/jest-dom": "npm:6.5.0"
     "@testing-library/user-event": "npm:14.5.2"
     "@vitest/expect": "npm:2.0.5"
     "@vitest/spy": "npm:2.0.5"
   peerDependencies:
-    storybook: ^8.6.18
-  checksum: 10c0/73a25bdf3063c5fb665349b96260af4889f646eaebc82cc2f763016bc345891f48187ec5bd7423951a98bf64d11e7bee87b72686b8996c421f7e21ac20c825fa
+    storybook: ^8.6.19
+  checksum: 10c0/2257fc202eafc779e3301587af908b5cdeed15a65824be5ccfb6468597e7a2a37138a647e66c16e2f290a07b296cb669d94b292103c0a44280a0345b1687c87f
   languageName: node
   linkType: hard
 
