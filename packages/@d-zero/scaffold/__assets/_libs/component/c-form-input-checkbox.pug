@@ -1,0 +1,17 @@
+//- checkbox には required を出力しない（各 input に付くと「全項目チェック必須」の挙動になるため。
+	「1つ以上選択必須」の検証はサーバー側の責務）
+	options の各要素は { value, label, id }
+mixin cFormInputCheckbox(params = {})
+	-
+		const props = Object.assign({ hiddenId: null, hiddenName: null, name: null, options: [] }, params);
+	//- 未選択時にもキーが送信されるようにするための hidden（CMS 仕様）
+	.c-form-input-checkbox
+		input.c-form-input-checkbox__hidden(
+			type="hidden"
+			name=props.hiddenName
+			value
+			id=props.hiddenId)
+		each option in props.options
+			.c-form-input-checkbox__item
+				input(type="checkbox" name=props.name value=option.value id=option.id)
+				label(for=option.id) #{ option.label }

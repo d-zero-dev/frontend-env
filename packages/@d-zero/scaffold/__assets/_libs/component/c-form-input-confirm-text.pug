@@ -1,0 +1,5 @@
+mixin cFormInputConfirmText(params = {})
+	-
+		const props = Object.assign({ value: "__入力内容__" }, params);
+	.c-form-input-confirm-text
+		span #{ props.value }

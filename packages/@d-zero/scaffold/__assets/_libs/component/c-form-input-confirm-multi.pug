@@ -1,0 +1,7 @@
+mixin cFormInputConfirmMulti(params = {})
+	-
+		const props = Object.assign({ value: ["__選択項目1__", "__選択項目2__"] }, params);
+	.c-form-input-confirm-multi
+		ul
+			each value in props.value
+				li #{ value }
