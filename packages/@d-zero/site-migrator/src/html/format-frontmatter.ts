@@ -1,6 +1,6 @@
 import type { Frontmatter, OgFrontmatter, TwitterFrontmatter } from '../types.js';
 
-import { dump, strTag, visit } from 'js-yaml';
+import { dump } from 'js-yaml';
 
 /**
  * Serialises a {@link Frontmatter} to the `---\n…\n---\n` YAML frontmatter
@@ -32,17 +32,11 @@ export function formatFrontmatter(meta: Frontmatter): string {
 		// `noRefs` avoids `*ref0` / `&ref0` anchors when the same string instance
 		// appears in two slots (rawTitle / title etc.).
 		noRefs: true,
-		// js-yaml's `forceQuotes` also quotes non-string scalars (e.g. `id`),
-		// tagging them `!!int "42"` to preserve their type through the quotes.
-		// Force double quotes on string values only, leaving numbers bare, to
-		// match the downstream scaffold pipeline's serialisation expectations.
-		transform: (documents) => {
-			visit(documents, (node, ctx) => {
-				if (node.kind === 'scalar' && node.tag === strTag.tagName && !ctx.isKey) {
-					node.style.doubleQuoted = true;
-				}
-			});
-		},
+		// `forceQuotes` quotes non-key string values only and leaves numbers
+		// (e.g. `id`) bare, matching the downstream scaffold pipeline's
+		// serialisation expectations.
+		forceQuotes: true,
+		quoteStyle: 'double',
 	});
 	return `---\n${yaml}---\n`;
 }
