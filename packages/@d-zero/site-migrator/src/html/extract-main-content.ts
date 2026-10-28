@@ -117,7 +117,7 @@ function collectElements(nodes: readonly Node[], out: Element[]): void {
  * @param node
  */
 function isElement(node: Node): node is Element {
-	return 'tagName' in node && Array.isArray((node as Element).attrs);
+	return 'tagName' in node && Array.isArray(node.attrs);
 }
 
 /**
