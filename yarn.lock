@@ -1383,7 +1383,7 @@ __metadata:
     "@d-zero/scaffold": "npm:5.4.1"
     "@types/node": "npm:25.9.9"
     execa: "npm:10.0.1"
-    i18n-js: "npm:4.5.3"
+    i18n-js: "npm:4.5.4"
     ignore: "npm:7.0.8"
     magicast: "npm:0.5.4"
     meow: "npm:14.1.0"
@@ -10545,14 +10545,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18n-js@npm:4.5.3":
-  version: 4.5.3
-  resolution: "i18n-js@npm:4.5.3"
+"i18n-js@npm:4.5.4":
+  version: 4.5.4
+  resolution: "i18n-js@npm:4.5.4"
   dependencies:
     bignumber.js: "npm:*"
     lodash: "npm:*"
     make-plural: "npm:7.5.0"
-  checksum: 10c0/c506bd56ad2ee6bf6047444313d0885e9e41277e0b7f85d9faa3c4f769ce4ba1334e2d8b953e346f2cd35ab439a43b35994c15930e1d36f2780f7207421b0137
+  checksum: 10c0/9fd631da7170687697c939414d1cd87ae8116c901f069f839107693633cff6ce869e53e0cdab579d674ff86deb7bdbf8f9a0f3b3ba508b6579b6af0545770822
   languageName: node
   linkType: hard
 
