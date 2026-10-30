@@ -1392,7 +1392,7 @@ __metadata:
     "@d-zero/prettier-config": "npm:5.1.1"
     "@d-zero/scaffold": "npm:5.4.1"
     "@types/node": "npm:25.9.9"
-    execa: "npm:10.0.1"
+    execa: "npm:10.2.1"
     i18n-js: "npm:4.5.4"
     ignore: "npm:7.0.13"
     magicast: "npm:0.5.4"
@@ -9393,6 +9393,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"execa@npm:10.2.1":
+  version: 10.2.1
+  resolution: "execa@npm:10.2.1"
+  dependencies:
+    "@sindresorhus/merge-streams": "npm:^4.0.0"
+    figures: "npm:^6.1.0"
+    get-stream: "npm:^9.0.1"
+    human-signals: "npm:^8.0.1"
+    is-plain-obj: "npm:^4.1.0"
+    is-stream: "npm:^4.0.1"
+    npm-run-path: "npm:^6.0.0"
+    pretty-ms: "npm:^9.3.1"
+    signal-exit: "npm:^4.1.0"
+    strip-final-newline: "npm:^4.0.0"
+    which-command: "npm:^0.1.0"
+    yoctocolors: "npm:^2.2.0"
+  checksum: 10c0/56024ace832edaa08562e73b9746f57751b6d9f458be5640b86b53e10a7cc2cc878a79e92ff22791ae04a3d61421e73096c86595559231a2225f40fcdcb9f5ea
+  languageName: node
+  linkType: hard
+
 "expand-tilde@npm:^2.0.0, expand-tilde@npm:^2.0.2":
   version: 2.0.2
   resolution: "expand-tilde@npm:2.0.2"
@@ -14909,6 +14929,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pretty-ms@npm:^9.3.1":
+  version: 9.3.1
+  resolution: "pretty-ms@npm:9.3.1"
+  dependencies:
+    parse-ms: "npm:^4.0.0"
+  checksum: 10c0/f034e6197922da40d6f0e73c835baa0f87d89f660966deb651305ee0567e20d5258b9c1782de098069b479036653bd1ad4ee1d6d816d1fde0e47c62d0ce5763d
+  languageName: node
+  linkType: hard
+
 "prh@npm:^5.4.4":
   version: 5.4.4
   resolution: "prh@npm:5.4.4"
@@ -18904,7 +18933,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yoctocolors@npm:^2.1.2":
+"yoctocolors@npm:^2.1.2, yoctocolors@npm:^2.2.0":
   version: 2.2.0
   resolution: "yoctocolors@npm:2.2.0"
   checksum: 10c0/ca179aa83401aa0711f268fda38145a44c828e612a5f5265439efb5796cd63c46ca6b786bae3b74c75440a48518c36b5b23cba7fbb76ea8af5a9f85f830a5754
