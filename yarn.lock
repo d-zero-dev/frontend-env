@@ -1550,7 +1550,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@d-zero/postcss-config@workspace:packages/@d-zero/postcss-config"
   dependencies:
-    autoprefixer: "npm:10.5.4"
+    autoprefixer: "npm:10.6.1"
     postcss: "npm:8.5.31"
     postcss-base64: "npm:0.7.1"
     postcss-calc: "npm:11.0.3"
@@ -6484,12 +6484,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:10.5.4":
-  version: 10.5.4
-  resolution: "autoprefixer@npm:10.5.4"
+"autoprefixer@npm:10.6.1":
+  version: 10.6.1
+  resolution: "autoprefixer@npm:10.6.1"
   dependencies:
-    browserslist: "npm:^4.28.6"
-    caniuse-lite: "npm:^1.0.30001806"
+    browserslist: "npm:^4.28.9"
+    caniuse-lite: "npm:^1.0.30001810"
     fraction.js: "npm:^5.3.4"
     picocolors: "npm:^1.1.1"
     postcss-value-parser: "npm:^4.2.0"
@@ -6497,7 +6497,7 @@ __metadata:
     postcss: ^8.1.0
   bin:
     autoprefixer: bin/autoprefixer
-  checksum: 10c0/274ebc9fa50ac0d7a5aa9bc29baa502f2d2006f47a899dac2de4ba86c989defaa62b096e68692e15d53c9ed2b62c57dd047ceba61d344908d8b6e61f220a10e8
+  checksum: 10c0/bd5273fbe36a2baccf29e7cb62b32181b1848a64f92d4d24fe5db66960f6f576ab9684983b93569f1bd890fa25ebc270eafac9692619517705e7be4f4d95db74
   languageName: node
   linkType: hard
 
@@ -6796,7 +6796,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.0.0, browserslist@npm:^4.27.0, browserslist@npm:^4.28.1, browserslist@npm:^4.28.6":
+"browserslist@npm:^4.0.0, browserslist@npm:^4.27.0, browserslist@npm:^4.28.1, browserslist@npm:^4.28.9":
   version: 4.29.4
   resolution: "browserslist@npm:4.29.4"
   dependencies:
@@ -7008,10 +7008,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001806, caniuse-lite@npm:^1.0.30001816":
+"caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001816":
   version: 1.0.30001817
   resolution: "caniuse-lite@npm:1.0.30001817"
   checksum: 10c0/6cb289db2bac703031ce98198ecf2f9e5b243282fcc9966789dd874eb0f97b59006277dd0646224dab8c605bee4c19f75d9f2f53638656371c831adcb5fc7fb5
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001810":
+  version: 1.0.30001819
+  resolution: "caniuse-lite@npm:1.0.30001819"
+  checksum: 10c0/6842319cdb9c8ac950ef0910fc3cc7dac3320b96b150de83ac65162c6b4906d2721ca830943a9e5a833c265b186aa0c417402ddd4157108bbf5474d6fabdc843
   languageName: node
   linkType: hard
 
