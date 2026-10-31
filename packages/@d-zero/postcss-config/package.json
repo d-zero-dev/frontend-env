@@ -18,7 +18,7 @@
 		"autoprefixer": "10.6.1",
 		"postcss": "8.5.31",
 		"postcss-base64": "0.7.1",
-		"postcss-calc": "11.0.3",
+		"postcss-calc": "11.2.3",
 		"postcss-clip-path-polyfill": "1.1.0",
 		"postcss-color-mod-function": "4.1.1",
 		"postcss-custom-media": "12.0.3",
