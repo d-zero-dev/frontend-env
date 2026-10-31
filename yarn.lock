@@ -1394,7 +1394,7 @@ __metadata:
     "@types/node": "npm:25.9.9"
     execa: "npm:10.2.1"
     i18n-js: "npm:4.5.4"
-    ignore: "npm:7.0.13"
+    ignore: "npm:7.0.14"
     magicast: "npm:0.5.4"
     meow: "npm:14.1.0"
     minimatch: "npm:10.2.6"
@@ -10659,10 +10659,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore@npm:7.0.13, ignore@npm:^7.0.5, ignore@npm:^7.0.6":
-  version: 7.0.13
-  resolution: "ignore@npm:7.0.13"
-  checksum: 10c0/e6d122726609d57be39a12a91a5479eefe6d4298233695651de21f2d0bb40216e5fe89e01f343f7fb2e265887136ad3bfae1a14e0b06d8ca4c6e9ea4891e53e4
+"ignore@npm:7.0.14":
+  version: 7.0.14
+  resolution: "ignore@npm:7.0.14"
+  checksum: 10c0/9845d63a5fd29c738b7b94bef4a304c0812453b5360f5edc0859c1428902058753dffeed0e17b9e88bf529815803ec2d31eefa9bdaea8f32154128143fae2ea9
   languageName: node
   linkType: hard
 
@@ -10677,6 +10677,13 @@ __metadata:
   version: 5.3.2
   resolution: "ignore@npm:5.3.2"
   checksum: 10c0/f9f652c957983634ded1e7f02da3b559a0d4cc210fca3792cb67f1b153623c9c42efdc1c4121af171e295444459fc4a9201101fb041b1104a3c000bccb188337
+  languageName: node
+  linkType: hard
+
+"ignore@npm:^7.0.5, ignore@npm:^7.0.6":
+  version: 7.0.13
+  resolution: "ignore@npm:7.0.13"
+  checksum: 10c0/e6d122726609d57be39a12a91a5479eefe6d4298233695651de21f2d0bb40216e5fe89e01f343f7fb2e265887136ad3bfae1a14e0b06d8ca4c6e9ea4891e53e4
   languageName: node
   linkType: hard
 
