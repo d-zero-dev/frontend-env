@@ -1395,7 +1395,7 @@ __metadata:
     execa: "npm:10.2.1"
     i18n-js: "npm:4.5.4"
     ignore: "npm:7.0.14"
-    magicast: "npm:0.5.4"
+    magicast: "npm:0.5.5"
     meow: "npm:14.1.0"
     minimatch: "npm:10.2.6"
     plop: "npm:4.0.4"
@@ -12354,14 +12354,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magicast@npm:0.5.4":
-  version: 0.5.4
-  resolution: "magicast@npm:0.5.4"
+"magicast@npm:0.5.5":
+  version: 0.5.5
+  resolution: "magicast@npm:0.5.5"
   dependencies:
     "@babel/parser": "npm:^7.29.7"
     "@babel/types": "npm:^7.29.7"
     source-map-js: "npm:^1.2.1"
-  checksum: 10c0/f6a3b33d1c994cace3999fc96876a9fd06429deff8266563ccdc1d731c9edc4e1fb59d724128d7d4f3382eb457cd5a39ae1ec7b1e1864e068297ee2a30c12a3d
+  checksum: 10c0/d27e94cd1e85f1736f97ab0c6e542170a818c7e573261722d056b3ec4a520e16d836ce4c6b0cd3dd215b1171d83592d48a3736f3da5997a55629a0de05f66e7d
   languageName: node
   linkType: hard
 
