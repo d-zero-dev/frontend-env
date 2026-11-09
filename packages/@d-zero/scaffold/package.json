@@ -1,6 +1,6 @@
 {
 	"name": "@d-zero/scaffold",
-	"version": "5.4.1",
+	"version": "5.4.2",
 	"description": "Frontend scaffold files of D-ZERO Co., Ltd.",
 	"repository": {
 		"type": "git",
@@ -52,7 +52,7 @@
 		"@d-zero/eslint-config": "5.1.3",
 		"@d-zero/lint-staged-config": "5.1.1",
 		"@d-zero/markuplint-config": "5.1.3",
-		"@d-zero/postcss-config": "5.4.1",
+		"@d-zero/postcss-config": "5.4.2",
 		"@d-zero/prettier-config": "5.1.1",
 		"@d-zero/pug-lint-config": "5.1.1",
 		"@d-zero/stylelint-config": "5.1.1",
@@ -76,7 +76,7 @@
 	},
 	"dependencies": {
 		"@burger-editor/css": "4.0.0-alpha.77",
-		"@d-zero/custom-components": "5.4.1",
+		"@d-zero/custom-components": "5.4.2",
 		"dialog-toggle-events-polyfill": "1.1.4",
 		"invokers-polyfill": "1.0.4",
 		"kiso.css": "1.2.4",

@@ -1390,7 +1390,7 @@ __metadata:
   resolution: "@d-zero/create-frontend@workspace:packages/@d-zero/create-frontend"
   dependencies:
     "@d-zero/prettier-config": "npm:5.1.1"
-    "@d-zero/scaffold": "npm:5.4.1"
+    "@d-zero/scaffold": "npm:5.4.2"
     "@types/node": "npm:25.9.9"
     execa: "npm:10.2.1"
     i18n-js: "npm:4.5.4"
@@ -1423,7 +1423,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/custom-components@npm:5.4.1, @d-zero/custom-components@workspace:packages/@d-zero/custom-components":
+"@d-zero/custom-components@npm:5.4.2, @d-zero/custom-components@workspace:packages/@d-zero/custom-components":
   version: 0.0.0-use.local
   resolution: "@d-zero/custom-components@workspace:packages/@d-zero/custom-components"
   dependencies:
@@ -1546,7 +1546,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/postcss-config@npm:5.4.1, @d-zero/postcss-config@workspace:packages/@d-zero/postcss-config":
+"@d-zero/postcss-config@npm:5.4.2, @d-zero/postcss-config@workspace:packages/@d-zero/postcss-config":
   version: 0.0.0-use.local
   resolution: "@d-zero/postcss-config@workspace:packages/@d-zero/postcss-config"
   dependencies:
@@ -1637,18 +1637,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/scaffold@npm:5.4.1, @d-zero/scaffold@workspace:packages/@d-zero/scaffold":
+"@d-zero/scaffold@npm:5.4.2, @d-zero/scaffold@workspace:packages/@d-zero/scaffold":
   version: 0.0.0-use.local
   resolution: "@d-zero/scaffold@workspace:packages/@d-zero/scaffold"
   dependencies:
     "@burger-editor/css": "npm:4.0.0-alpha.77"
     "@burger-editor/local": "npm:4.0.0-alpha.77"
     "@d-zero/cspell-config": "npm:5.1.1"
-    "@d-zero/custom-components": "npm:5.4.1"
+    "@d-zero/custom-components": "npm:5.4.2"
     "@d-zero/eslint-config": "npm:5.1.3"
     "@d-zero/lint-staged-config": "npm:5.1.1"
     "@d-zero/markuplint-config": "npm:5.1.3"
-    "@d-zero/postcss-config": "npm:5.4.1"
+    "@d-zero/postcss-config": "npm:5.4.2"
     "@d-zero/prettier-config": "npm:5.1.1"
     "@d-zero/pug-lint-config": "npm:5.1.1"
     "@d-zero/stylelint-config": "npm:5.1.1"
