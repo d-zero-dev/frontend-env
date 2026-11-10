@@ -1719,7 +1719,7 @@ __metadata:
     js-yaml: "npm:5.5.0"
     jsdom: "npm:30.1.3"
     parse5: "npm:8.1.0"
-    parse5-html-rewriting-stream: "npm:8.0.1"
+    parse5-html-rewriting-stream: "npm:8.1.0"
     puppeteer: "npm:25.15.0"
   bin:
     dz-migrate: dist/cli.js
@@ -14081,14 +14081,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse5-html-rewriting-stream@npm:8.0.1":
-  version: 8.0.1
-  resolution: "parse5-html-rewriting-stream@npm:8.0.1"
+"parse5-html-rewriting-stream@npm:8.1.0":
+  version: 8.1.0
+  resolution: "parse5-html-rewriting-stream@npm:8.1.0"
   dependencies:
-    entities: "npm:^8.0.0"
+    entities: "npm:^9.0.0"
     parse5: "npm:^8.0.0"
     parse5-sax-parser: "npm:^8.0.0"
-  checksum: 10c0/466074927c6df728f7bc2545b7742245ed518b698a7b37f0008a832e8d40151550def3fa6f0475caf5b53fdcf9c389152c78b16bc43095bb82e12e4669255555
+  checksum: 10c0/26c0e61880e9d32fad650e43ecf05e23ca8c46bb6bf050172ef8122e7d1772572a2cab5e906729cb6c0ab9e557dd51a7c7c32e15d1874b778aa701ec93aabc7b
   languageName: node
   linkType: hard
 
