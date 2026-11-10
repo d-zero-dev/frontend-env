@@ -20,12 +20,12 @@
 
 .c-page-home__main {
 	grid-area: main;
+}
 
-	> * {
-		inline-size: var(--content-width);
-		padding-inline: 1rem;
-		margin-inline: auto;
-	}
+.c-page-home__content {
+	inline-size: var(--content-width);
+	padding-inline: 1rem;
+	margin-inline: auto;
 }
 
 .c-page-home__footer {
