@@ -25,7 +25,7 @@
 	grid-area: footer;
 }
 
-.c-page-sub__content {
+.c-page-sub__article {
 	padding-inline: 2em;
 }
 
@@ -41,7 +41,9 @@
 	margin-inline: auto;
 }
 
-.c-page-sub__content-main {
+.c-page-sub__content {
 	max-inline-size: var(--content-width);
 	margin-inline: auto;
 }
+
+/* .c-page-sub__pagination {} */

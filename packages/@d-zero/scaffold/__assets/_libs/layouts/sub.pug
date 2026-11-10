@@ -8,12 +8,12 @@ html(lang=lang || "ja")
 				include /component/c-header.pug
 			.c-page-sub__main
 				main
-					article.c-page-sub__content
+					article.c-page-sub__article
 						.c-page-sub__title-page
 							include /component/c-title-page.pug
 						.c-page-sub__nav-breadcrumb
 							include /component/c-nav-breadcrumb.pug
-						.c-page-sub__content-body !{ content }
+						.c-page-sub__content !{ content }
 						if hasPagination
 							.c-page-sub__pagination
 								include /component/c-pagination.pug
