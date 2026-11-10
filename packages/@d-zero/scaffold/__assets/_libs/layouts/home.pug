@@ -8,6 +8,7 @@ html(lang=lang || "ja")
 				- const isHome = true;
 				include /component/c-header.pug
 			.c-page-home__main
-				main !{ content }
+				main
+					.c-page-home__content !{ content }
 			.c-page-home__footer
 				include /component/c-footer.pug

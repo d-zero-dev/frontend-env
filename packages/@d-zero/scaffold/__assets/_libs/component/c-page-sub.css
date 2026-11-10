@@ -25,23 +25,18 @@
 	grid-area: footer;
 }
 
-.c-page-sub__content {
-	padding-inline: 2em;
+.c-page-sub__article {
+	padding-inline: 2rem;
 }
 
 .c-page-sub__title-page {
-	max-inline-size: var(--wide-layout-width);
-	margin-block-end: 1em;
-	margin-inline: auto;
+	margin-block-end: 1rem;
 }
 
 .c-page-sub__nav-breadcrumb {
-	max-inline-size: var(--wide-layout-width);
-	margin-block-end: 2em;
-	margin-inline: auto;
+	margin-block-end: 2rem;
 }
 
-.c-page-sub__content-main {
-	max-inline-size: var(--content-width);
-	margin-inline: auto;
-}
+/* .c-page-sub__content {} */
+
+/* .c-page-sub__pagination {} */
