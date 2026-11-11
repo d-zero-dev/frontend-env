@@ -139,3 +139,21 @@ v6 の scaffold を写すと、次の差が出ます。どれも意図した差�
 - CSS の圧縮結果（ファイルサイズがわずかに変わる）
 
 タイトルの無いページのパンくずと`<title>`は、v5 も v6 の scaffold も URL の最後の部分です（v5 は kamado v1 の`fileSlug`で、`index`ページはディレクトリ名）。kamado v3 自体はこれを`__NO_TITLE__`にするので、v6 の scaffold の`breadcrumb.ts`を写さない場合は、`__NO_TITLE__`が出ます。
+
+## 7. AI 設定とドキュメントを写す
+
+v6 の scaffold は、AI エージェント向けの設定を次のように変えています。ビルドには影響しません。
+
+| v5                               | v6                                                                                                 |
+| -------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `.claude/commands/<名前>.md`     | `.claude/skills/<名前>/SKILL.md`（`/git`などの呼び出し名は同じ）                                   |
+| なし                             | `.claude/skills/organizing-kamado-pages/`（ページの追加・移動・改名・削除の手順と、kamado の規則） |
+| なし                             | `docs/kamado-ui.md`（ページ情報の編集画面の使い方）                                                |
+| `AGENTS.md`                      | 「サイト構成（kamado）」の節を足す                                                                 |
+| `README.md`                      | 「ディレクトリ構成」の節と、`yarn ui`・`yarn pages`を足す                                          |
+| `.claude/settings.json`の`allow` | `Bash(yarn pages:*)`、`Bash(git mv:*)`、`diff-pages.mjs`の実行を足す                               |
+
+- `.claude/commands/`と`.claude/skills/`に同じ名前があると、スキルが使われます。写したあとは`.claude/commands/`の同名のファイルを削除します
+- `fix-component`は、TSX と sidecar の JSON に合わせて書き直しています。v5 の内容に手を入れていた場合は、v6 のものに同じ変更を入れ直します
+- `package.json`の`scripts`に`"ui": "kamado ui"`と`"pages": "kamado pages"`を足します。この2つのコマンドは`kamado` 3.0.0-alpha.4 には入っていません。入っている版の`kamado`にしてから使います
+- `organizing-kamado-pages`は、`__assets/htdocs`をページの置き場、`__assets/_libs`を alias `@`の先として書いています。構成を変えているプロジェクトでは、`SKILL.md`と`kamado-rules.md`のパスを合わせます
