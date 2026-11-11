@@ -7,18 +7,11 @@ import CPagination from '../component/c-pagination.tsx';
 import CTitlePage from '../component/c-title-page.tsx';
 import Meta from '../mixin/meta.tsx';
 
-export default function LSub({
-	content,
-	page,
-	meta,
-	site,
-	titleList,
-	breadcrumbs,
-}: LayoutProps) {
+export default function LSub({ content, page, meta, site, breadcrumbs }: LayoutProps) {
 	return (
 		<html lang={meta.lang || 'ja'}>
 			<head>
-				<Meta page={page} meta={meta} site={site} titleList={titleList} />
+				<Meta page={page} meta={meta} site={site} breadcrumbs={breadcrumbs} />
 			</head>
 			<body className="l-sub">
 				<div className="l-sub__base">
@@ -32,7 +25,7 @@ export default function LSub({
 									<CTitlePage title={meta.title} />
 								</div>
 								<div className="l-sub__nav-breadcrumb">
-									<CNavBreadcrumb breadcrumbs={breadcrumbs} />
+									<CNavBreadcrumb breadcrumbs={breadcrumbs} site={site} />
 								</div>
 								<div
 									className="l-sub__content-body"

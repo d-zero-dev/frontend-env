@@ -8,12 +8,12 @@ export default function Index({
 	page,
 	meta,
 	site,
-	titleList,
-}: Pick<PageProps, 'page' | 'meta' | 'site' | 'titleList'>) {
+	breadcrumbs,
+}: Pick<PageProps, 'page' | 'meta' | 'site' | 'breadcrumbs'>) {
 	return (
 		<html lang="ja">
 			<head>
-				<Meta page={page} meta={meta} site={site} titleList={titleList} />
+				<Meta page={page} meta={meta} site={site} breadcrumbs={breadcrumbs} />
 			</head>
 			<body>
 				<main>

@@ -1,8 +1,13 @@
 /**
  * kamado がページとレイアウトに渡す値の型。
  *
- * kamado は型定義を同梱しないので、使う側がここに宣言する。形は kamado の
- * ドキュメント（ページに渡されるもの）に合わせる。
+ * kamado は props の型を`exports`から公開しない（`kamado`、`kamado/build`、
+ * `kamado/jsx`のどれからも import できない）ので、使う側がここに宣言する。形は
+ * kamado の`dist/props.d.ts`と`dist/page-data/*.d.ts`に合わせる。
+ *
+ * scaffold が使う props だけを宣言する。kamado はほかに`pages`、`nav()`、
+ * `titleList()`、`formatDate()`、`page.meta`も渡すので、使うときに足す。
+ * @see https://github.com/d-zero-dev/kamado/blob/dev/docs/v3/MIGRATION.md
  * @module
  */
 
@@ -60,23 +65,14 @@ export interface SiteInfo {
  * パンくずの1項目。祖先の`index`ページとページ自身。
  */
 export interface Breadcrumb {
-	/** タイトルがないページは`__NO_TITLE__` */
+	/**
+	 * タイトルがないページは`__NO_TITLE__`。kamado の組み込みのパンくずは常に文字列
+	 * だが、kamado の型（`BreadcrumbItem`）に合わせて`undefined`も受ける
+	 */
 	readonly title: string | undefined;
 	readonly href: string;
 	readonly depth: number;
 	readonly meta: PageMeta;
-}
-
-/**
- * `titleList()`のオプション。
- */
-export interface TitleListOptions {
-	readonly separator?: string;
-	readonly baseURL?: string;
-	readonly prefix?: string;
-	readonly suffix?: string;
-	readonly siteName?: string;
-	readonly fallback?: string;
 }
 
 /**
@@ -99,7 +95,6 @@ export interface PageProps {
 	readonly site: SiteInfo;
 	readonly data: GlobalData;
 	readonly breadcrumbs: readonly Breadcrumb[];
-	readonly titleList: (options?: TitleListOptions) => string;
 }
 
 /**
