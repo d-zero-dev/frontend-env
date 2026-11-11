@@ -146,17 +146,17 @@ v6 の scaffold を写すと、次の差が出ます。どれも意図した差�
 
 v6 の scaffold は、AI エージェント向けの設定を次のように変えています。ビルドには影響しません。
 
-| ファイル                                  | v6 の scaffold での変更                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------ |
-| `.claude/commands/<名前>.md`              | `.claude/skills/<名前>/SKILL.md`へ移す（`/git`などの呼び出し名は同じ）         |
-| `.claude/skills/organizing-kamado-pages/` | 新しく足す（ページの追加・移動・改名・削除の手順と、kamado の規則）            |
-| `docs/kamado-ui.md`                       | 新しく足す（ページ情報の編集画面の使い方）                                     |
-| `AGENTS.md`                               | 「サイト構成（kamado）」の節を足す                                             |
-| `README.md`                               | 「ディレクトリ構成」の節と、`yarn ui`・`yarn pages`を足す                      |
-| `.claude/settings.json`の`allow`          | `Bash(yarn pages:*)`、`Bash(git mv __assets/:*)`、`diff-pages.mjs`の実行を足す |
+| ファイル                                  | v6 の scaffold での変更                                                       |
+| ----------------------------------------- | ----------------------------------------------------------------------------- |
+| `.claude/commands/<名前>.md`              | `.claude/skills/<名前>/SKILL.md`へ移す（`/git`などの呼び出し名は同じ）        |
+| `.claude/skills/organizing-kamado-pages/` | 新しく足す（ページの追加・移動・改名・削除の手順と、kamado の規則）           |
+| `docs/kamado-ui.md`                       | 新しく足す（ページ情報の編集画面の使い方）                                    |
+| `AGENTS.md`                               | 「サイト構成（kamado）」の節を足す                                            |
+| `README.md`                               | 「ディレクトリ構成」の節と、`yarn ui`・`yarn pages`を足す                     |
+| `.claude/settings.json`の`allow`          | `Bash(yarn pages:*)`、`Bash(git mv __assets/*)`、`diff-pages.mjs`の実行を足す |
 
 - `.claude/commands/`と`.claude/skills/`に同じ名前があると、スキルが使われます。写したあとは`.claude/commands/`の同名のファイルを削除します
 - `fix-component`は、TSX と sidecar の JSON に合わせて書き直しています。v5 の内容に手を入れていた場合は、v6 のものに同じ変更を入れ直します
-- `package.json`の`scripts`に`"ui": "kamado ui"`と`"pages": "kamado pages"`を足します。`kamado`は、v6 の scaffold の`package.json`と同じ版にします（この2つのコマンドは 3.0.0-alpha.4 には入っていません）
+- `package.json`の`scripts`に`"ui": "kamado ui"`と`"pages": "kamado pages"`を足します。この2つのコマンドは`kamado` 3.0.0-alpha.4 には入っていません。`yarn pages`が`unknown command`か`Unknown option '--out'`で止まるときは、`kamado`を新しい版にします
 - `organizing-kamado-pages`は、`__assets/htdocs`をページの置き場、`__assets/_libs`を alias `@`の先として書いています。構成を変えているプロジェクトでは、`SKILL.md`と`kamado-rules.md`のパスを合わせます。`pages.overrides`を使っているプロジェクトでは、`SKILL.md`の「`pages.overrides`を足さない」と、`kamado-rules.md`の「使っていない」を、実際の運用に書き換えます
 - スキルは、ページの一覧を`.tmp/`に書き出します。`.tmp`が`.gitignore`に入っていることを確かめます
