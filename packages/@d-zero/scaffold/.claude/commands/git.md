@@ -26,7 +26,7 @@ disable-model-invocation: true
 - typeの選び方:
   - `feat` — ページ・コンポーネント・機能の新規追加
   - `fix` — 修正・改善・リファクタリング・ビルド出力に影響するlint修正（表示崩れ・リンク切れ・動作不具合の修正、コード整理、markuplint・textlint・cspell等の修正を含む）
-  - `chore` — ビルド出力に影響しない変更（設定変更・依存更新・ビルド関連・ESLint/Stylelint/pug-lintのコードスタイル修正・formatterの修正）
+  - `chore` — ビルド出力に影響しない変更（設定変更・依存更新・ビルド関連・oxlint/Stylelint/markuplintのコードスタイル修正・formatterの修正）
   - `docs` — ドキュメントファイル単体の変更（コードと一緒にコミットするJSDoc・コメントの修正は`feat`か`fix`を使う）
 - 迷ったら`chore`を使う
 

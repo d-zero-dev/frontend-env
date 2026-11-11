@@ -23,7 +23,7 @@ describe('downloadResources', () => {
 			'fetch',
 			vi.fn((input: string) => {
 				const body = input.endsWith('/a.png')
-					? new Uint8Array([0xff, 1, 2])
+					? new Uint8Array([255, 1, 2])
 					: new Uint8Array([3, 4]);
 				return Promise.resolve(new Response(body, { status: 200 }));
 			}),
@@ -43,7 +43,7 @@ describe('downloadResources', () => {
 		expect(new Set(results.map((event) => event.outcome))).toEqual(new Set(['saved']));
 		const png = await readFile(path.join(outputDir, 'img', 'a.png'));
 		const css = await readFile(path.join(outputDir, 'main.css'));
-		expect([...png]).toEqual([0xff, 1, 2]);
+		expect([...png]).toEqual([255, 1, 2]);
 		expect([...css]).toEqual([3, 4]);
 	});
 

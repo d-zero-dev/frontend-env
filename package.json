@@ -1,21 +1,28 @@
 {
 	"name": "@d-zero/frontend-env",
-	"description": "D-ZERO Frontend Developer's Environment",
-	"repository": "https://github.com/d-zero-dev/frontend-env.git",
-	"author": "D-ZERO Co., Ltd.",
-	"license": "MIT",
 	"private": true,
+	"description": "D-ZERO Frontend Developer's Environment",
+	"license": "MIT",
+	"author": "D-ZERO Co., Ltd.",
+	"repository": "https://github.com/d-zero-dev/frontend-env.git",
+	"workspaces": [
+		"packages/@d-zero/*"
+	],
 	"type": "module",
 	"scripts": {
 		"build": "lerna run build --scope=@d-zero/builder --scope=@d-zero/check-frontend-env --scope=@d-zero/custom-components --scope=@d-zero/site-migrator",
 		"dev": "lerna run dev",
 		"test": "vitest run --test-timeout 60000",
 		"test:update": "lerna run test:update",
-		"lint": "run-s lint:eslint lint:prettier lint:textlint lint:cspell",
+		"lint": "run-s lint:oxlint lint:oxfmt lint:textlint lint:cspell",
+		"lint:fix": "run-s lint:oxlint:fix lint:oxfmt:fix lint:textlint:fix",
 		"lint:cspell": "npx cspell --no-progress --show-suggestions \"**\"",
-		"lint:eslint": "npx eslint --fix \"./{*,**/*}.{js,cjs,mjs,ts,tsx}\"",
-		"lint:prettier": "npx prettier --write \"{*,./**/*}{.{md,mdc,mdx,js,jsx,ts,tsx,css,pug,html},*rc}\" \"!**/{dist,storybook-static}/**/*\"",
-		"lint:textlint": "npx textlint --fix \"{*,./**/*}.{md,mdc}\" && npx textlint \"{*,./**/*}.{md,mdc}\"",
+		"lint:oxlint": "oxlint .",
+		"lint:oxlint:fix": "oxlint --fix .",
+		"lint:oxfmt": "oxfmt --check \"{*,**/*}.{md,mdc,json,js,cjs,mjs,jsx,ts,cts,mts,tsx,yml,yaml,css,scss,html}\" \"!**/{dist,storybook-static}/**\"",
+		"lint:oxfmt:fix": "oxfmt --write \"{*,**/*}.{md,mdc,json,js,cjs,mjs,jsx,ts,cts,mts,tsx,yml,yaml,css,scss,html}\" \"!**/{dist,storybook-static}/**\"",
+		"lint:textlint": "npx textlint \"{*,./**/*}.{md,mdc}\"",
+		"lint:textlint:fix": "npx textlint --fix \"{*,./**/*}.{md,mdc}\"",
 		"storybook": "lerna run storybook --scope=@d-zero/custom-components",
 		"release": "lerna version --exact --force-publish --conventional-commits --conventional-graduate --no-push",
 		"release:alpha": "lerna version --exact --force-publish --conventional-commits --conventional-prerelease --preid alpha --no-push",
@@ -26,9 +33,25 @@
 		"co": "npx cz",
 		"update": "yarn upgrade-interactive"
 	},
-	"workspaces": [
-		"packages/@d-zero/*"
-	],
+	"devDependencies": {
+		"@d-zero/commitlint-config": "6.0.0-alpha.3",
+		"@d-zero/cspell-config": "6.0.0-alpha.3",
+		"@d-zero/lint-staged-config": "6.0.0-alpha.3",
+		"@d-zero/oxlint-config": "6.0.0-alpha.3",
+		"@d-zero/oxlint-plugin": "6.0.0-alpha.3",
+		"@d-zero/textlint-config": "6.0.0-alpha.3",
+		"@d-zero/tsconfig": "2.0.0",
+		"husky": "9.1.7",
+		"lerna": "10.1.1",
+		"npm-run-all2": "9.0.4",
+		"oxfmt": "0.62.0",
+		"oxlint": "1.77.0",
+		"typescript": "5.9.3",
+		"vitest": "4.1.12"
+	},
+	"resolutions": {
+		"nx/undici": "7.30.1"
+	},
 	"config": {
 		"commitizen": {
 			"path": "./node_modules/cz-customizable"
@@ -37,26 +60,9 @@
 			"config": "./node_modules/@d-zero/cz-config"
 		}
 	},
-	"devDependencies": {
-		"@d-zero/commitlint-config": "5.1.1",
-		"@d-zero/cspell-config": "5.1.1",
-		"@d-zero/eslint-config": "5.1.3",
-		"@d-zero/lint-staged-config": "5.1.1",
-		"@d-zero/prettier-config": "5.1.1",
-		"@d-zero/textlint-config": "5.1.2",
-		"@d-zero/tsconfig": "2.0.0",
-		"husky": "9.1.7",
-		"lerna": "10.1.1",
-		"npm-run-all2": "9.0.4",
-		"typescript": "5.9.3",
-		"vitest": "4.1.12"
-	},
-	"resolutions": {
-		"nx/undici": "7.30.1"
-	},
-	"packageManager": "yarn@4.18.1",
 	"volta": {
 		"node": "24.22.2",
 		"yarn": "4.18.1"
-	}
+	},
+	"packageManager": "yarn@4.18.1"
 }

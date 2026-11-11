@@ -1,0 +1,29 @@
+{
+	"$schema": "./node_modules/kamado/schema.json",
+	"dir": {
+		"input": "__assets/htdocs",
+		"output": "htdocs",
+	},
+	"devServer": {
+		"open": true,
+		"port": 8000,
+	},
+	"pages": {
+		"layouts": { "dir": "__assets/_libs/layouts" },
+		"alias": { "@": "./__assets/_libs" },
+	},
+	"data": { "dir": "__assets/_libs/data" },
+	"html": {
+		"rules": [
+			// React 19 が`img`ごとに`head`へ足す`preload`は、ここでは要らない
+			{ "selector": "link[rel=preload][as=image]", "action": "remove" },
+		],
+	},
+	"styles": {
+		"alias": { "@": "./__assets/_libs" },
+	},
+	"scripts": {
+		"minify": true,
+		"alias": { "@": "./__assets/_libs" },
+	},
+}

@@ -2,16 +2,16 @@
 	"name": "@d-zero/custom-components",
 	"version": "5.4.2",
 	"description": "D-ZERO custom components",
-	"author": "D-ZERO",
 	"license": "MIT",
+	"author": "D-ZERO",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/d-zero-dev/frontend-env.git",
 		"directory": "packages/@d-zero/custom-components"
 	},
-	"publishConfig": {
-		"access": "public"
-	},
+	"files": [
+		"dist"
+	],
 	"type": "module",
 	"exports": {
 		"./breadcrumbs": {
@@ -23,9 +23,9 @@
 			"types": "./dist/hamburger-menu.d.ts"
 		}
 	},
-	"files": [
-		"dist"
-	],
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
 		"build": "tsc --project tsconfig.build.json",
 		"dev": "storybook dev -p 6006",

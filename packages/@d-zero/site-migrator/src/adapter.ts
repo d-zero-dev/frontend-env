@@ -10,7 +10,8 @@ import type { LayoutAnalysisResult } from '@d-zero/anatomist/types';
  * 実装依存）。
  */
 export type ClassifyResult<TBlocks> =
-	{ kind: 'fatal'; error: Error } | { kind: 'converted' | 'partial'; blocks: TBlocks };
+	| { kind: 'fatal'; error: Error }
+	| { kind: 'converted' | 'partial'; blocks: TBlocks };
 
 export interface RewriteRefsResult<TBlocks> {
 	readonly blocks: TBlocks;

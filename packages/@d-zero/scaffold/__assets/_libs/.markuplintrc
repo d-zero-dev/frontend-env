@@ -2,23 +2,9 @@
 	"extends": ["../../markuplint.config.js"],
 	"nodeRules": [
 		{
-			"selector": "link, script",
+			"selector": "script[src*=jquery]",
 			"rules": {
-				"invalid-attr": {
-					"options": {
-						"allowAttrs": {
-							"⚠️": {
-								"type": "Any"
-							}
-						}
-					}
-				}
-			}
-		},
-		{
-			"selector": "script[⚠️], script[src*=jquery]",
-			"rules": {
-				"required-attr": false
+				"require-attr": false
 			}
 		}
 	]

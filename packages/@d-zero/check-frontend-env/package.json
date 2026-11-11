@@ -2,33 +2,33 @@
 	"name": "@d-zero/check-frontend-env",
 	"version": "5.4.2",
 	"description": "Check Frontend Environment for D-ZERO",
+	"license": "MIT",
+	"author": "D-ZERO Co., Ltd.",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/d-zero-dev/frontend-env.git",
 		"directory": "packages/@d-zero/check-frontend-env"
 	},
-	"author": "D-ZERO Co., Ltd.",
-	"license": "MIT",
-	"publishConfig": {
-		"access": "public"
-	},
+	"bin": "./dist/index.js",
+	"files": [
+		"dist"
+	],
 	"type": "module",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"bin": "./dist/index.js",
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
 			"types": "./dist/index.d.ts"
 		}
 	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
 		"build": "tsc --project tsconfig.build.json",
 		"dev": "tsc --watch --project tsconfig.build.json",
 		"test": "vitest",
 		"test:run": "vitest run"
-	},
-	"files": [
-		"dist"
-	]
+	}
 }

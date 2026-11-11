@@ -6,7 +6,12 @@ type Element = DefaultTreeAdapterMap['element'];
 type Node = DefaultTreeAdapterMap['childNode'];
 
 export type ExtractMainCriterion =
-	'class:main' | 'class:content' | 'tag:main' | 'role:main' | 'id:main' | 'id:content';
+	| 'class:main'
+	| 'class:content'
+	| 'tag:main'
+	| 'role:main'
+	| 'id:main'
+	| 'id:content';
 
 export interface ExtractMainResult {
 	/**

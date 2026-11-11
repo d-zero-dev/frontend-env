@@ -43,7 +43,7 @@ yarn dev
    ```
 
    - コンポーネントは **ディレクトリ**（`component/c-button/c-button.css`）の場合と **フラットファイル**（`component/c-local-nav.css`）の場合がある
-   - `.css`と`.pug`の両方を読み込む
+   - `.css`と`.tsx`の両方を読み込む
 
 2. クラス名が渡された場合:
    - BEM命名規則からブロック名を抽出（`c-button__label` → `c-button`）
@@ -61,7 +61,7 @@ Figma URLはデザインの参照情報として受け取る。**ブラウザで
 
 **DevTools MCPは`http://localhost:8000/`のローカルサーバーに対してのみ使用する。外部URLには使用しない。**
 
-1. 特定したCSS/Pugファイルを`Read`で読み込み、現状のスタイルを把握
+1. 特定したCSS/TSXファイルを`Read`で読み込み、現状のスタイルを把握
 2. chrome-devtools MCPで確認用ページを開く:
    - `navigate_page`で`http://localhost:8000/{対象ページパス}`を開く
    - `take_screenshot`で現状のスクリーンショットを取得
@@ -87,7 +87,7 @@ Figma URLはデザインの参照情報として受け取る。**ブラウザで
 1. ユーザーのデザイン指示と現状の差分を分析し、変更箇所を整理してから着手
 2. 修正対象のファイルを編集:
    - **CSS**: `__assets/_libs/component/`配下、または`__assets/_libs/style/`配下
-   - **Pug**: `__assets/_libs/component/`配下
+   - **TSX**: `__assets/_libs/component/`配下
    - **HTML**: `__assets/htdocs/`配下（BurgerEditorブロック構造を壊さないよう注意）
 3. 複数の修正指示がある場合は、一括で編集してからビルド・確認にまとめて進む
 

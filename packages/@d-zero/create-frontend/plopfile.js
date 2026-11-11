@@ -3,12 +3,10 @@ import fsp from 'node:fs/promises';
 import path from 'node:path';
 import { argv } from 'node:process';
 
-import prettierConfig from '@d-zero/prettier-config/base';
 import ignore from 'ignore';
-import { generateCode, parseModule } from 'magicast';
 import meow from 'meow';
 import { minimatch } from 'minimatch';
-import { format as prettierFormat } from 'prettier';
+import { format as oxfmtFormat } from 'oxfmt';
 
 import { command } from './command.js';
 import { copyLibraries } from './libraries.js';
@@ -65,6 +63,55 @@ const cli = meow(
 	},
 );
 
+const formattableExtensions = new Set([
+	'.js',
+	'.mjs',
+	'.cjs',
+	'.ts',
+	'.tsx',
+	'.json',
+	'.jsonc',
+]);
+
+/**
+ * Replaces `search` in the scaffold file `file`. A scaffold file that no longer contains
+ * `search` means the scaffold was changed without this generator, so it throws instead of
+ * silently generating a project with the wrong content.
+ * @param {string} content - Content of the scaffold file
+ * @param {string} search - Text to replace
+ * @param {string} replacement - Text to put in its place
+ * @param {string} file - Scaffold-relative path, used in the error message
+ * @returns {string} The content with `search` replaced
+ * @example
+ * replaceOrThrow("port: 8000,", "8000", "3000", "kamado.config.jsonc"); // "port: 3000,"
+ */
+function replaceOrThrow(content, search, replacement, file) {
+	if (!content.includes(search)) {
+		throw new Error(
+			`${file}: "${search}" not found; update plopfile.js with the scaffold`,
+		);
+	}
+	return content.replace(search, replacement);
+}
+
+/**
+ * Builds the template option of a plop `add` action for a scaffold file.
+ *
+ * plop renders every template with Handlebars, which reads the `{{` of JSX
+ * (`dangerouslySetInnerHTML={{ __html }}`) as an expression. A scaffold file is a file to
+ * copy, not a template, so the `{{` in it is escaped and comes out as written.
+ * @param {string} file - Absolute path of the scaffold file
+ * @returns {{ template: string } | { templateFile: string }} The option to spread into the action
+ * @example
+ * templateOption('/scaffold/__assets/_libs/layouts/l-home.tsx');
+ */
+function templateOption(file) {
+	const content = fs.readFileSync(file, 'utf8');
+	return content.includes('{{')
+		? { template: content.replaceAll('{{', String.raw`\{{`) }
+		: { templateFile: file };
+}
+
 /**
  * Recursively get all files in a directory
  * @param {string} dir - Directory to search
@@ -97,6 +144,14 @@ export default async function (plop) {
 	const scaffoldDir = path.normalize(
 		path.dirname(import.meta.resolve('@d-zero/scaffold').replace('file:', '')),
 	);
+
+	// Format the generated files with the formatting rules the scaffold itself ships.
+	// `ignorePatterns` and `overrides` only apply to the oxfmt CLI, not to `format()`.
+	const formatOptions = JSON.parse(
+		readFileSafe(path.resolve(scaffoldDir, '.oxfmtrc.json')) ?? '{}',
+	);
+	delete formatOptions.ignorePatterns;
+	delete formatOptions.overrides;
 
 	const gitignoreOriginContent =
 		readFileSafe(path.resolve(scaffoldDir, '.gitignore')) ?? '';
@@ -215,13 +270,13 @@ export default async function (plop) {
 			const ignoredFiles = [];
 
 			if (!config.type.startsWith('basercms')) {
-				ignoredFiles.push('**/bge_style.css');
+				ignoredFiles.push('**/bge_style.css', '__assets/_libs/mixin/meta-basercms.tsx');
 			}
 
 			if (config.type === 'static') {
 				ignoredFiles.push('**/__tmpl/**/*');
 			} else {
-				ignoredFiles.push('__assets/htdocs/index.pug', '__assets/htdocs/index.json');
+				ignoredFiles.push('__assets/htdocs/index.tsx', '__assets/htdocs/index.json');
 			}
 
 			const filteredFiles = scaffoldFiles.filter(
@@ -243,7 +298,7 @@ export default async function (plop) {
 						return {
 							type: 'add',
 							path: path.resolve(config.dest, destFile),
-							templateFile: path.resolve(scaffoldDir, originFile),
+							...templateOption(path.resolve(scaffoldDir, originFile)),
 							async transform(content) {
 								const nameCandidate = path.basename(path.resolve(config.dest));
 
@@ -271,45 +326,67 @@ export default async function (plop) {
 										content = JSON.stringify(pkg, null, '\t');
 										break;
 									}
-									case '__assets/_libs/data/blocks.js': {
+									case '__assets/htdocs/__tmpl/100_sub.tsx': {
 										if (config.type === 'basercms4' || config.type === 'basercms5') {
-											content = content.replace('bge-blocks.html', 'bge-blocks-v2.html');
+											content = replaceOrThrow(
+												content,
+												"data['bge-blocks']",
+												"data['bge-blocks-v2']",
+												originFile,
+											);
 										}
 										break;
 									}
-									case '__assets/_libs/mixin/meta.pug': {
+									case '__assets/_libs/mixin/meta.tsx': {
 										if (!config.type.startsWith('basercms')) {
-											content = content.replace('\ninclude meta-basercms.pug', '');
+											content = replaceOrThrow(
+												content,
+												"import MetaBasercms from './meta-basercms.tsx';\n",
+												'',
+												originFile,
+											);
+											content = replaceOrThrow(
+												content,
+												'<MetaBasercms />\n',
+												'',
+												originFile,
+											);
 										}
 										break;
 									}
-									case 'kamado.config.ts': {
+									case 'kamado.config.jsonc': {
 										if (config.type.startsWith('basercms')) {
-											const mod = parseModule(content);
-											mod.exports.default.devServer.startPath = '__tmpl/';
-											content = generateCode(mod).code;
+											content = replaceOrThrow(
+												content,
+												'"port": 8000,',
+												'"port": 8000,\n"startPath": "__tmpl/",',
+												originFile,
+											);
 										}
 										if (config.type === 'basercms5') {
-											content = content.replace(
-												"path.resolve(import.meta.dirname, 'htdocs')",
-												"path.resolve(import.meta.dirname, 'htdocs', 'webroot')",
+											content = replaceOrThrow(
+												content,
+												'"output": "htdocs"',
+												'"output": "htdocs/webroot"',
+												originFile,
 											);
 										}
 										break;
 									}
 								}
 
-								const ext = path.extname(originFile);
-								const parserMap = {
-									'.ts': 'typescript',
-									'.js': 'babel',
-									'.mjs': 'babel',
-									'.cjs': 'babel',
-									'.json': 'json',
-								};
-								const parser = parserMap[ext];
-								if (parser) {
-									content = await prettierFormat(content, { ...prettierConfig, parser });
+								if (formattableExtensions.has(path.extname(originFile))) {
+									const { code, errors } = await oxfmtFormat(
+										originFile,
+										content,
+										formatOptions,
+									);
+									if (errors.length > 0) {
+										throw new Error(
+											`${originFile}: ${errors.map((error) => error.message).join('\n')}`,
+										);
+									}
+									content = code;
 								}
 
 								return content;

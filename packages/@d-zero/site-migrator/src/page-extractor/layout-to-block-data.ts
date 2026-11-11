@@ -5,7 +5,9 @@ import { buildWysiwygFallbackBlock } from './build-wysiwyg-fallback-block.js';
 import { classifyBlockItem, wysiwygItem } from './classify-block-item.js';
 
 export type BlockFallbackReason =
-	'viewport-mismatch' | 'malformed-row-sizes' | 'low-confidence';
+	| 'viewport-mismatch'
+	| 'malformed-row-sizes'
+	| 'low-confidence';
 
 export interface LayoutToBlockDataOptions {
 	/** 構造判定の主とするビューポート名。既定 'pc'。見つからなければ幅最大のエントリにフォールバック。 */
