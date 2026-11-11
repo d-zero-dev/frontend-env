@@ -1738,7 +1738,7 @@ __metadata:
     dotenv: "npm:18.0.9"
     husky: "npm:9.1.7"
     invokers-polyfill: "npm:1.0.4"
-    kamado: "npm:3.0.0-alpha.4"
+    kamado: "npm:3.0.0-alpha.5"
     kiso.css: "npm:1.2.4"
     npm-run-all2: "npm:9.0.4"
     oxfmt: "npm:0.62.0"
@@ -2394,12 +2394,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hono/node-server@npm:2.1.5":
-  version: 2.1.5
-  resolution: "@hono/node-server@npm:2.1.5"
+"@hono/node-server@npm:2.1.6":
+  version: 2.1.6
+  resolution: "@hono/node-server@npm:2.1.6"
   peerDependencies:
     hono: ^4 || ^5.0.0-0
-  checksum: 10c0/3c3d5ffcc4a229e532530729b64db623493171bcda7b40ffbac3a46489884f700c881439d8c0d0413cd18793458ca252acedf6a9c13c8c3a024037e47974cacb
+  checksum: 10c0/bb57a4e00f193b37f1e7c8a4b8206914ab3f6073d8e7da7ca4b005f0205d89ef9cd0bdb783a4b59869a4c9211f1567f3e0717f31e92704ed7b1801a33d3252d3
   languageName: node
   linkType: hard
 
@@ -9924,10 +9924,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:4.13.14":
-  version: 4.13.14
-  resolution: "hono@npm:4.13.14"
-  checksum: 10c0/fdedcb49186e3a5eb0fff39c4fd66112718dc1a98c6df9a385f2fc4799c0e59140e3c45fbac12929d658b659d9eb9ddb9ac09161104336023c23f335668c93fd
+"hono@npm:4.13.16":
+  version: 4.13.16
+  resolution: "hono@npm:4.13.16"
+  checksum: 10c0/8a06f1d49bb98fd38a2bc4d5c1f5410b4c5a9fbe2dff85fbad2191a1b55fde93b64b63b2deba97d3e241630aedd800c57d1f4dc539e5f93ece81809fa63cbed9
   languageName: node
   linkType: hard
 
@@ -11037,16 +11037,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kamado@npm:3.0.0-alpha.4":
-  version: 3.0.0-alpha.4
-  resolution: "kamado@npm:3.0.0-alpha.4"
+"kamado@npm:3.0.0-alpha.5":
+  version: 3.0.0-alpha.5
+  resolution: "kamado@npm:3.0.0-alpha.5"
   dependencies:
-    "@hono/node-server": "npm:2.1.5"
+    "@hono/node-server": "npm:2.1.6"
     esbuild: "npm:0.28.2"
-    hono: "npm:4.13.14"
+    hono: "npm:4.13.16"
   bin:
     kamado: dist/cli.js
-  checksum: 10c0/a45bd7ba8fa91817f33040769552fc3fda56beb569510f0a008027b7664503f7f1ea25140d72e42d6f58bd2ed8d10862b681026a6de2628f760688d2563c603e
+  checksum: 10c0/0e84ca8efb8f435bd73f60303c6a5b34087a1dd406c60a940e3c2a457d84be57ba0866dcc5c217eaee3f937d56701bd6f720402ea936d5d40578db553634b78d
   languageName: node
   linkType: hard
 
