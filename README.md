@@ -16,15 +16,17 @@ yarn create @d-zero/frontend
 
 インストールで展開されるファイルは[`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)に格納されています。
 
+v5 で展開したプロジェクトを v6 の構成に移す手順は、[`MIGRATION-v6.md`](./MIGRATION-v6.md)にあります。
+
 ## パッケージ
 
-| パッケージ名                                                             | 内容                                                                                                              |
-| ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| [`@d-zero/check-frontend-env`](./packages/%40d-zero/check-frontend-env/) | フロントエンド開発環境のチェックツール（Node.js、npm、yarn、Husky、Voltaのインストール状況とバージョンを確認）    |
-| [`@d-zero/create-frontend`](./packages/%40d-zero/create-frontend/)       | [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)の中身をコマンドから展開するパッケージ                        |
-| [`@d-zero/custom-components`](./packages/%40d-zero/custom-components/)   | D-ZEROカスタムWebコンポーネント（breadcrumbs、hamburger-menu）                                                    |
-| [`@d-zero/postcss-config`](./packages/%40d-zero/postcss-config/)         | [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)で利用している[_PostCSS_](https://postcss.org/)の設定ファイル |
-| [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)                     | フロントエンド開発ボイラープレートファイル郡                                                                      |
+| パッケージ名                                                             | 内容                                                                                                                                                          |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`@d-zero/check-frontend-env`](./packages/%40d-zero/check-frontend-env/) | フロントエンド開発環境のチェックツール（Node.js、npm、yarn、Husky、Voltaのインストール状況とバージョンを確認）                                                |
+| [`@d-zero/create-frontend`](./packages/%40d-zero/create-frontend/)       | [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)の中身をコマンドから展開するパッケージ                                                                    |
+| [`@d-zero/custom-components`](./packages/%40d-zero/custom-components/)   | D-ZEROカスタムWebコンポーネント（breadcrumbs、hamburger-menu）                                                                                                |
+| [`@d-zero/postcss-config`](./packages/%40d-zero/postcss-config/)         | [_PostCSS_](https://postcss.org/)の設定ファイル（[`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)は v5 まで利用していた。v6 の CSS は kamado が処理する） |
+| [`@d-zero/scaffold`](./packages/%40d-zero/scaffold/)                     | フロントエンド開発ボイラープレートファイル群                                                                                                                  |
 
 ### スキャフォールドパッケージの配布戦略
 
