@@ -357,7 +357,6 @@ function main(argv) {
 		} catch (error) {
 			throw new UsageError(`cannot read ${file}: ${reasonOf(error)}`);
 		}
-		const shown = file.split(path.sep).join('/');
 		const pageUrl = urlOfFile.get(realPathOf(file)) ?? null;
 		for (const [index, rawLine] of text.split(/\r?\n/).entries()) {
 			const line = rawLine.replaceAll(CHARACTER_REFERENCES, ' ');
@@ -365,7 +364,7 @@ function main(argv) {
 			const excerpt =
 				trimmed.length > MAX_LINE_LENGTH ? `${trimmed.slice(0, MAX_LINE_LENGTH)}…` : trimmed;
 			const report = (list, token, mark, url) => {
-				list.push(`  ${shown}:${index + 1}: ${token} ${mark} ${url}`, `    ${excerpt}`);
+				list.push(`  ${file}:${index + 1}: ${token} ${mark} ${url}`, `    ${excerpt}`);
 			};
 			for (const match of line.matchAll(TOKEN)) {
 				const token = match[0];
