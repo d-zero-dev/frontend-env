@@ -1,0 +1,136 @@
+{
+	"version": 1,
+	"pages": [
+		{
+			"url": "/__tmpl/000_home.html",
+			"inputPath": "<project>/__assets/htdocs/__tmpl/000_home.tsx",
+			"outputPath": "<project>/htdocs/__tmpl/000_home.html",
+			"fileSlug": "000_home",
+			"filePathStem": "/__tmpl/000_home",
+			"extension": ".tsx",
+			"depth": 2,
+			"parent": "/__tmpl/",
+			"virtual": false,
+			"meta": {
+				"layout": "l-home",
+				"title": "トップページ"
+			}
+		},
+		{
+			"url": "/__tmpl/100_sub.html",
+			"inputPath": "<project>/__assets/htdocs/__tmpl/100_sub.tsx",
+			"outputPath": "<project>/htdocs/__tmpl/100_sub.html",
+			"fileSlug": "100_sub",
+			"filePathStem": "/__tmpl/100_sub",
+			"extension": ".tsx",
+			"depth": 2,
+			"parent": "/__tmpl/",
+			"virtual": false,
+			"meta": {
+				"layout": "l-sub",
+				"title": "下層固定ページ・ブログ詳細ページ"
+			}
+		},
+		{
+			"url": "/__tmpl/300_form_input.html",
+			"inputPath": "<project>/__assets/htdocs/__tmpl/300_form_input.tsx",
+			"outputPath": "<project>/htdocs/__tmpl/300_form_input.html",
+			"fileSlug": "300_form_input",
+			"filePathStem": "/__tmpl/300_form_input",
+			"extension": ".tsx",
+			"depth": 2,
+			"parent": "/__tmpl/",
+			"virtual": false,
+			"meta": {
+				"layout": "l-sub",
+				"title": "メールフォーム入力ページ"
+			}
+		},
+		{
+			"url": "/__tmpl/301_form_confirm.html",
+			"inputPath": "<project>/__assets/htdocs/__tmpl/301_form_confirm.tsx",
+			"outputPath": "<project>/htdocs/__tmpl/301_form_confirm.html",
+			"fileSlug": "301_form_confirm",
+			"filePathStem": "/__tmpl/301_form_confirm",
+			"extension": ".tsx",
+			"depth": 2,
+			"parent": "/__tmpl/",
+			"virtual": false,
+			"meta": {
+				"layout": "l-sub",
+				"title": "メールフォーム確認ページ"
+			}
+		},
+		{
+			"url": "/__tmpl/302_form_complete.html",
+			"inputPath": "<project>/__assets/htdocs/__tmpl/302_form_complete.tsx",
+			"outputPath": "<project>/htdocs/__tmpl/302_form_complete.html",
+			"fileSlug": "302_form_complete",
+			"filePathStem": "/__tmpl/302_form_complete",
+			"extension": ".tsx",
+			"depth": 2,
+			"parent": "/__tmpl/",
+			"virtual": false,
+			"meta": {
+				"layout": "l-sub",
+				"title": "メールフォーム完了ページ"
+			}
+		},
+		{
+			"url": "/__tmpl/",
+			"inputPath": "<project>/__assets/htdocs/__tmpl/index.tsx",
+			"outputPath": "<project>/htdocs/__tmpl/index.html",
+			"fileSlug": "__tmpl",
+			"filePathStem": "/__tmpl/index",
+			"extension": ".tsx",
+			"depth": 1,
+			"parent": "/",
+			"virtual": false,
+			"meta": {
+				"title": "テンプレート一覧"
+			}
+		},
+		{
+			"url": "/",
+			"inputPath": "<project>/__assets/htdocs/index.tsx",
+			"outputPath": "<project>/htdocs/index.html",
+			"fileSlug": "htdocs",
+			"filePathStem": "/index",
+			"extension": ".tsx",
+			"depth": 0,
+			"parent": null,
+			"virtual": false,
+			"meta": {
+				"layout": "l-home",
+				"title": "トップページ"
+			}
+		},
+		{
+			"url": "/sub-folder.test/build.test.html",
+			"inputPath": "<project>/__assets/htdocs/sub-folder.test/build.test.tsx",
+			"outputPath": "<project>/htdocs/sub-folder.test/build.test.html",
+			"fileSlug": "build.test",
+			"filePathStem": "/sub-folder.test/build.test",
+			"extension": ".tsx",
+			"depth": 2,
+			"parent": "/sub-folder.test/",
+			"virtual": false,
+			"meta": {}
+		},
+		{
+			"url": "/sub-folder.test/",
+			"inputPath": "<project>/__assets/htdocs/sub-folder.test/index.tsx",
+			"outputPath": "<project>/htdocs/sub-folder.test/index.html",
+			"fileSlug": "sub-folder.test",
+			"filePathStem": "/sub-folder.test/index",
+			"extension": ".tsx",
+			"depth": 1,
+			"parent": "/",
+			"virtual": false,
+			"meta": {
+				"title": "テストページ"
+			}
+		}
+	],
+	"warnings": []
+}

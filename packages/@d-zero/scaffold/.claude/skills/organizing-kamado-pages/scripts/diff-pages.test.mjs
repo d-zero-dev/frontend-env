@@ -3,6 +3,7 @@ import {
 	chmodSync,
 	mkdirSync,
 	mkdtempSync,
+	readFileSync,
 	realpathSync,
 	rmSync,
 	symlinkSync,
@@ -554,6 +555,69 @@ describe('the files that are searched', () => {
 		expect(sectionOf(run(['before.json', 'after.json', '--root=src']).stdout, LINKS)[0]).toBe(
 			'  src/nav.tsx:1: /a.html -> /a.html',
 		);
+	});
+});
+
+describe('the output of kamado pages', () => {
+	const fixture = path.join(import.meta.dirname, 'diff-pages.test.fixture.json');
+
+	/**
+	 * Writes the list that `kamado pages` wrote for the scaffold (a copy of the real output,
+	 * with the path of the project replaced by `<project>`), with the project of the test.
+	 * @param {string} name - The file to write, relative to the project
+	 * @param {(url: string) => string} [rename] - Gives a page its URL after a move
+	 */
+	function writeRealList(name, rename = (url) => url) {
+		const list = JSON.parse(readFileSync(fixture, 'utf8').replaceAll('<project>', dir));
+		for (const page of list.pages) {
+			page.url = rename(page.url);
+		}
+		writeFileSync(path.join(dir, name), JSON.stringify(list));
+	}
+
+	test('has the shape that the script reads', () => {
+		const list = JSON.parse(readFileSync(fixture, 'utf8'));
+
+		expect(Object.keys(list)).toStrictEqual(['version', 'pages', 'warnings']);
+		expect(list.pages.length).toBeGreaterThan(0);
+		for (const page of list.pages) {
+			expect(page.url).toMatch(/^\//);
+			expect(page.inputPath).toMatch(/^<project>\//);
+			expect(page.virtual).toBe(false);
+		}
+	});
+
+	test('reports no difference between two copies of the list', () => {
+		writeRealList('before.json');
+		writeRealList('after.json');
+		writeSource('__assets/htdocs/__tmpl/index.tsx', '<a href="100_sub.html">sub</a>\n');
+
+		const result = run(['before.json', 'after.json']);
+
+		expect(result.stdout).toBe(EMPTY_REPORT);
+		expect(result.status).toBe(0);
+	});
+
+	test('finds the link left by the move of a page of the scaffold, then none once it is fixed', () => {
+		writeRealList('before.json');
+		writeRealList('after.json', (url) =>
+			url === '/__tmpl/100_sub.html' ? '/service/detail.html' : url,
+		);
+		writeSource('__assets/htdocs/__tmpl/index.tsx', '<a href="100_sub.html">sub</a>\n');
+
+		const left = run(['before.json', 'after.json']);
+
+		expect(sectionOf(left.stdout, LINKS)[0]).toBe(
+			'  __assets/htdocs/__tmpl/index.tsx:1: 100_sub.html -> /__tmpl/100_sub.html',
+		);
+		expect(left.status).toBe(1);
+
+		writeSource(
+			'__assets/htdocs/__tmpl/index.tsx',
+			'<a href="../service/detail.html">sub</a>\n',
+		);
+
+		expect(run(['before.json', 'after.json']).status).toBe(0);
 	});
 });
 
