@@ -2,18 +2,18 @@
 	"name": "@d-zero/postcss-config",
 	"version": "5.4.2",
 	"description": "Configurations of PostCSS",
+	"license": "MIT",
+	"author": "D-ZERO Co., Ltd.",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/d-zero-dev/frontend-env.git",
 		"directory": "packages/@d-zero/postcss-config"
 	},
-	"author": "D-ZERO Co., Ltd.",
-	"license": "MIT",
+	"type": "module",
+	"main": "./.postcssrc.js",
 	"publishConfig": {
 		"access": "public"
 	},
-	"type": "module",
-	"main": "./.postcssrc.js",
 	"dependencies": {
 		"autoprefixer": "10.6.2",
 		"postcss": "8.5.32",
