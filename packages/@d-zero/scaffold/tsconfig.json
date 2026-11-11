@@ -1,12 +1,14 @@
 {
 	"extends": ["@d-zero/tsconfig"],
 	"compilerOptions": {
+		"allowImportingTsExtensions": true,
 		"checkJs": false,
+		"jsx": "preserve",
 		"noEmit": true, // Instead to use Vite,
 		"paths": {
 			"@/*": ["./__assets/_libs/*"]
 		}
 	},
 	"exclude": ["htdocs", "node_modules"],
-	"include": ["**/*.ts"]
+	"include": ["**/*.ts", "**/*.tsx"]
 }

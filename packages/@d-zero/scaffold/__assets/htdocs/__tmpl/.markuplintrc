@@ -2,17 +2,17 @@
 	"extends": ["../../../markuplint.config.js"],
 	"nodeRules": [
 		{
-			"selector": "link, script",
+			// baserCMS のメールフォームは、フィールドの`id`が固定の要件
+			"selector": "[id]",
 			"rules": {
-				"invalid-attr": {
-					"options": {
-						"allowAttrs": {
-							"⚠️": {
-								"type": "Any"
-							}
-						}
-					}
-				}
+				"no-hardcoded-id": false
+			}
+		},
+		{
+			// react-spec は`acceptCharset`を`accept-charset`として扱えない
+			"selector": "form",
+			"rules": {
+				"no-unknown-attr": false
 			}
 		}
 	]

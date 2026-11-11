@@ -1,11 +1,9 @@
 {
 	"recommendations": [
-		"esbenp.prettier-vscode",
+		"oxc.oxc-vscode",
 		"editorconfig.editorconfig",
 		"stylelint.vscode-stylelint",
-		"dbaeumer.vscode-eslint",
 		"yusukehirao.vscode-markuplint",
-		"mrmlnc.vscode-puglint",
 		"streetsidesoftware.code-spell-checker"
 	]
 }

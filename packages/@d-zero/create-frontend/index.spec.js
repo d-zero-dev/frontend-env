@@ -125,15 +125,15 @@ describe('CLI', () => {
 		expect(normalizePaths(actual, dir)).toMatchSnapshot();
 	});
 
-	describe('kamado.config.ts', () => {
+	describe('kamado.config.jsonc', () => {
 		test('basercms4: startPath が "__tmpl/" に設定されている', async ({
 			tmpDir,
 			task,
 		}) => {
 			const dir = path.join(tmpDir, getName(task));
 			await interactiveTest(dir, 'basercms4');
-			const content = fs.readFileSync(path.join(dir, 'kamado.config.ts'), 'utf8');
-			expect(content).toContain("startPath: '__tmpl/'");
+			const content = fs.readFileSync(path.join(dir, 'kamado.config.jsonc'), 'utf8');
+			expect(content).toContain('"startPath": "__tmpl/"');
 		});
 
 		test('basercms5: startPath が "__tmpl/" に設定されている', async ({
@@ -142,8 +142,8 @@ describe('CLI', () => {
 		}) => {
 			const dir = path.join(tmpDir, getName(task));
 			await interactiveTest(dir, 'basercms5');
-			const content = fs.readFileSync(path.join(dir, 'kamado.config.ts'), 'utf8');
-			expect(content).toContain("startPath: '__tmpl/'");
+			const content = fs.readFileSync(path.join(dir, 'kamado.config.jsonc'), 'utf8');
+			expect(content).toContain('"startPath": "__tmpl/"');
 		});
 
 		test('basercms5: output が "htdocs/webroot" に設定されている', async ({
@@ -152,8 +152,74 @@ describe('CLI', () => {
 		}) => {
 			const dir = path.join(tmpDir, getName(task));
 			await interactiveTest(dir, 'basercms5');
-			const content = fs.readFileSync(path.join(dir, 'kamado.config.ts'), 'utf8');
-			expect(content).toContain("path.resolve(import.meta.dirname, 'htdocs', 'webroot')");
+			const content = fs.readFileSync(path.join(dir, 'kamado.config.jsonc'), 'utf8');
+			expect(content).toContain('"output": "htdocs/webroot"');
+		});
+
+		test('static: startPath と webroot の指定がない', async ({ tmpDir, task }) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'static');
+			const content = fs.readFileSync(path.join(dir, 'kamado.config.jsonc'), 'utf8');
+			expect(content).not.toContain('startPath');
+			expect(content).toContain('"output": "htdocs"');
+		});
+	});
+
+	describe('meta.tsx', () => {
+		const metaPath = path.join('__assets', '_libs', 'mixin', 'meta.tsx');
+		const metaBasercmsPath = path.join('__assets', '_libs', 'mixin', 'meta-basercms.tsx');
+
+		test('basercms4: meta-basercms を読み込む', async ({ tmpDir, task }) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'basercms4');
+			const content = fs.readFileSync(path.join(dir, metaPath), 'utf8');
+			expect(content).toContain("import MetaBasercms from './meta-basercms.tsx';");
+			expect(content).toContain('<MetaBasercms />');
+			expect(fs.existsSync(path.join(dir, metaBasercmsPath))).toBe(true);
+		});
+
+		test('static: meta-basercms を読み込まず、ファイルも展開しない', async ({
+			tmpDir,
+			task,
+		}) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'static');
+			const content = fs.readFileSync(path.join(dir, metaPath), 'utf8');
+			expect(content).not.toContain('MetaBasercms');
+			expect(fs.existsSync(path.join(dir, metaBasercmsPath))).toBe(false);
+		});
+	});
+
+	describe('100_sub.tsx', () => {
+		const subPath = path.join('__assets', 'htdocs', '__tmpl', '100_sub.tsx');
+
+		test('basercms4: BurgerEditor v2 のブロックを読み込む', async ({ tmpDir, task }) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'basercms4');
+			const content = fs.readFileSync(path.join(dir, subPath), 'utf8');
+			expect(content).toContain("data['bge-blocks-v2']");
+		});
+
+		test('basercms5: BurgerEditor v2 のブロックを読み込む', async ({ tmpDir, task }) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'basercms5');
+			const content = fs.readFileSync(path.join(dir, subPath), 'utf8');
+			expect(content).toContain("data['bge-blocks-v2']");
+		});
+	});
+
+	describe('JSX の展開', () => {
+		test('dangerouslySetInnerHTML の {{ }} が式として解釈されずに展開される', async ({
+			tmpDir,
+			task,
+		}) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'static');
+			const content = fs.readFileSync(
+				path.join(dir, '__assets', '_libs', 'layouts', 'l-home.tsx'),
+				'utf8',
+			);
+			expect(content).toContain('dangerouslySetInnerHTML={{ __html: content }}');
 		});
 	});
 
