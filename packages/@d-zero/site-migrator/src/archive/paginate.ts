@@ -11,6 +11,7 @@ interface PaginatedResult<TItem> {
  * @param fetchPage
  * @param map
  * @param pageSize
+ * @yields {TItem} Each row mapped through `map`, in page order.
  */
 export async function* paginate<TRow, TItem>(
 	fetchPage: (offset: number, limit: number) => Promise<PaginatedResult<TRow>>,
