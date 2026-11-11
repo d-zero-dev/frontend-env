@@ -1,5 +1,6 @@
 ---
-description: Gitの操作ルール
+name: git
+description: コミットを作成するときの Git 操作ルール（ブランチの確認、メッセージの形式、diff の確認、安全ガイドライン）。コミットを頼むときに使う
 disable-model-invocation: true
 ---
 

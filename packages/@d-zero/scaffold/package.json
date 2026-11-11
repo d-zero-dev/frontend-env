@@ -19,6 +19,8 @@
 		"build:only": "kamado build",
 		"dev": "kamado server",
 		"d": "yarn dev",
+		"ui": "kamado ui",
+		"pages": "kamado pages",
 		"lint": "run-s \"lint:*\"",
 		"lint:html": "npx markuplint --no-allow-warnings \"./__assets/**/*.{tsx,html}\"",
 		"lint:css": "npx stylelint \"./__assets/**/*.css\" --fix",

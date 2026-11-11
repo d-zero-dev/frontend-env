@@ -1,5 +1,6 @@
 ---
-description: リリース手順
+name: release
+description: リリースブランチを作成し、トピックブランチをマージしてプッシュする手順。リリースの準備を頼むときに使う
 disable-model-invocation: true
 ---
 

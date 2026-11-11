@@ -1,5 +1,6 @@
 ---
-description: 2つのページを比較してデバッグする
+name: debug-diff
+description: 2つの環境（本番・テストサイト・ローカル）のページを比較し、見た目・HTML・アセットの差分を特定する。環境間の表示や内容の違いを調べるときに使う
 disable-model-invocation: true
 argument-hint: [相談内容・比較対象URL等]
 ---
