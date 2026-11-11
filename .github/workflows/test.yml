@@ -57,5 +57,11 @@ jobs:
       - name: Lint
         run: yarn lint
 
+      # The root lint does not type-check the scaffold or run markuplint on it
+      - name: Lint the scaffold templates
+        run: |
+          yarn workspace @d-zero/scaffold run lint:ts
+          yarn workspace @d-zero/scaffold run lint:html
+
       - name: Test
         run: yarn test

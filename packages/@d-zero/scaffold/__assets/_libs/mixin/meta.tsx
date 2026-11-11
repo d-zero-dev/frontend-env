@@ -1,14 +1,16 @@
 import type { PageProps } from '../types/kamado.ts';
 
+import { pageTitle } from '../helpers/breadcrumb.ts';
+
 import MetaBasercms from './meta-basercms.tsx';
 
-type Props = Pick<PageProps, 'page' | 'meta' | 'site' | 'titleList'>;
+type Props = Pick<PageProps, 'page' | 'meta' | 'site' | 'breadcrumbs'>;
 
-export default function Meta({ page, meta, site, titleList }: Props) {
+export default function Meta({ page, meta, site, breadcrumbs }: Props) {
 	const { description, ogType, ogDescription, ogImage, ogCard } = meta;
 	const host = site.host ?? '';
 	const url = host + page.url;
-	const metaTitle = titleList({ baseURL: site.baseURL });
+	const metaTitle = pageTitle(breadcrumbs, site);
 	const imageUrl = host + (ogImage || '/img/ogp.png');
 	const summary = ogDescription || description || '';
 

@@ -1,12 +1,12 @@
-import type { Breadcrumb } from '../types/kamado.ts';
+import type { PageProps } from '../types/kamado.ts';
 
-interface Props {
-	readonly breadcrumbs: readonly Breadcrumb[];
-}
+import { breadcrumbLabel, isTopPage } from '../helpers/breadcrumb.ts';
+
+type Props = Pick<PageProps, 'breadcrumbs' | 'site'>;
 
 const HOME_TITLE = 'Home';
 
-export default function CNavBreadcrumb({ breadcrumbs }: Props) {
+export default function CNavBreadcrumb({ breadcrumbs, site }: Props) {
 	return (
 		<div className="c-nav-breadcrumb">
 			<ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -16,7 +16,7 @@ export default function CNavBreadcrumb({ breadcrumbs }: Props) {
 						itemScope
 						itemProp="itemListElement"
 						itemType="https://schema.org/ListItem"
-						data-breadcrumb={link.href === '/' ? 'home' : undefined}>
+						data-breadcrumb={isTopPage(link, site.baseURL) ? 'home' : undefined}>
 						<a
 							href={link.href}
 							itemScope
@@ -24,7 +24,7 @@ export default function CNavBreadcrumb({ breadcrumbs }: Props) {
 							itemType="https://schema.org/WebPage"
 							itemID={link.href}>
 							<span itemProp="name">
-								{link.href === '/' ? HOME_TITLE || link.title : link.title}
+								{isTopPage(link, site.baseURL) ? HOME_TITLE : breadcrumbLabel(link)}
 							</span>
 						</a>
 						<meta itemProp="position" content={String(index + 1)} />
