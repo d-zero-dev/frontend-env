@@ -1,4 +1,10 @@
-import type { ArchiveAccessor } from '@nitpicker/crawler';
+import type { ArchiveManager } from '@nitpicker/query';
+
+/**
+ * Derived from `@nitpicker/query` instead of importing it from the package that
+ * defines it, so the type always matches the accessor that query hands back.
+ */
+type ArchiveAccessor = ReturnType<ArchiveManager['get']>;
 
 /**
  * Handle to an opened `.nitpicker` archive. The caller MUST call {@link ArchiveSession.close}

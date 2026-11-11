@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.4.2](https://github.com/d-zero-dev/frontend-env/compare/v5.4.1...v5.4.2) (2026-11-09)
+
+### Bug Fixes
+
+- **site-migrator:** update dependencies for security advisories ([d86a912](https://github.com/d-zero-dev/frontend-env/commit/d86a9128d5474445f0efc6193461750e5ee80861))
+
 ## [5.4.1](https://github.com/d-zero-dev/frontend-env/compare/v5.4.0...v5.4.1) (2026-10-07)
 
 **Note:** Version bump only for package @d-zero/site-migrator

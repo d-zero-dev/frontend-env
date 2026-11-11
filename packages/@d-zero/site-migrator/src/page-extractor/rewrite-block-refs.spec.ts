@@ -275,7 +275,7 @@ describe('rewriteBlockRefs', () => {
 	});
 
 	test('bare-stringのBlockItemはそのまま通す', async () => {
-		const blocks = [block([['plain-item-name' as unknown as BlockItem]])];
+		const blocks = [block([['plain-item-name']])];
 		const { blocks: result } = await rewriteBlockRefs({
 			blocks,
 			baseUrl: BASE,

@@ -713,7 +713,7 @@ function hasSignificantText(nodes: readonly Node[]): boolean {
  * @param node
  */
 function isElement(node: Node): node is Element {
-	return 'tagName' in node && Array.isArray((node as Element).attrs);
+	return 'tagName' in node && Array.isArray(node.attrs);
 }
 
 /**

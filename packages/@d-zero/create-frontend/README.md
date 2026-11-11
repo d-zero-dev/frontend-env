@@ -19,7 +19,7 @@ npx @d-zero/create-frontend
 | ------------------------ | ------ | ------------------------------------------------------------------------------ | ------------------------- |
 | `--type`                 | `-t`   | プロジェクトのタイプを指定します。指定した場合、対話モードはスキップされます。 | `static`                  |
 | `--dir`                  | `-d`   | 出力先ディレクトリを指定します。                                               | `.`（現在のディレクトリ） |
-| `--ignore-document-root` | -      | Document Root ファイルを `.gitignore` の追跡対象から外します。                 | `true`                    |
+| `--ignore-document-root` | -      | Document Root ファイルを`.gitignore`の追跡対象から外します。                   | `true`                    |
 | `--install`              | -      | スキャフォールディング後にyarnで依存関係をインストールします。                 | `true`                    |
 
 #### プロジェクトタイプ
@@ -29,7 +29,7 @@ npx @d-zero/create-frontend
 - **用途**: 静的なWebサイトの開発
 - **特徴**:
   - [BurgerEditor Local App](https://github.com/d-zero-dev/BurgerEditor) v4 が組み込まれており、ローカル環境でのビジュアル編集が可能
-  - [kamado](https://github.com/kamado-io/kamado) による静的サイトジェネレーター
+  - [kamado](https://github.com/kamado-io/kamado)による静的サイトジェネレーター
 - **開発コマンド**:
   - `yarn dev`: 開発サーバー起動（http://localhost:8000/）
   - `yarn bge`: BurgerEditor Local App 起動（http://localhost:8100/）
@@ -70,10 +70,10 @@ yarn create @d-zero/frontend --no-ignore-document-root
 
 インストールで展開されるファイルは[`@d-zero/scaffold`](https://github.com/d-zero-dev/frontend-env/blob/main/packages/%40d-zero/scaffold/)に格納されています。
 
-スキャフォールディング処理の中で、生成されるプロジェクトの `package.json` に次の変更が加えられます：
+スキャフォールディング処理の中で、生成されるプロジェクトの`package.json`に次の変更が加えられます：
 
-- `postinstall: "husky"` スクリプトが追加される
+- `postinstall: "husky"`スクリプトが追加される
 
-これにより、`yarn install` 実行時（`--install` オプション有効時はスキャフォールディング直後）に Husky の Git フックが自動的に設定されます。
+これにより、`yarn install`実行時（`--install`オプション有効時はスキャフォールディング直後）に Husky の Git フックが自動的に設定されます。
 
-生成される `.gitignore` は `@d-zero/scaffold` のテンプレートをもとに、`--ignore-document-root` の値に応じてセクションの取捨選択が行われます。デフォルトでは `# Document Root` セクションが保持され、Document Root 配下のファイルは追跡対象外になります。
+生成される`.gitignore`は`@d-zero/scaffold`のテンプレートをもとに、`--ignore-document-root`の値に応じてセクションの取捨選択が行われます。デフォルトでは`# Document Root`セクションが保持され、Document Root 配下のファイルは追跡対象外になります。

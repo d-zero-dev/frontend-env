@@ -80,7 +80,7 @@ defineHamburgerMenu('x'); // 'x-hamburger-menu'を登録
 yarn dev
 ```
 
-Storybookは `http://localhost:6006` で起動します。
+Storybookは`http://localhost:6006`で起動します。
 
 ## エクスポート
 
