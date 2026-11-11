@@ -8,6 +8,8 @@ v6 では次の3つが変わります。
 - lint と整形を、ESLint と Prettier から oxlint と oxfmt に変える（linters の`@d-zero/*-config` v6）
 - PostCSS を使わない（CSS は kamado v3 が処理する）
 
+このほかに、AI エージェント向けの設定とドキュメントが変わります（§7）。ビルドには影響しません。
+
 kamado と linters の変更の詳細は、それぞれの移行ガイドにあります。このガイドは、展開済みのプロジェクトでやることの順番と、scaffold での対応を書きます。リンク先は開発中のブランチなので、プロジェクトに入れた版のタグのガイドを読んでください。
 
 - kamado: [`docs/v3/MIGRATION.md`](https://github.com/d-zero-dev/kamado/blob/dev/docs/v3/MIGRATION.md)
@@ -99,7 +101,7 @@ node <kamado のリポジトリ>/scripts/pug-to-tsx.mjs <プロジェクト> <�
 
 変換したあとに手で直すものは、scaffold では次のとおりでした。
 
-- **props の型**: 変換結果は`any`を使います。v6 の scaffold の`__assets/_libs/types/kamado.ts`を写すと、`page`・`meta`・`site`・`data`・`breadcrumbs`に型が付きます。`meta`のキーと`data`のファイル名は、プロジェクトに合わせて足します。Invoker Commands の`command`/`commandfor`を書くなら、`__assets/_libs/types/react.d.ts`も写します（`@types/react`に無いため）
+- **props の型**: 変換結果は`any`を使います。`kamado/jsx`が`PageProps`・`LayoutProps`などを公開しているので、`import type { PageProps } from 'kamado/jsx'`で`page`・`meta`・`site`・`data`・`breadcrumbs`に型が付きます。`meta`のキーと`data`のファイル名は、v6 の scaffold の`__assets/_libs/types/kamado.ts`のように、`declare module 'kamado/jsx'`で`PageMeta`と`GlobalData`を拡張して足します。Invoker Commands の`command`/`commandfor`を書くなら、`__assets/_libs/types/react.d.ts`も写します（`@types/react`に無いため）
 - **`<title>`とパンくず**: v6 の scaffold は、`__assets/_libs/helpers/breadcrumb.ts`で`<title>`とパンくずの表示名を組み立てます（§6）。同じ形にするなら、これと`meta.tsx`・`c-nav-breadcrumb.tsx`を写します
 - **レイアウトの指定**: sidecar の JSON の`"layout": "home.pug"`は`"home"`（拡張子なし）にします。変換スクリプトは、書き換えた写しを出力先に書きます。v6 の scaffold はレイアウトを`l-home`/`l-sub`に、CSS を`component/c-page-*.css`から`layouts/l-*.css`と`page/p-*.css`に改名していますが、移行に改名は要りません。改名するなら、sidecar の`layout`と CSS の`@import`も合わせます
 - **`blocks.js`**: kamado v3 は JavaScript のデータファイルを読みません。`blocks.js`を削除し、ページで`data`からブロックの HTML を読みます。静的サイトは`data['bge-blocks']`（`_libs/data/bge-blocks.html`）、baserCMS 向けは`data['bge-blocks-v2']`（`_libs/data/bge-blocks-v2.html`）です
@@ -139,3 +141,22 @@ v6 の scaffold を写すと、次の差が出ます。どれも意図した差�
 - CSS の圧縮結果（ファイルサイズがわずかに変わる）
 
 タイトルの無いページのパンくずと`<title>`は、v5 も v6 の scaffold も URL の最後の部分です（v5 は kamado v1 の`fileSlug`で、`index`ページはディレクトリ名）。kamado v3 自体はこれを`__NO_TITLE__`にするので、v6 の scaffold の`breadcrumb.ts`を写さない場合は、`__NO_TITLE__`が出ます。
+
+## 7. AI 設定とドキュメントを写す
+
+v6 の scaffold は、AI エージェント向けの設定を次のように変えています。ビルドには影響しません。
+
+| ファイル                                  | v6 の scaffold での変更                                                              |
+| ----------------------------------------- | ------------------------------------------------------------------------------------ |
+| `.claude/commands/<名前>.md`              | `.claude/skills/<名前>/SKILL.md`へ移す（`/git`などの呼び出し名は同じ）               |
+| `.claude/skills/organizing-kamado-pages/` | 新しく足す（ページの追加・移動・改名・削除の手順と、kamado の規則）                  |
+| `docs/kamado-ui.md`                       | 新しく足す（ページ情報の編集画面の使い方）                                           |
+| `AGENTS.md`                               | 「サイト構成（kamado）」の節を足す                                                   |
+| `README.md`                               | 「ディレクトリ構成」の節と、`yarn dir`・`yarn kamado pages`を足す                    |
+| `.claude/settings.json`の`allow`          | `Bash(yarn kamado pages:*)`、`Bash(git mv __assets/*)`、`diff-pages.mjs`の実行を足す |
+
+- `.claude/commands/`と`.claude/skills/`に同じ名前があると、スキルが使われます。写したあとは`.claude/commands/`の同名のファイルを削除します
+- `fix-component`は、TSX と sidecar の JSON に合わせて書き直しています。v5 の内容に手を入れていた場合は、v6 のものに同じ変更を入れ直します
+- `package.json`の`scripts`に`"dir": "kamado ui"`を足します。`kamado ui`と`kamado pages`は`kamado` 3.0.0-alpha.5 から使えます（3.0.0-alpha.4 には入っていません）。`yarn kamado pages`が`unknown command`か`Unknown option '--out'`で止まるときは、`kamado`を 3.0.0-alpha.5 以降にします
+- `organizing-kamado-pages`は、`__assets/htdocs`をページの置き場、`__assets/_libs`を alias `@`の先として書いています。構成を変えているプロジェクトでは、`SKILL.md`と`kamado-rules.md`のパスを合わせます。`pages.overrides`を使っているプロジェクトでは、`SKILL.md`の「`pages.overrides`を足さない」と、`kamado-rules.md`の「使っていない」を、実際の運用に書き換えます
+- スキルは、ページの一覧を`.tmp/`に書き出します。`.tmp`が`.gitignore`に入っていることを確かめます

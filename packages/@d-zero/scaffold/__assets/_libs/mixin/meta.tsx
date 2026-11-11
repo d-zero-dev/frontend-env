@@ -1,4 +1,4 @@
-import type { PageProps } from '../types/kamado.ts';
+import type { PageProps } from 'kamado/jsx';
 
 import { pageTitle } from '../helpers/breadcrumb.ts';
 

@@ -1,4 +1,4 @@
-import type { LayoutProps } from '../types/kamado.ts';
+import type { LayoutProps } from 'kamado/jsx';
 
 import CFooter from '../component/c-footer.tsx';
 import CHeader from '../component/c-header.tsx';
