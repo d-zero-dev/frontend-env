@@ -31,7 +31,7 @@
 
 - **UI・機能の実装に着手する前に、必ず`.claude/skills/dzero-tech-selection`を読み、実装レイヤー（HTML/CSS/JS）を決定してから作業すること**
 - デザインデータ（Figma 等）を参照して実装するときは`.claude/skills/dzero-design-to-code`に従うこと
-- スキルの更新は`yarn skills:sync`で行い、`.claude/skills/`と`skills-lock.json`の差分をコミットすること（取得元は[frontend-guidelines](https://github.com/d-zero-dev/frontend-guidelines)の`main`ブランチ）
+- スキルの更新は`yarn skills:sync`で行い、`.claude/skills/`と`skills-lock.json`の差分をコミットすること（取得元は[frontend-guidelines](https://github.com/d-zero-dev/frontend-guidelines)の`main`ブランチ）。`yarn skills:sync`は、取得したスキルと同じ名前のディレクトリだけを置き換える。このプロジェクトのスキルは、取得元に同じ名前のスキルが無い限り残る
 
 ## コマンド制約
 

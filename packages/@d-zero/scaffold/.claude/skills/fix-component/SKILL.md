@@ -68,29 +68,31 @@ argument-hint: [component-or-class] [fix-instructions...]
 2. 対象のファイルを編集する
    - **CSS**: `__assets/_libs/component/`、`__assets/_libs/layouts/`、`__assets/_libs/page/`、`__assets/_libs/style/`
    - **TSX**: `__assets/_libs/component/`、`__assets/_libs/layouts/`、ページは`__assets/htdocs/`
-3. 修正指示が複数あるときは、まとめて編集してからビルドと確認に進む
+   - **HTML のページ**: `__assets/htdocs/`の`.html`。先頭の front matter（`---`で囲まれた部分）は、修正指示に含まれない限り変えない
+3. 修正指示が複数あるときは、まとめて編集してから確認に進む
 
-## 6. ビルドと確認
+## 6. 確認
 
-1. 修正したソースを読み込んでいるエントリポイントをビルドする
-
-   ```bash
-   yarn build:only "__assets/htdocs/css/style.css"
-   ```
-
-   - 渡すパスは`__assets/htdocs/`配下のファイル。コンポーネントの CSS（`__assets/_libs/component/`）ではなく、それを読み込む`__assets/htdocs/css/style.css`などを渡す
-   - `Build completed`が出れば成功
-
-2. ブラウザで確かめる
+1. ブラウザで確かめる。dev server はリクエストのたびにソースから作るので、ビルドは要らない
    - `chrome-devtools:navigate_page`を`type: "reload"`、`ignoreCache: true`で実行する
    - 再読み込みで UID は無効になる。`chrome-devtools:take_snapshot`で取り直してから`chrome-devtools:take_screenshot`を使う
    - `chrome-devtools:evaluate_script`で算出スタイルを取り、変更が反映されたことを数値で確かめる
-3. ナビの状態や子要素の有無で見た目が変わるコンポーネントは、複数のページで確かめる
-4. レスポンシブの確認は`chrome-devtools:emulate`でビューポートを変える
+2. ナビの状態や子要素の有無で見た目が変わるコンポーネントは、複数のページで確かめる
+3. レスポンシブの確認は`chrome-devtools:emulate`でビューポートを変える
    - PC: `1440x900x1`
    - タブレット: `768x1024x1,touch`
    - スマートフォン: `375x667x1,mobile,touch`
-5. 問題があれば、修正 → ビルド → 確認を繰り返す
+4. 問題があれば、修正 → 確認を繰り返す
+5. `yarn lint:css`と`yarn lint:html`を実行し、エラーを直す
+
+ビルドの出力をコミットするプロジェクトでは、最後に dev server を止めてから、修正したソースを読み込むエントリポイントをビルドする（kamado は、同じプロジェクトでビルドと dev server を同時に動かせない）。
+
+```bash
+yarn build:only "__assets/htdocs/css/style.css"
+```
+
+- 渡すパスは`__assets/htdocs/`の中のファイル。コンポーネントの CSS（`__assets/_libs/component/`）ではなく、それを読み込む`__assets/htdocs/css/style.css`などを渡す
+- `Build completed`が出て、`warning:`の行が無ければ成功。`warning: build target … matched no page, stylesheet or script`は、渡したパスがエントリポイントでないことを表す
 
 ## 報告
 

@@ -16,17 +16,17 @@
 
 ## ディレクトリ構成
 
-サイトは[kamado](https://github.com/d-zero-dev/kamado)でビルドします。編集するのは`__assets/`で、`htdocs/`はビルドの出力です。
+サイトは[kamado](https://github.com/d-zero-dev/kamado)でビルドします。編集するのは`__assets/`です。ビルドの出力先は`kamado.config.jsonc`の`dir.output`（`htdocs/`。baserCMS 5 向けは`htdocs/webroot/`）で、ここは直接編集しません。
 
-| パス                        | 役割                                                    |
-| --------------------------- | ------------------------------------------------------- |
-| `__assets/htdocs/`          | ページと、CSS・JS のエントリポイント                    |
-| `__assets/_libs/layouts/`   | レイアウト（ページの枠組み）                            |
-| `__assets/_libs/component/` | コンポーネント                                          |
-| `__assets/_libs/page/`      | ページごとの CSS                                        |
-| `__assets/_libs/style/`     | 全体の CSS                                              |
-| `__assets/_libs/data/`      | ページに渡すデータファイル                              |
-| `htdocs/`                   | ビルドの出力。`htdocs/img/`の画像だけは、ここに直接置く |
+| パス                        | 役割                                                                     |
+| --------------------------- | ------------------------------------------------------------------------ |
+| `__assets/htdocs/`          | ページと、CSS・JS のエントリポイント                                     |
+| `__assets/_libs/layouts/`   | レイアウト（ページの枠組み）                                             |
+| `__assets/_libs/component/` | コンポーネント                                                           |
+| `__assets/_libs/page/`      | ページごとの CSS                                                         |
+| `__assets/_libs/style/`     | 全体の CSS                                                               |
+| `__assets/_libs/data/`      | ページに渡すデータファイル                                               |
+| ビルドの出力先              | ビルドの出力。画像（`img/`）など、ビルドが作らないファイルだけを直接置く |
 
 ### ページと URL
 
