@@ -157,6 +157,6 @@ v6 の scaffold は、AI エージェント向けの設定を次のように変�
 
 - `.claude/commands/`と`.claude/skills/`に同じ名前があると、スキルが使われます。写したあとは`.claude/commands/`の同名のファイルを削除します
 - `fix-component`は、TSX と sidecar の JSON に合わせて書き直しています。v5 の内容に手を入れていた場合は、v6 のものに同じ変更を入れ直します
-- `package.json`の`scripts`に`"ui": "kamado ui"`と`"pages": "kamado pages"`を足します。この2つのコマンドは`kamado` 3.0.0-alpha.4 には入っていません。`yarn pages`が`unknown command`か`Unknown option '--out'`で止まるときは、`kamado`を新しい版にします
+- `package.json`の`scripts`に`"ui": "kamado ui"`と`"pages": "kamado pages"`を足します。この2つのコマンドは`kamado` 3.0.0-alpha.5 から使えます（3.0.0-alpha.4 には入っていません）。`yarn pages`が`unknown command`か`Unknown option '--out'`で止まるときは、`kamado`を 3.0.0-alpha.5 以降にします
 - `organizing-kamado-pages`は、`__assets/htdocs`をページの置き場、`__assets/_libs`を alias `@`の先として書いています。構成を変えているプロジェクトでは、`SKILL.md`と`kamado-rules.md`のパスを合わせます。`pages.overrides`を使っているプロジェクトでは、`SKILL.md`の「`pages.overrides`を足さない」と、`kamado-rules.md`の「使っていない」を、実際の運用に書き換えます
 - スキルは、ページの一覧を`.tmp/`に書き出します。`.tmp`が`.gitignore`に入っていることを確かめます
