@@ -1734,7 +1734,6 @@ __metadata:
     "@types/node": "npm:25.9.9"
     "@types/react": "npm:19.3.0"
     chrome-devtools-mcp: "npm:1.12.0"
-    cross-env: "npm:10.1.0"
     dialog-toggle-events-polyfill: "npm:1.1.4"
     dotenv: "npm:18.0.9"
     husky: "npm:9.1.7"
@@ -1969,13 +1968,6 @@ __metadata:
   dependencies:
     tslib: "npm:^2.4.0"
   checksum: 10c0/f0dc8269d6b20ae5a7c7b36e7a6a333452009d461038ef4febb29da2f3f78c1e2b1576d7e8970a5c5789ed3caedc1f80f5b0c2a5373bdaf8d03b20432bb55747
-  languageName: node
-  linkType: hard
-
-"@epic-web/invariant@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@epic-web/invariant@npm:1.0.0"
-  checksum: 10c0/72dbeb026e4e4eb3bc9c65739b91408ca77ab7d603a2494fa2eff3790ec22892c4caba751cffdf30f5ccf0e7ba79c1e9c96cf0a357404b9432bf1365baac23ca
   languageName: node
   linkType: hard
 
@@ -7674,19 +7666,6 @@ __metadata:
     crc-32: "npm:^1.2.0"
     readable-stream: "npm:^4.0.0"
   checksum: 10c0/0d8d217ca4f328bba859a6bef8593028d24841bef2fe4dc44ae892c7cace4301ce6d5676b568642ddb0a709ee3f0f7af1d1ada4c9c399bc5a4ff9b93d5d1071d
-  languageName: node
-  linkType: hard
-
-"cross-env@npm:10.1.0":
-  version: 10.1.0
-  resolution: "cross-env@npm:10.1.0"
-  dependencies:
-    "@epic-web/invariant": "npm:^1.0.0"
-    cross-spawn: "npm:^7.0.6"
-  bin:
-    cross-env: dist/bin/cross-env.js
-    cross-env-shell: dist/bin/cross-env-shell.js
-  checksum: 10c0/834a862db456ba1fedf6c6da43436b123ae38f514fa286d6f0937c14fa83f13469f77f70f2812db041ae2d84f82bac627040b8686030aca27fbdf113dfa38b63
   languageName: node
   linkType: hard
 
