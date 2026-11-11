@@ -21,9 +21,9 @@
 - ページのメタ（`title`、`layout`など）は、ページと同じ名前の`.json`（sidecar）に書く。同じキーがページ内の`export const meta`にもあるときは、sidecar の値が使われる
 - `layout`には`__assets/_libs/layouts/`のファイル名を拡張子なしで書く
 - `@/`は`__assets/_libs/`を指す
-- 全ページの一覧は`yarn pages`で JSON として得られる（ビルドしない）
+- 全ページの一覧は`yarn kamado pages`で JSON として得られる（ビルドしない）
 - **ページの追加・移動・改名・削除、URL の変更、ディレクトリの整理に着手する前に、必ず`.claude/skills/organizing-kamado-pages/SKILL.md`を読み、その手順で作業すること**
-- `yarn ui`（Kamado UI）は、人がブラウザでページのメタと URL を編集する画面。エージェントは起動しない。使い方は`docs/kamado-ui.md`
+- `yarn dir`（Kamado UI）は、人がブラウザでページのメタと URL を編集する画面。エージェントは起動しない。使い方は`docs/kamado-ui.md`
 
 ## AIエージェントスキル
 

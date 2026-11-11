@@ -11,7 +11,7 @@ description: kamado のサイトでページの追加・移動・改名・削除
 - ページのファイル（`.tsx`/`.html`）と、同じ名前の`.json`（sidecar）は、常に一緒に移す。`.json`を置いていくと、ページはタイトルとレイアウトを失い、あとから同じ場所に来たページがその`.json`を自分のものとして読む
 - URL が変わる変更と削除は、実行する前に計画の表を見せて承認を得る
 - 承認された計画に無いページを動かさない
-- `yarn ui`（Kamado UI）は人が使う画面。起動しない。ユーザーが Kamado UI で作業しているあいだは、同じファイルを編集しない
+- `yarn dir`（Kamado UI）は人が使う画面。起動しない。ユーザーが Kamado UI で作業しているあいだは、同じファイルを編集しない
 - `pages.overrides`を`kamado.config.jsonc`に足さない。メタは`.json`（sidecar）に書く
 - 同じ場所に、同じ名前の`.tsx`と`.html`を置かない。出力先が重なり、片方が警告だけで消える
 
@@ -46,7 +46,7 @@ description: kamado のサイトでページの追加・移動・改名・削除
 ### 1. 現状の一覧を保存する
 
 ```bash
-yarn pages --out .tmp/pages-before.json
+yarn kamado pages --out .tmp/pages-before.json
 ```
 
 `.tmp/pages-before.json`を読み、対象のページの`url`・`inputPath`・`meta.title`・`meta.layout`を把握する。
@@ -114,7 +114,7 @@ yarn pages --out .tmp/pages-before.json
 ### 4. 変更後の一覧を保存する
 
 ```bash
-yarn pages --out .tmp/pages-after.json
+yarn kamado pages --out .tmp/pages-after.json
 ```
 
 - エラーで止まったら、メッセージが指すファイルを直してやり直す

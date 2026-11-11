@@ -68,7 +68,7 @@
 ## レイアウト
 
 - `layout`には、`__assets/_libs/layouts/`にあるファイルの名前を拡張子なしで書く（`l-sub`）
-- 存在しない名前はビルドエラーになる（`layout "x" not found`）。`yarn pages`では検出されない
+- 存在しない名前はビルドエラーになる（`layout "x" not found`）。`yarn kamado pages`では検出されない
 - `layout`の無い`.tsx`のページは、ページ自身が`<html>`から書く（`__tmpl/index.tsx`）
 
 ## データファイル
@@ -116,7 +116,7 @@ sidecar を一緒に移さないと、移したページは`title`と`layout`を
 
 ## Kamado UI がすること
 
-`yarn ui`の画面で URL やファイルの場所を変えると、kamado は次のことをする。ユーザーが画面で移したあとの状態を調べるときの手がかりになる。
+`yarn dir`の画面で URL やファイルの場所を変えると、kamado は次のことをする。ユーザーが画面で移したあとの状態を調べるときの手がかりになる。
 
 - ページのファイルと sidecar を移す
 - 移した`.tsx`の、相対パスの`import`を書き換える

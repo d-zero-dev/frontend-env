@@ -677,7 +677,7 @@ describe('a wrong argument or file', () => {
 		const stderr = failure(['missing.json', 'after.json']);
 
 		expect(stderr).toContain('cannot read missing.json');
-		expect(stderr).toContain('yarn pages --out missing.json');
+		expect(stderr).toContain('yarn kamado pages --out missing.json');
 	});
 
 	test.each([

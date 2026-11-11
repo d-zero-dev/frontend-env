@@ -43,7 +43,7 @@ import path from 'node:path';
 
 const USAGE = `Usage: node diff-pages.mjs <before.json> <after.json> [--root <dir>]
 
-<before.json> and <after.json> are written by \`yarn pages --out <file>\`.
+<before.json> and <after.json> are written by \`yarn kamado pages --out <file>\`.
 --root is the directory to search for links (default: __assets).`;
 
 /** Files that can hold a link to a page (the extensions `data.dir` reads are among them). */
@@ -88,7 +88,7 @@ class UsageError extends Error {}
  * @throws {UsageError} when the file cannot be read or is not a page list
  */
 function readPages(file) {
-	const hint = `Write it with \`yarn pages --out ${file}\`.`;
+	const hint = `Write it with \`yarn kamado pages --out ${file}\`.`;
 	let text;
 	try {
 		text = readFileSync(file, 'utf8');

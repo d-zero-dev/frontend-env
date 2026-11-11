@@ -4,7 +4,7 @@
 			"Bash(yarn build:*)",
 			"Bash(yarn install)",
 			"Bash(yarn lint:*)",
-			"Bash(yarn pages:*)",
+			"Bash(yarn kamado pages:*)",
 			"Bash(yarn test:*)",
 			"Bash(git mv __assets/*)",
 			"Bash(node .claude/skills/organizing-kamado-pages/scripts/diff-pages.mjs:*)",
