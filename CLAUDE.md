@@ -21,7 +21,7 @@ D-ZERO 株式会社のフロントエンド開発環境パッケージ群（`@d-
 - `yarn build` — `@d-zero/builder`、`@d-zero/check-frontend-env`、`@d-zero/custom-components`のみビルド（lerna run build --scope）
 - `yarn dev` — `lerna run dev`
 - `yarn test` — Vitest でテスト（test-timeout 60000）
-- `yarn lint` — 検査のみ（ファイルを書き換えない）。v5（`dev`）は eslint/prettier/textlint/cspell、v6 は oxlint/oxfmt/textlint/cspell を直列実行する。v6 の自動修正は`yarn lint:fix`
+- `yarn lint` — oxlint/oxfmt/textlint/cspell を直列実行（検査のみ）。自動修正は`yarn lint:fix`
 - `yarn storybook` — `@d-zero/custom-components`の Storybook を起動
 - `yarn release`/`yarn release:alpha`等 — `lerna version`（push なし）。リリース手順は`.claude/skills/npm-publish/SKILL.md`参照
 
