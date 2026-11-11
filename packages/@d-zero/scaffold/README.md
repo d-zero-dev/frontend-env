@@ -72,4 +72,7 @@ nix build .#toolchain
 | `/grill-me`                | 計画や設計を質問で詰める                                       |
 | `/organizing-kamado-pages` | ページの追加・移動・改名・削除、URL の変更、ディレクトリの整理 |
 
-`/organizing-kamado-pages`と`/grill-me`は、「ページを整理して」「このページを`/company/`の下に移して」のように頼むだけでも使われます。
+次の2つは、名前を入力しなくても、頼んだ内容に応じて使われます。
+
+- `/organizing-kamado-pages`: 「ページを整理して」「このページを`/company/`の下に移して」
+- `/grill-me`: 「計画を詰めたい」「設計を固めたい」

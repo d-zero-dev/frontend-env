@@ -17,10 +17,19 @@
  * `detail.html` in another directory is another page. A text match reports those, and
  * misses `../news/`, `./` and a URL with a host.
  *
- * What it does not find: a link to the top page (`/`) when the top page is removed, a URL
- * assembled at run time from parts, a URL with a bracket or a comma in it, a relative path
- * that is only `./` or `../` in a file that is not a page, and anything outside the
- * searched directory (the globs of `kamado.config.jsonc`, for example).
+ * What it does not find:
+ *
+ * - a link to the top page (`/`) when the top page is removed
+ * - a URL assembled at run time from parts
+ * - a URL with a character that ends a token in it (a bracket, a comma, `=`, `;`), and a
+ *   URL followed by text without a space (`/a.html.` at the end of a sentence)
+ * - a relative path that is only `./` or `../` in a file that is not a page
+ * - a relative link of a moved page to a file that is not a page (an image, a style sheet)
+ * - anything outside the searched directory (the globs of `kamado.config.jsonc`)
+ *
+ * What it reports and is not a link to the page: the same path on another site
+ * (`https://other.example/news/`), and text that reads as a path (the regular expression
+ * `/news/`).
  *
  * Exit code: 0 when nothing is reported, 1 when a link or a warning is, 2 on a wrong
  * argument, a file that cannot be read, or an error of this script.
@@ -125,10 +134,17 @@ function reasonOf(error) {
  * Lists the files under a directory that can hold a link. Directories whose name starts
  * with a dot and `node_modules` are not entered, as kamado does not read them either.
  * @param {string} dir - Directory to walk
+ * @param {Set<string>} [visited] - The real paths of the directories already walked, so
+ * that a symbolic link to a directory above is not walked again
  * @returns {string[]} Paths, sorted
  * @throws {UsageError} when the directory cannot be read
  */
-function listFiles(dir) {
+function listFiles(dir, visited = new Set()) {
+	const real = realPathOf(dir);
+	if (visited.has(real)) {
+		return [];
+	}
+	visited.add(real);
 	let entries;
 	try {
 		entries = readdirSync(dir, { withFileTypes: true });
@@ -140,14 +156,22 @@ function listFiles(dir) {
 	const files = [];
 	for (const entry of entries.toSorted((a, b) => (a.name < b.name ? -1 : 1))) {
 		const file = path.join(dir, entry.name);
-		// A symbolic link is followed: a linked page is still a page.
-		const stats = entry.isSymbolicLink() ? statSync(file, { throwIfNoEntry: false }) : entry;
-		if (stats?.isDirectory()) {
+		// A symbolic link is followed: a linked page is still a page. A link that cannot be
+		// followed (broken, or a loop) is not a file to search.
+		let stats = entry;
+		if (entry.isSymbolicLink()) {
+			try {
+				stats = statSync(file);
+			} catch {
+				continue;
+			}
+		}
+		if (stats.isDirectory()) {
 			if (!entry.name.startsWith('.') && entry.name !== 'node_modules') {
-				files.push(...listFiles(file));
+				files.push(...listFiles(file, visited));
 			}
 		} else if (
-			stats?.isFile() &&
+			stats.isFile() &&
 			SEARCHED_EXTENSIONS.has(path.extname(entry.name).toLowerCase())
 		) {
 			files.push(file);
@@ -268,6 +292,18 @@ function realPathOf(file) {
 }
 
 /**
+ * The last segment of a path, with the `/` that ends a directory.
+ * @param {string} urlPath
+ * @returns {string}
+ * @example
+ * lastSegmentOf('/about/history.html'); // 'history.html'
+ * lastSegmentOf('/about/news/'); // 'news/'
+ */
+function lastSegmentOf(urlPath) {
+	return /[^/]*\/?$/.exec(urlPath)[0];
+}
+
+/**
  * A section of the report.
  * @param {string} title
  * @param {readonly string[]} items - Lines, already indented
@@ -291,7 +327,9 @@ function main(argv) {
 	}
 	const before = readPages(options.before);
 	const after = readPages(options.after);
-	const files = listFiles(options.root);
+	// The two lists hold every URL: with `--root .` they would be reported as links.
+	const lists = new Set([realPathOf(options.before), realPathOf(options.after)]);
+	const files = listFiles(options.root).filter((file) => !lists.has(realPathOf(file)));
 	const removed = [...before.urls].filter((url) => !after.urls.has(url)).toSorted();
 	const added = [...after.urls].filter((url) => !before.urls.has(url)).toSorted();
 	// The top page is not searched: `/` is also a division, a separator of CSS and the top
@@ -299,6 +337,8 @@ function main(argv) {
 	const searched = removed.filter((url) => url !== '/');
 	const removedUrls = new Set(searched);
 	const addedUrls = new Set(added);
+	/** The removed URLs by their last segment, to find those that end with a relative path. */
+	const removedBySegment = Map.groupBy(searched, (url) => lastSegmentOf(url));
 
 	/** The URL of each page file, to resolve the relative links in it. */
 	const urlOfFile = new Map(
@@ -329,12 +369,21 @@ function main(argv) {
 			};
 			for (const match of line.matchAll(TOKEN)) {
 				const token = match[0];
-				// `</a>` and `<br />` are tags, not links to `/a` and `/`.
-				if (line[match.index - 1] === '<' || line[match.index + token.length] === '>') {
+				// `</a>`, `<br/>` and the `/` of `<br />` are tags, not links to `/a`, `br/` and `/`.
+				// `<https://example.com/a.html>` (Markdown) and `href=/a.html>` are links.
+				const afterOpening = line[match.index - 1] === '<' && !token.includes('://');
+				const closing = token === '/' && line[match.index + token.length] === '>';
+				if (afterOpening || closing) {
 					continue;
 				}
 				const link = linkOf(token);
-				if (link === null) {
+				// A relative path names something or is `./` or `../`: `*/` and `--` are punctuation.
+				if (
+					link === null ||
+					(link.kind === 'relative' &&
+						!/[\p{L}\p{N}]/u.test(link.path) &&
+						!/^(?:\.\.?\/)+$/.test(link.path))
+				) {
 					continue;
 				}
 				if (link.kind === 'absolute') {
@@ -352,9 +401,11 @@ function main(argv) {
 					}
 					// `about/news` can be the directory `/about/news/`; a bare word (`news`) is not read so.
 					const asDirectory = link.path.includes('/') && !isPageLike(tail) ? `${tail}/` : null;
-					for (const url of searched) {
-						if (url.endsWith(tail) || (asDirectory !== null && url.endsWith(asDirectory))) {
-							report(possible, token, '~', url);
+					for (const end of asDirectory === null ? [tail] : [tail, asDirectory]) {
+						for (const url of removedBySegment.get(lastSegmentOf(end)) ?? []) {
+							if (url.endsWith(end)) {
+								report(possible, token, '~', url);
+							}
 						}
 					}
 					continue;

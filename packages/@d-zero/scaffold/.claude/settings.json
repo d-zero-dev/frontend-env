@@ -6,7 +6,7 @@
 			"Bash(yarn lint:*)",
 			"Bash(yarn pages:*)",
 			"Bash(yarn test:*)",
-			"Bash(git mv __assets/:*)",
+			"Bash(git mv __assets/*)",
 			"Bash(node .claude/skills/organizing-kamado-pages/scripts/diff-pages.mjs:*)",
 			"Bash(gh repo list *)",
 			"Bash(gh repo view *)",

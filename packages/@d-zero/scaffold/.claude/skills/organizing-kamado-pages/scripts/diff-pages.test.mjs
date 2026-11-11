@@ -268,7 +268,31 @@ describe('an absolute link', () => {
 		);
 	});
 
-	test('matches a URL with characters that are special in a regular expression', () => {
+	test.each([
+		['<a href=/a/b.html>x</a>', '/a/b.html'],
+		['<https://example.com/a/b.html>', 'https://example.com/a/b.html'],
+		['<a href="/a/index.htm/../b.html">', '/a/index.htm/../b.html'],
+	])('finds %s', (line, token) => {
+		writePages('before.json', ['/a/b.html']);
+		writePages('after.json', []);
+		writeSource('__assets/_libs/nav.md', `${line}\n`);
+
+		expect(sectionOf(run(['before.json', 'after.json']).stdout, LINKS)[0]).toBe(
+			`  __assets/_libs/nav.md:1: ${token} -> /a/b.html`,
+		);
+	});
+
+	test('reads /dir/index.htm as the directory', () => {
+		writePages('before.json', ['/news/']);
+		writePages('after.json', []);
+		writeSource('__assets/_libs/nav.tsx', '<a href="/news/index.htm">\n');
+
+		expect(sectionOf(run(['before.json', 'after.json']).stdout, LINKS)[0]).toBe(
+			'  __assets/_libs/nav.tsx:1: /news/index.htm -> /news/',
+		);
+	});
+
+	test('does not find a URL with a bracket in it', () => {
 		writePages('before.json', ['/a/b(1)+[x].html']);
 		writePages('after.json', []);
 		writeSource('__assets/_libs/data/nav.yml', 'url: /a/b(1)+[x].html\n');
@@ -383,6 +407,33 @@ describe('a relative link in a page', () => {
 		expect(result.status).toBe(1);
 	});
 
+	test('does not take the tags and the comments of a moved page for links', () => {
+		writePages('before.json', [['/a/list.html', '__assets/htdocs/a/list.tsx']]);
+		writePages('after.json', [['/b/list.html', '__assets/htdocs/b/list.tsx']]);
+		writeSource(
+			'__assets/htdocs/b/list.tsx',
+			[
+				'/**',
+				' * A page.',
+				' */',
+				'{/* comment */}',
+				'<br/>',
+				'<CHeader/>',
+				'<img src="pict.png"/>',
+				'</div>',
+				'<style>/* c */</style>',
+				'-- ./ --',
+			].join('\n'),
+		);
+
+		const result = run(['before.json', 'after.json']);
+
+		expect(sectionOf(result.stdout, MISSING)).toStrictEqual([
+			'  __assets/htdocs/b/list.tsx:10: ./ -> /b/',
+			'    -- ./ --',
+		]);
+	});
+
 	test('resolves the links of a page that is a symbolic link', () => {
 		writePages('before.json', ['/a.html', ['/', '__assets/htdocs/index.tsx']]);
 		writePages('after.json', [['/', '__assets/htdocs/index.tsx']]);
@@ -399,7 +450,7 @@ describe('a relative link in a page', () => {
 
 describe('a relative path in a file that is not a page', () => {
 	test('is reported as a possible link when a removed URL ends with it', () => {
-		writePages('before.json', ['/about/history.html', '/news/']);
+		writePages('before.json', ['/about/history.html', '/news/', '/about/news/']);
 		writePages('after.json', []);
 		writeSource(
 			'__assets/_libs/component/c-nav.tsx',
@@ -411,7 +462,9 @@ describe('a relative path in a file that is not a page', () => {
 		expect(sectionOf(result.stdout, POSSIBLE).filter((line) => line.includes(' ~ '))).toStrictEqual([
 			'  __assets/_libs/component/c-nav.tsx:1: history.html ~ /about/history.html',
 			'  __assets/_libs/component/c-nav.tsx:2: ../about/history.html ~ /about/history.html',
+			'  __assets/_libs/component/c-nav.tsx:3: news/ ~ /about/news/',
 			'  __assets/_libs/component/c-nav.tsx:3: news/ ~ /news/',
+			'  __assets/_libs/component/c-nav.tsx:4: about/news ~ /about/news/',
 		]);
 		expect(result.stdout).toContain('Links to removed URLs (0):');
 		expect(result.status).toBe(1);
@@ -448,6 +501,48 @@ describe('the files that are searched', () => {
 		},
 	);
 
+	test('reads the files in the order of their names', () => {
+		writePages('before.json', ['/a.html']);
+		writePages('after.json', []);
+		for (const file of ['__assets/c.tsx', '__assets/a.tsx', '__assets/b/x.tsx']) {
+			writeSource(file, '"/a.html"\n');
+		}
+
+		const result = run(['before.json', 'after.json']);
+
+		expect(sectionOf(result.stdout, LINKS).filter((line) => line.includes(' -> '))).toStrictEqual([
+			'  __assets/a.tsx:1: /a.html -> /a.html',
+			'  __assets/b/x.tsx:1: /a.html -> /a.html',
+			'  __assets/c.tsx:1: /a.html -> /a.html',
+		]);
+	});
+
+	test('reads a file once when a symbolic link points back into the directory', () => {
+		writePages('before.json', ['/a.html']);
+		writePages('after.json', []);
+		writeSource('__assets/sub/x.tsx', '"/a.html"\n');
+		symlinkSync(path.join(dir, '__assets'), path.join(dir, '__assets/sub/loop'));
+		symlinkSync(path.join(dir, 'nowhere'), path.join(dir, '__assets/broken.tsx'));
+
+		const result = run(['before.json', 'after.json']);
+
+		expect(sectionOf(result.stdout, LINKS)).toStrictEqual([
+			'  __assets/sub/x.tsx:1: /a.html -> /a.html',
+			'    "/a.html"',
+		]);
+		expect(result.stderr).toBe('');
+	});
+
+	test('does not read the two lists when they are in the searched directory', () => {
+		writePages('before.json', ['/a.html']);
+		writePages('after.json', []);
+
+		const result = run(['before.json', 'after.json', '--root', '.']);
+
+		expect(sectionOf(result.stdout, LINKS)).toStrictEqual(['  (none)']);
+		expect(result.status).toBe(0);
+	});
+
 	test('searches the directory given with --root, in either form', () => {
 		writePages('before.json', ['/a.html']);
 		writePages('after.json', []);
@@ -474,11 +569,24 @@ describe('a wrong argument or file', () => {
 		return result.stderr;
 	}
 
-	test('shows the usage and exits 0 for --help', () => {
-		const result = run(['--help']);
+	test.each(['--help', '-h'])('shows the usage and exits 0 for %s', (option) => {
+		const result = run([option]);
 
 		expect(result.stdout).toContain('Usage: node diff-pages.mjs <before.json> <after.json>');
 		expect(result.status).toBe(0);
+	});
+
+	test('exits 2, not 1, on an error of the script itself', () => {
+		// A list whose `warnings` cannot be turned into text makes the script throw.
+		writeFileSync(
+			path.join(dir, 'before.json'),
+			'{"pages":[],"warnings":[{"toString":null,"valueOf":null}]}',
+		);
+		writePages('after.json', []);
+
+		const stderr = failure(['before.json', 'after.json']);
+
+		expect(stderr).toContain('diff-pages.mjs failed: ');
 	});
 
 	test.each([[['before.json']], [['a.json', 'b.json', 'c.json']], [[]]])(

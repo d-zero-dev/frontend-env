@@ -11,7 +11,7 @@ argument-hint: [component-or-class] [fix-instructions...]
 
 ## 常に守ること
 
-- `htdocs/`はビルド出力。編集するのは`__assets/`だけ
+- ビルドの出力先（`kamado.config.jsonc`の`dir.output`。`htdocs/`か`htdocs/webroot/`）は編集しない。編集するのは`__assets/`だけ
 - DevTools MCP（`chrome-devtools`）は`http://localhost:8000/`にだけ使う。Figma などの外部 URL をブラウザで開かない
 - BurgerEditor の`data-bge-*`/`data-bgi-*`属性の構造を変えない
 - ページのメタ（TSX の`export const meta`と、同名の`.json`）は、修正指示に含まれない限り変えない

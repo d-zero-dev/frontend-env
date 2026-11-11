@@ -2,7 +2,7 @@
 
 ## ルール
 
-- `htdocs/`はビルド出力。直接編集せず`__assets/`のソースファイルを編集すること（ただし`htdocs/img/`は直接扱ってよい）
+- ビルドの出力先（`kamado.config.jsonc`の`dir.output`。`htdocs/`か`htdocs/webroot/`）は直接編集せず、`__assets/`のソースファイルを編集すること（ただし、画像の`img/`など、ビルドが作らないファイルは直接扱ってよい）
 - ブラウザチェック・実装チェック（表示・動作・インタラクションの確認）には DevTools MCP（`chrome-devtools`。`.mcp.json`に設定済み）を用いること
   - ネットワークアクセスやプロセス起動に制限のあるサンドボックス環境では、`.mcp.json`の`chrome-devtools`/`figma-remote-mcp`が動作しないことがある。動作しない場合は、実行環境に応じた代替手段（スクリーンショット取得ツール、Figma 連携の別経路など）を検討すること
 - `main`ブランチでの作業は禁止

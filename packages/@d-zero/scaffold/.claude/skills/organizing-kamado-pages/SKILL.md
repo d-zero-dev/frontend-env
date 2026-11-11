@@ -51,7 +51,7 @@ yarn pages --out .tmp/pages-before.json
 
 `.tmp/pages-before.json`を読み、対象のページの`url`・`inputPath`・`meta.title`・`meta.layout`を把握する。
 
-`unknown command: pages`で止まるときは、`kamado`が古い。ユーザーに伝えて、ここで止まる（`pages`の無い`kamado`では、この手順の検証ができない）。
+`unknown command: pages`か`Unknown option '--out'`で止まるときは、`kamado`が古い。ユーザーに伝えて、ここで止まる（`pages`の無い`kamado`では、この手順の検証ができない）。
 
 ### 2. 計画の表を見せ、承認を得る
 
@@ -68,9 +68,10 @@ yarn pages --out .tmp/pages-before.json
 
 **移動・改名**
 
-1. ページのファイルと sidecar を移す（1回の実行で1ファイル）。Git が追跡しているファイルは`git mv`、追跡していないファイル（作ったばかりのページ）は`mv`を使う
-2. 移した`.tsx`の相対パスの`import`を、新しい場所から同じファイルを指すように直す。`@/`で始まる`import`は直さない
-3. 移したページの本文にある相対パスのリンク（`href="detail.html"`など）を、新しい場所から同じページを指すように直す
+1. 移し先のディレクトリが無ければ、先に作る（`mkdir -p`）。`git mv`はディレクトリを作らない
+2. ページのファイルと sidecar を移す（1回の実行で1ファイル）。Git が追跡しているファイルは`git mv`、追跡していないファイル（作ったばかりのページ）は`mv`を使う
+3. 移した`.tsx`の相対パスの`import`を、新しい場所から同じファイルを指すように直す。`@/`で始まる`import`は直さない
+4. 移したページの本文にある相対パスのリンクと参照（`href="detail.html"`、`src="img/pict.png"`など）を、新しい場所から同じものを指すように直す
 
 **追加**
 
@@ -117,7 +118,7 @@ yarn pages --out .tmp/pages-after.json
 ```
 
 - エラーで止まったら、メッセージが指すファイルを直してやり直す
-- `warning:`で始まる行が出たら、ページの出力先が重なっている。重なりを解いてやり直す
+- `warning:`で始まる行が出たら、内容を読む。ページの出力先が重なっているという警告なら、重なりを解いてやり直す。ほかの警告は、ユーザーに伝える
 - ここで確かめられるのは、sidecar と`export const meta`が読めることまで。`layout`の名前と`import`の誤りは、手順 6 で出る
 
 ### 5. 差分と、残ったリンクを確かめる
@@ -134,7 +135,7 @@ node .claude/skills/organizing-kamado-pages/scripts/diff-pages.mjs .tmp/pages-be
 | ------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------ |
 | `Removed URLs` / `Added URLs`                                       | 消えた URL と増えた URL                                            | 計画の表と一致することを確かめる。一致しなければ手順 3 に戻る            |
 | `Links to removed URLs`                                             | 消えた URL へのリンク                                              | 新しい URL に直す。削除したページへのリンクは、どうするかをユーザーに聞く |
-| `Relative links of moved or new pages to pages that do not exist`   | 移したページの相対リンクが、移す前の隣を指したままになっている     | 新しい場所から正しいページを指すように直す                               |
+| `Relative links of moved or new pages to pages that do not exist`   | 移した・足したページの相対リンクが、無いページを指している         | 新しい場所から正しいページを指すように直す                               |
 | `Possible links to removed URLs`                                    | コンポーネントなどの相対パスで、消えた URL の末尾と同じもの        | 消えたページへのリンクなら直す                                           |
 | `Warnings of kamado pages`                                          | 手順 4 の`warning:`と同じ                                          | 手順 4 に戻る                                                            |
 
@@ -145,15 +146,22 @@ node .claude/skills/organizing-kamado-pages/scripts/diff-pages.mjs .tmp/pages-be
 このスクリプトが見つけないもの。該当しそうなら、自分で検索して確かめる。
 
 - 消えたトップページ（`/`）へのリンク
+- 移したページから、画像や CSS など、ページでないファイルへの相対パス（`src="img/pict.png"`）
 - 実行時に文字列をつないで作る URL
+- 前後に空白や引用符が無い URL（文末の`/a.html.`、和文に続けて書いた URL）
 - `kamado.config.jsonc`に書いた、ページを選ぶ glob（`html.rules`など）
 - `__assets/`の外にあるファイル
+
+このスクリプトが、リンクでないのに報告するもの。該当したら、手順どおりユーザーに説明する。
+
+- ほかのサイトの、同じパスの URL（`https://other.example/news/`）
+- パスに見える文字列（正規表現の`/news/`など）
 
 ヘッダーとフッターの`href="__URL__"`はプレースホルダー。ユーザーが指示したときだけ、実際の URL に置き換える。
 
 ### 6. ビルドして確かめる
 
-1. dev server（`yarn dev`）が動いていたら止める。kamado は、同じプロジェクトでビルドと dev server を同時に動かせない
+1. dev server（`yarn dev`）が動いていたら止める。kamado は、同じプロジェクトでビルドと dev server を同時に動かせない。自分が起動したものは止め、ユーザーが起動したものは、止めてもらうよう頼む
 2. `yarn build:only`
 3. `yarn lint:ts`
 4. `yarn lint:html`
