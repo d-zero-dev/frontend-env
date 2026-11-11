@@ -62,7 +62,7 @@
 - scaffold の構成では、`title`と`layout`を sidecar に書く
 - `export const meta`に書けるのはリテラルだけ。変数、関数呼び出し、スプレッドはビルドエラーになる
 - sidecar が不正な JSON だと、ビルドエラーになる
-- メタのキーは`__assets/_libs/types/kamado.ts`の`PageMeta`に宣言してある。キーを足すときは、型にも足す
+- メタのキーは`__assets/_libs/types/kamado.ts`で、`kamado/jsx`の`PageMeta`を拡張して宣言してある。キーを足すときは、そこにも足す
 - メタを1つ変えると、差分ビルドでは TSX の全ページが作り直される
 
 ## レイアウト
@@ -79,7 +79,7 @@
 - `.jsonc`・`.json5`・`.toml`・`.csv`・`.js`・`.mjs`・`.cjs`・`.ts`を置くと、エラーになる
 - それ以外の拡張子のファイルと、`.`で始まるファイルは、読まれずに無視される
 - 同じキーになるファイルを2つ置くと、エラーになる
-- ファイルを足したら、`__assets/_libs/types/kamado.ts`の`GlobalData`にも足す
+- ファイルを足したら、`__assets/_libs/types/kamado.ts`で、`kamado/jsx`の`GlobalData`を拡張して足す
 
 ## 並び順
 

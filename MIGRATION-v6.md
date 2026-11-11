@@ -101,7 +101,7 @@ node <kamado のリポジトリ>/scripts/pug-to-tsx.mjs <プロジェクト> <�
 
 変換したあとに手で直すものは、scaffold では次のとおりでした。
 
-- **props の型**: 変換結果は`any`を使います。v6 の scaffold の`__assets/_libs/types/kamado.ts`を写すと、`page`・`meta`・`site`・`data`・`breadcrumbs`に型が付きます。`meta`のキーと`data`のファイル名は、プロジェクトに合わせて足します。Invoker Commands の`command`/`commandfor`を書くなら、`__assets/_libs/types/react.d.ts`も写します（`@types/react`に無いため）
+- **props の型**: 変換結果は`any`を使います。`kamado/jsx`が`PageProps`・`LayoutProps`などを公開しているので、`import type { PageProps } from 'kamado/jsx'`で`page`・`meta`・`site`・`data`・`breadcrumbs`に型が付きます。`meta`のキーと`data`のファイル名は、v6 の scaffold の`__assets/_libs/types/kamado.ts`のように、`declare module 'kamado/jsx'`で`PageMeta`と`GlobalData`を拡張して足します。Invoker Commands の`command`/`commandfor`を書くなら、`__assets/_libs/types/react.d.ts`も写します（`@types/react`に無いため）
 - **`<title>`とパンくず**: v6 の scaffold は、`__assets/_libs/helpers/breadcrumb.ts`で`<title>`とパンくずの表示名を組み立てます（§6）。同じ形にするなら、これと`meta.tsx`・`c-nav-breadcrumb.tsx`を写します
 - **レイアウトの指定**: sidecar の JSON の`"layout": "home.pug"`は`"home"`（拡張子なし）にします。変換スクリプトは、書き換えた写しを出力先に書きます。v6 の scaffold はレイアウトを`l-home`/`l-sub`に、CSS を`component/c-page-*.css`から`layouts/l-*.css`と`page/p-*.css`に改名していますが、移行に改名は要りません。改名するなら、sidecar の`layout`と CSS の`@import`も合わせます
 - **`blocks.js`**: kamado v3 は JavaScript のデータファイルを読みません。`blocks.js`を削除し、ページで`data`からブロックの HTML を読みます。静的サイトは`data['bge-blocks']`（`_libs/data/bge-blocks.html`）、baserCMS 向けは`data['bge-blocks-v2']`（`_libs/data/bge-blocks-v2.html`）です
