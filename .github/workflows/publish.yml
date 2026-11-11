@@ -3,7 +3,7 @@ name: Publish
 on:
   push:
     tags:
-      - "v*"
+      - 'v*'
 
 concurrency:
   group: publish
@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version: 24
-          registry-url: "https://registry.npmjs.org"
+          registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: yarn install --immutable
       - name: Build
