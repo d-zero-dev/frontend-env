@@ -13,6 +13,8 @@ yarn create @d-zero/frontend
 npx @d-zero/create-frontend
 ```
 
+v5 で展開したプロジェクトを v6 の構成に移す手順は、[v6 移行ガイド](https://github.com/d-zero-dev/frontend-env/blob/v6/MIGRATION-v6.md)にあります。
+
 ### オプション
 
 | オプション               | 短縮形 | 説明                                                                           | デフォルト値              |
