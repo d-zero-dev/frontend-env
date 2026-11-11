@@ -21,7 +21,7 @@ function getName(task) {
  * @param {string} dir
  */
 function normalizePaths(lines, dir) {
-	return lines.map((line) => line.replaceAll(dir.replaceAll(path.sep, '/'), '<tmpDir>'));
+	return lines.map((line) => line.replaceAll(dir, '<tmpDir>'));
 }
 
 beforeEach((ctx) => {
@@ -54,10 +54,7 @@ describe('CLI', () => {
 				},
 			},
 		);
-		return stdout
-			.replaceAll(path.sep, '/')
-			.split('\n')
-			.filter((line) => line.trim() !== '');
+		return stdout.split('\n').filter((line) => line.trim() !== '');
 	}
 
 	/**
@@ -83,7 +80,7 @@ describe('CLI', () => {
 
 		return changes.map((c) => {
 			if (c.type === 'add') {
-				return `✔  ++ ${c.path.replaceAll(path.sep, '/')}`;
+				return `✔  ++ ${c.path}`;
 			}
 			return `✔  ${c.type} ${c.path}`;
 		});
