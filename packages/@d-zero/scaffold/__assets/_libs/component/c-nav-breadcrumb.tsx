@@ -1,4 +1,4 @@
-import type { PageProps } from '../types/kamado.ts';
+import type { PageProps } from 'kamado/jsx';
 
 import { breadcrumbLabel, isTopPage } from '../helpers/breadcrumb.ts';
 

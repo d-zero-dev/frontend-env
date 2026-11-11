@@ -1,4 +1,4 @@
-import type { PageProps } from '@/types/kamado.ts';
+import type { PageProps } from 'kamado/jsx';
 
 export default function Page100Sub({ data }: Pick<PageProps, 'data'>) {
 	return (

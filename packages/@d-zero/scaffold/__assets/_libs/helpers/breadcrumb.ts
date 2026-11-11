@@ -6,38 +6,19 @@
  * トップページを除けないため。
  *
  * トップページの判定は、kamado がパンくずを切るのと同じ規則にする。kamado は
- * `site.baseURL`のパスの部分（kamado の`basePathOf`。`exports`に無いので
- * import できない）の深さより浅いページをパンくずから除くので、残った中で
- * いちばん浅いページがトップになる。
+ * `site.baseURL`のパスの部分（`kamado/jsx`の`basePathOf`）の深さより浅いページを
+ * パンくずから除くので、残った中でいちばん浅いページがトップになる。
  * @module
  */
 
-import type { Breadcrumb, SiteInfo } from '../types/kamado.ts';
+import type { BreadcrumbItem, SiteInfo } from 'kamado/jsx';
+
+import { basePathOf } from 'kamado/jsx';
+
+type Breadcrumb = BreadcrumbItem;
 
 /** kamado がタイトルの無いページに入れる値 */
 const NO_TITLE = '__NO_TITLE__';
-
-/**
- * `site.baseURL`のパスの部分。kamado の`basePathOf`と同じ規則。
- * @param baseURL - `site.baseURL`（フル URL でも`/`始まりのパスでもよい）
- * @returns パス。`baseURL`が無いか、解析できなければ`/`
- * @example
- * basePathOf('https://example.com/sub/'); // '/sub/'
- * basePathOf(null); // '/'
- */
-export function basePathOf(baseURL: SiteInfo['baseURL']): string {
-	if (!baseURL) {
-		return '/';
-	}
-	if (baseURL.startsWith('/')) {
-		return baseURL;
-	}
-	try {
-		return new URL(baseURL).pathname;
-	} catch {
-		return '/';
-	}
-}
 
 /**
  * パンくずの1項目がトップページか。
