@@ -2,18 +2,19 @@
 	"extends": ["../../../markuplint.config.js"],
 	"nodeRules": [
 		{
-			// baserCMS のメールフォームは、フィールドの`id`が固定の要件
-			"selector": "[id]",
-			"rules": {
-				"no-hardcoded-id": false
-			}
-		},
-		{
 			// react-spec は`acceptCharset`を`accept-charset`として扱えない
 			"selector": "form",
 			"rules": {
 				"no-unknown-attr": false
 			}
 		}
-	]
+	],
+	"overrides": {
+		// baserCMS のメールフォームは、フィールドの`id`が固定の要件
+		"./30*_form_*.tsx": {
+			"rules": {
+				"no-hardcoded-id": false
+			}
+		}
+	}
 }
