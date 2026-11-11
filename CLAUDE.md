@@ -96,3 +96,5 @@ D-ZERO 株式会社のフロントエンド開発環境パッケージ群（`@d-
 | npm publish     | `.claude/skills/npm-publish/SKILL.md`     | リリース（dev→main、バージョニング、tag push、publish 検証、dev 同期）              |
 
 コミットは必ず`.claude/skills/git/SKILL.md`、PR 作成は`.claude/skills/pr/SKILL.md`、リリースは`.claude/skills/npm-publish/SKILL.md`の手順に従うこと。
+
+`packages/@d-zero/scaffold/.claude/skills/`（`v6`ライン）は、展開先のプロジェクトへ配るテンプレートで、このリポジトリの作業には使わない。scaffold のファイルを触ると、Claude Code はそこのスキル（`git`、`grill-me`など）も一覧に出すが、このリポジトリのコミット・PR・計画の詰めには、ルートの`.claude/skills/`の同名のスキルを使うこと。
