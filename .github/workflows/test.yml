@@ -13,7 +13,6 @@ jobs:
       matrix:
         os:
           - macOS-latest
-          # - windows-latest
         node: [24]
 
     runs-on: ${{ matrix.os }}
@@ -38,10 +37,6 @@ jobs:
         with:
           path: '**/node_modules'
           key: os-${{ matrix.os }}-node${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
-
-      - name: Create .yarnrc for Windows
-        if: runner.os == 'Windows' && steps.cache-depends.outputs.cache-hit != 'true'
-        run: echo "network-timeout 600000" > .yarnrc
 
       - name: Install dependencies for Renovate/Dependabot
         if: github.actor == 'renovate[bot]' || github.actor == 'dependabot[bot]'

@@ -61,61 +61,28 @@ function getVersions(): EnvironmentInfo['versions'] {
  */
 function checkVolta(): EnvironmentInfo['volta'] {
 	const homeDir = os.homedir();
-	const platform = os.platform();
-	const isWindows = platform === 'win32';
-	const executableName = isWindows ? 'volta.exe' : 'volta';
 
-	// OS固有の標準的なインストール場所
-	const possiblePaths: string[] = isWindows
-		? [
-				// Windows: %LOCALAPPDATA%\Volta\volta.exe
-				...(process.env.LOCALAPPDATA
-					? [path.join(process.env.LOCALAPPDATA, 'Volta', executableName)]
-					: []),
-				// Windows: %USERPROFILE%\.volta\bin\volta.exe
-				path.join(homeDir, '.volta', 'bin', executableName),
-			]
-		: [
-				// Unix系: /usr/local/bin/volta (Homebrewなどでグローバルインストール)
-				'/usr/local/bin/volta',
-				// Unix系: ~/.volta/bin/volta (標準的なインストール場所)
-				path.join(homeDir, '.volta', 'bin', 'volta'),
-			];
+	// 標準的なインストール場所
+	const possiblePaths: string[] = [
+		// Homebrew などでグローバルインストールした場所
+		'/usr/local/bin/volta',
+		// Volta のインストーラーが入れる場所
+		path.join(homeDir, '.volta', 'bin', 'volta'),
+	];
 
 	// PATHからvoltaを探す
 	try {
-		let commandOutput: string;
-		if (isWindows) {
-			// Windows: whereコマンドを使用
-			commandOutput = execSync('where volta', {
-				encoding: 'utf8',
-				stdio: ['ignore', 'pipe', 'ignore'],
-			})
-				.toString()
-				.trim();
-		} else {
-			// Unix系: whichコマンドを使用
-			commandOutput = execSync('which volta', {
-				encoding: 'utf8',
-				stdio: ['ignore', 'pipe', 'ignore'],
-			})
-				.toString()
-				.trim();
-		}
-
-		// 複数行の結果がある場合（Windowsのwhereは複数のパスを返すことがある）
-		const paths = commandOutput
-			.split('\n')
-			.map((p) => p.trim())
-			.filter((p) => p.length > 0);
-
-		for (const foundPath of paths) {
-			if (!possiblePaths.includes(foundPath)) {
-				possiblePaths.push(foundPath);
-			}
+		const foundPath = execSync('which volta', {
+			encoding: 'utf8',
+			stdio: ['ignore', 'pipe', 'ignore'],
+		})
+			.toString()
+			.trim();
+		if (foundPath.length > 0 && !possiblePaths.includes(foundPath)) {
+			possiblePaths.push(foundPath);
 		}
 	} catch {
-		// which/whereコマンドが失敗した場合は無視
+		// PATHにvoltaが無い場合は無視
 	}
 
 	// Voltaのホームディレクトリ
@@ -124,9 +91,7 @@ function checkVolta(): EnvironmentInfo['volta'] {
 	for (const voltaPath of possiblePaths) {
 		if (fs.existsSync(voltaPath)) {
 			try {
-				// Windowsでは実行ファイルパスをクォートする必要がある場合がある
-				const command = isWindows ? `"${voltaPath}" --version` : `${voltaPath} --version`;
-				const version = execSync(command, {
+				const version = execSync(`${voltaPath} --version`, {
 					encoding: 'utf8',
 					stdio: ['ignore', 'pipe', 'ignore'],
 				})
