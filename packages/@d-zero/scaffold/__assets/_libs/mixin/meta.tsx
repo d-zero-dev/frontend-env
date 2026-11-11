@@ -8,7 +8,7 @@ export default function Meta({ page, meta, site, titleList }: Props) {
 	const { description, ogType, ogDescription, ogImage, ogCard } = meta;
 	const host = site.host ?? '';
 	const url = host + page.url;
-	const metaTitle = titleList({ baseURL: site.baseURL });
+	const metaTitle = titleList({ baseURL: site.baseURL ?? undefined });
 	const imageUrl = host + (ogImage || '/img/ogp.png');
 	const summary = ogDescription || description || '';
 

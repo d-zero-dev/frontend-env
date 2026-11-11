@@ -38,24 +38,30 @@ export interface PageInfo {
 	/** `/`始まりのURL（`index.html`は`/dir/`） */
 	readonly url: string;
 	readonly extension: string;
-	readonly date: Date;
+	/** ビルドを始めた時刻（ISO 8601）。ページの更新日ではない */
+	readonly date: string;
 }
 
 /**
  * サイト情報。`kamado.config.jsonc`の`site`、なければ`package.json`の`production`。
  */
 export interface SiteInfo {
-	readonly host?: string;
-	readonly baseURL?: string;
-	readonly siteName?: string;
-	readonly siteNameEn?: string;
+	readonly host: string | null;
+	readonly baseURL: string | null;
+	readonly siteName: string | null;
+	readonly siteNameEn: string | null;
+	/** `package.json`の`name` */
+	readonly name: string | null;
+	/** `package.json`の`version` */
+	readonly version: string | null;
 }
 
 /**
  * パンくずの1項目。祖先の`index`ページとページ自身。
  */
 export interface Breadcrumb {
-	readonly title: string;
+	/** タイトルがないページは`__NO_TITLE__` */
+	readonly title: string | undefined;
 	readonly href: string;
 	readonly depth: number;
 	readonly meta: PageMeta;
@@ -69,6 +75,7 @@ export interface TitleListOptions {
 	readonly baseURL?: string;
 	readonly prefix?: string;
 	readonly suffix?: string;
+	readonly siteName?: string;
 	readonly fallback?: string;
 }
 
