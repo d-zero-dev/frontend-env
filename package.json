@@ -52,7 +52,7 @@
 		"vitest": "4.1.12"
 	},
 	"resolutions": {
-		"nx/undici": "7.30.1"
+		"nx/undici": "8.12.4"
 	},
 	"packageManager": "yarn@4.18.1",
 	"volta": {
