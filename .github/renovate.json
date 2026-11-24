@@ -45,6 +45,12 @@
 			"automerge": true
 		},
 		{
+			"description": "Keep create-frontend's BurgerEditor packages on v3 — they are copied into generated baserCMS projects, whose block markup (bge-blocks-v2.html) targets BurgerEditor v3; v4 is used only by the static type via @d-zero/scaffold and the two majors never coexist in one project",
+			"matchFileNames": ["packages/@d-zero/create-frontend/package.json"],
+			"matchPackageNames": ["@burger-editor/css", "@burger-editor/runtime"],
+			"allowedVersions": "<4"
+		},
+		{
 			"description": "Group site-migrator puppeteer with @d-zero/anatomist so a version bump on either side prefers landing together in one PR — site-migrator launches puppeteer itself and passes the resulting Page across the package boundary into anatomist analyzePageLayout(), and the two must resolve the same puppeteer-core install or TypeScript rejects the Page argument as structurally incompatible (TS2345)",
 			"matchFileNames": ["packages/@d-zero/site-migrator/package.json"],
 			"matchDepNames": ["puppeteer", "@d-zero/anatomist"],
