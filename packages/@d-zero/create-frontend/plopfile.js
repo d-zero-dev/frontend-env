@@ -11,10 +11,19 @@ import { minimatch } from 'minimatch';
 import { format as prettierFormat } from 'prettier';
 
 import { command } from './command.js';
-import { copyLibraries } from './libraries.js';
 import { t } from './locale.js';
 import { readFileSafe } from './read-file-safe.js';
 import { voltaInstallNode } from './volta-install-node.js';
+
+/**
+ * baserCMS タイプは BurgerEditor v3、static タイプ（scaffold 本体）は v4 を使い、両者は共存しない。
+ * v3 系のバージョンは分岐点であるこのパッケージの devDependencies で管理し（Renovate の更新対象にするため）、
+ * 生成時に dependencies へ書き写す。devDependencies なので利用者の環境にはインストールされない
+ */
+const BGE_BASERCMS_PACKAGES = ['@burger-editor/css', '@burger-editor/runtime'];
+const selfPkg = JSON.parse(
+	fs.readFileSync(path.resolve(import.meta.dirname, 'package.json'), 'utf8'),
+);
 
 const cli = meow(
 	`
@@ -148,12 +157,8 @@ export default async function (plop) {
 	});
 
 	plop.setActionType('Finalize', async (answers) => {
-		const { dest, type, ignoreDocumentRoot } = answerToConfig(answers);
+		const { dest, ignoreDocumentRoot } = answerToConfig(answers);
 		rewriteDotGitignore(dest, gitignoreOriginContent, ignoreDocumentRoot);
-
-		if (type.startsWith('basercms')) {
-			await copyLibraries(type, dest);
-		}
 		return 'finalized';
 	});
 
@@ -170,11 +175,11 @@ export default async function (plop) {
 						value: 'static',
 					},
 					{
-						name: 'baserCMS v4 (with BurgerEditor v2)',
+						name: 'baserCMS v4 (with BurgerEditor v3)',
 						value: 'basercms4',
 					},
 					{
-						name: 'baserCMS v5 (with BurgerEditor v2)',
+						name: 'baserCMS v5 (with BurgerEditor v3)',
 						value: 'basercms5',
 					},
 				],
@@ -263,9 +268,9 @@ export default async function (plop) {
 										if (config.type.startsWith('basercms')) {
 											delete pkg.scripts.bge;
 											delete pkg.devDependencies['@burger-editor/local'];
-											pkg.dependencies['@burger-editor/css'] = '2';
-											pkg.dependencies['jquery'] = '3.7.1'; // colorbox が jQuery 4系と互換性がないため、3系の最新版に固定
-											pkg.dependencies['jquery-colorbox'] = '1.5';
+											for (const name of BGE_BASERCMS_PACKAGES) {
+												pkg.dependencies[name] = selfPkg.devDependencies[name];
+											}
 										}
 										pkg.scripts.postinstall = 'husky';
 										content = JSON.stringify(pkg, null, '\t');
@@ -274,6 +279,12 @@ export default async function (plop) {
 									case '__assets/_libs/data/blocks.js': {
 										if (config.type === 'basercms4' || config.type === 'basercms5') {
 											content = content.replace('bge-blocks.html', 'bge-blocks-v2.html');
+										}
+										break;
+									}
+									case '__assets/htdocs/js/script.ts': {
+										if (config.type.startsWith('basercms')) {
+											content = `import '@burger-editor/runtime';\n${content}`;
 										}
 										break;
 									}
