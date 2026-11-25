@@ -1422,33 +1422,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/anatomist@npm:0.3.8":
-  version: 0.3.8
-  resolution: "@d-zero/anatomist@npm:0.3.8"
+"@d-zero/anatomist@npm:0.3.10":
+  version: 0.3.10
+  resolution: "@d-zero/anatomist@npm:0.3.10"
   dependencies:
-    "@d-zero/beholder": "npm:5.0.1"
-    "@d-zero/cli-core": "npm:1.4.0"
-    "@d-zero/dealer": "npm:1.14.0"
-    "@d-zero/puppeteer-page-scan": "npm:4.7.1"
-    "@d-zero/shared": "npm:0.23.0"
+    "@d-zero/beholder": "npm:5.0.3"
+    "@d-zero/cli-core": "npm:1.4.2"
+    "@d-zero/dealer": "npm:1.14.2"
+    "@d-zero/puppeteer-page-scan": "npm:4.7.3"
+    "@d-zero/shared": "npm:0.23.2"
     puppeteer: "npm:25.15.0"
   bin:
     anatomist: dist/cli.js
-  checksum: 10c0/30ad8132468ad75780b7d534f97ab864f1ce56d041d609833502419a34a1b87a1d2e35092a70a76ec3e2390082ec898985d02f38927af4eac96c77ab69c4cf81
+  checksum: 10c0/bb0a9e2cc4f1c6899e2146dcec87cd34ff93c013d77d1f279526e580b87a47df226591440daedcf790f6222bc5f955544d1380fcdc0ab31916a8492bedf108e0
   languageName: node
   linkType: hard
 
-"@d-zero/beholder@npm:5.0.1":
-  version: 5.0.1
-  resolution: "@d-zero/beholder@npm:5.0.1"
+"@d-zero/beholder@npm:5.0.3":
+  version: 5.0.3
+  resolution: "@d-zero/beholder@npm:5.0.3"
   dependencies:
-    "@d-zero/puppeteer-page-scan": "npm:4.7.1"
-    "@d-zero/puppeteer-scroll": "npm:4.0.13"
-    "@d-zero/shared": "npm:0.23.0"
+    "@d-zero/puppeteer-page-scan": "npm:4.7.3"
+    "@d-zero/puppeteer-scroll": "npm:4.0.15"
+    "@d-zero/shared": "npm:0.23.2"
     debug: "npm:4.4.3"
     puppeteer: "npm:25.15.0"
     simple-wappalyzer: "npm:1.1.108"
-  checksum: 10c0/a5397157517af3952b288e491b0c895a95a3325a57d41647db4d6e10545809c79e011ef43f1130e802479f5145ad665b38db2571b5970f70cfa665643fee1b13
+  checksum: 10c0/3d7dca6350df040c9f4557fa89603a9302a16eb549560069cd92df43ca9a2ee896e1bfd15fc7026333e5ba6be3727136385e6ad879b7d39a2683541b517c6ac1
   languageName: node
   linkType: hard
 
@@ -1460,13 +1460,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@d-zero/cli-core@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@d-zero/cli-core@npm:1.4.0"
+"@d-zero/cli-core@npm:1.4.2":
+  version: 1.4.2
+  resolution: "@d-zero/cli-core@npm:1.4.2"
   dependencies:
-    "@d-zero/shared": "npm:0.23.0"
+    "@d-zero/shared": "npm:0.23.2"
     minimist: "npm:1.2.8"
-  checksum: 10c0/ad3f7ad8b4f90b5eee07d15503495016d2a28df1e5364e3b5bce26683fd2374dcdc70223d288a35cd36da0f2f2736262d3118ec30761af5ebde6576d7e3eaa67
+  checksum: 10c0/cee523df7aaf4be9762d0815b090eb77eb1f3bdf3609e8f0313986f79e5538dcefeba73e95f9ca118006f4ccb3f9501f0af93c8e0ec744c173fe5b6e86680c72
   languageName: node
   linkType: hard
 
@@ -1683,36 +1683,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@d-zero/puppeteer-general-actions@npm:1.2.7":
-  version: 1.2.7
-  resolution: "@d-zero/puppeteer-general-actions@npm:1.2.7"
+"@d-zero/puppeteer-general-actions@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@d-zero/puppeteer-general-actions@npm:1.2.8"
   dependencies:
     ansi-colors: "npm:4.1.3"
-  checksum: 10c0/2c6d96e1a6f94a6eff5ad0792b9c6df2e71d79d12efb902d9941df428acccfa287e766ca44e0586b7207feacfbbd4cc23949569b6f3f3bcb55d03c04cdd3ff87
+  checksum: 10c0/b525ddcf2ee827376f3ddbabe239df3c08f74300873744251e17aa23361888df097a77ecccf9a0f3531bcf139e2574539cf54c40be8d61cc4ce1bc2763110a70
   languageName: node
   linkType: hard
 
-"@d-zero/puppeteer-page-scan@npm:4.7.1":
-  version: 4.7.1
-  resolution: "@d-zero/puppeteer-page-scan@npm:4.7.1"
+"@d-zero/puppeteer-page-scan@npm:4.7.3":
+  version: 4.7.3
+  resolution: "@d-zero/puppeteer-page-scan@npm:4.7.3"
   dependencies:
-    "@d-zero/puppeteer-general-actions": "npm:1.2.7"
-    "@d-zero/puppeteer-scroll": "npm:4.0.13"
-    "@d-zero/shared": "npm:0.23.0"
+    "@d-zero/puppeteer-general-actions": "npm:1.2.8"
+    "@d-zero/puppeteer-scroll": "npm:4.0.15"
+    "@d-zero/shared": "npm:0.23.2"
   peerDependencies:
     puppeteer: 25.15.0
-  checksum: 10c0/21ef7c70760dbd1a19be2037c3eb5d3483422464a15642ff4cbe71c42b3b03fb8c8eed2bee1fce482e4797f78069fb65ef412e00674930110d722599f0e872bf
+  checksum: 10c0/32beb32ce555183c4e5fd596d30077cd2f6efe67c51e93b25851a6f1adf6f229c6b8ece587875506dab0d0db6cfd37376903f47354cf1baaef8b091669d5cf96
   languageName: node
   linkType: hard
 
-"@d-zero/puppeteer-scroll@npm:4.0.13":
-  version: 4.0.13
-  resolution: "@d-zero/puppeteer-scroll@npm:4.0.13"
+"@d-zero/puppeteer-scroll@npm:4.0.15":
+  version: 4.0.15
+  resolution: "@d-zero/puppeteer-scroll@npm:4.0.15"
   dependencies:
-    "@d-zero/shared": "npm:0.23.0"
+    "@d-zero/shared": "npm:0.23.2"
   peerDependencies:
     puppeteer: 25.15.0
-  checksum: 10c0/d32324c344147de4b471d1ac53713233dc9f964b1bdd78ee45b381991680dc65d4cdd1bd96446ac867396a36120728def637b9c760431522d39a41379cd5f799
+  checksum: 10c0/97ac86aae4655921f7a4ebc20c6055254e66932faa2e1e60ba8e3bae45a869864ea6fec1379ab6f830238f943ff92f78ae75d5a37b2499cafcf3dc5f2fdcc393
   languageName: node
   linkType: hard
 
@@ -1810,7 +1810,7 @@ __metadata:
   dependencies:
     "@burger-editor/blocks": "npm:4.0.0-alpha.77"
     "@burger-editor/core": "npm:4.0.0-alpha.77"
-    "@d-zero/anatomist": "npm:0.3.8"
+    "@d-zero/anatomist": "npm:0.3.10"
     "@d-zero/dealer": "npm:1.14.0"
     "@d-zero/shared": "npm:0.23.0"
     "@nitpicker/query": "npm:0.25.0"
@@ -1820,7 +1820,7 @@ __metadata:
     jsdom: "npm:30.1.3"
     parse5: "npm:8.1.0"
     parse5-html-rewriting-stream: "npm:8.1.0"
-    puppeteer: "npm:25.15.0"
+    puppeteer: "npm:25.18.1"
   bin:
     dz-migrate: dist/cli.js
   languageName: unknown
@@ -4277,6 +4277,26 @@ __metadata:
   bin:
     browsers: lib/main-cli.js
   checksum: 10c0/c9d5ebc9a37821a611bfedbcd2c0ae45495f35294889ae76645d24ac180bbbafb8cb06d2498199b75a93292fde1f629308b8923f29807f5a44f23798ce7a54cf
+  languageName: node
+  linkType: hard
+
+"@puppeteer/browsers@npm:3.2.7":
+  version: 3.2.7
+  resolution: "@puppeteer/browsers@npm:3.2.7"
+  dependencies:
+    modern-tar: "npm:^0.8.6"
+    yargs: "npm:^18.0.0"
+  peerDependencies:
+    proxy-agent: ">=8.0.1"
+    yauzl: ^2.10.0 || ^3.4.0
+  peerDependenciesMeta:
+    proxy-agent:
+      optional: true
+    yauzl:
+      optional: true
+  bin:
+    browsers: lib/main-cli.js
+  checksum: 10c0/c40882ed30cfd9cb92b6238eb35f26f99259c8a9cb9c70e712255c0e055d7d87eaba04c654996ef4944c45eda4697fc7a9200aa6065ed225cf34a797bfe45303
   languageName: node
   linkType: hard
 
@@ -8539,6 +8559,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"devtools-protocol@npm:0.0.1717327":
+  version: 0.0.1717327
+  resolution: "devtools-protocol@npm:0.0.1717327"
+  checksum: 10c0/723a93feb5f7d9e1addc011aa76a3de99a67abce94a02eb4cab6f9eaab60a6c5fadd66bfc93c157303ddd76d030c38facd4e7a80187e67dc7d9765ae95bb07e2
+  languageName: node
+  linkType: hard
+
 "dialog-toggle-events-polyfill@npm:1.1.4":
   version: 1.1.4
   resolution: "dialog-toggle-events-polyfill@npm:1.1.4"
@@ -12186,6 +12213,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lilconfig@npm:^3.1.4":
+  version: 3.1.5
+  resolution: "lilconfig@npm:3.1.5"
+  checksum: 10c0/9e5790297b6be79f674c216781ba283f692df321c3818964aa22f85f342a66f40858c68056f4ced197a586e8880d35c997f0a2ee1a263baaa81359981d75047d
+  languageName: node
+  linkType: hard
+
 "lines-and-columns@npm:2.0.3":
   version: 2.0.3
   resolution: "lines-and-columns@npm:2.0.3"
@@ -13042,7 +13076,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"modern-tar@npm:^0.8.5":
+"modern-tar@npm:^0.8.5, modern-tar@npm:^0.8.6":
   version: 0.8.6
   resolution: "modern-tar@npm:0.8.6"
   checksum: 10c0/d04756042d2aaca9795a97cdb74ac38974fc501a23f6fc54ec0027083fc60a8a5e5b7c7ce89d99b81f9e7f59cb2cbdc73c2fb861acc82f8bec1ca6c86717b48b
@@ -15498,6 +15532,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"puppeteer-core@npm:25.18.1":
+  version: 25.18.1
+  resolution: "puppeteer-core@npm:25.18.1"
+  dependencies:
+    "@puppeteer/browsers": "npm:3.2.7"
+    chromium-bidi: "npm:157.0.8090-0"
+    devtools-protocol: "npm:0.0.1717327"
+    typed-query-selector: "npm:^2.12.3"
+    webdriver-bidi-protocol: "npm:1.0.2"
+    ws: "npm:^8.22.1"
+  checksum: 10c0/c2473be4d128e807815ddaa1ebaa9b17985546ced815c4256c15b8cef0e478de55dd769af95653a9c6772bf73d2315beb8e50daa4b0c3707d711a182380b1c3d
+  languageName: node
+  linkType: hard
+
 "puppeteer@npm:25.15.0":
   version: 25.15.0
   resolution: "puppeteer@npm:25.15.0"
@@ -15511,6 +15559,22 @@ __metadata:
   bin:
     puppeteer: lib/puppeteer/node/cli.js
   checksum: 10c0/268ded115936aec124b4c322c05a7f8fe36cad21f9573f9423243d3fecbd79329070e63638a3fb25ecb22c2c59d937aae513a8c3b44dbd78c2e33f67a20d3b23
+  languageName: node
+  linkType: hard
+
+"puppeteer@npm:25.18.1":
+  version: 25.18.1
+  resolution: "puppeteer@npm:25.18.1"
+  dependencies:
+    "@puppeteer/browsers": "npm:3.2.7"
+    chromium-bidi: "npm:157.0.8090-0"
+    devtools-protocol: "npm:0.0.1717327"
+    lilconfig: "npm:^3.1.4"
+    puppeteer-core: "npm:25.18.1"
+    typed-query-selector: "npm:^2.12.3"
+  bin:
+    puppeteer: lib/puppeteer/node/cli.js
+  checksum: 10c0/74e77eba6b6c95fedacc1a4638f97d4d4b74ff1596f7e74e7f9be375a6b6662d6e5598c7913a22f70d0793d125cadd5b429e5a5981ed7c5d321649e2f67c4dd5
   languageName: node
   linkType: hard
 
@@ -18608,6 +18672,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"webdriver-bidi-protocol@npm:1.0.2":
+  version: 1.0.2
+  resolution: "webdriver-bidi-protocol@npm:1.0.2"
+  checksum: 10c0/9ceeba031f6323217e1ff7bd6fb5527e1df2c7f27f98141ce623667227b19817150d64cc1cd1125644eb57d0808376239cc9548e68e5040f5733ea59f0cfcb42
+  languageName: node
+  linkType: hard
+
 "webidl-conversions@npm:^8.0.1":
   version: 8.0.1
   resolution: "webidl-conversions@npm:8.0.1"
@@ -18867,6 +18938,21 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: 10c0/7304d14ef38898dd366a528a85e2da389c4eebf30f4ce8a007bd2dce6025f9b619cefe44fe2354f0bad0ec541b1c9a4da06a3f3e046ab56f01fd52d5784ecfb2
+  languageName: node
+  linkType: hard
+
+"ws@npm:^8.22.1":
+  version: 8.23.0
+  resolution: "ws@npm:8.23.0"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ">=5.0.2"
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: 10c0/1de9b70701c03cdb1b22abd17a1488dc6d22b4dc36a8c32b173d955356ea3634e78aea8ec734a78201dbb34f5a402d9603df32ef267bd477228cd54ae158e2f8
   languageName: node
   linkType: hard
 
