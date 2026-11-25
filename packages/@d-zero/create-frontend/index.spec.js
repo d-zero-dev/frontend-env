@@ -158,11 +158,33 @@ describe('CLI', () => {
 	});
 
 	describe('package.json', () => {
-		test('basercms4: jquery が 3.7.1 に固定されている', async ({ tmpDir, task }) => {
+		test.for(['basercms4', 'basercms5'])(
+			'%s: BurgerEditor の css/runtime が create-frontend の devDependencies（v3 系）と一致し、jquery/jquery-colorbox を含まない',
+			async (type, { tmpDir, task }) => {
+				const dir = path.join(tmpDir, getName(task));
+				await interactiveTest(dir, type);
+				const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'));
+				const selfPkg = JSON.parse(
+					fs.readFileSync(path.resolve(import.meta.dirname, 'package.json'), 'utf8'),
+				);
+				for (const name of ['@burger-editor/css', '@burger-editor/runtime']) {
+					expect(selfPkg.devDependencies[name]).toMatch(/^3\.\d+\.\d+$/);
+					expect(pkg.dependencies[name]).toBe(selfPkg.devDependencies[name]);
+				}
+				expect(pkg.dependencies).not.toHaveProperty('jquery');
+				expect(pkg.dependencies).not.toHaveProperty('jquery-colorbox');
+				expect(pkg.devDependencies).not.toHaveProperty('@burger-editor/local');
+			},
+		);
+
+		test('static: BurgerEditor の runtime を依存に追加しない', async ({
+			tmpDir,
+			task,
+		}) => {
 			const dir = path.join(tmpDir, getName(task));
-			await interactiveTest(dir, 'basercms4');
+			await interactiveTest(dir, 'static');
 			const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'));
-			expect(pkg.dependencies['jquery']).toBe('3.7.1');
+			expect(pkg.dependencies).not.toHaveProperty('@burger-editor/runtime');
 		});
 
 		test('static: skills:sync がプロジェクト配下の一時ディレクトリ(.tmp)を使用する', async ({
@@ -173,6 +195,52 @@ describe('CLI', () => {
 			await interactiveTest(dir, 'static');
 			const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'));
 			expect(pkg.scripts['skills:sync']).toContain('TMPDIR=./.tmp');
+		});
+	});
+
+	describe('BurgerEditor runtime', () => {
+		test.for([
+			['basercms4', 'htdocs/__tmpl/__burger_editor'],
+			['basercms5', 'htdocs/webroot/__tmpl/__burger_editor'],
+		])(
+			'%s: script.ts で runtime を import し、__tmpl に bge_functions.min.js を置かない',
+			async ([type, bgeDir], { tmpDir, task }) => {
+				const dir = path.join(tmpDir, getName(task));
+				await interactiveTest(dir, type);
+				const script = fs.readFileSync(
+					path.join(dir, '__assets/htdocs/js/script.ts'),
+					'utf8',
+				);
+				expect(script.split('\n')[0]).toBe("import '@burger-editor/runtime';");
+				expect(
+					fs.existsSync(path.join(dir, bgeDir, 'js/bge_modules/bge_functions.min.js')),
+				).toBe(false);
+			},
+		);
+
+		test.for(['basercms4', 'basercms5'])(
+			'%s: meta-basercms.pug が bge_functions.min.js・colorbox・jQuery を読み込まない',
+			async (type, { tmpDir, task }) => {
+				const dir = path.join(tmpDir, getName(task));
+				await interactiveTest(dir, type);
+				const pug = fs.readFileSync(
+					path.join(dir, '__assets/_libs/mixin/meta-basercms.pug'),
+					'utf8',
+				);
+				expect(pug).not.toContain('bge_functions.min.js');
+				expect(pug).not.toContain('colorbox');
+				expect(pug).not.toContain('jquery');
+			},
+		);
+
+		test('static: script.ts で runtime を import しない', async ({ tmpDir, task }) => {
+			const dir = path.join(tmpDir, getName(task));
+			await interactiveTest(dir, 'static');
+			const script = fs.readFileSync(
+				path.join(dir, '__assets/htdocs/js/script.ts'),
+				'utf8',
+			);
+			expect(script).not.toContain('@burger-editor/runtime');
 		});
 	});
 
