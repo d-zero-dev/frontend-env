@@ -16,7 +16,7 @@
 			}
 		},
 		{
-			"selector": "script[⚠️], script[src*=jquery]",
+			"selector": "script[⚠️]",
 			"rules": {
 				"required-attr": false
 			}
