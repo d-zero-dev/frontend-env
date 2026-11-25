@@ -234,6 +234,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@burger-editor/css@npm:3.5.0":
+  version: 3.5.0
+  resolution: "@burger-editor/css@npm:3.5.0"
+  checksum: 10c0/0b7ef9de1d4e7f7345d5c649daca9d55f6791bbb6d2de61297049b4ef2733eba49f37aa6f40a467a8c3ad9d1e7757c42124bd3be42852d0c63e83a669664da7e
+  languageName: node
+  linkType: hard
+
 "@burger-editor/css@npm:4.0.0-alpha.77":
   version: 4.0.0-alpha.77
   resolution: "@burger-editor/css@npm:4.0.0-alpha.77"
@@ -332,6 +339,13 @@ __metadata:
     "@burger-editor/utils": "npm:4.0.0-alpha.77"
     semver: "npm:7.8.5"
   checksum: 10c0/72c73e8ce578de9e5cdf858d6947344c48fed5faac562b5ed80fa0f5424ed06d1a239db21cffeda3b9a83cfca8b4908042ccece29d28e1eca4abab83894fd80f
+  languageName: node
+  linkType: hard
+
+"@burger-editor/runtime@npm:3.5.0":
+  version: 3.5.0
+  resolution: "@burger-editor/runtime@npm:3.5.0"
+  checksum: 10c0/e56001d08a1a4a881e49cb456151ed898a87167fc680797d0935a2f5e57092d186e2acc14b000a2f01a7d5d28cd45721a06532eb32ff82ba8849a43701743bd1
   languageName: node
   linkType: hard
 
@@ -1389,6 +1403,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@d-zero/create-frontend@workspace:packages/@d-zero/create-frontend"
   dependencies:
+    "@burger-editor/css": "npm:3.5.0"
+    "@burger-editor/runtime": "npm:3.5.0"
     "@d-zero/prettier-config": "npm:5.1.1"
     "@d-zero/scaffold": "npm:5.4.2"
     "@types/node": "npm:25.9.9"

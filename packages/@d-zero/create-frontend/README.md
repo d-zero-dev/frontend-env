@@ -39,14 +39,14 @@ npx @d-zero/create-frontend
 
 - **用途**: [baserCMS](https://basercms.net/) v4 のテーマ開発
 - **特徴**:
-  - BurgerEditor v2 対応のテーマファイル
+  - BurgerEditor v3 対応のテーマファイル
   - baserCMS 固有のテンプレート構造
-  - jQuery および関連ライブラリが自動で依存関係に追加
+  - BurgerEditor のランタイム（`@burger-editor/runtime`）を`__assets/htdocs/js/script.ts`で import し、`script.js`にバンドル
   - baserCMS のテンプレート変数やヘルパー関数に対応
   - BurgerEditor のブロック定義ファイル（`bge-blocks-v2.html`）を使用
 - **追加される依存関係**:
-  - `jquery`: 最新版
-  - `jquery-colorbox`: v1.5
+  - `@burger-editor/css`: v3 系（バージョンは create-frontend の`devDependencies`に追従）
+  - `@burger-editor/runtime`: v3 系（同上）
 
 ### 使用例
 
