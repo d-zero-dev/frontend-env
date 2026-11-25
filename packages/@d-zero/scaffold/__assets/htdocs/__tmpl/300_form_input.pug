@@ -218,7 +218,10 @@
 					.cc-form-fieldset-body
 						#FieldMessageCategory.mail-field(data-type="checkbox")
 							span.mail-before-attachment チェックボックス前見出し
-							input#MailMessageCategory(type="hidden" name="data[MailMessage][category]" value)
+							input#MailMessageCategory(
+								type="hidden"
+								name="data[MailMessage][category]"
+								value)
 							.checkbox
 								input#MailMessageCategoryItem1(
 									type="checkbox"
@@ -252,7 +255,10 @@
 					.cc-form-fieldset-body
 						#FieldMessageContents.mail-field(data-type="checkbox")
 							span.mail-before-attachment 前見出し
-							input#MailMessageField4(type="hidden" name="data[MailMessage][contents]" value)
+							input#MailMessageField4(
+								type="hidden"
+								name="data[MailMessage][contents]"
+								value)
 							.checkbox
 								input#MailMessageField41(
 									type="checkbox"
@@ -467,10 +473,16 @@
 							input#MailMessageSex_(type="hidden" name="data[MailMessage][sex]" value)
 							.mail-group-radio
 								span
-									input#MailMessageSex1(type="radio" name="data[MailMessage][sex]" value="1")
+									input#MailMessageSex1(
+										type="radio"
+										name="data[MailMessage][sex]"
+										value="1")
 									label(for="MailMessageSex1") 男性
 								span
-									input#MailMessageSex2(type="radio" name="data[MailMessage][sex]" value="2")
+									input#MailMessageSex2(
+										type="radio"
+										name="data[MailMessage][sex]"
+										value="2")
 									label(for="MailMessageSex2") 女性
 							span.mail-after-attachment 後見出し
 			#GroupMessageMessage.cc-form-fieldset
