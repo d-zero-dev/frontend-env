@@ -17960,7 +17960,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:7.30.1, undici@npm:^7.21.0":
+"undici@npm:8.13.1":
+  version: 8.13.1
+  resolution: "undici@npm:8.13.1"
+  checksum: 10c0/ee202b4da4f4a663e723696c6d6f6f27f3424aaddd652ceccf1062beaddce171809445cbdbedc50dcd53f0119a1fe8ce20f7c5d320039e71915418dfc98b58a0
+  languageName: node
+  linkType: hard
+
+"undici@npm:^7.21.0":
   version: 7.30.1
   resolution: "undici@npm:7.30.1"
   checksum: 10c0/c838089b010e8e28a9a5358d4bf4621e0c8d7bb70058b23e819667349c4c0b6791a7c8bc9bbe94ff0923db132faae0d9d9592b9743eda4f2b49466fa57482213
